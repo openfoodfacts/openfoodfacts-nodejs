@@ -1,0 +1,20 @@
+{
+  "projectName": "openfoodfacts-nodejs",
+  "projectOwner": "openfoodfacts",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "contributors": [
+    {
+      "login": "ms10398",
+      "name": "Mohit Sharma",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/26259547?v=4",
+      "profile": "https://github.com/ms10398",
+      "contributions": [
+        "code"
+      ]
+    }
+  ]
+}

@@ -16,7 +16,11 @@
     "NodeJS",
     "Wrapper"
   ],
-  "author": "ms10398",
+  "scripts": {
+    "contributors:add": "all-contributors add",
+    "contributors:generate": "all-contributors generate"
+  },
+  "author": "openfoodfacts",
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/ms10398/openfoodfacts-nodejs/issues"
@@ -24,5 +28,8 @@
   "homepage": "https://github.com/ms10398/openfoodfacts-nodejs#readme",
   "dependencies": {
     "request": "^2.83.0"
+  },
+  "devDependencies": {
+    "all-contributors-cli": "^4.10.1"
   }
 }

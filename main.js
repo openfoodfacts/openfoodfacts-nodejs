@@ -11,10 +11,10 @@ OFF.getProduct = (barcode) => {
 				reject(err)
 			else
 			{
-				console.log(body)
 				resolve(JSON.parse(body))
 			}
 		})
 	})
 }
 
+module.exports = OFF

@@ -4,6 +4,9 @@
   "description": "Open Food Facts API NodeJS Wrapper",
   "main": "main.js",
   "scripts": {
+    "lint": "standard",
+    "precommit": "standard `git diff --name-only --staged --relative | grep '.js$'` nothing",
+    "fix": "standard --fix",
     "test": "echo \"Error: no test specified\" && exit 1",
     "contributors:add": "all-contributors add",
     "contributors:generate": "all-contributors generate"
@@ -28,6 +31,8 @@
     "request": "^2.83.0"
   },
   "devDependencies": {
-    "all-contributors-cli": "^4.10.1"
+    "all-contributors-cli": "^4.10.1",
+    "husky": "^0.14.3",
+    "standard": "^10.0.3"
   }
 }

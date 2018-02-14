@@ -4,7 +4,13 @@
   "description": "Open Food Facts API NodeJS Wrapper",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "standard",
+    "commitmsg": "commitlint -quiet=0 --extends=@commitlint/config-conventional -e",
+    "precommit": "standard `git diff --name-only --staged --relative | grep '.js$'` nothing",
+    "fix": "standard --fix",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "contributors:add": "all-contributors add",
+    "contributors:generate": "all-contributors generate"
   },
   "repository": {
     "type": "git",
@@ -16,10 +22,6 @@
     "NodeJS",
     "Wrapper"
   ],
-  "scripts": {
-    "contributors:add": "all-contributors add",
-    "contributors:generate": "all-contributors generate"
-  },
   "author": "openfoodfacts",
   "license": "Apache-2.0",
   "bugs": {
@@ -30,6 +32,10 @@
     "request": "^2.83.0"
   },
   "devDependencies": {
-    "all-contributors-cli": "^4.10.1"
+    "@commitlint/cli": "^6.1.0",
+    "@commitlint/config-conventional": "^6.1.0",
+    "all-contributors-cli": "^4.10.1",
+    "husky": "^0.14.3",
+    "standard": "^10.0.3"
   }
 }

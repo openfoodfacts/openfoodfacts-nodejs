@@ -18,7 +18,8 @@ For example check [here](example/examples.js)
 ## Contribute
 
 Fork the repository and feel free to send a PR.
-Using the [angular commit guideline](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#commits)
+
+Please use the [angular commit guideline](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#commits).
 
 ## Contributors
 

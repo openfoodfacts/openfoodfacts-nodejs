@@ -4,7 +4,9 @@
   "description": "Open Food Facts API NodeJS Wrapper",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "contributors:add": "all-contributors add",
+    "contributors:generate": "all-contributors generate"
   },
   "repository": {
     "type": "git",
@@ -16,10 +18,6 @@
     "NodeJS",
     "Wrapper"
   ],
-  "scripts": {
-    "contributors:add": "all-contributors add",
-    "contributors:generate": "all-contributors generate"
-  },
   "author": "openfoodfacts",
   "license": "Apache-2.0",
   "bugs": {

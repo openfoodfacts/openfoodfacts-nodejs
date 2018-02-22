@@ -1,19 +1,28 @@
-const request = require('request')
+const request = require('request-promise')
 
-const API_URL = 'https://world.openfoodfacts.org/'
+class OFF {
+  constructor (options = {}) {
+    this.options = options
+    this.countryName = 'world'
+    this.URL = 'https://world.openfoodfacts.org'
+  }
+  country (countryName) {
+    this.countryName = countryName
+    this.URL = `https://${this.countryName}.openfoodfacts.org`
+    return this
+  }
 
-let OFF = {}
+  getBrands () {
+    const URL = this.URL
+    return request(`${URL}/brands.json`)
+      .then(JSON.parse)
+  }
 
-OFF.getProduct = barcode => {
-  return new Promise((resolve, reject) => {
-    request(`${API_URL}api/v0/product/${barcode}.json`, (err, response, body) => {
-      if (err) {
-        reject(err)
-      } else {
-        resolve(JSON.parse(body))
-      }
-    })
-  })
+  getProduct (barcode) {
+    const URL = this.URL
+    return request(`${URL}/api/v0/${barcode}`)
+      .then(JSON.parse)
+  }
 }
 
 module.exports = OFF

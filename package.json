@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/ms10398/openfoodfacts-nodejs#readme",
   "dependencies": {
-    "request": "^2.83.0"
+    "request-promise": "^4.2.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^6.1.0",

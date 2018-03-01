@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>OFF - Documentation</title>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <span class="navicon"></span>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="OFF.html">OFF</a><ul class='methods'><li class='list-title'>Methods</li><li data-type='method'><a href="OFF.html#country">country</a></li><li data-type='method'><a href="OFF.html#getBrand">getBrand</a></li><li data-type='method'><a href="OFF.html#getBrands">getBrands</a></li><li data-type='method'><a href="OFF.html#getLabels">getLabels</a></li><li data-type='method'><a href="OFF.html#getLanguages">getLanguages</a></li><li data-type='method'><a href="OFF.html#getProduct">getProduct</a></li><li data-type='method'><a href="OFF.html#getProductsByBarcodeBeginning">getProductsByBarcodeBeginning</a></li><li data-type='method'><a href="OFF.html#setOption">setOption</a></li></ul></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">OFF</h1>
+    
+
+    
+
+
+
+
+<section>
+
+<header>
+    <span class="creds">
+      
+
+      
+    </span>
+
+    <hr>
+
+    
+        <h2>
+        OFF
+        </h2>
+        
+            <div class="class-description"><p>Class OFF Node API Wrappper of OFF API</p></div>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+
+    
+    <h2>Constructor</h2>
+    
+
+
+<div class="group" id="OFF">
+
+
+    <h4 class="name"><span class="type-signature"></span>new <b>OFF</b><span class="signature">(<span class="sig-params">options</span>)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Create OFF object</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters</h5>
+    
+
+<div class="params">
+    
+
+    
+        <span class="name">options</span><span class="type"><span class="param-type">:Object</span></span>
+    
+
+    
+
+    
+
+    <div class="description last"><p>Options for the OFF Object</p>
+        <div class="child-params">
+          
+
+<div class="params">
+    
+
+    
+        <span class="name"><span class="obj-tree">options.</span>country</span><span class="type"><span class="param-type">:string</span></span>
+    
+
+    
+
+    
+
+    <div class="description last"><p>Country for which you want to call OFF API Client</p></div>
+
+    
+</div>
+
+        </div>
+    </div>
+
+    
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="src">Source: <a href="main.js.html">main.js</a>, <a href="main.js.html#line8">line 8</a></div>
+
+
+</div>
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+
+    
+
+
+<div class="group" id="country">
+
+
+    <h4 class="name"><span class="type-signature"></span><b>country</b><span class="signature">(<span class="sig-params">country</span>)</span><span class="type-signature">:Object</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>It is used to set country option in the OFF Instance</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters</h5>
+    
+
+<div class="params">
+    
+
+    
+        <span class="name">country</span><span class="type"><span class="param-type">:string</span></span>
+    
+
+    
+
+    
+
+    <div class="description last"><p>Country value to set to the OFF Instance</p></div>
+
+    
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        <span class="param-type">:Object</span>
+    </dd>
+</dl>
+
+<div class="param-desc">
+    <p>An OFF Instance with the country option set</p>
+</div>
+
+
+    
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>const worldOFF = new OFF()
+const indiaOFF = worldOFF.country('in')</code></pre>
+
+
+
+
+<div class="src">Source: <a href="main.js.html">main.js</a>, <a href="main.js.html#line36">line 36</a></div>
+
+
+</div>
+
+        
+            
+
+
+    
+
+
+<div class="group" id="getBrand">
+
+
+    <h4 class="name"><span class="type-signature"></span><b>getBrand</b><span class="signature">(<span class="sig-params">brandName</span>)</span><span class="type-signature">:Object</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>It is used to get all details of a specific brand</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters</h5>
+    
+
+<div class="params">
+    
+
+    
+        <span class="name">brandName</span><span class="type"><span class="param-type">:string</span></span>
+    
+
+    
+
+    
+
+    <div class="description last"><p>Brand name of the brand you want to fetch details</p></div>
+
+    
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        <span class="param-type">:Object</span>
+    </dd>
+</dl>
+
+<div class="param-desc">
+    <p>It returns a JSON with all details of the brand</p>
+</div>
+
+
+    
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>const worldOFF = new OFF()
+worldOFF.getBrand('monoprix').then(brand => {
+  // use brand
+})</code></pre>
+
+
+
+
+<div class="src">Source: <a href="main.js.html">main.js</a>, <a href="main.js.html#line80">line 80</a></div>
+
+
+</div>
+
+        
+            
+
+
+    
+
+
+<div class="group" id="getBrands">
+
+
+    <h4 class="name"><span class="type-signature"></span><b>getBrands</b><span class="signature">(<span class="sig-params"></span>)</span><span class="type-signature">:Object</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>It is used to get all brands.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        <span class="param-type">:Object</span>
+    </dd>
+</dl>
+
+<div class="param-desc">
+    <p>It returns a JSON containing all brands</p>
+</div>
+
+
+    
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>const worldOFF = new OFF()
+const indiaOFF = worldOFF.country('in')
+indiaOFF.getBrands().then(brands => {
+  // use brands
+})</code></pre>
+
+
+
+
+<div class="src">Source: <a href="main.js.html">main.js</a>, <a href="main.js.html#line50">line 50</a></div>
+
+
+</div>
+
+        
+            
+
+
+    
+
+
+<div class="group" id="getLabels">
+
+
+    <h4 class="name"><span class="type-signature"></span><b>getLabels</b><span class="signature">(<span class="sig-params"></span>)</span><span class="type-signature">:Object</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>It is used to get all Labels from the API</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        <span class="param-type">:Object</span>
+    </dd>
+</dl>
+
+<div class="param-desc">
+    <p>It returns a JSON with all labels present on the API</p>
+</div>
+
+
+    
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>const worldOFF = new OFF()
+worldOFF.getLabels().then(labels => {
+  // use labels
+})</code></pre>
+
+
+
+
+<div class="src">Source: <a href="main.js.html">main.js</a>, <a href="main.js.html#line108">line 108</a></div>
+
+
+</div>
+
+        
+            
+
+
+    
+
+
+<div class="group" id="getLanguages">
+
+
+    <h4 class="name"><span class="type-signature"></span><b>getLanguages</b><span class="signature">(<span class="sig-params"></span>)</span><span class="type-signature">:Object</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>It is used to get all languages on the labels</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        <span class="param-type">:Object</span>
+    </dd>
+</dl>
+
+<div class="param-desc">
+    <p>It returns a JSON with list of all languages</p>
+</div>
+
+
+    
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>const worldOFF = new OFF()
+worldOFF.getLanguages().then(languages => {
+  // use languages
+})</code></pre>
+
+
+
+
+<div class="src">Source: <a href="main.js.html">main.js</a>, <a href="main.js.html#line94">line 94</a></div>
+
+
+</div>
+
+        
+            
+
+
+    
+
+
+<div class="group" id="getProduct">
+
+
+    <h4 class="name"><span class="type-signature"></span><b>getProduct</b><span class="signature">(<span class="sig-params">barcode</span>)</span><span class="type-signature">:Object</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>It is used to get a specific product using barcode</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters</h5>
+    
+
+<div class="params">
+    
+
+    
+        <span class="name">barcode</span><span class="type"><span class="param-type">:number</span></span>
+    
+
+    
+
+    
+
+    <div class="description last"><p>Barcode of the product you want to fetch details</p></div>
+
+    
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        <span class="param-type">:Object</span>
+    </dd>
+</dl>
+
+<div class="param-desc">
+    <p>It returns a JSON of the product</p>
+</div>
+
+
+    
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>const worldOFF = new OFF()
+worldOFF.getProduct(7622210288257).then(product => {
+  // use product
+})</code></pre>
+
+
+
+
+<div class="src">Source: <a href="main.js.html">main.js</a>, <a href="main.js.html#line65">line 65</a></div>
+
+
+</div>
+
+        
+            
+
+
+    
+
+
+<div class="group" id="getProductsByBarcodeBeginning">
+
+
+    <h4 class="name"><span class="type-signature"></span><b>getProductsByBarcodeBeginning</b><span class="signature">(<span class="sig-params">beginning</span>)</span><span class="type-signature">:Object</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>It is used to get all products beginning with the given barcode string</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters</h5>
+    
+
+<div class="params">
+    
+
+    
+        <span class="name">beginning</span><span class="type"><span class="param-type">:string</span></span>
+    
+
+    
+
+    
+
+    <div class="description last"><p>Barcode string from which if the barcode begins, then product is to be fetched</p></div>
+
+    
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        <span class="param-type">:Object</span>
+    </dd>
+</dl>
+
+<div class="param-desc">
+    <p>It returns a JSON of all products that begin with the given barcode string</p>
+</div>
+
+
+    
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>const worldOFF = new OFF()
+worldOFF.getProductsByBarcodeBeginning('3596710').then(products => {
+  // use products
+})</code></pre>
+
+
+
+
+<div class="src">Source: <a href="main.js.html">main.js</a>, <a href="main.js.html#line123">line 123</a></div>
+
+
+</div>
+
+        
+            
+
+
+    
+
+
+<div class="group" id="setOption">
+
+
+    <h4 class="name"><span class="type-signature"></span><b>setOption</b><span class="signature">(<span class="sig-params"></span>)</span><span class="type-signature">:Object</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>It is used to set option in OFF instance</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        <span class="param-type">:Object</span>
+    </dd>
+</dl>
+
+<div class="param-desc">
+    <p>An OFF Instance with option set</p>
+</div>
+
+
+    
+
+
+
+
+
+
+
+
+
+
+<div class="src">Source: <a href="main.js.html">main.js</a>, <a href="main.js.html#line22">line 22</a></div>
+
+
+</div>
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc" target="_blank">JSDoc 3.5.5</a> on 3/6/2018 using the <a href="https://github.com/Grafluxe/boxy-jsdoc-template" target="_blank">boxy-jsdoc-template</a> theme.
+</footer>
+
+<script src="scripts/prettify/prettify.js"></script>
+<script src="scripts/prettify/lang-css.js"></script>
+<script src="scripts/script.js"></script>
+
+</body>
+</html>

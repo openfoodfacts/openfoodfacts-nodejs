@@ -8,7 +8,7 @@
     "commitmsg": "commitlint -quiet=0 --extends=@commitlint/config-conventional -e",
     "precommit": "standard `git diff --name-only --staged --relative | grep '.js$'` nothing",
     "fix": "standard --fix",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "contributors:add": "all-contributors add",
     "contributors:generate": "all-contributors generate"
   },
@@ -29,6 +29,8 @@
   },
   "homepage": "https://github.com/ms10398/openfoodfacts-nodejs#readme",
   "dependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.0.1",
     "request-promise": "^4.2.2"
   },
   "devDependencies": {

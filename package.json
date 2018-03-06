@@ -9,8 +9,14 @@
     "precommit": "standard `git diff --name-only --staged --relative | grep '.js$'` nothing",
     "fix": "standard --fix",
     "test": "mocha",
+    "doc": "jsdoc -c .jsdocrc",
     "contributors:add": "all-contributors add",
     "contributors:generate": "all-contributors generate"
+  },
+  "standard": {
+    "ignore": [
+      "/docs/**/*.js"
+    ]
   },
   "repository": {
     "type": "git",
@@ -37,7 +43,9 @@
     "@commitlint/cli": "^6.1.0",
     "@commitlint/config-conventional": "^6.1.0",
     "all-contributors-cli": "^4.10.1",
+    "boxy-jsdoc-template": "^2.0.2",
     "husky": "^0.14.3",
+    "jsdoc": "^3.5.5",
     "standard": "^10.0.3"
   }
 }

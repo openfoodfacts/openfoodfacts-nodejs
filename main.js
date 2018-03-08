@@ -63,7 +63,7 @@ class OFF {
    * })
    */
   getProduct (barcode) {
-    return request(`${this.URL}/api/v0/${barcode}`)
+    return request(`${this.URL}/api/v0/product/${barcode}.json`)
       .then(JSON.parse)
   }
 

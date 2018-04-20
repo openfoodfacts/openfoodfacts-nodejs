@@ -111,6 +111,21 @@ class OFF {
   }
 
   /**
+  * It is used to get all additives from the API
+  * @return {Object} It returns a JSON with all additives present in the API
+  * @example
+  * const worldOFF = new OFF()
+  * worldOFF.getAdditives().then(additives =>{
+  *    //use additives
+  * })
+  */
+
+  getAdditives () {
+    return request(`${this.URL}/additives.json`)
+      .then(JSON.parse)
+  }
+
+  /**
    * It is used to get all products beginning with the given barcode string
    * @param {string} beginning - Barcode string from which if the barcode begins, then product is to be fetched
    * @return {Object} It returns a JSON of all products that begin with the given barcode string

@@ -47,4 +47,8 @@ describe('country', function () {
     const withAPI = await OFFInstance.getProductsByBarcodeBeginning(beginning)
     await test(withAPI, `${worldURL}/code/${beginning}xxxxxx.json`)
   })
+  it('Should fetch all additives', async () => {
+    const withAPI = await OFFInstance.getAdditives()
+    await test(withAPI, `${worldURL}/additives.json`)
+  })
 })

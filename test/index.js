@@ -27,7 +27,7 @@ describe('country', function () {
   it(`Should fetch product with barcode`, async () => {
     const barcode = '7622210288257'
     const withAPI = await OFFInstance.getProduct(barcode)
-    await test(withAPI, `${worldURL}/api/v0/${barcode}`)
+    await test(withAPI, `${worldURL}/api/v0/product/${barcode}`)
   })
   it(`Should fetch a brand by its name`, async () => {
     const brand = 'monoprix'

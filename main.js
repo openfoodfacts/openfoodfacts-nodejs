@@ -119,7 +119,6 @@ class OFF {
   *    //use additives
   * })
   */
-
   getAdditives () {
     return request(`${this.URL}/additives.json`)
       .then(JSON.parse)

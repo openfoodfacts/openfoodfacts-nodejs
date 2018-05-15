@@ -51,4 +51,48 @@ describe('country', function () {
     const withAPI = await OFFInstance.getAdditives()
     await test(withAPI, `${worldURL}/additives.json`)
   })
+  it('Should fetch all allergens', async () => {
+    const withAPI = await OFFInstance.getAllergens()
+    await test(withAPI, `${worldURL}/allergens.json`)
+  })
+  it('Should fetch all categories', async () => {
+    const withAPI = await OFFInstance.getCategories()
+    await test(withAPI, `${worldURL}/categories.json`)
+  })
+  it('Should fetch all countries', async () => {
+    const withAPI = await OFFInstance.getCountries()
+    await test(withAPI, `${worldURL}/countries.json`)
+  })
+  it('Should fetch all entry dates', async () => {
+    const withAPI = await OFFInstance.getEntryDates()
+    await test(withAPI, `${worldURL}/entry-dates.json`)
+  })
+  it('Should fetch all ingredients', async () => {
+    const withAPI = await OFFInstance.getIngredients()
+    await test(withAPI, `${worldURL}/ingredients.json`)
+  })
+  it('Should fetch all packagings', async () => {
+    const withAPI = await OFFInstance.getPackagings()
+    await test(withAPI, `${worldURL}/packaging.json`)
+  })
+  it('Should fetch all packager codes', async () => {
+    const withAPI = await OFFInstance.getPacakgingCodes()
+    await test(withAPI, `${worldURL}/packager-codes.json`)
+  })
+  it('Should fetch all purchase places', async () => {
+    const withAPI = await OFFInstance.getPurchasePlaces()
+    await test(withAPI, `${worldURL}/purchase-places.json`)
+  })
+  it('Should fetch all states', async () => {
+    const withAPI = await OFFInstance.getStates()
+    await test(withAPI, `${worldURL}/states.json`)
+  })
+  it('Should fetch all stores', async () => {
+    const withAPI = await OFFInstance.getStores()
+    await test(withAPI, `${worldURL}/stores.json`)
+  })
+  it('Should fetch all traces', async () => {
+    const withAPI = await OFFInstance.getTraces()
+    await test(withAPI, `${worldURL}/traces.json`)
+  })
 })

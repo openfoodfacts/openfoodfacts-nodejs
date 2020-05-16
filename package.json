@@ -40,7 +40,7 @@
     "request-promise": "^4.2.2"
   },
   "devDependencies": {
-    "@commitlint/cli": "^6.1.0",
+    "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^6.1.0",
     "all-contributors-cli": "^4.10.1",
     "boxy-jsdoc-template": "^2.0.2",

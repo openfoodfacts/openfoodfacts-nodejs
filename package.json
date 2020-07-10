@@ -14,13 +14,14 @@
     "contributors:generate": "all-contributors generate"
   },
   "standard": {
+    "env": [ "mocha" ],
     "ignore": [
       "/docs/**/*.js"
     ]
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ms10398/openfoodfacts-nodejs.git"
+    "url": "git+https://github.com/openfoodfacts/openfoodfacts-nodejs.git"
   },
   "keywords": [
     "OFF",
@@ -31,21 +32,22 @@
   "author": "openfoodfacts",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/ms10398/openfoodfacts-nodejs/issues"
+    "url": "https://github.com/openfoodfacts/openfoodfacts-nodejs/issues"
   },
-  "homepage": "https://github.com/ms10398/openfoodfacts-nodejs#readme",
+  "homepage": "https://github.com/openfoodfacts/openfoodfacts-nodejs#readme",
   "dependencies": {
-    "chai": "^4.2.0",
-    "mocha": "^5.0.1",
     "request-promise": "^4.2.5"
   },
   "devDependencies": {
     "@commitlint/cli": "^6.1.0",
     "@commitlint/config-conventional": "^6.1.0",
+    "chai": "^4.2.0",
     "all-contributors-cli": "^6.16.0",
     "boxy-jsdoc-template": "^2.0.2",
     "husky": "^0.14.3",
     "jsdoc": "^3.6.4",
+    "mocha": "^5.0.1",
+    "mockery": "^2.1.0",
     "standard": "^10.0.3"
   }
 }

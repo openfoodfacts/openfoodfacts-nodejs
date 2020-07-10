@@ -1,0 +1,2448 @@
+{
+    "tags": [
+        {
+            "id": "cadbury",
+            "url": "https://in.openfoodfacts.org/brand/cadbury",
+            "name": "Cadbury",
+            "products": 23,
+            "known": 0
+        },
+        {
+            "id": "nestle",
+            "known": 0,
+            "products": 19,
+            "name": "Nestle",
+            "url": "https://in.openfoodfacts.org/brand/nestle"
+        },
+        {
+            "known": 0,
+            "name": "Amul",
+            "products": 15,
+            "url": "https://in.openfoodfacts.org/brand/amul",
+            "id": "amul"
+        },
+        {
+            "known": 0,
+            "name": "Haldiram-s",
+            "products": 15,
+            "url": "https://in.openfoodfacts.org/brand/haldiram-s",
+            "id": "haldiram-s"
+        },
+        {
+            "known": 0,
+            "name": "Britannia",
+            "products": 13,
+            "url": "https://in.openfoodfacts.org/brand/britannia",
+            "id": "britannia"
+        },
+        {
+            "id": "parle",
+            "products": 10,
+            "name": "Parle",
+            "url": "https://in.openfoodfacts.org/brand/parle",
+            "known": 0
+        },
+        {
+            "id": "coca-cola",
+            "url": "https://in.openfoodfacts.org/brand/coca-cola",
+            "name": "Coca-cola",
+            "products": 10,
+            "known": 0
+        },
+        {
+            "url": "https://in.openfoodfacts.org/brand/maggi",
+            "products": 8,
+            "name": "Maggi",
+            "known": 0,
+            "id": "maggi"
+        },
+        {
+            "url": "https://in.openfoodfacts.org/brand/lays",
+            "name": "Lays",
+            "products": 8,
+            "known": 0,
+            "id": "lays"
+        },
+        {
+            "id": "haldirams",
+            "url": "https://in.openfoodfacts.org/brand/haldirams",
+            "products": 7,
+            "name": "Haldirams",
+            "known": 0
+        },
+        {
+            "id": "kurkure",
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/kurkure",
+            "name": "Kurkure",
+            "products": 7
+        },
+        {
+            "id": "knorr",
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/knorr",
+            "name": "Knorr",
+            "products": 5
+        },
+        {
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/saffola",
+            "name": "Saffola",
+            "products": 5,
+            "id": "saffola"
+        },
+        {
+            "id": "haldiram",
+            "url": "https://in.openfoodfacts.org/brand/haldiram",
+            "products": 4,
+            "name": "Haldiram",
+            "known": 0
+        },
+        {
+            "id": "dabur",
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/dabur",
+            "name": "Dabur",
+            "products": 4
+        },
+        {
+            "id": "hershey-s",
+            "products": 4,
+            "name": "Hershey-s",
+            "url": "https://in.openfoodfacts.org/brand/hershey-s",
+            "known": 0
+        },
+        {
+            "known": 0,
+            "products": 4,
+            "name": "Mtr",
+            "url": "https://in.openfoodfacts.org/brand/mtr",
+            "id": "mtr"
+        },
+        {
+            "id": "lipton",
+            "known": 0,
+            "products": 4,
+            "name": "Lipton",
+            "url": "https://in.openfoodfacts.org/brand/lipton"
+        },
+        {
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/carrefour",
+            "products": 4,
+            "name": "Carrefour",
+            "id": "carrefour"
+        },
+        {
+            "id": "dr-oetker",
+            "products": 4,
+            "name": "Dr-oetker",
+            "url": "https://in.openfoodfacts.org/brand/dr-oetker",
+            "known": 0
+        },
+        {
+            "id": "sunfeast",
+            "name": "Sunfeast",
+            "products": 4,
+            "url": "https://in.openfoodfacts.org/brand/sunfeast",
+            "known": 0
+        },
+        {
+            "known": 0,
+            "name": "Nescafe",
+            "products": 4,
+            "url": "https://in.openfoodfacts.org/brand/nescafe",
+            "id": "nescafe"
+        },
+        {
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/kellogg-s",
+            "name": "Kellogg-s",
+            "products": 4,
+            "id": "kellogg-s"
+        },
+        {
+            "id": "del-monte",
+            "url": "https://in.openfoodfacts.org/brand/del-monte",
+            "name": "Del-monte",
+            "products": 4,
+            "known": 0
+        },
+        {
+            "id": "bingo",
+            "name": "Bingo",
+            "products": 4,
+            "url": "https://in.openfoodfacts.org/brand/bingo",
+            "known": 0
+        },
+        {
+            "id": "patanjali",
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/patanjali",
+            "name": "Patanjali",
+            "products": 3
+        },
+        {
+            "id": "lay-s",
+            "url": "https://in.openfoodfacts.org/brand/lay-s",
+            "name": "Lay-s",
+            "products": 3,
+            "known": 0
+        },
+        {
+            "url": "https://in.openfoodfacts.org/brand/pepsico",
+            "name": "Pepsico",
+            "products": 3,
+            "known": 0,
+            "id": "pepsico"
+        },
+        {
+            "id": "the-coca-cola-company",
+            "url": "https://in.openfoodfacts.org/brand/the-coca-cola-company",
+            "products": 3,
+            "name": "The-coca-cola-company",
+            "known": 0
+        },
+        {
+            "name": "Heinz",
+            "products": 3,
+            "url": "https://in.openfoodfacts.org/brand/heinz",
+            "known": 0,
+            "id": "heinz"
+        },
+        {
+            "id": "itc",
+            "name": "Itc",
+            "products": 3,
+            "url": "https://in.openfoodfacts.org/brand/itc",
+            "known": 0
+        },
+        {
+            "known": 0,
+            "products": 3,
+            "name": "Quaker",
+            "url": "https://in.openfoodfacts.org/brand/quaker",
+            "id": "quaker"
+        },
+        {
+            "known": 0,
+            "name": "Bikano",
+            "products": 3,
+            "url": "https://in.openfoodfacts.org/brand/bikano",
+            "id": "bikano"
+        },
+        {
+            "id": "kelloggs",
+            "known": 0,
+            "name": "Kelloggs",
+            "products": 3,
+            "url": "https://in.openfoodfacts.org/brand/kelloggs"
+        },
+        {
+            "known": 0,
+            "products": 3,
+            "name": "Balaji",
+            "url": "https://in.openfoodfacts.org/brand/balaji",
+            "id": "balaji"
+        },
+        {
+            "known": 0,
+            "name": "Anmol",
+            "products": 3,
+            "url": "https://in.openfoodfacts.org/brand/anmol",
+            "id": "anmol"
+        },
+        {
+            "id": "tata",
+            "url": "https://in.openfoodfacts.org/brand/tata",
+            "name": "Tata",
+            "products": 3,
+            "known": 0
+        },
+        {
+            "id": "monin",
+            "url": "https://in.openfoodfacts.org/brand/monin",
+            "name": "Monin",
+            "products": 3,
+            "known": 0
+        },
+        {
+            "id": "s-narendrakumar-co",
+            "url": "https://in.openfoodfacts.org/brand/s-narendrakumar-co",
+            "products": 2,
+            "name": "S-narendrakumar-co",
+            "known": 0
+        },
+        {
+            "known": 0,
+            "products": 2,
+            "name": "Ramdev",
+            "url": "https://in.openfoodfacts.org/brand/ramdev",
+            "id": "ramdev"
+        },
+        {
+            "id": "kinley",
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/kinley",
+            "name": "Kinley",
+            "products": 2
+        },
+        {
+            "url": "https://in.openfoodfacts.org/brand/perfetti",
+            "name": "Perfetti",
+            "products": 2,
+            "known": 0,
+            "id": "perfetti"
+        },
+        {
+            "url": "https://in.openfoodfacts.org/brand/priyagold",
+            "products": 2,
+            "name": "Priyagold",
+            "known": 0,
+            "id": "priyagold"
+        },
+        {
+            "products": 2,
+            "name": "Btw",
+            "url": "https://in.openfoodfacts.org/brand/btw",
+            "known": 0,
+            "id": "btw"
+        },
+        {
+            "known": 0,
+            "products": 2,
+            "name": "Pillsbury",
+            "url": "https://in.openfoodfacts.org/brand/pillsbury",
+            "id": "pillsbury"
+        },
+        {
+            "id": "maiyas",
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/maiyas",
+            "name": "Maiyas",
+            "products": 2
+        },
+        {
+            "id": "bisleri",
+            "name": "Bisleri",
+            "products": 2,
+            "url": "https://in.openfoodfacts.org/brand/bisleri",
+            "known": 0
+        },
+        {
+            "url": "https://in.openfoodfacts.org/brand/ferrero",
+            "name": "Ferrero",
+            "products": 2,
+            "known": 0,
+            "id": "ferrero"
+        },
+        {
+            "id": "organic-india",
+            "url": "https://in.openfoodfacts.org/brand/organic-india",
+            "products": 2,
+            "name": "Organic-india",
+            "known": 0
+        },
+        {
+            "id": "maniarr-s",
+            "known": 0,
+            "name": "Maniarr-s",
+            "products": 2,
+            "url": "https://in.openfoodfacts.org/brand/maniarr-s"
+        },
+        {
+            "products": 2,
+            "name": "Rostaa",
+            "url": "https://in.openfoodfacts.org/brand/rostaa",
+            "known": 0,
+            "id": "rostaa"
+        },
+        {
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/bagrry-s",
+            "name": "Bagrry-s",
+            "products": 2,
+            "id": "bagrry-s"
+        },
+        {
+            "id": "u",
+            "url": "https://in.openfoodfacts.org/brand/u",
+            "products": 2,
+            "name": "U",
+            "known": 0
+        },
+        {
+            "known": 0,
+            "products": 2,
+            "name": "Swastiks",
+            "url": "https://in.openfoodfacts.org/brand/swastiks",
+            "id": "swastiks"
+        },
+        {
+            "known": 0,
+            "products": 2,
+            "name": "Zydus-wellness",
+            "url": "https://in.openfoodfacts.org/brand/zydus-wellness",
+            "id": "zydus-wellness"
+        },
+        {
+            "id": "pran",
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/pran",
+            "products": 2,
+            "name": "Pran"
+        },
+        {
+            "id": "bru",
+            "products": 2,
+            "name": "Bru",
+            "url": "https://in.openfoodfacts.org/brand/bru",
+            "known": 0
+        },
+        {
+            "known": 0,
+            "products": 2,
+            "name": "Casino",
+            "url": "https://in.openfoodfacts.org/brand/casino",
+            "id": "casino"
+        },
+        {
+            "id": "kwality-wall-s",
+            "known": 0,
+            "products": 2,
+            "name": "Kwality-wall-s",
+            "url": "https://in.openfoodfacts.org/brand/kwality-wall-s"
+        },
+        {
+            "products": 2,
+            "name": "Ritter-sport",
+            "url": "https://in.openfoodfacts.org/brand/ritter-sport",
+            "known": 0,
+            "id": "ritter-sport"
+        },
+        {
+            "id": "lion",
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/lion",
+            "products": 2,
+            "name": "Lion"
+        },
+        {
+            "id": "boni",
+            "products": 2,
+            "name": "Boni",
+            "url": "https://in.openfoodfacts.org/brand/boni",
+            "known": 0
+        },
+        {
+            "id": "savour",
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/savour",
+            "products": 2,
+            "name": "Savour"
+        },
+        {
+            "id": "doritos",
+            "products": 2,
+            "name": "Doritos",
+            "url": "https://in.openfoodfacts.org/brand/doritos",
+            "known": 0
+        },
+        {
+            "known": 0,
+            "products": 2,
+            "name": "Parle-g",
+            "url": "https://in.openfoodfacts.org/brand/parle-g",
+            "id": "parle-g"
+        },
+        {
+            "id": "monaco",
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/monaco",
+            "products": 2,
+            "name": "Monaco"
+        },
+        {
+            "products": 2,
+            "name": "Tropicana",
+            "url": "https://in.openfoodfacts.org/brand/tropicana",
+            "known": 0,
+            "id": "tropicana"
+        },
+        {
+            "known": 0,
+            "products": 2,
+            "name": "Parle-agro",
+            "url": "https://in.openfoodfacts.org/brand/parle-agro",
+            "id": "parle-agro"
+        },
+        {
+            "id": "cavin-s",
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/cavin-s",
+            "products": 2,
+            "name": "Cavin-s"
+        },
+        {
+            "name": "Bb-royal",
+            "products": 2,
+            "url": "https://in.openfoodfacts.org/brand/bb-royal",
+            "known": 0,
+            "id": "bb-royal"
+        },
+        {
+            "known": 0,
+            "products": 2,
+            "name": "Mc-cain",
+            "url": "https://in.openfoodfacts.org/brand/mc-cain",
+            "id": "mc-cain"
+        },
+        {
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/paper-boat",
+            "products": 2,
+            "name": "Paper-boat",
+            "id": "paper-boat"
+        },
+        {
+            "id": "funfoods",
+            "name": "Funfoods",
+            "products": 2,
+            "url": "https://in.openfoodfacts.org/brand/funfoods",
+            "known": 0
+        },
+        {
+            "id": "unibic",
+            "products": 2,
+            "name": "Unibic",
+            "url": "https://in.openfoodfacts.org/brand/unibic",
+            "known": 0
+        },
+        {
+            "id": "cream-bell",
+            "url": "https://in.openfoodfacts.org/brand/cream-bell",
+            "products": 2,
+            "name": "Cream-bell",
+            "known": 0
+        },
+        {
+            "id": "karachi-bakery",
+            "known": 0,
+            "name": "Karachi-bakery",
+            "products": 2,
+            "url": "https://in.openfoodfacts.org/brand/karachi-bakery"
+        },
+        {
+            "id": "danone",
+            "url": "https://in.openfoodfacts.org/brand/danone",
+            "products": 2,
+            "name": "Danone",
+            "known": 0
+        },
+        {
+            "id": "nutricane",
+            "name": "Nutricane",
+            "products": 2,
+            "url": "https://in.openfoodfacts.org/brand/nutricane",
+            "known": 0
+        },
+        {
+            "id": "delfi",
+            "known": 0,
+            "products": 2,
+            "name": "Delfi",
+            "url": "https://in.openfoodfacts.org/brand/delfi"
+        },
+        {
+            "id": "good-day",
+            "products": 1,
+            "name": "Good-day",
+            "url": "https://in.openfoodfacts.org/brand/good-day",
+            "known": 0
+        },
+        {
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/ananda",
+            "products": 1,
+            "name": "Ananda",
+            "id": "ananda"
+        },
+        {
+            "id": "vadilal",
+            "name": "Vadilal",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/vadilal",
+            "known": 0
+        },
+        {
+            "name": "Soy-milky",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/soy-milky",
+            "known": 0,
+            "id": "soy-milky"
+        },
+        {
+            "id": "bavaria",
+            "url": "https://in.openfoodfacts.org/brand/bavaria",
+            "products": 1,
+            "name": "Bavaria",
+            "known": 0
+        },
+        {
+            "url": "https://in.openfoodfacts.org/brand/tify",
+            "products": 1,
+            "name": "Tify",
+            "known": 0,
+            "id": "tify"
+        },
+        {
+            "known": 0,
+            "name": "Oyes",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/oyes",
+            "id": "oyes"
+        },
+        {
+            "id": "veg-pro",
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/veg-pro",
+            "name": "Veg-pro",
+            "products": 1
+        },
+        {
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/brook-bond",
+            "products": 1,
+            "name": "Brook-bond",
+            "id": "brook-bond"
+        },
+        {
+            "url": "https://in.openfoodfacts.org/brand/tetra",
+            "name": "Tetra",
+            "products": 1,
+            "known": 0,
+            "id": "tetra"
+        },
+        {
+            "id": "gsk",
+            "url": "https://in.openfoodfacts.org/brand/gsk",
+            "products": 1,
+            "name": "Gsk",
+            "known": 0
+        },
+        {
+            "url": "https://in.openfoodfacts.org/brand/xyz",
+            "products": 1,
+            "name": "Xyz",
+            "known": 0,
+            "id": "xyz"
+        },
+        {
+            "url": "https://in.openfoodfacts.org/brand/verka",
+            "name": "Verka",
+            "products": 1,
+            "known": 0,
+            "id": "verka"
+        },
+        {
+            "id": "markfed-sohna",
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/markfed-sohna",
+            "products": 1,
+            "name": "Markfed-sohna"
+        },
+        {
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/leeford-healthcare-ltd",
+            "name": "Leeford-healthcare-ltd",
+            "products": 1,
+            "id": "leeford-healthcare-ltd"
+        },
+        {
+            "id": "streax",
+            "known": 0,
+            "name": "Streax",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/streax"
+        },
+        {
+            "known": 0,
+            "products": 1,
+            "name": "Shri-varalakshmi-company",
+            "url": "https://in.openfoodfacts.org/brand/shri-varalakshmi-company",
+            "id": "shri-varalakshmi-company"
+        },
+        {
+            "id": "aroma-magic",
+            "known": 0,
+            "products": 1,
+            "name": "Aroma-magic",
+            "url": "https://in.openfoodfacts.org/brand/aroma-magic"
+        },
+        {
+            "id": "bombay-sweets",
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/bombay-sweets",
+            "products": 1,
+            "name": "Bombay-sweets"
+        },
+        {
+            "id": "smartpaper",
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/smartpaper",
+            "name": "Smartpaper",
+            "products": 1
+        },
+        {
+            "url": "https://in.openfoodfacts.org/brand/brooke-bond",
+            "products": 1,
+            "name": "Brooke-bond",
+            "known": 0,
+            "id": "brooke-bond"
+        },
+        {
+            "url": "https://in.openfoodfacts.org/brand/dukes",
+            "name": "Dukes",
+            "products": 1,
+            "known": 0,
+            "id": "dukes"
+        },
+        {
+            "id": "vedic-era",
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/vedic-era",
+            "products": 1,
+            "name": "Vedic-era"
+        },
+        {
+            "id": "akshat-group",
+            "known": 0,
+            "name": "Akshat-group",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/akshat-group"
+        },
+        {
+            "known": 0,
+            "name": "Kapol",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/kapol",
+            "id": "kapol"
+        },
+        {
+            "id": "ching-s-secret",
+            "known": 0,
+            "products": 1,
+            "name": "Ching-s-secret",
+            "url": "https://in.openfoodfacts.org/brand/ching-s-secret"
+        },
+        {
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/mc-curtie",
+            "name": "Mc-curtie",
+            "products": 1,
+            "id": "mc-curtie"
+        },
+        {
+            "name": "Royal-zahidi",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/royal-zahidi",
+            "known": 0,
+            "id": "royal-zahidi"
+        },
+        {
+            "name": "Mcvitie-s",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/mcvitie-s",
+            "known": 0,
+            "id": "mcvitie-s"
+        },
+        {
+            "products": 1,
+            "name": "Samsung",
+            "url": "https://in.openfoodfacts.org/brand/samsung",
+            "known": 0,
+            "id": "samsung"
+        },
+        {
+            "url": "https://in.openfoodfacts.org/brand/nutriplato",
+            "name": "Nutriplato",
+            "products": 1,
+            "known": 0,
+            "id": "nutriplato"
+        },
+        {
+            "id": "snackwise",
+            "products": 1,
+            "name": "Snackwise",
+            "url": "https://in.openfoodfacts.org/brand/snackwise",
+            "known": 0
+        },
+        {
+            "known": 0,
+            "products": 1,
+            "name": "Aldi",
+            "url": "https://in.openfoodfacts.org/brand/aldi",
+            "id": "aldi"
+        },
+        {
+            "id": "fresho",
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/fresho",
+            "name": "Fresho",
+            "products": 1
+        },
+        {
+            "id": "epigamua",
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/epigamua",
+            "products": 1,
+            "name": "Epigamua"
+        },
+        {
+            "known": 0,
+            "products": 1,
+            "name": "Bira",
+            "url": "https://in.openfoodfacts.org/brand/bira",
+            "id": "bira"
+        },
+        {
+            "id": "fortune",
+            "known": 0,
+            "name": "Fortune",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/fortune"
+        },
+        {
+            "id": "nutribee",
+            "url": "https://in.openfoodfacts.org/brand/nutribee",
+            "name": "Nutribee",
+            "products": 1,
+            "known": 0
+        },
+        {
+            "id": "madhur",
+            "known": 0,
+            "name": "Madhur",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/madhur"
+        },
+        {
+            "url": "https://in.openfoodfacts.org/brand/murgerbon",
+            "name": "Murgerbon",
+            "products": 1,
+            "known": 0,
+            "id": "murgerbon"
+        },
+        {
+            "id": "budweiser",
+            "known": 0,
+            "products": 1,
+            "name": "Budweiser",
+            "url": "https://in.openfoodfacts.org/brand/budweiser"
+        },
+        {
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/time-out",
+            "name": "Time-out",
+            "products": 1,
+            "id": "time-out"
+        },
+        {
+            "id": "nandini",
+            "products": 1,
+            "name": "Nandini",
+            "url": "https://in.openfoodfacts.org/brand/nandini",
+            "known": 0
+        },
+        {
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/candia",
+            "products": 1,
+            "name": "Candia",
+            "id": "candia"
+        },
+        {
+            "url": "https://in.openfoodfacts.org/brand/soul-flavours",
+            "name": "Soul-flavours",
+            "products": 1,
+            "known": 0,
+            "id": "soul-flavours"
+        },
+        {
+            "id": "chitale",
+            "name": "Chitale",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/chitale",
+            "known": 0
+        },
+        {
+            "id": "pet-sapha",
+            "known": 0,
+            "products": 1,
+            "name": "Pet-sapha",
+            "url": "https://in.openfoodfacts.org/brand/pet-sapha"
+        },
+        {
+            "id": "colonel-co",
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/colonel-co",
+            "name": "Colonel-co",
+            "products": 1
+        },
+        {
+            "id": "parlite-foods",
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/parlite-foods",
+            "name": "Parlite-foods",
+            "products": 1
+        },
+        {
+            "known": 0,
+            "name": "So-good-india",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/so-good-india",
+            "id": "so-good-india"
+        },
+        {
+            "id": "hershey-s-kitchens",
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/hershey-s-kitchens",
+            "name": "Hershey-s-kitchens",
+            "products": 1
+        },
+        {
+            "id": "dr-oetker-funfoods",
+            "name": "Dr-oetker-funfoods",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/dr-oetker-funfoods",
+            "known": 0
+        },
+        {
+            "id": "lite-n-fit",
+            "url": "https://in.openfoodfacts.org/brand/lite-n-fit",
+            "products": 1,
+            "name": "Lite-n-fit",
+            "known": 0
+        },
+        {
+            "id": "american-garden",
+            "products": 1,
+            "name": "American-garden",
+            "url": "https://in.openfoodfacts.org/brand/american-garden",
+            "known": 0
+        },
+        {
+            "known": 0,
+            "name": "Perrier",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/perrier",
+            "id": "perrier"
+        },
+        {
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/general-mills",
+            "products": 1,
+            "name": "General-mills",
+            "id": "general-mills"
+        },
+        {
+            "id": "group-of-doshi-brothers",
+            "name": "Group-of-doshi-brothers",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/group-of-doshi-brothers",
+            "known": 0
+        },
+        {
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/hennessy",
+            "name": "Hennessy",
+            "products": 1,
+            "id": "hennessy"
+        },
+        {
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/glaceau",
+            "products": 1,
+            "name": "Glaceau",
+            "id": "glaceau"
+        },
+        {
+            "id": "beefeater",
+            "url": "https://in.openfoodfacts.org/brand/beefeater",
+            "name": "Beefeater",
+            "products": 1,
+            "known": 0
+        },
+        {
+            "products": 1,
+            "name": "Kissan",
+            "url": "https://in.openfoodfacts.org/brand/kissan",
+            "known": 0,
+            "id": "kissan"
+        },
+        {
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/protinex",
+            "products": 1,
+            "name": "Protinex",
+            "id": "protinex"
+        },
+        {
+            "id": "alimento-agro",
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/alimento-agro",
+            "name": "Alimento-agro",
+            "products": 1
+        },
+        {
+            "id": "hidden-valley",
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/hidden-valley",
+            "products": 1,
+            "name": "Hidden-valley"
+        },
+        {
+            "products": 1,
+            "name": "Sapphire",
+            "url": "https://in.openfoodfacts.org/brand/sapphire",
+            "known": 0,
+            "id": "sapphire"
+        },
+        {
+            "id": "golden-victoria",
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/golden-victoria",
+            "name": "Golden-victoria",
+            "products": 1
+        },
+        {
+            "products": 1,
+            "name": "Keya",
+            "url": "https://in.openfoodfacts.org/brand/keya",
+            "known": 0,
+            "id": "keya"
+        },
+        {
+            "id": "qamar-dates",
+            "products": 1,
+            "name": "Qamar-dates",
+            "url": "https://in.openfoodfacts.org/brand/qamar-dates",
+            "known": 0
+        },
+        {
+            "known": 0,
+            "name": "My-chewy",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/my-chewy",
+            "id": "my-chewy"
+        },
+        {
+            "known": 0,
+            "products": 1,
+            "name": "Mapro",
+            "url": "https://in.openfoodfacts.org/brand/mapro",
+            "id": "mapro"
+        },
+        {
+            "url": "https://in.openfoodfacts.org/brand/bisk-farm",
+            "name": "Bisk-farm",
+            "products": 1,
+            "known": 0,
+            "id": "bisk-farm"
+        },
+        {
+            "url": "https://in.openfoodfacts.org/brand/perk",
+            "products": 1,
+            "name": "Perk",
+            "known": 0,
+            "id": "perk"
+        },
+        {
+            "id": "regal-foods-and-beverages",
+            "url": "https://in.openfoodfacts.org/brand/regal-foods-and-beverages",
+            "products": 1,
+            "name": "Regal-foods-and-beverages",
+            "known": 0
+        },
+        {
+            "id": "flanders-dairy-products",
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/flanders-dairy-products",
+            "name": "Flanders-dairy-products",
+            "products": 1
+        },
+        {
+            "id": "bliss-chocolates-india-pvt-ltd",
+            "products": 1,
+            "name": "Bliss-chocolates-india-pvt-ltd",
+            "url": "https://in.openfoodfacts.org/brand/bliss-chocolates-india-pvt-ltd",
+            "known": 0
+        },
+        {
+            "known": 0,
+            "products": 1,
+            "name": "Priya",
+            "url": "https://in.openfoodfacts.org/brand/priya",
+            "id": "priya"
+        },
+        {
+            "id": "k-minamoto",
+            "url": "https://in.openfoodfacts.org/brand/k-minamoto",
+            "name": "K-minamoto",
+            "products": 1,
+            "known": 0
+        },
+        {
+            "products": 1,
+            "name": "Nutri-choice",
+            "url": "https://in.openfoodfacts.org/brand/nutri-choice",
+            "known": 0,
+            "id": "nutri-choice"
+        },
+        {
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/pizza-topping",
+            "products": 1,
+            "name": "Pizza-topping",
+            "id": "pizza-topping"
+        },
+        {
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/mohun-s",
+            "name": "Mohun-s",
+            "products": 1,
+            "id": "mohun-s"
+        },
+        {
+            "name": "Sattviko",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/sattviko",
+            "known": 0,
+            "id": "sattviko"
+        },
+        {
+            "id": "tong-garden",
+            "products": 1,
+            "name": "Tong-garden",
+            "url": "https://in.openfoodfacts.org/brand/tong-garden",
+            "known": 0
+        },
+        {
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/bob-s-red-mill",
+            "products": 1,
+            "name": "Bob-s-red-mill",
+            "id": "bob-s-red-mill"
+        },
+        {
+            "url": "https://in.openfoodfacts.org/brand/fssai",
+            "name": "Fssai",
+            "products": 1,
+            "known": 0,
+            "id": "fssai"
+        },
+        {
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/chatkins",
+            "name": "Chatkins",
+            "products": 1,
+            "id": "chatkins"
+        },
+        {
+            "id": "crax",
+            "known": 0,
+            "products": 1,
+            "name": "Crax",
+            "url": "https://in.openfoodfacts.org/brand/crax"
+        },
+        {
+            "id": "simply-nature",
+            "name": "Simply-nature",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/simply-nature",
+            "known": 0
+        },
+        {
+            "id": "krbl-limited",
+            "known": 0,
+            "products": 1,
+            "name": "Krbl-limited",
+            "url": "https://in.openfoodfacts.org/brand/krbl-limited"
+        },
+        {
+            "known": 0,
+            "products": 1,
+            "name": "Mcvities",
+            "url": "https://in.openfoodfacts.org/brand/mcvities",
+            "id": "mcvities"
+        },
+        {
+            "id": "tasty-treat",
+            "products": 1,
+            "name": "Tasty-treat",
+            "url": "https://in.openfoodfacts.org/brand/tasty-treat",
+            "known": 0
+        },
+        {
+            "id": "on",
+            "known": 0,
+            "name": "On",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/on"
+        },
+        {
+            "url": "https://in.openfoodfacts.org/brand/ponds",
+            "products": 1,
+            "name": "Ponds",
+            "known": 0,
+            "id": "ponds"
+        },
+        {
+            "id": "red-bull",
+            "name": "Red-bull",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/red-bull",
+            "known": 0
+        },
+        {
+            "url": "https://in.openfoodfacts.org/brand/tetley",
+            "products": 1,
+            "name": "Tetley",
+            "known": 0,
+            "id": "tetley"
+        },
+        {
+            "known": 0,
+            "name": "Centre-fruit",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/centre-fruit",
+            "id": "centre-fruit"
+        },
+        {
+            "products": 1,
+            "name": "Hindustan-unilever-brand",
+            "url": "https://in.openfoodfacts.org/brand/hindustan-unilever-brand",
+            "known": 0,
+            "id": "hindustan-unilever-brand"
+        },
+        {
+            "id": "chabaa",
+            "known": 0,
+            "name": "Chabaa",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/chabaa"
+        },
+        {
+            "products": 1,
+            "name": "T-best",
+            "url": "https://in.openfoodfacts.org/brand/t-best",
+            "known": 0,
+            "id": "t-best"
+        },
+        {
+            "url": "https://in.openfoodfacts.org/brand/marks-spencer",
+            "products": 1,
+            "name": "Marks-spencer",
+            "known": 0,
+            "id": "marks-spencer"
+        },
+        {
+            "id": "moon-foods",
+            "url": "https://in.openfoodfacts.org/brand/moon-foods",
+            "name": "Moon-foods",
+            "products": 1,
+            "known": 0
+        },
+        {
+            "id": "p-tits-heinz",
+            "url": "https://in.openfoodfacts.org/brand/p-tits-heinz",
+            "products": 1,
+            "name": "P-tits-heinz",
+            "known": 0
+        },
+        {
+            "url": "https://in.openfoodfacts.org/brand/dettol",
+            "name": "Dettol",
+            "products": 1,
+            "known": 0,
+            "id": "dettol"
+        },
+        {
+            "id": "food-bazar",
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/food-bazar",
+            "name": "Food-bazar",
+            "products": 1
+        },
+        {
+            "id": "cadbury-dairy-milk",
+            "products": 1,
+            "name": "Cadbury-dairy-milk",
+            "url": "https://in.openfoodfacts.org/brand/cadbury-dairy-milk",
+            "known": 0
+        },
+        {
+            "id": "choko-la",
+            "known": 0,
+            "products": 1,
+            "name": "Choko-la",
+            "url": "https://in.openfoodfacts.org/brand/choko-la"
+        },
+        {
+            "id": "turkel",
+            "products": 1,
+            "name": "Turkel",
+            "url": "https://in.openfoodfacts.org/brand/turkel",
+            "known": 0
+        },
+        {
+            "name": "Freedom",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/freedom",
+            "known": 0,
+            "id": "freedom"
+        },
+        {
+            "name": "Solen",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/solen",
+            "known": 0,
+            "id": "solen"
+        },
+        {
+            "id": "noel",
+            "known": 0,
+            "products": 1,
+            "name": "Noel",
+            "url": "https://in.openfoodfacts.org/brand/noel"
+        },
+        {
+            "url": "https://in.openfoodfacts.org/brand/nutty-bite",
+            "name": "Nutty-bite",
+            "products": 1,
+            "known": 0,
+            "id": "nutty-bite"
+        },
+        {
+            "id": "deoleo",
+            "url": "https://in.openfoodfacts.org/brand/deoleo",
+            "name": "Deoleo",
+            "products": 1,
+            "known": 0
+        },
+        {
+            "known": 0,
+            "name": "Hatsun",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/hatsun",
+            "id": "hatsun"
+        },
+        {
+            "id": "colavita",
+            "url": "https://in.openfoodfacts.org/brand/colavita",
+            "products": 1,
+            "name": "Colavita",
+            "known": 0
+        },
+        {
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/food-bazaar",
+            "products": 1,
+            "name": "Food-bazaar",
+            "id": "food-bazaar"
+        },
+        {
+            "products": 1,
+            "name": "Britannia-nutrichoice",
+            "url": "https://in.openfoodfacts.org/brand/britannia-nutrichoice",
+            "known": 0,
+            "id": "britannia-nutrichoice"
+        },
+        {
+            "id": "splitz",
+            "products": 1,
+            "name": "Splitz",
+            "url": "https://in.openfoodfacts.org/brand/splitz",
+            "known": 0
+        },
+        {
+            "id": "fanta",
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/fanta",
+            "name": "Fanta",
+            "products": 1
+        },
+        {
+            "known": 0,
+            "products": 1,
+            "name": "Kit-kat",
+            "url": "https://in.openfoodfacts.org/brand/kit-kat",
+            "id": "kit-kat"
+        },
+        {
+            "id": "ji-ka-biskit",
+            "name": "Ji-ka-biskit",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/ji-ka-biskit",
+            "known": 0
+        },
+        {
+            "url": "https://in.openfoodfacts.org/brand/ghotti",
+            "name": "Ghotti",
+            "products": 1,
+            "known": 0,
+            "id": "ghotti"
+        },
+        {
+            "url": "https://in.openfoodfacts.org/brand/sbl",
+            "products": 1,
+            "name": "Sbl",
+            "known": 0,
+            "id": "sbl"
+        },
+        {
+            "id": "cocoaland",
+            "name": "Cocoaland",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/cocoaland",
+            "known": 0
+        },
+        {
+            "url": "https://in.openfoodfacts.org/brand/savencia",
+            "products": 1,
+            "name": "Savencia",
+            "known": 0,
+            "id": "savencia"
+        },
+        {
+            "url": "https://in.openfoodfacts.org/brand/naturamore-nutraceutical",
+            "products": 1,
+            "name": "Naturamore-nutraceutical",
+            "known": 0,
+            "id": "naturamore-nutraceutical"
+        },
+        {
+            "id": "catch",
+            "products": 1,
+            "name": "Catch",
+            "url": "https://in.openfoodfacts.org/brand/catch",
+            "known": 0
+        },
+        {
+            "products": 1,
+            "name": "Passendale",
+            "url": "https://in.openfoodfacts.org/brand/passendale",
+            "known": 0,
+            "id": "passendale"
+        },
+        {
+            "id": "picard",
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/picard",
+            "name": "Picard",
+            "products": 1
+        },
+        {
+            "url": "https://in.openfoodfacts.org/brand/marco",
+            "name": "Marco",
+            "products": 1,
+            "known": 0,
+            "id": "marco"
+        },
+        {
+            "id": "jk",
+            "name": "Jk",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/jk",
+            "known": 0
+        },
+        {
+            "id": "fritolay",
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/fritolay",
+            "name": "Fritolay",
+            "products": 1
+        },
+        {
+            "name": "Cereal-bio",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/cereal-bio",
+            "known": 0,
+            "id": "cereal-bio"
+        },
+        {
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/optimum-nutrition",
+            "name": "Optimum-nutrition",
+            "products": 1,
+            "id": "optimum-nutrition"
+        },
+        {
+            "id": "mars-nederland",
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/mars-nederland",
+            "products": 1,
+            "name": "Mars-nederland"
+        },
+        {
+            "name": "Real",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/real",
+            "known": 0,
+            "id": "real"
+        },
+        {
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/alpenliebe",
+            "name": "Alpenliebe",
+            "products": 1,
+            "id": "alpenliebe"
+        },
+        {
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/k-b-b-nuts-pvt-ltd",
+            "products": 1,
+            "name": "K-b-b-nuts-pvt-ltd",
+            "id": "k-b-b-nuts-pvt-ltd"
+        },
+        {
+            "id": "dilbahar",
+            "name": "Dilbahar",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/dilbahar",
+            "known": 0
+        },
+        {
+            "known": 0,
+            "products": 1,
+            "name": "Gervais",
+            "url": "https://in.openfoodfacts.org/brand/gervais",
+            "id": "gervais"
+        },
+        {
+            "id": "delhaize",
+            "url": "https://in.openfoodfacts.org/brand/delhaize",
+            "products": 1,
+            "name": "Delhaize",
+            "known": 0
+        },
+        {
+            "known": 0,
+            "products": 1,
+            "name": "Natraj-auroville",
+            "url": "https://in.openfoodfacts.org/brand/natraj-auroville",
+            "id": "natraj-auroville"
+        },
+        {
+            "id": "iba",
+            "name": "Iba",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/iba",
+            "known": 0
+        },
+        {
+            "id": "kalimark",
+            "known": 0,
+            "name": "Kalimark",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/kalimark"
+        },
+        {
+            "id": "grand-jury",
+            "known": 0,
+            "name": "Grand-jury",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/grand-jury"
+        },
+        {
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/pepsi",
+            "products": 1,
+            "name": "Pepsi",
+            "id": "pepsi"
+        },
+        {
+            "id": "grimbergen",
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/grimbergen",
+            "name": "Grimbergen",
+            "products": 1
+        },
+        {
+            "id": "kingfisher",
+            "url": "https://in.openfoodfacts.org/brand/kingfisher",
+            "products": 1,
+            "name": "Kingfisher",
+            "known": 0
+        },
+        {
+            "id": "harvest-gold",
+            "known": 0,
+            "products": 1,
+            "name": "Harvest-gold",
+            "url": "https://in.openfoodfacts.org/brand/harvest-gold"
+        },
+        {
+            "id": "kalyani",
+            "url": "https://in.openfoodfacts.org/brand/kalyani",
+            "products": 1,
+            "name": "Kalyani",
+            "known": 0
+        },
+        {
+            "known": 0,
+            "name": "Abbaye-de-crespin",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/abbaye-de-crespin",
+            "id": "abbaye-de-crespin"
+        },
+        {
+            "id": "russov",
+            "url": "https://in.openfoodfacts.org/brand/russov",
+            "products": 1,
+            "name": "Russov",
+            "known": 0
+        },
+        {
+            "id": "modern-foods",
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/modern-foods",
+            "name": "Modern-foods",
+            "products": 1
+        },
+        {
+            "id": "jelly-belly",
+            "known": 0,
+            "name": "Jelly-belly",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/jelly-belly"
+        },
+        {
+            "known": 0,
+            "products": 1,
+            "name": "Butterfly",
+            "url": "https://in.openfoodfacts.org/brand/butterfly",
+            "id": "butterfly"
+        },
+        {
+            "id": "tic-tac",
+            "products": 1,
+            "name": "Tic-tac",
+            "url": "https://in.openfoodfacts.org/brand/tic-tac",
+            "known": 0
+        },
+        {
+            "id": "nutrichoice",
+            "name": "Nutrichoice",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/nutrichoice",
+            "known": 0
+        },
+        {
+            "id": "gits",
+            "known": 0,
+            "products": 1,
+            "name": "Gits",
+            "url": "https://in.openfoodfacts.org/brand/gits"
+        },
+        {
+            "id": "shri-raja-industries",
+            "known": 0,
+            "products": 1,
+            "name": "Shri-raja-industries",
+            "url": "https://in.openfoodfacts.org/brand/shri-raja-industries"
+        },
+        {
+            "url": "https://in.openfoodfacts.org/brand/weight-gainer",
+            "name": "Weight-gainer",
+            "products": 1,
+            "known": 0,
+            "id": "weight-gainer"
+        },
+        {
+            "id": "britt",
+            "products": 1,
+            "name": "Britt",
+            "url": "https://in.openfoodfacts.org/brand/britt",
+            "known": 0
+        },
+        {
+            "id": "id",
+            "url": "https://in.openfoodfacts.org/brand/id",
+            "name": "Id",
+            "products": 1,
+            "known": 0
+        },
+        {
+            "id": "brasserie-koningshoeven",
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/brasserie-koningshoeven",
+            "name": "Brasserie-koningshoeven",
+            "products": 1
+        },
+        {
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/excel",
+            "name": "Excel",
+            "products": 1,
+            "id": "excel"
+        },
+        {
+            "name": "Coastal-bay-confections",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/coastal-bay-confections",
+            "known": 0,
+            "id": "coastal-bay-confections"
+        },
+        {
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/pepisco-india",
+            "name": "Pepisco-india",
+            "products": 1,
+            "id": "pepisco-india"
+        },
+        {
+            "known": 0,
+            "products": 1,
+            "name": "United-foods",
+            "url": "https://in.openfoodfacts.org/brand/united-foods",
+            "id": "united-foods"
+        },
+        {
+            "url": "https://in.openfoodfacts.org/brand/india-gate",
+            "products": 1,
+            "name": "India-gate",
+            "known": 0,
+            "id": "india-gate"
+        },
+        {
+            "products": 1,
+            "name": "Kellogs",
+            "url": "https://in.openfoodfacts.org/brand/kellogs",
+            "known": 0,
+            "id": "kellogs"
+        },
+        {
+            "id": "hollywood",
+            "known": 0,
+            "name": "Hollywood",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/hollywood"
+        },
+        {
+            "id": "kirkland-signature",
+            "url": "https://in.openfoodfacts.org/brand/kirkland-signature",
+            "name": "Kirkland-signature",
+            "products": 1,
+            "known": 0
+        },
+        {
+            "url": "https://in.openfoodfacts.org/brand/auchan",
+            "products": 1,
+            "name": "Auchan",
+            "known": 0,
+            "id": "auchan"
+        },
+        {
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/cannabia",
+            "products": 1,
+            "name": "Cannabia",
+            "id": "cannabia"
+        },
+        {
+            "id": "complan",
+            "name": "Complan",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/complan",
+            "known": 0
+        },
+        {
+            "id": "graminway-from-the-roots",
+            "name": "Graminway-from-the-roots",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/graminway-from-the-roots",
+            "known": 0
+        },
+        {
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/magnum",
+            "name": "Magnum",
+            "products": 1,
+            "id": "magnum"
+        },
+        {
+            "known": 0,
+            "name": "Wrigley-s",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/wrigley-s",
+            "id": "wrigley-s"
+        },
+        {
+            "url": "https://in.openfoodfacts.org/brand/kitkat",
+            "name": "Kitkat",
+            "products": 1,
+            "known": 0,
+            "id": "kitkat"
+        },
+        {
+            "url": "https://in.openfoodfacts.org/brand/pizmame",
+            "name": "Pizmame",
+            "products": 1,
+            "known": 0,
+            "id": "pizmame"
+        },
+        {
+            "known": 0,
+            "name": "Le-pere-eugene",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/le-pere-eugene",
+            "id": "le-pere-eugene"
+        },
+        {
+            "id": "kidys-oven-fresh",
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/kidys-oven-fresh",
+            "products": 1,
+            "name": "Kidys-oven-fresh"
+        },
+        {
+            "id": "kisaan",
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/kisaan",
+            "name": "Kisaan",
+            "products": 1
+        },
+        {
+            "id": "nambisan-s",
+            "known": 0,
+            "products": 1,
+            "name": "Nambisan-s",
+            "url": "https://in.openfoodfacts.org/brand/nambisan-s"
+        },
+        {
+            "id": "milka-wonder-cake",
+            "known": 0,
+            "name": "Milka-wonder-cake",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/milka-wonder-cake"
+        },
+        {
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/chabrior",
+            "products": 1,
+            "name": "Chabrior",
+            "id": "chabrior"
+        },
+        {
+            "id": "roger-vidal",
+            "known": 0,
+            "products": 1,
+            "name": "Roger-vidal",
+            "url": "https://in.openfoodfacts.org/brand/roger-vidal"
+        },
+        {
+            "known": 0,
+            "name": "Cristaline",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/cristaline",
+            "id": "cristaline"
+        },
+        {
+            "known": 0,
+            "products": 1,
+            "name": "Chheda-s",
+            "url": "https://in.openfoodfacts.org/brand/chheda-s",
+            "id": "chheda-s"
+        },
+        {
+            "id": "kabuto",
+            "url": "https://in.openfoodfacts.org/brand/kabuto",
+            "name": "Kabuto",
+            "products": 1,
+            "known": 0
+        },
+        {
+            "id": "coop",
+            "url": "https://in.openfoodfacts.org/brand/coop",
+            "name": "Coop",
+            "products": 1,
+            "known": 0
+        },
+        {
+            "id": "une-histoire-de-gout",
+            "known": 0,
+            "name": "Une-histoire-de-gout",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/une-histoire-de-gout"
+        },
+        {
+            "name": "Royco",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/royco",
+            "known": 0,
+            "id": "royco"
+        },
+        {
+            "id": "pierre-martinet",
+            "known": 0,
+            "name": "Pierre-martinet",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/pierre-martinet"
+        },
+        {
+            "id": "swastik",
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/swastik",
+            "name": "Swastik",
+            "products": 1
+        },
+        {
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/lima",
+            "products": 1,
+            "name": "Lima",
+            "id": "lima"
+        },
+        {
+            "id": "диетмарка",
+            "products": 1,
+            "name": "Диетмарка",
+            "url": "https://in.openfoodfacts.org/brand/%D0%B4%D0%B8%D0%B5%D1%82%D0%BC%D0%B0%D1%80%D0%BA%D0%B0",
+            "known": 0
+        },
+        {
+            "id": "raw-pressery",
+            "url": "https://in.openfoodfacts.org/brand/raw-pressery",
+            "products": 1,
+            "name": "Raw-pressery",
+            "known": 0
+        },
+        {
+            "name": "Mysore-royal-coffee-day",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/mysore-royal-coffee-day",
+            "known": 0,
+            "id": "mysore-royal-coffee-day"
+        },
+        {
+            "id": "daily-delight",
+            "name": "Daily-delight",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/daily-delight",
+            "known": 0
+        },
+        {
+            "id": "herbalife",
+            "known": 0,
+            "name": "Herbalife",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/herbalife"
+        },
+        {
+            "id": "hamdard",
+            "known": 0,
+            "name": "Hamdard",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/hamdard"
+        },
+        {
+            "id": "royal-bourbon",
+            "products": 1,
+            "name": "Royal-bourbon",
+            "url": "https://in.openfoodfacts.org/brand/royal-bourbon",
+            "known": 0
+        },
+        {
+            "id": "yellow-diamonds",
+            "url": "https://in.openfoodfacts.org/brand/yellow-diamonds",
+            "products": 1,
+            "name": "Yellow-diamonds",
+            "known": 0
+        },
+        {
+            "id": "hommade",
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/hommade",
+            "name": "Hommade",
+            "products": 1
+        },
+        {
+            "id": "duncans",
+            "known": 0,
+            "products": 1,
+            "name": "Duncans",
+            "url": "https://in.openfoodfacts.org/brand/duncans"
+        },
+        {
+            "known": 0,
+            "products": 1,
+            "name": "Gucci",
+            "url": "https://in.openfoodfacts.org/brand/gucci",
+            "id": "gucci"
+        },
+        {
+            "known": 0,
+            "products": 1,
+            "name": "Nutrica",
+            "url": "https://in.openfoodfacts.org/brand/nutrica",
+            "id": "nutrica"
+        },
+        {
+            "name": "Riverina-oils",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/riverina-oils",
+            "known": 0,
+            "id": "riverina-oils"
+        },
+        {
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/cauvin",
+            "products": 1,
+            "name": "Cauvin",
+            "id": "cauvin"
+        },
+        {
+            "name": "Gurujee-home-foods",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/gurujee-home-foods",
+            "known": 0,
+            "id": "gurujee-home-foods"
+        },
+        {
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/hybrid",
+            "name": "Hybrid",
+            "products": 1,
+            "id": "hybrid"
+        },
+        {
+            "id": "eastern",
+            "url": "https://in.openfoodfacts.org/brand/eastern",
+            "name": "Eastern",
+            "products": 1,
+            "known": 0
+        },
+        {
+            "known": 0,
+            "name": "L-or",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/l-or",
+            "id": "l-or"
+        },
+        {
+            "known": 0,
+            "products": 1,
+            "name": "Connoisseur",
+            "url": "https://in.openfoodfacts.org/brand/connoisseur",
+            "id": "connoisseur"
+        },
+        {
+            "url": "https://in.openfoodfacts.org/brand/hsk",
+            "name": "Hsk",
+            "products": 1,
+            "known": 0,
+            "id": "hsk"
+        },
+        {
+            "id": "frito-lay",
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/frito-lay",
+            "name": "Frito-lay",
+            "products": 1
+        },
+        {
+            "url": "https://in.openfoodfacts.org/brand/britannnia",
+            "products": 1,
+            "name": "Britannnia",
+            "known": 0,
+            "id": "britannnia"
+        },
+        {
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/sundrop",
+            "products": 1,
+            "name": "Sundrop",
+            "id": "sundrop"
+        },
+        {
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/nilons",
+            "products": 1,
+            "name": "Nilons",
+            "id": "nilons"
+        },
+        {
+            "id": "capital-foods",
+            "products": 1,
+            "name": "Capital-foods",
+            "url": "https://in.openfoodfacts.org/brand/capital-foods",
+            "known": 0
+        },
+        {
+            "id": "ching-s",
+            "products": 1,
+            "name": "Ching-s",
+            "url": "https://in.openfoodfacts.org/brand/ching-s",
+            "known": 0
+        },
+        {
+            "url": "https://in.openfoodfacts.org/brand/lotte",
+            "name": "Lotte",
+            "products": 1,
+            "known": 0,
+            "id": "lotte"
+        },
+        {
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/modicare",
+            "products": 1,
+            "name": "Modicare",
+            "id": "modicare"
+        },
+        {
+            "known": 0,
+            "products": 1,
+            "name": "Itc-sunfeast",
+            "url": "https://in.openfoodfacts.org/brand/itc-sunfeast",
+            "id": "itc-sunfeast"
+        },
+        {
+            "id": "proventus-retail-pvt-ltd",
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/proventus-retail-pvt-ltd",
+            "products": 1,
+            "name": "Proventus-retail-pvt-ltd"
+        },
+        {
+            "known": 0,
+            "products": 1,
+            "name": "Adyar-annapoorna",
+            "url": "https://in.openfoodfacts.org/brand/adyar-annapoorna",
+            "id": "adyar-annapoorna"
+        },
+        {
+            "url": "https://in.openfoodfacts.org/brand/dew",
+            "name": "Dew",
+            "products": 1,
+            "known": 0,
+            "id": "dew"
+        },
+        {
+            "id": "raw",
+            "known": 0,
+            "name": "Raw",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/raw"
+        },
+        {
+            "url": "https://in.openfoodfacts.org/brand/hisdustan-unilever-limited",
+            "products": 1,
+            "name": "Hisdustan-unilever-limited",
+            "known": 0,
+            "id": "hisdustan-unilever-limited"
+        },
+        {
+            "products": 1,
+            "name": "Cabernet-sauvignon",
+            "url": "https://in.openfoodfacts.org/brand/cabernet-sauvignon",
+            "known": 0,
+            "id": "cabernet-sauvignon"
+        },
+        {
+            "name": "Diet-coke",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/diet-coke",
+            "known": 0,
+            "id": "diet-coke"
+        },
+        {
+            "id": "glucon-d",
+            "url": "https://in.openfoodfacts.org/brand/glucon-d",
+            "products": 1,
+            "name": "Glucon-d",
+            "known": 0
+        },
+        {
+            "id": "minute-maid",
+            "url": "https://in.openfoodfacts.org/brand/minute-maid",
+            "products": 1,
+            "name": "Minute-maid",
+            "known": 0
+        },
+        {
+            "id": "natural-farms",
+            "url": "https://in.openfoodfacts.org/brand/natural-farms",
+            "products": 1,
+            "name": "Natural-farms",
+            "known": 0
+        },
+        {
+            "url": "https://in.openfoodfacts.org/brand/epigamia",
+            "name": "Epigamia",
+            "products": 1,
+            "known": 0,
+            "id": "epigamia"
+        },
+        {
+            "id": "everest",
+            "url": "https://in.openfoodfacts.org/brand/everest",
+            "name": "Everest",
+            "products": 1,
+            "known": 0
+        },
+        {
+            "id": "mothers-recipie",
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/mothers-recipie",
+            "name": "Mothers-recipie",
+            "products": 1
+        },
+        {
+            "name": "Refined-soybean-oil",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/refined-soybean-oil",
+            "known": 0,
+            "id": "refined-soybean-oil"
+        },
+        {
+            "known": 0,
+            "name": "Mccain",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/mccain",
+            "id": "mccain"
+        },
+        {
+            "url": "https://in.openfoodfacts.org/brand/classmate",
+            "products": 1,
+            "name": "Classmate",
+            "known": 0,
+            "id": "classmate"
+        },
+        {
+            "id": "awesome-brand",
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/awesome-brand",
+            "name": "Awesome-brand",
+            "products": 1
+        },
+        {
+            "id": "appy-fizz",
+            "url": "https://in.openfoodfacts.org/brand/appy-fizz",
+            "products": 1,
+            "name": "Appy-fizz",
+            "known": 0
+        },
+        {
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/drum-foods",
+            "name": "Drum-foods",
+            "products": 1,
+            "id": "drum-foods"
+        },
+        {
+            "name": "Mother-dairy",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/mother-dairy",
+            "known": 0,
+            "id": "mother-dairy"
+        },
+        {
+            "url": "https://in.openfoodfacts.org/brand/namaste-india",
+            "products": 1,
+            "name": "Namaste-india",
+            "known": 0,
+            "id": "namaste-india"
+        },
+        {
+            "id": "topvalu",
+            "products": 1,
+            "name": "Topvalu",
+            "url": "https://in.openfoodfacts.org/brand/topvalu",
+            "known": 0
+        },
+        {
+            "id": "reliance",
+            "known": 0,
+            "products": 1,
+            "name": "Reliance",
+            "url": "https://in.openfoodfacts.org/brand/reliance"
+        },
+        {
+            "id": "golden-grain",
+            "name": "Golden-grain",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/golden-grain",
+            "known": 0
+        },
+        {
+            "id": "nutty-gritties",
+            "known": 0,
+            "name": "Nutty-gritties",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/nutty-gritties"
+        },
+        {
+            "id": "chupa-chups",
+            "url": "https://in.openfoodfacts.org/brand/chupa-chups",
+            "products": 1,
+            "name": "Chupa-chups",
+            "known": 0
+        },
+        {
+            "id": "sachsen-milch",
+            "products": 1,
+            "name": "Sachsen-milch",
+            "url": "https://in.openfoodfacts.org/brand/sachsen-milch",
+            "known": 0
+        },
+        {
+            "name": "Orangina",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/orangina",
+            "known": 0,
+            "id": "orangina"
+        },
+        {
+            "id": "maison-co",
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/maison-co",
+            "name": "Maison-co",
+            "products": 1
+        },
+        {
+            "id": "double-horse",
+            "products": 1,
+            "name": "Double-horse",
+            "url": "https://in.openfoodfacts.org/brand/double-horse",
+            "known": 0
+        },
+        {
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/nutrela",
+            "products": 1,
+            "name": "Nutrela",
+            "id": "nutrela"
+        },
+        {
+            "id": "rajdhani",
+            "name": "Rajdhani",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/rajdhani",
+            "known": 0
+        },
+        {
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/yellow-diamond",
+            "name": "Yellow-diamond",
+            "products": 1,
+            "id": "yellow-diamond"
+        },
+        {
+            "id": "dr-oetker-funfood",
+            "url": "https://in.openfoodfacts.org/brand/dr-oetker-funfood",
+            "name": "Dr-oetker-funfood",
+            "products": 1,
+            "known": 0
+        },
+        {
+            "known": 0,
+            "products": 1,
+            "name": "Elder",
+            "url": "https://in.openfoodfacts.org/brand/elder",
+            "id": "elder"
+        },
+        {
+            "id": "tip-top",
+            "known": 0,
+            "name": "Tip-top",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/tip-top"
+        },
+        {
+            "known": 0,
+            "name": "Svs",
+            "products": 1,
+            "url": "https://in.openfoodfacts.org/brand/svs",
+            "id": "svs"
+        },
+        {
+            "id": "disano",
+            "url": "https://in.openfoodfacts.org/brand/disano",
+            "products": 1,
+            "name": "Disano",
+            "known": 0
+        },
+        {
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/dairy-fresh",
+            "name": "Dairy-fresh",
+            "products": 1,
+            "id": "dairy-fresh"
+        },
+        {
+            "id": "nutella",
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/nutella",
+            "name": "Nutella",
+            "products": 1
+        },
+        {
+            "id": "indira-foods-pvt-ltd",
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/indira-foods-pvt-ltd",
+            "name": "Indira-foods-pvt-ltd",
+            "products": 1
+        },
+        {
+            "id": "paperboat",
+            "url": "https://in.openfoodfacts.org/brand/paperboat",
+            "name": "Paperboat",
+            "products": 1,
+            "known": 0
+        },
+        {
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/krushnai-aquq",
+            "name": "Krushnai-aquq",
+            "products": 1,
+            "id": "krushnai-aquq"
+        },
+        {
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/himalaya",
+            "products": 1,
+            "name": "Himalaya",
+            "id": "himalaya"
+        },
+        {
+            "id": "lal-gulab",
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/lal-gulab",
+            "products": 1,
+            "name": "Lal-gulab"
+        },
+        {
+            "id": "garudafood",
+            "known": 0,
+            "url": "https://in.openfoodfacts.org/brand/garudafood",
+            "products": 1,
+            "name": "Garudafood"
+        },
+        {
+            "id": "पतंजली",
+            "products": 1,
+            "name": "पतंजली",
+            "url": "https://in.openfoodfacts.org/brand/%E0%A4%AA%E0%A4%A4%E0%A4%82%E0%A4%9C%E0%A4%B2%E0%A5%80",
+            "known": 0
+        },
+        {
+            "id": "tasti",
+            "products": 1,
+            "name": "Tasti",
+            "url": "https://in.openfoodfacts.org/brand/tasti",
+            "known": 0
+        }
+    ],
+    "count": 349
+}

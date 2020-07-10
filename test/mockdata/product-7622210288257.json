@@ -1,0 +1,1335 @@
+{
+    "status_verbose": "product found",
+    "status": 1,
+    "code": "7622210288257",
+    "product": {
+        "emb_codes_orig": "",
+        "data_sources_tags": [
+            "app-yuka",
+            "apps"
+        ],
+        "image_nutrition_thumb_url": "https://static.openfoodfacts.org/images/products/762/221/028/8257/nutrition_fr.28.100.jpg",
+        "lc": "fr",
+        "last_editor": "openfoodfacts-contributors",
+        "manufacturing_places": "Blois",
+        "new_additives_n": 0,
+        "category_properties": {},
+        "purchase_places": "France",
+        "cities_tags": [],
+        "ingredients_from_palm_oil_n": 0,
+        "nutrition_data_per_debug_tags": [],
+        "nova_groups": "4",
+        "vitamins_prev_tags": [],
+        "completeness": 0.9,
+        "data_quality_tags": [
+            "en:ingredients-percent-analysis-ok",
+            "en:nutrition-value-under-0-1-g-salt",
+            "en:nutrition-value-very-high-for-category-fat",
+            "en:nutrition-value-very-high-for-category-saturated-fat",
+            "en:nutrition-value-very-high-for-category-fiber",
+            "en:nutrition-value-very-high-for-category-proteins"
+        ],
+        "purchase_places_debug_tags": [],
+        "nutrition_data_per": "100g",
+        "interface_version_created": "20130323.jqm",
+        "codes_tags": [
+            "code-13",
+            "7622210288xxx",
+            "762221028xxxx",
+            "76222102xxxxx",
+            "7622210xxxxxx",
+            "762221xxxxxxx",
+            "76222xxxxxxxx",
+            "7622xxxxxxxxx",
+            "762xxxxxxxxxx",
+            "76xxxxxxxxxxx",
+            "7xxxxxxxxxxxx"
+        ],
+        "image_front_url": "https://static.openfoodfacts.org/images/products/762/221/028/8257/front_fr.59.400.jpg",
+        "product_name_fr_debug_tags": [],
+        "packaging": "boîte,plastique",
+        "countries_lc": "fr",
+        "expiration_date_debug_tags": [],
+        "traces_hierarchy": [],
+        "traces_tags": [],
+        "amino_acids_prev_tags": [],
+        "emb_codes": "",
+        "nutrition_data": "on",
+        "expiration_date": "17/11/2018",
+        "link": "https://www.chocolatpoulain.fr/les-produits/GRAND-AR%C3%94ME-800-G",
+        "allergens_from_user": "(fr) ",
+        "compared_to_category": "en:sweetened-beverages",
+        "generic_name": "Cacao fortement dégraissé en poudre sucré",
+        "languages": {
+            "en:french": 6
+        },
+        "stores": "",
+        "nova_groups_tags": [
+            "en:4-ultra-processed-food-and-drink-products"
+        ],
+        "unique_scans_n": 60,
+        "labels_prev_hierarchy": [
+            "en:gluten-free",
+            "en:green-dot"
+        ],
+        "nutrition_score_debug": "no score for category en:chocolate-powders without data for prepared product",
+        "origins_tags": [],
+        "labels": "Sans gluten, Point Vert",
+        "additives_original_tags": [],
+        "stores_debug_tags": [],
+        "ingredients_analysis_tags": [
+            "en:palm-oil-free",
+            "en:maybe-vegan",
+            "en:maybe-vegetarian"
+        ],
+        "allergens": "",
+        "selected_images": {
+            "nutrition": {
+                "thumb": {
+                    "fr": "https://static.openfoodfacts.org/images/products/762/221/028/8257/nutrition_fr.28.100.jpg"
+                },
+                "display": {
+                    "fr": "https://static.openfoodfacts.org/images/products/762/221/028/8257/nutrition_fr.28.400.jpg"
+                },
+                "small": {
+                    "fr": "https://static.openfoodfacts.org/images/products/762/221/028/8257/nutrition_fr.28.200.jpg"
+                }
+            },
+            "front": {
+                "small": {
+                    "fr": "https://static.openfoodfacts.org/images/products/762/221/028/8257/front_fr.59.200.jpg"
+                },
+                "display": {
+                    "fr": "https://static.openfoodfacts.org/images/products/762/221/028/8257/front_fr.59.400.jpg"
+                },
+                "thumb": {
+                    "fr": "https://static.openfoodfacts.org/images/products/762/221/028/8257/front_fr.59.100.jpg"
+                }
+            },
+            "ingredients": {
+                "small": {
+                    "fr": "https://static.openfoodfacts.org/images/products/762/221/028/8257/ingredients_fr.61.200.jpg"
+                },
+                "display": {
+                    "fr": "https://static.openfoodfacts.org/images/products/762/221/028/8257/ingredients_fr.61.400.jpg"
+                },
+                "thumb": {
+                    "fr": "https://static.openfoodfacts.org/images/products/762/221/028/8257/ingredients_fr.61.100.jpg"
+                }
+            }
+        },
+        "labels_tags": [
+            "en:gluten-free",
+            "en:green-dot"
+        ],
+        "additives_tags": [],
+        "states_tags": [
+            "en:to-be-checked",
+            "en:complete",
+            "en:nutrition-facts-completed",
+            "en:ingredients-completed",
+            "en:expiration-date-completed",
+            "en:packaging-code-to-be-completed",
+            "en:characteristics-completed",
+            "en:categories-completed",
+            "en:brands-completed",
+            "en:packaging-completed",
+            "en:quantity-completed",
+            "en:product-name-completed",
+            "en:photos-validated",
+            "en:photos-uploaded"
+        ],
+        "ingredients_that_may_be_from_palm_oil_n": 0,
+        "popularity_key": -81009999934,
+        "countries_tags": [
+            "en:france"
+        ],
+        "lang": "fr",
+        "images": {
+            "1": {
+                "uploader": "openfoodfacts-contributors",
+                "uploaded_t": 1415014698,
+                "sizes": {
+                    "100": {
+                        "h": 100,
+                        "w": 56
+                    },
+                    "400": {
+                        "w": 225,
+                        "h": 400
+                    },
+                    "full": {
+                        "w": 2000,
+                        "h": 3560
+                    }
+                }
+            },
+            "2": {
+                "sizes": {
+                    "100": {
+                        "w": 100,
+                        "h": 56
+                    },
+                    "400": {
+                        "h": 225,
+                        "w": 400
+                    },
+                    "full": {
+                        "h": 1123,
+                        "w": 2000
+                    }
+                },
+                "uploader": "openfoodfacts-contributors",
+                "uploaded_t": 1415014764
+            },
+            "3": {
+                "uploader": "openfoodfacts-contributors",
+                "uploaded_t": 1415014847,
+                "sizes": {
+                    "100": {
+                        "h": 100,
+                        "w": 56
+                    },
+                    "400": {
+                        "w": 225,
+                        "h": 400
+                    },
+                    "full": {
+                        "w": 2000,
+                        "h": 3560
+                    }
+                }
+            },
+            "4": {
+                "uploader": "openfoodfacts-contributors",
+                "uploaded_t": 1423953097,
+                "sizes": {
+                    "100": {
+                        "w": 57,
+                        "h": 100
+                    },
+                    "400": {
+                        "h": 400,
+                        "w": 226
+                    },
+                    "full": {
+                        "h": 3536,
+                        "w": 2000
+                    }
+                }
+            },
+            "5": {
+                "sizes": {
+                    "100": {
+                        "w": 75,
+                        "h": 100
+                    },
+                    "400": {
+                        "w": 300,
+                        "h": 400
+                    },
+                    "full": {
+                        "w": 2000,
+                        "h": 2666
+                    }
+                },
+                "uploader": "domdom26",
+                "uploaded_t": 1425030665
+            },
+            "6": {
+                "sizes": {
+                    "100": {
+                        "h": 75,
+                        "w": 100
+                    },
+                    "400": {
+                        "h": 300,
+                        "w": 400
+                    },
+                    "full": {
+                        "w": 2000,
+                        "h": 1500
+                    }
+                },
+                "uploaded_t": 1425030730,
+                "uploader": "domdom26"
+            },
+            "7": {
+                "sizes": {
+                    "100": {
+                        "h": 75,
+                        "w": 100
+                    },
+                    "400": {
+                        "w": 400,
+                        "h": 300
+                    },
+                    "full": {
+                        "h": 1500,
+                        "w": 2000
+                    }
+                },
+                "uploaded_t": 1425111225,
+                "uploader": "openfoodfacts-contributors"
+            },
+            "8": {
+                "uploader": "openfoodfacts-contributors",
+                "uploaded_t": 1432936336,
+                "sizes": {
+                    "100": {
+                        "w": 75,
+                        "h": 100
+                    },
+                    "400": {
+                        "h": 400,
+                        "w": 300
+                    },
+                    "full": {
+                        "w": 1500,
+                        "h": 2000
+                    }
+                }
+            },
+            "9": {
+                "uploaded_t": "1473876581",
+                "uploader": "gaminos",
+                "sizes": {
+                    "100": {
+                        "w": 56,
+                        "h": 100
+                    },
+                    "400": {
+                        "h": 400,
+                        "w": 225
+                    },
+                    "full": {
+                        "w": 2000,
+                        "h": 3555
+                    }
+                }
+            },
+            "10": {
+                "uploader": "openfoodfacts-contributors",
+                "uploaded_t": "1475333380",
+                "sizes": {
+                    "100": {
+                        "h": 100,
+                        "w": 75
+                    },
+                    "400": {
+                        "h": 400,
+                        "w": 300
+                    },
+                    "full": {
+                        "h": 3264,
+                        "w": 2448
+                    }
+                }
+            },
+            "11": {
+                "uploaded_t": "1476768304",
+                "uploader": "keragui",
+                "sizes": {
+                    "100": {
+                        "h": 100,
+                        "w": 75
+                    },
+                    "400": {
+                        "h": 400,
+                        "w": 300
+                    },
+                    "full": {
+                        "h": 2666,
+                        "w": 2000
+                    }
+                }
+            },
+            "12": {
+                "uploader": "asmoth",
+                "uploaded_t": "1482354428",
+                "sizes": {
+                    "100": {
+                        "w": 57,
+                        "h": 100
+                    },
+                    "400": {
+                        "h": 400,
+                        "w": 226
+                    },
+                    "full": {
+                        "w": 2000,
+                        "h": 3536
+                    }
+                }
+            },
+            "13": {
+                "sizes": {
+                    "100": {
+                        "h": 100,
+                        "w": 57
+                    },
+                    "400": {
+                        "h": 400,
+                        "w": 226
+                    },
+                    "full": {
+                        "h": 3536,
+                        "w": 2000
+                    }
+                },
+                "uploader": "asmoth",
+                "uploaded_t": "1482354544"
+            },
+            "14": {
+                "uploaded_t": "1485071560",
+                "uploader": "openfoodfacts-contributors",
+                "sizes": {
+                    "100": {
+                        "w": 56,
+                        "h": 100
+                    },
+                    "400": {
+                        "w": 225,
+                        "h": 400
+                    },
+                    "full": {
+                        "w": 2000,
+                        "h": 3555
+                    }
+                }
+            },
+            "15": {
+                "uploaded_t": "1485968660",
+                "uploader": "openfoodfacts-contributors",
+                "sizes": {
+                    "100": {
+                        "w": 56,
+                        "h": 100
+                    },
+                    "400": {
+                        "h": 400,
+                        "w": 225
+                    },
+                    "full": {
+                        "h": 2000,
+                        "w": 1125
+                    }
+                }
+            },
+            "16": {
+                "sizes": {
+                    "100": {
+                        "w": 56,
+                        "h": 100
+                    },
+                    "400": {
+                        "h": 400,
+                        "w": 225
+                    },
+                    "full": {
+                        "w": 1125,
+                        "h": 2000
+                    }
+                },
+                "uploaded_t": "1494231914",
+                "uploader": "openfoodfacts-contributors"
+            },
+            "17": {
+                "sizes": {
+                    "100": {
+                        "h": 100,
+                        "w": 56
+                    },
+                    "400": {
+                        "w": 225,
+                        "h": 400
+                    },
+                    "full": {
+                        "w": 1125,
+                        "h": 2000
+                    }
+                },
+                "uploaded_t": "1502919059",
+                "uploader": "openfoodfacts-contributors"
+            },
+            "18": {
+                "sizes": {
+                    "100": {
+                        "w": 75,
+                        "h": 100
+                    },
+                    "400": {
+                        "w": 300,
+                        "h": 400
+                    },
+                    "full": {
+                        "h": 4032,
+                        "w": 3024
+                    }
+                },
+                "uploaded_t": "1504938163",
+                "uploader": "openfoodfacts-contributors"
+            },
+            "19": {
+                "uploader": "openfoodfacts-contributors",
+                "uploaded_t": "1511975635",
+                "sizes": {
+                    "100": {
+                        "h": 100,
+                        "w": 56
+                    },
+                    "400": {
+                        "w": 225,
+                        "h": 400
+                    },
+                    "full": {
+                        "w": 1125,
+                        "h": 2000
+                    }
+                }
+            },
+            "20": {
+                "uploader": "openfoodfacts-contributors",
+                "uploaded_t": "1517670248",
+                "sizes": {
+                    "100": {
+                        "w": 100,
+                        "h": 60
+                    },
+                    "400": {
+                        "w": 400,
+                        "h": 241
+                    },
+                    "full": {
+                        "h": 1203,
+                        "w": 2000
+                    }
+                }
+            },
+            "21": {
+                "sizes": {
+                    "100": {
+                        "h": 100,
+                        "w": 75
+                    },
+                    "400": {
+                        "h": 400,
+                        "w": 300
+                    },
+                    "full": {
+                        "h": 2666,
+                        "w": 2000
+                    }
+                },
+                "uploader": "openfoodfacts-contributors",
+                "uploaded_t": "1518516206"
+            },
+            "22": {
+                "sizes": {
+                    "100": {
+                        "h": 100,
+                        "w": 75
+                    },
+                    "400": {
+                        "w": 300,
+                        "h": 400
+                    },
+                    "full": {
+                        "w": 2448,
+                        "h": 3264
+                    }
+                },
+                "uploaded_t": "1523784853",
+                "uploader": "openfoodfacts-contributors"
+            },
+            "23": {
+                "sizes": {
+                    "100": {
+                        "h": 100,
+                        "w": 75
+                    },
+                    "400": {
+                        "w": 300,
+                        "h": 400
+                    },
+                    "full": {
+                        "h": 3264,
+                        "w": 2448
+                    }
+                },
+                "uploader": "openfoodfacts-contributors",
+                "uploaded_t": "1523784864"
+            },
+            "24": {
+                "sizes": {
+                    "100": {
+                        "h": 56,
+                        "w": 100
+                    },
+                    "400": {
+                        "h": 225,
+                        "w": 400
+                    },
+                    "full": {
+                        "w": 2612,
+                        "h": 1468
+                    }
+                },
+                "uploader": "openfoodfacts-contributors",
+                "uploaded_t": 1536868358
+            },
+            "35": {
+                "uploaded_t": 1536952469,
+                "uploader": "openfoodfacts-contributors",
+                "sizes": {
+                    "100": {
+                        "h": 100,
+                        "w": 67
+                    },
+                    "400": {
+                        "w": 267,
+                        "h": 400
+                    },
+                    "full": {
+                        "h": 4226,
+                        "w": 2820
+                    }
+                }
+            },
+            "36": {
+                "sizes": {
+                    "100": {
+                        "w": 75,
+                        "h": 100
+                    },
+                    "400": {
+                        "h": 400,
+                        "w": 300
+                    },
+                    "full": {
+                        "w": 2476,
+                        "h": 3302
+                    }
+                },
+                "uploader": "cecilia2205",
+                "uploaded_t": 1536957811
+            },
+            "37": {
+                "sizes": {
+                    "100": {
+                        "w": 75,
+                        "h": 100
+                    },
+                    "400": {
+                        "w": 300,
+                        "h": 400
+                    },
+                    "full": {
+                        "w": 2380,
+                        "h": 3174
+                    }
+                },
+                "uploaded_t": 1537420554,
+                "uploader": "openfoodfacts-contributors"
+            },
+            "38": {
+                "uploaded_t": 1537439297,
+                "uploader": "openfoodfacts-contributors",
+                "sizes": {
+                    "100": {
+                        "w": 75,
+                        "h": 100
+                    },
+                    "400": {
+                        "h": 400,
+                        "w": 300
+                    },
+                    "full": {
+                        "h": 3174,
+                        "w": 2380
+                    }
+                }
+            },
+            "39": {
+                "sizes": {
+                    "100": {
+                        "h": 100,
+                        "w": 60
+                    },
+                    "400": {
+                        "h": 400,
+                        "w": 241
+                    },
+                    "full": {
+                        "h": 3277,
+                        "w": 1976
+                    }
+                },
+                "uploaded_t": 1540214606,
+                "uploader": "openfoodfacts-contributors"
+            },
+            "40": {
+                "uploaded_t": "1526151972",
+                "uploader": "openfoodfacts-contributors",
+                "sizes": {
+                    "100": {
+                        "w": 100,
+                        "h": 56
+                    },
+                    "400": {
+                        "h": 225,
+                        "w": 400
+                    },
+                    "full": {
+                        "w": 2000,
+                        "h": 1125
+                    }
+                }
+            },
+            "ingredients_fr": {
+                "y1": null,
+                "angle": null,
+                "x2": null,
+                "rev": "61",
+                "geometry": "0x0-0-0",
+                "y2": null,
+                "sizes": {
+                    "100": {
+                        "w": 75,
+                        "h": 100
+                    },
+                    "200": {
+                        "h": 200,
+                        "w": 150
+                    },
+                    "400": {
+                        "h": 400,
+                        "w": 300
+                    },
+                    "full": {
+                        "w": 2380,
+                        "h": 3174
+                    }
+                },
+                "normalize": null,
+                "x1": null,
+                "white_magic": null,
+                "ocr": 1,
+                "imgid": "37",
+                "orientation": "0"
+            },
+            "nutrition_fr": {
+                "rev": "28",
+                "x2": "153.83331298828125",
+                "y1": "103.96665954589845",
+                "angle": "0",
+                "sizes": {
+                    "100": {
+                        "h": 100,
+                        "w": 47
+                    },
+                    "200": {
+                        "w": 94,
+                        "h": 200
+                    },
+                    "400": {
+                        "h": 400,
+                        "w": 188
+                    },
+                    "full": {
+                        "h": 1564,
+                        "w": 735
+                    }
+                },
+                "y2": "280.9666595458985",
+                "geometry": "735x1564-626-919",
+                "white_magic": "false",
+                "ocr": 1,
+                "x1": "70.83331298828125",
+                "normalize": "false",
+                "orientation": "0",
+                "imgid": "12"
+            },
+            "front_fr": {
+                "x1": "25.699981689453125",
+                "normalize": "false",
+                "white_magic": "false",
+                "imgid": "21",
+                "x2": "273.9799499511719",
+                "y1": "11.28997802734375",
+                "angle": "0",
+                "rev": "59",
+                "geometry": "1655x2123-171-75",
+                "sizes": {
+                    "100": {
+                        "w": 78,
+                        "h": 100
+                    },
+                    "200": {
+                        "w": 156,
+                        "h": 200
+                    },
+                    "400": {
+                        "w": 312,
+                        "h": 400
+                    },
+                    "full": {
+                        "h": 2123,
+                        "w": 1655
+                    }
+                },
+                "y2": "329.90997314453125"
+            },
+            "front": {
+                "normalize": null,
+                "white_magic": null,
+                "rev": "9",
+                "imgid": "1",
+                "geometry": "1627x2189-204-436",
+                "sizes": {
+                    "100": {
+                        "h": 100,
+                        "w": 74
+                    },
+                    "200": {
+                        "w": 149,
+                        "h": 200
+                    },
+                    "400": {
+                        "w": 297,
+                        "h": 400
+                    },
+                    "full": {
+                        "h": 2189,
+                        "w": 1627
+                    }
+                }
+            },
+            "ingredients": {
+                "geometry": "1130x445-375-495",
+                "imgid": "6",
+                "sizes": {
+                    "100": {
+                        "h": 39,
+                        "w": 100
+                    },
+                    "200": {
+                        "w": 200,
+                        "h": 79
+                    },
+                    "400": {
+                        "w": 400,
+                        "h": 158
+                    },
+                    "full": {
+                        "h": 445,
+                        "w": 1130
+                    }
+                },
+                "normalize": null,
+                "rev": "10",
+                "white_magic": null
+            },
+            "nutrition": {
+                "imgid": "5",
+                "geometry": "1067x1826-466-33",
+                "sizes": {
+                    "100": {
+                        "w": 58,
+                        "h": 100
+                    },
+                    "200": {
+                        "w": 117,
+                        "h": 200
+                    },
+                    "400": {
+                        "w": 234,
+                        "h": 400
+                    },
+                    "full": {
+                        "w": 1067,
+                        "h": 1826
+                    }
+                },
+                "normalize": null,
+                "white_magic": null,
+                "rev": "11"
+            }
+        },
+        "data_quality_info_tags": [
+            "en:ingredients-percent-analysis-ok"
+        ],
+        "packaging_tags": [
+            "boite",
+            "plastique"
+        ],
+        "labels_hierarchy": [
+            "en:gluten-free",
+            "en:green-dot"
+        ],
+        "unknown_ingredients_n": 0,
+        "ingredients_debug": [
+            "Sucre",
+            ",",
+            null,
+            null,
+            null,
+            " cacao maigre ",
+            "(",
+            "(",
+            null,
+            null,
+            "11% de beurre de cacao)",
+            ",",
+            null,
+            null,
+            null,
+            " arôme."
+        ],
+        "generic_name_fr": "Cacao fortement dégraissé en poudre sucré",
+        "editors": [
+            "",
+            "domdom26"
+        ],
+        "ingredients_hierarchy": [
+            "en:sugar",
+            "en:fat-reduced-cocoa",
+            "en:cocoa",
+            "en:flavouring",
+            "en:cocoa-butter"
+        ],
+        "origins": "",
+        "allergens_debug_tags": [],
+        "no_nutrition_data": "",
+        "categories_hierarchy": [
+            "en:beverages",
+            "en:snacks",
+            "en:breakfasts",
+            "en:sweet-snacks",
+            "en:chocolates",
+            "en:instant-beverages",
+            "en:cocoa-and-chocolate-powders",
+            "en:chocolate-powders",
+            "en:sweetened-beverages"
+        ],
+        "id": "7622210288257",
+        "product_name_debug_tags": [],
+        "quantity_debug_tags": [],
+        "data_sources": "App - yuka, Apps",
+        "ingredients_from_palm_oil_tags": [],
+        "image_ingredients_url": "https://static.openfoodfacts.org/images/products/762/221/028/8257/ingredients_fr.61.400.jpg",
+        "allergens_hierarchy": [],
+        "nutrition_data_prepared_per": "100g",
+        "nova_group_debug": " -- categories/en:chocolates : 3 -- ingredients/en:flavouring : 4",
+        "code": "7622210288257",
+        "additives_old_n": 0,
+        "brands_tags": [
+            "poulain"
+        ],
+        "traces_from_ingredients": "",
+        "informers_tags": [
+            "openfoodfacts-contributors",
+            "domdom26",
+            "date-limite-app",
+            "keragui",
+            "asmoth",
+            "moon-rabbit",
+            "alak",
+            "desan"
+        ],
+        "image_nutrition_small_url": "https://static.openfoodfacts.org/images/products/762/221/028/8257/nutrition_fr.28.200.jpg",
+        "emb_codes_debug_tags": [],
+        "image_url": "https://static.openfoodfacts.org/images/products/762/221/028/8257/front_fr.59.400.jpg",
+        "ingredients_text_fr": "Sucre, cacao maigre (11% de beurre de cacao), arôme.",
+        "nucleotides_tags": [],
+        "other_nutritional_substances_tags": [],
+        "data_quality_warnings_tags": [
+            "en:nutrition-value-under-0-1-g-salt",
+            "en:nutrition-value-very-high-for-category-fat",
+            "en:nutrition-value-very-high-for-category-saturated-fat",
+            "en:nutrition-value-very-high-for-category-fiber",
+            "en:nutrition-value-very-high-for-category-proteins"
+        ],
+        "product_name": "Grand Arôme",
+        "additives_prev_original_tags": [],
+        "emb_codes_tags": [],
+        "categories": "Boissons, Snacks, Petit-déjeuners, Snacks sucrés, Chocolats, Boissons instantanées, Cacaos et chocolats en poudre, Chocolats en poudre, Boissons avec sucre ajouté",
+        "editors_tags": [
+            "keragui",
+            "gaminos",
+            "sebleouf",
+            "yuka.VDRBZ0FKNGhxS2dubXZNTXcwL2I4ODRwNkw2WGVtN3JFczRlSWc9PQ",
+            "yuka.WmJFZkFKUlptZUFBeDhRUnB6ckgxWWhyeGFTWWJES1JHOW8rSUE9PQ",
+            "domdom26",
+            "yuka.RzRBcElMbFpyYUkwbDhFZXIwclM0L3RSeXJTSGVGMnlNYkE3SVE9PQ",
+            "openfoodfacts-contributors",
+            "alak",
+            "yuka.ZDVBNUlxbzdoZDRWbnNSaHd5eU00dWxsMk02dGNrUHZMcnBCSUE9PQ",
+            "moon-rabbit",
+            "date-limite-app",
+            "yuka.V1owZlBaMGtudVpUbWZOdTkwS0oxTTlxbUp5N1UwYU1lc0FnSVE9PQ",
+            "cecilia2205",
+            "asmoth",
+            "yuka.UzYxZUVaUUtpK1Vxdy8wYzdDblVxOTVVN1o3MERHK3ZGYmM3SVE9PQ",
+            "desan",
+            "yuka.SDdJY042Y01qY1FwbWRnQytpUFMyODFSeThTN2VWdXRHYk1LSWc9PQ"
+        ],
+        "nutrition_data_prepared_per_debug_tags": [],
+        "pnns_groups_1_tags": [
+            "sugary-snacks",
+            "known"
+        ],
+        "max_imgid": "40",
+        "ciqual_food_name_tags": [
+            "unknown"
+        ],
+        "traces_lc": "fr",
+        "image_small_url": "https://static.openfoodfacts.org/images/products/762/221/028/8257/front_fr.59.200.jpg",
+        "nova_group": 4,
+        "origins_debug_tags": [],
+        "states": "en:to-be-checked, en:complete, en:nutrition-facts-completed, en:ingredients-completed, en:expiration-date-completed, en:packaging-code-to-be-completed, en:characteristics-completed, en:categories-completed, en:brands-completed, en:packaging-completed, en:quantity-completed, en:product-name-completed, en:photos-validated, en:photos-uploaded",
+        "additives_n": 0,
+        "popularity_tags": [
+            "top-10000-scans-2019",
+            "top-50000-scans-2019",
+            "top-100000-scans-2019",
+            "at-least-5-scans-2019",
+            "at-least-10-scans-2019",
+            "top-90-percent-scans-2019",
+            "top-95-percent-scans-2019",
+            "top-10000-fr-scans-2019",
+            "top-50000-fr-scans-2019",
+            "top-100000-fr-scans-2019",
+            "top-country-fr-scans-2019",
+            "at-least-5-fr-scans-2019",
+            "at-least-10-fr-scans-2019",
+            "top-10000-ch-scans-2019",
+            "top-50000-ch-scans-2019",
+            "top-100000-ch-scans-2019"
+        ],
+        "ingredients_tags": [
+            "en:sugar",
+            "en:fat-reduced-cocoa",
+            "en:cocoa",
+            "en:flavouring",
+            "en:cocoa-butter"
+        ],
+        "created_t": 1415014644,
+        "brands_debug_tags": [],
+        "labels_prev_tags": [
+            "en:gluten-free",
+            "en:green-dot"
+        ],
+        "nucleotides_prev_tags": [],
+        "labels_lc": "fr",
+        "brands": "Poulain",
+        "complete": 1,
+        "manufacturing_places_tags": [
+            "blois"
+        ],
+        "debug_param_sorted_langs": [
+            "fr"
+        ],
+        "manufacturing_places_debug_tags": [],
+        "last_edit_dates_tags": [
+            "2020-01-01",
+            "2020-01",
+            "2020"
+        ],
+        "ingredients_from_or_that_may_be_from_palm_oil_n": 0,
+        "entry_dates_tags": [
+            "2014-11-03",
+            "2014-11",
+            "2014"
+        ],
+        "pnns_groups_2": "Chocolate products",
+        "completed_t": 1425040499,
+        "allergens_lc": "fr",
+        "categories_lc": "fr",
+        "nutrition_data_prepared": "",
+        "ingredients_n_tags": [
+            "4",
+            "1-10"
+        ],
+        "packaging_debug_tags": [],
+        "lang_debug_tags": [],
+        "image_ingredients_small_url": "https://static.openfoodfacts.org/images/products/762/221/028/8257/ingredients_fr.61.200.jpg",
+        "fruits-vegetables-nuts_100g_estimate": 0,
+        "creator": "openfoodfacts-contributors",
+        "last_modified_t": 1577918611,
+        "categories_tags": [
+            "en:beverages",
+            "en:snacks",
+            "en:breakfasts",
+            "en:sweet-snacks",
+            "en:chocolates",
+            "en:instant-beverages",
+            "en:cocoa-and-chocolate-powders",
+            "en:chocolate-powders",
+            "en:sweetened-beverages"
+        ],
+        "update_key": "key-20200703",
+        "amino_acids_tags": [],
+        "ingredients": [
+            {
+                "vegetarian": "yes",
+                "vegan": "yes",
+                "id": "en:sugar",
+                "rank": 1,
+                "percent_max": 89,
+                "text": "Sucre",
+                "percent_min": 78
+            },
+            {
+                "rank": 2,
+                "text": "cacao maigre",
+                "percent_min": 11,
+                "vegan": "yes",
+                "id": "en:fat-reduced-cocoa",
+                "vegetarian": "yes",
+                "percent_max": 11,
+                "has_sub_ingredients": "yes"
+            },
+            {
+                "id": "en:flavouring",
+                "vegan": "maybe",
+                "vegetarian": "maybe",
+                "percent_max": 11,
+                "text": "arôme",
+                "rank": 3,
+                "percent_min": 0
+            },
+            {
+                "percent_min": "11",
+                "text": "beurre de cacao",
+                "percent_max": "11",
+                "percent": "11",
+                "vegan": "yes",
+                "vegetarian": "yes",
+                "id": "en:cocoa-butter"
+            }
+        ],
+        "pnns_groups_2_tags": [
+            "chocolate-products",
+            "known"
+        ],
+        "sortkey": -98422081389,
+        "additives_debug_tags": [],
+        "image_nutrition_url": "https://static.openfoodfacts.org/images/products/762/221/028/8257/nutrition_fr.28.400.jpg",
+        "ingredients_text": "Sucre, cacao maigre (11% de beurre de cacao), arôme.",
+        "emb_codes_20141016": "",
+        "countries_debug_tags": [],
+        "generic_name_fr_debug_tags": [],
+        "allergens_from_ingredients": "",
+        "states_hierarchy": [
+            "en:to-be-checked",
+            "en:complete",
+            "en:nutrition-facts-completed",
+            "en:ingredients-completed",
+            "en:expiration-date-completed",
+            "en:packaging-code-to-be-completed",
+            "en:characteristics-completed",
+            "en:categories-completed",
+            "en:brands-completed",
+            "en:packaging-completed",
+            "en:quantity-completed",
+            "en:product-name-completed",
+            "en:photos-validated",
+            "en:photos-uploaded"
+        ],
+        "ingredients_that_may_be_from_palm_oil_tags": [],
+        "image_front_small_url": "https://static.openfoodfacts.org/images/products/762/221/028/8257/front_fr.59.200.jpg",
+        "traces_debug_tags": [],
+        "serving_size_debug_tags": [],
+        "traces": "",
+        "ingredients_text_with_allergens_fr": "Sucre, cacao maigre (11% de beurre de cacao), arôme.",
+        "last_image_t": 1577918611,
+        "last_image_dates_tags": [
+            "2020-01-01",
+            "2020-01",
+            "2020"
+        ],
+        "product_quantity": 800,
+        "ingredients_text_fr_debug_tags": [],
+        "traces_from_user": "(fr) ",
+        "allergens_tags": [],
+        "nutrient_levels": {
+            "salt": "low",
+            "fat": "moderate",
+            "sugars": "high",
+            "saturated-fat": "moderate"
+        },
+        "nutrition_score_beverage": 0,
+        "stores_tags": [],
+        "nutriments": {
+            "cocoa_value": 32,
+            "energy-kcal_value": 375,
+            "proteins": 7.5,
+            "energy-kcal_unit": "kcal",
+            "cocoa_unit": "g",
+            "energy": 1569,
+            "magnesium": 0.156,
+            "proteins_100g": 7.5,
+            "carbohydrates_unit": "g",
+            "saturated-fat": 2.4,
+            "sugars_unit": "g",
+            "phosphorus_label": "0",
+            "nova-group_100g": 4,
+            "carbohydrates": 71,
+            "sodium_100g": 0.012,
+            "fruits-vegetables-nuts-estimate-from-ingredients_100g": 0,
+            "magnesium_100g": 0.156,
+            "saturated-fat_value": 2.4,
+            "sugars_value": 67,
+            "saturated-fat_100g": 2.4,
+            "salt_unit": "g",
+            "sodium_unit": "g",
+            "energy_value": 375,
+            "carbohydrates_100g": 71,
+            "cocoa_label": "0",
+            "sodium": 0.012,
+            "energy_100g": 1569,
+            "sugars": 67,
+            "fiber_value": 10.5,
+            "magnesium_unit": "mg",
+            "fiber": 10.5,
+            "proteins_value": 7.5,
+            "carbohydrates_value": 71,
+            "salt": 0.03,
+            "fiber_100g": 10.5,
+            "phosphorus_unit": "mg",
+            "fat": 3.9,
+            "magnesium_value": 156,
+            "salt_value": 0.03,
+            "magnesium_label": "0",
+            "proteins_unit": "g",
+            "nova-group_serving": 4,
+            "energy-kcal": 375,
+            "phosphorus_100g": 0.246,
+            "fat_unit": "g",
+            "salt_100g": 0.03,
+            "phosphorus": 0.246,
+            "energy-kcal_100g": 375,
+            "cocoa_100g": 32,
+            "cocoa_serving": 32,
+            "cocoa": 32,
+            "sugars_100g": 67,
+            "fat_100g": 3.9,
+            "sodium_value": 0.012,
+            "saturated-fat_unit": "g",
+            "fat_value": 3.9,
+            "fiber_unit": "g",
+            "nova-group": 4,
+            "energy_unit": "kcal",
+            "phosphorus_value": 246
+        },
+        "ingredients_original_tags": [
+            "en:sugar",
+            "en:fat-reduced-cocoa",
+            "en:flavouring",
+            "en:cocoa-butter"
+        ],
+        "_id": "7622210288257",
+        "scans_n": 102,
+        "minerals_prev_tags": [],
+        "_keywords": [
+            "sucre",
+            "ajoute",
+            "petit-dejeuner",
+            "arome",
+            "grand",
+            "fortement",
+            "poulain",
+            "chocolat",
+            "boisson",
+            "gluten",
+            "et",
+            "instantanee",
+            "en",
+            "avec",
+            "cacao",
+            "snack",
+            "vert",
+            "san",
+            "degraisse",
+            "point",
+            "poudre"
+        ],
+        "interface_version_modified": "20120622",
+        "data_quality_bugs_tags": [],
+        "misc_tags": [
+            "en:nutriscore-not-computed"
+        ],
+        "ingredients_n": 4,
+        "countries_hierarchy": [
+            "en:france"
+        ],
+        "correctors_tags": [
+            "domdom26",
+            "keragui",
+            "asmoth",
+            "moon-rabbit",
+            "yuka.ZDVBNUlxbzdoZDRWbnNSaHd5eU00dWxsMk02dGNrUHZMcnBCSUE9PQ",
+            "yuka.VDRBZ0FKNGhxS2dubXZNTXcwL2I4ODRwNkw2WGVtN3JFczRlSWc9PQ",
+            "alak",
+            "openfoodfacts-contributors",
+            "desan"
+        ],
+        "pnns_groups_1": "Sugary snacks",
+        "vitamins_tags": [],
+        "quantity": "800 g",
+        "rev": 65,
+        "ingredients_ids_debug": [
+            "sucre",
+            "cacao-maigre",
+            "11-de-beurre-de-cacao",
+            "arome"
+        ],
+        "additives_old_tags": [],
+        "ingredients_percent_analysis": 1,
+        "languages_hierarchy": [
+            "en:french"
+        ],
+        "product_name_fr": "Grand Arôme",
+        "nutrition_grades_tags": [
+            "not-applicable"
+        ],
+        "image_ingredients_thumb_url": "https://static.openfoodfacts.org/images/products/762/221/028/8257/ingredients_fr.61.100.jpg",
+        "image_thumb_url": "https://static.openfoodfacts.org/images/products/762/221/028/8257/front_fr.59.100.jpg",
+        "countries": "France",
+        "last_modified_by": "sebleouf",
+        "ingredients_text_with_allergens": "Sucre, cacao maigre (11% de beurre de cacao), arôme.",
+        "languages_codes": {
+            "fr": 6
+        },
+        "languages_tags": [
+            "en:french",
+            "en:1"
+        ],
+        "checkers_tags": [],
+        "purchase_places_tags": [
+            "france"
+        ],
+        "minerals_tags": [],
+        "link_debug_tags": [],
+        "image_front_thumb_url": "https://static.openfoodfacts.org/images/products/762/221/028/8257/front_fr.59.100.jpg",
+        "data_quality_errors_tags": [],
+        "photographers_tags": [
+            "openfoodfacts-contributors",
+            "domdom26",
+            "gaminos",
+            "keragui",
+            "asmoth",
+            "cecilia2205"
+        ],
+        "known_ingredients_n": 5,
+        "unknown_nutrients_tags": [],
+        "nutrient_levels_tags": [
+            "en:fat-in-moderate-quantity",
+            "en:saturated-fat-in-moderate-quantity",
+            "en:sugars-in-high-quantity",
+            "en:salt-in-low-quantity"
+        ],
+        "ingredients_text_debug": "Sucre, cacao maigre (11% de beurre de cacao), arôme."
+    }
+}

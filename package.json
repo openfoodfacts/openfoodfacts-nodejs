@@ -37,7 +37,7 @@
   "dependencies": {
     "chai": "^4.2.0",
     "mocha": "^5.0.1",
-    "request-promise": "^4.2.5"
+    "request-promise": "^4.2.6"
   },
   "devDependencies": {
     "@commitlint/cli": "^6.1.0",

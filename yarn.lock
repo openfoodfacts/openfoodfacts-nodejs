@@ -6,9 +6,9 @@
   version "7.9.6"
   resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.9.6.tgz#3b1bbb30dabe600cd72db58720998376ff653bc7"
 
-"@babel/runtime@^7.10.2", "@babel/runtime@^7.7.6":
-  version "7.10.3"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.10.3.tgz#670d002655a7c366540c67f6fd3342cd09500364"
+"@babel/runtime@^7.10.4", "@babel/runtime@^7.7.6":
+  version "7.10.5"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.10.5.tgz#303d8bd440ecd5a491eae6117fd3367698674c5c"
   dependencies:
     regenerator-runtime "^0.13.4"
 
@@ -165,16 +165,16 @@ ajv@^5.1.0:
     fast-json-stable-stringify "^2.0.0"
     json-schema-traverse "^0.3.0"
 
-all-contributors-cli@^6.16.0:
-  version "6.16.0"
-  resolved "https://registry.yarnpkg.com/all-contributors-cli/-/all-contributors-cli-6.16.0.tgz#c998634778f0e2ba5ac1784df6fc3837b34a7c43"
+all-contributors-cli@^6.17.0:
+  version "6.17.0"
+  resolved "https://registry.yarnpkg.com/all-contributors-cli/-/all-contributors-cli-6.17.0.tgz#cd671f224e5e54c9c13b6e4ffc2b71c6523056d1"
   dependencies:
     "@babel/runtime" "^7.7.6"
     async "^3.0.1"
     chalk "^4.0.0"
     didyoumean "^1.2.1"
     inquirer "^7.0.4"
-    json-fixer "^1.4.0"
+    json-fixer "^1.5.1"
     lodash "^4.11.2"
     pify "^5.0.0"
     request "^2.72.0"
@@ -431,7 +431,7 @@ chalk@^3.0.0:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
 
-chalk@^4.0.0:
+chalk@^4.0.0, chalk@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-4.1.0.tgz#4e14870a618d9e2edd97dd8345fd9d9dc315646a"
   dependencies:
@@ -1459,12 +1459,12 @@ jsdoc@^3.6.4:
     taffydb "2.6.2"
     underscore "~1.10.2"
 
-json-fixer@^1.4.0:
-  version "1.4.3"
-  resolved "https://registry.yarnpkg.com/json-fixer/-/json-fixer-1.4.3.tgz#94d9b91821d13f1e685c17af7b1825ded16240e4"
+json-fixer@^1.5.1:
+  version "1.5.4"
+  resolved "https://registry.yarnpkg.com/json-fixer/-/json-fixer-1.5.4.tgz#6ca893dbb4ca688f737543247bb5af235e74aa04"
   dependencies:
-    "@babel/runtime" "^7.10.2"
-    chalk "^4.0.0"
+    "@babel/runtime" "^7.10.4"
+    chalk "^4.1.0"
     pegjs "^0.10.0"
 
 json-parse-better-errors@^1.0.1:

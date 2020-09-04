@@ -1,0 +1,1077 @@
+{
+    "tags": [
+        {
+            "id": "en:1",
+            "products": 1313328,
+            "name": "1",
+            "url": "https://world.openfoodfacts.org/language/1",
+            "known": 0
+        },
+        {
+            "id": "en:french",
+            "url": "https://world.openfoodfacts.org/language/french",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q150"
+            ],
+            "products": 781993,
+            "name": "French",
+            "known": 1
+        },
+        {
+            "products": 435526,
+            "name": "English",
+            "url": "https://world.openfoodfacts.org/language/english",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q1860"
+            ],
+            "known": 1,
+            "id": "en:english"
+        },
+        {
+            "id": "en:spanish",
+            "products": 168254,
+            "name": "Spanish",
+            "url": "https://world.openfoodfacts.org/language/spanish",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q1321"
+            ],
+            "known": 1
+        },
+        {
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/language/multilingual",
+            "name": "multilingual",
+            "products": 91336,
+            "id": "en:multilingual"
+        },
+        {
+            "id": "en:german",
+            "products": 77415,
+            "name": "German",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q188"
+            ],
+            "url": "https://world.openfoodfacts.org/language/german",
+            "known": 1
+        },
+        {
+            "url": "https://world.openfoodfacts.org/language/2",
+            "products": 69318,
+            "name": "2",
+            "known": 0,
+            "id": "en:2"
+        },
+        {
+            "id": "en:italian",
+            "known": 1,
+            "products": 22533,
+            "name": "Italian",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q652"
+            ],
+            "url": "https://world.openfoodfacts.org/language/italian"
+        },
+        {
+            "products": 13790,
+            "name": "3",
+            "url": "https://world.openfoodfacts.org/language/3",
+            "known": 0,
+            "id": "en:3"
+        },
+        {
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q7411"
+            ],
+            "url": "https://world.openfoodfacts.org/language/dutch",
+            "name": "Dutch",
+            "products": 9964,
+            "known": 1,
+            "id": "en:dutch"
+        },
+        {
+            "id": "en:4",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/language/4",
+            "name": "4",
+            "products": 7206
+        },
+        {
+            "id": "en:0",
+            "known": 0,
+            "products": 5623,
+            "name": "0",
+            "url": "https://world.openfoodfacts.org/language/0"
+        },
+        {
+            "known": 1,
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q809"
+            ],
+            "url": "https://world.openfoodfacts.org/language/polish",
+            "products": 4145,
+            "name": "Polish",
+            "id": "en:polish"
+        },
+        {
+            "name": "Portuguese",
+            "products": 4025,
+            "url": "https://world.openfoodfacts.org/language/portuguese",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q5146"
+            ],
+            "known": 1,
+            "id": "en:portuguese"
+        },
+        {
+            "known": 1,
+            "name": "Swedish",
+            "products": 3292,
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q9027"
+            ],
+            "url": "https://world.openfoodfacts.org/language/swedish",
+            "id": "en:swedish"
+        },
+        {
+            "id": "en:russian",
+            "known": 1,
+            "products": 3217,
+            "name": "Russian",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q7737"
+            ],
+            "url": "https://world.openfoodfacts.org/language/russian"
+        },
+        {
+            "known": 1,
+            "products": 2190,
+            "name": "Thai",
+            "url": "https://world.openfoodfacts.org/language/thai",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q9217"
+            ],
+            "id": "en:thai"
+        },
+        {
+            "known": 1,
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q13955"
+            ],
+            "url": "https://world.openfoodfacts.org/language/arabic",
+            "name": "Arabic",
+            "products": 1725,
+            "id": "en:arabic"
+        },
+        {
+            "id": "en:romanian",
+            "known": 1,
+            "products": 1655,
+            "name": "Romanian",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q7913"
+            ],
+            "url": "https://world.openfoodfacts.org/language/romanian"
+        },
+        {
+            "id": "en:finnish",
+            "known": 1,
+            "name": "Finnish",
+            "products": 1445,
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q1412"
+            ],
+            "url": "https://world.openfoodfacts.org/language/finnish"
+        },
+        {
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/language/hungarian",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q9067"
+            ],
+            "products": 1382,
+            "name": "Hungarian",
+            "id": "en:hungarian"
+        },
+        {
+            "id": "en:danish",
+            "products": 1169,
+            "name": "Danish",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q9035"
+            ],
+            "url": "https://world.openfoodfacts.org/language/danish",
+            "known": 1
+        },
+        {
+            "known": 1,
+            "products": 918,
+            "name": "Czech",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q9056"
+            ],
+            "url": "https://world.openfoodfacts.org/language/czech",
+            "id": "en:czech"
+        },
+        {
+            "id": "en:bulgarian",
+            "known": 1,
+            "products": 898,
+            "name": "Bulgarian",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q7918"
+            ],
+            "url": "https://world.openfoodfacts.org/language/bulgarian"
+        },
+        {
+            "id": "en:catalan",
+            "known": 1,
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q7026"
+            ],
+            "url": "https://world.openfoodfacts.org/language/catalan",
+            "name": "Catalan",
+            "products": 762
+        },
+        {
+            "known": 1,
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q9299"
+            ],
+            "url": "https://world.openfoodfacts.org/language/serbian",
+            "products": 611,
+            "name": "Serbian",
+            "id": "en:serbian"
+        },
+        {
+            "id": "en:chinese",
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/language/chinese",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q7850"
+            ],
+            "name": "Chinese",
+            "products": 573
+        },
+        {
+            "url": "https://world.openfoodfacts.org/language/5",
+            "name": "5",
+            "products": 452,
+            "known": 0,
+            "id": "en:5"
+        },
+        {
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/language/slovene",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q9063"
+            ],
+            "products": 416,
+            "name": "Slovene",
+            "id": "en:slovene"
+        },
+        {
+            "id": "en:modern-greek",
+            "url": "https://world.openfoodfacts.org/language/modern-greek",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q36510"
+            ],
+            "products": 393,
+            "name": "Modern Greek",
+            "known": 1
+        },
+        {
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q25167"
+            ],
+            "url": "https://world.openfoodfacts.org/language/bokmal",
+            "name": "Bokmål",
+            "products": 384,
+            "known": 1,
+            "id": "en:bokmal"
+        },
+        {
+            "id": "en:turkish",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q256"
+            ],
+            "url": "https://world.openfoodfacts.org/language/turkish",
+            "products": 365,
+            "name": "Turkish",
+            "known": 1
+        },
+        {
+            "known": 1,
+            "products": 347,
+            "name": "Japanese",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q5287"
+            ],
+            "url": "https://world.openfoodfacts.org/language/japanese",
+            "id": "en:japanese"
+        },
+        {
+            "known": 1,
+            "products": 310,
+            "name": "Latvian",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q9078"
+            ],
+            "url": "https://world.openfoodfacts.org/language/latvian",
+            "id": "en:latvian"
+        },
+        {
+            "products": 282,
+            "name": "Croatian",
+            "url": "https://world.openfoodfacts.org/language/croatian",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q6654"
+            ],
+            "known": 1,
+            "id": "en:croatian"
+        },
+        {
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/language/norwegian",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q9043"
+            ],
+            "name": "Norwegian",
+            "products": 264,
+            "id": "en:norwegian"
+        },
+        {
+            "id": "en:6",
+            "url": "https://world.openfoodfacts.org/language/6",
+            "name": "6",
+            "products": 218,
+            "known": 0
+        },
+        {
+            "known": 1,
+            "name": "Lithuanian",
+            "products": 216,
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q9083"
+            ],
+            "url": "https://world.openfoodfacts.org/language/lithuanian",
+            "id": "en:lithuanian"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/language/latin",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q397"
+            ],
+            "name": "Latin",
+            "products": 216,
+            "known": 1,
+            "id": "en:latin"
+        },
+        {
+            "id": "en:slovak",
+            "known": 1,
+            "name": "Slovak",
+            "products": 165,
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q9058"
+            ],
+            "url": "https://world.openfoodfacts.org/language/slovak"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/language/at",
+            "products": 144,
+            "name": "at",
+            "known": 0,
+            "id": "at"
+        },
+        {
+            "id": "en:ukrainian",
+            "name": "Ukrainian",
+            "products": 139,
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q8798"
+            ],
+            "url": "https://world.openfoodfacts.org/language/ukrainian",
+            "known": 1
+        },
+        {
+            "url": "https://world.openfoodfacts.org/language/7",
+            "name": "7",
+            "products": 138,
+            "known": 0,
+            "id": "en:7"
+        },
+        {
+            "name": "Estonian",
+            "products": 138,
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q9072"
+            ],
+            "url": "https://world.openfoodfacts.org/language/estonian",
+            "known": 1,
+            "id": "en:estonian"
+        },
+        {
+            "name": "Hindi",
+            "products": 126,
+            "url": "https://world.openfoodfacts.org/language/hindi",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q1568"
+            ],
+            "known": 1,
+            "id": "en:hindi"
+        },
+        {
+            "known": 1,
+            "products": 118,
+            "name": "Hebrew",
+            "url": "https://world.openfoodfacts.org/language/hebrew",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q9288"
+            ],
+            "id": "en:hebrew"
+        },
+        {
+            "id": "en:vietnamese",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q9199"
+            ],
+            "url": "https://world.openfoodfacts.org/language/vietnamese",
+            "products": 105,
+            "name": "Vietnamese",
+            "known": 1
+        },
+        {
+            "id": "en:korean",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q9176"
+            ],
+            "url": "https://world.openfoodfacts.org/language/korean",
+            "products": 100,
+            "name": "Korean",
+            "known": 1
+        },
+        {
+            "url": "https://world.openfoodfacts.org/language/8",
+            "products": 88,
+            "name": "8",
+            "known": 0,
+            "id": "en:8"
+        },
+        {
+            "id": "en:georgian",
+            "known": 1,
+            "name": "Georgian",
+            "products": 83,
+            "url": "https://world.openfoodfacts.org/language/georgian",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q8108"
+            ]
+        },
+        {
+            "name": "Kazakh",
+            "products": 74,
+            "url": "https://world.openfoodfacts.org/language/kazakh",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q9252"
+            ],
+            "known": 1,
+            "id": "en:kazakh"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/language/albanian",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q8748"
+            ],
+            "products": 51,
+            "name": "Albanian",
+            "known": 1,
+            "id": "en:albanian"
+        },
+        {
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q9240"
+            ],
+            "url": "https://world.openfoodfacts.org/language/indonesian",
+            "name": "Indonesian",
+            "products": 51,
+            "known": 1,
+            "id": "en:indonesian"
+        },
+        {
+            "known": 1,
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q9296"
+            ],
+            "url": "https://world.openfoodfacts.org/language/macedonian",
+            "products": 51,
+            "name": "Macedonian",
+            "id": "en:macedonian"
+        },
+        {
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q9091"
+            ],
+            "url": "https://world.openfoodfacts.org/language/belarusian",
+            "name": "Belarusian",
+            "products": 49,
+            "known": 1,
+            "id": "en:belarusian"
+        },
+        {
+            "id": "en:malay",
+            "url": "https://world.openfoodfacts.org/language/malay",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q9237"
+            ],
+            "name": "Malay",
+            "products": 47,
+            "known": 1
+        },
+        {
+            "id": "en:persian",
+            "name": "Persian",
+            "products": 43,
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q9168"
+            ],
+            "url": "https://world.openfoodfacts.org/language/persian",
+            "known": 1
+        },
+        {
+            "id": "en:icelandic",
+            "known": 1,
+            "products": 43,
+            "name": "Icelandic",
+            "url": "https://world.openfoodfacts.org/language/icelandic",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q294"
+            ]
+        },
+        {
+            "id": "lc",
+            "products": 39,
+            "name": "lc",
+            "url": "https://world.openfoodfacts.org/language/lc",
+            "known": 0
+        },
+        {
+            "id": "en:uyghur",
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/language/uyghur",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q13263"
+            ],
+            "name": "Uyghur",
+            "products": 37
+        },
+        {
+            "url": "https://world.openfoodfacts.org/language/10",
+            "products": 34,
+            "name": "10",
+            "known": 0,
+            "id": "en:10"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/language/in",
+            "name": "in",
+            "products": 32,
+            "known": 0,
+            "id": "in"
+        },
+        {
+            "id": "en:9",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/language/9",
+            "name": "9",
+            "products": 29
+        },
+        {
+            "id": "en:11",
+            "known": 0,
+            "name": "11",
+            "products": 29,
+            "url": "https://world.openfoodfacts.org/language/11"
+        },
+        {
+            "known": 1,
+            "products": 25,
+            "name": "Nynorsk",
+            "url": "https://world.openfoodfacts.org/language/nynorsk",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q25164"
+            ],
+            "id": "en:nynorsk"
+        },
+        {
+            "known": 1,
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q8785"
+            ],
+            "url": "https://world.openfoodfacts.org/language/armenian",
+            "name": "Armenian",
+            "products": 25,
+            "id": "en:armenian"
+        },
+        {
+            "name": "us",
+            "products": 20,
+            "url": "https://world.openfoodfacts.org/language/us",
+            "known": 0,
+            "id": "us"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/language/iw",
+            "products": 19,
+            "name": "iw",
+            "known": 0,
+            "id": "iw"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/language/unknown-language",
+            "products": 18,
+            "name": "Unknown language",
+            "known": 1,
+            "id": "en:unknown-language"
+        },
+        {
+            "known": 1,
+            "products": 17,
+            "name": "Uzbek",
+            "url": "https://world.openfoodfacts.org/language/uzbek",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q9264"
+            ],
+            "id": "en:uzbek"
+        },
+        {
+            "known": 0,
+            "products": 15,
+            "name": "hk",
+            "url": "https://world.openfoodfacts.org/language/hk",
+            "id": "hk"
+        },
+        {
+            "known": 1,
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q9292"
+            ],
+            "url": "https://world.openfoodfacts.org/language/azerbaijani",
+            "products": 13,
+            "name": "Azerbaijani",
+            "id": "en:azerbaijani"
+        },
+        {
+            "id": "en:bosnian",
+            "known": 1,
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q9303"
+            ],
+            "url": "https://world.openfoodfacts.org/language/bosnian",
+            "name": "Bosnian",
+            "products": 12
+        },
+        {
+            "id": "en:12",
+            "known": 0,
+            "products": 11,
+            "name": "12",
+            "url": "https://world.openfoodfacts.org/language/12"
+        },
+        {
+            "id": "en:kyrgyz",
+            "known": 1,
+            "products": 7,
+            "name": "Kyrgyz",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q9255"
+            ],
+            "url": "https://world.openfoodfacts.org/language/kyrgyz"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/language/14",
+            "name": "14",
+            "products": 7,
+            "known": 0,
+            "id": "en:14"
+        },
+        {
+            "id": "en:basque",
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/language/basque",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q8752"
+            ],
+            "name": "Basque",
+            "products": 7
+        },
+        {
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/language/chamorro",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q33262"
+            ],
+            "name": "Chamorro",
+            "products": 6,
+            "id": "en:chamorro"
+        },
+        {
+            "id": "en:khmer",
+            "known": 1,
+            "products": 6,
+            "name": "Khmer",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q9205"
+            ],
+            "url": "https://world.openfoodfacts.org/language/khmer"
+        },
+        {
+            "known": 1,
+            "name": "Afar",
+            "products": 6,
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q27811"
+            ],
+            "url": "https://world.openfoodfacts.org/language/afar",
+            "id": "en:afar"
+        },
+        {
+            "id": "en:bengali",
+            "name": "Bengali",
+            "products": 6,
+            "url": "https://world.openfoodfacts.org/language/bengali",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q9610"
+            ],
+            "known": 1
+        },
+        {
+            "name": "Moldovan",
+            "products": 6,
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q36392"
+            ],
+            "url": "https://world.openfoodfacts.org/language/moldovan",
+            "known": 1,
+            "id": "en:moldovan"
+        },
+        {
+            "id": "jp",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/language/jp",
+            "name": "jp",
+            "products": 6
+        },
+        {
+            "id": "en:afrikaans",
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/language/afrikaans",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q14196"
+            ],
+            "name": "Afrikaans",
+            "products": 5
+        },
+        {
+            "id": "en:tajik",
+            "products": 5,
+            "name": "Tajik",
+            "url": "https://world.openfoodfacts.org/language/tajik",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q9260"
+            ],
+            "known": 1
+        },
+        {
+            "id": "en:15",
+            "url": "https://world.openfoodfacts.org/language/15",
+            "products": 5,
+            "name": "15",
+            "known": 0
+        },
+        {
+            "known": 1,
+            "name": "Sinhala",
+            "products": 5,
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q13267"
+            ],
+            "url": "https://world.openfoodfacts.org/language/sinhala",
+            "id": "en:sinhala"
+        },
+        {
+            "id": "en:luxembourgish",
+            "known": 1,
+            "products": 5,
+            "name": "Luxembourgish",
+            "url": "https://world.openfoodfacts.org/language/luxembourgish",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q9051"
+            ]
+        },
+        {
+            "known": 0,
+            "name": "gb",
+            "products": 5,
+            "url": "https://world.openfoodfacts.org/language/gb",
+            "id": "gb"
+        },
+        {
+            "id": "en:telugu",
+            "known": 1,
+            "products": 4,
+            "name": "Telugu",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q8097"
+            ],
+            "url": "https://world.openfoodfacts.org/language/telugu"
+        },
+        {
+            "known": 1,
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q33549"
+            ],
+            "url": "https://world.openfoodfacts.org/language/javanese",
+            "products": 4,
+            "name": "Javanese",
+            "id": "en:javanese"
+        },
+        {
+            "id": "en:welsh",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q9309"
+            ],
+            "url": "https://world.openfoodfacts.org/language/welsh",
+            "name": "Welsh",
+            "products": 4,
+            "known": 1
+        },
+        {
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/language/13",
+            "name": "13",
+            "products": 4,
+            "id": "en:13"
+        },
+        {
+            "id": "re",
+            "known": 0,
+            "products": 3,
+            "name": "re",
+            "url": "https://world.openfoodfacts.org/language/re"
+        },
+        {
+            "id": "en:17",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/language/17",
+            "products": 3,
+            "name": "17"
+        },
+        {
+            "products": 3,
+            "name": "20",
+            "url": "https://world.openfoodfacts.org/language/20",
+            "known": 0,
+            "id": "en:20"
+        },
+        {
+            "id": "en:somali",
+            "name": "Somali",
+            "products": 2,
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q13275"
+            ],
+            "url": "https://world.openfoodfacts.org/language/somali",
+            "known": 1
+        },
+        {
+            "id": "en:malagasy",
+            "url": "https://world.openfoodfacts.org/language/malagasy",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q7930"
+            ],
+            "name": "Malagasy",
+            "products": 2,
+            "known": 1
+        },
+        {
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q9307"
+            ],
+            "url": "https://world.openfoodfacts.org/language/galician",
+            "products": 2,
+            "name": "Galician",
+            "known": 1,
+            "id": "en:galician"
+        },
+        {
+            "id": "en:scottish-gaelic",
+            "known": 1,
+            "name": "Scottish Gaelic",
+            "products": 2,
+            "url": "https://world.openfoodfacts.org/language/scottish-gaelic",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q9314"
+            ]
+        },
+        {
+            "id": "en:urdu",
+            "name": "Urdu",
+            "products": 2,
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q1617"
+            ],
+            "url": "https://world.openfoodfacts.org/language/urdu",
+            "known": 1
+        },
+        {
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/language/mn",
+            "name": "mn",
+            "products": 1,
+            "id": "mn"
+        },
+        {
+            "id": "en:burmese",
+            "url": "https://world.openfoodfacts.org/language/burmese",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q9228"
+            ],
+            "products": 1,
+            "name": "Burmese",
+            "known": 1
+        },
+        {
+            "name": "rs",
+            "products": 1,
+            "url": "https://world.openfoodfacts.org/language/rs",
+            "known": 0,
+            "id": "rs"
+        },
+        {
+            "known": 1,
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q5137"
+            ],
+            "url": "https://world.openfoodfacts.org/language/gujarati",
+            "name": "Gujarati",
+            "products": 1,
+            "id": "en:gujarati"
+        },
+        {
+            "id": "en:irish",
+            "name": "Irish",
+            "products": 1,
+            "url": "https://world.openfoodfacts.org/language/irish",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q9142"
+            ],
+            "known": 1
+        },
+        {
+            "id": "au",
+            "url": "https://world.openfoodfacts.org/language/au",
+            "name": "au",
+            "products": 1,
+            "known": 0
+        },
+        {
+            "id": "en:tagalog",
+            "products": 1,
+            "name": "Tagalog",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q34057"
+            ],
+            "url": "https://world.openfoodfacts.org/language/tagalog",
+            "known": 1
+        },
+        {
+            "id": "en:esperanto",
+            "known": 1,
+            "products": 1,
+            "name": "Esperanto",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q143"
+            ],
+            "url": "https://world.openfoodfacts.org/language/esperanto"
+        },
+        {
+            "id": "gp",
+            "known": 0,
+            "products": 1,
+            "name": "gp",
+            "url": "https://world.openfoodfacts.org/language/gp"
+        },
+        {
+            "id": "en:16",
+            "name": "16",
+            "products": 1,
+            "url": "https://world.openfoodfacts.org/language/16",
+            "known": 0
+        },
+        {
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q9267"
+            ],
+            "url": "https://world.openfoodfacts.org/language/turkmen",
+            "products": 1,
+            "name": "Turkmen",
+            "known": 1,
+            "id": "en:turkmen"
+        },
+        {
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q36451"
+            ],
+            "url": "https://world.openfoodfacts.org/language/M%C4%81ori",
+            "name": "Māori",
+            "products": 1,
+            "known": 1,
+            "id": "en:māori"
+        },
+        {
+            "products": 1,
+            "name": "Occitan",
+            "url": "https://world.openfoodfacts.org/language/occitan",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q14185"
+            ],
+            "known": 1,
+            "id": "en:occitan"
+        },
+        {
+            "known": 1,
+            "products": 1,
+            "name": "Breton",
+            "url": "https://world.openfoodfacts.org/language/breton",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q12107"
+            ],
+            "id": "en:breton"
+        },
+        {
+            "id": "en:luba-katanga-language",
+            "known": 1,
+            "products": 1,
+            "name": "Luba-Katanga language",
+            "url": "https://world.openfoodfacts.org/language/luba-katanga-language",
+            "sameAs": [
+                "https://www.wikidata.org/wiki/Q36157"
+            ]
+        },
+        {
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/language/wa",
+            "products": 1,
+            "name": "wa",
+            "id": "wa"
+        },
+        {
+            "id": "sh",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/language/sh",
+            "products": 1,
+            "name": "sh"
+        }
+    ],
+    "count": 118
+}

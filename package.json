@@ -37,7 +37,7 @@
   "homepage": "https://github.com/openfoodfacts/openfoodfacts-nodejs#readme",
   "dependencies": {
     "chai": "^4.2.0",
-    "mocha": "^5.0.1",
+    "mocha": "^8.1.3",
     "request-promise": "^4.2.6"
   },
   "devDependencies": {
@@ -48,7 +48,7 @@
     "boxy-jsdoc-template": "^2.0.2",
     "husky": "^0.14.3",
     "jsdoc": "^3.6.5",
-    "mocha": "^5.0.1",
+    "mocha": "^8.1.3",
     "mockery": "^2.1.0",
     "standard": "^10.0.3"
   }

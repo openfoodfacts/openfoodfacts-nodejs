@@ -42,7 +42,7 @@
   },
   "devDependencies": {
     "@commitlint/cli": "^6.1.0",
-    "@commitlint/config-conventional": "^6.1.0",
+    "@commitlint/config-conventional": "^9.1.2",
     "chai": "^4.2.0",
     "all-contributors-cli": "^6.17.2",
     "boxy-jsdoc-template": "^2.0.2",

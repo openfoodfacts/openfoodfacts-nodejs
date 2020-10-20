@@ -44,7 +44,7 @@
     "@commitlint/cli": "^6.1.0",
     "@commitlint/config-conventional": "^6.1.0",
     "chai": "^4.2.0",
-    "all-contributors-cli": "^6.17.2",
+    "all-contributors-cli": "^6.19.0",
     "boxy-jsdoc-template": "^2.0.2",
     "husky": "^0.14.3",
     "jsdoc": "^3.6.6",

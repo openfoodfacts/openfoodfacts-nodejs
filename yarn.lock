@@ -156,9 +156,10 @@ ajv@^4.7.0:
     co "^4.6.0"
     json-stable-stringify "^1.0.1"
 
-all-contributors-cli@^6.17.2:
-  version "6.17.2"
-  resolved "https://registry.yarnpkg.com/all-contributors-cli/-/all-contributors-cli-6.17.2.tgz#fb3461de56c378d1846e0b982ca0bd7ce4359c18"
+all-contributors-cli@^6.19.0:
+  version "6.19.0"
+  resolved "https://registry.yarnpkg.com/all-contributors-cli/-/all-contributors-cli-6.19.0.tgz#7e4550973afede2476b62bd159fee6d72a1ad802"
+  integrity sha512-QJN4iLeTeYpTZJES8XFTzQ+itA1qSyBbxLapJLtwrnY+kipyRhCX49fS/s/qftQQym9XLATMZUpUeEeJSox1sw==
   dependencies:
     "@babel/runtime" "^7.7.6"
     async "^3.0.1"
@@ -1442,13 +1443,9 @@ lodash.upperfirst@4.3.1:
   version "4.3.1"
   resolved "https://registry.yarnpkg.com/lodash.upperfirst/-/lodash.upperfirst-4.3.1.tgz#1365edf431480481ef0d1c68957a5ed99d49f7ce"
 
-lodash@^4.0.0, lodash@^4.11.2, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.2.1, lodash@^4.3.0:
+lodash@^4.0.0, lodash@^4.11.2, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.2.1, lodash@^4.3.0:
   version "4.17.20"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.20.tgz#b44a9b6297bcb698f1c51a3545a2b3b368d59c52"
-
-lodash@^4.17.19:
-  version "4.17.19"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.19.tgz#e48ddedbe30b3321783c5b4301fbd353bc1e4a4b"
 
 loud-rejection@^1.0.0:
   version "1.6.0"

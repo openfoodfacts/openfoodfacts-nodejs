@@ -1,0 +1,3939 @@
+{
+    "tags": [
+        {
+            "known": 1,
+            "name": "France",
+            "products": 694556,
+            "url": "https://world.openfoodfacts.org/country/france",
+            "id": "en:france"
+        },
+        {
+            "id": "en:united-states",
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/united-states",
+            "products": 331506,
+            "name": "United States"
+        },
+        {
+            "id": "en:spain",
+            "products": 169204,
+            "name": "Spain",
+            "url": "https://world.openfoodfacts.org/country/spain",
+            "known": 1
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/germany",
+            "name": "Germany",
+            "products": 59342,
+            "known": 1,
+            "id": "en:germany"
+        },
+        {
+            "id": "en:belgium",
+            "url": "https://world.openfoodfacts.org/country/belgium",
+            "products": 49471,
+            "name": "Belgium",
+            "known": 1
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/switzerland",
+            "products": 49340,
+            "name": "Switzerland",
+            "known": 1,
+            "id": "en:switzerland"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/united-kingdom",
+            "products": 26556,
+            "name": "United Kingdom",
+            "known": 1,
+            "id": "en:united-kingdom"
+        },
+        {
+            "id": "en:canada",
+            "known": 1,
+            "name": "Canada",
+            "products": 13574,
+            "url": "https://world.openfoodfacts.org/country/canada"
+        },
+        {
+            "id": "en:italy",
+            "known": 1,
+            "name": "Italy",
+            "products": 11217,
+            "url": "https://world.openfoodfacts.org/country/italy"
+        },
+        {
+            "known": 1,
+            "products": 7240,
+            "name": "Ireland",
+            "url": "https://world.openfoodfacts.org/country/ireland",
+            "id": "en:ireland"
+        },
+        {
+            "id": "en:netherlands",
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/netherlands",
+            "products": 7200,
+            "name": "Netherlands"
+        },
+        {
+            "id": "en:australia",
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/australia",
+            "products": 6278,
+            "name": "Australia"
+        },
+        {
+            "known": 1,
+            "products": 5401,
+            "name": "Mexico",
+            "url": "https://world.openfoodfacts.org/country/mexico",
+            "id": "en:mexico"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/austria",
+            "name": "Austria",
+            "products": 4765,
+            "known": 1,
+            "id": "en:austria"
+        },
+        {
+            "id": "en:poland",
+            "known": 1,
+            "products": 4239,
+            "name": "Poland",
+            "url": "https://world.openfoodfacts.org/country/poland"
+        },
+        {
+            "id": "en:portugal",
+            "name": "Portugal",
+            "products": 3402,
+            "url": "https://world.openfoodfacts.org/country/portugal",
+            "known": 1
+        },
+        {
+            "products": 3306,
+            "name": "Sweden",
+            "url": "https://world.openfoodfacts.org/country/sweden",
+            "known": 1,
+            "id": "en:sweden"
+        },
+        {
+            "id": "en:russia",
+            "name": "Russia",
+            "products": 2928,
+            "url": "https://world.openfoodfacts.org/country/russia",
+            "known": 1
+        },
+        {
+            "known": 1,
+            "products": 2780,
+            "name": "Morocco",
+            "url": "https://world.openfoodfacts.org/country/morocco",
+            "id": "en:morocco"
+        },
+        {
+            "known": 1,
+            "products": 2712,
+            "name": "Luxembourg",
+            "url": "https://world.openfoodfacts.org/country/luxembourg",
+            "id": "en:luxembourg"
+        },
+        {
+            "name": "Thailand",
+            "products": 2637,
+            "url": "https://world.openfoodfacts.org/country/thailand",
+            "known": 1,
+            "id": "en:thailand"
+        },
+        {
+            "products": 2277,
+            "name": "Réunion",
+            "url": "https://world.openfoodfacts.org/country/reunion",
+            "known": 1,
+            "id": "en:reunion"
+        },
+        {
+            "known": 1,
+            "name": "Romania",
+            "products": 1762,
+            "url": "https://world.openfoodfacts.org/country/romania",
+            "id": "en:romania"
+        },
+        {
+            "id": "en:hungary",
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/hungary",
+            "products": 1610,
+            "name": "Hungary"
+        },
+        {
+            "id": "en:finland",
+            "url": "https://world.openfoodfacts.org/country/finland",
+            "name": "Finland",
+            "products": 1560,
+            "known": 1
+        },
+        {
+            "id": "en:brazil",
+            "known": 1,
+            "name": "Brazil",
+            "products": 1550,
+            "url": "https://world.openfoodfacts.org/country/brazil"
+        },
+        {
+            "id": "en:algeria",
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/algeria",
+            "products": 1541,
+            "name": "Algeria"
+        },
+        {
+            "id": "en:bulgaria",
+            "url": "https://world.openfoodfacts.org/country/bulgaria",
+            "products": 1506,
+            "name": "Bulgaria",
+            "known": 1
+        },
+        {
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/denmark",
+            "name": "Denmark",
+            "products": 1453,
+            "id": "en:denmark"
+        },
+        {
+            "id": "en:argentina",
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/argentina",
+            "name": "Argentina",
+            "products": 1447
+        },
+        {
+            "id": "en:singapore",
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/singapore",
+            "name": "Singapore",
+            "products": 1391
+        },
+        {
+            "id": "en:czech-republic",
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/czech-republic",
+            "products": 1376,
+            "name": "Czech Republic"
+        },
+        {
+            "id": "en:norway",
+            "url": "https://world.openfoodfacts.org/country/norway",
+            "products": 1015,
+            "name": "Norway",
+            "known": 1
+        },
+        {
+            "id": "en:french-polynesia",
+            "url": "https://world.openfoodfacts.org/country/french-polynesia",
+            "products": 1008,
+            "name": "French Polynesia",
+            "known": 1
+        },
+        {
+            "known": 1,
+            "products": 1000,
+            "name": "Guadeloupe",
+            "url": "https://world.openfoodfacts.org/country/guadeloupe",
+            "id": "en:guadeloupe"
+        },
+        {
+            "id": "en:japan",
+            "url": "https://world.openfoodfacts.org/country/japan",
+            "products": 987,
+            "name": "Japan",
+            "known": 1
+        },
+        {
+            "id": "en:new-caledonia",
+            "known": 1,
+            "name": "New Caledonia",
+            "products": 955,
+            "url": "https://world.openfoodfacts.org/country/new-caledonia"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/india",
+            "name": "India",
+            "products": 932,
+            "known": 1,
+            "id": "en:india"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/tunisia",
+            "name": "Tunisia",
+            "products": 784,
+            "known": 1,
+            "id": "en:tunisia"
+        },
+        {
+            "id": "en:serbia",
+            "products": 722,
+            "name": "Serbia",
+            "url": "https://world.openfoodfacts.org/country/serbia",
+            "known": 1
+        },
+        {
+            "known": 1,
+            "name": "Chile",
+            "products": 720,
+            "url": "https://world.openfoodfacts.org/country/chile",
+            "id": "en:chile"
+        },
+        {
+            "id": "en:hong-kong",
+            "name": "Hong Kong",
+            "products": 715,
+            "url": "https://world.openfoodfacts.org/country/hong-kong",
+            "known": 1
+        },
+        {
+            "name": "United Arab Emirates",
+            "products": 675,
+            "url": "https://world.openfoodfacts.org/country/united-arab-emirates",
+            "known": 1,
+            "id": "en:united-arab-emirates"
+        },
+        {
+            "name": "Martinique",
+            "products": 672,
+            "url": "https://world.openfoodfacts.org/country/martinique",
+            "known": 1,
+            "id": "en:martinique"
+        },
+        {
+            "id": "en:greece",
+            "name": "Greece",
+            "products": 641,
+            "url": "https://world.openfoodfacts.org/country/greece",
+            "known": 1
+        },
+        {
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/colombia",
+            "name": "Colombia",
+            "products": 629,
+            "id": "en:colombia"
+        },
+        {
+            "known": 1,
+            "products": 602,
+            "name": "New Zealand",
+            "url": "https://world.openfoodfacts.org/country/new-zealand",
+            "id": "en:new-zealand"
+        },
+        {
+            "id": "en:saudi-arabia",
+            "known": 1,
+            "products": 510,
+            "name": "Saudi Arabia",
+            "url": "https://world.openfoodfacts.org/country/saudi-arabia"
+        },
+        {
+            "id": "en:south-africa",
+            "products": 507,
+            "name": "South Africa",
+            "url": "https://world.openfoodfacts.org/country/south-africa",
+            "known": 1
+        },
+        {
+            "id": "en:slovenia",
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/slovenia",
+            "products": 494,
+            "name": "Slovenia"
+        },
+        {
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/senegal",
+            "products": 484,
+            "name": "Senegal",
+            "id": "en:senegal"
+        },
+        {
+            "products": 451,
+            "name": "Côte d'Ivoire",
+            "url": "https://world.openfoodfacts.org/country/cote-d-ivoire",
+            "known": 1,
+            "id": "en:cote-d-ivoire"
+        },
+        {
+            "known": 1,
+            "name": "China",
+            "products": 439,
+            "url": "https://world.openfoodfacts.org/country/china",
+            "id": "en:china"
+        },
+        {
+            "known": 1,
+            "name": "Croatia",
+            "products": 420,
+            "url": "https://world.openfoodfacts.org/country/croatia",
+            "id": "en:croatia"
+        },
+        {
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/latvia",
+            "name": "Latvia",
+            "products": 420,
+            "id": "en:latvia"
+        },
+        {
+            "id": "en:lebanon",
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/lebanon",
+            "products": 392,
+            "name": "Lebanon"
+        },
+        {
+            "id": "en:mauritius",
+            "url": "https://world.openfoodfacts.org/country/mauritius",
+            "products": 384,
+            "name": "Mauritius",
+            "known": 1
+        },
+        {
+            "id": "en:andorra",
+            "known": 1,
+            "products": 375,
+            "name": "Andorra",
+            "url": "https://world.openfoodfacts.org/country/andorra"
+        },
+        {
+            "id": "en:turkey",
+            "url": "https://world.openfoodfacts.org/country/turkey",
+            "products": 354,
+            "name": "Turkey",
+            "known": 1
+        },
+        {
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/israel",
+            "name": "Israel",
+            "products": 341,
+            "id": "en:israel"
+        },
+        {
+            "name": "French Guiana",
+            "products": 292,
+            "url": "https://world.openfoodfacts.org/country/french-guiana",
+            "known": 1,
+            "id": "en:french-guiana"
+        },
+        {
+            "id": "en:malaysia",
+            "known": 1,
+            "products": 290,
+            "name": "Malaysia",
+            "url": "https://world.openfoodfacts.org/country/malaysia"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/ukraine",
+            "name": "Ukraine",
+            "products": 287,
+            "known": 1,
+            "id": "en:ukraine"
+        },
+        {
+            "id": "en:georgia",
+            "url": "https://world.openfoodfacts.org/country/georgia",
+            "products": 284,
+            "name": "Georgia",
+            "known": 1
+        },
+        {
+            "id": "en:slovakia",
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/slovakia",
+            "products": 271,
+            "name": "Slovakia"
+        },
+        {
+            "id": "en:cyprus",
+            "url": "https://world.openfoodfacts.org/country/cyprus",
+            "name": "Cyprus",
+            "products": 268,
+            "known": 1
+        },
+        {
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/taiwan",
+            "products": 264,
+            "name": "Taiwan",
+            "id": "en:taiwan"
+        },
+        {
+            "products": 258,
+            "name": "Indonesia",
+            "url": "https://world.openfoodfacts.org/country/indonesia",
+            "known": 1,
+            "id": "en:indonesia"
+        },
+        {
+            "known": 1,
+            "products": 257,
+            "name": "Peru",
+            "url": "https://world.openfoodfacts.org/country/peru",
+            "id": "en:peru"
+        },
+        {
+            "id": "en:lithuania",
+            "known": 1,
+            "products": 247,
+            "name": "Lithuania",
+            "url": "https://world.openfoodfacts.org/country/lithuania"
+        },
+        {
+            "id": "en:costa-rica",
+            "url": "https://world.openfoodfacts.org/country/costa-rica",
+            "name": "Costa Rica",
+            "products": 233,
+            "known": 1
+        },
+        {
+            "known": 1,
+            "name": "Vietnam",
+            "products": 210,
+            "url": "https://world.openfoodfacts.org/country/vietnam",
+            "id": "en:vietnam"
+        },
+        {
+            "products": 198,
+            "name": "Madagascar",
+            "url": "https://world.openfoodfacts.org/country/madagascar",
+            "known": 1,
+            "id": "en:madagascar"
+        },
+        {
+            "name": "Qatar",
+            "products": 196,
+            "url": "https://world.openfoodfacts.org/country/qatar",
+            "known": 1,
+            "id": "en:qatar"
+        },
+        {
+            "id": "en:egypt",
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/egypt",
+            "name": "Egypt",
+            "products": 192
+        },
+        {
+            "id": "en:cameroon",
+            "known": 1,
+            "name": "Cameroon",
+            "products": 184,
+            "url": "https://world.openfoodfacts.org/country/cameroon"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/south-korea",
+            "products": 182,
+            "name": "South Korea",
+            "known": 1,
+            "id": "en:south-korea"
+        },
+        {
+            "id": "en:pakistan",
+            "known": 1,
+            "name": "Pakistan",
+            "products": 175,
+            "url": "https://world.openfoodfacts.org/country/pakistan"
+        },
+        {
+            "id": "en:philippines",
+            "known": 1,
+            "products": 174,
+            "name": "Philippines",
+            "url": "https://world.openfoodfacts.org/country/philippines"
+        },
+        {
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/en",
+            "name": "en",
+            "products": 171,
+            "id": "en:en"
+        },
+        {
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/malta",
+            "name": "Malta",
+            "products": 171,
+            "id": "en:malta"
+        },
+        {
+            "products": 168,
+            "name": "Iraq",
+            "url": "https://world.openfoodfacts.org/country/iraq",
+            "known": 1,
+            "id": "en:iraq"
+        },
+        {
+            "id": "en:kuwait",
+            "url": "https://world.openfoodfacts.org/country/kuwait",
+            "name": "Kuwait",
+            "products": 168,
+            "known": 1
+        },
+        {
+            "id": "en:estonia",
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/estonia",
+            "name": "Estonia",
+            "products": 166
+        },
+        {
+            "known": 1,
+            "name": "European Union",
+            "products": 160,
+            "url": "https://world.openfoodfacts.org/country/european-union",
+            "id": "en:european-union"
+        },
+        {
+            "id": "en:bolivia",
+            "known": 1,
+            "products": 151,
+            "name": "Bolivia",
+            "url": "https://world.openfoodfacts.org/country/bolivia"
+        },
+        {
+            "id": "en:bosnia-and-herzegovina",
+            "known": 1,
+            "name": "Bosnia and Herzegovina",
+            "products": 143,
+            "url": "https://world.openfoodfacts.org/country/bosnia-and-herzegovina"
+        },
+        {
+            "id": "en:uruguay",
+            "known": 1,
+            "name": "Uruguay",
+            "products": 136,
+            "url": "https://world.openfoodfacts.org/country/uruguay"
+        },
+        {
+            "products": 129,
+            "name": "Ecuador",
+            "url": "https://world.openfoodfacts.org/country/ecuador",
+            "known": 1,
+            "id": "en:ecuador"
+        },
+        {
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/republic-of-macedonia",
+            "name": "Republic of Macedonia",
+            "products": 128,
+            "id": "en:republic-of-macedonia"
+        },
+        {
+            "id": "en:puerto-rico",
+            "url": "https://world.openfoodfacts.org/country/puerto-rico",
+            "products": 127,
+            "name": "Puerto Rico",
+            "known": 1
+        },
+        {
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/burkina-faso",
+            "products": 126,
+            "name": "Burkina Faso",
+            "id": "en:burkina-faso"
+        },
+        {
+            "id": "en:iceland",
+            "products": 123,
+            "name": "Iceland",
+            "url": "https://world.openfoodfacts.org/country/iceland",
+            "known": 1
+        },
+        {
+            "products": 121,
+            "name": "Monaco",
+            "url": "https://world.openfoodfacts.org/country/monaco",
+            "known": 1,
+            "id": "en:monaco"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/albania",
+            "name": "Albania",
+            "products": 113,
+            "known": 1,
+            "id": "en:albania"
+        },
+        {
+            "id": "en:gabon",
+            "known": 1,
+            "products": 112,
+            "name": "Gabon",
+            "url": "https://world.openfoodfacts.org/country/gabon"
+        },
+        {
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/democratic-republic-of-the-congo",
+            "products": 109,
+            "name": "Democratic Republic of the Congo",
+            "id": "en:democratic-republic-of-the-congo"
+        },
+        {
+            "id": "en:saint-pierre-and-miquelon",
+            "name": "Saint Pierre and Miquelon",
+            "products": 103,
+            "url": "https://world.openfoodfacts.org/country/saint-pierre-and-miquelon",
+            "known": 1
+        },
+        {
+            "id": "en:afghanistan",
+            "products": 102,
+            "name": "Afghanistan",
+            "url": "https://world.openfoodfacts.org/country/afghanistan",
+            "known": 1
+        },
+        {
+            "id": "en:panama",
+            "known": 1,
+            "name": "Panama",
+            "products": 99,
+            "url": "https://world.openfoodfacts.org/country/panama"
+        },
+        {
+            "id": "en:montenegro",
+            "name": "Montenegro",
+            "products": 96,
+            "url": "https://world.openfoodfacts.org/country/montenegro",
+            "known": 1
+        },
+        {
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/cambodia",
+            "products": 92,
+            "name": "Cambodia",
+            "id": "en:cambodia"
+        },
+        {
+            "id": "en:belarus",
+            "products": 90,
+            "name": "Belarus",
+            "url": "https://world.openfoodfacts.org/country/belarus",
+            "known": 1
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/sweden-svenska",
+            "name": "sweden-svenska",
+            "products": 87,
+            "known": 0,
+            "id": "en:sweden-svenska"
+        },
+        {
+            "id": "en:spain-espanol",
+            "known": 0,
+            "products": 87,
+            "name": "spain-espanol",
+            "url": "https://world.openfoodfacts.org/country/spain-espanol"
+        },
+        {
+            "known": 0,
+            "products": 87,
+            "name": "south-africa-english",
+            "url": "https://world.openfoodfacts.org/country/south-africa-english",
+            "id": "en:south-africa-english"
+        },
+        {
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/singapore-english",
+            "products": 87,
+            "name": "singapore-english",
+            "id": "en:singapore-english"
+        },
+        {
+            "id": "en:serbia-srpski",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/serbia-srpski",
+            "products": 87,
+            "name": "serbia-srpski"
+        },
+        {
+            "id": "en:russia-русский",
+            "known": 0,
+            "name": "russia-русский",
+            "products": 87,
+            "url": "https://world.openfoodfacts.org/country/russia-%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9"
+        },
+        {
+            "id": "en:peru-espanol",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/peru-espanol",
+            "products": 87,
+            "name": "peru-espanol"
+        },
+        {
+            "known": 0,
+            "name": "paraguay-espanol",
+            "products": 87,
+            "url": "https://world.openfoodfacts.org/country/paraguay-espanol",
+            "id": "en:paraguay-espanol"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/namibia-english",
+            "name": "namibia-english",
+            "products": 87,
+            "known": 0,
+            "id": "en:namibia-english"
+        },
+        {
+            "id": "en:lithuania-lietuvių",
+            "url": "https://world.openfoodfacts.org/country/lithuania-lietuvi%C5%B3",
+            "name": "lithuania-lietuvių",
+            "products": 87,
+            "known": 0
+        },
+        {
+            "id": "en:korea-한국어",
+            "known": 0,
+            "products": 87,
+            "name": "korea-한국어",
+            "url": "https://world.openfoodfacts.org/country/korea-%ED%95%9C%EA%B5%AD%EC%96%B4"
+        },
+        {
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/malaysia-%E4%B8%AD%E6%96%87",
+            "products": 87,
+            "name": "malaysia-中文",
+            "id": "en:malaysia-中文"
+        },
+        {
+            "products": 87,
+            "name": "jamaica-english",
+            "url": "https://world.openfoodfacts.org/country/jamaica-english",
+            "known": 0,
+            "id": "en:jamaica-english"
+        },
+        {
+            "id": "en:portugal-portugues",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/portugal-portugues",
+            "name": "portugal-portugues",
+            "products": 87
+        },
+        {
+            "products": 87,
+            "name": "iceland-islenska",
+            "url": "https://world.openfoodfacts.org/country/iceland-islenska",
+            "known": 0,
+            "id": "en:iceland-islenska"
+        },
+        {
+            "known": 0,
+            "products": 87,
+            "name": "hong-kong-粵語",
+            "url": "https://world.openfoodfacts.org/country/hong-kong-%E7%B2%B5%E8%AA%9E",
+            "id": "en:hong-kong-粵語"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/honduras-espanol",
+            "name": "honduras-espanol",
+            "products": 87,
+            "known": 0,
+            "id": "en:honduras-espanol"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/malaysia-english",
+            "name": "malaysia-english",
+            "products": 87,
+            "known": 0,
+            "id": "en:malaysia-english"
+        },
+        {
+            "known": 0,
+            "products": 87,
+            "name": "ghana-english",
+            "url": "https://world.openfoodfacts.org/country/ghana-english",
+            "id": "en:ghana-english"
+        },
+        {
+            "products": 87,
+            "name": "georgia-ქართული",
+            "url": "https://world.openfoodfacts.org/country/georgia-%E1%83%A5%E1%83%90%E1%83%A0%E1%83%97%E1%83%A3%E1%83%9A%E1%83%98",
+            "known": 0,
+            "id": "en:georgia-ქართული"
+        },
+        {
+            "id": "en:swaziland-english",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/swaziland-english",
+            "name": "swaziland-english",
+            "products": 87
+        },
+        {
+            "id": "en:finland-suomi",
+            "known": 0,
+            "products": 87,
+            "name": "finland-suomi",
+            "url": "https://world.openfoodfacts.org/country/finland-suomi"
+        },
+        {
+            "known": 0,
+            "products": 87,
+            "name": "el-salvador-espanol",
+            "url": "https://world.openfoodfacts.org/country/el-salvador-espanol",
+            "id": "en:el-salvador-espanol"
+        },
+        {
+            "id": "en:ecuador-espanol",
+            "url": "https://world.openfoodfacts.org/country/ecuador-espanol",
+            "name": "ecuador-espanol",
+            "products": 87,
+            "known": 0
+        },
+        {
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/north-macedonia-%D0%BC%D0%B0%D0%BA%D0%B5%D0%B4%D0%BE%D0%BD%D1%81%D0%BA%D0%B8-%D1%98%D0%B0%D0%B7%D0%B8%D0%BA",
+            "name": "north-macedonia-македонски-јазик",
+            "products": 87,
+            "id": "en:north-macedonia-македонски-јазик"
+        },
+        {
+            "id": "en:cyprus-ελληνικά",
+            "known": 0,
+            "name": "cyprus-ελληνικά",
+            "products": 87,
+            "url": "https://world.openfoodfacts.org/country/cyprus-%CE%B5%CE%BB%CE%BB%CE%B7%CE%BD%CE%B9%CE%BA%CE%AC"
+        },
+        {
+            "id": "en:croatia-hrvatski",
+            "known": 0,
+            "products": 87,
+            "name": "croatia-hrvatski",
+            "url": "https://world.openfoodfacts.org/country/croatia-hrvatski"
+        },
+        {
+            "known": 0,
+            "name": "venezuela-espanol",
+            "products": 87,
+            "url": "https://world.openfoodfacts.org/country/venezuela-espanol",
+            "id": "en:venezuela-espanol"
+        },
+        {
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/costa-rica-espanol",
+            "name": "costa-rica-espanol",
+            "products": 87,
+            "id": "en:costa-rica-espanol"
+        },
+        {
+            "id": "en:armenia-pyсский",
+            "known": 0,
+            "name": "armenia-pyсский",
+            "products": 87,
+            "url": "https://world.openfoodfacts.org/country/armenia-py%D1%81%D1%81%D0%BA%D0%B8%D0%B9"
+        },
+        {
+            "name": "colombia-espanol",
+            "products": 87,
+            "url": "https://world.openfoodfacts.org/country/colombia-espanol",
+            "known": 0,
+            "id": "en:colombia-espanol"
+        },
+        {
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/europe",
+            "products": 87,
+            "name": "europe",
+            "id": "en:europe"
+        },
+        {
+            "id": "en:china-中文",
+            "known": 0,
+            "products": 87,
+            "name": "china-中文",
+            "url": "https://world.openfoodfacts.org/country/china-%E4%B8%AD%E6%96%87"
+        },
+        {
+            "products": 87,
+            "name": "malaysia-bahasa-melayu",
+            "url": "https://world.openfoodfacts.org/country/malaysia-bahasa-melayu",
+            "known": 0,
+            "id": "en:malaysia-bahasa-melayu"
+        },
+        {
+            "id": "en:canada-english",
+            "known": 0,
+            "products": 87,
+            "name": "canada-english",
+            "url": "https://world.openfoodfacts.org/country/canada-english"
+        },
+        {
+            "name": "slovenia-slovene",
+            "products": 87,
+            "url": "https://world.openfoodfacts.org/country/slovenia-slovene",
+            "known": 0,
+            "id": "en:slovenia-slovene"
+        },
+        {
+            "id": "en:cambodia-ភាសាខ្មែរ",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/cambodia-%E1%9E%97%E1%9E%B6%E1%9E%9F%E1%9E%B6%E1%9E%81%E1%9F%92%E1%9E%98%E1%9F%82%E1%9E%9A",
+            "name": "cambodia-ភាសាខ្មែរ",
+            "products": 87
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/cambodia-english",
+            "name": "cambodia-english",
+            "products": 87,
+            "known": 0,
+            "id": "en:cambodia-english"
+        },
+        {
+            "id": "en:botswana-english",
+            "name": "botswana-english",
+            "products": 87,
+            "url": "https://world.openfoodfacts.org/country/botswana-english",
+            "known": 0
+        },
+        {
+            "id": "en:bosnia-i-hercegovina-bosnian",
+            "known": 0,
+            "products": 87,
+            "name": "bosnia-i-hercegovina-bosnian",
+            "url": "https://world.openfoodfacts.org/country/bosnia-i-hercegovina-bosnian"
+        },
+        {
+            "known": 0,
+            "products": 87,
+            "name": "belgium-francais",
+            "url": "https://world.openfoodfacts.org/country/belgium-francais",
+            "id": "en:belgium-francais"
+        },
+        {
+            "id": "en:mongolia-монгол-хэл",
+            "url": "https://world.openfoodfacts.org/country/mongolia-%D0%BC%D0%BE%D0%BD%D0%B3%D0%BE%D0%BB-%D1%85%D1%8D%D0%BB",
+            "name": "mongolia-монгол-хэл",
+            "products": 87,
+            "known": 0
+        },
+        {
+            "known": 0,
+            "products": 87,
+            "name": "poland-polski",
+            "url": "https://world.openfoodfacts.org/country/poland-polski",
+            "id": "en:poland-polski"
+        },
+        {
+            "id": "en:australia-english",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/australia-english",
+            "products": 87,
+            "name": "australia-english"
+        },
+        {
+            "id": "en:france-francais",
+            "products": 87,
+            "name": "france-francais",
+            "url": "https://world.openfoodfacts.org/country/france-francais",
+            "known": 0
+        },
+        {
+            "known": 0,
+            "products": 87,
+            "name": "asia-pacific",
+            "url": "https://world.openfoodfacts.org/country/asia-pacific",
+            "id": "en:asia-pacific"
+        },
+        {
+            "id": "en:aruba-espanol",
+            "url": "https://world.openfoodfacts.org/country/aruba-espanol",
+            "name": "aruba-espanol",
+            "products": 87,
+            "known": 0
+        },
+        {
+            "id": "en:argentina-espanol",
+            "products": 87,
+            "name": "argentina-espanol",
+            "url": "https://world.openfoodfacts.org/country/argentina-espanol",
+            "known": 0
+        },
+        {
+            "id": "en:lebanon-english",
+            "name": "lebanon-english",
+            "products": 87,
+            "url": "https://world.openfoodfacts.org/country/lebanon-english",
+            "known": 0
+        },
+        {
+            "id": "en:mexico-espanol",
+            "products": 87,
+            "name": "mexico-espanol",
+            "url": "https://world.openfoodfacts.org/country/mexico-espanol",
+            "known": 0
+        },
+        {
+            "id": "en:kazakhstan-pyсский",
+            "known": 0,
+            "products": 87,
+            "name": "kazakhstan-pyсский",
+            "url": "https://world.openfoodfacts.org/country/kazakhstan-py%D1%81%D1%81%D0%BA%D0%B8%D0%B9"
+        },
+        {
+            "known": 0,
+            "products": 87,
+            "name": "india-english",
+            "url": "https://world.openfoodfacts.org/country/india-english",
+            "id": "en:india-english"
+        },
+        {
+            "id": "en:estonia-eesti",
+            "url": "https://world.openfoodfacts.org/country/estonia-eesti",
+            "products": 87,
+            "name": "estonia-eesti",
+            "known": 0
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/ireland-english",
+            "name": "ireland-english",
+            "products": 87,
+            "known": 0,
+            "id": "en:ireland-english"
+        },
+        {
+            "known": 0,
+            "name": "zambia-english",
+            "products": 87,
+            "url": "https://world.openfoodfacts.org/country/zambia-english",
+            "id": "en:zambia-english"
+        },
+        {
+            "id": "en:macau-中文",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/macau-%E4%B8%AD%E6%96%87",
+            "name": "macau-中文",
+            "products": 87
+        },
+        {
+            "id": "en:switzerland-deutsch",
+            "products": 87,
+            "name": "switzerland-deutsch",
+            "url": "https://world.openfoodfacts.org/country/switzerland-deutsch",
+            "known": 0
+        },
+        {
+            "id": "en:kyrgyzstan-русский",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/kyrgyzstan-%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9",
+            "products": 87,
+            "name": "kyrgyzstan-русский"
+        },
+        {
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/hungary-magyar",
+            "products": 87,
+            "name": "hungary-magyar",
+            "id": "en:hungary-magyar"
+        },
+        {
+            "products": 87,
+            "name": "guatemala-espanol",
+            "url": "https://world.openfoodfacts.org/country/guatemala-espanol",
+            "known": 0,
+            "id": "en:guatemala-espanol"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/romania-roman%C4%83",
+            "name": "romania-romană",
+            "products": 87,
+            "known": 0,
+            "id": "en:romania-romană"
+        },
+        {
+            "products": 87,
+            "name": "belgium-nederlands",
+            "url": "https://world.openfoodfacts.org/country/belgium-nederlands",
+            "known": 0,
+            "id": "en:belgium-nederlands"
+        },
+        {
+            "id": "en:italy-italiano",
+            "url": "https://world.openfoodfacts.org/country/italy-italiano",
+            "name": "italy-italiano",
+            "products": 87,
+            "known": 0
+        },
+        {
+            "id": "en:republica-dominicana-espanol",
+            "url": "https://world.openfoodfacts.org/country/republica-dominicana-espanol",
+            "name": "republica-dominicana-espanol",
+            "products": 87,
+            "known": 0
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/israel-%D7%A2%D7%91%D7%A8%D7%99%D7%AA",
+            "products": 87,
+            "name": "israel-עברית",
+            "known": 0,
+            "id": "en:israel-עברית"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/latvia-latvie%C5%A1u",
+            "name": "latvia-latviešu",
+            "products": 87,
+            "known": 0,
+            "id": "en:latvia-latviešu"
+        },
+        {
+            "id": "en:moldova-roman",
+            "products": 87,
+            "name": "moldova-roman",
+            "url": "https://world.openfoodfacts.org/country/moldova-roman",
+            "known": 0
+        },
+        {
+            "id": "en:thailand-ไทย",
+            "known": 0,
+            "products": 87,
+            "name": "thailand-ไทย",
+            "url": "https://world.openfoodfacts.org/country/thailand-%E0%B9%84%E0%B8%97%E0%B8%A2"
+        },
+        {
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/czech-republic-%C4%8De%C5%A1tina",
+            "products": 87,
+            "name": "czech-republic-čeština",
+            "id": "en:czech-republic-čeština"
+        },
+        {
+            "id": "en:panama-espanol",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/panama-espanol",
+            "name": "panama-espanol",
+            "products": 87
+        },
+        {
+            "id": "en:brazil-portugues",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/brazil-portugues",
+            "name": "brazil-portugues",
+            "products": 87
+        },
+        {
+            "id": "en:switzerland-francais",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/switzerland-francais",
+            "name": "switzerland-francais",
+            "products": 87
+        },
+        {
+            "name": "chile-espanol",
+            "products": 87,
+            "url": "https://world.openfoodfacts.org/country/chile-espanol",
+            "known": 0,
+            "id": "en:chile-espanol"
+        },
+        {
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/middle-east-africa",
+            "name": "middle-east-africa",
+            "products": 87,
+            "id": "en:middle-east-africa"
+        },
+        {
+            "id": "en:denmark-dansk",
+            "known": 0,
+            "products": 87,
+            "name": "denmark-dansk",
+            "url": "https://world.openfoodfacts.org/country/denmark-dansk"
+        },
+        {
+            "known": 0,
+            "name": "indonesia-bahasa-indonesia",
+            "products": 87,
+            "url": "https://world.openfoodfacts.org/country/indonesia-bahasa-indonesia",
+            "id": "en:indonesia-bahasa-indonesia"
+        },
+        {
+            "id": "en:united-states-espanol",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/united-states-espanol",
+            "products": 87,
+            "name": "united-states-espanol"
+        },
+        {
+            "products": 87,
+            "name": "azerbaijan-русский",
+            "url": "https://world.openfoodfacts.org/country/azerbaijan-%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9",
+            "known": 0,
+            "id": "en:azerbaijan-русский"
+        },
+        {
+            "known": 0,
+            "name": "norway-norsk",
+            "products": 87,
+            "url": "https://world.openfoodfacts.org/country/norway-norsk",
+            "id": "en:norway-norsk"
+        },
+        {
+            "id": "en:bulgaria-български",
+            "products": 87,
+            "name": "bulgaria-български",
+            "url": "https://world.openfoodfacts.org/country/bulgaria-%D0%B1%D1%8A%D0%BB%D0%B3%D0%B0%D1%80%D1%81%D0%BA%D0%B8",
+            "known": 0
+        },
+        {
+            "id": "en:slovak-republic-slovenčina",
+            "url": "https://world.openfoodfacts.org/country/slovak-republic-sloven%C4%8Dina",
+            "name": "slovak-republic-slovenčina",
+            "products": 87,
+            "known": 0
+        },
+        {
+            "known": 0,
+            "products": 87,
+            "name": "new-zealand-english",
+            "url": "https://world.openfoodfacts.org/country/new-zealand-english",
+            "id": "en:new-zealand-english"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/austria-deutsch",
+            "products": 87,
+            "name": "austria-deutsch",
+            "known": 0,
+            "id": "en:austria-deutsch"
+        },
+        {
+            "id": "en:germany-deutsch",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/germany-deutsch",
+            "products": 87,
+            "name": "germany-deutsch"
+        },
+        {
+            "name": "greece-ελληνικά",
+            "products": 87,
+            "url": "https://world.openfoodfacts.org/country/greece-%CE%B5%CE%BB%CE%BB%CE%B7%CE%BD%CE%B9%CE%BA%CE%AC",
+            "known": 0,
+            "id": "en:greece-ελληνικά"
+        },
+        {
+            "products": 87,
+            "name": "bolivia-espanol",
+            "url": "https://world.openfoodfacts.org/country/bolivia-espanol",
+            "known": 0,
+            "id": "en:bolivia-espanol"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/turkey-turkce",
+            "products": 87,
+            "name": "turkey-turkce",
+            "known": 0,
+            "id": "en:turkey-turkce"
+        },
+        {
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/ukraine-y%D0%BA%D1%80%D0%B0%D1%97%CC%81%D0%BD%D1%81%D1%8C%D0%BA%D0%B0",
+            "products": 87,
+            "name": "ukraine-yкраї́нська",
+            "id": "en:ukraine-yкраї́нська"
+        },
+        {
+            "id": "en:united-kingdom-english",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/united-kingdom-english",
+            "name": "united-kingdom-english",
+            "products": 87
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/philippines-english",
+            "products": 87,
+            "name": "philippines-english",
+            "known": 0,
+            "id": "en:philippines-english"
+        },
+        {
+            "id": "en:united-states-english",
+            "name": "united-states-english",
+            "products": 87,
+            "url": "https://world.openfoodfacts.org/country/united-states-english",
+            "known": 0
+        },
+        {
+            "id": "en:uruguay-espanol",
+            "name": "uruguay-espanol",
+            "products": 87,
+            "url": "https://world.openfoodfacts.org/country/uruguay-espanol",
+            "known": 0
+        },
+        {
+            "id": "en:vietnam-tiếng-việt",
+            "url": "https://world.openfoodfacts.org/country/vietnam-ti%E1%BA%BFng-vi%E1%BB%87t",
+            "products": 87,
+            "name": "vietnam-tiếng-việt",
+            "known": 0
+        },
+        {
+            "id": "en:lesotho-english",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/lesotho-english",
+            "name": "lesotho-english",
+            "products": 87
+        },
+        {
+            "id": "en:netherlands-nederlands",
+            "products": 87,
+            "name": "netherlands-nederlands",
+            "url": "https://world.openfoodfacts.org/country/netherlands-nederlands",
+            "known": 0
+        },
+        {
+            "id": "en:canada-francais",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/canada-francais",
+            "name": "canada-francais",
+            "products": 87
+        },
+        {
+            "known": 0,
+            "name": "nicaragua-espanol",
+            "products": 87,
+            "url": "https://world.openfoodfacts.org/country/nicaragua-espanol",
+            "id": "en:nicaragua-espanol"
+        },
+        {
+            "name": "trinidad-tobago-english",
+            "products": 87,
+            "url": "https://world.openfoodfacts.org/country/trinidad-tobago-english",
+            "known": 0,
+            "id": "en:trinidad-tobago-english"
+        },
+        {
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/japan-%E6%97%A5%E6%9C%AC%E8%AA%9E",
+            "name": "japan-日本語",
+            "products": 87,
+            "id": "en:japan-日本語"
+        },
+        {
+            "products": 87,
+            "name": "puerto-rico-espanol",
+            "url": "https://world.openfoodfacts.org/country/puerto-rico-espanol",
+            "known": 0,
+            "id": "en:puerto-rico-espanol"
+        },
+        {
+            "id": "en:taiwan-中文",
+            "known": 0,
+            "name": "taiwan-中文",
+            "products": 87,
+            "url": "https://world.openfoodfacts.org/country/taiwan-%E4%B8%AD%E6%96%87"
+        },
+        {
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/belarus-py%D1%81%D1%81%D0%BA%D0%B8%D0%B9",
+            "products": 87,
+            "name": "belarus-pyсский",
+            "id": "en:belarus-pyсский"
+        },
+        {
+            "id": "en:kazakhstan",
+            "known": 1,
+            "name": "Kazakhstan",
+            "products": 83,
+            "url": "https://world.openfoodfacts.org/country/kazakhstan"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/dominican-republic",
+            "name": "Dominican Republic",
+            "products": 77,
+            "known": 1,
+            "id": "en:dominican-republic"
+        },
+        {
+            "known": 1,
+            "products": 71,
+            "name": "Jordan",
+            "url": "https://world.openfoodfacts.org/country/jordan",
+            "id": "en:jordan"
+        },
+        {
+            "id": "en:venezuela",
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/venezuela",
+            "products": 68,
+            "name": "Venezuela"
+        },
+        {
+            "id": "en:guatemala",
+            "known": 1,
+            "products": 67,
+            "name": "Guatemala",
+            "url": "https://world.openfoodfacts.org/country/guatemala"
+        },
+        {
+            "known": 1,
+            "products": 66,
+            "name": "Moldova",
+            "url": "https://world.openfoodfacts.org/country/moldova",
+            "id": "en:moldova"
+        },
+        {
+            "id": "en:guinea",
+            "url": "https://world.openfoodfacts.org/country/guinea",
+            "name": "Guinea",
+            "products": 64,
+            "known": 1
+        },
+        {
+            "known": 1,
+            "name": "Bahrain",
+            "products": 61,
+            "url": "https://world.openfoodfacts.org/country/bahrain",
+            "id": "en:bahrain"
+        },
+        {
+            "known": 1,
+            "name": "Togo",
+            "products": 59,
+            "url": "https://world.openfoodfacts.org/country/togo",
+            "id": "en:togo"
+        },
+        {
+            "known": 1,
+            "products": 58,
+            "name": "El Salvador",
+            "url": "https://world.openfoodfacts.org/country/el-salvador",
+            "id": "en:el-salvador"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/mali",
+            "name": "Mali",
+            "products": 58,
+            "known": 1,
+            "id": "en:mali"
+        },
+        {
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/benin",
+            "products": 53,
+            "name": "Benin",
+            "id": "en:benin"
+        },
+        {
+            "id": "en:republic-of-the-congo",
+            "products": 52,
+            "name": "Republic of the Congo",
+            "url": "https://world.openfoodfacts.org/country/republic-of-the-congo",
+            "known": 1
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/oman",
+            "name": "Oman",
+            "products": 50,
+            "known": 1,
+            "id": "en:oman"
+        },
+        {
+            "id": "en:armenia",
+            "url": "https://world.openfoodfacts.org/country/armenia",
+            "name": "Armenia",
+            "products": 48,
+            "known": 1
+        },
+        {
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/kenya",
+            "name": "Kenya",
+            "products": 47,
+            "id": "en:kenya"
+        },
+        {
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/paraguay",
+            "name": "Paraguay",
+            "products": 47,
+            "id": "en:paraguay"
+        },
+        {
+            "id": "en:ghana",
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/ghana",
+            "products": 47,
+            "name": "Ghana"
+        },
+        {
+            "id": "en:liechtenstein",
+            "url": "https://world.openfoodfacts.org/country/liechtenstein",
+            "name": "Liechtenstein",
+            "products": 47,
+            "known": 1
+        },
+        {
+            "name": "Nigeria",
+            "products": 46,
+            "url": "https://world.openfoodfacts.org/country/nigeria",
+            "known": 1,
+            "id": "en:nigeria"
+        },
+        {
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/bangladesh",
+            "name": "Bangladesh",
+            "products": 44,
+            "id": "en:bangladesh"
+        },
+        {
+            "id": "en:iran",
+            "products": 44,
+            "name": "Iran",
+            "url": "https://world.openfoodfacts.org/country/iran",
+            "known": 1
+        },
+        {
+            "id": "en:sri-lanka",
+            "url": "https://world.openfoodfacts.org/country/sri-lanka",
+            "products": 41,
+            "name": "Sri Lanka",
+            "known": 1
+        },
+        {
+            "name": "Niger",
+            "products": 40,
+            "url": "https://world.openfoodfacts.org/country/niger",
+            "known": 1,
+            "id": "en:niger"
+        },
+        {
+            "name": "Azerbaijan",
+            "products": 39,
+            "url": "https://world.openfoodfacts.org/country/azerbaijan",
+            "known": 1,
+            "id": "en:azerbaijan"
+        },
+        {
+            "known": 1,
+            "products": 37,
+            "name": "Gibraltar",
+            "url": "https://world.openfoodfacts.org/country/gibraltar",
+            "id": "en:gibraltar"
+        },
+        {
+            "known": 1,
+            "products": 36,
+            "name": "Jersey",
+            "url": "https://world.openfoodfacts.org/country/jersey",
+            "id": "en:jersey"
+        },
+        {
+            "id": "en:libya",
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/libya",
+            "products": 33,
+            "name": "Libya"
+        },
+        {
+            "id": "en:uzbekistan",
+            "url": "https://world.openfoodfacts.org/country/uzbekistan",
+            "products": 33,
+            "name": "Uzbekistan",
+            "known": 1
+        },
+        {
+            "id": "en:nicaragua",
+            "products": 30,
+            "name": "Nicaragua",
+            "url": "https://world.openfoodfacts.org/country/nicaragua",
+            "known": 1
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/mayotte",
+            "name": "Mayotte",
+            "products": 29,
+            "known": 1,
+            "id": "en:mayotte"
+        },
+        {
+            "known": 1,
+            "name": "Kosovo",
+            "products": 28,
+            "url": "https://world.openfoodfacts.org/country/kosovo",
+            "id": "en:kosovo"
+        },
+        {
+            "id": "en:honduras",
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/honduras",
+            "name": "Honduras",
+            "products": 26
+        },
+        {
+            "id": "en:nepal",
+            "url": "https://world.openfoodfacts.org/country/nepal",
+            "products": 24,
+            "name": "Nepal",
+            "known": 1
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/mauritania",
+            "name": "Mauritania",
+            "products": 24,
+            "known": 1,
+            "id": "en:mauritania"
+        },
+        {
+            "id": "en:djibouti",
+            "name": "Djibouti",
+            "products": 24,
+            "url": "https://world.openfoodfacts.org/country/djibouti",
+            "known": 1
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/macau",
+            "products": 24,
+            "name": "Macau",
+            "known": 1,
+            "id": "en:macau"
+        },
+        {
+            "id": "en:trinidad-and-tobago",
+            "url": "https://world.openfoodfacts.org/country/trinidad-and-tobago",
+            "products": 23,
+            "name": "Trinidad and Tobago",
+            "known": 1
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/myanmar",
+            "products": 23,
+            "name": "Myanmar",
+            "known": 1,
+            "id": "en:myanmar"
+        },
+        {
+            "known": 0,
+            "name": "fr:dom-tom",
+            "products": 23,
+            "url": "https://world.openfoodfacts.org/country/fr:dom-tom",
+            "id": "fr:dom-tom"
+        },
+        {
+            "id": "en:haiti",
+            "url": "https://world.openfoodfacts.org/country/haiti",
+            "products": 23,
+            "name": "Haiti",
+            "known": 1
+        },
+        {
+            "name": "Brunei",
+            "products": 21,
+            "url": "https://world.openfoodfacts.org/country/brunei",
+            "known": 1,
+            "id": "en:brunei"
+        },
+        {
+            "id": "en:mongolia",
+            "known": 1,
+            "name": "Mongolia",
+            "products": 20,
+            "url": "https://world.openfoodfacts.org/country/mongolia"
+        },
+        {
+            "products": 19,
+            "name": "Somalia",
+            "url": "https://world.openfoodfacts.org/country/somalia",
+            "known": 1,
+            "id": "en:somalia"
+        },
+        {
+            "id": "en:seychelles",
+            "name": "Seychelles",
+            "products": 19,
+            "url": "https://world.openfoodfacts.org/country/seychelles",
+            "known": 1
+        },
+        {
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/laos",
+            "name": "Laos",
+            "products": 18,
+            "id": "en:laos"
+        },
+        {
+            "known": 1,
+            "products": 18,
+            "name": "Kyrgyzstan",
+            "url": "https://world.openfoodfacts.org/country/kyrgyzstan",
+            "id": "en:kyrgyzstan"
+        },
+        {
+            "id": "de:niemcy",
+            "known": 0,
+            "name": "de:niemcy",
+            "products": 17,
+            "url": "https://world.openfoodfacts.org/country/de:niemcy"
+        },
+        {
+            "known": 1,
+            "name": "Cape Verde",
+            "products": 16,
+            "url": "https://world.openfoodfacts.org/country/cape-verde",
+            "id": "en:cape-verde"
+        },
+        {
+            "products": 16,
+            "name": "Palestinian territories",
+            "url": "https://world.openfoodfacts.org/country/palestinian-territories",
+            "known": 1,
+            "id": "en:palestinian-territories"
+        },
+        {
+            "id": "fr:belgie",
+            "url": "https://world.openfoodfacts.org/country/fr:belgie",
+            "name": "fr:belgie",
+            "products": 16,
+            "known": 0
+        },
+        {
+            "id": "en:saint-martin",
+            "known": 1,
+            "products": 16,
+            "name": "Saint Martin",
+            "url": "https://world.openfoodfacts.org/country/saint-martin"
+        },
+        {
+            "id": "en:saint-lucia",
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/saint-lucia",
+            "products": 15,
+            "name": "Saint Lucia"
+        },
+        {
+            "id": "en:maldives",
+            "url": "https://world.openfoodfacts.org/country/maldives",
+            "name": "Maldives",
+            "products": 15,
+            "known": 1
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/cuba",
+            "name": "Cuba",
+            "products": 15,
+            "known": 1,
+            "id": "en:cuba"
+        },
+        {
+            "id": "en:rwanda",
+            "name": "Rwanda",
+            "products": 15,
+            "url": "https://world.openfoodfacts.org/country/rwanda",
+            "known": 1
+        },
+        {
+            "id": "en:wallis-and-futuna",
+            "name": "Wallis and Futuna",
+            "products": 14,
+            "url": "https://world.openfoodfacts.org/country/wallis-and-futuna",
+            "known": 1
+        },
+        {
+            "products": 14,
+            "name": "Mozambique",
+            "url": "https://world.openfoodfacts.org/country/mozambique",
+            "known": 1,
+            "id": "en:mozambique"
+        },
+        {
+            "id": "en:vanuatu",
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/vanuatu",
+            "name": "Vanuatu",
+            "products": 14
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/swaziland",
+            "products": 14,
+            "name": "Swaziland",
+            "known": 1,
+            "id": "en:swaziland"
+        },
+        {
+            "id": "en:frankreich",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/frankreich",
+            "name": "frankreich",
+            "products": 14
+        },
+        {
+            "id": "en:chad",
+            "name": "Chad",
+            "products": 13,
+            "url": "https://world.openfoodfacts.org/country/chad",
+            "known": 1
+        },
+        {
+            "known": 1,
+            "name": "Angola",
+            "products": 13,
+            "url": "https://world.openfoodfacts.org/country/angola",
+            "id": "en:angola"
+        },
+        {
+            "name": "Zambia",
+            "products": 12,
+            "url": "https://world.openfoodfacts.org/country/zambia",
+            "known": 1,
+            "id": "en:zambia"
+        },
+        {
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/curacao",
+            "name": "Curaçao",
+            "products": 12,
+            "id": "en:curacao"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/ethiopia",
+            "products": 12,
+            "name": "Ethiopia",
+            "known": 1,
+            "id": "en:ethiopia"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/francia",
+            "products": 11,
+            "name": "francia",
+            "known": 0,
+            "id": "en:francia"
+        },
+        {
+            "known": 1,
+            "products": 11,
+            "name": "Yemen",
+            "url": "https://world.openfoodfacts.org/country/yemen",
+            "id": "en:yemen"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/namibia",
+            "products": 11,
+            "name": "Namibia",
+            "known": 1,
+            "id": "en:namibia"
+        },
+        {
+            "id": "en:fiji",
+            "products": 10,
+            "name": "Fiji",
+            "url": "https://world.openfoodfacts.org/country/fiji",
+            "known": 1
+        },
+        {
+            "products": 10,
+            "name": "Aruba",
+            "url": "https://world.openfoodfacts.org/country/aruba",
+            "known": 1,
+            "id": "en:aruba"
+        },
+        {
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/francia-spain",
+            "products": 10,
+            "name": "francia-spain",
+            "id": "en:francia-spain"
+        },
+        {
+            "id": "en:syria",
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/syria",
+            "products": 10,
+            "name": "Syria"
+        },
+        {
+            "id": "en:jamaica",
+            "known": 1,
+            "name": "Jamaica",
+            "products": 9,
+            "url": "https://world.openfoodfacts.org/country/jamaica"
+        },
+        {
+            "id": "en:frankreich-en-de",
+            "products": 9,
+            "name": "frankreich-en-de",
+            "url": "https://world.openfoodfacts.org/country/frankreich-en-de",
+            "known": 0
+        },
+        {
+            "known": 0,
+            "products": 9,
+            "name": "deutschland",
+            "url": "https://world.openfoodfacts.org/country/deutschland",
+            "id": "en:deutschland"
+        },
+        {
+            "id": "en:world",
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/world",
+            "name": "World",
+            "products": 9
+        },
+        {
+            "id": "en:guernsey",
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/guernsey",
+            "products": 8,
+            "name": "Guernsey"
+        },
+        {
+            "products": 8,
+            "name": "Tanzania",
+            "url": "https://world.openfoodfacts.org/country/tanzania",
+            "known": 1,
+            "id": "en:tanzania"
+        },
+        {
+            "id": "en:the-bahamas",
+            "products": 8,
+            "name": "The Bahamas",
+            "url": "https://world.openfoodfacts.org/country/the-bahamas",
+            "known": 1
+        },
+        {
+            "name": "de:allemagne",
+            "products": 7,
+            "url": "https://world.openfoodfacts.org/country/de:allemagne",
+            "known": 0,
+            "id": "de:allemagne"
+        },
+        {
+            "id": "en:francja",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/francja",
+            "name": "francja",
+            "products": 7
+        },
+        {
+            "id": "en:barbados",
+            "name": "Barbados",
+            "products": 7,
+            "url": "https://world.openfoodfacts.org/country/barbados",
+            "known": 1
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/suriname",
+            "products": 7,
+            "name": "Suriname",
+            "known": 1,
+            "id": "en:suriname"
+        },
+        {
+            "id": "en:0",
+            "url": "https://world.openfoodfacts.org/country/0",
+            "name": "0",
+            "products": 7,
+            "known": 0
+        },
+        {
+            "id": "en:france-germany",
+            "name": "france-germany",
+            "products": 7,
+            "url": "https://world.openfoodfacts.org/country/france-germany",
+            "known": 0
+        },
+        {
+            "id": "en:burundi",
+            "url": "https://world.openfoodfacts.org/country/burundi",
+            "products": 7,
+            "name": "Burundi",
+            "known": 1
+        },
+        {
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/de:francja",
+            "name": "de:francja",
+            "products": 7,
+            "id": "de:francja"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/malawi",
+            "name": "Malawi",
+            "products": 7,
+            "known": 1,
+            "id": "en:malawi"
+        },
+        {
+            "products": 6,
+            "name": "Guyana",
+            "url": "https://world.openfoodfacts.org/country/guyana",
+            "known": 1,
+            "id": "en:guyana"
+        },
+        {
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/sint-maarten",
+            "name": "Sint Maarten",
+            "products": 6,
+            "id": "en:sint-maarten"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/central-african-republic",
+            "products": 6,
+            "name": "Central African Republic",
+            "known": 1,
+            "id": "en:central-african-republic"
+        },
+        {
+            "id": "en:sudan",
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/sudan",
+            "products": 6,
+            "name": "Sudan"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/fr:deutschland",
+            "name": "fr:deutschland",
+            "products": 6,
+            "known": 0,
+            "id": "fr:deutschland"
+        },
+        {
+            "id": "en:tajikistan",
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/tajikistan",
+            "name": "Tajikistan",
+            "products": 6
+        },
+        {
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/belgique",
+            "products": 6,
+            "name": "belgique",
+            "id": "en:belgique"
+        },
+        {
+            "name": "niemcy",
+            "products": 6,
+            "url": "https://world.openfoodfacts.org/country/niemcy",
+            "known": 0,
+            "id": "en:niemcy"
+        },
+        {
+            "name": "fr:francja",
+            "products": 6,
+            "url": "https://world.openfoodfacts.org/country/fr:francja",
+            "known": 0,
+            "id": "fr:francja"
+        },
+        {
+            "id": "en:francia-espana",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/francia-espana",
+            "name": "francia-espana",
+            "products": 6
+        },
+        {
+            "name": "Faroe Islands",
+            "products": 5,
+            "url": "https://world.openfoodfacts.org/country/faroe-islands",
+            "known": 1,
+            "id": "en:faroe-islands"
+        },
+        {
+            "id": "en:liberia",
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/liberia",
+            "name": "Liberia",
+            "products": 5
+        },
+        {
+            "id": "en:east-germany",
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/east-germany",
+            "products": 5,
+            "name": "East Germany"
+        },
+        {
+            "id": "en:cook-islands",
+            "known": 1,
+            "products": 5,
+            "name": "Cook Islands",
+            "url": "https://world.openfoodfacts.org/country/cook-islands"
+        },
+        {
+            "id": "en:comoros",
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/comoros",
+            "products": 5,
+            "name": "Comoros"
+        },
+        {
+            "id": "en:frankreich-deutschland",
+            "url": "https://world.openfoodfacts.org/country/frankreich-deutschland",
+            "products": 5,
+            "name": "frankreich-deutschland",
+            "known": 0
+        },
+        {
+            "known": 1,
+            "products": 5,
+            "name": "Bermuda",
+            "url": "https://world.openfoodfacts.org/country/bermuda",
+            "id": "en:bermuda"
+        },
+        {
+            "name": "vereinigtes-konigreich",
+            "products": 5,
+            "url": "https://world.openfoodfacts.org/country/vereinigtes-konigreich",
+            "known": 0,
+            "id": "en:vereinigtes-konigreich"
+        },
+        {
+            "id": "en:allemagne",
+            "products": 5,
+            "name": "allemagne",
+            "url": "https://world.openfoodfacts.org/country/allemagne",
+            "known": 0
+        },
+        {
+            "id": "en:france-allemagne",
+            "products": 5,
+            "name": "france-allemagne",
+            "url": "https://world.openfoodfacts.org/country/france-allemagne",
+            "known": 0
+        },
+        {
+            "known": 1,
+            "name": "Galmudug",
+            "products": 5,
+            "url": "https://world.openfoodfacts.org/country/galmudug",
+            "id": "en:galmudug"
+        },
+        {
+            "id": "en:botswana",
+            "url": "https://world.openfoodfacts.org/country/botswana",
+            "products": 4,
+            "name": "Botswana",
+            "known": 1
+        },
+        {
+            "id": "fr:frankreich",
+            "url": "https://world.openfoodfacts.org/country/fr:frankreich",
+            "name": "fr:frankreich",
+            "products": 4,
+            "known": 0
+        },
+        {
+            "id": "fr:francia",
+            "name": "fr:francia",
+            "products": 4,
+            "url": "https://world.openfoodfacts.org/country/fr:francia",
+            "known": 0
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/soviet-union",
+            "products": 4,
+            "name": "Soviet Union",
+            "known": 1,
+            "id": "en:soviet-union"
+        },
+        {
+            "known": 1,
+            "name": "Equatorial Guinea",
+            "products": 4,
+            "url": "https://world.openfoodfacts.org/country/equatorial-guinea",
+            "id": "en:equatorial-guinea"
+        },
+        {
+            "id": "de:bélgica",
+            "known": 0,
+            "name": "de:bélgica",
+            "products": 4,
+            "url": "https://world.openfoodfacts.org/country/de:b%C3%A9lgica"
+        },
+        {
+            "name": "Cayman Islands",
+            "products": 3,
+            "url": "https://world.openfoodfacts.org/country/cayman-islands",
+            "known": 1,
+            "id": "en:cayman-islands"
+        },
+        {
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/zimbabwe",
+            "products": 3,
+            "name": "Zimbabwe",
+            "id": "en:zimbabwe"
+        },
+        {
+            "products": 3,
+            "name": "Caribbean Netherlands",
+            "url": "https://world.openfoodfacts.org/country/caribbean-netherlands",
+            "known": 1,
+            "id": "en:caribbean-netherlands"
+        },
+        {
+            "name": "fr:angleterre",
+            "products": 3,
+            "url": "https://world.openfoodfacts.org/country/fr:angleterre",
+            "known": 0,
+            "id": "fr:angleterre"
+        },
+        {
+            "products": 3,
+            "name": "france-en-germany",
+            "url": "https://world.openfoodfacts.org/country/france-en-germany",
+            "known": 0,
+            "id": "en:france-en-germany"
+        },
+        {
+            "known": 0,
+            "name": "schweiz",
+            "products": 3,
+            "url": "https://world.openfoodfacts.org/country/schweiz",
+            "id": "en:schweiz"
+        },
+        {
+            "products": 3,
+            "name": "belgie",
+            "url": "https://world.openfoodfacts.org/country/belgie",
+            "known": 0,
+            "id": "en:belgie"
+        },
+        {
+            "name": "royaume-uni",
+            "products": 3,
+            "url": "https://world.openfoodfacts.org/country/royaume-uni",
+            "known": 0,
+            "id": "en:royaume-uni"
+        },
+        {
+            "id": "en:法国",
+            "known": 0,
+            "products": 3,
+            "name": "法国",
+            "url": "https://world.openfoodfacts.org/country/%E6%B3%95%E5%9B%BD"
+        },
+        {
+            "id": "en:dublin",
+            "products": 3,
+            "name": "dublin",
+            "url": "https://world.openfoodfacts.org/country/dublin",
+            "known": 0
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/saint-kitts-and-nevis",
+            "name": "Saint Kitts and Nevis",
+            "products": 3,
+            "known": 1,
+            "id": "en:saint-kitts-and-nevis"
+        },
+        {
+            "products": 3,
+            "name": "Uganda",
+            "url": "https://world.openfoodfacts.org/country/uganda",
+            "known": 1,
+            "id": "en:uganda"
+        },
+        {
+            "id": "fr:spanien",
+            "products": 3,
+            "name": "fr:spanien",
+            "url": "https://world.openfoodfacts.org/country/fr:spanien",
+            "known": 0
+        },
+        {
+            "id": "en:suisse",
+            "known": 0,
+            "products": 3,
+            "name": "suisse",
+            "url": "https://world.openfoodfacts.org/country/suisse"
+        },
+        {
+            "id": "en:france-en-belgium",
+            "url": "https://world.openfoodfacts.org/country/france-en-belgium",
+            "products": 3,
+            "name": "france-en-belgium",
+            "known": 0
+        },
+        {
+            "name": "fr:belgien",
+            "products": 3,
+            "url": "https://world.openfoodfacts.org/country/fr:belgien",
+            "known": 0,
+            "id": "fr:belgien"
+        },
+        {
+            "id": "fr:schweiz",
+            "products": 3,
+            "name": "fr:schweiz",
+            "url": "https://world.openfoodfacts.org/country/fr:schweiz",
+            "known": 0
+        },
+        {
+            "id": "en:france-en-morocco",
+            "known": 0,
+            "products": 3,
+            "name": "france-en-morocco",
+            "url": "https://world.openfoodfacts.org/country/france-en-morocco"
+        },
+        {
+            "known": 0,
+            "products": 3,
+            "name": "fr:frankrike",
+            "url": "https://world.openfoodfacts.org/country/fr:frankrike",
+            "id": "fr:frankrike"
+        },
+        {
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/kirgizstan",
+            "products": 2,
+            "name": "kirgizstan",
+            "id": "en:kirgizstan"
+        },
+        {
+            "known": 0,
+            "products": 2,
+            "name": "es:mundial",
+            "url": "https://world.openfoodfacts.org/country/es:mundial",
+            "id": "es:mundial"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/iraqi-kurdistan",
+            "products": 2,
+            "name": "Iraqi Kurdistan",
+            "known": 1,
+            "id": "en:iraqi-kurdistan"
+        },
+        {
+            "products": 2,
+            "name": "xk",
+            "url": "https://world.openfoodfacts.org/country/xk",
+            "known": 0,
+            "id": "en:xk"
+        },
+        {
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/bhutan",
+            "name": "Bhutan",
+            "products": 2,
+            "id": "en:bhutan"
+        },
+        {
+            "id": "en:yugoslavia",
+            "products": 2,
+            "name": "Yugoslavia",
+            "url": "https://world.openfoodfacts.org/country/yugoslavia",
+            "known": 1
+        },
+        {
+            "id": "en:sierra-leone",
+            "known": 1,
+            "products": 2,
+            "name": "Sierra Leone",
+            "url": "https://world.openfoodfacts.org/country/sierra-leone"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/montserrat",
+            "name": "Montserrat",
+            "products": 2,
+            "known": 1,
+            "id": "en:montserrat"
+        },
+        {
+            "id": "en:anguilla",
+            "products": 2,
+            "name": "Anguilla",
+            "url": "https://world.openfoodfacts.org/country/anguilla",
+            "known": 1
+        },
+        {
+            "products": 2,
+            "name": "de:فرنسا",
+            "url": "https://world.openfoodfacts.org/country/de:%D9%81%D8%B1%D9%86%D8%B3%D8%A7",
+            "known": 0,
+            "id": "de:فرنسا"
+        },
+        {
+            "id": "en:papua-new-guinea",
+            "products": 2,
+            "name": "Papua New Guinea",
+            "url": "https://world.openfoodfacts.org/country/papua-new-guinea",
+            "known": 1
+        },
+        {
+            "known": 0,
+            "products": 2,
+            "name": "italien",
+            "url": "https://world.openfoodfacts.org/country/italien",
+            "id": "en:italien"
+        },
+        {
+            "id": "en:espagne",
+            "known": 0,
+            "name": "espagne",
+            "products": 2,
+            "url": "https://world.openfoodfacts.org/country/espagne"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/wielka-brytania",
+            "products": 2,
+            "name": "wielka-brytania",
+            "known": 0,
+            "id": "en:wielka-brytania"
+        },
+        {
+            "products": 2,
+            "name": "Gambia",
+            "url": "https://world.openfoodfacts.org/country/gambia",
+            "known": 1,
+            "id": "en:gambia"
+        },
+        {
+            "id": "de:norvège",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/de:norv%C3%A8ge",
+            "products": 2,
+            "name": "de:norvège"
+        },
+        {
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/australie",
+            "products": 2,
+            "name": "australie",
+            "id": "en:australie"
+        },
+        {
+            "id": "en:grenada",
+            "known": 1,
+            "products": 2,
+            "name": "Grenada",
+            "url": "https://world.openfoodfacts.org/country/grenada"
+        },
+        {
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/aland-islands",
+            "name": "Åland Islands",
+            "products": 2,
+            "id": "en:aland-islands"
+        },
+        {
+            "id": "en:france-united-states",
+            "url": "https://world.openfoodfacts.org/country/france-united-states",
+            "name": "france-united-states",
+            "products": 2,
+            "known": 0
+        },
+        {
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/england",
+            "name": "england",
+            "products": 2,
+            "id": "en:england"
+        },
+        {
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/de:autriche",
+            "name": "de:autriche",
+            "products": 2,
+            "id": "de:autriche"
+        },
+        {
+            "known": 0,
+            "name": "de:ألمانيا",
+            "products": 2,
+            "url": "https://world.openfoodfacts.org/country/de:%D8%A3%D9%84%D9%85%D8%A7%D9%86%D9%8A%D8%A7",
+            "id": "de:ألمانيا"
+        },
+        {
+            "id": "en:france-en-ca",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/france-en-ca",
+            "name": "france-en-ca",
+            "products": 2
+        },
+        {
+            "id": "en:belgique-france",
+            "known": 0,
+            "name": "belgique-france",
+            "products": 2,
+            "url": "https://world.openfoodfacts.org/country/belgique-france"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/republique-tcheque",
+            "name": "republique-tcheque",
+            "products": 2,
+            "known": 0,
+            "id": "en:republique-tcheque"
+        },
+        {
+            "id": "en:belgique-en-france",
+            "known": 0,
+            "products": 2,
+            "name": "belgique-en-france",
+            "url": "https://world.openfoodfacts.org/country/belgique-en-france"
+        },
+        {
+            "id": "en:american-samoa",
+            "url": "https://world.openfoodfacts.org/country/american-samoa",
+            "products": 2,
+            "name": "American Samoa",
+            "known": 1
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/fr:vereinigtes-konigreich",
+            "products": 2,
+            "name": "fr:vereinigtes-konigreich",
+            "known": 0,
+            "id": "fr:vereinigtes-konigreich"
+        },
+        {
+            "id": "fr:en",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/fr:en",
+            "name": "fr:en",
+            "products": 2
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/fr:%D9%81%D8%B1%D9%86%D8%B3%D8%A7",
+            "products": 2,
+            "name": "fr:فرنسا",
+            "known": 0,
+            "id": "fr:فرنسا"
+        },
+        {
+            "id": "en:pays-bas",
+            "products": 2,
+            "name": "pays-bas",
+            "url": "https://world.openfoodfacts.org/country/pays-bas",
+            "known": 0
+        },
+        {
+            "known": 0,
+            "products": 2,
+            "name": "de:états-unis",
+            "url": "https://world.openfoodfacts.org/country/de:%C3%A9tats-unis",
+            "id": "de:états-unis"
+        },
+        {
+            "id": "en:autriche",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/autriche",
+            "name": "autriche",
+            "products": 2
+        },
+        {
+            "id": "en:irlande",
+            "url": "https://world.openfoodfacts.org/country/irlande",
+            "name": "irlande",
+            "products": 2,
+            "known": 0
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/marruecos",
+            "products": 2,
+            "name": "marruecos",
+            "known": 0,
+            "id": "en:marruecos"
+        },
+        {
+            "id": "es:espanya",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/es:espanya",
+            "products": 2,
+            "name": "es:espanya"
+        },
+        {
+            "id": "en:isle-of-man",
+            "name": "Isle of Man",
+            "products": 2,
+            "url": "https://world.openfoodfacts.org/country/isle-of-man",
+            "known": 1
+        },
+        {
+            "known": 0,
+            "products": 1,
+            "name": "global",
+            "url": "https://world.openfoodfacts.org/country/global",
+            "id": "en:global"
+        },
+        {
+            "id": "fr:belgique-france",
+            "name": "fr:belgique-france",
+            "products": 1,
+            "url": "https://world.openfoodfacts.org/country/fr:belgique-france",
+            "known": 0
+        },
+        {
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/paraguay-argentina",
+            "name": "paraguay-argentina",
+            "products": 1,
+            "id": "en:paraguay-argentina"
+        },
+        {
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/%D8%A7%D9%84%D9%85%D8%A7%D9%86%D9%8A%D8%A9",
+            "products": 1,
+            "name": "المانية",
+            "id": "en:المانية"
+        },
+        {
+            "id": "ar:محمد",
+            "known": 0,
+            "name": "ar:محمد",
+            "products": 1,
+            "url": "https://world.openfoodfacts.org/country/ar:%D9%85%D8%AD%D9%85%D8%AF"
+        },
+        {
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/it:santorso",
+            "products": 1,
+            "name": "it:santorso",
+            "id": "it:santorso"
+        },
+        {
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/fr:200-da",
+            "products": 1,
+            "name": "fr:200-da",
+            "id": "fr:200-da"
+        },
+        {
+            "name": "pt:barueri",
+            "products": 1,
+            "url": "https://world.openfoodfacts.org/country/pt:barueri",
+            "known": 0,
+            "id": "pt:barueri"
+        },
+        {
+            "id": "fr:villebon-sur-yvette-france",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/fr:villebon-sur-yvette-france",
+            "name": "fr:villebon-sur-yvette-france",
+            "products": 1
+        },
+        {
+            "name": "fr:ostwald",
+            "products": 1,
+            "url": "https://world.openfoodfacts.org/country/fr:ostwald",
+            "known": 0,
+            "id": "fr:ostwald"
+        },
+        {
+            "name": "fr:frane",
+            "products": 1,
+            "url": "https://world.openfoodfacts.org/country/fr:frane",
+            "known": 0,
+            "id": "fr:frane"
+        },
+        {
+            "id": "pt:ajak",
+            "url": "https://world.openfoodfacts.org/country/pt:ajak",
+            "products": 1,
+            "name": "pt:ajak",
+            "known": 0
+        },
+        {
+            "known": 0,
+            "products": 1,
+            "name": "lots",
+            "url": "https://world.openfoodfacts.org/country/lots",
+            "id": "en:lots"
+        },
+        {
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/de:netto-marken-discount",
+            "products": 1,
+            "name": "de:netto-marken-discount",
+            "id": "de:netto-marken-discount"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/es:todo-el-mundo",
+            "products": 1,
+            "name": "es:todo-el-mundo",
+            "known": 0,
+            "id": "es:todo-el-mundo"
+        },
+        {
+            "id": "es:en-todo-el-peru",
+            "url": "https://world.openfoodfacts.org/country/es:en-todo-el-peru",
+            "name": "es:en-todo-el-peru",
+            "products": 1,
+            "known": 0
+        },
+        {
+            "id": "fr:90da",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/fr:90da",
+            "products": 1,
+            "name": "fr:90da"
+        },
+        {
+            "id": "es:argentina-bolivia",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/es:argentina-bolivia",
+            "name": "es:argentina-bolivia",
+            "products": 1
+        },
+        {
+            "name": "es:belgia",
+            "products": 1,
+            "url": "https://world.openfoodfacts.org/country/es:belgia",
+            "known": 0,
+            "id": "es:belgia"
+        },
+        {
+            "id": "es:el",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/es:el",
+            "name": "es:el",
+            "products": 1
+        },
+        {
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/u-s-minor-outlying-islands",
+            "name": "u-s-minor-outlying-islands",
+            "products": 1,
+            "id": "en:u-s-minor-outlying-islands"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/fr:je-sais-pas-je-sais-pas-ce-que-ca-veut-dire",
+            "name": "fr:je-sais-pas-je-sais-pas-ce-que-ca-veut-dire",
+            "products": 1,
+            "known": 0,
+            "id": "fr:je-sais-pas-je-sais-pas-ce-que-ca-veut-dire"
+        },
+        {
+            "id": "en:india-bangladesh-nepal-bhutan-sri-lanka",
+            "known": 0,
+            "name": "india-bangladesh-nepal-bhutan-sri-lanka",
+            "products": 1,
+            "url": "https://world.openfoodfacts.org/country/india-bangladesh-nepal-bhutan-sri-lanka"
+        },
+        {
+            "id": "fr:vente",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/fr:vente",
+            "products": 1,
+            "name": "fr:vente"
+        },
+        {
+            "id": "ar:ليبيا-تونس",
+            "known": 0,
+            "name": "ar:ليبيا-تونس",
+            "products": 1,
+            "url": "https://world.openfoodfacts.org/country/ar:%D9%84%D9%8A%D8%A8%D9%8A%D8%A7-%D8%AA%D9%88%D9%86%D8%B3"
+        },
+        {
+            "id": "fr:200dh",
+            "name": "fr:200dh",
+            "products": 1,
+            "url": "https://world.openfoodfacts.org/country/fr:200dh",
+            "known": 0
+        },
+        {
+            "id": "ar:بريطانيا",
+            "url": "https://world.openfoodfacts.org/country/ar:%D8%A8%D8%B1%D9%8A%D8%B7%D8%A7%D9%86%D9%8A%D8%A7",
+            "products": 1,
+            "name": "ar:بريطانيا",
+            "known": 0
+        },
+        {
+            "id": "nl:nn",
+            "url": "https://world.openfoodfacts.org/country/nl:nn",
+            "name": "nl:nn",
+            "products": 1,
+            "known": 0
+        },
+        {
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/a2",
+            "products": 1,
+            "name": "a2",
+            "id": "en:a2"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/a1",
+            "name": "a1",
+            "products": 1,
+            "known": 0,
+            "id": "en:a1"
+        },
+        {
+            "known": 0,
+            "name": "ar:المانيا",
+            "products": 1,
+            "url": "https://world.openfoodfacts.org/country/ar:%D8%A7%D9%84%D9%85%D8%A7%D9%86%D9%8A%D8%A7",
+            "id": "ar:المانيا"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/san-marino",
+            "name": "San Marino",
+            "products": 1,
+            "known": 1,
+            "id": "en:san-marino"
+        },
+        {
+            "id": "en:schweiz-en-germany",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/schweiz-en-germany",
+            "products": 1,
+            "name": "schweiz-en-germany"
+        },
+        {
+            "id": "en:ch-en-germany",
+            "url": "https://world.openfoodfacts.org/country/ch-en-germany",
+            "name": "ch-en-germany",
+            "products": 1,
+            "known": 0
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/ar:%D9%A1",
+            "name": "ar:١",
+            "products": 1,
+            "known": 0,
+            "id": "ar:١"
+        },
+        {
+            "products": 1,
+            "name": "it:africa",
+            "url": "https://world.openfoodfacts.org/country/it:africa",
+            "known": 0,
+            "id": "it:africa"
+        },
+        {
+            "id": "it:mexixo",
+            "known": 0,
+            "name": "it:mexixo",
+            "products": 1,
+            "url": "https://world.openfoodfacts.org/country/it:mexixo"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/fr:suiza",
+            "products": 1,
+            "name": "fr:suiza",
+            "known": 0,
+            "id": "fr:suiza"
+        },
+        {
+            "id": "en:slovaquie",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/slovaquie",
+            "products": 1,
+            "name": "slovaquie"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/es:france-espagne-royaume-uni-en-united-kingdom",
+            "name": "es:france-espagne-royaume-uni-en-united-kingdom",
+            "products": 1,
+            "known": 0,
+            "id": "es:france-espagne-royaume-uni-en-united-kingdom"
+        },
+        {
+            "id": "it:asia",
+            "known": 0,
+            "name": "it:asia",
+            "products": 1,
+            "url": "https://world.openfoodfacts.org/country/it:asia"
+        },
+        {
+            "id": "en:jfztuz",
+            "url": "https://world.openfoodfacts.org/country/jfztuz",
+            "products": 1,
+            "name": "jfztuz",
+            "known": 0
+        },
+        {
+            "name": "de:oesterreich",
+            "products": 1,
+            "url": "https://world.openfoodfacts.org/country/de:oesterreich",
+            "known": 0,
+            "id": "de:oesterreich"
+        },
+        {
+            "id": "it:dinosusa",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/it:dinosusa",
+            "products": 1,
+            "name": "it:dinosusa"
+        },
+        {
+            "id": "en:lesotho",
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/lesotho",
+            "name": "Lesotho",
+            "products": 1
+        },
+        {
+            "id": "en:united-kingdom-en-morocco",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/united-kingdom-en-morocco",
+            "products": 1,
+            "name": "united-kingdom-en-morocco"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/british-indian-ocean-territory",
+            "products": 1,
+            "name": "British Indian Ocean Territory",
+            "known": 1,
+            "id": "en:british-indian-ocean-territory"
+        },
+        {
+            "name": "australie-belgique-france-japon-nouvelle-zelande-royaume-uni-etats-unis",
+            "products": 1,
+            "url": "https://world.openfoodfacts.org/country/australie-belgique-france-japon-nouvelle-zelande-royaume-uni-etats-unis",
+            "known": 0,
+            "id": "en:australie-belgique-france-japon-nouvelle-zelande-royaume-uni-etats-unis"
+        },
+        {
+            "id": "en:timor-leste",
+            "products": 1,
+            "name": "Timor-Leste",
+            "url": "https://world.openfoodfacts.org/country/timor-leste",
+            "known": 1
+        },
+        {
+            "id": "en:france-suisse-thailande",
+            "name": "france-suisse-thailande",
+            "products": 1,
+            "url": "https://world.openfoodfacts.org/country/france-suisse-thailande",
+            "known": 0
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/ar:%D9%A1%D9%A6",
+            "products": 1,
+            "name": "ar:١٦",
+            "known": 0,
+            "id": "ar:١٦"
+        },
+        {
+            "id": "en:australia-france-united-states",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/australia-france-united-states",
+            "name": "australia-france-united-states",
+            "products": 1
+        },
+        {
+            "id": "fr:tyskland",
+            "url": "https://world.openfoodfacts.org/country/fr:tyskland",
+            "products": 1,
+            "name": "fr:tyskland",
+            "known": 0
+        },
+        {
+            "id": "es:francia-spain-en-morocco",
+            "known": 0,
+            "name": "es:francia-spain-en-morocco",
+            "products": 1,
+            "url": "https://world.openfoodfacts.org/country/es:francia-spain-en-morocco"
+        },
+        {
+            "id": "en:nederland",
+            "url": "https://world.openfoodfacts.org/country/nederland",
+            "products": 1,
+            "name": "nederland",
+            "known": 0
+        },
+        {
+            "id": "es:francia-spain",
+            "products": 1,
+            "name": "es:francia-spain",
+            "url": "https://world.openfoodfacts.org/country/es:francia-spain",
+            "known": 0
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/francia-italia",
+            "name": "francia-italia",
+            "products": 1,
+            "known": 0,
+            "id": "en:francia-italia"
+        },
+        {
+            "known": 1,
+            "name": "North Korea",
+            "products": 1,
+            "url": "https://world.openfoodfacts.org/country/north-korea",
+            "id": "en:north-korea"
+        },
+        {
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/es:francia-espana",
+            "products": 1,
+            "name": "es:francia-espana",
+            "id": "es:francia-espana"
+        },
+        {
+            "id": "en:francia-en-en",
+            "url": "https://world.openfoodfacts.org/country/francia-en-en",
+            "name": "francia-en-en",
+            "products": 1,
+            "known": 0
+        },
+        {
+            "id": "es:colombia-paraguay-uruguay-japon-china-korea-argentina-brasil",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/es:colombia-paraguay-uruguay-japon-china-korea-argentina-brasil",
+            "products": 1,
+            "name": "es:colombia-paraguay-uruguay-japon-china-korea-argentina-brasil"
+        },
+        {
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/it:shopping-online",
+            "name": "it:shopping-online",
+            "products": 1,
+            "id": "it:shopping-online"
+        },
+        {
+            "id": "en:frankreich-en-ch",
+            "url": "https://world.openfoodfacts.org/country/frankreich-en-ch",
+            "products": 1,
+            "name": "frankreich-en-ch",
+            "known": 0
+        },
+        {
+            "id": "nl:overal",
+            "url": "https://world.openfoodfacts.org/country/nl:overal",
+            "name": "nl:overal",
+            "products": 1,
+            "known": 0
+        },
+        {
+            "id": "en:yum",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/yum",
+            "name": "yum",
+            "products": 1
+        },
+        {
+            "id": "en:pologne",
+            "known": 0,
+            "products": 1,
+            "name": "pologne",
+            "url": "https://world.openfoodfacts.org/country/pologne"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/suedia",
+            "name": "suedia",
+            "products": 1,
+            "known": 0,
+            "id": "en:suedia"
+        },
+        {
+            "id": "es:france-united-states",
+            "url": "https://world.openfoodfacts.org/country/es:france-united-states",
+            "products": 1,
+            "name": "es:france-united-states",
+            "known": 0
+        },
+        {
+            "id": "fr:franța",
+            "known": 0,
+            "name": "fr:franța",
+            "products": 1,
+            "url": "https://world.openfoodfacts.org/country/fr:fran%C8%9Ba"
+        },
+        {
+            "id": "fr:ประเทศฝรั่งเศส",
+            "name": "fr:ประเทศฝรั่งเศส",
+            "products": 1,
+            "url": "https://world.openfoodfacts.org/country/fr:%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B9%80%E0%B8%97%E0%B8%A8%E0%B8%9D%E0%B8%A3%E0%B8%B1%E0%B9%88%E0%B8%87%E0%B9%80%E0%B8%A8%E0%B8%AA",
+            "known": 0
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/belgien-deutschland",
+            "products": 1,
+            "name": "belgien-deutschland",
+            "known": 0,
+            "id": "en:belgien-deutschland"
+        },
+        {
+            "id": "fr:78-croissy-seine",
+            "products": 1,
+            "name": "fr:78-croissy-seine",
+            "url": "https://world.openfoodfacts.org/country/fr:78-croissy-seine",
+            "known": 0
+        },
+        {
+            "products": 1,
+            "name": "Christmas Island",
+            "url": "https://world.openfoodfacts.org/country/christmas-island",
+            "known": 1,
+            "id": "en:christmas-island"
+        },
+        {
+            "id": "en:antigua-and-barbuda",
+            "products": 1,
+            "name": "Antigua and Barbuda",
+            "url": "https://world.openfoodfacts.org/country/antigua-and-barbuda",
+            "known": 1
+        },
+        {
+            "id": "en:algerie-andorre-autriche-belgique-bresil-cameroun-canada-france-georgie-allemagne-inde-irlande-italie-luxembourg-mali-martinique-mexique-maroc-pays-bas-nouvelle-caledonie-pologne-portugal-la-reunion-roumanie-arabie-saoudite-senegal-espagne-suisse-tunisie-royaume-uni-etats-unis",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/algerie-andorre-autriche-belgique-bresil-cameroun-canada-france-georgie-allemagne-inde-irlande-italie-luxembourg-mali-martinique-mexique-maroc-pays-bas-nouvelle-caledonie-pologne-portugal-la-reunion-roumanie-arabie-saoudite-senegal-espagne-suisse-tunisie-royaume-uni-etats-unis",
+            "products": 1,
+            "name": "algerie-andorre-autriche-belgique-bresil-cameroun-canada-france-georgie-allemagne-inde-irlande-italie-luxembourg-mali-martinique-mexique-maroc-pays-bas-nouvelle-caledonie-pologne-portugal-la-reunion-roumanie-arabie-saoudite-senegal-espagne-suisse-tunisie-royaume-uni-etats-unis"
+        },
+        {
+            "id": "en:be-en-france",
+            "products": 1,
+            "name": "be-en-france",
+            "url": "https://world.openfoodfacts.org/country/be-en-france",
+            "known": 0
+        },
+        {
+            "known": 0,
+            "products": 1,
+            "name": "4",
+            "url": "https://world.openfoodfacts.org/country/4",
+            "id": "en:4"
+        },
+        {
+            "id": "fr:suusse",
+            "url": "https://world.openfoodfacts.org/country/fr:suusse",
+            "products": 1,
+            "name": "fr:suusse",
+            "known": 0
+        },
+        {
+            "products": 1,
+            "name": "fr:cemac",
+            "url": "https://world.openfoodfacts.org/country/fr:cemac",
+            "known": 0,
+            "id": "fr:cemac"
+        },
+        {
+            "id": "fr:irland",
+            "name": "fr:irland",
+            "products": 1,
+            "url": "https://world.openfoodfacts.org/country/fr:irland",
+            "known": 0
+        },
+        {
+            "products": 1,
+            "name": "Virgin Islands of the United States",
+            "url": "https://world.openfoodfacts.org/country/virgin-islands-of-the-united-states",
+            "known": 1,
+            "id": "en:virgin-islands-of-the-united-states"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/alemania",
+            "products": 1,
+            "name": "alemania",
+            "known": 0,
+            "id": "en:alemania"
+        },
+        {
+            "name": "d39h-j",
+            "products": 1,
+            "url": "https://world.openfoodfacts.org/country/d39h-j",
+            "known": 0,
+            "id": "en:d39h-j"
+        },
+        {
+            "id": "es:mexico-y-latinoamerica",
+            "known": 0,
+            "products": 1,
+            "name": "es:mexico-y-latinoamerica",
+            "url": "https://world.openfoodfacts.org/country/es:mexico-y-latinoamerica"
+        },
+        {
+            "id": "en:etats-unis",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/etats-unis",
+            "name": "etats-unis",
+            "products": 1
+        },
+        {
+            "known": 0,
+            "name": "de:adeutschland",
+            "products": 1,
+            "url": "https://world.openfoodfacts.org/country/de:adeutschland",
+            "id": "de:adeutschland"
+        },
+        {
+            "id": "en:france-en-us",
+            "known": 0,
+            "products": 1,
+            "name": "france-en-us",
+            "url": "https://world.openfoodfacts.org/country/france-en-us"
+        },
+        {
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/%D9%81%D8%B1%D9%86%D8%B3%D8%A7",
+            "products": 1,
+            "name": "فرنسا",
+            "id": "en:فرنسا"
+        },
+        {
+            "id": "de:avstrija",
+            "url": "https://world.openfoodfacts.org/country/de:avstrija",
+            "products": 1,
+            "name": "de:avstrija",
+            "known": 0
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/v%C4%81cija",
+            "products": 1,
+            "name": "vācija",
+            "known": 0,
+            "id": "en:vācija"
+        },
+        {
+            "id": "fr:800",
+            "url": "https://world.openfoodfacts.org/country/fr:800",
+            "products": 1,
+            "name": "fr:800",
+            "known": 0
+        },
+        {
+            "products": 1,
+            "name": "belgia",
+            "url": "https://world.openfoodfacts.org/country/belgia",
+            "known": 0,
+            "id": "en:belgia"
+        },
+        {
+            "id": "it:the-united-state",
+            "url": "https://world.openfoodfacts.org/country/it:the-united-state",
+            "name": "it:the-united-state",
+            "products": 1,
+            "known": 0
+        },
+        {
+            "id": "fr:luxemburgo",
+            "known": 0,
+            "products": 1,
+            "name": "fr:luxemburgo",
+            "url": "https://world.openfoodfacts.org/country/fr:luxemburgo"
+        },
+        {
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/fr:aucun",
+            "name": "fr:aucun",
+            "products": 1,
+            "id": "fr:aucun"
+        },
+        {
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/francia-italia-en-switzerland-en-belgium",
+            "products": 1,
+            "name": "francia-italia-en-switzerland-en-belgium",
+            "id": "en:francia-italia-en-switzerland-en-belgium"
+        },
+        {
+            "id": "es:franciaorszag",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/es:franciaorszag",
+            "name": "es:franciaorszag",
+            "products": 1
+        },
+        {
+            "id": "fr:10-da",
+            "name": "fr:10-da",
+            "products": 1,
+            "url": "https://world.openfoodfacts.org/country/fr:10-da",
+            "known": 0
+        },
+        {
+            "id": "fr:nya-kaledonien",
+            "url": "https://world.openfoodfacts.org/country/fr:nya-kaledonien",
+            "products": 1,
+            "name": "fr:nya-kaledonien",
+            "known": 0
+        },
+        {
+            "id": "fr:italien",
+            "url": "https://world.openfoodfacts.org/country/fr:italien",
+            "name": "fr:italien",
+            "products": 1,
+            "known": 0
+        },
+        {
+            "id": "en:england-b-desh",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/england-b-desh",
+            "name": "england-b-desh",
+            "products": 1
+        },
+        {
+            "products": 1,
+            "name": "unknown-except-united-states-of-america",
+            "url": "https://world.openfoodfacts.org/country/unknown-except-united-states-of-america",
+            "known": 0,
+            "id": "en:unknown-except-united-states-of-america"
+        },
+        {
+            "products": 1,
+            "name": "france-la-reunion",
+            "url": "https://world.openfoodfacts.org/country/france-la-reunion",
+            "known": 0,
+            "id": "en:france-la-reunion"
+        },
+        {
+            "known": 0,
+            "name": "pt:holanda",
+            "products": 1,
+            "url": "https://world.openfoodfacts.org/country/pt:holanda",
+            "id": "pt:holanda"
+        },
+        {
+            "id": "fr:algerien",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/fr:algerien",
+            "products": 1,
+            "name": "fr:algerien"
+        },
+        {
+            "id": "fr:ألمانيا",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/fr:%D8%A3%D9%84%D9%85%D8%A7%D9%86%D9%8A%D8%A7",
+            "name": "fr:ألمانيا",
+            "products": 1
+        },
+        {
+            "products": 1,
+            "name": "it:magnago",
+            "url": "https://world.openfoodfacts.org/country/it:magnago",
+            "known": 0,
+            "id": "it:magnago"
+        },
+        {
+            "id": "en:great",
+            "name": "great",
+            "products": 1,
+            "url": "https://world.openfoodfacts.org/country/great",
+            "known": 0
+        },
+        {
+            "products": 1,
+            "name": "de:en",
+            "url": "https://world.openfoodfacts.org/country/de:en",
+            "known": 0,
+            "id": "de:en"
+        },
+        {
+            "known": 0,
+            "products": 1,
+            "name": "de:oberösterreich",
+            "url": "https://world.openfoodfacts.org/country/de:ober%C3%B6sterreich",
+            "id": "de:oberösterreich"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/es:magyarorszag",
+            "name": "es:magyarorszag",
+            "products": 1,
+            "known": 0,
+            "id": "es:magyarorszag"
+        },
+        {
+            "id": "en:السعودية",
+            "url": "https://world.openfoodfacts.org/country/%D8%A7%D9%84%D8%B3%D8%B9%D9%88%D8%AF%D9%8A%D8%A9",
+            "name": "السعودية",
+            "products": 1,
+            "known": 0
+        },
+        {
+            "known": 0,
+            "products": 1,
+            "name": "de:países-bajos",
+            "url": "https://world.openfoodfacts.org/country/de:pa%C3%ADses-bajos",
+            "id": "de:países-bajos"
+        },
+        {
+            "id": "en:italija",
+            "known": 0,
+            "products": 1,
+            "name": "italija",
+            "url": "https://world.openfoodfacts.org/country/italija"
+        },
+        {
+            "known": 0,
+            "name": "奥地利",
+            "products": 1,
+            "url": "https://world.openfoodfacts.org/country/%E5%A5%A5%E5%9C%B0%E5%88%A9",
+            "id": "en:奥地利"
+        },
+        {
+            "id": "en:francia-en-morocco-en-spain",
+            "products": 1,
+            "name": "francia-en-morocco-en-spain",
+            "url": "https://world.openfoodfacts.org/country/francia-en-morocco-en-spain",
+            "known": 0
+        },
+        {
+            "id": "en:la-reunion",
+            "name": "la-reunion",
+            "products": 1,
+            "url": "https://world.openfoodfacts.org/country/la-reunion",
+            "known": 0
+        },
+        {
+            "known": 0,
+            "name": "regatul-unit-al-marii-britanii-și-al-irlandei-de-nord",
+            "products": 1,
+            "url": "https://world.openfoodfacts.org/country/regatul-unit-al-marii-britanii-%C8%99i-al-irlandei-de-nord",
+            "id": "en:regatul-unit-al-marii-britanii-și-al-irlandei-de-nord"
+        },
+        {
+            "id": "fr:australien",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/fr:australien",
+            "name": "fr:australien",
+            "products": 1
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/%E5%BE%B7%E5%9B%BD",
+            "products": 1,
+            "name": "德国",
+            "known": 0,
+            "id": "en:德国"
+        },
+        {
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/most-uk-ireland",
+            "name": "most-uk-ireland",
+            "products": 1,
+            "id": "en:most-uk-ireland"
+        },
+        {
+            "id": "fr:export",
+            "known": 0,
+            "products": 1,
+            "name": "fr:export",
+            "url": "https://world.openfoodfacts.org/country/fr:export"
+        },
+        {
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/maroc",
+            "name": "maroc",
+            "products": 1,
+            "id": "en:maroc"
+        },
+        {
+            "id": "en:nfi",
+            "name": "nfi",
+            "products": 1,
+            "url": "https://world.openfoodfacts.org/country/nfi",
+            "known": 0
+        },
+        {
+            "id": "it:smart-working",
+            "products": 1,
+            "name": "it:smart-working",
+            "url": "https://world.openfoodfacts.org/country/it:smart-working",
+            "known": 0
+        },
+        {
+            "known": 0,
+            "name": "ca:catalunya",
+            "products": 1,
+            "url": "https://world.openfoodfacts.org/country/ca:catalunya",
+            "id": "ca:catalunya"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/dominica",
+            "products": 1,
+            "name": "Dominica",
+            "known": 1,
+            "id": "en:dominica"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/irorszag",
+            "products": 1,
+            "name": "irorszag",
+            "known": 0,
+            "id": "en:irorszag"
+        },
+        {
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/fr:belgia",
+            "products": 1,
+            "name": "fr:belgia",
+            "id": "fr:belgia"
+        },
+        {
+            "id": "fr:niemcy",
+            "url": "https://world.openfoodfacts.org/country/fr:niemcy",
+            "products": 1,
+            "name": "fr:niemcy",
+            "known": 0
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/es:svajc",
+            "products": 1,
+            "name": "es:svajc",
+            "known": 0,
+            "id": "es:svajc"
+        },
+        {
+            "id": "de:suède",
+            "url": "https://world.openfoodfacts.org/country/de:su%C3%A8de",
+            "products": 1,
+            "name": "de:suède",
+            "known": 0
+        },
+        {
+            "name": "nederlanderna",
+            "products": 1,
+            "url": "https://world.openfoodfacts.org/country/nederlanderna",
+            "known": 0,
+            "id": "en:nederlanderna"
+        },
+        {
+            "id": "en:storbritannien",
+            "products": 1,
+            "name": "storbritannien",
+            "url": "https://world.openfoodfacts.org/country/storbritannien",
+            "known": 0
+        },
+        {
+            "id": "en:northern-mariana-islands",
+            "name": "Northern Mariana Islands",
+            "products": 1,
+            "url": "https://world.openfoodfacts.org/country/northern-mariana-islands",
+            "known": 1
+        },
+        {
+            "id": "en:france-en-united-kingdom",
+            "known": 0,
+            "name": "france-en-united-kingdom",
+            "products": 1,
+            "url": "https://world.openfoodfacts.org/country/france-en-united-kingdom"
+        },
+        {
+            "id": "en:tyskland",
+            "url": "https://world.openfoodfacts.org/country/tyskland",
+            "name": "tyskland",
+            "products": 1,
+            "known": 0
+        },
+        {
+            "id": "en:france-hong-kong-germany",
+            "products": 1,
+            "name": "france-hong-kong-germany",
+            "url": "https://world.openfoodfacts.org/country/france-hong-kong-germany",
+            "known": 0
+        },
+        {
+            "id": "de:سويسرا",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/de:%D8%B3%D9%88%D9%8A%D8%B3%D8%B1%D8%A7",
+            "products": 1,
+            "name": "de:سويسرا"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/belize",
+            "products": 1,
+            "name": "Belize",
+            "known": 1,
+            "id": "en:belize"
+        },
+        {
+            "known": 0,
+            "products": 1,
+            "name": "francija",
+            "url": "https://world.openfoodfacts.org/country/francija",
+            "id": "en:francija"
+        },
+        {
+            "id": "en:estados-unidos",
+            "url": "https://world.openfoodfacts.org/country/estados-unidos",
+            "name": "estados-unidos",
+            "products": 1,
+            "known": 0
+        },
+        {
+            "id": "de:belgique",
+            "known": 0,
+            "products": 1,
+            "name": "de:belgique",
+            "url": "https://world.openfoodfacts.org/country/de:belgique"
+        },
+        {
+            "id": "en:tunisie",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/tunisie",
+            "name": "tunisie",
+            "products": 1
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/fr:suissa",
+            "name": "fr:suissa",
+            "products": 1,
+            "known": 0,
+            "id": "fr:suissa"
+        },
+        {
+            "id": "en:الأردن",
+            "name": "الأردن",
+            "products": 1,
+            "url": "https://world.openfoodfacts.org/country/%D8%A7%D9%84%D8%A3%D8%B1%D8%AF%D9%86",
+            "known": 0
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/es:ranska",
+            "name": "es:ranska",
+            "products": 1,
+            "known": 0,
+            "id": "es:ranska"
+        },
+        {
+            "id": "en:belgique-france-luxembourg",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/belgique-france-luxembourg",
+            "name": "belgique-france-luxembourg",
+            "products": 1
+        },
+        {
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/es:belgique-france",
+            "name": "es:belgique-france",
+            "products": 1,
+            "id": "es:belgique-france"
+        },
+        {
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/frankrike",
+            "name": "frankrike",
+            "products": 1,
+            "id": "en:frankrike"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/es:nemetorszag",
+            "name": "es:nemetorszag",
+            "products": 1,
+            "known": 0,
+            "id": "es:nemetorszag"
+        },
+        {
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/ru:%D1%80%D0%B0%D1%81%D1%81%D0%B8%D1%8F",
+            "name": "ru:рассия",
+            "products": 1,
+            "id": "ru:рассия"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/de:frankrike",
+            "products": 1,
+            "name": "de:frankrike",
+            "known": 0,
+            "id": "de:frankrike"
+        },
+        {
+            "id": "en:franța",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/fran%C8%9Ba",
+            "name": "franța",
+            "products": 1
+        },
+        {
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/it:feltre",
+            "name": "it:feltre",
+            "products": 1,
+            "id": "it:feltre"
+        },
+        {
+            "id": "en:republika-srpska",
+            "products": 1,
+            "name": "Republika Srpska",
+            "url": "https://world.openfoodfacts.org/country/republika-srpska",
+            "known": 1
+        },
+        {
+            "id": "en:angola-france-united-states",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/angola-france-united-states",
+            "name": "angola-france-united-states",
+            "products": 1
+        },
+        {
+            "known": 0,
+            "products": 1,
+            "name": "franciaorszag",
+            "url": "https://world.openfoodfacts.org/country/franciaorszag",
+            "id": "en:franciaorszag"
+        },
+        {
+            "id": "es:belgie",
+            "known": 0,
+            "products": 1,
+            "name": "es:belgie",
+            "url": "https://world.openfoodfacts.org/country/es:belgie"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/fr:frantzia",
+            "products": 1,
+            "name": "fr:frantzia",
+            "known": 0,
+            "id": "fr:frantzia"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/suede",
+            "name": "suede",
+            "products": 1,
+            "known": 0,
+            "id": "en:suede"
+        },
+        {
+            "known": 0,
+            "products": 1,
+            "name": "nederlamd",
+            "url": "https://world.openfoodfacts.org/country/nederlamd",
+            "id": "en:nederlamd"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/fr:%E6%B3%95%E5%9B%BD",
+            "name": "fr:法国",
+            "products": 1,
+            "known": 0,
+            "id": "fr:法国"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/frankreich-en-at",
+            "products": 1,
+            "name": "frankreich-en-at",
+            "known": 0,
+            "id": "en:frankreich-en-at"
+        },
+        {
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/fr:spania",
+            "name": "fr:spania",
+            "products": 1,
+            "id": "fr:spania"
+        },
+        {
+            "products": 1,
+            "name": "suisse-en-france",
+            "url": "https://world.openfoodfacts.org/country/suisse-en-france",
+            "known": 0,
+            "id": "en:suisse-en-france"
+        },
+        {
+            "id": "en:allemagne-en-belgium",
+            "name": "allemagne-en-belgium",
+            "products": 1,
+            "url": "https://world.openfoodfacts.org/country/allemagne-en-belgium",
+            "known": 0
+        },
+        {
+            "id": "en:frankreich-deutschland-en-germany",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/frankreich-deutschland-en-germany",
+            "products": 1,
+            "name": "frankreich-deutschland-en-germany"
+        },
+        {
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/rumunia",
+            "name": "rumunia",
+            "products": 1,
+            "id": "en:rumunia"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/france-en-united-states",
+            "name": "france-en-united-states",
+            "products": 1,
+            "known": 0,
+            "id": "en:france-en-united-states"
+        },
+        {
+            "known": 1,
+            "url": "https://world.openfoodfacts.org/country/south-georgia-and-the-south-sandwich-islands",
+            "name": "South Georgia and the South Sandwich Islands",
+            "products": 1,
+            "id": "en:south-georgia-and-the-south-sandwich-islands"
+        },
+        {
+            "products": 1,
+            "name": "algerie",
+            "url": "https://world.openfoodfacts.org/country/algerie",
+            "known": 0,
+            "id": "en:algerie"
+        },
+        {
+            "id": "fr:elfenbeinkuste",
+            "known": 0,
+            "url": "https://world.openfoodfacts.org/country/fr:elfenbeinkuste",
+            "name": "fr:elfenbeinkuste",
+            "products": 1
+        },
+        {
+            "id": "it:quartu-s-antelena",
+            "known": 0,
+            "name": "it:quartu-s-antelena",
+            "products": 1,
+            "url": "https://world.openfoodfacts.org/country/it:quartu-s-antelena"
+        },
+        {
+            "id": "en:a3",
+            "known": 0,
+            "products": 1,
+            "name": "a3",
+            "url": "https://world.openfoodfacts.org/country/a3"
+        },
+        {
+            "known": 0,
+            "products": 1,
+            "name": "irak",
+            "url": "https://world.openfoodfacts.org/country/irak",
+            "id": "en:irak"
+        },
+        {
+            "id": "de:edeka",
+            "name": "de:edeka",
+            "products": 1,
+            "url": "https://world.openfoodfacts.org/country/de:edeka",
+            "known": 0
+        },
+        {
+            "id": "it:albania-croazia",
+            "known": 0,
+            "products": 1,
+            "name": "it:albania-croazia",
+            "url": "https://world.openfoodfacts.org/country/it:albania-croazia"
+        },
+        {
+            "id": "en:العراق",
+            "products": 1,
+            "name": "العراق",
+            "url": "https://world.openfoodfacts.org/country/%D8%A7%D9%84%D8%B9%D8%B1%D8%A7%D9%82",
+            "known": 0
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/danemarca",
+            "products": 1,
+            "name": "danemarca",
+            "known": 0,
+            "id": "en:danemarca"
+        },
+        {
+            "url": "https://world.openfoodfacts.org/country/spanyolorszag",
+            "products": 1,
+            "name": "spanyolorszag",
+            "known": 0,
+            "id": "en:spanyolorszag"
+        },
+        {
+            "products": 1,
+            "name": "de:japón",
+            "url": "https://world.openfoodfacts.org/country/de:jap%C3%B3n",
+            "known": 0,
+            "id": "de:japón"
+        },
+        {
+            "id": "en:argentina-france-italy",
+            "known": 0,
+            "name": "argentina-france-italy",
+            "products": 1,
+            "url": "https://world.openfoodfacts.org/country/argentina-france-italy"
+        },
+        {
+            "name": "reino-unido",
+            "products": 1,
+            "url": "https://world.openfoodfacts.org/country/reino-unido",
+            "known": 0,
+            "id": "en:reino-unido"
+        }
+    ],
+    "count": 562
+}

@@ -46,7 +46,7 @@
     "chai": "^4.2.0",
     "all-contributors-cli": "^6.20.0",
     "boxy-jsdoc-template": "^2.0.2",
-    "husky": "^0.14.3",
+    "husky": "^5.1.2",
     "jsdoc": "^3.6.6",
     "mocha": "^5.0.1",
     "mockery": "^2.1.0",

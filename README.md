@@ -1,7 +1,7 @@
 # Open Food Facts-NodeJS
 [![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors)
 
-This is the official node module for OFF API.
+This is the official node module for Open Food Facts API.
 
 ## Installation
 

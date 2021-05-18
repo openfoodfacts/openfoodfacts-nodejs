@@ -14,7 +14,9 @@
     "contributors:generate": "all-contributors generate"
   },
   "standard": {
-    "env": [ "mocha" ],
+    "env": [
+      "mocha"
+    ],
     "ignore": [
       "/docs/**/*.js"
     ]

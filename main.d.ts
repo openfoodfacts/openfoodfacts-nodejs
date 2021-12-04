@@ -1822,6 +1822,14 @@ declare namespace APIResponse {
     url: string;
     image?: string | null;
   }
+  export interface Code {
+    count: number;
+    page: number;
+    page_count: number;
+    page_size: number;
+    products?: Product[] | null;
+    skip: number;
+  }
 }
 
 declare namespace OFF {
@@ -1851,4 +1859,5 @@ export class OFF {
   getStates(): Promise<APIResponse.Entity>;
   getStores(): Promise<APIResponse.Entity>;
   getTraces(): Promise<APIResponse.Entity>;
+  getProductsByBarcodeBeginning(beginning: string): Promise<APIResponse.code>;
 }

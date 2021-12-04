@@ -1843,4 +1843,5 @@ export class OFF {
   getAllergens(): Promise<APIResponse.Entity>;
   getCategories(): Promise<APIResponse.Entity>;
   getCountries(): Promise<APIResponse.Entity>;
+  getEntryDates(): Promise<APIResponse.Entity>;
 }

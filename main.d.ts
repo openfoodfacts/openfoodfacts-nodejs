@@ -1811,21 +1811,25 @@ declare namespace APIResponse {
   }
   export interface Languages {
     count: number;
-    tags?: TagsLanguages[] | null;
-  }
-  export interface TagsLanguages {
-    id: string;
-    known: number;
-    name: string;
-    products: number;
-    sameAs?: string[] | null;
-    url: string;
+    tags?: TagsEntity[] | null;
   }
   export interface Labels {
     count: number;
-    tags?: TagsLabels[] | null;
+    tags?: TagsEntity[] | null;
   }
-  export interface TagsLabels {
+  export interface Addivives {
+    count: number;
+    tags?: TagsEntity[] | null;
+  }
+  export interface Allergens {
+    count: number;
+    tags?: TagsEntity[] | null;
+  }
+  export interface Categories {
+    count: number;
+    tags?: TagsEntity[] | null;
+  }
+  export interface TagsEntity {
     id: string;
     known: number;
     name: string;
@@ -1833,30 +1837,6 @@ declare namespace APIResponse {
     sameAs?: string[] | null;
     url: string;
     image?: string | null;
-  }
-  export interface Addivives {
-    count: number;
-    tags?: TagsAddivives[] | null;
-  }
-  export interface TagsAddivives {
-    id: string;
-    known: number;
-    name: string;
-    products: number;
-    sameAs?: string[] | null;
-    url: string;
-  }
-  export interface Allergens {
-    count: number;
-    tags?: TagsAllergens[] | null;
-  }
-  export interface TagsAllergens {
-    id: string;
-    known: number;
-    name: string;
-    products: number;
-    sameAs?: string[] | null;
-    url: string;
   }
 }
 
@@ -1877,4 +1857,5 @@ export class OFF {
   getLabels(): Promise<APIResponse.Labels>;
   getAdditives(): Promise<APIResponse.Addivives>;
   getAllergens(): Promise<APIResponse.Allergens>;
+  getCategories(): Promise<APIResponse.Categories>;
 }

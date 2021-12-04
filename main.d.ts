@@ -1834,6 +1834,18 @@ declare namespace APIResponse {
     url: string;
     image?: string | null;
   }
+  export interface Addivives {
+    count: number;
+    tags?: TagsAddivives[] | null;
+  }
+  export interface TagsAddivives {
+    id: string;
+    known: number;
+    name: string;
+    products: number;
+    sameAs?: string[] | null;
+    url: string;
+  }
 }
 
 declare namespace OFF {
@@ -1851,4 +1863,5 @@ export class OFF {
   getBrand(brandName: string): Promise<APIResponse.Brand>;
   getLanguages(): Promise<APIResponse.Languages>;
   getLabels(): Promise<APIResponse.Labels>;
+  getAdditives(): Promise<APIResponse.Addivives>;
 }

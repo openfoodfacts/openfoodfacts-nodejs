@@ -1846,4 +1846,5 @@ export class OFF {
   getEntryDates(): Promise<APIResponse.Entity>;
   getIngredients(): Promise<APIResponse.Entity>;
   getPackagings(): Promise<APIResponse.Entity>;
+  getPacakgingCodes(): Promise<APIResponse.Entity>;
 }

@@ -1821,6 +1821,19 @@ declare namespace APIResponse {
     sameAs?: string[] | null;
     url: string;
   }
+  export interface Labels {
+    count: number;
+    tags?: TagsLabels[] | null;
+  }
+  export interface TagsLabels {
+    id: string;
+    known: number;
+    name: string;
+    products: number;
+    sameAs?: string[] | null;
+    url: string;
+    image?: string | null;
+  }
 }
 
 export class OFF {
@@ -1831,4 +1844,5 @@ export class OFF {
   getProduct(barcode: string): Promise<APIResponse.Products>;
   getBrand(brandName: string): Promise<APIResponse.Brand>;
   getLanguages(): Promise<APIResponse.Languages>;
+  getLabels(): Promise<APIResponse.Labels>;
 }

@@ -1836,8 +1836,14 @@ declare namespace APIResponse {
   }
 }
 
+declare namespace OFF {
+  export interface Options {
+    country: string;
+  }
+}
+
 export class OFF {
-  constructor(option?: OFF.option);
+  constructor(option?: OFF.Options);
   setOption(optionName: string, optionValue: string): OFF;
   country(country?: string): OFF;
   getBrands(): Promise<APIResponse.Brands>;

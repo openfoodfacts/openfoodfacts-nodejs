@@ -1809,23 +1809,7 @@ declare namespace APIResponse {
   export interface DisplayOrSmallOrThumb {
     fr: string;
   }
-  export interface Languages {
-    count: number;
-    tags?: TagsEntity[] | null;
-  }
-  export interface Labels {
-    count: number;
-    tags?: TagsEntity[] | null;
-  }
-  export interface Addivives {
-    count: number;
-    tags?: TagsEntity[] | null;
-  }
-  export interface Allergens {
-    count: number;
-    tags?: TagsEntity[] | null;
-  }
-  export interface Categories {
+  export interface Entity {
     count: number;
     tags?: TagsEntity[] | null;
   }
@@ -1853,9 +1837,10 @@ export class OFF {
   getBrands(): Promise<APIResponse.Brands>;
   getProduct(barcode: string): Promise<APIResponse.Products>;
   getBrand(brandName: string): Promise<APIResponse.Brand>;
-  getLanguages(): Promise<APIResponse.Languages>;
-  getLabels(): Promise<APIResponse.Labels>;
-  getAdditives(): Promise<APIResponse.Addivives>;
-  getAllergens(): Promise<APIResponse.Allergens>;
-  getCategories(): Promise<APIResponse.Categories>;
+  getLanguages(): Promise<APIResponse.Entity>;
+  getLabels(): Promise<APIResponse.Entity>;
+  getAdditives(): Promise<APIResponse.Entity>;
+  getAllergens(): Promise<APIResponse.Entity>;
+  getCategories(): Promise<APIResponse.Entity>;
+  getCountries(): Promise<APIResponse.Entity>;
 }

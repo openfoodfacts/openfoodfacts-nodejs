@@ -1846,6 +1846,18 @@ declare namespace APIResponse {
     sameAs?: string[] | null;
     url: string;
   }
+  export interface Allergens {
+    count: number;
+    tags?: TagsAllergens[] | null;
+  }
+  export interface TagsAllergens {
+    id: string;
+    known: number;
+    name: string;
+    products: number;
+    sameAs?: string[] | null;
+    url: string;
+  }
 }
 
 declare namespace OFF {
@@ -1864,4 +1876,5 @@ export class OFF {
   getLanguages(): Promise<APIResponse.Languages>;
   getLabels(): Promise<APIResponse.Labels>;
   getAdditives(): Promise<APIResponse.Addivives>;
+  getAllergens(): Promise<APIResponse.Allergens>;
 }

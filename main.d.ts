@@ -1847,4 +1847,8 @@ export class OFF {
   getIngredients(): Promise<APIResponse.Entity>;
   getPackagings(): Promise<APIResponse.Entity>;
   getPacakgingCodes(): Promise<APIResponse.Entity>;
+  getPurchasePlaces(): Promise<APIResponse.Entity>;
+  getStates(): Promise<APIResponse.Entity>;
+  getStores(): Promise<APIResponse.Entity>;
+  getTraces(): Promise<APIResponse.Entity>;
 }

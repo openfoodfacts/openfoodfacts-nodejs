@@ -49,7 +49,7 @@
     "all-contributors-cli": "^6.20.0",
     "boxy-jsdoc-template": "^2.0.2",
     "husky": "^7.0.4",
-    "jsdoc": "^3.6.7",
+    "jsdoc": "^3.6.10",
     "mocha": "^9.1.4",
     "mockery": "^2.1.0",
     "standard": "^16.0.4"

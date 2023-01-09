@@ -1859,5 +1859,5 @@ export class OFF {
   getStates(): Promise<APIResponse.Entity>;
   getStores(): Promise<APIResponse.Entity>;
   getTraces(): Promise<APIResponse.Entity>;
-  getProductsByBarcodeBeginning(beginning: string): Promise<APIResponse.code>;
+  getProductsByBarcodeBeginning(beginning: string): Promise<APIResponse.Code>;
 }

@@ -16,7 +16,7 @@ const test = async (withAPI, url) => {
 const mockRequest = (filename) => {
   mockery.registerMock('request-promise', function (url) {
     lastCalledUrl = url
-    var response = fs.readFileSync(path.join(__dirname, 'mockdata', filename), 'utf8')
+    const response = fs.readFileSync(path.join(__dirname, 'mockdata', filename), 'utf8')
     return Promise.resolve(response.trim())
   })
 }
@@ -42,37 +42,37 @@ describe('country', function () {
     mockRequest('in-brands.json')
     const indiaOFF = getOFFInstance().country('in')
     const withAPI = await indiaOFF.getBrands()
-    await test(withAPI, `https://in.openfoodfacts.org/brands.json`)
+    await test(withAPI, 'https://in.openfoodfacts.org/brands.json')
   })
   it('Should fetch brands from Spain', async () => {
     mockRequest('es-brands.json')
     const spainOFF = getOFFInstance().country('es')
     const withAPI = await spainOFF.getBrands()
-    await test(withAPI, `https://es.openfoodfacts.org/brands.json`)
+    await test(withAPI, 'https://es.openfoodfacts.org/brands.json')
   })
-  it(`Should fetch product with barcode`, async () => {
+  it('Should fetch product with barcode', async () => {
     mockRequest('product-7622210288257.json')
     const barcode = '7622210288257'
     const withAPI = await getOFFInstance().getProduct(barcode)
     await test(withAPI, `${worldURL}/api/v0/product/${barcode}.json`)
   })
-  it(`Should fetch a brand by its name`, async () => {
+  it('Should fetch a brand by its name', async () => {
     mockRequest('brand-monoprix.json')
     const brand = 'monoprix'
     const withAPI = await getOFFInstance().getBrand(brand)
     await test(withAPI, `${worldURL}/brand/${brand}.json`)
   })
-  it(`Should fetch all languages`, async () => {
+  it('Should fetch all languages', async () => {
     mockRequest('languages.json')
     const withAPI = await getOFFInstance().getLanguages()
     await test(withAPI, `${worldURL}/languages.json`)
   })
-  it(`Should fetch all labels`, async () => {
+  it('Should fetch all labels', async () => {
     mockRequest('labels.json')
     const withAPI = await getOFFInstance().getLabels()
     await test(withAPI, `${worldURL}/labels.json`)
   })
-  it(`Should fetch product by barcode beginning`, async () => {
+  it('Should fetch product by barcode beginning', async () => {
     mockRequest('code-3596710xxxxxx.json')
     const beginning = '3596710'
     const withAPI = await getOFFInstance().getProductsByBarcodeBeginning(beginning)

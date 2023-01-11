@@ -15,6 +15,7 @@ class OFF {
     this.options = options
     this.URL = `https://${options.country}.openfoodfacts.org`
   }
+
   /**
    * It is used to set option in OFF instance
    * @return {Object} An OFF Instance with option set
@@ -25,6 +26,7 @@ class OFF {
       [option]: value
     })
   }
+
   /**
    * It is used to set country option in the OFF Instance
    * @param {string} country - Country value to set to the OFF Instance
@@ -111,171 +113,171 @@ class OFF {
   }
 
   /**
-  * It is used to get all additives from the API
-  * @return {Object} It returns a JSON with all additives present in the API
-  * @example
-  * const worldOFF = new OFF()
-  * worldOFF.getAdditives().then(additives =>{
-  *    //use additives
-  * })
-  */
+   * It is used to get all additives from the API
+   * @return {Object} It returns a JSON with all additives present in the API
+   * @example
+   * const worldOFF = new OFF()
+   * worldOFF.getAdditives().then(additives =>{
+   *    //use additives
+   * })
+   */
   getAdditives () {
     return request(`${this.URL}/additives.json`)
       .then(JSON.parse)
   }
 
   /**
-  * It is used to get all allergens from the API
-  * @return {Object} It returns a JSON with all allergens present in the API
-  * @example
-  * const worldOFF = new OFF()
-  * worldOFF.getAllergens().then(allergens =>{
-  *    //use allergens
-  * })
-  */
+   * It is used to get all allergens from the API
+   * @return {Object} It returns a JSON with all allergens present in the API
+   * @example
+   * const worldOFF = new OFF()
+   * worldOFF.getAllergens().then(allergens =>{
+   *    //use allergens
+   * })
+   */
   getAllergens () {
     return request(`${this.URL}/allergens.json`)
-    .then(JSON.parse)
+      .then(JSON.parse)
   }
 
   /**
-  * It is used to get all categories from the API
-  * @return {Object} It returns a JSON with all categories present in the API
-  * @example
-  * const worldOFF = new OFF()
-  * worldOFF.getCategories().then(categories =>{
-  *    //use categories
-  * })
-  */
+   * It is used to get all categories from the API
+   * @return {Object} It returns a JSON with all categories present in the API
+   * @example
+   * const worldOFF = new OFF()
+   * worldOFF.getCategories().then(categories =>{
+   *    //use categories
+   * })
+   */
   getCategories () {
     return request(`${this.URL}/categories.json`)
-    .then(JSON.parse)
+      .then(JSON.parse)
   }
 
   /**
-  * It is used to get all countries from the API
-  * @return {Object} It returns a JSON with all categories present in the API
-  * @example
-  * const worldOFF = new OFF()
-  * worldOFF.getCountries().then(countries =>{
-  *    //use countries
-  * })
-  */
+   * It is used to get all countries from the API
+   * @return {Object} It returns a JSON with all categories present in the API
+   * @example
+   * const worldOFF = new OFF()
+   * worldOFF.getCountries().then(countries =>{
+   *    //use countries
+   * })
+   */
   getCountries () {
     return request(`${this.URL}/countries.json`)
-    .then(JSON.parse)
+      .then(JSON.parse)
   }
 
   /**
-  * It is used to get all entry dates from the API
-  * @return {Object} It returns a JSON with all entry dates present in the API
-  * @example
-  * const worldOFF = new OFF()
-  * worldOFF.getEntryDates().then(entry_dates =>{
-  *    //use entry_dates
-  * })
-  */
+   * It is used to get all entry dates from the API
+   * @return {Object} It returns a JSON with all entry dates present in the API
+   * @example
+   * const worldOFF = new OFF()
+   * worldOFF.getEntryDates().then(entry_dates =>{
+   *    //use entry_dates
+   * })
+   */
   getEntryDates () {
     return request(`${this.URL}/entry-dates.json`)
-    .then(JSON.parse)
+      .then(JSON.parse)
   }
 
   /**
-  * It is used to get all ingredients from the API
-  * @return {Object} It returns a JSON with all ingredients present in the API
-  * @example
-  * const worldOFF = new OFF()
-  * worldOFF.getIngredients().then(ingredients =>{
-  *    //use ingredients
-  * })
-  */
+   * It is used to get all ingredients from the API
+   * @return {Object} It returns a JSON with all ingredients present in the API
+   * @example
+   * const worldOFF = new OFF()
+   * worldOFF.getIngredients().then(ingredients =>{
+   *    //use ingredients
+   * })
+   */
   getIngredients () {
     return request(`${this.URL}/ingredients.json`)
-    .then(JSON.parse)
+      .then(JSON.parse)
   }
 
   /**
-  * It is used to get all packagings from the API
-  * @return {Object} It returns a JSON with all packagings present in the API
-  * @example
-  * const worldOFF = new OFF()
-  * worldOFF.getPackagings().then(packagings =>{
-  *    //use packagings
-  * })
-  */
+   * It is used to get all packagings from the API
+   * @return {Object} It returns a JSON with all packagings present in the API
+   * @example
+   * const worldOFF = new OFF()
+   * worldOFF.getPackagings().then(packagings =>{
+   *    //use packagings
+   * })
+   */
   getPackagings () {
     return request(`${this.URL}/packaging.json`)
-    .then(JSON.parse)
+      .then(JSON.parse)
   }
 
   /**
-  * It is used to get packaging codes from the API
-  * @return {Object} It returns a JSON with all packaging codes present in the API
-  * @example
-  * const worldOFF = new OFF()
-  * worldOFF.getPackagingCodes().then(packaging_codes =>{
-  *    //use packaging_codes
-  * })
-  */
+   * It is used to get packaging codes from the API
+   * @return {Object} It returns a JSON with all packaging codes present in the API
+   * @example
+   * const worldOFF = new OFF()
+   * worldOFF.getPackagingCodes().then(packaging_codes =>{
+   *    //use packaging_codes
+   * })
+   */
   getPacakgingCodes () {
     return request(`${this.URL}/packager-codes.json`)
-    .then(JSON.parse)
+      .then(JSON.parse)
   }
 
   /**
-  * It is used to get all purchase places from the API
-  * @return {Object} It returns a JSON with all purchase places present in the API
-  * @example
-  * const worldOFF = new OFF()
-  * worldOFF.getPurchasePlaces().then(purchase_places =>{
-  *    //use purchase_places
-  * })
-  */
+   * It is used to get all purchase places from the API
+   * @return {Object} It returns a JSON with all purchase places present in the API
+   * @example
+   * const worldOFF = new OFF()
+   * worldOFF.getPurchasePlaces().then(purchase_places =>{
+   *    //use purchase_places
+   * })
+   */
   getPurchasePlaces () {
     return request(`${this.URL}/purchase-places.json`)
-    .then(JSON.parse)
+      .then(JSON.parse)
   }
 
   /**
-  * It is used to get all states from the API
-  * @return {Object} It returns a JSON with all states present in the API
-  * @example
-  * const worldOFF = new OFF()
-  * worldOFF.getStates().then(states =>{
-  *    //use states
-  * })
-  */
+   * It is used to get all states from the API
+   * @return {Object} It returns a JSON with all states present in the API
+   * @example
+   * const worldOFF = new OFF()
+   * worldOFF.getStates().then(states =>{
+   *    //use states
+   * })
+   */
   getStates () {
     return request(`${this.URL}/states.json`)
-    .then(JSON.parse)
-  }
-
-    /**
-  * It is used to get all stores from the API
-  * @return {Object} It returns a JSON with all stores present in the API
-  * @example
-  * const worldOFF = new OFF()
-  * worldOFF.getStores().then(stores =>{
-  *    //use stores
-  * })
-  */
-  getStores () {
-    return request(`${this.URL}/stores.json`)
-    .then(JSON.parse)
+      .then(JSON.parse)
   }
 
   /**
-  * It is used to get all trace types from the API
-  * @return {Object} It returns a JSON with all traces present in the API
-  * @example
-  * const worldOFF = new OFF()
-  * worldOFF.getTraces().then(traces =>{
-  *    //use traces
-  * })
-  */
+   * It is used to get all stores from the API
+   * @return {Object} It returns a JSON with all stores present in the API
+   * @example
+   * const worldOFF = new OFF()
+   * worldOFF.getStores().then(stores =>{
+   *    //use stores
+   * })
+   */
+  getStores () {
+    return request(`${this.URL}/stores.json`)
+      .then(JSON.parse)
+  }
+
+  /**
+   * It is used to get all trace types from the API
+   * @return {Object} It returns a JSON with all traces present in the API
+   * @example
+   * const worldOFF = new OFF()
+   * worldOFF.getTraces().then(traces =>{
+   *    //use traces
+   * })
+   */
   getTraces () {
     return request(`${this.URL}/traces.json`)
-    .then(JSON.parse)
+      .then(JSON.parse)
   }
 
   /**

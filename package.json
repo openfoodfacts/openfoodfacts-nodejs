@@ -1,12 +1,12 @@
 {
   "name": "openfoodfacts-nodejs",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Open Food Facts API NodeJS Wrapper",
   "main": "main.js",
   "scripts": {
     "lint": "standard",
     "commitmsg": "commitlint -quiet=0 --extends=@commitlint/config-conventional -e",
-    "precommit": "standard `git diff --name-only --staged --relative | grep '.js$'` nothing",
+    "precommit": "standard `git diff --name-only --staged --relative | grep '.js$'`",
     "fix": "standard --fix",
     "test": "mocha",
     "doc": "jsdoc -c .jsdocrc",
@@ -38,8 +38,6 @@
   },
   "homepage": "https://github.com/openfoodfacts/openfoodfacts-nodejs#readme",
   "dependencies": {
-    "chai": "^4.3.6",
-    "mocha": "^9.2.2",
     "request-promise": "^4.2.6"
   },
   "devDependencies": {
@@ -48,7 +46,6 @@
     "chai": "^4.3.6",
     "all-contributors-cli": "^6.24.0",
     "boxy-jsdoc-template": "^2.0.2",
-    "husky": "^8.0.1",
     "jsdoc": "^3.6.11",
     "mocha": "^9.2.2",
     "mockery": "^2.1.0",

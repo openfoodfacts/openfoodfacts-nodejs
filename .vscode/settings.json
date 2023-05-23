@@ -1,0 +1,8 @@
+{
+    "yaml.schemas": {
+        "https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.1/schema.json": [
+            "file:///home/eyad/Progetti/openfoodfacts-nodejs/openfoodfacts-server/docs/api/ref/schemas/product.yaml",
+            "file:///home/eyad/Progetti/openfoodfacts-nodejs/openfoodfacts-server/docs/api/ref/schemas/ingredient.yaml"
+        ]
+    }
+}

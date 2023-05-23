@@ -1,42 +1,35 @@
-const request = require('request-promise')
+import axios, { Axios } from "axios";
+import {
+  paths,
+  components,
+} from "./schemas/openfoodfacts-server/docs/api/ref/api";
+import createClient from "openapi-fetch";
 
-const defaultOptions = {
-  country: 'world'
-}
+type Product = components["schemas"]["Product"];
 
-/** Class OFF Node API Wrappper of OFF API */
-class OFF {
+/** Wrapper of OFF API */
+export default class OFF {
+  private readonly client = createClient<paths>({
+    baseUrl: `https://world.openfoodfacts.org`,
+  });
+  private readonly axios: Axios = axios;
+
   /**
    * Create OFF object
    * @param {Object} options - Options for the OFF Object
-   * @param {string} options.country - Country for which you want to call OFF API Client
+   * @param {string} options.country - Country for which you want to call OFF API axios
    */
-  constructor (options = defaultOptions) {
-    this.options = options
-    this.URL = `https://${options.country}.openfoodfacts.org`
-  }
-
-  /**
-   * It is used to set option in OFF instance
-   * @return {Object} An OFF Instance with option set
-   */
-  setOption (option, value) {
-    return new OFF({
-      ...this.options,
-      [option]: value
-    })
-  }
-
-  /**
-   * It is used to set country option in the OFF Instance
-   * @param {string} country - Country value to set to the OFF Instance
-   * @return {Object} An OFF Instance with the country option set
-   * @example
-   * const worldOFF = new OFF()
-   * const indiaOFF = worldOFF.country('in')
-   */
-  country (country = defaultOptions.country) {
-    return this.setOption('country', country)
+  constructor(
+    options: {
+      baseUrl: string;
+    } = { baseUrl: "https://world.openfoodfacts.org" }
+  ) {
+    if (options != null) {
+      this.client = createClient<paths>({
+        baseUrl: options.baseUrl,
+      });
+      axios.defaults.baseURL = options.baseUrl;
+    }
   }
 
   /**
@@ -49,24 +42,24 @@ class OFF {
    *   // use brands
    * })
    */
-  getBrands () {
-    return request(`${this.URL}/brands.json`)
-      .then(JSON.parse)
+  async getBrands(): Promise<object[]> {
+    return this.axios.get(`/brands.json`).then((res) => res.data);
   }
 
   /**
    * It is used to get a specific product using barcode
-   * @param {number} barcode - Barcode of the product you want to fetch details
-   * @return {Object} It returns a JSON of the product
+   * @param {string} barcode - Barcode of the product you want to fetch details
    * @example
    * const worldOFF = new OFF()
    * worldOFF.getProduct(7622210288257).then(product => {
    *   // use product
    * })
    */
-  getProduct (barcode) {
-    return request(`${this.URL}/api/v0/product/${barcode}.json`)
-      .then(JSON.parse)
+  async getProduct(barcode: string): Promise<Product> {
+    const res = await this.client.get("/api/v2/product/{barcode}", {
+      params: { path: { barcode } },
+    });
+    return res.data?.product;
   }
 
   /**
@@ -79,9 +72,9 @@ class OFF {
    *   // use brand
    * })
    */
-  getBrand (brandName) {
-    return request(`${this.URL}/brand/${brandName}.json`)
-      .then(JSON.parse)
+  async getBrand(brandName: string): Promise<Object> {
+    const res = await this.axios.get(`/brand/${brandName}.json`);
+    return res.data;
   }
 
   /**
@@ -93,9 +86,9 @@ class OFF {
    *   // use languages
    * })
    */
-  getLanguages () {
-    return request(`${this.URL}/languages.json`)
-      .then(JSON.parse)
+  async getLanguages(): Promise<object> {
+    const res = await this.axios.get(`/languages.json`);
+    return res.data;
   }
 
   /**
@@ -107,9 +100,9 @@ class OFF {
    *   // use labels
    * })
    */
-  getLabels () {
-    return request(`${this.URL}/labels.json`)
-      .then(JSON.parse)
+  async getLabels(): Promise<object> {
+    const res = await this.axios.get(`/labels.json`);
+    return res.data;
   }
 
   /**
@@ -121,9 +114,9 @@ class OFF {
    *    //use additives
    * })
    */
-  getAdditives () {
-    return request(`${this.URL}/additives.json`)
-      .then(JSON.parse)
+  async getAdditives(): Promise<object> {
+    const res = await this.axios.get(`/additives.json`);
+    return res.data;
   }
 
   /**
@@ -135,9 +128,9 @@ class OFF {
    *    //use allergens
    * })
    */
-  getAllergens () {
-    return request(`${this.URL}/allergens.json`)
-      .then(JSON.parse)
+  async getAllergens(): Promise<object> {
+    const res = await this.axios.get(`/allergens.json`);
+    return res.data;
   }
 
   /**
@@ -149,9 +142,9 @@ class OFF {
    *    //use categories
    * })
    */
-  getCategories () {
-    return request(`${this.URL}/categories.json`)
-      .then(JSON.parse)
+  async getCategories(): Promise<object> {
+    const res = await this.axios.get(`/categories.json`);
+    return res.data;
   }
 
   /**
@@ -163,9 +156,9 @@ class OFF {
    *    //use countries
    * })
    */
-  getCountries () {
-    return request(`${this.URL}/countries.json`)
-      .then(JSON.parse)
+  async getCountries(): Promise<object> {
+    const res = await this.axios.get(`/countries.json`);
+    return res.data;
   }
 
   /**
@@ -177,9 +170,9 @@ class OFF {
    *    //use entry_dates
    * })
    */
-  getEntryDates () {
-    return request(`${this.URL}/entry-dates.json`)
-      .then(JSON.parse)
+  async getEntryDates() {
+    const res = await this.axios.get(`/entry-dates.json`);
+    return res.data;
   }
 
   /**
@@ -191,9 +184,9 @@ class OFF {
    *    //use ingredients
    * })
    */
-  getIngredients () {
-    return request(`${this.URL}/ingredients.json`)
-      .then(JSON.parse)
+  async getIngredients(): Promise<object> {
+    const res = await this.axios.get(`/ingredients.json`);
+    return res.data;
   }
 
   /**
@@ -205,9 +198,9 @@ class OFF {
    *    //use packagings
    * })
    */
-  getPackagings () {
-    return request(`${this.URL}/packaging.json`)
-      .then(JSON.parse)
+  async getPackagings(): Promise<object> {
+    const res = await this.axios.get(`/packaging.json`);
+    return res.data;
   }
 
   /**
@@ -219,9 +212,9 @@ class OFF {
    *    //use packaging_codes
    * })
    */
-  getPacakgingCodes () {
-    return request(`${this.URL}/packager-codes.json`)
-      .then(JSON.parse)
+  async getPacakgingCodes() {
+    const res = await this.axios.get(`/packager-codes.json`);
+    return res.data;
   }
 
   /**
@@ -233,9 +226,9 @@ class OFF {
    *    //use purchase_places
    * })
    */
-  getPurchasePlaces () {
-    return request(`${this.URL}/purchase-places.json`)
-      .then(JSON.parse)
+  async getPurchasePlaces(): Promise<object> {
+    const res = await this.axios.get(`/purchase-places.json`);
+    return res.data;
   }
 
   /**
@@ -247,9 +240,9 @@ class OFF {
    *    //use states
    * })
    */
-  getStates () {
-    return request(`${this.URL}/states.json`)
-      .then(JSON.parse)
+  async getStates(): Promise<object> {
+    const res = await this.axios.get(`/states.json`);
+    return res.data;
   }
 
   /**
@@ -261,9 +254,9 @@ class OFF {
    *    //use stores
    * })
    */
-  getStores () {
-    return request(`${this.URL}/stores.json`)
-      .then(JSON.parse)
+  async getStores(): Promise<object> {
+    const res = await this.axios.get(`/stores.json`);
+    return res.data;
   }
 
   /**
@@ -275,9 +268,9 @@ class OFF {
    *    //use traces
    * })
    */
-  getTraces () {
-    return request(`${this.URL}/traces.json`)
-      .then(JSON.parse)
+  async getTraces(): Promise<object> {
+    const res = await this.axios.get(`/traces.json`);
+    return res.data;
   }
 
   /**
@@ -290,12 +283,9 @@ class OFF {
    *   // use products
    * })
    */
-  getProductsByBarcodeBeginning (beginning) {
-    const fill = 'x'.repeat(13 - beginning.length)
-    const barcode = beginning.concat(fill)
-    return request(`${this.URL}/code/${barcode}.json`)
-      .then(JSON.parse)
+  async getProductsByBarcodeBeginning(beginning: string) {
+    const fill = "x".repeat(13 - beginning.length);
+    const barcode = beginning.concat(fill);
+    return this.getProduct(barcode);
   }
 }
-
-module.exports = OFF

@@ -58,3 +58,7 @@ typings/
 .env
 
 .idea
+
+dist/
+openfoodfacts-server/
+openfoodfacts-server.tar.gz

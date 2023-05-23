@@ -405,7 +405,6 @@ ajv@^8.11.0:
 all-contributors-cli@^6.24.0:
   version "6.25.1"
   resolved "https://registry.yarnpkg.com/all-contributors-cli/-/all-contributors-cli-6.25.1.tgz#d6fbd4e7264939dc8efe897a9ccddc5329e46235"
-  integrity sha512-Q9MfsO6FH09h71IG6OobfESA7lbooB3/bnO2wnuXbLPye1lFsYsa/jpNZP0YBx6zbhwXqqm6CXRZ9HO/tmD4NQ==
   dependencies:
     "@babel/runtime" "^7.7.6"
     async "^3.1.0"

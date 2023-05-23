@@ -321,8 +321,8 @@ ajv@^8.11.0:
     uri-js "^4.2.2"
 
 all-contributors-cli@^6.24.0:
-  version "6.24.0"
-  resolved "https://registry.npmjs.org/all-contributors-cli/-/all-contributors-cli-6.24.0.tgz"
+  version "6.25.1"
+  resolved "https://registry.yarnpkg.com/all-contributors-cli/-/all-contributors-cli-6.25.1.tgz#d6fbd4e7264939dc8efe897a9ccddc5329e46235"
   dependencies:
     "@babel/runtime" "^7.7.6"
     async "^3.1.0"

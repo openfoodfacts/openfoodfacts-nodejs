@@ -5,11 +5,11 @@
   "main": "dist/main.js",
   "types": "dist/main.d.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "yarn openapi && tsc",
     "lint": "standard",
     "commitmsg": "commitlint -quiet=0 --extends=@commitlint/config-conventional -e",
     "precommit": "standard `git diff --name-only --staged --relative | grep '.js$'`",
-    "schema": "openapi-typescript './server/docs/api/ref/**/*.{yml,yaml}' --output schemas/",
+    "openapi": "openapi-typescript './server/docs/api/ref/**/*.{yml,yaml}' --output schemas/",
     "fix": "standard --fix",
     "test": "mocha",
     "doc": "jsdoc -c .jsdocrc",

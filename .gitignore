@@ -62,3 +62,4 @@ typings/
 dist/
 openfoodfacts-server/
 openfoodfacts-server.tar.gz
+schemas/

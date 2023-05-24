@@ -16,6 +16,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+        with:
+          submodules: true
 
       - name: Setup Node ${{ matrix.node-version }}
         uses: actions/setup-node@v3.6.0

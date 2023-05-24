@@ -4,6 +4,7 @@
   "description": "Open Food Facts API NodeJS Wrapper",
   "main": "main.js",
   "scripts": {
+    "build": "echo 'No build required'",
     "lint": "standard",
     "commitmsg": "commitlint -quiet=0 --extends=@commitlint/config-conventional -e",
     "precommit": "standard `git diff --name-only --staged --relative | grep '.js$'`",

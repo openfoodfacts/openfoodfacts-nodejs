@@ -72,3 +72,5 @@ schemas/
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+.vscode/

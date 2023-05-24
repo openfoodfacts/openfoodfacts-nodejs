@@ -53,7 +53,7 @@ export default class OFF {
    *   // use product
    * })
    */
-  async getProduct(barcode: string): Promise<Product> {
+  async getProduct(barcode: string): Promise<Product | undefined> {
     const res = await this.client.get("/api/v2/product/{barcode}", {
       params: { path: { barcode } },
     });

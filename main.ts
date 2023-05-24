@@ -3,6 +3,10 @@ import { paths, components } from "./schemas/server/docs/api/ref/api";
 import createClient from "openapi-fetch";
 import { Product, SearchResult } from "./types";
 
+export type OffOptions = {
+  country: string;
+};
+
 /** Wrapper of OFF API */
 export default class OFF {
   private readonly axios: Axios;
@@ -10,24 +14,29 @@ export default class OFF {
 
   /**
    * Create OFF object
-   * @param {Object} options - Options for the OFF Object
-   * @param {string} options.country - Country for which you want to call OFF API axios
+   * @param options - Options for the OFF Object
    */
-  constructor(
-    options: {
-      baseUrl: string;
-    } = { baseUrl: "https://world.openfoodfacts.org" }
-  ) {
+  constructor(options: OffOptions = {
+    country: "world",
+  }) {
+    const baseUrl = `https://${options.country}.openfoodfacts.org`
     this.axios = axios.create({
-      baseURL: options.baseUrl,
+      baseURL: baseUrl,
     });
     this.client = createClient<paths>({
-      baseUrl: options.baseUrl,
+      baseUrl: baseUrl,
       headers: {
         "User-Agent":
           "OpenFoodFacts NodeJS Client v" + require("../package.json").version,
       },
     });
+  }
+
+  /**
+   * @deprecated
+   */
+  country(country: string): OFF {
+    return new OFF({ country });
   }
 
   /**

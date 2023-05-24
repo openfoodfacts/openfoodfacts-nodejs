@@ -13,7 +13,7 @@
     "precommit": "standard `git diff --name-only --staged --relative | grep '.js$'`",
     "openapi": "openapi-typescript './server/docs/api/ref/**/*.{yml,yaml}' --output schemas/",
     "fix": "standard --fix",
-    "test": "mocha",
+    "test": "mocha --require ts-node/register test/**/*.ts",
     "doc": "jsdoc -c .jsdocrc",
     "contributors:add": "all-contributors add",
     "contributors:generate": "all-contributors generate"
@@ -50,6 +50,9 @@
   "devDependencies": {
     "@commitlint/cli": "^17.3.0",
     "@commitlint/config-conventional": "^17.1.0",
+    "@types/chai": "^4.3.5",
+    "@types/mocha": "^10.0.1",
+    "@types/mockery": "^1.4.30",
     "@types/node-fetch": "^2.6.4",
     "all-contributors-cli": "^6.24.0",
     "boxy-jsdoc-template": "^2.0.2",

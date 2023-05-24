@@ -463,6 +463,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/chai@npm:^4.3.5":
+  version: 4.3.5
+  resolution: "@types/chai@npm:4.3.5"
+  checksum: c8f26a88c6b5b53a3275c7f5ff8f107028e3cbb9ff26795fff5f3d9dea07106a54ce9e2dce5e40347f7c4cc35657900aaf0c83934a25a1ae12e61e0f5516e431
+  languageName: node
+  linkType: hard
+
 "@types/json5@npm:^0.0.29":
   version: 0.0.29
   resolution: "@types/json5@npm:0.0.29"
@@ -498,6 +505,20 @@ __metadata:
   version: 1.2.2
   resolution: "@types/minimist@npm:1.2.2"
   checksum: b8da83c66eb4aac0440e64674b19564d9d86c80ae273144db9681e5eeff66f238ade9515f5006ffbfa955ceff8b89ad2bd8ec577d7caee74ba101431fb07045d
+  languageName: node
+  linkType: hard
+
+"@types/mocha@npm:^10.0.1":
+  version: 10.0.1
+  resolution: "@types/mocha@npm:10.0.1"
+  checksum: 224ea9fce7b1734ccdb9aa99a622d902a538ce1847bca7fd22c5fb38adcf3ed536f50f48f587085db988a4bb3c2eb68f4b98e1cd6a38bc5547bd3bbbedc54495
+  languageName: node
+  linkType: hard
+
+"@types/mockery@npm:^1.4.30":
+  version: 1.4.30
+  resolution: "@types/mockery@npm:1.4.30"
+  checksum: cb7b547af7296d97ece667674173afdab25e2cc3cd2c1719e50aa7144f483b9f54bbb366cc0324b610ca29788cec8a60a3c8991d3f4d1bc5d59964242de49e31
   languageName: node
   linkType: hard
 
@@ -3841,6 +3862,9 @@ __metadata:
   dependencies:
     "@commitlint/cli": ^17.3.0
     "@commitlint/config-conventional": ^17.1.0
+    "@types/chai": ^4.3.5
+    "@types/mocha": ^10.0.1
+    "@types/mockery": ^1.4.30
     "@types/node-fetch": ^2.6.4
     all-contributors-cli: ^6.24.0
     axios: ^1.4.0

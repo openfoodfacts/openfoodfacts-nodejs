@@ -1,18 +1,12 @@
 import axios, { Axios } from "axios";
-import {
-  paths,
-  components,
-} from "./schemas/openfoodfacts-server/docs/api/ref/api";
+import { paths, components } from "./schemas/server/docs/api/ref/api";
 import createClient from "openapi-fetch";
-
-type Product = components["schemas"]["Product"];
+import { Product, SearchResult } from "./types";
 
 /** Wrapper of OFF API */
 export default class OFF {
-  private readonly client = createClient<paths>({
-    baseUrl: `https://world.openfoodfacts.org`,
-  });
-  private readonly axios: Axios = axios;
+  private readonly axios: Axios;
+  private readonly client: ReturnType<typeof createClient<paths>>;
 
   /**
    * Create OFF object
@@ -24,12 +18,16 @@ export default class OFF {
       baseUrl: string;
     } = { baseUrl: "https://world.openfoodfacts.org" }
   ) {
-    if (options != null) {
-      this.client = createClient<paths>({
-        baseUrl: options.baseUrl,
-      });
-      axios.defaults.baseURL = options.baseUrl;
-    }
+    this.axios = axios.create({
+      baseURL: options.baseUrl,
+    });
+    this.client = createClient<paths>({
+      baseUrl: options.baseUrl,
+      headers: {
+        "User-Agent":
+          "OpenFoodFacts NodeJS Client v" + require("../package.json").version,
+      },
+    });
   }
 
   /**
@@ -59,7 +57,35 @@ export default class OFF {
     const res = await this.client.get("/api/v2/product/{barcode}", {
       params: { path: { barcode } },
     });
+
     return res.data?.product;
+  }
+
+  async getProductImages(barcode: string): Promise<string[]> {
+    const res = await this.client.get(
+      "/api/v2/product/{barcode}?fields=images",
+      { params: { path: { barcode } } }
+    );
+
+    if (!res.data?.product) {
+      throw new Error("Product not found");
+    } else if (!res.data?.product?.images) {
+      throw new Error("Images not found");
+    }
+
+    const imgObj = res.data?.product?.images;
+    return Object.keys(imgObj);
+  }
+
+  async search(
+    fields: string,
+    sort_by: components["parameters"]["sort_by"]
+  ): Promise<SearchResult | undefined> {
+    const res = await this.client.get("/api/v2/search", {
+      params: { query: { fields, sort_by } },
+    });
+
+    return res.data;
   }
 
   /**

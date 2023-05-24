@@ -63,3 +63,12 @@ dist/
 openfoodfacts-server/
 openfoodfacts-server.tar.gz
 schemas/
+
+
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions

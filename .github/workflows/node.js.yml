@@ -2,7 +2,7 @@ name: Node.js CI
 
 on:
   push:
-    branches: [develop]
+
   pull_request:
     branches: [develop]
 
@@ -48,9 +48,6 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-
-
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
-

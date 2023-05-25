@@ -59,11 +59,10 @@ typings/
 
 .idea
 
+# Auto-generated folders
 dist/
-openfoodfacts-server/
-openfoodfacts-server.tar.gz
 schemas/
-
+docs/
 
 .pnp.*
 .yarn/*

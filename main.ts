@@ -3,12 +3,12 @@ import { paths, components } from "./schemas/server/docs/api/ref/api";
 import createClient from "openapi-fetch";
 import { Product, SearchResult } from "./types";
 
-export type OffOptions = {
+type OffOptions = {
   country: string;
 };
 
 /** Wrapper of OFF API */
-export default class OFF {
+export class OpenFoodFacts {
   private readonly axios: Axios;
   private readonly client: ReturnType<typeof createClient<paths>>;
 
@@ -35,8 +35,8 @@ export default class OFF {
   /**
    * @deprecated
    */
-  country(country: string): OFF {
-    return new OFF({ country });
+  country(country: string): OpenFoodFacts {
+    return new OpenFoodFacts({ country });
   }
 
   /**
@@ -324,3 +324,4 @@ export default class OFF {
     return this.getProduct(barcode);
   }
 }
+export default OpenFoodFacts;

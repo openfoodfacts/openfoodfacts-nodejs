@@ -1,31 +1,50 @@
-# Open Food Facts-NodeJS
+# Open Food Facts - JS SDK
 
-This is the official node module for Open Food Facts API.
+This is the official JS/TS SDK for the Open Food Facts API.
 
 ## Installation
 
-Use npm to include package in your project:
+```shell
+npm install openfoodfacts-nodejs
+# or
+yarn add openfoodfacts-nodejs
+# or
+pnpm add openfoodfacts-nodejs
+```
 
-`npm i openfoodfacts-nodejs`
+#### Example code snippet:
 
-Example code snippet:
+```ts
+import OFF from "openfoodfacts-nodejs";
+const client = new OFF();
 
-```javascript
-const off = require('openfoodfacts-nodejs');
-const client = new off();
-
-client.getProduct('5000112546415').then(console.log);
+client.getProduct("5000112546415").then(console.log);
 ```
 
 ## Development
 
-Clone the repository and run `npm i` in the directory
+The project uses [openapi-typescript](https://github.com/drwpow/openapi-typescript) to generate the API bindings automatically from the OpenAPI specification.
+
+The folder `server` is a submodule of the [Open Food Facts Server](https://github.com/openfoodfacts/openfoodfacts-server) repository.
+
+### Prerequisites
+
+- Node.js 14+
+- Yarn v2
+
+### Building
+
+- Clone the repository and run `yarn install` in the directory.
+- Run `yarn build` to generate the OpenAPI bindings and build the project.
+- Run `yarn test` to run the tests.
 
 ## Contribute
 
-Fork the repository and feel free to send a PR.
+We accept contributions of any kind: new features, bug fixes, documentation improvements, etc.
 
-Please use the [angular commit guideline](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#commits).
+You can also help us by reporting bugs, suggesting improvements or testing new features.
+
+When submitting a PR, please use the [angular commit guideline](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#commits).
 
 ## Third party applications
 

@@ -8,6 +8,7 @@ on:
 
 jobs:
   build:
+    name: Build and Test
     runs-on: ubuntu-latest
 
     strategy:
@@ -40,7 +41,7 @@ jobs:
           path: "docs"
 
   docs:
-    name: Build and Deploy Docs
+    name: Deploy Docs
     runs-on: ubuntu-latest
     needs: build
     if: github.event_name == 'push' && github.ref == 'refs/heads/develop'

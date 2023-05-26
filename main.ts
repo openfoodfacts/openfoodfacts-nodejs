@@ -1,5 +1,5 @@
 import axios, { Axios } from "axios";
-import { paths, components } from "./schemas/server/docs/api/ref/api";
+import { paths, components, external } from "./schemas/server/docs/api/ref/api";
 import createClient from "openapi-fetch";
 import { Product, SearchResult } from "./types";
 
@@ -16,10 +16,12 @@ export class OpenFoodFacts {
    * Create OFF object
    * @param options - Options for the OFF Object
    */
-  constructor(options: OffOptions = {
-    country: "world",
-  }) {
-    const baseUrl = `https://${options.country}.openfoodfacts.org`
+  constructor(
+    options: OffOptions = {
+      country: "world",
+    }
+  ) {
+    const baseUrl = `https://${options.country}.openfoodfacts.org`;
     this.axios = axios.create({
       baseURL: baseUrl,
     });
@@ -68,6 +70,25 @@ export class OpenFoodFacts {
     });
 
     return res.data?.product;
+  }
+
+  async performOCR(
+    barcode: string,
+    photoId: string,
+    ocrEngine: "google_cloud_vision" = "google_cloud_vision"
+  ): Promise<{ status?: number | undefined } | undefined> {
+    const res = await this.client.get("/cgi/ingredients.pl", {
+      params: {
+        query: {
+          code: barcode,
+          id: photoId,
+          ocr_engine: ocrEngine,
+          process_image: "1",
+        },
+      },
+    });
+
+    return res.data;
   }
 
   async getProductImages(barcode: string): Promise<string[]> {

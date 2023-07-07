@@ -1,14 +1,11 @@
-export { };
+export {};
 
 import * as NodeFetch from "node-fetch";
 import * as FormData from "formdata-node";
 import { components, external } from "./schemas/server/docs/api/ref/api";
 
-
-
 export type Product = components["schemas"]["Product"];
-export type SearchResult =
-  external["responses/search_for_products.yaml"];
+export type SearchResult = external["responses/search_for_products.yaml"];
 
 declare global {
   type File = FormData.File;

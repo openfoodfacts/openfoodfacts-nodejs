@@ -2118,12 +2118,12 @@ __metadata:
   linkType: hard
 
 "formdata-node@npm:^5.0.0":
-  version: 5.0.0
-  resolution: "formdata-node@npm:5.0.0"
+  version: 5.0.1
+  resolution: "formdata-node@npm:5.0.1"
   dependencies:
     node-domexception: 1.0.0
     web-streams-polyfill: 4.0.0-beta.3
-  checksum: 384126102c5c541e1203a372f23417a1bbd7b2d866da6c15f2d397bf3475f08ed01b7f940eabb0ca6edfc370ae5bc8d09d3f89a285529016750757a6c2f98bd2
+  checksum: fc793643d358a93ebb4a8787938c1d1306b20d77d83085ef5b3b8895581eb2ea9f9d565c83314762ce348fe12f354d15d0f69616c5434b545f368e44ed8f3955
   languageName: node
   linkType: hard
 

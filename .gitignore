@@ -58,3 +58,18 @@ typings/
 .env
 
 .idea
+
+# Auto-generated folders
+dist/
+schemas/
+docs/
+
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+.vscode/

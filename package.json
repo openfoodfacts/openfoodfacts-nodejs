@@ -1,16 +1,20 @@
 {
   "name": "openfoodfacts-nodejs",
-  "version": "0.1.0",
+  "version": "2.0.0",
   "description": "Open Food Facts API NodeJS Wrapper",
-  "main": "main.js",
+  "exports": [
+    "./dist/main.js"
+  ],
+  "types": "dist/main.d.ts",
   "scripts": {
-    "build": "echo 'No build required'",
+    "build": "yarn openapi && tsc",
     "lint": "standard",
     "commitmsg": "commitlint -quiet=0 --extends=@commitlint/config-conventional -e",
     "precommit": "standard `git diff --name-only --staged --relative | grep '.js$'`",
+    "openapi": "openapi-typescript './server/docs/api/ref/**/*.{yml,yaml}' --output schemas/",
     "fix": "standard --fix",
-    "test": "mocha",
-    "doc": "jsdoc -c .jsdocrc",
+    "test": "mocha --require ts-node/register test/**/*.ts",
+    "build:docs": "typedoc main.ts",
     "contributors:add": "all-contributors add",
     "contributors:generate": "all-contributors generate"
   },
@@ -39,17 +43,28 @@
   },
   "homepage": "https://github.com/openfoodfacts/openfoodfacts-nodejs#readme",
   "dependencies": {
-    "request-promise": "^4.2.6"
+    "axios": "^1.4.0",
+    "node-fetch": "^3.3.1",
+    "openapi-fetch": "^0.2.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.3.0",
     "@commitlint/config-conventional": "^17.1.0",
-    "chai": "^4.3.6",
+    "@types/chai": "^4.3.5",
+    "@types/mocha": "^10.0.1",
+    "@types/mockery": "^1.4.30",
+    "@types/node-fetch": "^2.6.4",
     "all-contributors-cli": "^6.24.0",
     "boxy-jsdoc-template": "^2.0.2",
+    "chai": "^4.3.6",
+    "formdata-node": "^5.0.0",
     "jsdoc": "^4.0.2",
     "mocha": "^9.2.2",
     "mockery": "^2.1.0",
-    "standard": "^17.0.0"
-  }
+    "openapi-typescript": "^6.2.4",
+    "standard": "^17.0.0",
+    "typedoc": "^0.24.7",
+    "typescript": "^5.0.4"
+  },
+  "packageManager": "yarn@3.5.1"
 }

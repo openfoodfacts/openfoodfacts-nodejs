@@ -2,20 +2,24 @@ name: Node.js CI
 
 on:
   push:
-    branches: [develop]
+
   pull_request:
     branches: [develop]
 
 jobs:
   build:
+    name: Build and Test
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [14.x, 16.x, 18.x, 19.x]
+        node-version: [14.x, 16.x, 18.x, 19.x, 20.x]
 
     steps:
       - uses: actions/checkout@v3
+        with:
+          submodules: true
+          fetch-depth: 1
 
       - name: Setup Node ${{ matrix.node-version }}
         uses: actions/setup-node@v3.6.0
@@ -28,3 +32,26 @@ jobs:
       - run: yarn run build
 
       - run: yarn test
+
+      - run: yarn run build:docs
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        if: ${{ matrix.node-version }} == '20.x'
+        with:
+          path: "docs"
+
+  docs:
+    name: Deploy Docs
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2

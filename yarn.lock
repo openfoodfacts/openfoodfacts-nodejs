@@ -3863,10 +3863,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"openapi-fetch@npm:^0.6.1":
-  version: 0.6.1
-  resolution: "openapi-fetch@npm:0.6.1"
-  checksum: 7da3d4092f7f544e63577d098745b570d550ec63932db6e4fd38ddf52f38efd25150ed65d7952a1842d89a0f548ff61c6f8bad45d277e8a044a56735e4a71b27
+"openapi-fetch@npm:^0.7.2":
+  version: 0.7.2
+  resolution: "openapi-fetch@npm:0.7.2"
+  checksum: 07f069f4ed5a6252a76bcfc7a05097b7ee6765aa6c25e648725a651a9ecb6adcf162341add0a00e1cfc59e945d48339171a9c1ce0dcb656e83b043dec00bedd2
   languageName: node
   linkType: hard
 
@@ -3905,7 +3905,7 @@ __metadata:
     mocha: ^9.2.2
     mockery: ^2.1.0
     node-fetch: ^3.3.1
-    openapi-fetch: ^0.6.1
+    openapi-fetch: ^0.7.2
     openapi-typescript: ^6.2.4
     standard: ^17.0.0
     typedoc: ^0.24.7

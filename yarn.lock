@@ -1948,16 +1948,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-glob@npm:^3.3.0":
-  version: 3.3.0
-  resolution: "fast-glob@npm:3.3.0"
+"fast-glob@npm:^3.3.1":
+  version: 3.3.1
+  resolution: "fast-glob@npm:3.3.1"
   dependencies:
     "@nodelib/fs.stat": ^2.0.2
     "@nodelib/fs.walk": ^1.2.3
     glob-parent: ^5.1.2
     merge2: ^1.3.0
     micromatch: ^4.0.4
-  checksum: 20df62be28eb5426fe8e40e0d05601a63b1daceb7c3d87534afcad91bdcf1e4b1743cf2d5247d6e225b120b46df0b9053a032b2691ba34ee121e033acd81f547
+  checksum: b6f3add6403e02cf3a798bfbb1183d0f6da2afd368f27456010c0bc1f9640aea308243d4cb2c0ab142f618276e65ecb8be1661d7c62a7b4e5ba774b9ce5432e5
   languageName: node
   linkType: hard
 
@@ -3871,18 +3871,18 @@ __metadata:
   linkType: hard
 
 "openapi-typescript@npm:^6.2.4":
-  version: 6.4.0
-  resolution: "openapi-typescript@npm:6.4.0"
+  version: 6.4.4
+  resolution: "openapi-typescript@npm:6.4.4"
   dependencies:
     ansi-colors: ^4.1.3
-    fast-glob: ^3.3.0
+    fast-glob: ^3.3.1
     js-yaml: ^4.1.0
     supports-color: ^9.4.0
-    undici: ^5.22.1
+    undici: ^5.23.0
     yargs-parser: ^21.1.1
   bin:
     openapi-typescript: bin/cli.js
-  checksum: 31992cc079bd9b552beb506f6af1a0b9a0a4c0ee45596a667eebcd924a4d3285667fb03bbc9ad16bdbd50deb0d0184ac36c3863ddf9e3d8226ecf32495281b32
+  checksum: 9335ea44b4710e8de95775bcaeee49568f5c8f8720fdaec2327978c5f26db65e6a995c9c958629c2bb3f2cfc472f4664060d0c6f8e3531b578b3d08e12ce5855
   languageName: node
   linkType: hard
 
@@ -5108,12 +5108,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"undici@npm:^5.22.1":
-  version: 5.22.1
-  resolution: "undici@npm:5.22.1"
+"undici@npm:^5.23.0":
+  version: 5.23.0
+  resolution: "undici@npm:5.23.0"
   dependencies:
     busboy: ^1.6.0
-  checksum: 048a3365f622be44fb319316cedfaa241c59cf7f3368ae7667a12323447e1822e8cc3d00f6956c852d1478a6fde1cbbe753f49e05f2fdaed229693e716ebaf35
+  checksum: 906ca4fb1d47163d2cee2ecbbc664a1d92508a2cdf1558146621109f525c983a83597910b36e6ba468240e95259be5939cea6babc99fc0c36360b16630f66784
   languageName: node
   linkType: hard
 

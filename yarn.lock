@@ -3863,10 +3863,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"openapi-fetch@npm:^0.6.1":
-  version: 0.6.1
-  resolution: "openapi-fetch@npm:0.6.1"
-  checksum: 7da3d4092f7f544e63577d098745b570d550ec63932db6e4fd38ddf52f38efd25150ed65d7952a1842d89a0f548ff61c6f8bad45d277e8a044a56735e4a71b27
+"openapi-fetch@npm:^0.7.4":
+  version: 0.7.4
+  resolution: "openapi-fetch@npm:0.7.4"
+  dependencies:
+    openapi-typescript-helpers: ^0.0.1
+  checksum: 3a318e6b4a7d427ace8de7ee60bdc3e06b65e13c911e3ae8ca15ab383b9cacbdb139aea5bcfe12c13c9497133397e88da5e866516731111f50a9432baf795555
+  languageName: node
+  linkType: hard
+
+"openapi-typescript-helpers@npm:^0.0.1":
+  version: 0.0.1
+  resolution: "openapi-typescript-helpers@npm:0.0.1"
+  checksum: 4199daeed6c6e9a7ae8e6da93a5a88b52b5003754502db408956456888e602f93d99cfc6fc04ccb64fff03abbd74c2b7adf16730df0f6ce848fb7933749ddb8c
   languageName: node
   linkType: hard
 
@@ -3905,7 +3914,7 @@ __metadata:
     mocha: ^9.2.2
     mockery: ^2.1.0
     node-fetch: ^3.3.1
-    openapi-fetch: ^0.6.1
+    openapi-fetch: ^0.7.4
     openapi-typescript: ^6.2.4
     standard: ^17.0.0
     typedoc: ^0.24.7

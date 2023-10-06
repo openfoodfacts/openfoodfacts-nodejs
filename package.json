@@ -47,7 +47,7 @@
   "dependencies": {
     "axios": "^1.4.0",
     "node-fetch": "^3.3.1",
-    "openapi-fetch": "^0.6.1"
+    "openapi-fetch": "^0.7.9"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.3.0",

@@ -523,9 +523,9 @@ __metadata:
   linkType: hard
 
 "@types/mockery@npm:^1.4.30":
-  version: 1.4.30
-  resolution: "@types/mockery@npm:1.4.30"
-  checksum: cb7b547af7296d97ece667674173afdab25e2cc3cd2c1719e50aa7144f483b9f54bbb366cc0324b610ca29788cec8a60a3c8991d3f4d1bc5d59964242de49e31
+  version: 1.4.32
+  resolution: "@types/mockery@npm:1.4.32"
+  checksum: f431e0bb8165fa0f5034f5b72fe2e684d8a9a99b46b7d141d1f212bf1daeae2d9ad6b10a504af9b40b4761ac1d7246573af6b16f9450eae214e9d5053de69ef8
   languageName: node
   linkType: hard
 

@@ -65,7 +65,7 @@
     "mockery": "^2.1.0",
     "openapi-typescript": "^6.2.4",
     "standard": "^17.0.0",
-    "typedoc": "^0.24.7",
+    "typedoc": "^0.25.3",
     "typescript": "^5.0.4"
   },
   "packageManager": "yarn@3.5.1"

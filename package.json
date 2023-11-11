@@ -50,7 +50,7 @@
     "openapi-fetch": "^0.6.1"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.3.0",
+    "@commitlint/cli": "^18.4.0",
     "@commitlint/config-conventional": "^18.4.0",
     "@types/chai": "^4.3.5",
     "@types/mocha": "^10.0.1",

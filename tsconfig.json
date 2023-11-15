@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
     "target": "ES2015",
+    "rootDirs": [
+      "src",
+      "schemas"
+    ],
     "module": "CommonJS",
     "lib": [
       "ES2022"

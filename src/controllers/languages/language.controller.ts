@@ -1,21 +1,18 @@
-import {Brand, Taxonomy} from "../../taxonomy/types";
-import {getTaxo} from "../../taxonomy/api";
+import { Language, Taxonomy } from '../../taxonomy/types'
+import { getTaxo, getTaxoEntry } from '../../taxonomy/api'
 
+export class Languages {
+  private readonly baseUrl
 
-export class Brands {
-    private readonly fetch;
-    private readonly getTaxoEntry;
+  constructor (baseUrl: string) {
+    this.baseUrl = baseUrl
+  }
 
-    constructor(fetch, getTaxoEntry) {
-        this.fetch = fetch;
-        this.getTaxoEntry = getTaxoEntry;
-    }
+  async getLanguages (): Promise<Taxonomy<Language>> {
+    return await getTaxo('languages')
+  }
 
-    async getBrands (): Promise<Taxonomy<Brand>> {
-        return await getTaxo('brands', this.fetch)
-    }
-
-    async getBrand (brandName: string): Promise<Object> {
-        return await this.getTaxoEntry('brands', brandName)
-    }
+  async getLanguage (languageName: string): Promise<Language> {
+    return await getTaxoEntry(this.baseUrl, 'languages', languageName)
+  }
 }

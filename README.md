@@ -15,8 +15,8 @@ pnpm add openfoodfacts-nodejs
 #### Example code snippet:
 
 ```ts
-import OFF from "openfoodfacts-nodejs";
-const client = new OFF();
+import { OpenFoodFacts } from "openfoodfacts-nodejs";
+const client = new OFF({ country: 'string' || null });
 
 client.getProduct("5000112546415").then(console.log);
 ```

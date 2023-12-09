@@ -1,5 +1,5 @@
 {
-  "name": "openfoodfacts-nodejs",
+  "name": "openfoodfacts-nodejs-ts",
   "version": "2.0.0",
   "description": "Open Food Facts API NodeJS Wrapper",
   "exports": [

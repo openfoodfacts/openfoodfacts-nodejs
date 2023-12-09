@@ -4239,9 +4239,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"openfoodfacts-nodejs@workspace:.":
+"openfoodfacts-nodejs-ts@workspace:.":
   version: 0.0.0-use.local
-  resolution: "openfoodfacts-nodejs@workspace:."
+  resolution: "openfoodfacts-nodejs-ts@workspace:."
   dependencies:
     "@commitlint/cli": ^18.4.1
     "@commitlint/config-conventional": ^18.4.0

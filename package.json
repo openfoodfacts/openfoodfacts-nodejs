@@ -47,7 +47,6 @@
   },
   "homepage": "https://github.com/openfoodfacts/openfoodfacts-nodejs#readme",
   "dependencies": {
-    "axios": "^1.6.2",
     "openapi-fetch": "^0.8.2"
   },
   "devDependencies": {
@@ -61,15 +60,13 @@
     "@typescript-eslint/eslint-plugin": "^6.13.2",
     "@typescript-eslint/parser": "^6.13.2",
     "all-contributors-cli": "^6.26.1",
-    "boxy-jsdoc-template": "^2.0.2",
     "chai": "^4.3.10",
     "eslint": "^8.55.0",
     "formdata-node": "^6.0.3",
-    "jsdoc": "^4.0.2",
     "mocha": "^10.2.0",
     "mockery": "^2.1.0",
     "openapi-typescript": "^6.7.2",
-    "standard": "^17.1.0",
+    "prettier": "^3.1.1",
     "typedoc": "^0.25.4",
     "typescript": "^5.3.3"
   },

@@ -17,7 +17,7 @@
     "api:prices": "openapi-typescript https://prices.openfoodfacts.net/openapi.json --output schemas/prices.d.ts",
     "api:folksonomy": "openapi-typescript https://api.folksonomy.openfoodfacts.org/openapi.json --output schemas/folksonomy.d.ts",
     "fix": "standard --fix",
-    "test": "mocha --require ts-node/register test/**/*.ts",
+    "test": "mocha test/**/*.ts",
     "build:docs": "typedoc main.ts",
     "contributors:add": "all-contributors add",
     "contributors:generate": "all-contributors generate"

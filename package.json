@@ -48,7 +48,7 @@
   "homepage": "https://github.com/openfoodfacts/openfoodfacts-nodejs#readme",
   "dependencies": {
     "axios": "^1.6.2",
-    "openapi-fetch": "^0.6.1"
+    "openapi-fetch": "0.8.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^18.4.1",

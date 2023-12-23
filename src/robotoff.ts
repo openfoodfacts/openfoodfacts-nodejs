@@ -1,28 +1,31 @@
 import { paths } from '../schemas/robotoff'
 import createClient from 'openapi-fetch'
+import { Fetch } from './types'
 
 export class Robotoff {
   private readonly client: ReturnType<typeof createClient<paths>>
 
   constructor (
-    baseUrl: string
+    baseUrl: string,
+    fetch?: Fetch
   ) {
     this.client = createClient<paths>({
-      baseUrl
+      baseUrl,
+      fetch
     })
   }
 
   async annotate (
     body: paths['/insights/annotate']['post']['requestBody']['content']['application/x-www-form-urlencoded']
   ): Promise<any> {
-    const { data } = await this.client.post('/insights/annotate', {
+    const { data } = await this.client.POST('/insights/annotate', {
       body
     })
     return data
   }
 
   async questionsByProductCode (code: number): Promise<any> {
-    const { data } = await this.client.get('/questions/{barcode}', {
+    const { data } = await this.client.GET('/questions/{barcode}', {
       params: {
         path: { barcode: code }
       }
@@ -31,7 +34,7 @@ export class Robotoff {
   }
 
   async insightDetail (id: string): Promise<any> {
-    const { data } = await this.client.get('/insights/detail/{id}', {
+    const { data } = await this.client.GET('/insights/detail/{id}', {
       params: { path: { id } }
     })
     return data
@@ -39,7 +42,7 @@ export class Robotoff {
 
   async loadLogo (logoId: string): Promise<any> {
     // @ts-expect-error TODO: still not documented
-    const { data } = await this.client.get('/images/logos/{logoId}', {
+    const { data } = await this.client.GET('/images/logos/{logoId}', {
       params: {
         path: { logoId }
       }

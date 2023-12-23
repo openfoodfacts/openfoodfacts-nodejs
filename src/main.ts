@@ -1,7 +1,7 @@
 import { Robotoff } from './robotoff'
 import { Additives, Brands, Labels, Languages, Categories, Countries, Ingredients, Products, Packagings, States, Stores } from './controllers'
 
-import { OffOptions } from './taxonomy/types'
+import { Fetch } from './types'
 
 export * as TaxoTypes from './taxonomy/types'
 export * as Types from './types'
@@ -9,6 +9,7 @@ export * as Types from './types'
 /** Wrapper of OFF API */
 export class OpenFoodFacts {
   private readonly baseUrl: string
+
   readonly robotoff: Robotoff
 
   readonly additives: Additives
@@ -25,13 +26,13 @@ export class OpenFoodFacts {
 
   /**
    * Create OFF object
-   * @param options - Options for the OFF Object
+   * @param fetch - fetcher to be used in the client | Default to openapi-fetch
    */
   constructor (
-    options: OffOptions
+    fetch?: Fetch
   ) {
-    this.baseUrl = `https://${options?.country ?? 'world'}.openfoodfacts.org`
-    this.robotoff = new Robotoff('https://robotoff.openfoodfacts.org')
+    this.baseUrl = 'https://world.openfoodfacts.org'
+    this.robotoff = new Robotoff('https://robotoff.openfoodfacts.org', fetch)
 
     this.additives = new Additives()
     this.brands = new Brands(this.baseUrl)
@@ -41,7 +42,7 @@ export class OpenFoodFacts {
     this.labels = new Labels()
     this.languages = new Languages(this.baseUrl)
     this.packagings = new Packagings()
-    this.products = new Products(this.baseUrl)
+    this.products = new Products(this.baseUrl, fetch)
     this.states = new States()
     this.stores = new Stores()
   }

@@ -89,11 +89,11 @@ __metadata:
   linkType: hard
 
 "@commitlint/config-conventional@npm:^18.4.0":
-  version: 18.4.2
-  resolution: "@commitlint/config-conventional@npm:18.4.2"
+  version: 18.4.4
+  resolution: "@commitlint/config-conventional@npm:18.4.4"
   dependencies:
     conventional-changelog-conventionalcommits: ^7.0.2
-  checksum: ed4a5c593e5519ccea93ee050c5bbaa642f43ca89b4795929b3be199402d3fd04f2f6651be58441bbbeb49b26158359c2b67d6c08fe4c64d0beb2405d2dd5052
+  checksum: 53238dfac4bef5dcee301cbe1cfc4501054adf9bc1c9bcda47ff0039cf108fd0ffa5e27ff608e62baced9dc976745e7dc2d2a8242704b23251632ed59e303be2
   languageName: node
   linkType: hard
 

@@ -25,13 +25,15 @@ export class OpenFoodFacts {
   readonly stores: Stores
 
   /**
-   * Create OFF object
+   * Create OFF client
    * @param fetch - fetcher to be used in the client | Default to openapi-fetch
+   * @param country - country from where base url should point
    */
   constructor (
-    fetch?: Fetch
+    fetch?: Fetch,
+    country: string = "world",
   ) {
-    this.baseUrl = 'https://world.openfoodfacts.org'
+    this.baseUrl = `https://${country}.openfoodfacts.org`
     this.robotoff = new Robotoff('https://robotoff.openfoodfacts.org', fetch)
 
     this.additives = new Additives()

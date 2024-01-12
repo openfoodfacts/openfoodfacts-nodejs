@@ -3,7 +3,11 @@ updates:
   - package-ecosystem: 'npm'
     directory: '/'
     schedule:
-      interval: 'daily'
+      interval: weekly
+    groups:
+      linting:
+        patterns:
+          - "@commitlint/*"
     commit-message:
       prefix: "chore"
       include: "scope"
@@ -11,7 +15,7 @@ updates:
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
-      interval: daily
+      interval: weekly
     commit-message:
       prefix: "chore"
       include: "scope"

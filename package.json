@@ -1,5 +1,5 @@
 {
-  "name": "openfoodfacts-nodejs",
+  "name": "openfoodfacts-nodejs-ts",
   "version": "2.0.0",
   "description": "Open Food Facts API NodeJS Wrapper",
   "exports": [
@@ -7,25 +7,27 @@
   ],
   "types": "dist/main.d.ts",
   "scripts": {
-    "build": "yarn openapi && tsc",
-    "lint": "standard",
-    "commitmsg": "commitlint -quiet=0 --extends=@commitlint/config-conventional -e",
-    "precommit": "standard `git diff --name-only --staged --relative | grep '.js$'`",
+    "build": "tsc",
+    "lint": "ts-standard",
+    "fix": "ts-standard --fix",
+    "commitmsg": "commitlint -q true --extends=@commitlint/config-conventional -e",
+    "precommit": "ts-standard `git diff --name-only --staged --relative | grep '.js$'`",
     "openapi": "yarn openapi:server && yarn openapi:robotoff",
-    "openapi:server": "openapi-typescript './server/docs/api/ref/**/*.{yml,yaml}' --output schemas/",
-    "openapi:robotoff": "openapi-typescript './robotoff/doc/references/api.yml' --output 'schemas/robotoff.ts'",
-    "fix": "standard --fix",
+    "openapi:server": "openapi-typescript './server/docs/api/ref/**/*.{yml,yaml}' -o schemas/",
+    "openapi:robotoff": "openapi-typescript './robotoff/doc/references/api.yml' -o 'schemas/robotoff.ts'",
     "test": "mocha --require ts-node/register test/**/*.ts",
     "build:docs": "typedoc main.ts",
     "contributors:add": "all-contributors add",
     "contributors:generate": "all-contributors generate"
   },
-  "standard": {
+  "ts-standard": {
     "env": [
       "mocha"
     ],
     "ignore": [
-      "/docs/**/*.js"
+      "/docs/**/*.ts",
+      "robotoff",
+      "server"
     ]
   },
   "repository": {
@@ -45,9 +47,8 @@
   },
   "homepage": "https://github.com/openfoodfacts/openfoodfacts-nodejs#readme",
   "dependencies": {
-    "axios": "^1.4.0",
-    "node-fetch": "^3.3.1",
-    "openapi-fetch": "^0.6.1"
+    "axios": "^1.6.2",
+    "openapi-fetch": "0.8.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^18.4.1",
@@ -61,10 +62,10 @@
     "chai": "^4.3.6",
     "formdata-node": "^5.0.0",
     "jsdoc": "^4.0.2",
-    "mocha": "^9.2.2",
+    "mocha": "^10.2.0",
     "mockery": "^2.1.0",
-    "openapi-typescript": "^6.2.4",
-    "standard": "^17.0.0",
+    "openapi-typescript": "^6.7.2",
+    "ts-standard": "^12.0.2",
     "typedoc": "^0.24.7",
     "typescript": "^5.0.4"
   },

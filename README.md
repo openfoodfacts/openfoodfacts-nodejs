@@ -15,7 +15,12 @@ pnpm add openfoodfacts-nodejs
 #### Example code snippet:
 
 ```ts
-import OFF from "openfoodfacts-nodejs";
+import { OpenFoodFacts } from "openfoodfacts-nodejs";
+
+ /** Optionnal options for client
+ * @param fetch - fetcher to be used in the client | Default to openapi-fetch
+ * @param country - country from where base url should point / Default to world
+ */
 const client = new OFF();
 
 client.getProduct("5000112546415").then(console.log);

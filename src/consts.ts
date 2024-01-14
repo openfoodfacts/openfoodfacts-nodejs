@@ -1,1 +1,1 @@
-export const STATIC_HOST = "https://static.openfoodfacts.org";
+export const STATIC_HOST = 'https://static.openfoodfacts.org'

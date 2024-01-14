@@ -7,16 +7,18 @@
     ],
     "module": "CommonJS",
     "lib": [
-      "ES2022"
+      "ES2022",
+      "dom",
     ],
     "declaration": true,
     "outDir": "./dist",
     "strict": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
   },
   "exclude": [
     "node_modules",
     "dist",
-    "server"
+    "server",
+    "robotoff"
   ]
 }

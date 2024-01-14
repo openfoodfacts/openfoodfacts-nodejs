@@ -1,56 +1,52 @@
-import { RequestInfo } from "node-fetch";
-import { paths, components } from "../schemas/robotoff";
-import createClient from "openapi-fetch";
+import { paths } from '../schemas/robotoff'
+import createClient from 'openapi-fetch'
+import { Fetch } from './types'
 
 export class Robotoff {
-  private readonly fetch: (
-    url: URL | RequestInfo,
-    init?: RequestInit
-  ) => Promise<Response>;
+  private readonly client: ReturnType<typeof createClient<paths>>
 
-  private readonly client: ReturnType<typeof createClient<paths>>;
-
-  constructor(
-    fetch: (url: URL | RequestInfo, init?: RequestInit) => Promise<Response>
+  constructor (
+    baseUrl: string,
+    fetch?: Fetch
   ) {
-    this.fetch = fetch;
     this.client = createClient<paths>({
-      fetch: this.fetch,
-      baseUrl: "https://robotoff.openfoodfacts.org",
-    });
+      baseUrl,
+      fetch
+    })
   }
 
-  async annotate(
-    body: paths["/insights/annotate"]["post"]["requestBody"]["content"]["application/x-www-form-urlencoded"]
-  ) {
-    return this.client.post("/insights/annotate", {
-      body: body,
-    });
+  async annotate (
+    body: paths['/insights/annotate']['post']['requestBody']['content']['application/x-www-form-urlencoded']
+  ): Promise<any> {
+    const { data } = await this.client.POST('/insights/annotate', {
+      body
+    })
+    return data
   }
 
-  async questionsByProductCode(code: number) {
-    const result = await this.client.get("/questions/{barcode}", {
+  async questionsByProductCode (code: number): Promise<any> {
+    const { data } = await this.client.GET('/questions/{barcode}', {
       params: {
-        path: { barcode: code },
-      },
-    });
-    return result.data;
+        path: { barcode: code }
+      }
+    })
+    return data
   }
 
-  async insightDetail(id: string) {
-    const result = await this.client.get("/insights/detail/{id}", {
-      params: { path: { id } },
-    });
-    return result.data;
+  async insightDetail (id: string): Promise<any> {
+    const { data } = await this.client.GET('/insights/detail/{id}', {
+      params: { path: { id } }
+    })
+    return data
   }
 
-  async loadLogo(logoId: string) {
+  async loadLogo (logoId: string): Promise<any> {
     // @ts-expect-error TODO: still not documented
-    const result = await this.client.get("/images/logos/{logoId}", {
+    const { data } = await this.client.GET('/images/logos/{logoId}', {
       params: {
-        path: { logoId },
-      },
-    });
-    return result.data;
+        path: { logoId }
+      }
+    })
+    return data
   }
 }

@@ -18,21 +18,24 @@ pnpm add git+https://github.com/openfoodfacts/openfoodfacts-nodejs.git
 
 ```ts
 import OpenFoodFacts from "openfoodfacts-nodejs";
-const client = new OpenFoodFacts();
 
-client.getProduct("5000112546415").then(console.log);
+const client = new OpenFoodFacts();
+client.getProduct("5000112546415").then((it) => console.log(it));
 ```
 
 ## Development
-
-The project uses [openapi-typescript](https://github.com/drwpow/openapi-typescript) to generate the API bindings automatically from the OpenAPI specification.
-
-The folder `server` is a submodule of the [Open Food Facts Server](https://github.com/openfoodfacts/openfoodfacts-server) repository.
 
 ### Prerequisites
 
 - Node.js
 - Yarn v4
+
+### API bindings
+
+The project uses [openapi-typescript](https://github.com/drwpow/openapi-typescript) to generate the API bindings automatically from the OpenAPI specification.
+
+To generate the API bindings, run `yarn api`.
+The files are to be committed to the repository, so that the SDK can be used without having to download the specs every time.
 
 ### Building
 

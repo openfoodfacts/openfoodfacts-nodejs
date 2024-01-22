@@ -1,6 +1,0 @@
-[submodule "server"]
-	path = server
-	url = https://github.com/openfoodfacts/openfoodfacts-server.git
-[submodule "robotoff"]
-	path = robotoff
-	url = git@github.com:openfoodfacts/robotoff.git

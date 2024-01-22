@@ -4,11 +4,12 @@ import createClient from "openapi-fetch";
 export default class Robotoff {
   private readonly fetch: typeof global.fetch;
 
-  private readonly client: ReturnType<typeof createClient<paths>>;
+  // The raw openapi-fetch client is used for every request exposed by the openapi schema
+  private readonly raw: ReturnType<typeof createClient<paths>>;
 
   constructor(fetch: typeof global.fetch) {
     this.fetch = fetch;
-    this.client = createClient<paths>({
+    this.raw = createClient<paths>({
       fetch: this.fetch,
       baseUrl: "https://robotoff.openfoodfacts.org",
     });
@@ -17,13 +18,13 @@ export default class Robotoff {
   async annotate(
     body: paths["/insights/annotate"]["post"]["requestBody"]["content"]["application/x-www-form-urlencoded"]
   ) {
-    return this.client.POST("/insights/annotate", {
+    return this.raw.POST("/insights/annotate", {
       body: body,
     });
   }
 
   async questionsByProductCode(code: number) {
-    const result = await this.client.GET("/questions/{barcode}", {
+    const result = await this.raw.GET("/questions/{barcode}", {
       params: {
         path: { barcode: code },
       },
@@ -32,7 +33,7 @@ export default class Robotoff {
   }
 
   async insightDetail(id: string) {
-    const result = await this.client.GET("/insights/detail/{id}", {
+    const result = await this.raw.GET("/insights/detail/{id}", {
       params: { path: { id } },
     });
     return result.data;
@@ -40,7 +41,7 @@ export default class Robotoff {
 
   async loadLogo(logoId: string) {
     // @ts-expect-error TODO: still not documented
-    const result = await this.client.GET("/images/logos/{logoId}", {
+    const result = await this.raw.GET("/images/logos/{logoId}", {
       params: { path: { logoId } },
     });
     return result.data;

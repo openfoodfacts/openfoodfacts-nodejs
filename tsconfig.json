@@ -7,10 +7,7 @@
     },
     "forceConsistentCasingInFileNames": true,
     "target": "ES2015",
-    "rootDirs": [
-      "src",
-      "src/schemas"
-    ],
+    "rootDir": "./src",
     "module": "CommonJS",
     "lib": [
       "ES2022",
@@ -24,5 +21,6 @@
   "exclude": [
     "node_modules",
     "dist",
+    "test"
   ],
 }

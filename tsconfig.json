@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "forceConsistentCasingInFileNames": true,
     "target": "ES2015",
     "rootDirs": [
       "src",

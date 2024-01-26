@@ -2,9 +2,10 @@ import { paths } from "../schemas/robotoff";
 import createClient from "openapi-fetch";
 
 export default class Robotoff {
+  /** The fetch function used for every request */
   private readonly fetch: typeof global.fetch;
 
-  // The raw openapi-fetch client is used for every request exposed by the openapi schema
+  /** The raw openapi-fetch client is used for every request exposed by the openapi schema */
   private readonly raw: ReturnType<typeof createClient<paths>>;
 
   constructor(fetch: typeof global.fetch) {

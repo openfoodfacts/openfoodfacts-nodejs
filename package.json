@@ -7,7 +7,8 @@
   ],
   "types": "dist/main.d.ts",
   "scripts": {
-    "build": "yarn api && tsc",
+    "build": "tsc",
+    "build:docs": "typedoc src/main.ts",
     "lint": "standard",
     "commitmsg": "commitlint -quiet=0 --extends=@commitlint/config-conventional -e",
     "precommit": "standard `git diff --name-only --staged --relative | grep '.js$'`",
@@ -18,7 +19,6 @@
     "api:folksonomy": "openapi-typescript https://api.folksonomy.openfoodfacts.org/openapi.json --output schemas/folksonomy.d.ts",
     "fix": "standard --fix",
     "test": "mocha test/**/*.ts",
-    "build:docs": "typedoc main.ts",
     "contributors:add": "all-contributors add",
     "contributors:generate": "all-contributors generate"
   },

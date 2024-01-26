@@ -1,5 +1,6 @@
-import { paths } from "../schemas/robotoff";
 import createClient from "openapi-fetch";
+
+import { paths } from "$schemas/robotoff";
 
 export default class Robotoff {
   /** The fetch function used for every request */

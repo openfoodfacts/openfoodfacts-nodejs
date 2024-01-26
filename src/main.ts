@@ -1,6 +1,7 @@
-import { paths, components } from "../schemas/server/docs/api/ref/api";
 import createClient from "openapi-fetch";
-import { Product, SearchResult } from "../types";
+
+import { paths, components, external } from "$schemas/server/docs/api/ref/api";
+
 import Robotoff from "./robotoff";
 import { TAXONOMY_URL } from "./taxonomy/api";
 import {
@@ -18,18 +19,24 @@ import {
   Taxonomy,
 } from "./taxonomy/types";
 
-type OpenFoodFactsOptions = { country: string };
+export type OpenFoodFactsOptions = { country: string };
+export type Product = components["schemas"]["Product"];
+export type SearchResult = external["responses/search_for_products.yaml"];
 
 export * from "./taxonomy/types";
 
 /** Wrapper of OFF API */
-export default class OpenFoodFacts {
-  private readonly fetch: typeof global.fetch;
 
+export class OpenFoodFacts {
+  private readonly fetch: typeof global.fetch;
+  private readonly baseUrl: string;
+
+  /** The raw openapi-fetch api reference.
+   * Do not use unless a function is not implemented in the API */
   readonly raw: ReturnType<typeof createClient<paths>>;
 
+  /** Robotoff API */
   readonly robotoff: Robotoff;
-  readonly baseUrl: string;
 
   /**
    * Create OFF object
@@ -165,3 +172,5 @@ export default class OpenFoodFacts {
     return res.data;
   }
 }
+
+export default OpenFoodFacts;

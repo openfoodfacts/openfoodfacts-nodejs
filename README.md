@@ -4,33 +4,38 @@ This is the official JS/TS SDK for the Open Food Facts API.
 
 ## Installation
 
+### Development version
+
 ```shell
-npm install openfoodfacts-nodejs
+npm install git+https://github.com/openfoodfacts/openfoodfacts-nodejs.git
 # or
-yarn add openfoodfacts-nodejs
+yarn add git+https://github.com/openfoodfacts/openfoodfacts-nodejs.git
 # or
-pnpm add openfoodfacts-nodejs
+pnpm add git+https://github.com/openfoodfacts/openfoodfacts-nodejs.git
 ```
 
 #### Example code snippet:
 
 ```ts
-import OFF from "openfoodfacts-nodejs";
-const client = new OFF();
+import OpenFoodFacts from "openfoodfacts-nodejs";
 
-client.getProduct("5000112546415").then(console.log);
+const client = new OpenFoodFacts();
+client.getProduct("5000112546415").then((it) => console.log(it));
 ```
 
 ## Development
 
-The project uses [openapi-typescript](https://github.com/drwpow/openapi-typescript) to generate the API bindings automatically from the OpenAPI specification.
-
-The folder `server` is a submodule of the [Open Food Facts Server](https://github.com/openfoodfacts/openfoodfacts-server) repository.
-
 ### Prerequisites
 
-- Node.js 14+
-- Yarn v2
+- Node.js
+- Yarn v4
+
+### API bindings
+
+The project uses [openapi-typescript](https://github.com/drwpow/openapi-typescript) to generate the API bindings automatically from the OpenAPI specification.
+
+To generate the API bindings, run `yarn api`.
+The files are to be committed to the repository, so that the SDK can be used without having to download the specs every time.
 
 ### Building
 

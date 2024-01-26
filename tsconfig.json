@@ -1,13 +1,20 @@
 {
   "compilerOptions": {
+    "paths": {
+      "$schemas/*": [
+        "./src/schemas/*"
+      ],
+    },
+    "forceConsistentCasingInFileNames": true,
     "target": "ES2015",
     "rootDirs": [
       "src",
-      "schemas"
+      "src/schemas"
     ],
     "module": "CommonJS",
     "lib": [
-      "ES2022"
+      "ES2022",
+      "DOM"
     ],
     "declaration": true,
     "outDir": "./dist",
@@ -17,6 +24,5 @@
   "exclude": [
     "node_modules",
     "dist",
-    "server"
-  ]
+  ],
 }

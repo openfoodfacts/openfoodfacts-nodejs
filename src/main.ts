@@ -1,6 +1,10 @@
 import createClient from "openapi-fetch";
 
-import { paths, components, external } from "$schemas/server/docs/api/ref/api";
+import {
+  paths as pathsv2,
+  components as componentsv2,
+  external as externalv2,
+} from "$schemas/server/v2";
 
 import Robotoff from "./robotoff";
 import { TAXONOMY_URL } from "./taxonomy/api";
@@ -19,11 +23,15 @@ import {
   Taxonomy,
 } from "./taxonomy/types";
 
-export type OpenFoodFactsOptions = { country: string };
-export type Product = components["schemas"]["Product"];
-export type SearchResult = external["responses/search_for_products.yaml"];
+export type ProductV2 = componentsv2["schemas"]["Product"];
+export type SearchResultV2 = externalv2["responses/search_for_products.yaml"];
+
+// By default, use v2
+export { ProductV2 as Product, SearchResultV2 as SearchResult };
 
 export * from "./taxonomy/types";
+
+export type OpenFoodFactsOptions = { country: string };
 
 /** Wrapper of OFF API */
 
@@ -31,9 +39,8 @@ export class OpenFoodFacts {
   private readonly fetch: typeof global.fetch;
   private readonly baseUrl: string;
 
-  /** The raw openapi-fetch api reference.
-   * Do not use unless a function is not implemented in the API */
-  readonly raw: ReturnType<typeof createClient<paths>>;
+  /** Raw v2 client */
+  readonly rawv2: ReturnType<typeof createClient<pathsv2>>;
 
   /** Robotoff API */
   readonly robotoff: Robotoff;
@@ -49,7 +56,7 @@ export class OpenFoodFacts {
     this.baseUrl = `https://${options.country}.openfoodfacts.org`;
     this.fetch = fetch;
 
-    this.raw = createClient<paths>({
+    this.rawv2 = createClient<pathsv2>({
       fetch: this.fetch,
       baseUrl: this.baseUrl,
     });
@@ -119,8 +126,8 @@ export class OpenFoodFacts {
    * It is used to get a specific product using barcode
    * @param barcode Barcode of the product you want to fetch details
    */
-  async getProduct(barcode: string): Promise<Product | undefined> {
-    const res = await this.raw.GET("/api/v2/product/{barcode}", {
+  async getProduct(barcode: string): Promise<ProductV2 | undefined> {
+    const res = await this.rawv2.GET("/api/v2/product/{barcode}", {
       params: { path: { barcode } },
     });
 
@@ -132,7 +139,7 @@ export class OpenFoodFacts {
     photoId: string,
     ocrEngine: "google_cloud_vision" = "google_cloud_vision"
   ): Promise<{ status?: number } | undefined> {
-    const res = await this.raw.GET("/cgi/ingredients.pl", {
+    const res = await this.rawv2.GET("/cgi/ingredients.pl", {
       params: {
         query: {
           code: barcode,
@@ -147,8 +154,14 @@ export class OpenFoodFacts {
   }
 
   async getProductImages(barcode: string): Promise<string[] | null> {
-    const res = await this.raw.GET("/api/v2/product/{barcode}?fields=images", {
-      params: { path: { barcode } },
+    const res = await this.rawv2.GET("/api/v2/product/{barcode}", {
+      params: {
+        // @ts-expect-error query is not parsed correctly
+        query: {
+          fields: "images",
+        },
+        path: { barcode },
+      },
     });
 
     if (!res.data?.product) {
@@ -163,9 +176,9 @@ export class OpenFoodFacts {
 
   async search(
     fields?: string,
-    sortBy?: components["parameters"]["sort_by"]
-  ): Promise<SearchResult | undefined> {
-    const res = await this.raw.GET("/api/v2/search", {
+    sortBy?: componentsv2["parameters"]["sort_by"]
+  ): Promise<SearchResultV2 | undefined> {
+    const res = await this.rawv2.GET("/api/v2/search", {
       params: { query: { fields, sort_by: sortBy } },
     });
 

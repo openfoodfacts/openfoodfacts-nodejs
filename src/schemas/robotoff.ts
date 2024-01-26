@@ -50,7 +50,7 @@ export interface paths {
           count?: components["parameters"]["count"];
           server_type?: components["parameters"]["server_type"];
           insight_types?: components["parameters"]["insight_types"];
-          country?: components["parameters"]["country"];
+          countries?: components["parameters"]["countries"];
           brands?: components["parameters"]["brands"];
           value_tag?: components["parameters"]["value_tag"];
           page?: components["parameters"]["page"];
@@ -94,7 +94,7 @@ export interface paths {
           count?: components["parameters"]["count"];
           server_type?: components["parameters"]["server_type"];
           insight_types?: components["parameters"]["insight_types"];
-          country?: components["parameters"]["country"];
+          countries?: components["parameters"]["countries"];
           brands?: components["parameters"]["brands"];
           value_tag?: components["parameters"]["value_tag"];
           page?: components["parameters"]["page"];
@@ -132,7 +132,7 @@ export interface paths {
           count?: components["parameters"]["count"];
           server_type?: components["parameters"]["server_type"];
           insight_types?: components["parameters"]["insight_types"];
-          country?: components["parameters"]["country"];
+          countries?: components["parameters"]["countries"];
           brands?: components["parameters"]["brands"];
           value_tag?: components["parameters"]["value_tag"];
           page?: components["parameters"]["page"];
@@ -162,7 +162,7 @@ export interface paths {
           count?: number;
           server_type?: components["parameters"]["server_type"];
           type?: components["parameters"]["insight_type"];
-          country?: components["parameters"]["country"];
+          countries?: components["parameters"]["countries"];
           page?: components["parameters"]["page"];
           reserved_barcode?: components["parameters"]["reserved_barcode"];
           campaigns?: components["parameters"]["campaigns"];
@@ -223,7 +223,7 @@ export interface paths {
       parameters: {
         query?: {
           type?: components["parameters"]["insight_type"];
-          country?: components["parameters"]["country"];
+          countries?: components["parameters"]["countries"];
           value_tag?: components["parameters"]["value_tag"];
           server_type?: components["parameters"]["server_type"];
           count?: components["parameters"]["count"];
@@ -290,10 +290,12 @@ export interface paths {
      * is an base64-encoded string of `user:password`. Don't provide an authentication header for anonymous
      * users.
      *
-     * The annotation is an integer that can take 3 values: `0`, `1`, `-1`. `0` means the insight is incorrect
+     * The annotation is an integer that can take 4 values: `0`, `1`, `2`, `-1`. `0` means the insight is incorrect
      * (so it won't be applied), `1` means it is correct (so it will be applied) and `-1` means the insight
-     * won't be returned to the user (_skip_). We use the voting mecanism system to remember which insight
-     * to skip for a user (authenticated or not).
+     * won't be returned to the user (_skip_). `2` is used when user submit some data to the annotate endpoint
+     * (for example in some cases of category annotation).
+     *
+     * We use the voting mecanism system to remember which insight to skip for a user (authenticated or not).
      */
     post: {
       requestBody: {
@@ -484,7 +486,7 @@ export interface paths {
   "/images/logos": {
     /**
      * Fetch logos
-     * @description Return details about requested logos
+     * @description Return details about requested logos (maximum 500 logos can be fetched per request).
      */
     get: {
       parameters: {
@@ -630,15 +632,14 @@ export interface paths {
   "/predict/category": {
     /**
      * Predict categories for a product
-     * @description Both `neural` and `matcher` categorizers are available.
+     * @description Predictions are performed using a neural model.
      * As input, you can either provide:
      *
      * - the `barcode` of a product: Robotoff will fetch the product from
      *   Product Opener and will use this data as inputs to predict categories.
      * - expected inputs under a `product` key. The neural category model
      *   accepts the following fields as input: `product_name`, `ingredients_tags`,
-     *   `ocr`, `nutriments`, `images`. All fields are optional (but you should at least provide one).
-     *   The matcher categorizer requires the `lang` and `product.product_name` fields.
+     *   `ocr`, `nutriments`, `image_embeddings`. All fields are optional (but you should at least provide one).
      */
     post: {
       requestBody?: {
@@ -668,15 +669,7 @@ export interface paths {
              * @default 0.5
              */
             threshold?: number;
-            /**
-             * @description List of predictors to use, possible values are `matcher` (simple matching algorithm) and `neural` (neural network categorizer)
-             * @example [
-             *   "neural",
-             *   "matcher"
-             * ]
-             */
-            predictors?: ("neural" | "matcher")[];
-          }) | ({
+          }) | {
             /**
              * @description product information used as model input. All fields are optional, but at
              * least one field must be provided.
@@ -722,11 +715,6 @@ export interface paths {
               };
             };
             /**
-             * @description Language of the product name, only required (and used) for matcher algorithm
-             * @example en
-             */
-            lang?: string;
-            /**
              * @description If true, only return the deepest elements in the category taxonomy
              * (don't return categories that are parents of other predicted categories)
              */
@@ -737,15 +725,7 @@ export interface paths {
              * @default 0.5
              */
             threshold?: number;
-            /**
-             * @description List of predictors to use, possible values are `matcher` (simple matching algorithm) and `neural` (neural network categorizer)
-             * @example [
-             *   "neural",
-             *   "matcher"
-             * ]
-             */
-            predictors?: ("neural" | "matcher")[];
-          });
+          };
         };
       };
       responses: {
@@ -764,56 +744,6 @@ export interface paths {
                    * @example 0.6
                    */
                   confidence: number;
-                }[];
-              matcher?: {
-                  /**
-                   * @description The predicted `value_tag`
-                   * @example en:roast-chicken
-                   */
-                  value_tag: string;
-                  /** @description Additional debug information */
-                  debug: {
-                    /**
-                     * @description The pattern that matched the product name
-                     * @example roast chicken
-                     */
-                    pattern: string;
-                    /**
-                     * @description The language of the matched pattern
-                     * @example en
-                     */
-                    lang: string;
-                    /**
-                     * @description The product name that matched the category name
-                     * @example roasted chicken
-                     */
-                    product_name: string;
-                    /**
-                     * @description The product name after preprocessing (stemming, stop word removal,...)
-                     * @example roast chicken
-                     */
-                    processed_product_name: string;
-                    /**
-                     * @description The (localized) category name that matched the product name
-                     * @example Roast chicken
-                     */
-                    category_name: string;
-                    /**
-                     * @description The string match start position
-                     * @example 0
-                     */
-                    start_idx: number;
-                    /**
-                     * @description The string match end position
-                     * @example 13
-                     */
-                    end_idx: number;
-                    /**
-                     * @description If true, the processed product name matched completely with the processed category name
-                     * @example true
-                     */
-                    is_full_match: boolean;
-                  };
                 }[];
             };
           };
@@ -909,6 +839,121 @@ export interface paths {
             "application/json": {
               /** @description a list of extracted predictions */
               predictions: components["schemas"]["Prediction"][];
+            };
+          };
+        };
+        /** @description An HTTP 400 is returned if the provided parameters are invalid */
+        400: {
+          content: never;
+        };
+      };
+    };
+  };
+  "/predict/lang": {
+    /**
+     * Predict the language of a text
+     * @description Predict the language of a text using a neural model.
+     * A POST version of this endpoint is also available, it accepts a JSON body with exactly the
+     * same parameters.
+     *
+     * Use the POST version if you want to predict the language of a long text, as the GET version
+     * has a limit on the length of the text that can be provided.
+     */
+    get: {
+      parameters: {
+        query: {
+          /** @description The text to predict language of */
+          text: string;
+          /** @description the number of predictions to return */
+          k?: number;
+          /** @description the minimum probability for a language to be returned */
+          threshold?: number;
+        };
+      };
+      responses: {
+        /** @description the predicted languages */
+        200: {
+          content: {
+            "application/json": {
+              /** @description a list of predicted languages, sorted by descending probability */
+              predictions?: {
+                  /**
+                   * @description the predicted language (2-letter code)
+                   * @example en
+                   */
+                  lang?: string;
+                  /**
+                   * @description the probability of the predicted language
+                   * @example 0.9
+                   */
+                  confidence?: number;
+                }[];
+            };
+          };
+        };
+        /** @description An HTTP 400 is returned if the provided parameters are invalid */
+        400: {
+          content: never;
+        };
+      };
+    };
+  };
+  "/predict/lang/product": {
+    /**
+     * Predict the languages of the product
+     * @description Return the most common languages present on the product images, based on word-level
+     * language detection from product images.
+     *
+     * Language detection is not performed on the fly, but is based on predictions of type
+     * `image_lang` stored in the `prediction` table.
+     */
+    get: {
+      parameters: {
+        query: {
+          barcode: components["parameters"]["barcode"];
+          /** @description the minimum probability for a language to be returned */
+          server_type?: components["parameters"]["server_type"];
+        };
+      };
+      responses: {
+        /** @description The predicted languages, sorted by descending probability. */
+        200: {
+          content: {
+            "application/json": {
+              /**
+               * @description the number of words detected for each language, over all images,
+               * sorted by descending count
+               */
+              counts?: {
+                  /**
+                   * @description the predicted language (2-letter code). `null` if the language could not be detected.
+                   * @example en
+                   */
+                  lang?: string;
+                  /**
+                   * @description the number of words for which this language was detected over all images
+                   * @example 10
+                   */
+                  count?: number;
+                }[];
+              /**
+               * @description the percentage of words detected for each language, over all images,
+               * sorted by descending percentage
+               */
+              percent?: {
+                  /**
+                   * @description the predicted language (2-letter code). `null` if the language could not be detected.
+                   * @example en
+                   */
+                  lang?: string;
+                  /**
+                   * @description the percentage of words for which the language was detected over all images
+                   * @example 80.5
+                   */
+                  percent?: number;
+                }[];
+              /** @description the IDs of the images that were used to generate the predictions */
+              image_ids?: number[];
             };
           };
         };
@@ -1080,10 +1125,10 @@ export interface components {
     /** @description Filter by insight type */
     insight_type?: string;
     /**
-     * @description Filter by country tag
-     * @example en:france
+     * @description Comma separated list, filter by country value (2-letter code)
+     * @example uk
      */
-    country?: string;
+    countries?: string;
     /** @description Comma-separated list, filter by brands */
     brands?: string;
     /**

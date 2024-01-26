@@ -1564,7 +1564,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-glob@npm:^3.2.9, fast-glob@npm:^3.3.1":
+"fast-glob@npm:^3.2.9, fast-glob@npm:^3.3.2":
   version: 3.3.2
   resolution: "fast-glob@npm:3.3.2"
   dependencies:
@@ -2977,19 +2977,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"openapi-typescript@npm:^6.7.2":
-  version: 6.7.2
-  resolution: "openapi-typescript@npm:6.7.2"
+"openapi-typescript@npm:^6.7.4":
+  version: 6.7.4
+  resolution: "openapi-typescript@npm:6.7.4"
   dependencies:
     ansi-colors: "npm:^4.1.3"
-    fast-glob: "npm:^3.3.1"
+    fast-glob: "npm:^3.3.2"
     js-yaml: "npm:^4.1.0"
     supports-color: "npm:^9.4.0"
-    undici: "npm:^5.27.2"
+    undici: "npm:^5.28.2"
     yargs-parser: "npm:^21.1.1"
   bin:
     openapi-typescript: bin/cli.js
-  checksum: 6c3d5250978dbff8b8384b448eb965a3dfb97b95ddefd73a77cf6fb3b8fdc9235774d234c9efb7e103ba98c042d55a20aec00a181ab0bab92424ead2c7975584
+  checksum: 80bcac218945492e94b4763e9c6db4c30226becc32e26fa4783aae17a95be219df0448b5f80c994b495c10da837d81ee70d5509e208ca94f3d887cd70d36ca43
   languageName: node
   linkType: hard
 
@@ -3013,7 +3013,7 @@ __metadata:
     mocha: "npm:^10.2.0"
     mockery: "npm:^2.1.0"
     openapi-fetch: "npm:^0.8.2"
-    openapi-typescript: "npm:^6.7.2"
+    openapi-typescript: "npm:^6.7.4"
     prettier: "npm:^3.1.1"
     typedoc: "npm:^0.25.4"
     typescript: "npm:^5.3.3"
@@ -3910,7 +3910,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"undici@npm:^5.27.2":
+"undici@npm:^5.28.2":
   version: 5.28.2
   resolution: "undici@npm:5.28.2"
   dependencies:

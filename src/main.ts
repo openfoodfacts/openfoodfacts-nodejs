@@ -6,7 +6,7 @@ import {
   external as externalv2,
 } from "$schemas/server/v2";
 
-import Robotoff from "./robotoff";
+import { Robotoff } from "./robotoff";
 import { TAXONOMY_URL } from "./taxonomy/api";
 import {
   Additive,
@@ -30,11 +30,13 @@ export type SearchResultV2 = externalv2["responses/search_for_products.yaml"];
 export { ProductV2 as Product, SearchResultV2 as SearchResult };
 
 export * from "./taxonomy/types";
+export * from "./robotoff";
+export * from "./folksonomy";
+export * from "./prices";
 
 export type OpenFoodFactsOptions = { country: string };
 
 /** Wrapper of OFF API */
-
 export class OpenFoodFacts {
   private readonly fetch: typeof global.fetch;
   private readonly baseUrl: string;

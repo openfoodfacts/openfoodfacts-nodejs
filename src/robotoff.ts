@@ -2,7 +2,7 @@ import createClient from "openapi-fetch";
 
 import { paths } from "./schemas/robotoff";
 
-export default class Robotoff {
+export class Robotoff {
   /** The fetch function used for every request */
   private readonly fetch: typeof global.fetch;
 

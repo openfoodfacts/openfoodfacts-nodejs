@@ -2972,19 +2972,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"openapi-fetch@npm:^0.8.2":
-  version: 0.8.2
-  resolution: "openapi-fetch@npm:0.8.2"
+"openapi-fetch@npm:^0.9.3":
+  version: 0.9.3
+  resolution: "openapi-fetch@npm:0.9.3"
   dependencies:
-    openapi-typescript-helpers: "npm:^0.0.5"
-  checksum: 28da01ec9c748e1fa085e9d79d991c852c1291f33e103d8b1f1b17e5c2b51c41d94b56a7ed676e4485e83cd557df8e187374092bdf0b310d4504404aa49e5bc5
+    openapi-typescript-helpers: "npm:^0.0.7"
+  checksum: fb9bb29ec90a9107e4b768b1400e7005266f705084592f5ba3a26d69acf2d6ac78c5a81b9e75cc52063dffba5ee65060fa3c2e8a35367ef3cebf814713e4a725
   languageName: node
   linkType: hard
 
-"openapi-typescript-helpers@npm:^0.0.5":
-  version: 0.0.5
-  resolution: "openapi-typescript-helpers@npm:0.0.5"
-  checksum: 1c1024e552af9f3bdf3ab7a76bd7208f783f9af53b9cfebc86984e700e85df071a73cf5f560cb295a547a0dc88ccd87a689a7fd286781e3b04716af8aa583898
+"openapi-typescript-helpers@npm:^0.0.7":
+  version: 0.0.7
+  resolution: "openapi-typescript-helpers@npm:0.0.7"
+  checksum: bbfb408242961115a10e1fad27a2783888e9f46c36540f26b6e192d4de57f32b278b6dccc1707f39ef0cd9cef1335f34f270656c207224037f84ba38d8a78d15
   languageName: node
   linkType: hard
 
@@ -3023,7 +3023,7 @@ __metadata:
     formdata-node: "npm:^6.0.3"
     mocha: "npm:^10.2.0"
     mockery: "npm:^2.1.0"
-    openapi-fetch: "npm:^0.8.2"
+    openapi-fetch: "npm:^0.9.3"
     openapi-typescript: "npm:^6.7.4"
     prettier: "npm:^3.1.1"
     typedoc: "npm:^0.25.4"

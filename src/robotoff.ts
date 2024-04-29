@@ -13,7 +13,7 @@ export class Robotoff {
     this.fetch = fetch;
     this.raw = createClient<paths>({
       fetch: this.fetch,
-      baseUrl: "https://robotoff.openfoodfacts.org",
+      baseUrl: "https://robotoff.openfoodfacts.org/api/v1",
     });
   }
 

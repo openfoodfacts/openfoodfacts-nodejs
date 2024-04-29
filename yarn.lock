@@ -429,13 +429,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/mockery@npm:^1.4.33":
-  version: 1.4.33
-  resolution: "@types/mockery@npm:1.4.33"
-  checksum: ca7b859e2d71dda8bd135eb8745f5d71beaaf4f59da50ce84be2f56c1809ee34696085ae522d53ca146c7096b30bd2a91476771e2496be9e6163a47a67e9d7b4
-  languageName: node
-  linkType: hard
-
 "@types/node-fetch@npm:^2.6.9":
   version: 2.6.9
   resolution: "@types/node-fetch@npm:2.6.9"
@@ -2663,13 +2656,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mockery@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "mockery@npm:2.1.0"
-  checksum: d6ee75930783e1720b551d366d3db4494f0c7dbffda37c86c6f7a9282e12b29e89edbcd9d19be293a23babdd3211c74c3f64664b16198ae809823facd77cb9ab
-  languageName: node
-  linkType: hard
-
 "ms@npm:2.1.2":
   version: 2.1.2
   resolution: "ms@npm:2.1.2"
@@ -2855,7 +2841,6 @@ __metadata:
     "@types/chai": "npm:^4.3.11"
     "@types/eslint": "npm:^8"
     "@types/mocha": "npm:^10.0.6"
-    "@types/mockery": "npm:^1.4.33"
     "@types/node-fetch": "npm:^2.6.9"
     "@typescript-eslint/eslint-plugin": "npm:^7.0.0"
     "@typescript-eslint/parser": "npm:^7.8.0"
@@ -2864,7 +2849,6 @@ __metadata:
     eslint: "npm:^9.1.1"
     formdata-node: "npm:^6.0.3"
     mocha: "npm:^10.2.0"
-    mockery: "npm:^2.1.0"
     openapi-fetch: "npm:^0.8.2"
     openapi-typescript: "npm:^6.7.4"
     prettier: "npm:^3.1.1"

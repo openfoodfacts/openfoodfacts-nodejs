@@ -1,0 +1,9 @@
+# Schemas
+src/schemas/
+
+# Mock data
+test/mockdata/
+
+.yarn/
+
+

@@ -413,12 +413,12 @@ __metadata:
   linkType: hard
 
 "@types/node-fetch@npm:^2.6.9":
-  version: 2.6.9
-  resolution: "@types/node-fetch@npm:2.6.9"
+  version: 2.6.11
+  resolution: "@types/node-fetch@npm:2.6.11"
   dependencies:
     "@types/node": "npm:*"
     form-data: "npm:^4.0.0"
-  checksum: fc46141516191699b5f34fdf3516d3bd67421ad18da9f14785252abd22c1aa7a80ea5bcde835531b33df681f2b0d671786c3e987941547532fb447d77ebb8588
+  checksum: c416df8f182ec3826278ea42557fda08f169a48a05e60722d9c8edd4e5b2076ae281c6b6601ad406035b7201f885b0257983b61c26b3f9eb0f41192a807b5de5
   languageName: node
   linkType: hard
 

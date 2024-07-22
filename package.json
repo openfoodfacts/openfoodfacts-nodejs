@@ -65,7 +65,7 @@
     "eslint": "^9.1.1",
     "formdata-node": "^6.0.3",
     "mocha": "^10.2.0",
-    "openapi-typescript": "^6.7.4",
+    "openapi-typescript": "^7.1.0",
     "prettier": "^3.1.1",
     "typedoc": "^0.25.4",
     "typescript": "^5.3.3"

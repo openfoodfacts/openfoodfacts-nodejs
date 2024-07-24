@@ -33,7 +33,7 @@ jobs:
       - run: yarn run build:docs
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v3
         if: ${{ matrix.node-version }} == '20.x'
         with:
           path: "docs"

@@ -16,8 +16,6 @@ export type Label = TaxoNode & {
   auth_url: LocalizedString;
 };
 
-export type Country = TaxoNode & object;
-
 export type Ingredient = TaxoNode & object;
 
 export type State = TaxoNode & object;
@@ -36,10 +34,11 @@ export type Additive = TaxoNode & object;
 export type Allergen = TaxoNode & object;
 
 export type Language = TaxoNode & {
-  language_code_2: {
-    en: string;
-  };
-  language_code_3: {
-    en: string;
-  };
+  language_code_2: { en: string };
+  language_code_3: { en: string };
+};
+
+export type Country = TaxoNode & {
+  country_code_3: { en: string };
+  country_code_2: { en: string };
 };

@@ -109,3 +109,9 @@ jobs:
           github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
           labeled: 🎯 P0, 🎯 P1
           label-operator: OR
+      - uses: actions/add-to-project@main
+        with:
+          project-url: https://github.com/orgs/openfoodfacts/projects/105 # Add issue to the Prices project
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+          labeled: 💸 Prices
+          label-operator: OR   

@@ -39,7 +39,7 @@ jobs:
           label-operator: OR
       - uses: actions/add-to-project@main
         with:
-          project-url: https://github.com/orgs/openfoodfacts/projects/11 # Add issue to the open products facts project
+          project-url: https://github.com/orgs/openfoodfacts/projects/43 # Add issue to the open products facts project
           github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
           labeled: 📸 Open Products Facts
           label-operator: OR

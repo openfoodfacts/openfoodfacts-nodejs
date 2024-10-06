@@ -22,9 +22,7 @@
     "lint": "prettier --check . && eslint .",
     "format": "prettier --write .",
     "fix": "standard --fix",
-    "test": "mocha test/**/*.ts",
-    "contributors:add": "all-contributors add",
-    "contributors:generate": "all-contributors generate"
+    "test": "mocha test/**/*.ts"
   },
   "standard": {
     "env": [
@@ -60,7 +58,6 @@
     "@types/mocha": "^10.0.6",
     "@typescript-eslint/eslint-plugin": "^7.0.0",
     "@typescript-eslint/parser": "^7.8.0",
-    "all-contributors-cli": "^6.26.1",
     "chai": "^4.3.10",
     "eslint": "^9.1.1",
     "formdata-node": "^6.0.3",

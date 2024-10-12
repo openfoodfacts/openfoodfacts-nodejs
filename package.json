@@ -18,6 +18,7 @@
     "api:prices": "openapi-typescript https://prices.openfoodfacts.net/api/openapi.json --output src/schemas/prices.ts",
     "api:robotoff": "openapi-typescript https://raw.githubusercontent.com/openfoodfacts/robotoff/main/doc/references/api.yml --output src/schemas/robotoff.ts",
     "api:folksonomy": "openapi-typescript https://api.folksonomy.openfoodfacts.org/openapi.json --output src/schemas/folksonomy.ts",
+    "api:nutripatrol": "openapi-typescript https://nutripatrol.openfoodfacts.org/api/openapi.json --output src/schemas/nutripatrol.ts",
     "check": "yarn run lint && yarn run test",
     "lint": "prettier --check . && eslint .",
     "format": "prettier --write .",

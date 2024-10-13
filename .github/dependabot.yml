@@ -1,7 +1,7 @@
 version: 2
 updates:
-  - package-ecosystem: 'npm'
-    directory: '/'
+  - package-ecosystem: "npm"
+    directory: "/"
     schedule:
       interval: weekly
     groups:
@@ -10,8 +10,8 @@ updates:
           - "@commitlint/*"
           - "eslint"
       minor:
-        patterns: ['*']
-        update-types: ['minor', 'patch']
+        patterns: ["*"]
+        update-types: ["minor", "patch"]
     commit-message:
       prefix: "chore"
       include: "scope"

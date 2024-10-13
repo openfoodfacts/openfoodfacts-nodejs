@@ -13,7 +13,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x, 19.x, 20.x, 21.x]
+        node-version: [18.x, 19.x, 20.x, 21.x, 22.x]
 
     steps:
       # Checkout the repository
@@ -32,15 +32,15 @@ jobs:
 
       # Run eslint
       - name: Run ESLint
-        run: yarn run eslint .
+        run: yarn lint
 
       # Run prettier check
       - name: Run Prettier
-        run: yarn run prettier --check .
+        run: yarn format
 
       # Run build
       - name: Build project
-        run: yarn run build
+        run: yarn build
 
       # Run tests
       - name: Run tests
@@ -49,7 +49,7 @@ jobs:
       # Build documentation only for Node.js 20.x
       - name: Build documentation
         if: ${{ matrix.node-version }} == '20.x'
-        run: yarn run build:docs
+        run: yarn build:docs
 
       # Upload documentation artifact (only for Node.js 20.x)
       - name: Upload docs

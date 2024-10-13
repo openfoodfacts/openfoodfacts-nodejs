@@ -33,6 +33,7 @@ export * from "./taxonomy/types";
 export * from "./robotoff";
 export * from "./folksonomy";
 export * from "./prices";
+export * from "./nutripatrol";
 
 export type OpenFoodFactsOptions = { country: string };
 

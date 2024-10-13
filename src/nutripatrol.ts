@@ -43,11 +43,11 @@ export class NutriPatrol {
     });
   }
 
-  private async fetchApi(
+  private async fetchApi<T>(
     method: "GET" | "POST" | "PUT" | "DELETE",
     path: string,
     options: any = {},
-  ): Promise<any> {
+  ): Promise<T | NutriPatrolError> {
     const methods = {
       GET: this.raw.GET,
       POST: this.raw.POST,
@@ -62,50 +62,63 @@ export class NutriPatrol {
       if (!res.response.ok) {
         switch (res.response.status) {
           case 422:
-            throw new NutriPatrolError(
-              422,
-              "Validation error",
-              res.error?.detail?.map((d: any) => d.msg),
-            );
+            return {
+              error: {
+                statusCode: 422,
+                message: "Validation error",
+                details: res.error?.detail?.map((d: any) => d.msg),
+              },
+            } as NutriPatrolError;
           default:
             const errorDetails = await res.response.json();
-            throw new NutriPatrolError(
-              res.response.status,
-              "Error while requesting Nutripatrol API",
-              errorDetails,
-            );
+            return {
+              error: {
+                statusCode: res.response.status,
+                message: "Error while requesting Nutripatrol API",
+                details: errorDetails,
+              },
+            } as NutriPatrolError;
         }
       }
 
       const data = await res.response.json();
 
       if (!data) {
-        throw new NutriPatrolError(500, `Malformed API response.`);
+        return {
+          error: {
+            statusCode: 500,
+            message: "Malformed API response",
+          },
+        };
       }
 
       return data;
     } catch (error) {
-      if (error instanceof NutriPatrolError) {
-        throw error;
-      }
-      throw new NutriPatrolError(500, "An unexpected error occurred");
+      return {
+        error: {
+          statusCode: 500,
+          message: "An unexpected error occurred",
+        },
+      };
     }
   }
 
   /**
    * List all flags.
    *
-   * @returns {Promise<Flag[]>} - A promise that resolves with the list of flag data.
-   * @throws {NutriPatrolError} - Throws an error if the request fails, if the response is malformed.
+   * @returns {Promise<Flag[] | NutriPatrolError>} - A promise that resolves with the list of flag data or error.
    *
-   * The thrown error can be one of the following:
+   * The error can be one of the following:
    * - A `NutriPatrolError` with status 422 if there is a validation issue (e.g., invalid flag ID).
    * - A `NutriPatrolError` with the corresponding HTTP status code for other types of errors (e.g., 404, 500).
    * - A generic `NutriPatrolError` with status 500 for unexpected errors.
    *
    */
-  async getFlags(): Promise<Flag[]> {
-    const data: FlagsResponse = await this.fetchApi("GET", `/api/v1/flags`);
+  async getFlags(): Promise<Flag[] | NutriPatrolError> {
+    const data = await this.fetchApi<FlagsResponse>("GET", `/api/v1/flags`);
+    if ("error" in data) {
+      return data;
+    }
     return data.flags;
   }
 
@@ -113,23 +126,25 @@ export class NutriPatrol {
    * Retrieves a specific flag by its ID from the NutriPatrol API.
    *
    * @param {number} flagId - The ID of the flag to fetch.
-   * @returns {Promise<Flag>} - A promise that resolves with the flag data if found.
-   * @throws {NutriPatrolError} - Throws an error if the request fails, if the response is malformed, or if there is a validation error (HTTP 422).
+   * @returns {Promise<Flag | NutriPatrolError>} - A promise that resolves with the flag data if found or error.
    *
-   * The thrown error can be one of the following:
+   * The error can be one of the following:
    * - A `NutriPatrolError` with status 422 if there is a validation issue (e.g., invalid flag ID).
    * - A `NutriPatrolError` with the corresponding HTTP status code for other types of errors (e.g., 404, 500).
    * - A generic `NutriPatrolError` with status 500 for unexpected errors.
    *
    */
-  async getFlagById(flagId: number): Promise<Flag> {
-    const data: FlagResponse = await this.fetchApi(
+  async getFlagById(flagId: number): Promise<Flag | NutriPatrolError> {
+    const data = await this.fetchApi<FlagResponse>(
       "GET",
       `/api/v1/flags/{flag_id}`,
       {
         params: { path: { flag_id: flagId } },
       },
     );
+    if ("error" in data) {
+      return data;
+    }
     return data.__data__;
   }
 
@@ -137,19 +152,21 @@ export class NutriPatrol {
    * Create a flag in the NutriPatrol API.
    *
    * @param {Flag} flagData - Data for the flag to create.
-   * @returns {Promise<Flag>} - A promise that resolves with the flag created.
-   * @throws {NutriPatrolError} - Throws an error if the request fails, if the response is malformed, or if there is a validation error (HTTP 422).
+   * @returns {Promise<Flag | NutriPatrolError>} - A promise that resolves with the flag created or error..
    *
-   * The thrown error can be one of the following:
+   * The error can be one of the following:
    * - A `NutriPatrolError` with status 422 if there is a validation issue (e.g., invalid flag ID).
    * - A `NutriPatrolError` with the corresponding HTTP status code for other types of errors (e.g., 404, 500).
    * - A generic `NutriPatrolError` with status 500 for unexpected errors.
    *
    */
-  async createFlag(flagData: Flag): Promise<Flag> {
-    const data: Flag = await this.fetchApi("POST", `/api/v1/flags`, {
+  async createFlag(flagData: Flag): Promise<Flag | NutriPatrolError> {
+    const data = await this.fetchApi<Flag>("POST", `/api/v1/flags`, {
       body: flagData,
     });
+    if ("error" in data) {
+      return data;
+    }
     return data;
   }
 
@@ -157,10 +174,9 @@ export class NutriPatrol {
    * Get flags by ticket batch.
    *
    * @param {number[]} ticketIds - Ids of ticket to get flags from.
-   * @returns {Promise<{ [ticketId: string]: Flag[] }>} - A promise that resolves with the flags associated to each ticket.
-   * @throws {NutriPatrolError} - Throws an error if the request fails, if the response is malformed, or if there is a validation error (HTTP 422).
+   * @returns {Promise<{ [ticketId: string]: Flag[] } | NutriPatrolError>} - A promise that resolves with the flags associated to each ticket or error.
    *
-   * The thrown error can be one of the following:
+   * The error can be one of the following:
    * - A `NutriPatrolError` with status 422 if there is a validation issue (e.g., invalid flag ID).
    * - A `NutriPatrolError` with the corresponding HTTP status code for other types of errors (e.g., 404, 500).
    * - A generic `NutriPatrolError` with status 500 for unexpected errors.
@@ -168,8 +184,8 @@ export class NutriPatrol {
    */
   async getFlagsByTicketBatch(
     ticketIds: number[],
-  ): Promise<{ [ticketId: string]: Flag[] }> {
-    const data: FlagBatchResponse = await this.fetchApi(
+  ): Promise<{ [ticketId: string]: Flag[] } | NutriPatrolError> {
+    const data = await this.fetchApi<FlagBatchResponse>(
       "POST",
       `/api/v1/batch`,
       {
@@ -178,6 +194,9 @@ export class NutriPatrol {
         },
       },
     );
+    if ("error" in data) {
+      return data;
+    }
     return data.ticket_id_to_flags;
   }
 
@@ -185,10 +204,9 @@ export class NutriPatrol {
    * List all tickets.
    *
    * @param {object} query - Parameters to filter the tickets.
-   * @returns {Promise<Ticket[]>} - A promise that resolves with the list of ticket data.
-   * @throws {NutriPatrolError} - Throws an error if the request fails, if the response is malformed.
+   * @returns {Promise<Ticket[] | NutriPatrolError>} - A promise that resolves with the list of ticket data or error.
    *
-   * The thrown error can be one of the following:
+   * The error can be one of the following:
    * - A `NutriPatrolError` with status 422 if there is a validation issue (e.g., invalid filter value).
    * - A `NutriPatrolError` with the corresponding HTTP status code for other types of errors (e.g., 404, 500).
    * - A generic `NutriPatrolError` with status 500 for unexpected errors.
@@ -200,12 +218,15 @@ export class NutriPatrol {
     reason?: "inappropriate" | "human" | "beauty" | "other";
     page?: number;
     page_size?: number;
-  }): Promise<Ticket[]> {
-    const data: TicketsResponse = await this.fetchApi(
+  }): Promise<Ticket[] | NutriPatrolError> {
+    const data = await this.fetchApi<TicketsResponse>(
       "GET",
       `/api/v1/tickets`,
       { params: { query } },
     );
+    if ("error" in data) {
+      return data;
+    }
     return data.tickets;
   }
 
@@ -213,23 +234,25 @@ export class NutriPatrol {
    * Retrieves a specific ticket by its ID from the NutriPatrol API.
    *
    * @param {number} ticketId - The ID of the ticket to fetch.
-   * @returns {Promise<Ticket>} - A promise that resolves with the ticket data if found.
-   * @throws {NutriPatrolError} - Throws an error if the request fails, if the response is malformed, or if there is a validation error (HTTP 422).
+   * @returns {Promise<Ticket | NutriPatrolError>} - A promise that resolves with the ticket data if found or error.
    *
-   * The thrown error can be one of the following:
+   * The error can be one of the following:
    * - A `NutriPatrolError` with status 422 if there is a validation issue (e.g., invalid ticket ID).
    * - A `NutriPatrolError` with the corresponding HTTP status code for other types of errors (e.g., 404, 500).
    * - A generic `NutriPatrolError` with status 500 for unexpected errors.
    *
    */
-  async getTicketById(ticketId: number): Promise<Ticket> {
-    const data: Ticket = await this.fetchApi(
+  async getTicketById(ticketId: number): Promise<Ticket | NutriPatrolError> {
+    const data = await this.fetchApi<Ticket>(
       "GET",
       `/api/v1/tickets/{ticket_id}`,
       {
         params: { path: { ticket_id: ticketId } },
       },
     );
+    if ("error" in data) {
+      return data;
+    }
     return data;
   }
 
@@ -237,19 +260,23 @@ export class NutriPatrol {
    * Create a ticket in the NutriPatrol API.
    *
    * @param {Ticket} ticketData - Data for the ticket to create.
-   * @returns {Promise<Ticket>} - A promise that resolves with the ticket created.
-   * @throws {NutriPatrolError} - Throws an error if the request fails, if the response is malformed, or if there is a validation error (HTTP 422).
+   * @returns {Promise<Ticket | NutriPatrolError>} - A promise that resolves with the ticket created or error.
    *
-   * The thrown error can be one of the following:
+   * The error can be one of the following:
    * - A `NutriPatrolError` with status 422 if there is a validation issue (e.g., invalid ticket status).
    * - A `NutriPatrolError` with the corresponding HTTP status code for other types of errors (e.g., 404, 500).
    * - A generic `NutriPatrolError` with status 500 for unexpected errors.
    *
    */
-  async createTicket(ticketData: Omit<Ticket, "id">): Promise<Ticket> {
-    const data: Ticket = await this.fetchApi("POST", `/api/v1/tickets`, {
+  async createTicket(
+    ticketData: Omit<Ticket, "id">,
+  ): Promise<Ticket | NutriPatrolError> {
+    const data = await this.fetchApi<Ticket>("POST", `/api/v1/tickets`, {
       body: ticketData,
     });
+    if ("error" in data) {
+      return data;
+    }
     return data;
   }
 
@@ -258,10 +285,9 @@ export class NutriPatrol {
    *
    * @param {number} ticketId - The ID of the ticket to update.
    * @param {"open" | "closed"} status - The new status of the ticket.
-   * @returns {Promise<Ticket>} - A promise that resolves with the ticket updated.
-   * @throws {NutriPatrolError} - Throws an error if the request fails, if the response is malformed, or if there is a validation error (HTTP 422).
+   * @returns {Promise<Ticket | NutriPatrolError>} - A promise that resolves with the ticket updated or error.
    *
-   * The thrown error can be one of the following:
+   * The error can be one of the following:
    * - A `NutriPatrolError` with status 422 if there is a validation issue (e.g., invalid ticket status).
    * - A `NutriPatrolError` with the corresponding HTTP status code for other types of errors (e.g., 404, 500).
    * - A generic `NutriPatrolError` with status 500 for unexpected errors.
@@ -270,8 +296,8 @@ export class NutriPatrol {
   async updateTicketStatus(
     ticketId: number,
     status: "open" | "closed",
-  ): Promise<Ticket> {
-    const data: Ticket = await this.fetchApi(
+  ): Promise<Ticket | NutriPatrolError> {
+    const data = await this.fetchApi<Ticket>(
       "PUT",
       `/api/v1/tickets/{ticket_id}/status`,
       {
@@ -281,25 +307,30 @@ export class NutriPatrol {
         },
       },
     );
+    if ("error" in data) {
+      return data;
+    }
     return data;
   }
 
   /**
    * Get the status of the NutriPatrol API.
    *
-   * @returns {Promise<{ status: string }>} - A promise that resolves with the API status.
-   * @throws {NutriPatrolError} - Throws an error if the request fails, if the response is malformed, or if there is a validation error (HTTP 422).
+   * @returns {Promise<{ status: string } | NutriPatrolError>} - A promise that resolves with the API status or error.
    *
-   * The thrown error can be one of the following:
+   * The error can be one of the following:
    * - A `NutriPatrolError` with the corresponding HTTP status code for other types of errors (e.g., 404, 500).
    * - A generic `NutriPatrolError` with status 500 for unexpected errors.
    *
    */
-  async getApiStatus(): Promise<{ status: string }> {
-    const data: { status: string } = await this.fetchApi(
+  async getApiStatus(): Promise<{ status: string } | NutriPatrolError> {
+    const data = await this.fetchApi<{ status: string }>(
       "GET",
       `/api/v1/status`,
     );
+    if ("error" in data) {
+      return data;
+    }
     return data;
   }
 }

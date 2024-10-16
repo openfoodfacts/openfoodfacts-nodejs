@@ -14,7 +14,7 @@ export class PricesApi {
 
   constructor(
     fetch: typeof window.fetch,
-    options: { baseUrl: string } = { baseUrl: BASE_URL }
+    options: { baseUrl: string } = { baseUrl: BASE_URL },
   ) {
     this.client = createClient({
       fetch,

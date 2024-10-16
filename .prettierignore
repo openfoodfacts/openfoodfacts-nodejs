@@ -4,6 +4,18 @@ src/schemas/
 # Mock data
 test/mockdata/
 
-.yarn/
+dist
+docs
+coverage
+node_modules
 
+# Ignore dependency locks
+.yarn/
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+CHANGELOG.md
+
+.all-contributorsrc
 

@@ -37,8 +37,7 @@
     "api:server:v3": "openapi-typescript 'https://raw.githubusercontent.com/openfoodfacts/openfoodfacts-server/main/docs/api/ref/api-v3.yml' --output src/schemas/server/v3.ts",
     "api:prices": "openapi-typescript https://prices.openfoodfacts.net/api/openapi.json --output src/schemas/prices.ts",
     "api:robotoff": "openapi-typescript https://raw.githubusercontent.com/openfoodfacts/robotoff/main/doc/references/api.yml --output src/schemas/robotoff.ts",
-    "api:folksonomy": "openapi-typescript https://api.folksonomy.openfoodfacts.org/openapi.json --output src/schemas/folksonomy.ts",
-    "api:nutripatrol": "openapi-typescript https://nutripatrol.openfoodfacts.org/api/openapi.json --output src/schemas/nutripatrol.ts"
+    "api:folksonomy": "openapi-typescript https://api.folksonomy.openfoodfacts.org/openapi.json --output src/schemas/folksonomy.ts"
   },
   "dependencies": {
     "openapi-fetch": "^0.8.2"

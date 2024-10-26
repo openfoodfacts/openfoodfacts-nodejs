@@ -54,6 +54,7 @@ export class NutriPatrol {
       PUT: this.raw.PUT,
       DELETE: this.raw.DELETE,
     };
+    let errorDetails;
 
     try {
       const fct = methods[method] as any;
@@ -70,7 +71,7 @@ export class NutriPatrol {
               },
             } as NutriPatrolError;
           default:
-            const errorDetails = await res.response.json();
+            errorDetails = await res.response.json();
             return {
               error: {
                 statusCode: res.response.status,
@@ -93,7 +94,7 @@ export class NutriPatrol {
       }
 
       return data;
-    } catch (error) {
+    } catch {
       return {
         error: {
           statusCode: 500,

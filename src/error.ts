@@ -5,3 +5,11 @@ export type ApiError = {
     loc: string[];
   }[];
 };
+
+export type NutriPatrolError = {
+  error: {
+    statusCode: number;
+    message: string;
+    details?: any;
+  };
+};

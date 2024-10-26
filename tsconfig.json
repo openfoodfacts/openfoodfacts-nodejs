@@ -1,26 +1,17 @@
 {
   "compilerOptions": {
     "paths": {
-      "$schemas/*": [
-        "./src/schemas/*"
-      ],
+      "$schemas/*": ["./src/schemas/*"]
     },
     "forceConsistentCasingInFileNames": true,
     "target": "ES2015",
     "rootDir": "./src",
     "module": "CommonJS",
-    "lib": [
-      "ES2022",
-      "DOM"
-    ],
+    "lib": ["ES2022", "DOM"],
     "declaration": true,
     "outDir": "./dist",
     "strict": true,
     "esModuleInterop": true
   },
-  "exclude": [
-    "node_modules",
-    "dist",
-    "test"
-  ],
+  "exclude": ["node_modules", "dist", "tests", "jest.config.ts"]
 }

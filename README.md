@@ -55,4 +55,4 @@ When submitting a PR, please use the [angular commit guideline](https://github.c
 
 If you use this SDK, feel free to open a PR to add your application in this list.
 
-* openfoodfacts-explorer : https://github.com/openfoodfacts/openfoodfacts-explorer
+- openfoodfacts-explorer : https://github.com/openfoodfacts/openfoodfacts-explorer

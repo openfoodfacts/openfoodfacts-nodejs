@@ -38,5 +38,5 @@ export default tseslint.config(
       "*.config.mjs",
       "jest.config.ts",
     ],
-  }
+  },
 );

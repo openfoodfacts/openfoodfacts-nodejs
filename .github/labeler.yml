@@ -2,5 +2,5 @@
 
 # Pull requests that update GitHub Actions code. If you navigate to the folder, you will have a README of what it does
 GitHub Actions:
-- changed-files:
-  - any-glob-to-any-file: '.github/**/*'
+  - changed-files:
+      - any-glob-to-any-file: ".github/**/*"

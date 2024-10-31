@@ -111,7 +111,7 @@ export class Folksonomy {
    */
   async login(
     username: string,
-    password: string
+    password: string,
   ): Promise<
     | { token: { access_token: string; token_type: string } }
     | { error: ApiError }

@@ -18,7 +18,7 @@ export class Robotoff {
   }
 
   async annotate(
-    body: paths["/insights/annotate"]["post"]["requestBody"]["content"]["application/x-www-form-urlencoded"]
+    body: paths["/insights/annotate"]["post"]["requestBody"]["content"]["application/x-www-form-urlencoded"],
   ) {
     return this.raw.POST("/insights/annotate", {
       body: body,

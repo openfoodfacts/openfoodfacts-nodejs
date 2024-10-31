@@ -54,7 +54,7 @@ export class OpenFoodFacts {
    */
   constructor(
     fetch: typeof global.fetch,
-    options: OpenFoodFactsOptions = { country: "world" }
+    options: OpenFoodFactsOptions = { country: "world" },
   ) {
     this.baseUrl = `https://${options.country}.openfoodfacts.org`;
     this.fetch = fetch;
@@ -69,10 +69,10 @@ export class OpenFoodFacts {
 
   private async getTaxoEntry<T extends TaxoNode>(
     taxo: string,
-    entry: string
+    entry: string,
   ): Promise<T> {
     const res = await fetch(
-      `${this.baseUrl}/api/v2/taxonomy?tagtype=${taxo}&tags=${entry}`
+      `${this.baseUrl}/api/v2/taxonomy?tagtype=${taxo}&tags=${entry}`,
     );
 
     return (await res.json()) as T;
@@ -140,7 +140,7 @@ export class OpenFoodFacts {
   async performOCR(
     barcode: string,
     photoId: string,
-    ocrEngine: "google_cloud_vision" = "google_cloud_vision"
+    ocrEngine: "google_cloud_vision" = "google_cloud_vision",
   ): Promise<{ status?: number } | undefined> {
     const res = await this.rawv2.GET("/cgi/ingredients.pl", {
       params: {
@@ -159,7 +159,6 @@ export class OpenFoodFacts {
   async getProductImages(barcode: string): Promise<string[] | null> {
     const res = await this.rawv2.GET("/api/v2/product/{barcode}", {
       params: {
-        // @ts-expect-error query is not parsed correctly
         query: {
           fields: "images",
         },
@@ -179,7 +178,7 @@ export class OpenFoodFacts {
 
   async search(
     fields?: string,
-    sortBy?: componentsv2["parameters"]["sort_by"]
+    sortBy?: componentsv2["parameters"]["sort_by"],
   ): Promise<SearchResultV2 | undefined> {
     const res = await this.rawv2.GET("/api/v2/search", {
       params: { query: { fields, sort_by: sortBy } },

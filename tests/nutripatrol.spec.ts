@@ -1,5 +1,5 @@
-import { Flag, NutriPatrol, Ticket } from "../src/nutripatrol";
 import { NutriPatrolError } from "../src/error";
+import { Flag, NutriPatrol, Ticket } from "../src/nutripatrol";
 
 describe("NutriPatrol Wrapper", () => {
     let fetchMock: jest.Mock;
@@ -32,6 +32,7 @@ describe("NutriPatrol Wrapper", () => {
                 },
             },
             json: async () => data,
+            text: async () => JSON.stringify(data),
             clone: () => ({ json: async () => data }),
         };
     };

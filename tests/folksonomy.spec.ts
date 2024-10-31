@@ -1,5 +1,4 @@
-import { Folksonomy, FolksonomyTag, FolksonomyKey } from "../src/folksonomy";
-import { ApiError } from "../src/error";
+import { Folksonomy, FolksonomyTag } from "../src/folksonomy";
 
 describe("Folksonomy Wrapper", () => {
     let fetchMock: jest.Mock;
@@ -32,6 +31,7 @@ describe("Folksonomy Wrapper", () => {
                 },
             },
             json: async () => data,
+            text: async () => JSON.stringify(data),
             clone: () => ({ json: async () => data }),
         };
     };

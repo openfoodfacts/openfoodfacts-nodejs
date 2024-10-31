@@ -8,7 +8,7 @@
   "types": "dist/main.d.ts",
   "scripts": {
     "prepack": "yarn run build",
-    "build": "tsc",
+    "build": "tsc -p tsconfig.build.json",
     "build:docs": "typedoc src/main.ts",
     "commitmsg": "commitlint -quiet=0 --extends=@commitlint/config-conventional -e",
     "precommit": "standard `git diff --name-only --staged --relative | grep '.js$'`",
@@ -20,7 +20,8 @@
     "api:folksonomy": "openapi-typescript https://api.folksonomy.openfoodfacts.org/openapi.json --output src/schemas/folksonomy.ts",
     "api:nutripatrol": "openapi-typescript https://nutripatrol.openfoodfacts.org/api/openapi.json --output src/schemas/nutripatrol.ts",
     "check": "yarn run lint && yarn run test",
-    "lint": "prettier --check . && eslint .",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
     "format": "prettier --write .",
     "fix": "standard --fix",
     "test": "jest",
@@ -56,6 +57,8 @@
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",
     "@commitlint/config-conventional": "^19.2.2",
+    "@eslint/eslintrc": "^3.1.0",
+    "@eslint/js": "^9.13.0",
     "@jest/globals": "^29.7.0",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.8.5",
@@ -63,13 +66,15 @@
     "@typescript-eslint/parser": "^7.8.0",
     "eslint": "^9.1.1",
     "formdata-node": "^6.0.3",
+    "globals": "^15.11.0",
     "jest": "^29.7.0",
     "openapi-typescript": "^6.7.4",
     "prettier": "^3.1.1",
     "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
     "typedoc": "^0.26.10",
-    "typescript": "^5.6.3"
+    "typescript": "^5.6.3",
+    "typescript-eslint": "^8.12.2"
   },
   "packageManager": "yarn@4.0.2"
 }

@@ -58,6 +58,7 @@ export class NutriPatrol {
     try {
       const fct = methods[method] as any;
       const res = await fct(path as any, options as any);
+      let errorDetails: NutriPatrolError | undefined;
 
       if (!res.response.ok) {
         switch (res.response.status) {
@@ -70,7 +71,7 @@ export class NutriPatrol {
               },
             } as NutriPatrolError;
           default:
-            const errorDetails = await res.response.json();
+            errorDetails = await res.response.json();
             return {
               error: {
                 statusCode: res.response.status,
@@ -93,7 +94,7 @@ export class NutriPatrol {
       }
 
       return data;
-    } catch (error) {
+    } catch {
       return {
         error: {
           statusCode: 500,

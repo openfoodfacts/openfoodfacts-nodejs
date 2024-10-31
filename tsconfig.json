@@ -5,7 +5,7 @@
     },
     "forceConsistentCasingInFileNames": true,
     "target": "ES2015",
-    "rootDir": "./src",
+    "rootDir": ".",
     "module": "CommonJS",
     "lib": ["ES2022", "DOM"],
     "declaration": true,
@@ -13,5 +13,5 @@
     "strict": true,
     "esModuleInterop": true
   },
-  "exclude": ["node_modules", "dist", "tests", "jest.config.ts"]
+  "exclude": ["node_modules", "dist", "jest.config.ts", "coverage", "docs"]
 }

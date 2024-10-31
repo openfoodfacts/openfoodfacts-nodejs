@@ -22,7 +22,8 @@
     "check": "yarn run lint && yarn run test",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "format": "prettier --write .",
+    "format": "prettier --check .",
+    "format:fix": "prettier --write .",
     "fix": "standard --fix",
     "test": "jest",
     "test:coverage": "jest --coverage"

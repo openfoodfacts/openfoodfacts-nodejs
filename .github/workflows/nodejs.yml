@@ -48,7 +48,7 @@ jobs:
 
       # Build documentation only for Node.js 20.x
       - name: Build documentation
-        if: ${{ matrix.node-version }} == '20.x'
+        if: ${{ startsWith(matrix.node-version, '20') }}
         run: yarn build:docs
 
       # Upload documentation artifact (only for Node.js 20.x)
@@ -57,3 +57,23 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: "docs"
+
+  docs:
+    name: Deploy Docs
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
+
+    permissions:
+      pages: write # to deploy to Pages
+      id-token: write # to verify the deployment originates from an appropriate source
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      # Deploy documentation to GitHub Pages
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

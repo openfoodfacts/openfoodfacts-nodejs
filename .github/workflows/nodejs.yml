@@ -45,3 +45,15 @@ jobs:
       # Run tests
       - name: Run tests
         run: yarn test
+
+      # Build documentation only for Node.js 20.x
+      - name: Build documentation
+        if: ${{ matrix.node-version }} == '20.x'
+        run: yarn build:docs
+
+      # Upload documentation artifact (only for Node.js 20.x)
+      - name: Upload docs
+        if: ${{ matrix.node-version }} == '20.x'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "docs"

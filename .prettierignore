@@ -1,5 +1,6 @@
 # Mock data
-test/mockdata/
+tests/mockdata/
+src/schemas/
 
 dist
 docs

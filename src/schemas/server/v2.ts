@@ -3,6 +3,7 @@
  * Do not make direct changes to the file.
  */
 
+
 export interface paths {
   "/api/v2/product/{barcode}": {
     /**
@@ -154,18 +155,7 @@ export interface components {
      * * `created_t`, `last_modified_t`, are about creation and modification dates
      * * `nothing`, tells not to sort at all (because if you do not provide the sort_by argument we default to sorting on popularity (for food) or last modification date)
      */
-    sort_by?:
-      | "product_name"
-      | "last_modified_t"
-      | "scans_n"
-      | "unique_scans_n"
-      | "created_t"
-      | "completeness"
-      | "popularity_key"
-      | "nutriscore_score"
-      | "nova_score"
-      | "nothing"
-      | "ecoscore_score";
+    sort_by?: "product_name" | "last_modified_t" | "scans_n" | "unique_scans_n" | "created_t" | "completeness" | "popularity_key" | "nutriscore_score" | "nova_score" | "nothing" | "ecoscore_score";
     /**
      * @description The fields to be returned from the product object can also be limited.
      * If not specified, it returns the entire product object response.
@@ -182,7 +172,7 @@ export interface components {
 export type $defs = Record<string, never>;
 
 export interface external {
-  "examples/get_product_by_barcode_spread.yaml": unknown;
+  "examples/get_product_by_barcode_spread.yaml": unknown
   "requestBodies/add_or_edit_a_product.yaml": {
     /**
      * @description The barcode of the product to be added or edited
@@ -338,17 +328,17 @@ export interface external {
   };
   "responses/add_photo_to_existing_product.yaml": {
     files?: {
-      /** @example /product/3017620422003/nutella-ferrero */
-      url?: string;
-      /** @example */
-      filename?: string;
-      /** @example Nutella - Ferrero - 400g */
-      name?: string;
-      /** @example /images/products/301/762/042/2003/123.100.jpg */
-      thumbnailUrl?: string;
-      /** @example 3017620422003 */
-      code?: string;
-    }[];
+        /** @example /product/3017620422003/nutella-ferrero */
+        url?: string;
+        /** @example */
+        filename?: string;
+        /** @example Nutella - Ferrero - 400g */
+        name?: string;
+        /** @example /images/products/301/762/042/2003/123.100.jpg */
+        thumbnailUrl?: string;
+        /** @example 3017620422003 */
+        code?: string;
+      }[];
     image?: {
       /** @example 123.100.jpg */
       thumb_url?: string;
@@ -541,17 +531,17 @@ export interface external {
     uploader?: string;
   };
   "schemas/ingredient.yaml": {
-    id?: string;
-    /** @description Sub ingredients composing this ingredients. */
-    ingredients?: external["schemas/ingredient.yaml"];
-    percent?: number;
-    percent_estimate?: number;
-    percent_max?: number;
-    percent_min?: number;
-    text?: string;
-    vegan?: string;
-    vegetarian?: string;
-  }[];
+      id?: string;
+      /** @description Sub ingredients composing this ingredients. */
+      ingredients?: external["schemas/ingredient.yaml"];
+      percent?: number;
+      percent_estimate?: number;
+      percent_max?: number;
+      percent_min?: number;
+      text?: string;
+      vegan?: string;
+      vegetarian?: string;
+    }[];
   "schemas/knowledge_panels/elements/element.yaml": {
     /**
      * @description The type of the included element object.
@@ -609,13 +599,13 @@ export interface external {
     title?: string;
     rows?: string;
     columns?: {
-      type?: string;
-      text?: string;
-      text_for_small_screens?: string;
-      style?: string;
-      column_group_id?: string;
-      shown_by_default?: boolean;
-    }[];
+        type?: string;
+        text?: string;
+        text_for_small_screens?: string;
+        style?: string;
+        column_group_id?: string;
+        shown_by_default?: boolean;
+      }[];
   };
   "schemas/knowledge_panels/elements/text_element.yaml": {
     /**
@@ -822,9 +812,9 @@ export interface external {
       adjustments?: {
         origins_of_ingredients?: {
           aggregated_origins?: {
-            origin?: string;
-            percent?: number;
-          }[];
+              origin?: string;
+              percent?: number;
+            }[];
           epi_score?: number;
           epi_value?: number;
           origins_from_origins_field?: string[];
@@ -836,11 +826,11 @@ export interface external {
         packaging?: {
           non_recyclable_and_non_biodegradable_materials?: number;
           packagings?: {
-            ecoscore_material_score?: number;
-            ecoscore_shape_ratio?: number;
-            material?: string;
-            shape?: string;
-          }[];
+              ecoscore_material_score?: number;
+              ecoscore_shape_ratio?: number;
+              material?: string;
+              shape?: string;
+            }[];
           score?: number;
           value?: number;
           warning?: string;
@@ -1092,17 +1082,17 @@ export interface external {
     photographers_tags?: string[];
     /** @description revision number of this product version (each edit adds a revision) */
     rev?: number;
-    sources?: {
-      fields?: string[];
-      id?: string;
-      images?: Record<string, never>[];
-      import_t?: number;
-      manufacturer?: number | string;
-      name?: string;
-      source_licence?: string;
-      source_licence_url?: string;
-      url?: null | string;
-    }[];
+    sources?: ({
+        fields?: string[];
+        id?: string;
+        images?: Record<string, never>[];
+        import_t?: number;
+        manufacturer?: number | string;
+        name?: string;
+        source_licence?: string;
+        source_licence_url?: string;
+        url?: null | string;
+      })[];
     sources_fields?: {
       "org-gs1"?: {
         gln?: string;
@@ -1452,17 +1442,7 @@ export interface external {
     nova_groups_tags?: string[];
     nutrient_levels_tags?: string[];
   };
-  "schemas/product.yaml": external["schemas/product_base.yaml"] &
-    external["schemas/product_misc.yaml"] &
-    external["schemas/product_tags.yaml"] &
-    external["schemas/product_images.yaml"] &
-    external["schemas/product_ecoscore.yaml"] &
-    external["schemas/product_ingredients.yaml"] &
-    external["schemas/product_nutrition.yaml"] &
-    external["schemas/product_quality.yaml"] &
-    external["schemas/product_extended.yaml"] &
-    external["schemas/product_meta.yaml"] &
-    external["schemas/product_knowledge_panels.yaml"];
+  "schemas/product.yaml": external["schemas/product_base.yaml"] & external["schemas/product_misc.yaml"] & external["schemas/product_tags.yaml"] & external["schemas/product_images.yaml"] & external["schemas/product_ecoscore.yaml"] & external["schemas/product_ingredients.yaml"] & external["schemas/product_nutrition.yaml"] & external["schemas/product_quality.yaml"] & external["schemas/product_extended.yaml"] & external["schemas/product_meta.yaml"] & external["schemas/product_knowledge_panels.yaml"];
   "schemas/tags_parameters.yaml": {
     /**
      * @description The additives_tags in english of product(s) you are searching for.
@@ -1529,10 +1509,11 @@ export interface external {
     traces_tags?: unknown;
     /** @description You can add a language code to a specific tag to query it in a specific language */
     tag_name_with_language_code?: unknown;
-  };
+  }
 }
 
 export interface operations {
+
   /**
    * Get information for a specific product by barcode
    * @description A product can be fetched via its unique barcode.

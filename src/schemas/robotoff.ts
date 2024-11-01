@@ -3,6 +3,7 @@
  * Do not make direct changes to the file.
  */
 
+
 export interface paths {
   "/questions/{barcode}": {
     /**
@@ -142,7 +143,8 @@ export interface paths {
       };
       responses: {
         200: {
-          content: {};
+          content: {
+          };
         };
       };
     };
@@ -252,7 +254,8 @@ export interface paths {
       };
       responses: {
         200: {
-          content: {};
+          content: {
+          };
         };
       };
     };
@@ -268,7 +271,8 @@ export interface paths {
       };
       responses: {
         200: {
-          content: {};
+          content: {
+          };
         };
       };
     };
@@ -315,7 +319,8 @@ export interface paths {
       };
       responses: {
         200: {
-          content: {};
+          content: {
+          };
         };
       };
     };
@@ -453,10 +458,7 @@ export interface paths {
           /** @description if True, only return image predictions that have associated logos (only valid for universal-logo-detector image predictions) */
           with_logo?: boolean;
           /** @description filter by name of the image predictor model */
-          model_name?:
-            | "universal-logo-detector"
-            | "nutrition-table"
-            | "nutriscore";
+          model_name?: "universal-logo-detector" | "nutrition-table" | "nutriscore";
           /** @description filter by type of the image predictor model, currently only 'object_detection' */
           type?: "object_detection";
           /** @description filter by model version value */
@@ -642,90 +644,88 @@ export interface paths {
     post: {
       requestBody?: {
         content: {
-          "application/json":
-            | {
-                /**
-                 * @description The barcode of the product to categorize
-                 * @example 748162621021
-                 */
-                barcode: string;
-                /**
-                 * @description The server type (=project) to use, such as 'off' (Open Food Facts), 'obf' (Open Beauty Facts),...
-                 * Only 'off' is currently supported for category prediction
-                 *
-                 * @default off
-                 * @enum {string}
-                 */
-                server_type?: "off" | "obf" | "opff" | "opf";
-                /**
-                 * @description If true, only return the deepest elements in the category taxonomy
-                 * (don't return categories that are parents of other predicted categories)
-                 */
-                deepest_only?: boolean;
-                /**
-                 * @description The score above which we consider the category to be detected
-                 *
-                 * @default 0.5
-                 */
-                threshold?: number;
-              }
-            | {
-                /**
-                 * @description product information used as model input. All fields are optional, but at
-                 * least one field must be provided.
-                 */
-                product: {
-                  /** @example roasted chicken */
-                  product_name?: string;
-                  /**
-                   * @description the ingredient list, as an ordered list of ingredient tags
-                   * @example [
-                   *   "en:chicken",
-                   *   "en:salts"
-                   * ]
-                   */
-                  ingredients_tags?: string[];
-                  /**
-                   * @description Embeddings of the 10 most recent product images generated with clip-vit-base-patch32 model.
-                   * Each item of the list is the embedding of a single image, provided as a list of dimension 512.
-                   * Shape: (num_images, 512)
-                   */
-                  image_embeddings?: number[][];
-                  /**
-                   * @description A list of string corresponding to the text extracted from the product images with OCR.
-                   * Each element of the list is the text of a single image, the list order doesn't affect predictions.
-                   * We use OCR text to detect ingredient mentions and use it as a model input.
-                   * For optimal results, this field should be provided even if `ingredients_tags` is provided.
-                   */
-                  ocr?: string[];
-                  /**
-                   * @description Nutriment values. These fields have exactly the same meaning as those of Product Opener.
-                   * All fields are optional, only send data for the field for which the value is not missing.
-                   */
-                  nutriments?: {
-                    fat_100g?: number;
-                    "saturated-fat_100g"?: number;
-                    carbohydrates_100g?: number;
-                    sugars_100g?: number;
-                    fiber_100g?: number;
-                    proteins_100g?: number;
-                    salt_100g?: number;
-                    "energy-kcal_100g"?: number;
-                    "fruits-vegetables-nuts_100g"?: number;
-                  };
-                };
-                /**
-                 * @description If true, only return the deepest elements in the category taxonomy
-                 * (don't return categories that are parents of other predicted categories)
-                 */
-                deepest_only?: boolean;
-                /**
-                 * @description The score above which we consider the category to be detected
-                 *
-                 * @default 0.5
-                 */
-                threshold?: number;
+          "application/json": ({
+            /**
+             * @description The barcode of the product to categorize
+             * @example 748162621021
+             */
+            barcode: string;
+            /**
+             * @description The server type (=project) to use, such as 'off' (Open Food Facts), 'obf' (Open Beauty Facts),...
+             * Only 'off' is currently supported for category prediction
+             *
+             * @default off
+             * @enum {string}
+             */
+            server_type?: "off" | "obf" | "opff" | "opf";
+            /**
+             * @description If true, only return the deepest elements in the category taxonomy
+             * (don't return categories that are parents of other predicted categories)
+             */
+            deepest_only?: boolean;
+            /**
+             * @description The score above which we consider the category to be detected
+             *
+             * @default 0.5
+             */
+            threshold?: number;
+          }) | {
+            /**
+             * @description product information used as model input. All fields are optional, but at
+             * least one field must be provided.
+             */
+            product: {
+              /** @example roasted chicken */
+              product_name?: string;
+              /**
+               * @description the ingredient list, as an ordered list of ingredient tags
+               * @example [
+               *   "en:chicken",
+               *   "en:salts"
+               * ]
+               */
+              ingredients_tags?: string[];
+              /**
+               * @description Embeddings of the 10 most recent product images generated with clip-vit-base-patch32 model.
+               * Each item of the list is the embedding of a single image, provided as a list of dimension 512.
+               * Shape: (num_images, 512)
+               */
+              image_embeddings?: number[][];
+              /**
+               * @description A list of string corresponding to the text extracted from the product images with OCR.
+               * Each element of the list is the text of a single image, the list order doesn't affect predictions.
+               * We use OCR text to detect ingredient mentions and use it as a model input.
+               * For optimal results, this field should be provided even if `ingredients_tags` is provided.
+               */
+              ocr?: string[];
+              /**
+               * @description Nutriment values. These fields have exactly the same meaning as those of Product Opener.
+               * All fields are optional, only send data for the field for which the value is not missing.
+               */
+              nutriments?: {
+                fat_100g?: number;
+                "saturated-fat_100g"?: number;
+                carbohydrates_100g?: number;
+                sugars_100g?: number;
+                fiber_100g?: number;
+                proteins_100g?: number;
+                salt_100g?: number;
+                "energy-kcal_100g"?: number;
+                "fruits-vegetables-nuts_100g"?: number;
               };
+            };
+            /**
+             * @description If true, only return the deepest elements in the category taxonomy
+             * (don't return categories that are parents of other predicted categories)
+             */
+            deepest_only?: boolean;
+            /**
+             * @description The score above which we consider the category to be detected
+             *
+             * @default 0.5
+             */
+            threshold?: number;
+          };
         };
       };
       responses: {
@@ -734,17 +734,17 @@ export interface paths {
           content: {
             "application/json": {
               neural?: {
-                /**
-                 * @description The predicted `value_tag`
-                 * @example en:roast-chicken
-                 */
-                value_tag: string;
-                /**
-                 * @description The confidence score of the model
-                 * @example 0.6
-                 */
-                confidence: number;
-              }[];
+                  /**
+                   * @description The predicted `value_tag`
+                   * @example en:roast-chicken
+                   */
+                  value_tag: string;
+                  /**
+                   * @description The confidence score of the model
+                   * @example 0.6
+                   */
+                  confidence: number;
+                }[];
             };
           };
         };
@@ -802,11 +802,11 @@ export interface paths {
               image_ids: number[];
               /** @description a list of errors that occured during processing */
               errors?: {
-                /** @description the identifier of the error */
-                error?: string;
-                /** @description a full description of the error that occured */
-                error_description?: string;
-              }[];
+                  /** @description the identifier of the error */
+                  error?: string;
+                  /** @description a full description of the error that occured */
+                  error_description?: string;
+                }[];
             };
           };
         };
@@ -877,17 +877,17 @@ export interface paths {
             "application/json": {
               /** @description a list of predicted languages, sorted by descending probability */
               predictions?: {
-                /**
-                 * @description the predicted language (2-letter code)
-                 * @example en
-                 */
-                lang?: string;
-                /**
-                 * @description the probability of the predicted language
-                 * @example 0.9
-                 */
-                confidence?: number;
-              }[];
+                  /**
+                   * @description the predicted language (2-letter code)
+                   * @example en
+                   */
+                  lang?: string;
+                  /**
+                   * @description the probability of the predicted language
+                   * @example 0.9
+                   */
+                  confidence?: number;
+                }[];
             };
           };
         };
@@ -925,33 +925,33 @@ export interface paths {
                * sorted by descending count
                */
               counts?: {
-                /**
-                 * @description the predicted language (2-letter code). `null` if the language could not be detected.
-                 * @example en
-                 */
-                lang?: string;
-                /**
-                 * @description the number of words for which this language was detected over all images
-                 * @example 10
-                 */
-                count?: number;
-              }[];
+                  /**
+                   * @description the predicted language (2-letter code). `null` if the language could not be detected.
+                   * @example en
+                   */
+                  lang?: string;
+                  /**
+                   * @description the number of words for which this language was detected over all images
+                   * @example 10
+                   */
+                  count?: number;
+                }[];
               /**
                * @description the percentage of words detected for each language, over all images,
                * sorted by descending percentage
                */
               percent?: {
-                /**
-                 * @description the predicted language (2-letter code). `null` if the language could not be detected.
-                 * @example en
-                 */
-                lang?: string;
-                /**
-                 * @description the percentage of words for which the language was detected over all images
-                 * @example 80.5
-                 */
-                percent?: number;
-              }[];
+                  /**
+                   * @description the predicted language (2-letter code). `null` if the language could not be detected.
+                   * @example en
+                   */
+                  lang?: string;
+                  /**
+                   * @description the percentage of words for which the language was detected over all images
+                   * @example 80.5
+                   */
+                  percent?: number;
+                }[];
               /** @description the IDs of the images that were used to generate the predictions */
               image_ids?: number[];
             };
@@ -973,18 +973,18 @@ export interface components {
     LogoANNSearchResponse: {
       /** @description Each item corresponds to a neighbor logo */
       results: {
-        /**
-         * @description ID of the result logo
-         * @example 1
-         */
-        logo_id: number;
-        /**
-         * @description distance between the query logo and the result logo (closer to 0 means a more similar logo)
-         *
-         * @example 0.1
-         */
-        distance: number;
-      }[];
+          /**
+           * @description ID of the result logo
+           * @example 1
+           */
+          logo_id: number;
+          /**
+           * @description distance between the query logo and the result logo (closer to 0 means a more similar logo)
+           *
+           * @example 0.1
+           */
+          distance: number;
+        }[];
       /** @description Number of returned results */
       count: number;
       /** @description ID of the query logo */
@@ -1017,12 +1017,7 @@ export interface components {
      * @example api.openfoodfacts.org
      * @enum {string}
      */
-    ServerDomainParameter:
-      | "api.openfoodfacts.org"
-      | "api.openbeautyfacts.org"
-      | "api.openproductfacts.org"
-      | "api.openpetfoodfacts.org"
-      | "api.pro.openfoodfacts.org";
+    ServerDomainParameter: "api.openfoodfacts.org" | "api.openbeautyfacts.org" | "api.openproductfacts.org" | "api.openpetfoodfacts.org" | "api.pro.openfoodfacts.org";
     /** @description a Robotoff Prediction */
     Prediction: {
       /**

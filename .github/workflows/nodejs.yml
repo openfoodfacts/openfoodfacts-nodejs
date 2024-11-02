@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x, 19.x, 20.x, 21.x, 22.x]
+        node-version: [18.x, 20.x, 22.x, 23.x]
 
     steps:
       # Checkout the repository
@@ -47,12 +47,12 @@ jobs:
 
       # Build documentation only for Node.js 20.x
       - name: Build documentation
-        if: ${{ startsWith(matrix.node-version, '20') }}
+        if: matrix.node-version == '22.x'
         run: yarn build:docs
 
       # Upload documentation artifact (only for Node.js 20.x)
       - name: Upload docs
-        if: ${{ startsWith(matrix.node-version, '20') }}
+        if: matrix.node-version == '22.x'
         uses: actions/upload-pages-artifact@v3
         with:
           path: "docs"

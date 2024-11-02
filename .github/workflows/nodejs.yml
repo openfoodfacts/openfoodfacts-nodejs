@@ -20,7 +20,7 @@ jobs:
 
       # Setup Node.js environment
       - name: Setup Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: "yarn"
@@ -45,12 +45,12 @@ jobs:
       - name: Run tests
         run: yarn test
 
-      # Build documentation only for Node.js 20.x
+      # Build documentation only for Node.js 22.x
       - name: Build documentation
         if: matrix.node-version == '22.x'
         run: yarn build:docs
 
-      # Upload documentation artifact (only for Node.js 20.x)
+      # Upload documentation artifact (only for Node.js 22.x)
       - name: Upload docs
         if: matrix.node-version == '22.x'
         uses: actions/upload-pages-artifact@v3

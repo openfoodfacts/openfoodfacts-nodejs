@@ -22,6 +22,7 @@ import {
   TaxoNode,
   Taxonomy,
 } from "./taxonomy/types";
+import { USER_AGENT } from "./consts";
 
 export type ProductV2 = componentsv2["schemas"]["Product"];
 export type SearchResultV2 = externalv2["responses/search_for_products.yaml"];
@@ -62,6 +63,9 @@ export class OpenFoodFacts {
     this.rawv2 = createClient<pathsv2>({
       fetch: this.fetch,
       baseUrl: this.baseUrl,
+      headers: {
+        "User-Agent": USER_AGENT,
+      },
     });
 
     this.robotoff = new Robotoff(fetch);
@@ -73,6 +77,7 @@ export class OpenFoodFacts {
   ): Promise<T> {
     const res = await fetch(
       `${this.baseUrl}/api/v2/taxonomy?tagtype=${taxo}&tags=${entry}`,
+      { headers: { "User-Agent": USER_AGENT } },
     );
 
     return (await res.json()) as T;

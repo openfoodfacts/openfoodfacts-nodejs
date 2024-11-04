@@ -1,5 +1,6 @@
 import createClient from "openapi-fetch";
 import type { paths } from "$schemas/prices";
+import { USER_AGENT } from "./consts";
 
 type PricesQuery = paths["/api/v1/prices"]["get"]["parameters"]["query"];
 export type PricesCreate =
@@ -20,6 +21,9 @@ export class PricesApi {
       fetch,
       baseUrl: options.baseUrl,
       credentials: "include",
+      headers: {
+        "User-Agent": USER_AGENT,
+      },
     });
   }
 

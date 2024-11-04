@@ -1,6 +1,7 @@
 import createClient from "openapi-fetch";
 
 import { paths } from "./schemas/robotoff";
+import { USER_AGENT } from "./consts";
 
 type InsightQuery = paths["/insights"]["get"]["parameters"]["query"];
 type InsightResponse =
@@ -20,6 +21,9 @@ export class Robotoff {
     this.raw = createClient<paths>({
       fetch: this.fetch,
       baseUrl: "https://robotoff.openfoodfacts.org/api/v1",
+      headers: {
+        "User-Agent": USER_AGENT,
+      },
     });
   }
 

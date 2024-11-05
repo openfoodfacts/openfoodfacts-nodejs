@@ -2614,13 +2614,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"formdata-node@npm:^6.0.3":
-  version: 6.0.3
-  resolution: "formdata-node@npm:6.0.3"
-  checksum: 10/26ec90f5dd5d5572dceb524b86f42e28b148022e5c50b2af83ee8ad99d56f26157a7b5583ddbf10725e567bba30ad8bf6b6527f17f5e94d64ccaa950d1fe0b5f
-  languageName: node
-  linkType: hard
-
 "fs-minipass@npm:^2.0.0":
   version: 2.1.0
   resolution: "fs-minipass@npm:2.1.0"
@@ -4340,7 +4333,6 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:^8.12.2"
     "@typescript-eslint/parser": "npm:^8.12.2"
     eslint: "npm:^9.13.0"
-    formdata-node: "npm:^6.0.3"
     globals: "npm:^15.11.0"
     jest: "npm:^29.7.0"
     openapi-fetch: "npm:^0.13.0"

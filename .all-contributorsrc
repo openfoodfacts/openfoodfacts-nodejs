@@ -34,8 +34,19 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "gciluffo",
+      "name": "Griffin Ciluffo",
+      "avatar_url": "https://avatars.githubusercontent.com/u/14182616?v=4",
+      "profile": "https://github.com/gciluffo",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "repoType": "github",
-  "commitConvention": "angular"
+  "commitConvention": "angular",
+  "commitType": "docs",
+  "contributorsPerLine": 7
 }

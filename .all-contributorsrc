@@ -34,8 +34,19 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "bengeois",
+      "name": "Benjamin",
+      "avatar_url": "https://avatars.githubusercontent.com/u/20949060?v=4",
+      "profile": "https://www.bbourgeois.dev",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "repoType": "github",
-  "commitConvention": "angular"
+  "commitConvention": "angular",
+  "commitType": "docs",
+  "contributorsPerLine": 7
 }

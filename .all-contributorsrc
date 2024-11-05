@@ -1,11 +1,15 @@
 {
   "projectName": "openfoodfacts-nodejs",
   "projectOwner": "openfoodfacts",
+  "repoType": "github",
   "files": [
-    "README.md"
+    "CONTRIBUTORS.md"
   ],
   "imageSize": 100,
-  "commit": true,
+  "commit": false,
+  "commitConvention": "angular",
+  "contributorsPerLine": 7,
+  "contributorsSortAlphabetically": true,
   "contributors": [
     {
       "login": "ms10398",
@@ -44,9 +48,5 @@
         "code"
       ]
     }
-  ],
-  "repoType": "github",
-  "commitConvention": "angular",
-  "commitType": "docs",
-  "contributorsPerLine": 7
+  ]
 }

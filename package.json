@@ -23,6 +23,7 @@
   ],
   "types": "dist/main.d.ts",
   "scripts": {
+    "prepack": "yarn run build",
     "build": "tsc -p tsconfig.build.json",
     "build:docs": "typedoc src/main.ts",
     "commitmsg": "commitlint -quiet=0 --extends=@commitlint/config-conventional -e",

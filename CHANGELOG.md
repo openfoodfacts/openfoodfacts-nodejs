@@ -4,6 +4,36 @@
 
 ## Features
 
+## [2.0.0](https://github.com/openfoodfacts/openfoodfacts-nodejs/compare/v1.0.0...v2.0.0) (2024-11-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* initial work for version 2.0.0
+
+### Features
+
+* Add endpoint for /insights robotoff ([#553](https://github.com/openfoodfacts/openfoodfacts-nodejs/issues/553)) ([475363b](https://github.com/openfoodfacts/openfoodfacts-nodejs/commit/475363b44f493a1829756e2dc87fa85ba958995a))
+* add folksonomy and prices API ([00bfa2f](https://github.com/openfoodfacts/openfoodfacts-nodejs/commit/00bfa2f90d99f2828aa467188ae18168271a9a1f))
+* add nutripatrol API interfaces and support all flag endpoints ([d29ffac](https://github.com/openfoodfacts/openfoodfacts-nodejs/commit/d29ffac5bc00c780cdfcd62e3ea51ae2d1b73c52))
+* add performOCR ([eeb37d4](https://github.com/openfoodfacts/openfoodfacts-nodejs/commit/eeb37d44aaadd17df7ac7fbc3e5d6ee4b765be54))
+* add robotoff openapi generation to package.json ([3d0a113](https://github.com/openfoodfacts/openfoodfacts-nodejs/commit/3d0a113a630ba8795a5cd8b9b8e74f0f3f0b5318))
+* add support for ticket in nutripatrol API ([d09ae9a](https://github.com/openfoodfacts/openfoodfacts-nodejs/commit/d09ae9ac44abac4e1a0c8a40c8e1540cfc20b2da))
+* add USER_AGENT constant and include it in API request headers ([#559](https://github.com/openfoodfacts/openfoodfacts-nodejs/issues/559)) ([6052c45](https://github.com/openfoodfacts/openfoodfacts-nodejs/commit/6052c459f706e82f303cad31f052e307dcd98237))
+* auto build & deploy documentation ([a66d3a8](https://github.com/openfoodfacts/openfoodfacts-nodejs/commit/a66d3a8b9f2dd7bfac060dbf5ba1d5461e4b14aa))
+* initial work for version 2.0.0 ([2b488a3](https://github.com/openfoodfacts/openfoodfacts-nodejs/commit/2b488a36dc7bfb7326dfbb59b83e0393fd31f84b))
+* refactor error handling in nutripatrol wrapper ([eb94452](https://github.com/openfoodfacts/openfoodfacts-nodejs/commit/eb94452503d58f602f20fd947547476851fea36d))
+
+
+### Bug Fixes
+
+* checkout submodules during nodejs workflow ([21e342e](https://github.com/openfoodfacts/openfoodfacts-nodejs/commit/21e342e472f071616db797662eead7801216f3dc))
+* make docs job depend on build job ([b8dce91](https://github.com/openfoodfacts/openfoodfacts-nodejs/commit/b8dce914a664a93c115297efc66edf8b8eb7af0f))
+* remove tests for now, as they are really difficult to implement with the new openapi codegen ([d5efade](https://github.com/openfoodfacts/openfoodfacts-nodejs/commit/d5efade6a74fe56307c8d278183cb3d3201bbab3))
+* run doc generation only for latest node version ([e28547e](https://github.com/openfoodfacts/openfoodfacts-nodejs/commit/e28547ecec0f96370aa998e48d97d4e545f47a5e))
+* **ts:** wrong [@ts-ignore](https://github.com/ts-ignore) usage ([53ebeef](https://github.com/openfoodfacts/openfoodfacts-nodejs/commit/53ebeefb4498ed2850e1592920ba227c71a9c089))
+* use branch for server submodule. fixes type error ([19c730a](https://github.com/openfoodfacts/openfoodfacts-nodejs/commit/19c730ab353e4128caaa9fe48906eea3e163ebd3))
+
 ## 1.0.0 (2022-04-27)
 
 ### Features

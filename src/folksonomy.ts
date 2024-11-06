@@ -3,6 +3,7 @@ import createClient from "openapi-fetch";
 import { paths, components } from "./schemas/folksonomy";
 import { formBody as formBodySerializer } from "./formbody";
 import { ApiError } from "./error";
+import { USER_AGENT } from "./consts";
 
 export type FolksonomyTag = components["schemas"]["ProductTag"];
 export type FolksonomyKey = {
@@ -26,6 +27,7 @@ export class Folksonomy {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${authToken}`,
+        "User-Agent": USER_AGENT,
       },
     });
   }

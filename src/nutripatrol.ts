@@ -2,6 +2,7 @@ import createClient from "openapi-fetch";
 
 import { components, paths } from "./schemas/nutripatrol";
 import { NutriPatrolError } from "./error";
+import { USER_AGENT } from "./consts";
 
 export type Flag = components["schemas"]["FlagCreate"];
 export type Ticket = components["schemas"]["Ticket"];
@@ -39,6 +40,7 @@ export class NutriPatrol {
       fetch,
       headers: {
         "Content-Type": "application/json",
+        "User-Agent": USER_AGENT,
       },
     });
   }

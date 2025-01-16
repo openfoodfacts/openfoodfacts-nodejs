@@ -18,9 +18,7 @@
   "bugs": {
     "url": "https://github.com/openfoodfacts/openfoodfacts-nodejs/issues"
   },
-  "exports": [
-    "./dist/main.js"
-  ],
+  "exports": "./dist/main.js",
   "types": "dist/main.d.ts",
   "scripts": {
     "prepack": "yarn run build",

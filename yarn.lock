@@ -1077,6 +1077,33 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@openfoodfacts/openfoodfacts-nodejs@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "@openfoodfacts/openfoodfacts-nodejs@workspace:."
+  dependencies:
+    "@commitlint/cli": "npm:^19.3.0"
+    "@commitlint/config-conventional": "npm:^19.2.2"
+    "@eslint/eslintrc": "npm:^3.1.0"
+    "@eslint/js": "npm:^9.13.0"
+    "@jest/globals": "npm:^29.7.0"
+    "@types/jest": "npm:^29.5.14"
+    "@types/node": "npm:^22.8.5"
+    "@typescript-eslint/eslint-plugin": "npm:^8.12.2"
+    "@typescript-eslint/parser": "npm:^8.12.2"
+    eslint: "npm:^9.13.0"
+    globals: "npm:^15.11.0"
+    jest: "npm:^29.7.0"
+    openapi-fetch: "npm:^0.13.0"
+    openapi-typescript: "npm:^7.4.3"
+    prettier: "npm:^3.1.1"
+    ts-jest: "npm:^29.2.5"
+    ts-node: "npm:^10.9.2"
+    typedoc: "npm:^0.27.2"
+    typescript: "npm:^5.6.3"
+    typescript-eslint: "npm:^8.12.2"
+  languageName: unknown
+  linkType: soft
+
 "@pkgjs/parseargs@npm:^0.11.0":
   version: 0.11.0
   resolution: "@pkgjs/parseargs@npm:0.11.0"
@@ -4226,33 +4253,6 @@ __metadata:
   checksum: 10/967207fbff0f678dce734c374572408531645c038044a9b5e5fffced25b3201ef54c3f6285aa04be1c4061adceb2a44348ceb7aecca86929bd1df9542f2032f8
   languageName: node
   linkType: hard
-
-"openfoodfacts-nodejs@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "openfoodfacts-nodejs@workspace:."
-  dependencies:
-    "@commitlint/cli": "npm:^19.3.0"
-    "@commitlint/config-conventional": "npm:^19.2.2"
-    "@eslint/eslintrc": "npm:^3.1.0"
-    "@eslint/js": "npm:^9.13.0"
-    "@jest/globals": "npm:^29.7.0"
-    "@types/jest": "npm:^29.5.14"
-    "@types/node": "npm:^22.8.5"
-    "@typescript-eslint/eslint-plugin": "npm:^8.12.2"
-    "@typescript-eslint/parser": "npm:^8.12.2"
-    eslint: "npm:^9.13.0"
-    globals: "npm:^15.11.0"
-    jest: "npm:^29.7.0"
-    openapi-fetch: "npm:^0.13.0"
-    openapi-typescript: "npm:^7.4.3"
-    prettier: "npm:^3.1.1"
-    ts-jest: "npm:^29.2.5"
-    ts-node: "npm:^10.9.2"
-    typedoc: "npm:^0.27.2"
-    typescript: "npm:^5.6.3"
-    typescript-eslint: "npm:^8.12.2"
-  languageName: unknown
-  linkType: soft
 
 "optionator@npm:^0.9.3":
   version: 0.9.4

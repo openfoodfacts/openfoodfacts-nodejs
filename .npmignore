@@ -1,0 +1,16 @@
+.yarn/
+.github/
+
+
+tests/
+jest.config.ts
+eslint.config.mjs
+tsconfig.build.json
+tsconfig.json
+
+.all-contributorsrc
+.gitmodules
+.prettierignore
+.prettierrc
+
+*.tgz

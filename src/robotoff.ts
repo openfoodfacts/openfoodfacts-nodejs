@@ -33,12 +33,12 @@ export class Robotoff {
       for (const [key, value] of Object.entries(body)) {
         formBody.append(key, value.toString());
       }
-      return formBody
+      return formBody;
     };
     return this.raw.POST("/insights/annotate", {
       body: body,
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      bodySerializer
+      bodySerializer,
     });
   }
 

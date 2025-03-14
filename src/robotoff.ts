@@ -2,6 +2,7 @@ import createClient from "openapi-fetch";
 
 import { paths } from "./schemas/robotoff";
 import { USER_AGENT } from "./consts";
+import { formBody } from "./formbody";
 
 type InsightQuery = paths["/insights"]["get"]["parameters"]["query"];
 type InsightResponse =
@@ -28,17 +29,15 @@ export class Robotoff {
   }
 
   async annotate(body: AnnotateBody) {
-    const bodySerializer = (body: AnnotateBody) => {
-      const formBody = new URLSearchParams();
-      for (const [key, value] of Object.entries(body)) {
-        formBody.append(key, value.toString());
-      }
-      return formBody;
+    const stringifyValues = (body: AnnotateBody) => {
+      return Object.fromEntries(
+        Object.entries(body).map(([key, value]) => [key, String(value)]),
+      );
     };
     return this.raw.POST("/insights/annotate", {
       body: body,
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      bodySerializer,
+      bodySerializer: (body) => formBody(stringifyValues(body)),
     });
   }
 

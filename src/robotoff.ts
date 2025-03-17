@@ -17,6 +17,10 @@ export type Question = {
   value?: string;
 };
 
+type QuestionsResponse =
+  | { status?: "found" | "no_questions"; questions?: Question[] }
+  | undefined;
+
 export class Robotoff {
   /** The fetch function used for every request */
   private readonly fetch: typeof global.fetch;
@@ -54,7 +58,7 @@ export class Robotoff {
         path: { barcode: code },
       },
     });
-    return result.data;
+    return result.data as QuestionsResponse;
   }
 
   async insightDetail(id: string) {

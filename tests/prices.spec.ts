@@ -18,6 +18,15 @@ describe("Prices Wrapper", () => {
     jest.clearAllMocks();
   });
 
+  const getRandomPassword = () => {
+    const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    let password = "";
+    for (let i = 0; i < 10; i++) {
+      password += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return password;
+  }
+
   const mockResponse = (data: any, ok = true, status = 200) => {
     return {
       ok,
@@ -91,7 +100,7 @@ describe("Prices Wrapper", () => {
         const mockData = { token: "test-token" };
         fetchMock.mockResolvedValue(mockResponse(mockData));
     
-        const result = await client.login({ username: "test", password: "test" });
+        const result = await client.login({ username: "test", password: getRandomPassword() });
         expect(result.data).toEqual(mockData);
       });
     
@@ -99,7 +108,7 @@ describe("Prices Wrapper", () => {
         const errorData = { detail: "Unauthorized" };
         fetchMock.mockResolvedValue(mockResponse(errorData, false, 401));
     
-        const result = await client.login({ username: "test", password: "test" });
+        const result = await client.login({ username: "test", password: getRandomPassword() });
         expect(result.error).toBeDefined();
         expect(result.response.status).toBe(401);
       });

@@ -1,5 +1,6 @@
 import { NutriPatrolError } from "../src/error";
 import { Flag, NutriPatrol, Ticket } from "../src/nutripatrol";
+import { TestUtils } from "./utils/test-utils";
 
 describe("NutriPatrol Wrapper", () => {
   let fetchMock: jest.Mock;
@@ -19,23 +20,7 @@ describe("NutriPatrol Wrapper", () => {
     jest.clearAllMocks();
   });
 
-  const mockResponse = (data: any, ok = true, status = 200) => {
-    return {
-      ok,
-      status,
-      headers: {
-        get: (header: string) => {
-          const headers: { [key: string]: string } = {
-            "Content-Type": "application/json",
-          };
-          return headers[header];
-        },
-      },
-      json: async () => data,
-      text: async () => JSON.stringify(data),
-      clone: () => ({ json: async () => data }),
-    };
-  };
+  const mockResponse = TestUtils.mockResponse;
 
   describe("Flags", () => {
     it("should fetch flags successfully", async () => {

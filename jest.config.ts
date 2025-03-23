@@ -11,6 +11,10 @@ const config: Config.InitialOptions = {
   testMatch: ["**/tests/**/*.spec.ts"],
   coverageDirectory: "coverage",
   coverageReporters: ["text", "lcov"],
+  collectCoverageFrom: [
+    "src/**/*.{ts,tsx}",
+    "!src/**/*.d.ts",
+  ],
 };
 
 export default config;

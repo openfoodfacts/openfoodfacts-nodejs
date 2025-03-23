@@ -1,4 +1,5 @@
 import { PricesApi } from "../src/prices";
+import { TestUtils } from "./utils/test-utils";
 
 describe("Prices Wrapper", () => {
   let fetchMock: jest.Mock;
@@ -27,23 +28,7 @@ describe("Prices Wrapper", () => {
     return password;
   }
 
-  const mockResponse = (data: any, ok = true, status = 200) => {
-    return {
-      ok,
-      status,
-      headers: {
-        get: (header: string) => {
-          const headers: { [key: string]: string } = {
-            "Content-Type": "application/json",
-          };
-          return headers[header];
-        },
-      },
-      json: async () => data,
-      text: async () => JSON.stringify(data),
-      clone: () => ({ json: async () => data }),
-    };
-  };
+  const mockResponse = TestUtils.mockResponse;
 
   describe("Prices", () => {
     it("should fetch prices successfully", async () => {

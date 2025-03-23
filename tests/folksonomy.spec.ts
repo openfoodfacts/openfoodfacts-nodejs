@@ -1,4 +1,5 @@
 import { Folksonomy, FolksonomyTag } from "../src/folksonomy";
+import { TestUtils } from "./utils/test-utils";
 
 describe("Folksonomy Wrapper", () => {
   let fetchMock: jest.Mock;
@@ -18,23 +19,7 @@ describe("Folksonomy Wrapper", () => {
     jest.clearAllMocks();
   });
 
-  const mockResponse = (data: any, ok = true, status = 200) => {
-    return {
-      ok,
-      status,
-      headers: {
-        get: (header: string) => {
-          const headers: { [key: string]: string } = {
-            "Content-Type": "application/json",
-          };
-          return headers[header];
-        },
-      },
-      json: async () => data,
-      text: async () => JSON.stringify(data),
-      clone: () => ({ json: async () => data }),
-    };
-  };
+  const mockResponse = TestUtils.mockResponse;
 
   describe("Keys", () => {
     it("should fetch keys successfully", async () => {

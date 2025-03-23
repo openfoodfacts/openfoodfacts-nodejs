@@ -156,6 +156,24 @@ describe("NutriPatrol Wrapper", () => {
       const result = await client.getFlagsByTicketBatch([1]);
       expect((result as NutriPatrolError).error.statusCode).toBe(500);
     });
+
+    it("should handle malformed API response error", async () => {
+      fetchMock.mockResolvedValue(mockResponse(null, true, 200));
+
+      const result = await client.getFlags();
+      expect((result as NutriPatrolError).error.statusCode).toBe(500);
+      expect((result as NutriPatrolError).error.message).toBe("Malformed API response");
+    });
+
+    it("should handle unexpected error occurred", async () => {
+      fetchMock.mockImplementation(() => {
+        throw new Error("Unexpected error");
+      });
+
+      const result = await client.getFlags();
+      expect((result as NutriPatrolError).error.statusCode).toBe(500);
+      expect((result as NutriPatrolError).error.message).toBe("An unexpected error occurred");
+    });
   });
 
   describe("Tickets", () => {

@@ -176,4 +176,26 @@ describe("Folksonomy Wrapper", () => {
       });
     });
   });
+
+  describe("Auth Token Validation", () => {
+    it("should throw an error if auth token is missing and calling putTag", async () => {
+      const clientWithoutToken = new Folksonomy(fetchMock);
+      expect(() => clientWithoutToken.putTag({ k: "key", v: "value", product: "12345" })).rejects.toThrow(
+        "Auth token is required to perform this action"
+      );
+    });
+
+    it("should throw an error if auth token is missing and calling removeTag", async () => {
+      const clientWithoutToken = new Folksonomy(fetchMock);
+      const tagData: FolksonomyTag & { version: number } = {
+        k: "test-key",
+        v: "test-value",
+        product: "12345",
+        version: 1,
+      };
+      expect(() => clientWithoutToken.removeTag(tagData)).rejects.toThrow(
+        "Auth token is required to perform this action"
+      );
+    });
+  });
 });

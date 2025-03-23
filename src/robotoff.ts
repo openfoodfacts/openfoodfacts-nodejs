@@ -17,9 +17,10 @@ export type Question = {
   value?: string;
 };
 
-type QuestionsResponse =
-  | { status?: "found" | "no_questions"; questions?: Question[] }
-  | undefined;
+type QuestionsResponse = {
+  status?: "found" | "no_questions";
+  questions?: Question[];
+};
 
 export class Robotoff {
   /** The fetch function used for every request */
@@ -52,7 +53,7 @@ export class Robotoff {
     });
   }
 
-  async questionsByProductCode(code: number) {
+  async questionsByProductCode(code: number): Promise<QuestionsResponse> {
     const result = await this.raw.GET("/questions/{barcode}", {
       params: {
         path: { barcode: code },

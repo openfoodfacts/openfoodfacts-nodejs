@@ -5321,4 +5321,3 @@ __metadata:
   resolution: "yocto-queue@npm:1.2.0"
   checksum: 10/6154113e60285f75c9d59c65056ea3842d3d5c999a4c692568155dcc5b9c038850374eae1f04507090eeee8129b8110d9c7259d1aa9fe323957fd46892b655fc
   languageName: node
-  linkType: hard

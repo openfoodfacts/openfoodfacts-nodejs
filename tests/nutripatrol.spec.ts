@@ -162,7 +162,9 @@ describe("NutriPatrol Wrapper", () => {
 
       const result = await client.getFlags();
       expect((result as NutriPatrolError).error.statusCode).toBe(500);
-      expect((result as NutriPatrolError).error.message).toBe("Malformed API response");
+      expect((result as NutriPatrolError).error.message).toBe(
+        "Malformed API response",
+      );
     });
 
     it("should handle unexpected error occurred", async () => {
@@ -172,7 +174,9 @@ describe("NutriPatrol Wrapper", () => {
 
       const result = await client.getFlags();
       expect((result as NutriPatrolError).error.statusCode).toBe(500);
-      expect((result as NutriPatrolError).error.message).toBe("An unexpected error occurred");
+      expect((result as NutriPatrolError).error.message).toBe(
+        "An unexpected error occurred",
+      );
     });
   });
 

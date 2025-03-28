@@ -1,5 +1,6 @@
 import { PricesApi } from "../src/prices";
 import { TestUtils } from "./utils/test-utils";
+import crypto from "node:crypto";
 
 describe("Prices Wrapper", () => {
   let fetchMock: jest.Mock;

@@ -36,7 +36,7 @@ export * from "./folksonomy";
 export * from "./prices";
 export * from "./nutripatrol";
 
-export type OpenFoodFactsOptions = { country: string };
+export type OpenFoodFactsOptions = { country?: string; host?: string };
 
 /** Wrapper of OFF API */
 export class OpenFoodFacts {
@@ -57,7 +57,10 @@ export class OpenFoodFacts {
     fetch: typeof global.fetch,
     options: OpenFoodFactsOptions = { country: "world" },
   ) {
-    this.baseUrl = `https://${options.country}.openfoodfacts.org`;
+    this.baseUrl = options.host
+      ? `https://${options.host}`
+      : `https://${options.country}.openfoodfacts.org`;
+
     this.fetch = fetch;
 
     this.rawv2 = createClient<pathsv2>({

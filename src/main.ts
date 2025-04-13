@@ -35,6 +35,7 @@ export * from "./robotoff";
 export * from "./folksonomy";
 export * from "./prices";
 export * from "./nutripatrol";
+export * from "./search";
 
 export type OpenFoodFactsOptions = { country: string };
 

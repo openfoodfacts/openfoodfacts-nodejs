@@ -13,7 +13,6 @@ export type FolksonomyKey = {
 };
 
 export class Folksonomy {
-  private readonly fetch: typeof global.fetch;
   private readonly baseUrl: string;
   private authToken?: string;
   readonly raw: ReturnType<typeof createClient<paths>>;
@@ -22,7 +21,6 @@ export class Folksonomy {
     this.baseUrl = "https://api.folksonomy.openfoodfacts.org";
     this.authToken = authToken;
 
-    this.fetch = fetch;
     this.raw = createClient({
       baseUrl: this.baseUrl,
       fetch,
@@ -34,7 +32,7 @@ export class Folksonomy {
     });
   }
 
-  private validateAuthToken(message?: string) {
+  private validateAuthToken(message?: string): void {
     if (!this.authToken) {
       throw new Error(
         message || "Auth token is required to perform this action",
@@ -49,37 +47,30 @@ export class Folksonomy {
    */
   async getKeys(): Promise<FolksonomyKey[]> {
     const res = await this.raw.GET("/keys");
-    return res.response.json();
+    return (res?.data ?? []) as FolksonomyKey[];
   }
 
   /**
    * Get the list of products that have a `key` or `key=value` if `value` is provided
    */
   async getProducts(key: string, value?: string): Promise<FolksonomyTag[]> {
+    const queryParams = value ? { k: key, v: value } : { k: key };
     const res = await this.raw.GET("/products", {
-      params: { query: { k: key, v: value } },
+      params: { query: queryParams },
     });
-    return res.response.json();
-  }
-
-  async putTag(tag: FolksonomyTag): Promise<boolean> {
-    this.validateAuthToken();
-
-    const res = await this.raw.PUT("/product", { body: tag });
-
-    return res.response.status === 200;
+    return (res?.data ?? []) as Array<{ product: string; k: string; v: string; }>;
   }
 
   /**
    * Get a list of existing tags for a product
    */
-  async getProduct(barcode: string) {
+  async getProduct(barcode: string): Promise<FolksonomyTag[]> {
     const res = await this.raw.GET("/product/{product}", {
       params: { path: { product: barcode } },
     });
-
-    return res;
+    return (res.data ?? []) as FolksonomyTag[];
   }
+  
   /**
    * Update a product tag (or add it if it does not exist)
    *
@@ -87,7 +78,7 @@ export class Folksonomy {
    * - `k`: key
    * - `v`: value
    * - `product`: barcode
-   * - `version`: version of the tag (must be equal to previous version + 1)
+   * - `version`: if passed it should be equal to 1
    * - `owner`: user_id of the owner of the tag (empty for public tags)
    *
    * @returns if the tag was added or updated
@@ -99,15 +90,59 @@ export class Folksonomy {
       body: tag,
     });
 
-    return res.response.status === 200;
+    const isSuccess = res.response.status === 200;
+    if (!isSuccess) {
+      const error = res.error as ApiError;
+      if (error) {
+        throw new Error(
+          `${error.detail}`,
+        );
+      }
+    }
+    return isSuccess;
+  }
+
+  /**
+   * Update a product tag, returns error if the tag does not exist
+   *
+   * @param tag Tag to update with the following fields:
+   * - `k`: key
+   * - `v`: value
+   * - `product`: barcode
+   * - `version`: version of the tag (must be equal to previous version + 1)
+   * - `owner`: user_id of the owner of the tag (empty for public tags)
+   *
+   * @returns if the tag was added or updated
+   */
+  async putTag(tag: FolksonomyTag): Promise<boolean> {
+    this.validateAuthToken();
+
+    const res = await this.raw.PUT("/product", { body: tag });
+    const isSuccess = res.response.status === 200;
+    if (!isSuccess) {
+      const error = res.error as ApiError;
+      if (error) {
+        throw new Error(
+          `${error.detail}`,
+        );
+      }
+    }
+    return isSuccess;
   }
 
   /**
    * Delete a product tag
    *
+   * @param tag Tag to delete with the following fields:
+   * - `k`: key
+   * - `v`: value
+   * - `product`: barcode
+   * - `version`: version of the tag [required]
+   * - `owner`: user_id of the owner of the tag (empty for public tags)
+   *
    * @returns if the tag was deleted
    */
-  async removeTag(tag: FolksonomyTag & { version: number }) {
+  async removeTag(tag: FolksonomyTag & { version: number }): Promise<boolean> {
     this.validateAuthToken();
 
     const res = await this.raw.DELETE("/product/{product}/{k}", {
@@ -117,7 +152,16 @@ export class Folksonomy {
       },
     });
 
-    return res;
+    const isSuccess = res.response.status === 200;
+    if (!isSuccess) {
+      const error = res.error as ApiError;
+      if (error) {
+        throw new Error(
+          `${error.detail}`,
+        );
+      }
+    }
+    return isSuccess;
   }
 
   /**
@@ -156,11 +200,7 @@ export class Folksonomy {
       return { error: res.error };
     }
 
-    const token = (await res.response.json()) as {
-      access_token: string;
-      token_type: string;
-    };
-
-    return { token };
+    const data = res.data as { access_token: string; token_type: string };
+    return { token: data };
   }
 }

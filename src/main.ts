@@ -22,7 +22,7 @@ import {
   TaxoNode,
   Taxonomy,
 } from "./taxonomy/types";
-import { USER_AGENT } from "./consts";
+import { PLATFORM_DOMAINS, PLATFORM_NAMES } from "./consts";
 
 export type ProductV2 = componentsv2["schemas"]["Product"];
 export type SearchResultV2 = externalv2["responses/search_for_products.yaml"];
@@ -37,12 +37,19 @@ export * from "./prices";
 export * from "./nutripatrol";
 export * from "./search";
 
-export type OpenFoodFactsOptions = { country: string };
+export type PlatformType = "food" | "beauty" | "petfood" | "products";
+
+export type OpenFoodFactsOptions = {
+  country: string;
+  platform?: PlatformType;
+};
 
 /** Wrapper of OFF API */
 export class OpenFoodFacts {
   private readonly fetch: typeof global.fetch;
   private readonly baseUrl: string;
+  private readonly platform: PlatformType;
+  private readonly customUserAgent: string;
 
   /** Raw v2 client */
   readonly rawv2: ReturnType<typeof createClient<pathsv2>>;
@@ -56,16 +63,38 @@ export class OpenFoodFacts {
    */
   constructor(
     fetch: typeof global.fetch,
-    options: OpenFoodFactsOptions = { country: "world" },
+    options: OpenFoodFactsOptions = { country: "world", platform: "food" },
   ) {
-    this.baseUrl = `https://${options.country}.openfoodfacts.org`;
+    this.platform = options.platform || "food";
+
+    const domain =
+      this.platform === "food"
+        ? PLATFORM_DOMAINS.FOOD
+        : this.platform === "beauty"
+          ? PLATFORM_DOMAINS.BEAUTY
+          : this.platform === "petfood"
+            ? PLATFORM_DOMAINS.PET_FOOD
+            : PLATFORM_DOMAINS.PRODUCTS;
+
+    this.baseUrl = `https://${options.country}.${domain}`;
     this.fetch = fetch;
+
+    const platformName =
+      this.platform === "food"
+        ? PLATFORM_NAMES.FOOD
+        : this.platform === "beauty"
+          ? PLATFORM_NAMES.BEAUTY
+          : this.platform === "petfood"
+            ? PLATFORM_NAMES.PET_FOOD
+            : PLATFORM_NAMES.PRODUCTS;
+
+    this.customUserAgent = `${platformName} - NodeJS ${require("../package.json").version}`;
 
     this.rawv2 = createClient<pathsv2>({
       fetch: this.fetch,
       baseUrl: this.baseUrl,
       headers: {
-        "User-Agent": USER_AGENT,
+        "User-Agent": this.customUserAgent,
       },
     });
 
@@ -78,7 +107,7 @@ export class OpenFoodFacts {
   ): Promise<T> {
     const res = await fetch(
       `${this.baseUrl}/api/v2/taxonomy?tagtype=${taxo}&tags=${entry}`,
-      { headers: { "User-Agent": USER_AGENT } },
+      { headers: { "User-Agent": this.customUserAgent } },
     );
 
     return (await res.json()) as T;

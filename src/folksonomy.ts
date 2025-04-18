@@ -70,7 +70,7 @@ export class Folksonomy {
     });
     return (res.data ?? []) as FolksonomyTag[];
   }
-  
+
   /**
    * Add a product tag, returns error if the tag already exists
    *
@@ -94,9 +94,7 @@ export class Folksonomy {
     if (!isSuccess) {
       const error = res.error as ApiError;
       if (error) {
-        throw new Error(
-          `${JSON.stringify(error.detail)}`,
-        );
+        throw new Error(`${JSON.stringify(error.detail)}`);
       }
     }
     return isSuccess;
@@ -122,9 +120,7 @@ export class Folksonomy {
     if (!isSuccess) {
       const error = res.error as ApiError;
       if (error) {
-        throw new Error(
-          `${error.detail}`,
-        );
+        throw new Error(`${error.detail}`);
       }
     }
     return isSuccess;
@@ -156,9 +152,7 @@ export class Folksonomy {
     if (!isSuccess) {
       const error = res.error as ApiError;
       if (error) {
-        throw new Error(
-          `${error.detail}`,
-        );
+        throw new Error(`${error.detail}`);
       }
     }
     return isSuccess;

@@ -58,13 +58,13 @@ export class Folksonomy {
     const res = await this.raw.GET("/products", {
       params: { query: queryParams },
     });
-    return (res?.data ?? []) as Array<{ product: string; k: string; v: string; }>;
+    return (res?.data ?? []) as FolksonomyTag[];
   }
 
   /**
    * Get a list of existing tags for a product
    */
-  async getProduct(barcode: string): Promise<FolksonomyTag[]> {
+  async getProductTags(barcode: string): Promise<FolksonomyTag[]> {
     const res = await this.raw.GET("/product/{product}", {
       params: { path: { product: barcode } },
     });
@@ -72,7 +72,7 @@ export class Folksonomy {
   }
   
   /**
-   * Update a product tag (or add it if it does not exist)
+   * Add a product tag, returns error if the tag already exists
    *
    * @param tag Tag to add or update with the following fields:
    * - `k`: key
@@ -95,7 +95,7 @@ export class Folksonomy {
       const error = res.error as ApiError;
       if (error) {
         throw new Error(
-          `${error.detail}`,
+          `${JSON.stringify(error.detail)}`,
         );
       }
     }

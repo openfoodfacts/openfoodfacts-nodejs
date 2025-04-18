@@ -56,8 +56,8 @@ export class PricesApi {
   }
 
   async isAuthenticated() {
-    const res = await this.client.GET('/api/v1/session');
-		return res.response.ok;
+    const res = await this.client.GET("/api/v1/session");
+    return res.response.ok;
   }
 
   async getStatus() {

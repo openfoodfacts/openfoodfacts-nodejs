@@ -749,7 +749,7 @@ export interface operations {
     parameters: {
       query?: {
         /** @description if set to 1, the token is also set as a cookie named 'session' in the response. This parameter must be passed as a query parameter, e.g.: /auth?set_cookie=1 */
-        set_cookie?: boolean;
+        set_cookie?: number;
       };
     };
     requestBody: {

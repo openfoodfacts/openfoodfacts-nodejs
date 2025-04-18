@@ -35,7 +35,7 @@ export class PricesApi {
   }
   login(body: { username: string; password: string }) {
     return this.client.POST("/api/v1/auth", {
-      params: { query: { set_cookie: true } },
+      params: { query: { set_cookie: 1 } },
       body,
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       bodySerializer: (body) =>
@@ -56,8 +56,8 @@ export class PricesApi {
   }
 
   async isAuthenticated() {
-    const res = await this.getProofs();
-    return res.error == null;
+    const res = await this.client.GET('/api/v1/session');
+		return res.response.ok;
   }
 
   async getStatus() {

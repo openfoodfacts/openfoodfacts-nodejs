@@ -35,6 +35,8 @@ export class PricesApi {
   }
   login(body: { username: string; password: string }) {
     return this.client.POST("/api/v1/auth", {
+      // @ts-expect-error - The type definition currently specify set_cookie as a boolean which is incorrect. 
+      // until that is fixed, we need to use this workaround.
       params: { query: { set_cookie: 1 } },
       body,
       headers: { "Content-Type": "application/x-www-form-urlencoded" },

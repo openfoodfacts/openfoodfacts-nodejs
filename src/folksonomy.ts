@@ -13,7 +13,6 @@ export type FolksonomyKey = {
 };
 
 export class Folksonomy {
-  private readonly fetch: typeof global.fetch;
   private readonly baseUrl: string;
   private authToken?: string;
   readonly raw: ReturnType<typeof createClient<paths>>;
@@ -22,7 +21,6 @@ export class Folksonomy {
     this.baseUrl = "https://api.folksonomy.openfoodfacts.org";
     this.authToken = authToken;
 
-    this.fetch = fetch;
     this.raw = createClient({
       baseUrl: this.baseUrl,
       fetch,
@@ -62,32 +60,43 @@ export class Folksonomy {
     return res.response.json();
   }
 
+  /**
+   * Update a product tag, returns error if the tag does not exist
+   *
+   * @param tag Tag to update with the following fields:
+   * - `k`: key
+   * - `v`: value
+   * - `product`: barcode
+   * - `version`: version of the tag (must be equal to previous version + 1)
+   * - `owner`: user_id of the owner of the tag (empty for public tags)
+   *
+   * @returns if the tag was added or updated
+   */
   async putTag(tag: FolksonomyTag): Promise<boolean> {
     this.validateAuthToken();
 
     const res = await this.raw.PUT("/product", { body: tag });
-
     return res.response.status === 200;
   }
 
   /**
    * Get a list of existing tags for a product
    */
-  async getProduct(barcode: string) {
+  async getProductTags(barcode: string) {
     const res = await this.raw.GET("/product/{product}", {
       params: { path: { product: barcode } },
     });
-
     return res;
   }
+
   /**
-   * Update a product tag (or add it if it does not exist)
+   * Add a product tag, returns error if the tag already exists
    *
    * @param tag Tag to add or update with the following fields:
    * - `k`: key
    * - `v`: value
    * - `product`: barcode
-   * - `version`: version of the tag (must be equal to previous version + 1)
+   * - `version`: if passed it should be equal to 1
    * - `owner`: user_id of the owner of the tag (empty for public tags)
    *
    * @returns if the tag was added or updated
@@ -104,6 +113,13 @@ export class Folksonomy {
 
   /**
    * Delete a product tag
+   *
+   * @param tag Tag to delete with the following fields:
+   * - `k`: key
+   * - `v`: value
+   * - `product`: barcode
+   * - `version`: version of the tag [required]
+   * - `owner`: user_id of the owner of the tag (empty for public tags)
    *
    * @returns if the tag was deleted
    */

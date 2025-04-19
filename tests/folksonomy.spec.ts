@@ -82,14 +82,14 @@ describe("Folksonomy Wrapper", () => {
       const data = [{ k: "test-key", v: "test-value", product: "12345" }];
       fetchMock.mockResolvedValue(mockResponse(data));
 
-      const result = await client.getProduct("12345");
+      const result = await client.getProductTags("12345");
       expect(result).toBeDefined();
     });
 
     it("should handle error when getting product tags", async () => {
       fetchMock.mockResolvedValue(mockResponse(null, false, 500));
 
-      expect(await client.getProduct("12345")).toBeNull;
+      expect(await client.getProductTags("12345")).toBeNull;
     });
 
     it("should add tag successfully", async () => {

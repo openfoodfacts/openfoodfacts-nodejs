@@ -34,7 +34,7 @@ export class Folksonomy {
     });
   }
 
-  private validateAuthToken(message?: string) {
+  private validateAuthToken(message?: string): void {
     if (!this.authToken) {
       throw new Error(
         message || "Auth token is required to perform this action",
@@ -49,17 +49,18 @@ export class Folksonomy {
    */
   async getKeys(): Promise<FolksonomyKey[]> {
     const res = await this.raw.GET("/keys");
-    return res.response.json();
+    return (res?.data ?? []) as FolksonomyKey[];
   }
 
   /**
    * Get the list of products that have a `key` or `key=value` if `value` is provided
    */
   async getProducts(key: string, value?: string): Promise<FolksonomyTag[]> {
+    const queryParams = value ? { k: key, v: value } : { k: key };
     const res = await this.raw.GET("/products", {
-      params: { query: { k: key, v: value } },
+      params: { query: queryParams },
     });
-    return res.response.json();
+    return (res?.data ?? []) as FolksonomyTag[];
   }
 
   async putTag(tag: FolksonomyTag): Promise<boolean> {
@@ -73,13 +74,14 @@ export class Folksonomy {
   /**
    * Get a list of existing tags for a product
    */
-  async getProduct(barcode: string) {
+  async getProduct(barcode: string): Promise<FolksonomyTag[]> {
     const res = await this.raw.GET("/product/{product}", {
       params: { path: { product: barcode } },
     });
 
-    return res;
+    return (res.data ?? []) as FolksonomyTag[];
   }
+
   /**
    * Update a product tag (or add it if it does not exist)
    *
@@ -107,7 +109,7 @@ export class Folksonomy {
    *
    * @returns if the tag was deleted
    */
-  async removeTag(tag: FolksonomyTag & { version: number }) {
+  async removeTag(tag: FolksonomyTag & { version: number }): Promise<boolean> {
     this.validateAuthToken();
 
     const res = await this.raw.DELETE("/product/{product}/{k}", {
@@ -117,7 +119,7 @@ export class Folksonomy {
       },
     });
 
-    return res;
+    return res.response.status === 200;
   }
 
   /**
@@ -156,11 +158,7 @@ export class Folksonomy {
       return { error: res.error };
     }
 
-    const token = (await res.response.json()) as {
-      access_token: string;
-      token_type: string;
-    };
-
-    return { token };
+    const data = res.data as { access_token: string; token_type: string };
+    return { token: data };
   }
 }

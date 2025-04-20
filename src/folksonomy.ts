@@ -13,6 +13,7 @@ export type FolksonomyKey = {
 };
 
 export class Folksonomy {
+  private readonly fetch: typeof global.fetch;
   private readonly baseUrl: string;
   private authToken?: string;
   readonly raw: ReturnType<typeof createClient<paths>>;
@@ -24,6 +25,7 @@ export class Folksonomy {
     this.baseUrl = options?.baseUrl ?? DEFAULT_FOLKSONOMY_API_URL;
     this.authToken = options?.authToken;
 
+    this.fetch = fetch;
     this.raw = createClient({
       baseUrl: this.baseUrl,
       fetch,

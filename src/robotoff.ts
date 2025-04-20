@@ -1,7 +1,7 @@
 import createClient from "openapi-fetch";
 
 import { paths } from "./schemas/robotoff";
-import { USER_AGENT } from "./consts";
+import { DEFAULT_ROBOTOFF_API_URL, USER_AGENT } from "./consts";
 import { formBody } from "./formbody";
 
 type InsightQuery = paths["/insights"]["get"]["parameters"]["query"];
@@ -29,11 +29,14 @@ export class Robotoff {
   /** The raw openapi-fetch client is used for every request exposed by the openapi schema */
   private readonly raw: ReturnType<typeof createClient<paths>>;
 
-  constructor(fetch: typeof global.fetch) {
+  constructor(
+    fetch: typeof global.fetch,
+    options: { baseUrl: string } = { baseUrl: DEFAULT_ROBOTOFF_API_URL },
+  ) {
     this.fetch = fetch;
     this.raw = createClient<paths>({
       fetch: this.fetch,
-      baseUrl: "https://robotoff.openfoodfacts.org/api/v1",
+      baseUrl: options.baseUrl,
       headers: {
         "User-Agent": USER_AGENT,
       },

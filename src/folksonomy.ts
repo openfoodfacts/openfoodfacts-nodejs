@@ -3,7 +3,7 @@ import createClient from "openapi-fetch";
 import { paths, components } from "./schemas/folksonomy";
 import { formBody as formBodySerializer } from "./formbody";
 import { ApiError } from "./error";
-import { USER_AGENT } from "./consts";
+import { DEFAULT_FOLKSONOMY_API_URL, USER_AGENT } from "./consts";
 
 export type FolksonomyTag = components["schemas"]["ProductTag"];
 export type FolksonomyKey = {
@@ -18,9 +18,12 @@ export class Folksonomy {
   private authToken?: string;
   readonly raw: ReturnType<typeof createClient<paths>>;
 
-  constructor(fetch: typeof global.fetch, authToken?: string) {
-    this.baseUrl = "https://api.folksonomy.openfoodfacts.org";
-    this.authToken = authToken;
+  constructor(
+    fetch: typeof global.fetch,
+    options?: { baseUrl?: string; authToken?: string },
+  ) {
+    this.baseUrl = options?.baseUrl ?? DEFAULT_FOLKSONOMY_API_URL;
+    this.authToken = options?.authToken;
 
     this.fetch = fetch;
     this.raw = createClient({
@@ -28,7 +31,7 @@ export class Folksonomy {
       fetch,
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${authToken}`,
+        Authorization: `Bearer ${this.authToken}`,
         "User-Agent": USER_AGENT,
       },
     });

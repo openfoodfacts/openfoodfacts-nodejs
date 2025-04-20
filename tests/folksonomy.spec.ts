@@ -8,7 +8,7 @@ describe("Folksonomy Wrapper", () => {
   beforeEach(() => {
     fetchMock = jest.fn();
     global.fetch = fetchMock;
-    client = new Folksonomy(fetchMock, "test-token");
+    client = new Folksonomy(fetchMock, { authToken: "test-token" });
   });
 
   afterEach(() => {

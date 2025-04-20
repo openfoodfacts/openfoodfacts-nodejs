@@ -76,10 +76,14 @@ describe("Platform support tests", () => {
   });
 
   it("should throw an error if neither country nor customHost is provided", () => {
-    expect(() => {
-      new OpenFoodFacts(dummyFetch, {
+    function createClientWithoutCountryOrHost() {
+      return new OpenFoodFacts(dummyFetch, {
         platform: "food",
       });
-    }).toThrow("Either 'customHost' or 'country' must be provided in options");
+    }
+
+    expect(createClientWithoutCountryOrHost).toThrow(
+      "Either 'customHost' or 'country' must be provided in options",
+    );
   });
 });

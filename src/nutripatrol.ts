@@ -2,7 +2,7 @@ import createClient from "openapi-fetch";
 
 import { components, paths } from "./schemas/nutripatrol";
 import { NutriPatrolError } from "./error";
-import { USER_AGENT } from "./consts";
+import { DEFAULT_NUTRIPATROL_API_URL, USER_AGENT } from "./consts";
 
 export type Flag = components["schemas"]["FlagCreate"];
 export type Ticket = components["schemas"]["Ticket"];
@@ -31,10 +31,14 @@ export class NutriPatrol {
   private readonly baseUrl: string;
   readonly raw: ReturnType<typeof createClient<paths>>;
 
-  constructor(fetch: typeof global.fetch) {
-    this.baseUrl = "https://nutripatrol.openfoodfacts.org";
-
+  constructor(
+    fetch: typeof global.fetch,
+    options: { baseUrl: string } = {
+      baseUrl: DEFAULT_NUTRIPATROL_API_URL,
+    },
+  ) {
     this.fetch = fetch;
+    this.baseUrl = options.baseUrl;
     this.raw = createClient({
       baseUrl: this.baseUrl,
       fetch,

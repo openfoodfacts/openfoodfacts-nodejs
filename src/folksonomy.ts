@@ -67,7 +67,14 @@ export class Folksonomy {
 
     const res = await this.raw.PUT("/product", { body: tag });
 
-    return res.response.status === 200;
+    const isSuccess = res.response.status === 200;
+    if (!isSuccess) {
+      const error = res.error as ApiError;
+      if (error) {
+        throw new Error(`${JSON.stringify(error.detail)}`);
+      }
+    }
+    return isSuccess;
   }
 
   /**
@@ -99,7 +106,14 @@ export class Folksonomy {
       body: tag,
     });
 
-    return res.response.status === 200;
+    const isSuccess = res.response.status === 200;
+    if (!isSuccess) {
+      const error = res.error as ApiError;
+      if (error) {
+        throw new Error(`${JSON.stringify(error.detail)}`);
+      }
+    }
+    return isSuccess;
   }
 
   /**
@@ -117,7 +131,14 @@ export class Folksonomy {
       },
     });
 
-    return res;
+    const isSuccess = res.response.status === 200;
+    if (!isSuccess) {
+      const error = res.error as ApiError;
+      if (error) {
+        throw new Error(`${JSON.stringify(error.detail)}`);
+      }
+    }
+    return isSuccess;
   }
 
   /**

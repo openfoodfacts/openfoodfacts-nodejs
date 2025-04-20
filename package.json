@@ -2,7 +2,7 @@
   "name": "@openfoodfacts/openfoodfacts-nodejs",
   "author": "openfoodfacts",
   "license": "Apache-2.0",
-  "version": "2.0.0-alpha.3",
+  "version": "2.0.0-alpha.4",
   "description": "Open Food Facts API NodeJS Wrapper",
   "keywords": [
     "OFF",
@@ -41,28 +41,28 @@
     "test:coverage": "jest --coverage"
   },
   "dependencies": {
-    "openapi-fetch": "^0.13.0"
+    "openapi-fetch": "^0.13.5"
   },
   "devDependencies": {
-    "@commitlint/cli": "^19.3.0",
-    "@commitlint/config-conventional": "^19.2.2",
-    "@eslint/eslintrc": "^3.1.0",
-    "@eslint/js": "^9.13.0",
+    "@commitlint/cli": "^19.8.0",
+    "@commitlint/config-conventional": "^19.8.0",
+    "@eslint/eslintrc": "^3.3.1",
+    "@eslint/js": "^9.25.0",
     "@jest/globals": "^29.7.0",
     "@types/jest": "^29.5.14",
-    "@types/node": "^22.8.5",
-    "@typescript-eslint/eslint-plugin": "^8.12.2",
-    "@typescript-eslint/parser": "^8.12.2",
-    "eslint": "^9.13.0",
-    "globals": "^15.11.0",
+    "@types/node": "^22.14.1",
+    "@typescript-eslint/eslint-plugin": "^8.30.1",
+    "@typescript-eslint/parser": "^8.30.1",
+    "eslint": "^9.25.0",
+    "globals": "^16.0.0",
     "jest": "^29.7.0",
-    "openapi-typescript": "^7.4.3",
-    "prettier": "^3.1.1",
-    "ts-jest": "^29.2.5",
+    "openapi-typescript": "^7.6.1",
+    "prettier": "^3.5.3",
+    "ts-jest": "^29.3.2",
     "ts-node": "^10.9.2",
-    "typedoc": "^0.27.2",
-    "typescript": "^5.6.3",
-    "typescript-eslint": "^8.12.2"
+    "typedoc": "^0.28.2",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.30.1"
   },
   "packageManager": "yarn@4.7.0"
 }

@@ -6,7 +6,10 @@ describe("Platform support tests", () => {
   const dummyFetch = (() => Promise.resolve(new Response())) as typeof fetch;
 
   it("should set the correct baseUrl for food platform", () => {
-    const off = new OpenFoodFacts(dummyFetch);
+    const off = new OpenFoodFacts(dummyFetch, {
+      platform: "food",
+      country: "world",
+    });
     // @ts-ignore - accessing private property for testing
     expect(off.baseUrl).toContain(PLATFORM_DOMAINS.FOOD);
   });
@@ -59,5 +62,24 @@ describe("Platform support tests", () => {
       // @ts-ignore - accessing private property for testing
       expect(off.customUserAgent).toContain(expectedAgentPrefixes[i]);
     }
+  });
+
+  it("should accept a custom host", () => {
+    const customHost = "https://test.openfoodfacts.org";
+    const off = new OpenFoodFacts(dummyFetch, {
+      platform: "food",
+      customHost: customHost,
+    });
+
+    // @ts-ignore - accessing private property for testing
+    expect(off.baseUrl).toBe(customHost);
+  });
+
+  it("should throw an error if neither country nor customHost is provided", () => {
+    expect(() => {
+      new OpenFoodFacts(dummyFetch, {
+        platform: "food",
+      });
+    }).toThrow("Either 'customHost' or 'country' must be provided in options");
   });
 });

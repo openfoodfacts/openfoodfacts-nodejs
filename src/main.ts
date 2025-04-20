@@ -22,7 +22,12 @@ import {
   TaxoNode,
   Taxonomy,
 } from "./taxonomy/types";
-import { PLATFORM_DOMAINS, PLATFORM_NAMES } from "./consts";
+import {
+  PLATFORM_DOMAINS,
+  PLATFORM_NAMES,
+  PlatformFeature,
+  PLATFORM_FEATURES,
+} from "./consts";
 
 export type ProductV2 = componentsv2["schemas"]["Product"];
 export type SearchResultV2 = externalv2["responses/search_for_products.yaml"];
@@ -40,8 +45,9 @@ export * from "./search";
 export type PlatformType = "food" | "beauty" | "petfood" | "products";
 
 export type OpenFoodFactsOptions = {
-  country: string;
-  platform?: PlatformType;
+  platform: PlatformType;
+  country?: string;
+  customHost?: string;
 };
 
 /** Wrapper of OFF API */
@@ -50,6 +56,7 @@ export class OpenFoodFacts {
   private readonly baseUrl: string;
   private readonly platform: PlatformType;
   private readonly customUserAgent: string;
+  private readonly supportedFeatures: PlatformFeature[];
 
   /** Raw v2 client */
   readonly rawv2: ReturnType<typeof createClient<pathsv2>>;
@@ -61,22 +68,30 @@ export class OpenFoodFacts {
    * Create OFF object
    * @param options - Options for the OFF Object
    */
-  constructor(
-    fetch: typeof global.fetch,
-    options: OpenFoodFactsOptions = { country: "world", platform: "food" },
-  ) {
-    this.platform = options.platform || "food";
+  constructor(fetch: typeof global.fetch, options: OpenFoodFactsOptions) {
+    this.platform = options.platform;
 
-    const domain =
-      this.platform === "food"
-        ? PLATFORM_DOMAINS.FOOD
-        : this.platform === "beauty"
-          ? PLATFORM_DOMAINS.BEAUTY
-          : this.platform === "petfood"
-            ? PLATFORM_DOMAINS.PET_FOOD
-            : PLATFORM_DOMAINS.PRODUCTS;
+    this.supportedFeatures = PLATFORM_FEATURES[this.platform];
 
-    this.baseUrl = `https://${options.country}.${domain}`;
+    if (options.customHost) {
+      this.baseUrl = options.customHost;
+    } else if (options.country) {
+      const domain =
+        this.platform === "food"
+          ? PLATFORM_DOMAINS.FOOD
+          : this.platform === "beauty"
+            ? PLATFORM_DOMAINS.BEAUTY
+            : this.platform === "petfood"
+              ? PLATFORM_DOMAINS.PET_FOOD
+              : PLATFORM_DOMAINS.PRODUCTS;
+
+      this.baseUrl = `https://${options.country}.${domain}`;
+    } else {
+      throw new Error(
+        "Either 'customHost' or 'country' must be provided in options",
+      );
+    }
+
     this.fetch = fetch;
 
     const platformName =
@@ -99,6 +114,18 @@ export class OpenFoodFacts {
     });
 
     this.robotoff = new Robotoff(fetch);
+  }
+
+  isFeatureSupported(feature: PlatformFeature): boolean {
+    return this.supportedFeatures.includes(feature);
+  }
+
+  private requireFeature(feature: PlatformFeature): void {
+    if (!this.isFeatureSupported(feature)) {
+      throw new Error(
+        `Feature ${feature} is not supported on the ${this.platform} platform.`,
+      );
+    }
   }
 
   private async getTaxoEntry<T extends TaxoNode>(

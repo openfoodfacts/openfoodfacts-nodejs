@@ -57,9 +57,12 @@ export class OpenFoodFacts {
     fetch: typeof global.fetch,
     options: OpenFoodFactsOptions = { country: "world" },
   ) {
-    this.baseUrl = options.host
-      ? `https://${options.host}`
-      : `https://${options.country}.openfoodfacts.org`;
+    if (options.host && options.country) {
+      throw new Error("You must provide either `host` or `country`, not both.");
+    }
+
+    this.baseUrl =
+      options.host ?? `https://${options.country}.openfoodfacts.org`;
 
     this.fetch = fetch;
 

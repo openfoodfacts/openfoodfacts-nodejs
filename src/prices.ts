@@ -15,13 +15,15 @@ export class PricesApi {
 
   constructor(
     fetch: typeof window.fetch,
-    options: { baseUrl: string } = { baseUrl: BASE_URL },
+    options: { baseUrl: string; authToken?: string } = { baseUrl: BASE_URL },
   ) {
     this.client = createClient({
       fetch,
       baseUrl: options.baseUrl,
       credentials: "include",
       headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${options?.authToken}`,
         "User-Agent": USER_AGENT,
       },
     });

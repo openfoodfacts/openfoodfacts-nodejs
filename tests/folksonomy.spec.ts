@@ -62,8 +62,9 @@ describe("Folksonomy Wrapper", () => {
       };
       fetchMock.mockResolvedValue(mockResponse("ok", true, 200));
 
-      const result = await client.putTag(tagData);
-      expect(result).toBe(true);
+      const [success, error] = await client.putTag(tagData);
+      expect(success).toBe(true);
+      expect(error).toBeNull();
     });
 
     it("should handle error when putting tag", async () => {
@@ -74,8 +75,9 @@ describe("Folksonomy Wrapper", () => {
       };
       fetchMock.mockResolvedValue(mockResponse(null, false, 500));
 
-      const result = await client.putTag(tagData);
-      expect(result).toBe(false);
+      const [success, error] = await client.putTag(tagData);
+      expect(success).toBe(false);
+      expect(error).toBeDefined();
     });
 
     it("should get product tags successfully", async () => {
@@ -100,8 +102,9 @@ describe("Folksonomy Wrapper", () => {
       };
       fetchMock.mockResolvedValue(mockResponse("ok", true, 200));
 
-      const result = await client.addTag(tagData);
-      expect(result).toBe(true);
+      const [success, error] = await client.addTag(tagData);
+      expect(success).toBe(true);
+      expect(error).toBeNull();
     });
 
     it("should handle error when adding tag", async () => {
@@ -112,8 +115,9 @@ describe("Folksonomy Wrapper", () => {
       };
       fetchMock.mockResolvedValue(mockResponse(null, false, 500));
 
-      const result = await client.addTag(tagData);
-      expect(result).toBe(false);
+      const [success, error] = await client.addTag(tagData);
+      expect(success).toBe(false);
+      expect(error).toBeDefined();
     });
 
     it("should remove tag successfully", async () => {
@@ -125,8 +129,9 @@ describe("Folksonomy Wrapper", () => {
       };
       fetchMock.mockResolvedValue(mockResponse("ok", true, 200));
 
-      const result = await client.removeTag(tagData);
-      expect(result).toBeDefined();
+      const [success, error] = await client.removeTag(tagData);
+      expect(success).toBe(true);
+      expect(error).toBeNull();
     });
 
     it("should handle error when removing tag", async () => {
@@ -138,8 +143,9 @@ describe("Folksonomy Wrapper", () => {
       };
       fetchMock.mockResolvedValue(mockResponse(null, false, 500));
 
-      const result = await client.removeTag(tagData);
-      expect(result).toBeDefined();
+      const [success, error] = await client.removeTag(tagData);
+      expect(success).toBe(false);
+      expect(error).toBeDefined();
     });
   });
 

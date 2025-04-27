@@ -37,7 +37,7 @@ export * from "./prices";
 export * from "./nutripatrol";
 export * from "./search";
 
-export type OpenFoodFactsOptions = { country: string };
+export type OpenFoodFactsOptions = { country?: string; host?: string };
 
 /** Wrapper of OFF API */
 export class OpenFoodFacts {
@@ -58,7 +58,13 @@ export class OpenFoodFacts {
     fetch: typeof global.fetch,
     options: OpenFoodFactsOptions = { country: "world" },
   ) {
-    this.baseUrl = `https://${options.country}.openfoodfacts.org`;
+    if (options.host && options.country) {
+      throw new Error("You must provide either `host` or `country`, not both.");
+    }
+
+    this.baseUrl =
+      options.host ?? `https://${options.country}.openfoodfacts.org`;
+
     this.fetch = fetch;
 
     this.rawv2 = createClient<pathsv2>({

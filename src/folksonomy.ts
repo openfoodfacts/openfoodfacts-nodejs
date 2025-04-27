@@ -85,7 +85,7 @@ export class Folksonomy {
 
     const isSuccess = res.response.status === 200;
     if (!isSuccess) {
-      return [false, res.error as ApiError ?? null];
+      return [false, (res.error as ApiError) ?? null];
     }
     return [true, null];
   }
@@ -122,7 +122,7 @@ export class Folksonomy {
 
     const isSuccess = res.response.status === 200;
     if (!isSuccess) {
-      return [false, res.error as ApiError ?? null];
+      return [false, (res.error as ApiError) ?? null];
     }
     return [true, null];
   }
@@ -139,7 +139,9 @@ export class Folksonomy {
    *
    * @returns if the tag was deleted
    */
-  async removeTag(tag: FolksonomyTag & { version: number }): Promise<[boolean, ApiError | null]> {
+  async removeTag(
+    tag: FolksonomyTag & { version: number },
+  ): Promise<[boolean, ApiError | null]> {
     this.validateAuthToken();
 
     const res = await this.raw.DELETE("/product/{product}/{k}", {
@@ -151,7 +153,7 @@ export class Folksonomy {
 
     const isSuccess = res.response.status === 200;
     if (!isSuccess) {
-      return [false, res.error as ApiError ?? null];
+      return [false, (res.error as ApiError) ?? null];
     }
     return [true, null];
   }

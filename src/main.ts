@@ -65,8 +65,13 @@ export class OpenFoodFacts {
     fetch: typeof global.fetch,
     options: OpenFoodFactsOptions = { country: "world" },
   ) {
-    if ((options.host && options.country) || (options.type && options.country)) {
-      throw new Error("You must provide either `host`, `type`, or `country`, not multiple.");
+    if (
+      (options.host && options.country) ||
+      (options.type && options.country)
+    ) {
+      throw new Error(
+        "You must provide either `host`, `type`, or `country`, not multiple.",
+      );
     }
 
     this.backendType = options.type;

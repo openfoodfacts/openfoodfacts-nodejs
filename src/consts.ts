@@ -1,8 +1,8 @@
-/* eslint-disable no-unused-vars */
 export const STATIC_HOST = "https://static.openfoodfacts.org";
 
 export const USER_AGENT = `OpenFoodFacts - NodeJS ${require("../package.json").version}`;
 
+/* eslint-disable no-unused-vars */
 export enum BackendType {
   OFF = "OFF",
   OBF = "OBF",

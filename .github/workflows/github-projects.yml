@@ -1,6 +1,25 @@
 name: Add bugs to the relevant GitHub Projects
 
 on:
+  issues:
+    types:
+      - opened
+      - edited
+      - deleted
+      - transferred
+      - pinned
+      - unpinned
+      - closed
+      - reopened
+      - assigned
+      - unassigned
+      - labeled
+      - unlabeled
+      - locked
+      - unlocked
+      - milestoned
+      - demilestoned
+
   pull_request_target:
     types:
       - assigned
@@ -20,13 +39,6 @@ on:
       - review_request_removed
       - auto_merge_enabled
       - auto_merge_disabled
-  issues:
-    types:
-      - opened
-      - labeled
-      - transfered
-      - edited
-
 jobs:
   add-to-project:
     name: Add issue to project

@@ -1,6 +1,6 @@
 .yarn/
 .github/
-
+.vscode/
 
 tests/
 jest.config.ts

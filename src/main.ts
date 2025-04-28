@@ -22,12 +22,7 @@ import {
   TaxoNode,
   Taxonomy,
 } from "./taxonomy/types";
-import {
-  PLATFORM_DOMAINS,
-  PLATFORM_NAMES,
-  PlatformFeature,
-  PLATFORM_FEATURES,
-} from "./consts";
+import { BackendType, BACKEND_DOMAINS, BACKEND_NAMES } from "./consts";
 
 export type ProductV2 = componentsv2["schemas"]["Product"];
 export type SearchResultV2 = externalv2["responses/search_for_products.yaml"];
@@ -42,21 +37,17 @@ export * from "./prices";
 export * from "./nutripatrol";
 export * from "./search";
 
-export type PlatformType = "food" | "beauty" | "petfood" | "products";
-
 export type OpenFoodFactsOptions = {
-  platform: PlatformType;
-  country?: string;
-  customHost?: string;
+  type: BackendType;
+  host?: string;
 };
 
 /** Wrapper of OFF API */
 export class OpenFoodFacts {
   private readonly fetch: typeof global.fetch;
   private readonly baseUrl: string;
-  private readonly platform: PlatformType;
+  private readonly backendType: BackendType;
   private readonly customUserAgent: string;
-  private readonly supportedFeatures: PlatformFeature[];
 
   /** Raw v2 client */
   readonly rawv2: ReturnType<typeof createClient<pathsv2>>;
@@ -66,44 +57,23 @@ export class OpenFoodFacts {
 
   /**
    * Create OFF object
+   * @param fetch - Fetch implementation to use
    * @param options - Options for the OFF Object
    */
   constructor(fetch: typeof global.fetch, options: OpenFoodFactsOptions) {
-    this.platform = options.platform;
+    this.backendType = options.type;
 
-    this.supportedFeatures = PLATFORM_FEATURES[this.platform];
-
-    if (options.customHost) {
-      this.baseUrl = options.customHost;
-    } else if (options.country) {
-      const domain =
-        this.platform === "food"
-          ? PLATFORM_DOMAINS.FOOD
-          : this.platform === "beauty"
-            ? PLATFORM_DOMAINS.BEAUTY
-            : this.platform === "petfood"
-              ? PLATFORM_DOMAINS.PET_FOOD
-              : PLATFORM_DOMAINS.PRODUCTS;
-
-      this.baseUrl = `https://${options.country}.${domain}`;
+    if (options.host) {
+      this.baseUrl = options.host;
     } else {
-      throw new Error(
-        "Either 'customHost' or 'country' must be provided in options",
-      );
+      const domain = BACKEND_DOMAINS[this.backendType];
+      this.baseUrl = `https://world.${domain}`;
     }
 
     this.fetch = fetch;
 
-    const platformName =
-      this.platform === "food"
-        ? PLATFORM_NAMES.FOOD
-        : this.platform === "beauty"
-          ? PLATFORM_NAMES.BEAUTY
-          : this.platform === "petfood"
-            ? PLATFORM_NAMES.PET_FOOD
-            : PLATFORM_NAMES.PRODUCTS;
-
-    this.customUserAgent = `${platformName} - NodeJS ${require("../package.json").version}`;
+    const backendName = BACKEND_NAMES[this.backendType];
+    this.customUserAgent = `${backendName} - NodeJS ${require("../package.json").version}`;
 
     this.rawv2 = createClient<pathsv2>({
       fetch: this.fetch,
@@ -114,18 +84,6 @@ export class OpenFoodFacts {
     });
 
     this.robotoff = new Robotoff(fetch);
-  }
-
-  isFeatureSupported(feature: PlatformFeature): boolean {
-    return this.supportedFeatures.includes(feature);
-  }
-
-  private requireFeature(feature: PlatformFeature): void {
-    if (!this.isFeatureSupported(feature)) {
-      throw new Error(
-        `Feature ${feature} is not supported on the ${this.platform} platform.`,
-      );
-    }
   }
 
   private async getTaxoEntry<T extends TaxoNode>(

@@ -1,62 +1,63 @@
 import { describe, it, expect } from "@jest/globals";
-import { OpenFoodFacts, PlatformType } from "../src/main";
-import { PLATFORM_DOMAINS, PLATFORM_NAMES } from "../src/consts";
+import { OpenFoodFacts } from "../src/main";
+import { BackendType, BACKEND_DOMAINS, BACKEND_NAMES } from "../src/consts";
 
 describe("Platform support tests", () => {
   const dummyFetch = (() => Promise.resolve(new Response())) as typeof fetch;
 
-  it("should set the correct baseUrl for food platform", () => {
+  it("should set the correct baseUrl for OFF platform", () => {
     const off = new OpenFoodFacts(dummyFetch, {
-      platform: "food",
-      country: "world",
+      type: BackendType.OFF,
     });
     // @ts-ignore - accessing private property for testing
-    expect(off.baseUrl).toContain(PLATFORM_DOMAINS.FOOD);
+    expect(off.baseUrl).toContain(BACKEND_DOMAINS[BackendType.OFF]);
   });
 
-  it("should set the correct baseUrl for beauty platform", () => {
+  it("should set the correct baseUrl for OBF platform", () => {
     const off = new OpenFoodFacts(dummyFetch, {
-      country: "world",
-      platform: "beauty",
+      type: BackendType.OBF,
     });
 
     // @ts-ignore - accessing private property for testing
-    expect(off.baseUrl).toContain(PLATFORM_DOMAINS.BEAUTY);
+    expect(off.baseUrl).toContain(BACKEND_DOMAINS[BackendType.OBF]);
   });
 
-  it("should set the correct baseUrl for petfood platform", () => {
+  it("should set the correct baseUrl for OPFF platform", () => {
     const off = new OpenFoodFacts(dummyFetch, {
-      country: "world",
-      platform: "petfood",
+      type: BackendType.OPFF,
     });
 
     // @ts-ignore - accessing private property for testing
-    expect(off.baseUrl).toContain(PLATFORM_DOMAINS.PET_FOOD);
+    expect(off.baseUrl).toContain(BACKEND_DOMAINS[BackendType.OPFF]);
   });
 
-  it("should set the correct baseUrl for products platform", () => {
+  it("should set the correct baseUrl for OPF platform", () => {
     const off = new OpenFoodFacts(dummyFetch, {
-      country: "world",
-      platform: "products",
+      type: BackendType.OPF,
     });
 
     // @ts-ignore - accessing private property for testing
-    expect(off.baseUrl).toContain(PLATFORM_DOMAINS.PRODUCTS);
+    expect(off.baseUrl).toContain(BACKEND_DOMAINS[BackendType.OPF]);
   });
 
   it("should set the correct User-Agent header based on platform", () => {
-    const platforms: PlatformType[] = ["food", "beauty", "petfood", "products"];
-    const expectedAgentPrefixes = [
-      PLATFORM_NAMES.FOOD,
-      PLATFORM_NAMES.BEAUTY,
-      PLATFORM_NAMES.PET_FOOD,
-      PLATFORM_NAMES.PRODUCTS,
+    const backends = [
+      BackendType.OFF,
+      BackendType.OBF,
+      BackendType.OPFF,
+      BackendType.OPF,
     ];
 
-    for (let i = 0; i < platforms.length; i++) {
+    const expectedAgentPrefixes = [
+      BACKEND_NAMES[BackendType.OFF],
+      BACKEND_NAMES[BackendType.OBF],
+      BACKEND_NAMES[BackendType.OPFF],
+      BACKEND_NAMES[BackendType.OPF],
+    ];
+
+    for (let i = 0; i < backends.length; i++) {
       const off = new OpenFoodFacts(dummyFetch, {
-        country: "world",
-        platform: platforms[i],
+        type: backends[i],
       });
 
       // @ts-ignore - accessing private property for testing
@@ -67,23 +68,11 @@ describe("Platform support tests", () => {
   it("should accept a custom host", () => {
     const customHost = "https://test.openfoodfacts.org";
     const off = new OpenFoodFacts(dummyFetch, {
-      platform: "food",
-      customHost: customHost,
+      type: BackendType.OFF,
+      host: customHost,
     });
 
     // @ts-ignore - accessing private property for testing
     expect(off.baseUrl).toBe(customHost);
-  });
-
-  it("should throw an error if neither country nor customHost is provided", () => {
-    function createClientWithoutCountryOrHost() {
-      return new OpenFoodFacts(dummyFetch, {
-        platform: "food",
-      });
-    }
-
-    expect(createClientWithoutCountryOrHost).toThrow(
-      "Either 'customHost' or 'country' must be provided in options",
-    );
   });
 });

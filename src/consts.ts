@@ -23,3 +23,10 @@ export const BACKEND_NAMES = {
   [BackendType.OPFF]: "OpenPetFoodFacts",
   [BackendType.OPF]: "OpenProductsFacts",
 };
+
+export const DEFAULT_FOLKSONOMY_API_URL =
+  "https://api.folksonomy.openfoodfacts.org";
+export const DEFAULT_ROBOTOFF_API_URL =
+  "https://robotoff.openfoodfacts.org/api/v1";
+export const DEFAULT_NUTRIPATROL_API_URL =
+  "https://nutripatrol.openfoodfacts.org";

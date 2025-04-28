@@ -38,7 +38,8 @@ export * from "./nutripatrol";
 export * from "./search";
 
 export type OpenFoodFactsOptions = {
-  type: BackendType;
+  type?: BackendType;
+  country?: string;
   host?: string;
 };
 
@@ -46,7 +47,7 @@ export type OpenFoodFactsOptions = {
 export class OpenFoodFacts {
   private readonly fetch: typeof global.fetch;
   private readonly baseUrl: string;
-  private readonly backendType: BackendType;
+  private readonly backendType?: BackendType;
   private readonly customUserAgent: string;
 
   /** Raw v2 client */
@@ -60,20 +61,32 @@ export class OpenFoodFacts {
    * @param fetch - Fetch implementation to use
    * @param options - Options for the OFF Object
    */
-  constructor(fetch: typeof global.fetch, options: OpenFoodFactsOptions) {
+  constructor(
+    fetch: typeof global.fetch,
+    options: OpenFoodFactsOptions = { country: "world" },
+  ) {
+    if ((options.host && options.country) || (options.type && options.country)) {
+      throw new Error("You must provide either `host`, `type`, or `country`, not multiple.");
+    }
+
     this.backendType = options.type;
+    this.fetch = fetch;
 
     if (options.host) {
       this.baseUrl = options.host;
-    } else {
-      const domain = BACKEND_DOMAINS[this.backendType];
+    } else if (options.type) {
+      const domain = BACKEND_DOMAINS[options.type];
       this.baseUrl = `https://world.${domain}`;
+    } else {
+      this.baseUrl = `https://${options.country}.openfoodfacts.org`;
     }
 
-    this.fetch = fetch;
-
-    const backendName = BACKEND_NAMES[this.backendType];
-    this.customUserAgent = `${backendName} - NodeJS ${require("../package.json").version}`;
+    if (this.backendType) {
+      const backendName = BACKEND_NAMES[this.backendType];
+      this.customUserAgent = `${backendName} - NodeJS ${require("../package.json").version}`;
+    } else {
+      this.customUserAgent = `OpenFoodFacts - NodeJS ${require("../package.json").version}`;
+    }
 
     this.rawv2 = createClient<pathsv2>({
       fetch: this.fetch,

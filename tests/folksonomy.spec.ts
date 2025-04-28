@@ -62,8 +62,7 @@ describe("Folksonomy Wrapper", () => {
       };
       fetchMock.mockResolvedValue(mockResponse("ok", true, 200));
 
-      const [success, error] = await client.putTag(tagData);
-      expect(success).toBe(true);
+      const error = await client.putTag(tagData);
       expect(error).toBeNull();
     });
 
@@ -75,8 +74,7 @@ describe("Folksonomy Wrapper", () => {
       };
       fetchMock.mockResolvedValue(mockResponse(null, false, 500));
 
-      const [success, error] = await client.putTag(tagData);
-      expect(success).toBe(false);
+      const error = await client.putTag(tagData);
       expect(error).toBeDefined();
     });
 
@@ -102,8 +100,7 @@ describe("Folksonomy Wrapper", () => {
       };
       fetchMock.mockResolvedValue(mockResponse("ok", true, 200));
 
-      const [success, error] = await client.addTag(tagData);
-      expect(success).toBe(true);
+      const error = await client.addTag(tagData);
       expect(error).toBeNull();
     });
 
@@ -115,8 +112,7 @@ describe("Folksonomy Wrapper", () => {
       };
       fetchMock.mockResolvedValue(mockResponse(null, false, 500));
 
-      const [success, error] = await client.addTag(tagData);
-      expect(success).toBe(false);
+      const error = await client.addTag(tagData);
       expect(error).toBeDefined();
     });
 
@@ -129,8 +125,7 @@ describe("Folksonomy Wrapper", () => {
       };
       fetchMock.mockResolvedValue(mockResponse("ok", true, 200));
 
-      const [success, error] = await client.removeTag(tagData);
-      expect(success).toBe(true);
+      const error = await client.removeTag(tagData);
       expect(error).toBeNull();
     });
 
@@ -143,8 +138,7 @@ describe("Folksonomy Wrapper", () => {
       };
       fetchMock.mockResolvedValue(mockResponse(null, false, 500));
 
-      const [success, error] = await client.removeTag(tagData);
-      expect(success).toBe(false);
+      const error = await client.removeTag(tagData);
       expect(error).toBeDefined();
     });
   });

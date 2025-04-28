@@ -78,16 +78,15 @@ export class Folksonomy {
    *
    * @returns if the tag was added or updated
    */
-  async putTag(tag: FolksonomyTag): Promise<[boolean, ApiError | null]> {
+  async putTag(tag: FolksonomyTag): Promise<ApiError | null> {
     this.validateAuthToken();
 
     const res = await this.raw.PUT("/product", { body: tag });
 
-    const isSuccess = res.response.status === 200;
-    if (!isSuccess) {
-      return [false, (res.error as ApiError) ?? null];
+    if (res.response.status !== 200) {
+      return (res.error as ApiError) ?? null;
     }
-    return [true, null];
+    return null;
   }
 
   /**
@@ -113,18 +112,17 @@ export class Folksonomy {
    *
    * @returns if the tag was added or updated
    */
-  async addTag(tag: FolksonomyTag): Promise<[boolean, ApiError | null]> {
+  async addTag(tag: FolksonomyTag): Promise<ApiError | null> {
     this.validateAuthToken();
 
     const res = await this.raw.POST("/product", {
       body: tag,
     });
 
-    const isSuccess = res.response.status === 200;
-    if (!isSuccess) {
-      return [false, (res.error as ApiError) ?? null];
+    if (res.response.status !== 200) {
+      return (res.error as ApiError) ?? null;
     }
-    return [true, null];
+    return null;
   }
 
   /**
@@ -141,7 +139,7 @@ export class Folksonomy {
    */
   async removeTag(
     tag: FolksonomyTag & { version: number },
-  ): Promise<[boolean, ApiError | null]> {
+  ): Promise<ApiError | null> {
     this.validateAuthToken();
 
     const res = await this.raw.DELETE("/product/{product}/{k}", {
@@ -151,11 +149,10 @@ export class Folksonomy {
       },
     });
 
-    const isSuccess = res.response.status === 200;
-    if (!isSuccess) {
-      return [false, (res.error as ApiError) ?? null];
+    if (res.response.status !== 200) {
+      return (res.error as ApiError) ?? null;
     }
-    return [true, null];
+    return null;
   }
 
   /**

@@ -77,16 +77,16 @@ export class OpenFoodFacts {
     this.backendType = options.type;
     this.fetch = fetch;
 
-    if (options.host) {
+    if (options.host != null) {
       this.baseUrl = options.host;
-    } else if (options.type) {
+    } else if (options.type != null) {
       const domain = BACKEND_DOMAINS[options.type];
       this.baseUrl = `https://world.${domain}`;
     } else {
       this.baseUrl = `https://${options.country}.openfoodfacts.org`;
     }
 
-    if (this.backendType) {
+    if (this.backendType != null) {
       const backendName = BACKEND_NAMES[this.backendType];
       this.customUserAgent = `${backendName} - NodeJS ${require("../package.json").version}`;
     } else {

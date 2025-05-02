@@ -2,7 +2,7 @@ import createClient from "openapi-fetch";
 
 import { paths, components } from "./schemas/folksonomy";
 import { formBody as formBodySerializer } from "./formbody";
-import { ApiError } from "./error";
+import { ApiError, UNKNOWN_API_ERROR } from "./error";
 import { DEFAULT_FOLKSONOMY_API_URL, USER_AGENT } from "./consts";
 
 export type FolksonomyTag = components["schemas"]["ProductTag"];
@@ -10,17 +10,6 @@ export type FolksonomyKey = {
   k: string;
   count: number;
   values: number;
-};
-
-// Common error object for unknown API errors
-const UNKNOWN_API_ERROR: ApiError = {
-  detail: [
-    {
-      msg: "Unknown error occurred",
-      type: "error",
-      loc: [],
-    },
-  ],
 };
 
 export class Folksonomy {

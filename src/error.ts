@@ -13,3 +13,14 @@ export type NutriPatrolError = {
     details?: any;
   };
 };
+
+// Common error object for unknown API errors
+export const UNKNOWN_API_ERROR: ApiError = {
+  detail: [
+    {
+      msg: "Unknown error occurred",
+      type: "error",
+      loc: [],
+    },
+  ],
+};

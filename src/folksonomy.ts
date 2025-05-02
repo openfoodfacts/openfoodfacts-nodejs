@@ -12,6 +12,17 @@ export type FolksonomyKey = {
   values: number;
 };
 
+// Common error object for unknown API errors
+const UNKNOWN_API_ERROR: ApiError = {
+  detail: [
+    {
+      msg: "Unknown error occurred",
+      type: "error",
+      loc: [],
+    },
+  ],
+};
+
 export class Folksonomy {
   private readonly fetch: typeof global.fetch;
   private readonly baseUrl: string;
@@ -84,7 +95,7 @@ export class Folksonomy {
     const res = await this.raw.PUT("/product", { body: tag });
 
     if (res.response.status !== 200) {
-      return (res.error as ApiError) ?? null;
+      return (res.error as ApiError) ?? UNKNOWN_API_ERROR;
     }
     return null;
   }
@@ -120,7 +131,7 @@ export class Folksonomy {
     });
 
     if (res.response.status !== 200) {
-      return (res.error as ApiError) ?? null;
+      return (res.error as ApiError) ?? UNKNOWN_API_ERROR;
     }
     return null;
   }
@@ -150,7 +161,7 @@ export class Folksonomy {
     });
 
     if (res.response.status !== 200) {
-      return (res.error as ApiError) ?? null;
+      return (res.error as ApiError) ?? UNKNOWN_API_ERROR;
     }
     return null;
   }

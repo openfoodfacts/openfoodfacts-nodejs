@@ -41,7 +41,7 @@
     "test:coverage": "jest --coverage"
   },
   "dependencies": {
-    "openapi-fetch": "^0.13.5"
+    "openapi-fetch": "^0.14.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.8.0",

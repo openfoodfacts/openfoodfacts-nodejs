@@ -140,7 +140,7 @@ export class OpenFoodFacts {
     return this.getTaxo<Allergen>("allergens");
   }
   getCategories(): Promise<Taxonomy<Category>> {
-    return this.getTaxo<Category>("categories");
+    return this.getTaxo<Category>("facets/categories");
   }
   getCountries(): Promise<Taxonomy<Country>> {
     return this.getTaxo<Country>("countries");

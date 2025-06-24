@@ -23,7 +23,7 @@ import {
   Taxonomy,
 } from "./taxonomy/types";
 import { BackendType, BACKEND_DOMAINS, BACKEND_NAMES } from "./consts";
-
+const IMAGE_BASE_URL = "https://images.openfoodfacts.org/images/products/";
 export type ProductV2 = componentsv2["schemas"]["Product"];
 export type SearchResultV2 = externalv2["responses/search_for_products.yaml"];
 
@@ -61,13 +61,6 @@ export class OpenFoodFacts {
    * @param fetch - Fetch implementation to use
    * @param options - Options for the OFF Object
    */
-  getProductImageFolder(productCode: string): string {
-    const chunks = productCode.match(/.{1,3}/g);
-    if (!chunks) return "";
-
-    return `https://images.openfoodfacts.org/images/products/${chunks.join("/")}/`;
-  }
-
   constructor(
     fetch: typeof global.fetch,
     options: OpenFoodFactsOptions = { country: "world" },
@@ -229,8 +222,13 @@ export class OpenFoodFacts {
       params: { query: { fields, sort_by: sortBy } },
     });
 
-    
     return res.data;
+  }
+  getProductImageFolder(productCode: string): string {
+    const chunks = productCode.match(/.{1,3}/g);
+    if (!chunks) return "";
+
+    return `${IMAGE_BASE_URL}${chunks.join("/")}/`;
   }
 }
 

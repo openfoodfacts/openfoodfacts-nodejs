@@ -1,11 +1,10 @@
-import OpenFoodFacts from "../src/main";
+import { getProductImageFolder } from "../src/main";
 import { PRODUCT_IMAGE_BASE_URL } from "../src/consts";
 
 describe("getProductImageFolder", () => {
   it("should construct the correct folder path from barcode", () => {
-    const off = new OpenFoodFacts(fetch as any);
     const barcode = "6111035000430";
     const expected = `${PRODUCT_IMAGE_BASE_URL}/611/103/500/0430/`;
-    expect(off.getProductImageFolder(barcode)).toBe(expected);
+    expect(getProductImageFolder(barcode)).toBe(expected);
   });
 });

@@ -21,7 +21,12 @@ import {
   TaxoNode,
   Taxonomy,
 } from "./taxonomy/types";
-import { BackendType, BACKEND_DOMAINS, BACKEND_NAMES, PRODUCT_IMAGE_BASE_URL as IMAGE_BASE_URL } from "./consts";
+import {
+  BackendType,
+  BACKEND_DOMAINS,
+  BACKEND_NAMES,
+  PRODUCT_IMAGE_BASE_URL as IMAGE_BASE_URL,
+} from "./consts";
 
 export type ProductV2 = componentsv2["schemas"]["Product"];
 export type SearchResultV2 = externalv2["responses/search_for_products.yaml"];
@@ -228,17 +233,21 @@ export class OpenFoodFacts {
 
     return res.data;
   }
+}
 
-  /**
-   * Get base folder URL for a product's image
-   * @param productCode Barcode of the product
-   * @returns Folder path for the image files
-   */
-  getProductImageFolder(productCode: string): string {
-    const chunks = productCode.match(/.{1,3}/g);
-    if (!chunks) return "";
-    return `${IMAGE_BASE_URL}${chunks.join("/")}/`;
-  }
+/**
+ * Get base folder URL for a product's image
+ * @param productCode Barcode of the product
+ * @returns Folder path for the image files
+ */
+export function getProductImageFolder(productCode: string): string {
+  if (!productCode) return "";
+  // All but last 4 digits in 3-digit chunks, last 4 as one chunk
+  const prefix = productCode.slice(0, -4);
+  const suffix = productCode.slice(-4);
+  const chunks: string[] = prefix.match(/.{1,3}/g) || [];
+  if (suffix) chunks.push(suffix);
+  return IMAGE_BASE_URL + "/" + chunks.join("/") + "/";
 }
 
 export default OpenFoodFacts;

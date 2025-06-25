@@ -30,6 +30,5 @@ export const DEFAULT_ROBOTOFF_API_URL =
   "https://robotoff.openfoodfacts.org/api/v1";
 export const DEFAULT_NUTRIPATROL_API_URL =
   "https://nutripatrol.openfoodfacts.org";
-export const PRODUCT_IMAGE_BASE_URL = 
+export const PRODUCT_IMAGE_BASE_URL =
   "https://images.openfoodfacts.org/images/products";
-

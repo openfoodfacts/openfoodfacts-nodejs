@@ -3,1196 +3,2694 @@
  * Do not make direct changes to the file.
  */
 
-
 export interface paths {
-  "/questions/{barcode}": {
-    /**
-     * Get questions for a given product
-     * @description Questions are sorted by priority: we want questions with highest impact to be displayed first. The order is the following:
-     *   - category
-     *   - label
-     *   - brand
-     *   - remaining types
-     */
-    get: {
-      parameters: {
-        query?: {
-          /** @description The number of questions to return */
-          count?: number;
-          server_type?: components["parameters"]["server_type"];
-          lang?: components["parameters"]["lang"];
-          insight_types?: components["parameters"]["insight_types"];
+    "/questions/{barcode}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-        path: {
-          barcode: components["parameters"]["barcode_path"];
-        };
-      };
-      responses: {
-        /** @description Questions about the requested product */
-        200: {
-          content: {
-            "application/json": {
-              /** @enum {string} */
-              status?: "no_questions" | "found";
-              questions?: Record<string, never>[];
-            };
-          };
-        };
-      };
+        /**
+         * Get questions for a given product
+         * @description Questions are sorted by priority: we want questions with highest impact to be displayed first. The order is the following:
+         *       - category
+         *       - label
+         *       - brand
+         *       - remaining types
+         *
+         */
+        get: operations["getQuestionsByBarcode"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-  };
-  "/questions": {
-    /** Fetch questions */
-    get: {
-      parameters: {
-        query?: {
-          lang?: components["parameters"]["lang"];
-          count?: components["parameters"]["count"];
-          server_type?: components["parameters"]["server_type"];
-          insight_types?: components["parameters"]["insight_types"];
-          countries?: components["parameters"]["countries"];
-          brands?: components["parameters"]["brands"];
-          value_tag?: components["parameters"]["value_tag"];
-          page?: components["parameters"]["page"];
-          reserved_barcode?: components["parameters"]["reserved_barcode"];
-          campaigns?: components["parameters"]["campaigns"];
-          predictor?: components["parameters"]["predictor"];
-          /**
-           * @description The field to use for ordering results:
-           *   - confidence: order by (descending) model confidence, null confidence insights come last
-           *   - popularity: order by (descending) popularity (=scan count)
-           *   - random: use a random order
-           */
-          order_by?: "confidence" | "random" | "popularity";
+    "/questions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-      };
-      responses: {
-        /** @description The questions matching the filters */
-        200: {
-          content: {
-            "application/json": {
-              /** @enum {string} */
-              status?: "no_questions" | "found";
-              questions?: Record<string, never>[];
-              /** @description The total number of results with the provided filters */
-              count?: number;
-            };
-          };
-        };
-      };
+        /** Fetch questions */
+        get: operations["getQuestions"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-  };
-  "/questions/random": {
-    /**
-     * Get random questions
-     * @deprecated
-     */
-    get: {
-      parameters: {
-        query?: {
-          lang?: components["parameters"]["lang"];
-          count?: components["parameters"]["count"];
-          server_type?: components["parameters"]["server_type"];
-          insight_types?: components["parameters"]["insight_types"];
-          countries?: components["parameters"]["countries"];
-          brands?: components["parameters"]["brands"];
-          value_tag?: components["parameters"]["value_tag"];
-          page?: components["parameters"]["page"];
-          reserved_barcode?: components["parameters"]["reserved_barcode"];
-          campaigns?: components["parameters"]["campaigns"];
-          predictor?: components["parameters"]["predictor"];
+    "/questions/random": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-      };
-      responses: {
-        /** @description The queried insights */
-        200: {
-          content: {
-            "application/json": {
-              /** @enum {string} */
-              status?: "no_questions" | "found";
-              questions?: Record<string, never>[];
-              /** @description The total number of results with the provided filters */
-              count?: number;
-            };
-          };
-        };
-      };
+        /**
+         * Get random questions
+         * @deprecated
+         */
+        get: operations["getRandomQuestions"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-  };
-  "/questions/popular": {
-    /**
-     * Get questions about popular products
-     * @deprecated
-     * @description Questions are ranked by the product popularity (based on scan count).
-     */
-    get: {
-      parameters: {
-        query?: {
-          lang?: components["parameters"]["lang"];
-          count?: components["parameters"]["count"];
-          server_type?: components["parameters"]["server_type"];
-          insight_types?: components["parameters"]["insight_types"];
-          countries?: components["parameters"]["countries"];
-          brands?: components["parameters"]["brands"];
-          value_tag?: components["parameters"]["value_tag"];
-          page?: components["parameters"]["page"];
-          reserved_barcode?: components["parameters"]["reserved_barcode"];
-          campaigns?: components["parameters"]["campaigns"];
-          predictor?: components["parameters"]["predictor"];
+    "/questions/popular": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-      };
-      responses: {
-        200: {
-          content: {
-          };
-        };
-      };
+        /**
+         * Get questions about popular products
+         * @deprecated
+         * @description Questions are ranked by the product popularity (based on scan count).
+         *
+         */
+        get: operations["getPopularQuestions"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-  };
-  "/questions/unanswered": {
-    /**
-     * Get unanswered question counts
-     * @description Get number of unanswered questions grouped by `value_tag`.
-     * The list is ordered from highest count to lowest.
-     */
-    get: {
-      parameters: {
-        query?: {
-          /** @description The number of distinct `value_tag`s to return */
-          count?: number;
-          server_type?: components["parameters"]["server_type"];
-          type?: components["parameters"]["insight_type"];
-          countries?: components["parameters"]["countries"];
-          page?: components["parameters"]["page"];
-          reserved_barcode?: components["parameters"]["reserved_barcode"];
-          campaigns?: components["parameters"]["campaigns"];
-          predictor?: components["parameters"]["predictor"];
+    "/questions/unanswered": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-      };
-      responses: {
-        /** @description The number of questions grouped by `value_tag` */
-        200: {
-          content: {
-            "application/json": {
-              /** @description The total number of questions that meet the provided criteria */
-              count: number;
-              questions: (string | number)[];
-              /**
-               * @description The request status
-               * @enum {string}
-               */
-              status: "found" | "no_questions";
-            };
-          };
-        };
-      };
+        /**
+         * Get unanswered question counts
+         * @description Get number of unanswered questions grouped by `value_tag`.
+         *     The list is ordered from highest count to lowest.
+         *
+         */
+        get: operations["getUnansweredQuestions"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-  };
-  "/predictions": {
-    /** Get predictions */
-    get: {
-      parameters: {
-        query?: {
-          count?: components["parameters"]["count"];
-          page?: components["parameters"]["page"];
-          server_type?: components["parameters"]["server_type"];
-          barcode?: components["parameters"]["barcode_query_filter"];
-          /** @description Comma-separated list, filter by prediction types */
-          types?: string;
+    "/predictions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-      };
-      responses: {
-        /** @description The queried predictions */
-        200: {
-          content: {
-            "application/json": {
-              /** @enum {string} */
-              status?: "no_predictions" | "found";
-              predictions?: Record<string, never>[];
-              /** @description The total number of results with the provided filters */
-              count?: number;
-            };
-          };
-        };
-      };
+        /** Get predictions */
+        get: operations["getPredictions"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-  };
-  "/insights/random": {
-    /**
-     * Get a random insight, use GET /insights?order_by=random instead
-     * @deprecated
-     */
-    get: {
-      parameters: {
-        query?: {
-          type?: components["parameters"]["insight_type"];
-          countries?: components["parameters"]["countries"];
-          value_tag?: components["parameters"]["value_tag"];
-          server_type?: components["parameters"]["server_type"];
-          count?: components["parameters"]["count"];
-          predictor?: components["parameters"]["predictor"];
+    "/insights/random": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-      };
-      responses: {
-        200: {
-          content: {
-            "application/json": {
-              insights?: components["schemas"]["InsightSearchResult"][];
-            };
-          };
-        };
-      };
+        /**
+         * Get a random insight, use GET /insights?order_by=random instead
+         * @deprecated
+         */
+        get: operations["getRandomInsights"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-  };
-  "/insights/{barcode}": {
-    /**
-     * Get all insights for a specific product, use GET /insights?barcode={barcode} instead
-     * @deprecated
-     */
-    get: {
-      parameters: {
-        query?: {
-          server_type?: components["parameters"]["server_type"];
+    "/insights/{barcode}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-        path: {
-          barcode: components["parameters"]["barcode_path"];
-        };
-      };
-      responses: {
-        200: {
-          content: {
-          };
-        };
-      };
+        /**
+         * Get all insights for a specific product, use GET /insights?barcode={barcode} instead
+         * @deprecated
+         */
+        get: operations["getInsightsByBarcode"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-  };
-  "/insights": {
-    /** List insights */
-    get: {
-      parameters: {
-        query?: {
-          insight_types?: components["parameters"]["insight_types"];
-          barcode?: components["parameters"]["barcode_optional"];
-          annotated?: components["parameters"]["insight_filter_annotated"];
-          annotation?: components["parameters"]["insight_filter_annotation"];
-          value_tag?: components["parameters"]["value_tag"];
-          brands?: components["parameters"]["brands"];
-          countries?: components["parameters"]["countries"];
-          server_type?: components["parameters"]["server_type"];
-          predictor?: components["parameters"]["predictor"];
-          order_by?: components["parameters"]["insight_order_by"];
-          count?: components["parameters"]["count"];
-          page?: components["parameters"]["page"];
+    "/insights": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-      };
-      responses: {
-        200: {
-          content: {
-            "application/json": {
-              insights?: components["schemas"]["InsightSearchResult"][];
-              /**
-               * @example found
-               * @enum {string}
-               */
-              status?: "no_insights" | "found";
-              /**
-               * @description The total number of results with the provided filters
-               * @example 10
-               */
-              count?: number;
-            };
-          };
-        };
-      };
+        /** List insights */
+        get: operations["getInsights"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-  };
-  "/insights/detail/{id}": {
-    /** Get a specific insight */
-    get: {
-      parameters: {
-        path: {
-          /** @description ID of the insight */
-          id: string;
+    "/insights/detail/{insight_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-      };
-      responses: {
-        200: {
-          content: {
-          };
-        };
-      };
+        /** Get a specific insight */
+        get: operations["getInsightDetails"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-  };
-  "/insights/annotate": {
-    /**
-     * Submit an annotation
-     * @description The annotation can be submitted as an anonymous user or as a registered user.
-     * If the user is anonymous, the annotation will be accounted as a vote, and several identical
-     * anonymous votes are required to apply the insight. If the vote is sent from a registered user,
-     * it is applied directly.
-     *
-     * To send the annotation as a registered user, send Open Food Facts credentials to the API using
-     * Basic Authentication: add a `Authorization: basic {ENCODED_BASE64}` header where `{ENCODED_BASE64}`
-     * is an base64-encoded string of `user:password`. Don't provide an authentication header for anonymous
-     * users.
-     *
-     * The annotation is an integer that can take 4 values: `0`, `1`, `2`, `-1`. `0` means the insight is incorrect
-     * (so it won't be applied), `1` means it is correct (so it will be applied) and `-1` means the insight
-     * won't be returned to the user (_skip_). `2` is used when user submit some data to the annotate endpoint
-     * (for example in some cases of category annotation or ingredients spellcheck).
-     *
-     * We use the voting mecanism system to remember which insight to skip for a user (authenticated or not).
-     */
-    post: {
-      requestBody: {
-        content: {
-          "application/x-www-form-urlencoded": {
-            /** @description ID of the insight */
-            insight_id: string;
-            /**
-             * @description Annotation of the prediction: 1 to accept the prediction, 0 to refuse it, and -1 for _skip_, 2 to accept and add data
-             * @enum {integer}
-             */
-            annotation: 0 | 1 | -1 | 2;
-            /**
-             * @description Send the update to Openfoodfacts if `update=1`, don't send the update otherwise. This parameter is useful if the update is performed client-side
-             * @default 1
-             * @enum {integer}
-             */
-            update?: 0 | 1;
-            /** @description Additional data provided by the user as key-value pairs */
-            data?: Record<string, never>;
-          };
+    "/insights/annotate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-      };
-      responses: {
-        200: {
-          content: {
-          };
-        };
-      };
+        get?: never;
+        put?: never;
+        /**
+         * Submit an annotation
+         * @description The annotation can be submitted as an anonymous user or as a registered user.
+         *     If the user is anonymous, the annotation will be accounted as a vote, and several identical
+         *     anonymous votes are required to apply the insight. If the vote is sent from a registered user,
+         *     it is applied directly.
+         *
+         *     To send the annotation as a registered user, send Open Food Facts credentials to the API using
+         *     Basic Authentication: add a `Authorization: basic {ENCODED_BASE64}` header where `{ENCODED_BASE64}`
+         *     is an base64-encoded string of `user:password`. Don't provide an authentication header for anonymous
+         *     users.
+         *
+         *     The annotation is an integer that can take 4 values: `0`, `1`, `2`, `-1`. `0` means the insight is incorrect
+         *     (so it won't be applied), `1` means it is correct (so it will be applied) and `-1` means the insight
+         *     won't be returned to the user (_skip_). `2` is used when user submit some data to the annotate endpoint
+         *     (for example in some cases of category annotation or ingredients spellcheck).
+         *
+         *     We use the voting mecanism system to remember which insight to skip for a user (authenticated or not).
+         *
+         */
+        post: operations["annotateInsight"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-  };
-  "/insights/dump": {
-    /**
-     * Generate a CSV dump
-     * @description Generate a CSV dump of insights with specific criteria.
-     * If more than 10,000 insights match provided criteria and `count` is not provided, a `HTTP 400` is returned
-     */
-    get: {
-      parameters: {
-        query?: {
-          server_type?: components["parameters"]["server_type"];
-          value_tag?: components["parameters"]["value_tag"];
-          insight_types?: components["parameters"]["insight_types"];
-          barcode?: components["parameters"]["barcode_query_filter"];
-          /** @description The annotation status of the insight. If not provided, both annotated and non-annotated insights are returned */
-          annotated?: boolean;
-          /** @description Maximum number of insights to return. If not provided, an HTTP 400 response may be returned if more than 10,000 insights match the criteria */
-          count?: number;
+    "/insights/dump": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-      };
-      responses: {
-        /** @description The CSV dump */
-        200: {
-          content: {
-            "text/csv": string;
-          };
-        };
-        /** @description HTTP 204 is returned if no insights were found */
-        204: {
-          content: never;
-        };
-        /** @description HTTP 400 is returned if more than 10,000 insights match the criteria and `count` is not provided */
-        400: {
-          content: never;
-        };
-      };
+        /**
+         * Generate a CSV dump
+         * @description Generate a CSV dump of insights with specific criteria.
+         *     If more than 10,000 insights match provided criteria and `count` is not provided, a `HTTP 400` is returned
+         *
+         */
+        get: operations["dumpInsights"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-  };
-  "/images/crop": {
-    /**
-     * Crop an image
-     * @description This endpoint is currently only used to generate cropped logos on Hunger Games from a
-     * base image and cropping coordinates. Cropping coordinates are relative (between 0.
-     * and 1. inclusive), with (0, 0) being the upper left corner.
-     */
-    get: {
-      parameters: {
-        query?: {
-          /** @example https://static.openfoodfacts.org/images/products/211/123/200/5508/3.jpg */
-          image_url?: string;
-          /** @example 0.47795143723487854 */
-          y_min?: number;
-          /** @example 0.5583494305610657 */
-          x_min?: number;
-          /** @example 0.5653171539306641 */
-          y_max?: number;
-          /** @example 0.6795185804367065 */
-          x_max?: number;
+    "/images/crop": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-      };
-      responses: {
-        200: {
-          content: {
-            "image/jpeg": string;
-          };
-        };
-      };
+        /**
+         * Crop an image
+         * @description This endpoint is currently only used to generate cropped logos on Hunger Games from a
+         *     base image and cropping coordinates. Cropping coordinates are relative (between 0.
+         *     and 1. inclusive), with (0, 0) being the upper left corner.
+         *
+         */
+        get: operations["cropImage"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-  };
-  "/image_predictions": {
-    /** Get image predictions */
-    get: {
-      parameters: {
-        query?: {
-          count?: components["parameters"]["count"];
-          page?: components["parameters"]["page"];
-          server_type?: components["parameters"]["server_type"];
-          barcode?: components["parameters"]["barcode_query_filter"];
-          /** @description if True, only return image predictions that have associated logos (only valid for universal-logo-detector image predictions) */
-          with_logo?: boolean;
-          /** @description filter by name of the image predictor model */
-          model_name?: "universal-logo-detector" | "nutrition-table" | "nutriscore";
-          /** @description filter by type of the image predictor model, currently only 'object_detection' */
-          type?: "object_detection";
-          /** @description filter by model version value */
-          model_version?: string;
-          /** @description filter by minimum confidence score value */
-          min_confidence?: number;
+    "/image_predictions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-      };
-      responses: {
-        /** @description The queried image predictions */
-        200: {
-          content: {
-            "application/json": {
-              /** @enum {string} */
-              status?: "no_image_predictions" | "found";
-              image_predictions?: Record<string, never>[];
-              /** @description The total number of results with the provided filters */
-              count?: number;
-            };
-          };
-        };
-      };
+        /** Get image predictions */
+        get: operations["getImagePredictions"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-  };
-  "/images/logos": {
-    /**
-     * Fetch logos
-     * @description Return details about requested logos (maximum 500 logos can be fetched per request).
-     */
-    get: {
-      parameters: {
-        query?: {
-          /** @description Comma-separated string of logo IDs */
-          logo_ids?: string;
+    "/images/logos": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-      };
-      responses: {
-        /** @description The fetch results */
-        200: {
-          content: {
-            "application/json": {
-              /** @description Details about requested logos */
-              logos: unknown[];
-              /** @description Number of returned results */
-              count: number;
-            };
-          };
-        };
-      };
+        /**
+         * Fetch logos
+         * @description Return details about requested logos (maximum 500 logos can be fetched per request).
+         */
+        get: operations["fetchLogos"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-  };
-  "/images/logos/search": {
-    /**
-     * Search for logos
-     * @description Search for logos detected using the universal-logo-detector model that
-     * meet some criteria (annotation status, annotated, type,...)
-     */
-    get: {
-      parameters: {
-        query?: {
-          server_type?: components["parameters"]["server_type"];
-          barcode?: components["parameters"]["barcode_query_filter"];
-          /** @description Number of results to return */
-          count?: number;
-          /**
-           * @description Filter by logo type
-           * @example packager_code
-           */
-          type?: string;
-          /**
-           * @description Filter by annotated value
-           * @example lidl
-           */
-          value?: string;
-          /**
-           * @description Filter by taxonomy value, i.e. the canonical value present is the associated taxonomy. This parameter is mutually exclusive with `value`, and should be used for `label` type.
-           * @example en:organic
-           */
-          taxonomy_value?: string;
-          /** @description Filter logos that have a confidence score above a threshold */
-          min_confidence?: number;
-          /** @description If true, randomized result order */
-          random?: boolean;
-          /** @description The annotation status of the logo. If not provided, both annotated and non-annotated logos are returned */
-          annotated?: boolean;
+    "/images/logos/search": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-      };
-      responses: {
-        /** @description The search results */
-        200: {
-          content: {
-            "application/json": {
-              /** @description Found logos */
-              logos: unknown[];
-              /** @description Number of returned results */
-              count: number;
-            };
-          };
-        };
-      };
+        /**
+         * Search for logos
+         * @description Search for logos detected using the universal-logo-detector model that
+         *     meet some criteria (annotation status, annotated, type,...)
+         *
+         */
+        get: operations["searchLogos"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-  };
-  "/images/logos/{logo_id}/reset": {
-    /**
-     * Reset logo annotation
-     * @description Reset logo annotations, and delete all annotation-associated predictions and insights
-     */
-    post: {
-      parameters: {
-        path: {
-          /** @description The ID of the logo whose annotation to reset */
-          logo_id: number;
+    "/images/logos/{logo_id}/reset": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-      };
-      responses: {
-        /** @description HTTP 204 is returned if the reset operation was successful */
-        204: {
-          content: never;
-        };
-        /** @description HTTP 404 is returned if the `logo_id` was not found */
-        404: {
-          content: never;
-        };
-      };
+        get?: never;
+        put?: never;
+        /**
+         * Reset logo annotation
+         * @description Reset logo annotations, and delete all annotation-associated predictions and insights
+         */
+        post: operations["resetLogoAnnotation"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-  };
-  "/ann/search": {
-    /**
-     * Approximate search for nearest neighbors of a random query logo
-     * @description Return ID and distance of each logo found, the number of neighbors returned and the ID of the query logo.
-     */
-    get: {
-      parameters: {
-        query?: {
-          count?: components["parameters"]["ann_search_count"];
-          server_type?: components["parameters"]["server_type"];
+    "/ann/search": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-      };
-      responses: {
-        /** @description Response from ANN search */
-        200: {
-          content: {
-            "application/json": components["schemas"]["LogoANNSearchResponse"];
-          };
-        };
-      };
+        /**
+         * Approximate search for nearest neighbors of a random query logo
+         * @description Return ID and distance of each logo found, the number of neighbors returned and the ID of the query logo.
+         */
+        get: operations["searchNearestNeighbors"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-  };
-  "/ann/search/{logo_id:int}": {
-    /**
-     * Approximate search for nearest neighbors of a specified query logo
-     * @description Return ID and distance of each logo found, the number of neighbors returned and the ID of the query logo.
-     */
-    get: {
-      parameters: {
-        query?: {
-          count?: components["parameters"]["ann_search_count"];
-          server_type?: components["parameters"]["server_type"];
+    "/ann/search/{logo_id:int}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-      };
-      responses: {
-        /** @description Response from ANN search */
-        200: {
-          content: {
-            "application/json": components["schemas"]["LogoANNSearchResponse"];
-          };
-        };
-      };
+        /**
+         * Approximate search for nearest neighbors of a specified query logo
+         * @description Return ID and distance of each logo found, the number of neighbors returned and the ID of the query logo.
+         */
+        get: operations["searchNearestNeighborsByLogoId"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-  };
-  "/predict/category": {
-    /**
-     * Predict categories for a product
-     * @description Predictions are performed using a neural model.
-     * As input, you can either provide:
-     *
-     * - the `barcode` of a product: Robotoff will fetch the product from
-     *   Product Opener and will use this data as inputs to predict categories.
-     * - expected inputs under a `product` key. The neural category model
-     *   accepts the following fields as input: `product_name`, `ingredients_tags`,
-     *   `ocr`, `nutriments`, `image_embeddings`. All fields are optional (but you should at least provide one).
-     */
-    post: {
-      requestBody?: {
-        content: {
-          "application/json": ({
-            /**
-             * @description The barcode of the product to categorize
-             * @example 748162621021
-             */
-            barcode: string;
-            /**
-             * @description The server type (=project) to use, such as 'off' (Open Food Facts), 'obf' (Open Beauty Facts),...
-             * Only 'off' is currently supported for category prediction
-             *
-             * @default off
-             * @enum {string}
-             */
-            server_type?: "off" | "obf" | "opff" | "opf";
-            /**
-             * @description If true, only return the deepest elements in the category taxonomy
-             * (don't return categories that are parents of other predicted categories)
-             */
-            deepest_only?: boolean;
-            /**
-             * @description The score above which we consider the category to be detected
-             *
-             * @default 0.5
-             */
-            threshold?: number;
-          }) | {
-            /**
-             * @description product information used as model input. All fields are optional, but at
-             * least one field must be provided.
-             */
-            product: {
-              /** @example roasted chicken */
-              product_name?: string;
-              /**
-               * @description the ingredient list, as an ordered list of ingredient tags
-               * @example [
-               *   "en:chicken",
-               *   "en:salts"
-               * ]
-               */
-              ingredients_tags?: string[];
-              /**
-               * @description Embeddings of the 10 most recent product images generated with clip-vit-base-patch32 model.
-               * Each item of the list is the embedding of a single image, provided as a list of dimension 512.
-               * Shape: (num_images, 512)
-               */
-              image_embeddings?: number[][];
-              /**
-               * @description A list of string corresponding to the text extracted from the product images with OCR.
-               * Each element of the list is the text of a single image, the list order doesn't affect predictions.
-               * We use OCR text to detect ingredient mentions and use it as a model input.
-               * For optimal results, this field should be provided even if `ingredients_tags` is provided.
-               */
-              ocr?: string[];
-              /**
-               * @description Nutriment values. These fields have exactly the same meaning as those of Product Opener.
-               * All fields are optional, only send data for the field for which the value is not missing.
-               */
-              nutriments?: {
-                fat_100g?: number;
-                "saturated-fat_100g"?: number;
-                carbohydrates_100g?: number;
-                sugars_100g?: number;
-                fiber_100g?: number;
-                proteins_100g?: number;
-                salt_100g?: number;
-                "energy-kcal_100g"?: number;
-                "fruits-vegetables-nuts_100g"?: number;
-              };
-            };
-            /**
-             * @description If true, only return the deepest elements in the category taxonomy
-             * (don't return categories that are parents of other predicted categories)
-             */
-            deepest_only?: boolean;
-            /**
-             * @description The score above which we consider the category to be detected
-             *
-             * @default 0.5
-             */
-            threshold?: number;
-          };
+    "/status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-      };
-      responses: {
-        /** @description the category predictions */
-        200: {
-          content: {
-            "application/json": {
-              neural?: {
-                  /**
-                   * @description The predicted `value_tag`
-                   * @example en:roast-chicken
-                   */
-                  value_tag: string;
-                  /**
-                   * @description The confidence score of the model
-                   * @example 0.6
-                   */
-                  confidence: number;
-                }[];
-            };
-          };
-        };
-      };
+        /**
+         * Get API status
+         * @description Check if the API is running
+         */
+        get: operations["getApiStatus"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-  };
-  "/predict/nutrition": {
-    /**
-     * Extract nutritional information from an image
-     * @description We currently only use the OCR text as input, and detect nutrient-value pairs if they are consecutive
-     * to each other in the OCR text (ex: "protein: 10.5g, fat: 2.1g").
-     */
-    get: {
-      parameters: {
-        query: {
-          barcode: components["parameters"]["barcode"];
-          server_type?: components["parameters"]["server_type"];
-          /**
-           * @description a comma-separated list of IDs of images to extract nutritional information from.
-           * If not provided, the 10 most recent images will be used.
-           */
-          image_ids?: string;
+    "/health": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-      };
-      responses: {
-        /** @description the extracted nutritional information */
-        200: {
-          content: {
-            "application/json": {
-              predictions: {
+        /**
+         * Get health check status
+         * @description Check the health of all system components
+         */
+        get: operations["getHealthStatus"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/users/statistics/{username}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get user statistics
+         * @description Get annotation statistics for a specific user
+         */
+        get: operations["getUserStatistics"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/images": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get images
+         * @description Retrieve images with optional filters
+         */
+        get: operations["getImages"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/images/predict": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Predict on images
+         * @description Run image prediction models on product images
+         */
+        get: operations["predictOnImages"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/images/logos/annotate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Annotate multiple logos
+         * @description Bulk annotate logos with type and value
+         */
+        post: operations["annotateLogos"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/images/logos/update": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Bulk update logo annotations
+         * @description Mass update logo annotations by changing type and value
+         */
+        post: operations["updateLogoAnnotations"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/images/logos/{logo_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get logo details
+         * @description Get details about a specific logo
+         */
+        get: operations["getLogoDetails"];
+        /**
+         * Update logo annotation
+         * @description Update the type and value of a logo annotation
+         */
+        put: operations["updateLogoAnnotation"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/image_predictions/import": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Import image predictions
+         * @description Bulk import image predictions into the database
+         */
+        post: operations["importImagePredictions"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/annotation/collection": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get logo annotations
+         * @description Retrieve logo annotations with optional filters
+         */
+        get: operations["getAnnotationCollection"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/predict/ingredient_list": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Extract ingredient list from OCR
+         * @description Extract and parse ingredient lists from OCR text
+         */
+        get: operations["extractIngredientList"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/products/dataset": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get dataset information
+         * @description Get information about the product dataset
+         */
+        get: operations["getDatasetInfo"];
+        put?: never;
+        /**
+         * Update product dataset
+         * @description Trigger an update of the product dataset
+         */
+        post: operations["updateDataset"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/predict/category": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Predict categories for a product
+         * @description Predictions are performed using a neural model.
+         *     As input, you can either provide:
+         *
+         *     - the `barcode` of a product: Robotoff will fetch the product from
+         *       Product Opener and will use this data as inputs to predict categories.
+         *     - expected inputs under a `product` key. The neural category model
+         *       accepts the following fields as input: `product_name`, `ingredients_tags`,
+         *       `ocr`, `nutriments`, `image_embeddings`. All fields are optional (but you should at least provide one).
+         *
+         */
+        post: operations["predictCategory"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/predict/nutrition": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Extract nutritional information from an image
+         * @description Predict nutritional information from a packaging image using the Nutri-Sight model.
+         *
+         *     The model takes an image and the OCR result (as a JSON file) obtained from Google Cloud Vision.
+         *     For more information about the model, see the
+         *     [Nutri-Sight documentation](https://openfoodfacts.github.io/robotoff/references/predictions/nutrient-extraction/).
+         *
+         */
+        get: operations["extractNutrition"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/predict/ocr_prediction": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Generate OCR predictions an OCR JSON */
+        get: operations["generateOCRPredictions"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/predict/lang": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Predict the language of a text
+         * @description Predict the language of a text using a neural model.
+         *     A POST version of this endpoint is also available, it accepts a JSON body with exactly the
+         *     same parameters.
+         *
+         *     Use the POST version if you want to predict the language of a long text, as the GET version
+         *     has a limit on the length of the text that can be provided.
+         *
+         */
+        get: operations["predictLanguage"];
+        put?: never;
+        /**
+         * Predict the language of a text
+         * @description Predict the language of a text using a neural model.
+         *     Use this POST version for long texts, as the GET version has a limit on the length
+         *     of the text that can be provided in the query string.
+         *
+         */
+        post: operations["predictLanguagePost"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/predict/lang/product": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Predict the languages of the product
+         * @description Return the most common languages present on the product images, based on word-level
+         *     language detection from product images.
+         *
+         *     Language detection is not performed on the fly, but is based on predictions of type
+         *     `image_lang` stored in the `prediction` table.
+         *
+         */
+        get: operations["predictProductLanguages"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/batch/import": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Import batch job results
+         * @description Import batch job data into Robotoff database. This endpoint is secured and requires bearer authentication.
+         *
+         *     This endpoint is mainly used by the batch job once the job is finished.
+         *
+         */
+        post: operations["importBatchJobResults"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+}
+export type webhooks = Record<string, never>;
+export interface components {
+    schemas: {
+        LogoANNSearchResponse: {
+            /** @description Each item corresponds to a neighbor logo */
+            results: {
                 /**
-                 * @description a dict mapping nutrient name (`energy`, `fat`,...) to a list of dict containing detected nutritional information.
-                 * The list contains as many elements as the number of detected values for this nutrient. Each element of the list
-                 * has the following fields:
-                 *   - `raw`: string of the full detected pattern (ex: `Valeur énergétique: 245 kj`)
-                 *   - `nutrient`: nutrient mention (`energy`, `saturated_fat`,...)
-                 *   - `value`: nutrient value, should be an number (example: `245`)
-                 *   - `unit`: nutrient unit associated with the value (one of `kj`, `kcal`, `g`)
-                 */
-                nutrients: Record<string, never>;
-                /**
-                 * @description identifier of the version of the predictor used
+                 * @description ID of the result logo
                  * @example 1
                  */
-                predictor_version: string;
+                logo_id: number;
                 /**
-                 * @description predictor used to generate this prediction
-                 * @example regex
+                 * @description distance between the query logo and the result logo (closer to 0 means a more similar logo)
+                 *
+                 * @example 0.1
                  */
-                predictor: string;
-                /** @description the path of the image the nutrient prediction was generated from */
-                source_image: string;
-              };
-              /** @description list of the IDs of images that were used as input analyzed */
-              image_ids: number[];
-              /** @description a list of errors that occured during processing */
-              errors?: {
-                  /** @description the identifier of the error */
-                  error?: string;
-                  /** @description a full description of the error that occured */
-                  error_description?: string;
-                }[];
-            };
-          };
+                distance: number;
+            }[];
+            /** @description Number of returned results */
+            count: number;
+            /** @description ID of the query logo */
+            query_logo_id: number;
         };
-        /** @description An HTTP 400 is returned if the provided parameters are invalid */
-        400: {
-          content: never;
+        /**
+         * @description An insight search result as returned by /insights/random or /insights/{barcode}
+         * @example {
+         *       "id": "3cd5aecd-edcc-4237-87d0-6595fc4e53c9",
+         *       "type": "label",
+         *       "barcode": 9782012805866
+         *     }
+         */
+        InsightSearchResult: {
+            /** @description Insight ID */
+            id: string;
+            /** @description Insight type */
+            type: string;
+            /** @description Barcode of the product */
+            barcode: number;
+            /** @description country tags of the product */
+            countries: string[];
         };
-      };
+        /**
+         * @description The server domain associated with the image/product.
+         *
+         *     If the `server_domain` top level domain does not match the server configuration,
+         *     an HTTP 400 error will be raised
+         *
+         * @example api.openfoodfacts.org
+         * @enum {string}
+         */
+        ServerDomainParameter: "api.openfoodfacts.org" | "api.openbeautyfacts.org" | "api.openproductfacts.org" | "api.openpetfoodfacts.org" | "api.pro.openfoodfacts.org";
+        /** @description a Robotoff Prediction */
+        Prediction: {
+            /**
+             * @description barcode of the product
+             * @example 5410041040807
+             */
+            barcode?: string;
+            /**
+             * @description the prediction type
+             * @example category
+             */
+            type?: string;
+            /**
+             * Format: date-time
+             * @description datetime of creation of the prediction
+             * @example 2023-05-13 02:10:09.107262
+             */
+            timestamp?: string;
+            /** @description a JSON structure containing prediction data. It either complements `value` and `value_tag`
+             *     with additional data or contains the full prediction data.
+             *      */
+            data?: Record<string, never>;
+            /**
+             * @description the value tag of the prediction. The use of this field depends of the prediction type,
+             *     but it contains most of the time the canonical tag that should be sent to Product Opener.
+             *     For example, for a category prediction, `value_tag` can be `en:beverages`.
+             *
+             * @example en:beverages
+             */
+            value_tag?: string;
+            /**
+             * @description the value of the prediction. It is used if no canonical tag can be used
+             *     for the prediction type. For example, we use it to store the detected product weight
+             *     value (example: `100 g`)
+             *
+             * @example null
+             */
+            value?: string;
+            /**
+             * @description a boolean indicating whether we're confident enough in the prediction to apply it
+             *     automatically in Open Food Facts without human supervision. This does not mean it will
+             *     indeed be applied automatically, please refer to the import mechanism description in the
+             *     documentation to know how automatic processing works.
+             *
+             * @example false
+             */
+            automatic_processing?: boolean;
+            /**
+             * @description the path of the image the prediction was generated from.
+             *     May be null, it is mainly provided for OCR and object detection-based predictions.
+             *
+             * @example 541/004/104/0807/3.jpg
+             */
+            source_image?: string;
+            /**
+             * @description unique ID of the prediction in the PostgreSQL DB
+             * @example 1522429
+             */
+            id?: number;
+            /**
+             * @description this is a version ID that is used to know when to replace predictions in database
+             *     by new ones during import, and when to keep them. It is either an incrementing integer
+             *     (for regex-based predictions) or the version of the model that generated the predictions.
+             *
+             * @example keras-image-embeddings-3.0
+             */
+            predictor_version?: string;
+            /**
+             * @description name of the predictor that generated the prediction. Every insight type has its own `predictor`s, but most common ones are:
+             *       - `universal-logo-detector` for predictions generated by the nearest-neighbors logo detector
+             *       - `flashtext` for all predictions generated using flashtext library
+             *       - `regex` for all predictions generated using simple regex
+             *
+             * @example neural
+             */
+            predictor?: string;
+            /**
+             * @description The server type (=project) to use, such as 'off' (Open Food Facts), 'obf' (Open Beauty Facts),...
+             * @example off
+             * @enum {string}
+             */
+            server_type?: "off" | "obf" | "opff" | "opf" | "off_pro";
+            /**
+             * Format: number
+             * @description confidence score of the prediction, it is only provided for ML-based predictions. It may be null.
+             *
+             * @example 0.95
+             */
+            confidence?: string;
+        };
     };
-  };
-  "/predict/ocr_prediction": {
-    /** Generate OCR predictions an OCR JSON */
-    get: {
-      parameters: {
-        query: {
-          /** @description The URL of the OCR JSON to use for extraction */
-          ocr_url: string;
-          server_type?: components["parameters"]["server_type"];
-          /**
-           * @description a comma-separated list of prediction types to use for extraction. If not provided, we use the default:
-           * set of OCR prediction types (see `DEFAULT_OCR_PREDICTION_TYPES` variable in Robotoff codebase)
-           */
-          prediction_types?: string;
-        };
-      };
-      responses: {
-        /** @description the extracted predictions */
-        200: {
-          content: {
-            "application/json": {
-              /** @description a list of extracted predictions */
-              predictions: components["schemas"]["Prediction"][];
-            };
-          };
-        };
-        /** @description An HTTP 400 is returned if the provided parameters are invalid */
-        400: {
-          content: never;
-        };
-      };
+    responses: never;
+    parameters: {
+        /** @description The URL of the input image */
+        image_url: string;
+        /** @description The URL of the OCR JSON to use. The OCR must have been extracted using Google Cloud Vision, and be in the JSON format. */
+        ocr_url: string;
+        /** @description The language of the question/value */
+        lang: string;
+        /** @description Comma-separated list of language codes to filter insights by language */
+        lc: string;
+        /** @description The number of items to return */
+        count: number;
+        /** @description Filter by barcode value */
+        barcode_query_filter: string;
+        /** @description The server type (=project) to use, such as 'off' (Open Food Facts), 'obf' (Open Beauty Facts),... */
+        server_type: "off" | "obf" | "opff" | "opf" | "off_pro";
+        /** @description Comma-separated list, filter by insight types */
+        insight_types: string;
+        /** @description Filter by insight type */
+        insight_type: string;
+        /**
+         * @description Comma separated list, filter by country value (2-letter code)
+         * @example uk
+         */
+        countries: string;
+        /** @description Comma-separated list, filter by brands */
+        brands: string;
+        /**
+         * @description Filter by value tag, i.e the value that is going to be sent to Product Opener
+         * @example en:organic
+         */
+        value_tag: string;
+        /** @description Page index to return (starting at 1) */
+        page: number;
+        /** @description If true, also return questions about products with reserved barcodes */
+        reserved_barcode: boolean;
+        /** @description Filter by annotation campaigns (the insight must have all the campaigns) An annotation campaign allows to only retrieve questions or insights based on arbitrary criteria defined during insight import. */
+        campaigns: string;
+        /** @description Filter by predictor value A predictor refers to the model/method that was used to generate the prediction. */
+        predictor: string;
+        /** @description How to order by insight results.
+         *     By default, results are not ordered. Possible values are:
+         *       - `random`: insights are ordered randomly
+         *       - `popularity`: insights are returned by decreasing popularity, using the number of scans as proxy
+         *      */
+        insight_order_by: "random" | "popularity";
+        /** @description Number of neighbors to return */
+        ann_search_count: number;
+        /** @description The barcode of the product */
+        barcode_path: number;
+        /** @description The barcode of the product */
+        barcode: number;
+        /** @description Filter by barcode value */
+        barcode_optional: number;
+        /** @description Filter by annotation status of the insight. A true value (`1`, `true`) means we only return annotated insights, a false value (`0`, `false`) only non-annotated insights. If the parameter is not provided, both annotated and non-annotated insights are returned. */
+        insight_filter_annotated: boolean;
+        /** @description Filter by annotation value of the insight. If not provided, all insights are returned. This works in conjunction with the `annotated` parameter. */
+        insight_filter_annotation: number;
+        /** @description The type of batch job launched. */
+        job_type: "ingredients_spellcheck";
     };
-  };
-  "/predict/lang": {
-    /**
-     * Predict the language of a text
-     * @description Predict the language of a text using a neural model.
-     * A POST version of this endpoint is also available, it accepts a JSON body with exactly the
-     * same parameters.
-     *
-     * Use the POST version if you want to predict the language of a long text, as the GET version
-     * has a limit on the length of the text that can be provided.
-     */
-    get: {
-      parameters: {
-        query: {
-          /** @description The text to predict language of */
-          text: string;
-          /** @description the number of predictions to return */
-          k?: number;
-          /** @description the minimum probability for a language to be returned */
-          threshold?: number;
-        };
-      };
-      responses: {
-        /** @description the predicted languages */
-        200: {
-          content: {
-            "application/json": {
-              /** @description a list of predicted languages, sorted by descending probability */
-              predictions?: {
-                  /**
-                   * @description the predicted language (2-letter code)
-                   * @example en
-                   */
-                  lang?: string;
-                  /**
-                   * @description the probability of the predicted language
-                   * @example 0.9
-                   */
-                  confidence?: number;
-                }[];
-            };
-          };
-        };
-        /** @description An HTTP 400 is returned if the provided parameters are invalid */
-        400: {
-          content: never;
-        };
-      };
-    };
-  };
-  "/predict/lang/product": {
-    /**
-     * Predict the languages of the product
-     * @description Return the most common languages present on the product images, based on word-level
-     * language detection from product images.
-     *
-     * Language detection is not performed on the fly, but is based on predictions of type
-     * `image_lang` stored in the `prediction` table.
-     */
-    get: {
-      parameters: {
-        query: {
-          barcode: components["parameters"]["barcode"];
-          /** @description the minimum probability for a language to be returned */
-          server_type?: components["parameters"]["server_type"];
-        };
-      };
-      responses: {
-        /** @description The predicted languages, sorted by descending probability. */
-        200: {
-          content: {
-            "application/json": {
-              /**
-               * @description the number of words detected for each language, over all images,
-               * sorted by descending count
-               */
-              counts?: {
-                  /**
-                   * @description the predicted language (2-letter code). `null` if the language could not be detected.
-                   * @example en
-                   */
-                  lang?: string;
-                  /**
-                   * @description the number of words for which this language was detected over all images
-                   * @example 10
-                   */
-                  count?: number;
-                }[];
-              /**
-               * @description the percentage of words detected for each language, over all images,
-               * sorted by descending percentage
-               */
-              percent?: {
-                  /**
-                   * @description the predicted language (2-letter code). `null` if the language could not be detected.
-                   * @example en
-                   */
-                  lang?: string;
-                  /**
-                   * @description the percentage of words for which the language was detected over all images
-                   * @example 80.5
-                   */
-                  percent?: number;
-                }[];
-              /** @description the IDs of the images that were used to generate the predictions */
-              image_ids?: number[];
-            };
-          };
-        };
-        /** @description An HTTP 400 is returned if the provided parameters are invalid */
-        400: {
-          content: never;
-        };
-      };
-    };
-  };
-  "/batch/import": {
-    /**
-     * Import batch processed data to the Robotoff database.
-     * @description Trigger import of the batch processed data to the Robotoff database. A `BATCH_JOB_KEY` is expected in the authorization header. This endpoint is mainly used by the batch job once the job is finished.
-     */
-    post: {
-      parameters: {
-        query: {
-          job_type: components["parameters"]["job_type"];
-        };
-      };
-      responses: {
-        /** @description Data successfully imported. */
-        200: {
-          content: {
-            "application/json": unknown;
-          };
-        };
-        /** @description An HTTP 400 is returned if the authentification key is invalid or if the job_type is not supported. */
-        400: {
-          content: never;
-        };
-      };
-    };
-  };
+    requestBodies: never;
+    headers: never;
+    pathItems: never;
 }
-
-export type webhooks = Record<string, never>;
-
-export interface components {
-  schemas: {
-    LogoANNSearchResponse: {
-      /** @description Each item corresponds to a neighbor logo */
-      results: {
-          /**
-           * @description ID of the result logo
-           * @example 1
-           */
-          logo_id: number;
-          /**
-           * @description distance between the query logo and the result logo (closer to 0 means a more similar logo)
-           *
-           * @example 0.1
-           */
-          distance: number;
-        }[];
-      /** @description Number of returned results */
-      count: number;
-      /** @description ID of the query logo */
-      query_logo_id: number;
-    };
-    /**
-     * @description An insight search result as returned by /insights/random or /insights/{barcode}
-     * @example {
-     *   "id": "3cd5aecd-edcc-4237-87d0-6595fc4e53c9",
-     *   "type": "label",
-     *   "barcode": 9782012805866
-     * }
-     */
-    InsightSearchResult: {
-      /** @description Insight ID */
-      id: string;
-      /** @description Insight type */
-      type: string;
-      /** @description Barcode of the product */
-      barcode: number;
-      /** @description country tags of the product */
-      countries: string[];
-    };
-    /**
-     * @description The server domain associated with the image/product.
-     *
-     * If the `server_domain` top level domain does not match the server configuration,
-     * an HTTP 400 error will be raised
-     *
-     * @example api.openfoodfacts.org
-     * @enum {string}
-     */
-    ServerDomainParameter: "api.openfoodfacts.org" | "api.openbeautyfacts.org" | "api.openproductfacts.org" | "api.openpetfoodfacts.org" | "api.pro.openfoodfacts.org";
-    /** @description a Robotoff Prediction */
-    Prediction: {
-      /**
-       * @description barcode of the product
-       * @example 5410041040807
-       */
-      barcode?: string;
-      /**
-       * @description the prediction type
-       * @example category
-       */
-      type?: string;
-      /**
-       * Format: date-time
-       * @description datetime of creation of the prediction
-       * @example 2023-05-13 02:10:09.107262
-       */
-      timestamp?: string;
-      /**
-       * @description a JSON structure containing prediction data. It either complements `value` and `value_tag`
-       * with additional data or contains the full prediction data.
-       */
-      data?: Record<string, never>;
-      /**
-       * @description the value tag of the prediction. The use of this field depends of the prediction type,
-       * but it contains most of the time the canonical tag that should be sent to Product Opener.
-       * For example, for a category prediction, `value_tag` can be `en:beverages`.
-       *
-       * @example en:beverages
-       */
-      value_tag?: string;
-      /**
-       * @description the value of the prediction. It is used if no canonical tag can be used
-       * for the prediction type. For example, we use it to store the detected product weight
-       * value (example: `100 g`)
-       *
-       * @example null
-       */
-      value?: string;
-      /**
-       * @description a boolean indicating whether we're confident enough in the prediction to apply it
-       * automatically in Open Food Facts without human supervision. This does not mean it will
-       * indeed be applied automatically, please refer to the import mechanism description in the
-       * documentation to know how automatic processing works.
-       *
-       * @example false
-       */
-      automatic_processing?: boolean;
-      /**
-       * @description the path of the image the prediction was generated from.
-       * May be null, it is mainly provided for OCR and object detection-based predictions.
-       *
-       * @example 541/004/104/0807/3.jpg
-       */
-      source_image?: string;
-      /**
-       * @description unique ID of the prediction in the PostgreSQL DB
-       * @example 1522429
-       */
-      id?: number;
-      /**
-       * @description this is a version ID that is used to know when to replace predictions in database
-       * by new ones during import, and when to keep them. It is either an incrementing integer
-       * (for regex-based predictions) or the version of the model that generated the predictions.
-       *
-       * @example keras-image-embeddings-3.0
-       */
-      predictor_version?: string;
-      /**
-       * @description name of the predictor that generated the prediction. Every insight type has its own `predictor`s, but most common ones are:
-       *   - `universal-logo-detector` for predictions generated by the nearest-neighbors logo detector
-       *   - `flashtext` for all predictions generated using flashtext library
-       *   - `regex` for all predictions generated using simple regex
-       *
-       * @example neural
-       */
-      predictor?: string;
-      /**
-       * @description The server type (=project) to use, such as 'off' (Open Food Facts), 'obf' (Open Beauty Facts),...
-       * @example off
-       * @enum {string}
-       */
-      server_type?: "off" | "obf" | "opff" | "opf" | "off_pro";
-      /**
-       * Format: number
-       * @description confidence score of the prediction, it is only provided for ML-based predictions. It may be null.
-       *
-       * @example 0.95
-       */
-      confidence?: string;
-    };
-  };
-  responses: never;
-  parameters: {
-    /** @description The language of the question/value */
-    lang?: string;
-    /** @description The number of items to return */
-    count?: number;
-    /** @description Filter by barcode value */
-    barcode_query_filter?: string;
-    /** @description The server type (=project) to use, such as 'off' (Open Food Facts), 'obf' (Open Beauty Facts),... */
-    server_type?: "off" | "obf" | "opff" | "opf" | "off_pro";
-    /** @description Comma-separated list, filter by insight types */
-    insight_types?: string;
-    /** @description Filter by insight type */
-    insight_type?: string;
-    /**
-     * @description Comma separated list, filter by country value (2-letter code)
-     * @example uk
-     */
-    countries?: string;
-    /** @description Comma-separated list, filter by brands */
-    brands?: string;
-    /**
-     * @description Filter by value tag, i.e the value that is going to be sent to Product Opener
-     * @example en:organic
-     */
-    value_tag?: string;
-    /** @description Page index to return (starting at 1) */
-    page?: number;
-    /** @description If true, also return questions about products with reserved barcodes */
-    reserved_barcode?: boolean;
-    /** @description Filter by annotation campaigns (the insight must have all the campaigns) An annotation campaigns allows to only retrieve questions about selected products, based on arbitrary criteria */
-    campaigns?: string;
-    /** @description Filter by predictor value A predictor refers to the model/method that was used to generate the prediction. */
-    predictor?: string;
-    /**
-     * @description How to order by insight results.
-     * By default, results are not ordered. Possible values are:
-     *   - `random`: insights are ordered randomly
-     *   - `popularity`: insights are returned by decreasing popularity, using the number of scans as proxy
-     */
-    insight_order_by?: "random" | "popularity";
-    /** @description Number of neighbors to return */
-    ann_search_count?: number;
-    /** @description The barcode of the product */
-    barcode_path: number;
-    /** @description The barcode of the product */
-    barcode: number;
-    /** @description Filter by barcode value */
-    barcode_optional?: number;
-    /** @description Filter by annotation status of the insight. A true value (`1`, `true`) means we only return annotated insights, a false value (`0`, `false`) only non-annotated insights. If the parameter is not provided, both annotated and non-annotated insights are returned. */
-    insight_filter_annotated?: boolean;
-    /** @description Filter by annotation value of the insight. If not provided, all insights are returned. This works in conjunction with the `annotated` parameter. */
-    insight_filter_annotation?: number;
-    /** @description The type of batch job launched. */
-    job_type: "ingredients_spellcheck";
-  };
-  requestBodies: never;
-  headers: never;
-  pathItems: never;
-}
-
 export type $defs = Record<string, never>;
-
-export type external = Record<string, never>;
-
-export type operations = Record<string, never>;
+export interface operations {
+    getQuestionsByBarcode: {
+        parameters: {
+            query?: {
+                /** @description The number of questions to return */
+                count?: number;
+                /** @description The server type (=project) to use, such as 'off' (Open Food Facts), 'obf' (Open Beauty Facts),... */
+                server_type?: components["parameters"]["server_type"];
+                /** @description The language of the question/value */
+                lang?: components["parameters"]["lang"];
+                /** @description Comma-separated list, filter by insight types */
+                insight_types?: components["parameters"]["insight_types"];
+            };
+            header?: never;
+            path: {
+                /** @description The barcode of the product */
+                barcode: components["parameters"]["barcode_path"];
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Questions about the requested product */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {string} */
+                        status?: "no_questions" | "found";
+                        questions?: Record<string, never>[];
+                    };
+                };
+            };
+        };
+    };
+    getQuestions: {
+        parameters: {
+            query?: {
+                /** @description The language of the question/value */
+                lang?: components["parameters"]["lang"];
+                /** @description The number of items to return */
+                count?: components["parameters"]["count"];
+                /** @description The server type (=project) to use, such as 'off' (Open Food Facts), 'obf' (Open Beauty Facts),... */
+                server_type?: components["parameters"]["server_type"];
+                /** @description Comma-separated list, filter by insight types */
+                insight_types?: components["parameters"]["insight_types"];
+                /**
+                 * @description Comma separated list, filter by country value (2-letter code)
+                 * @example uk
+                 */
+                countries?: components["parameters"]["countries"];
+                /** @description Comma-separated list, filter by brands */
+                brands?: components["parameters"]["brands"];
+                /**
+                 * @description Filter by value tag, i.e the value that is going to be sent to Product Opener
+                 * @example en:organic
+                 */
+                value_tag?: components["parameters"]["value_tag"];
+                /** @description Page index to return (starting at 1) */
+                page?: components["parameters"]["page"];
+                /** @description If true, also return questions about products with reserved barcodes */
+                reserved_barcode?: components["parameters"]["reserved_barcode"];
+                /** @description Filter by annotation campaigns (the insight must have all the campaigns) An annotation campaign allows to only retrieve questions or insights based on arbitrary criteria defined during insight import. */
+                campaigns?: components["parameters"]["campaigns"];
+                /** @description Filter by predictor value A predictor refers to the model/method that was used to generate the prediction. */
+                predictor?: components["parameters"]["predictor"];
+                /** @description The field to use for ordering results:
+                 *       - confidence: order by (descending) model confidence, null confidence insights come last
+                 *       - popularity: order by (descending) popularity (=scan count)
+                 *       - random: use a random order
+                 *      */
+                order_by?: "confidence" | "random" | "popularity";
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description The questions matching the filters */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {string} */
+                        status?: "no_questions" | "found";
+                        questions?: Record<string, never>[];
+                        /** @description The total number of results with the provided filters */
+                        count?: number;
+                    };
+                };
+            };
+        };
+    };
+    getRandomQuestions: {
+        parameters: {
+            query?: {
+                /** @description The language of the question/value */
+                lang?: components["parameters"]["lang"];
+                /** @description The number of items to return */
+                count?: components["parameters"]["count"];
+                /** @description The server type (=project) to use, such as 'off' (Open Food Facts), 'obf' (Open Beauty Facts),... */
+                server_type?: components["parameters"]["server_type"];
+                /** @description Comma-separated list, filter by insight types */
+                insight_types?: components["parameters"]["insight_types"];
+                /**
+                 * @description Comma separated list, filter by country value (2-letter code)
+                 * @example uk
+                 */
+                countries?: components["parameters"]["countries"];
+                /** @description Comma-separated list, filter by brands */
+                brands?: components["parameters"]["brands"];
+                /**
+                 * @description Filter by value tag, i.e the value that is going to be sent to Product Opener
+                 * @example en:organic
+                 */
+                value_tag?: components["parameters"]["value_tag"];
+                /** @description Page index to return (starting at 1) */
+                page?: components["parameters"]["page"];
+                /** @description If true, also return questions about products with reserved barcodes */
+                reserved_barcode?: components["parameters"]["reserved_barcode"];
+                /** @description Filter by annotation campaigns (the insight must have all the campaigns) An annotation campaign allows to only retrieve questions or insights based on arbitrary criteria defined during insight import. */
+                campaigns?: components["parameters"]["campaigns"];
+                /** @description Filter by predictor value A predictor refers to the model/method that was used to generate the prediction. */
+                predictor?: components["parameters"]["predictor"];
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description The queried insights */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {string} */
+                        status?: "no_questions" | "found";
+                        questions?: Record<string, never>[];
+                        /** @description The total number of results with the provided filters */
+                        count?: number;
+                    };
+                };
+            };
+        };
+    };
+    getPopularQuestions: {
+        parameters: {
+            query?: {
+                /** @description The language of the question/value */
+                lang?: components["parameters"]["lang"];
+                /** @description The number of items to return */
+                count?: components["parameters"]["count"];
+                /** @description The server type (=project) to use, such as 'off' (Open Food Facts), 'obf' (Open Beauty Facts),... */
+                server_type?: components["parameters"]["server_type"];
+                /** @description Comma-separated list, filter by insight types */
+                insight_types?: components["parameters"]["insight_types"];
+                /**
+                 * @description Comma separated list, filter by country value (2-letter code)
+                 * @example uk
+                 */
+                countries?: components["parameters"]["countries"];
+                /** @description Comma-separated list, filter by brands */
+                brands?: components["parameters"]["brands"];
+                /**
+                 * @description Filter by value tag, i.e the value that is going to be sent to Product Opener
+                 * @example en:organic
+                 */
+                value_tag?: components["parameters"]["value_tag"];
+                /** @description Page index to return (starting at 1) */
+                page?: components["parameters"]["page"];
+                /** @description If true, also return questions about products with reserved barcodes */
+                reserved_barcode?: components["parameters"]["reserved_barcode"];
+                /** @description Filter by annotation campaigns (the insight must have all the campaigns) An annotation campaign allows to only retrieve questions or insights based on arbitrary criteria defined during insight import. */
+                campaigns?: components["parameters"]["campaigns"];
+                /** @description Filter by predictor value A predictor refers to the model/method that was used to generate the prediction. */
+                predictor?: components["parameters"]["predictor"];
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Questions about popular products */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {string} */
+                        status?: "no_questions" | "found";
+                        questions?: Record<string, never>[];
+                        /** @description The total number of results with the provided filters */
+                        count?: number;
+                    };
+                };
+            };
+        };
+    };
+    getUnansweredQuestions: {
+        parameters: {
+            query?: {
+                /** @description The number of distinct `value_tag`s to return */
+                count?: number;
+                /** @description The server type (=project) to use, such as 'off' (Open Food Facts), 'obf' (Open Beauty Facts),... */
+                server_type?: components["parameters"]["server_type"];
+                /** @description Filter by insight type */
+                type?: components["parameters"]["insight_type"];
+                /**
+                 * @description Comma separated list, filter by country value (2-letter code)
+                 * @example uk
+                 */
+                countries?: components["parameters"]["countries"];
+                /** @description Page index to return (starting at 1) */
+                page?: components["parameters"]["page"];
+                /** @description If true, also return questions about products with reserved barcodes */
+                reserved_barcode?: components["parameters"]["reserved_barcode"];
+                /** @description Filter by annotation campaigns (the insight must have all the campaigns) An annotation campaign allows to only retrieve questions or insights based on arbitrary criteria defined during insight import. */
+                campaigns?: components["parameters"]["campaigns"];
+                /** @description Filter by predictor value A predictor refers to the model/method that was used to generate the prediction. */
+                predictor?: components["parameters"]["predictor"];
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description The number of questions grouped by `value_tag` */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @description The total number of questions that meet the provided criteria */
+                        count: number;
+                        questions: (string | number)[];
+                        /**
+                         * @description The request status
+                         * @enum {string}
+                         */
+                        status: "found" | "no_questions";
+                    };
+                };
+            };
+        };
+    };
+    getPredictions: {
+        parameters: {
+            query?: {
+                /** @description The number of items to return */
+                count?: components["parameters"]["count"];
+                /** @description Page index to return (starting at 1) */
+                page?: components["parameters"]["page"];
+                /** @description The server type (=project) to use, such as 'off' (Open Food Facts), 'obf' (Open Beauty Facts),... */
+                server_type?: components["parameters"]["server_type"];
+                /** @description Filter by barcode value */
+                barcode?: components["parameters"]["barcode_query_filter"];
+                /** @description Comma-separated list, filter by prediction types */
+                types?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description The queried predictions */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {string} */
+                        status?: "no_predictions" | "found";
+                        predictions?: Record<string, never>[];
+                        /** @description The total number of results with the provided filters */
+                        count?: number;
+                    };
+                };
+            };
+        };
+    };
+    getRandomInsights: {
+        parameters: {
+            query?: {
+                /** @description Filter by insight type */
+                type?: components["parameters"]["insight_type"];
+                /**
+                 * @description Comma separated list, filter by country value (2-letter code)
+                 * @example uk
+                 */
+                countries?: components["parameters"]["countries"];
+                /**
+                 * @description Filter by value tag, i.e the value that is going to be sent to Product Opener
+                 * @example en:organic
+                 */
+                value_tag?: components["parameters"]["value_tag"];
+                /** @description The server type (=project) to use, such as 'off' (Open Food Facts), 'obf' (Open Beauty Facts),... */
+                server_type?: components["parameters"]["server_type"];
+                /** @description The number of items to return */
+                count?: components["parameters"]["count"];
+                /** @description Filter by predictor value A predictor refers to the model/method that was used to generate the prediction. */
+                predictor?: components["parameters"]["predictor"];
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Random insights matching the criteria */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        insights?: components["schemas"]["InsightSearchResult"][];
+                    };
+                };
+            };
+        };
+    };
+    getInsightsByBarcode: {
+        parameters: {
+            query?: {
+                /** @description The server type (=project) to use, such as 'off' (Open Food Facts), 'obf' (Open Beauty Facts),... */
+                server_type?: components["parameters"]["server_type"];
+            };
+            header?: never;
+            path: {
+                /** @description The barcode of the product */
+                barcode: components["parameters"]["barcode_path"];
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description All insights for the specific product */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        insights?: components["schemas"]["InsightSearchResult"][];
+                        /** @enum {string} */
+                        status?: "no_insights" | "found";
+                        /** @description The total number of results */
+                        count?: number;
+                    };
+                };
+            };
+        };
+    };
+    getInsights: {
+        parameters: {
+            query?: {
+                /** @description Comma-separated list, filter by insight types */
+                insight_types?: components["parameters"]["insight_types"];
+                /** @description Filter by barcode value */
+                barcode?: components["parameters"]["barcode_optional"];
+                /** @description Filter by annotation status of the insight. A true value (`1`, `true`) means we only return annotated insights, a false value (`0`, `false`) only non-annotated insights. If the parameter is not provided, both annotated and non-annotated insights are returned. */
+                annotated?: components["parameters"]["insight_filter_annotated"];
+                /** @description Filter by annotation value of the insight. If not provided, all insights are returned. This works in conjunction with the `annotated` parameter. */
+                annotation?: components["parameters"]["insight_filter_annotation"];
+                /**
+                 * @description Filter by value tag, i.e the value that is going to be sent to Product Opener
+                 * @example en:organic
+                 */
+                value_tag?: components["parameters"]["value_tag"];
+                /** @description Comma-separated list, filter by brands */
+                brands?: components["parameters"]["brands"];
+                /**
+                 * @description Comma separated list, filter by country value (2-letter code)
+                 * @example uk
+                 */
+                countries?: components["parameters"]["countries"];
+                /** @description The server type (=project) to use, such as 'off' (Open Food Facts), 'obf' (Open Beauty Facts),... */
+                server_type?: components["parameters"]["server_type"];
+                /** @description Filter by predictor value A predictor refers to the model/method that was used to generate the prediction. */
+                predictor?: components["parameters"]["predictor"];
+                /** @description How to order by insight results.
+                 *     By default, results are not ordered. Possible values are:
+                 *       - `random`: insights are ordered randomly
+                 *       - `popularity`: insights are returned by decreasing popularity, using the number of scans as proxy
+                 *      */
+                order_by?: components["parameters"]["insight_order_by"];
+                /** @description The number of items to return */
+                count?: components["parameters"]["count"];
+                /** @description Page index to return (starting at 1) */
+                page?: components["parameters"]["page"];
+                /** @description Filter by annotation campaigns (the insight must have all the campaigns) An annotation campaign allows to only retrieve questions or insights based on arbitrary criteria defined during insight import. */
+                campaigns?: components["parameters"]["campaigns"];
+                /** @description Comma-separated list of language codes to filter insights by language */
+                lc?: components["parameters"]["lc"];
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description List of insights matching the criteria */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        insights?: components["schemas"]["InsightSearchResult"][];
+                        /**
+                         * @example found
+                         * @enum {string}
+                         */
+                        status?: "no_insights" | "found";
+                        /**
+                         * @description The total number of results with the provided filters
+                         * @example 10
+                         */
+                        count?: number;
+                    };
+                };
+            };
+        };
+    };
+    getInsightDetails: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description ID of the insight */
+                insight_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Insight details */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["InsightSearchResult"];
+                };
+            };
+        };
+    };
+    annotateInsight: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/x-www-form-urlencoded": {
+                    /**
+                     * Format: uuid
+                     * @description ID of the insight
+                     * @example 3cd5aecd-edcc-4237-87d0-6595fc4e53c9
+                     */
+                    insight_id: string;
+                    /**
+                     * @description Annotation of the prediction: 1 to accept the prediction, 0 to refuse it, and -1 for _skip_, 2 to accept and add data
+                     * @enum {integer}
+                     */
+                    annotation: 0 | 1 | -1 | 2;
+                    /**
+                     * @description Send the update to Openfoodfacts if `update=1`, don't send the update otherwise. This parameter is useful if the update is performed client-side
+                     * @default 1
+                     * @enum {integer}
+                     */
+                    update?: 0 | 1;
+                    /** @description Additional data provided by the user as key-value pairs (required when annotation=2) */
+                    data?: Record<string, never> | null;
+                    /** @description Device identifier for tracking anonymous votes */
+                    device_id?: string;
+                };
+            };
+        };
+        responses: {
+            /** @description Annotation successfully processed */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @description Status code of the annotation result */
+                        status_code?: number;
+                        /** @description Status name of the annotation result */
+                        status?: string;
+                        /** @description Description of the annotation result */
+                        description?: string;
+                    };
+                };
+            };
+            /** @description Bad request - invalid parameters or missing required data */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Insight not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    dumpInsights: {
+        parameters: {
+            query?: {
+                /** @description The server type (=project) to use, such as 'off' (Open Food Facts), 'obf' (Open Beauty Facts),... */
+                server_type?: components["parameters"]["server_type"];
+                /**
+                 * @description Filter by value tag, i.e the value that is going to be sent to Product Opener
+                 * @example en:organic
+                 */
+                value_tag?: components["parameters"]["value_tag"];
+                /** @description Comma-separated list, filter by insight types */
+                insight_types?: components["parameters"]["insight_types"];
+                /** @description Filter by barcode value */
+                barcode?: components["parameters"]["barcode_query_filter"];
+                /** @description The annotation status of the insight. If not provided, both annotated and non-annotated insights are returned */
+                annotated?: boolean;
+                /** @description Maximum number of insights to return. If not provided, an HTTP 400 response may be returned if more than 10,000 insights match the criteria */
+                count?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description The CSV dump */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "text/csv": string;
+                };
+            };
+            /** @description HTTP 204 is returned if no insights were found */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description HTTP 400 is returned if more than 10,000 insights match the criteria and `count` is not provided */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    cropImage: {
+        parameters: {
+            query?: {
+                /** @description The URL of the input image */
+                image_url?: components["parameters"]["image_url"];
+                /** @example 0.47795143723487854 */
+                y_min?: number;
+                /** @example 0.5583494305610657 */
+                x_min?: number;
+                /** @example 0.5653171539306641 */
+                y_max?: number;
+                /** @example 0.6795185804367065 */
+                x_max?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Cropped image in JPEG format */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "image/jpeg": string;
+                };
+            };
+        };
+    };
+    getImagePredictions: {
+        parameters: {
+            query?: {
+                /** @description The number of items to return */
+                count?: components["parameters"]["count"];
+                /** @description Page index to return (starting at 1) */
+                page?: components["parameters"]["page"];
+                /** @description The server type (=project) to use, such as 'off' (Open Food Facts), 'obf' (Open Beauty Facts),... */
+                server_type?: components["parameters"]["server_type"];
+                /** @description Filter by barcode value */
+                barcode?: components["parameters"]["barcode_query_filter"];
+                /** @description if True, only return image predictions that have associated logos (only valid for universal-logo-detector image predictions). If false, only return image predictions that have no associated logos. Otherwise, return all image predictions. */
+                with_logo?: boolean | null;
+                /** @description filter by name of the image predictor model */
+                model_name?: string;
+                /** @description filter by image ID. It should be a digit (raw images only), otherwise no result will be returned. */
+                image_id?: string;
+                /** @description filter by type of the image predictor model */
+                type?: string;
+                /** @description filter by model version value */
+                model_version?: string;
+                /** @description filter by minimum confidence score value */
+                min_confidence?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description The queried image predictions */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {string} */
+                        status?: "no_image_predictions" | "found";
+                        image_predictions?: Record<string, never>[];
+                        /** @description The total number of results with the provided filters */
+                        count?: number;
+                    };
+                };
+            };
+        };
+    };
+    fetchLogos: {
+        parameters: {
+            query?: {
+                /** @description Comma-separated string of logo IDs */
+                logo_ids?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description The fetch results */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @description Details about requested logos */
+                        logos: unknown[];
+                        /** @description Number of returned results */
+                        count: number;
+                    };
+                };
+            };
+        };
+    };
+    searchLogos: {
+        parameters: {
+            query?: {
+                /** @description The server type (=project) to use, such as 'off' (Open Food Facts), 'obf' (Open Beauty Facts),... */
+                server_type?: components["parameters"]["server_type"];
+                /** @description Filter by barcode value */
+                barcode?: components["parameters"]["barcode_query_filter"];
+                /** @description Number of results to return */
+                count?: number;
+                /**
+                 * @description Filter by logo type
+                 * @example packager_code
+                 */
+                type?: string;
+                /**
+                 * @description Filter by annotated value
+                 * @example lidl
+                 */
+                value?: string;
+                /**
+                 * @description Filter by taxonomy value, i.e. the canonical value present is the associated taxonomy. This parameter is mutually exclusive with `value`, and should be used for `label` type.
+                 * @example en:organic
+                 */
+                taxonomy_value?: string;
+                /** @description Filter logos that have a confidence score above a threshold */
+                min_confidence?: number;
+                /** @description If true, randomized result order */
+                random?: boolean;
+                /** @description The annotation status of the logo. If not provided, both annotated and non-annotated logos are returned */
+                annotated?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description The search results */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @description Found logos */
+                        logos: unknown[];
+                        /** @description Number of returned results */
+                        count: number;
+                    };
+                };
+            };
+        };
+    };
+    resetLogoAnnotation: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description The ID of the logo whose annotation to reset */
+                logo_id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description HTTP 204 is returned if the reset operation was successful */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description HTTP 404 is returned if the `logo_id` was not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    searchNearestNeighbors: {
+        parameters: {
+            query?: {
+                /** @description Number of neighbors to return */
+                count?: components["parameters"]["ann_search_count"];
+                /** @description The server type (=project) to use, such as 'off' (Open Food Facts), 'obf' (Open Beauty Facts),... */
+                server_type?: components["parameters"]["server_type"];
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response from ANN search */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LogoANNSearchResponse"];
+                };
+            };
+        };
+    };
+    searchNearestNeighborsByLogoId: {
+        parameters: {
+            query?: {
+                /** @description Number of neighbors to return */
+                count?: components["parameters"]["ann_search_count"];
+                /** @description The server type (=project) to use, such as 'off' (Open Food Facts), 'obf' (Open Beauty Facts),... */
+                server_type?: components["parameters"]["server_type"];
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Response from ANN search */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LogoANNSearchResponse"];
+                };
+            };
+        };
+    };
+    getApiStatus: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description API status */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /**
+                         * @example running
+                         * @enum {string}
+                         */
+                        status?: "running";
+                    };
+                };
+            };
+        };
+    };
+    getHealthStatus: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Health check results */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @description Detailed health check results */
+                        message?: Record<string, never>;
+                        /** @description HTTP status code */
+                        status?: number;
+                        /** @description Response headers */
+                        headers?: Record<string, never>;
+                    };
+                };
+            };
+            /** @description Health check failed */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    getUserStatistics: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description The username to get statistics for */
+                username: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description User statistics */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        count?: {
+                            /**
+                             * @description Number of annotations made by the user
+                             * @example 42
+                             */
+                            annotations?: number;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    getImages: {
+        parameters: {
+            query?: {
+                /** @description The number of items to return */
+                count?: components["parameters"]["count"];
+                /** @description Page index to return (starting at 1) */
+                page?: components["parameters"]["page"];
+                /** @description The server type (=project) to use, such as 'off' (Open Food Facts), 'obf' (Open Beauty Facts),... */
+                server_type?: components["parameters"]["server_type"];
+                /** @description Filter by barcode value */
+                barcode?: components["parameters"]["barcode_optional"];
+                /** @description Filter images that have predictions */
+                with_predictions?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Images matching the filters */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {string} */
+                        status?: "no_images" | "found";
+                        images?: Record<string, never>[];
+                        /** @description Total number of results */
+                        count?: number;
+                    };
+                };
+            };
+        };
+    };
+    predictOnImages: {
+        parameters: {
+            query: {
+                /** @description The barcode of the product */
+                barcode: components["parameters"]["barcode"];
+                /** @description The server type (=project) to use, such as 'off' (Open Food Facts), 'obf' (Open Beauty Facts),... */
+                server_type?: components["parameters"]["server_type"];
+                /** @description Comma-separated list of model names to run */
+                models?: string;
+                /** @description Image ID to store predictions for */
+                output_image_id?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Prediction results */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        predictions?: Record<string, never>[];
+                    };
+                };
+            };
+        };
+    };
+    annotateLogos: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    annotations: {
+                        /** @description ID of the logo to annotate */
+                        logo_id: number;
+                        /**
+                         * @description Type of the logo
+                         * @enum {string}
+                         */
+                        type: "brand" | "category" | "label" | "no_logo" | "nutritional_label" | "packager_code" | "packaging" | "qr_code" | "store";
+                        /** @description Value/name of the logo */
+                        value: string | null;
+                    }[];
+                    // @ts-ignore
+                    server_type?: components["parameters"]["server_type"]["schema"];
+                };
+            };
+        };
+        responses: {
+            /** @description Annotation results */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @description Number of logos successfully annotated */
+                        annotated?: number;
+                    };
+                };
+            };
+        };
+    };
+    updateLogoAnnotations: {
+        parameters: {
+            query: {
+                /** @description Current logo type to update from */
+                source_type: string;
+                /** @description Current logo value to update from */
+                source_value: string;
+                /** @description New logo type to update to */
+                target_type: string;
+                /** @description New logo value to update to */
+                target_value: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Update results */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @description Number of logos updated */
+                        updated?: number;
+                    };
+                };
+            };
+        };
+    };
+    getLogoDetails: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description The ID of the logo */
+                logo_id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Logo details */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": Record<string, never>;
+                };
+            };
+            /** @description Logo not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    updateLogoAnnotation: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description The ID of the logo to update */
+                logo_id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** @description The type of the logo */
+                    type: string;
+                    /** @description The value/name of the logo */
+                    value?: string | null;
+                };
+            };
+        };
+        responses: {
+            /** @description Logo annotation updated successfully */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Authentication required */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Logo not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    importImagePredictions: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    predictions: {
+                        /** @description Product barcode */
+                        barcode: string;
+                        /** @description Image identifier */
+                        image_id: string;
+                        /** @description Name of the prediction model */
+                        model_name: string;
+                        /** @description Version of the prediction model */
+                        model_version: string;
+                        /** @description Prediction data */
+                        data: Record<string, never>;
+                        /** @description Server type */
+                        server_type?: string;
+                    }[];
+                };
+            };
+        };
+        responses: {
+            /** @description Import successful */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    getAnnotationCollection: {
+        parameters: {
+            query?: {
+                /** @description The number of items to return */
+                count?: components["parameters"]["count"];
+                /** @description Page index to return (starting at 1) */
+                page?: components["parameters"]["page"];
+                /** @description The server type (=project) to use, such as 'off' (Open Food Facts), 'obf' (Open Beauty Facts),... */
+                server_type?: components["parameters"]["server_type"];
+                /** @description Filter by barcode value */
+                barcode?: components["parameters"]["barcode_optional"];
+                /**
+                 * @description Filter by value tag, i.e the value that is going to be sent to Product Opener
+                 * @example en:organic
+                 */
+                value_tag?: components["parameters"]["value_tag"];
+                /** @description Comma-separated list of annotation types to filter by */
+                types?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Logo annotations matching the filters */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {string} */
+                        status?: "no_annotation" | "found";
+                        annotation?: Record<string, never>[];
+                        /** @description Total number of results */
+                        count?: number;
+                    };
+                };
+            };
+        };
+    };
+    extractIngredientList: {
+        parameters: {
+            query: {
+                /** @description URL of the OCR JSON to process */
+                ocr_url: string;
+                /** @description Strategy for aggregating ingredient entities */
+                aggregation_strategy?: "simple" | "max" | "first";
+                /** @description Version of the ingredient extraction model */
+                model_version?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Extracted ingredient list */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @description Extracted ingredients */
+                        ingredients?: Record<string, never>[];
+                    };
+                };
+            };
+        };
+    };
+    getDatasetInfo: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Dataset information */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @description Current dataset ETag */
+                        etag?: string;
+                    };
+                };
+            };
+        };
+    };
+    updateDataset: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Dataset update triggered */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    predictCategory: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": {
+                    /**
+                     * @description The barcode of the product to categorize
+                     * @example 748162621021
+                     */
+                    barcode: string;
+                    /**
+                     * @description The server type (=project) to use, such as 'off' (Open Food Facts), 'obf' (Open Beauty Facts),...
+                     *     Only 'off' is currently supported for category prediction
+                     *
+                     * @default off
+                     * @enum {string}
+                     */
+                    server_type?: "off" | "obf" | "opff" | "opf";
+                    /** @description If true, only return the deepest elements in the category taxonomy
+                     *     (don't return categories that are parents of other predicted categories)
+                     *      */
+                    deepest_only?: boolean;
+                    /**
+                     * @description The score above which we consider the category to be detected
+                     *
+                     * @default 0.5
+                     */
+                    threshold?: number;
+                } | {
+                    /** @description product information used as model input. All fields are optional, but at
+                     *     least one field must be provided.
+                     *      */
+                    product: {
+                        /** @example roasted chicken */
+                        product_name?: string;
+                        /**
+                         * @description the ingredient list, as an ordered list of ingredient tags
+                         * @example [
+                         *       "en:chicken",
+                         *       "en:salts"
+                         *     ]
+                         */
+                        ingredients_tags?: string[];
+                        /** @description Embeddings of the 10 most recent product images generated with clip-vit-base-patch32 model.
+                         *     Each item of the list is the embedding of a single image, provided as a list of dimension 512.
+                         *     Shape: (num_images, 512)
+                         *      */
+                        image_embeddings?: number[][];
+                        /** @description A list of string corresponding to the text extracted from the product images with OCR.
+                         *     Each element of the list is the text of a single image, the list order doesn't affect predictions.
+                         *     We use OCR text to detect ingredient mentions and use it as a model input.
+                         *     For optimal results, this field should be provided even if `ingredients_tags` is provided.
+                         *      */
+                        ocr?: string[];
+                        /** @description Nutriment values. These fields have exactly the same meaning as those of Product Opener.
+                         *     All fields are optional, only send data for the field for which the value is not missing.
+                         *      */
+                        nutriments?: {
+                            fat_100g?: number;
+                            "saturated-fat_100g"?: number;
+                            carbohydrates_100g?: number;
+                            sugars_100g?: number;
+                            fiber_100g?: number;
+                            proteins_100g?: number;
+                            salt_100g?: number;
+                            "energy-kcal_100g"?: number;
+                            "fruits-vegetables-nuts_100g"?: number;
+                        };
+                    };
+                    /** @description If true, only return the deepest elements in the category taxonomy
+                     *     (don't return categories that are parents of other predicted categories)
+                     *      */
+                    deepest_only?: boolean;
+                    /**
+                     * @description The score above which we consider the category to be detected
+                     *
+                     * @default 0.5
+                     */
+                    threshold?: number;
+                };
+            };
+        };
+        responses: {
+            /** @description the category predictions */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        neural?: {
+                            /**
+                             * @description The predicted `value_tag`
+                             * @example en:roast-chicken
+                             */
+                            value_tag: string;
+                            /**
+                             * @description The confidence score of the model
+                             * @example 0.6
+                             */
+                            confidence: number;
+                        }[];
+                    };
+                };
+            };
+        };
+    };
+    extractNutrition: {
+        parameters: {
+            query?: {
+                /** @description The URL of the input image */
+                image_url?: components["parameters"]["image_url"];
+                /** @description The URL of the OCR JSON to use. The OCR must have been extracted using Google Cloud Vision, and be in the JSON format. */
+                ocr_url?: components["parameters"]["ocr_url"];
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description the extracted nutritional information */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        predictions?: {
+                            /** @description a dictionary mapping nutrient keys in Open Food Facts format (ex: `fat_100g`) to a dictionary
+                             *     containing the detected nutrient value.
+                             *      */
+                            nutrients?: Record<string, never>;
+                            entities?: {
+                                aggregated?: Record<string, never>[];
+                                postprocessed?: Record<string, never>[];
+                                raw?: Record<string, never>[];
+                            };
+                        }[];
+                    };
+                };
+            };
+            /** @description An HTTP 400 is returned if the provided parameters are invalid */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    generateOCRPredictions: {
+        parameters: {
+            query: {
+                /** @description The URL of the OCR JSON to use for extraction */
+                ocr_url: string;
+                /** @description The server type (=project) to use, such as 'off' (Open Food Facts), 'obf' (Open Beauty Facts),... */
+                server_type?: components["parameters"]["server_type"];
+                /** @description a comma-separated list of prediction types to use for extraction. If not provided, we use the default:
+                 *     set of OCR prediction types (see `DEFAULT_OCR_PREDICTION_TYPES` variable in Robotoff codebase)
+                 *      */
+                prediction_types?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description the extracted predictions */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @description a list of extracted predictions */
+                        predictions: components["schemas"]["Prediction"][];
+                    };
+                };
+            };
+            /** @description An HTTP 400 is returned if the provided parameters are invalid */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    predictLanguage: {
+        parameters: {
+            query: {
+                /** @description The text to predict language of */
+                text: string;
+                /** @description the number of predictions to return
+                 *      */
+                k?: number;
+                /** @description the minimum probability for a language to be returned
+                 *      */
+                threshold?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description the predicted languages */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @description a list of predicted languages, sorted by descending probability */
+                        predictions?: {
+                            /**
+                             * @description the predicted language (2-letter code)
+                             * @example en
+                             */
+                            lang?: string;
+                            /**
+                             * @description the probability of the predicted language
+                             * @example 0.9
+                             */
+                            confidence?: number;
+                        }[];
+                    };
+                };
+            };
+            /** @description An HTTP 400 is returned if the provided parameters are invalid */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    predictLanguagePost: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /**
+                     * @description The text to predict language of
+                     * @example hello world
+                     */
+                    text: string;
+                    /**
+                     * @description The number of predictions to return
+                     * @default 10
+                     */
+                    k?: number;
+                    /**
+                     * @description The minimum probability for a language to be returned
+                     * @default 0.01
+                     */
+                    threshold?: number;
+                };
+            };
+        };
+        responses: {
+            /** @description the predicted languages */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @description a list of predicted languages, sorted by descending probability */
+                        predictions?: {
+                            /**
+                             * @description the predicted language (2-letter code)
+                             * @example en
+                             */
+                            lang?: string;
+                            /**
+                             * @description the probability of the predicted language
+                             * @example 0.9
+                             */
+                            confidence?: number;
+                        }[];
+                    };
+                };
+            };
+            /** @description An HTTP 400 is returned if the provided parameters are invalid */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    predictProductLanguages: {
+        parameters: {
+            query: {
+                /** @description The barcode of the product */
+                barcode: components["parameters"]["barcode"];
+                /** @description The server type (=project) to use, such as 'off' (Open Food Facts), 'obf' (Open Beauty Facts),... */
+                server_type?: components["parameters"]["server_type"];
+                /** @description Number of language predictions to return */
+                k?: number;
+                /** @description the minimum probability for a language to be returned
+                 *      */
+                threshold?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description The predicted languages, sorted by descending probability.
+             *      */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @description the number of words detected for each language, over all images,
+                         *     sorted by descending count
+                         *      */
+                        counts?: {
+                            /**
+                             * @description the predicted language (2-letter code). `null` if the language could not be detected.
+                             * @example en
+                             */
+                            lang?: string;
+                            /**
+                             * @description the number of words for which this language was detected over all images
+                             * @example 10
+                             */
+                            count?: number;
+                        }[];
+                        /** @description the percentage of words detected for each language, over all images,
+                         *     sorted by descending percentage
+                         *      */
+                        percent?: {
+                            /**
+                             * @description the predicted language (2-letter code). `null` if the language could not be detected.
+                             * @example en
+                             */
+                            lang?: string;
+                            /**
+                             * @description the percentage of words for which the language was detected over all images
+                             * @example 80.5
+                             */
+                            percent?: number;
+                        }[];
+                        /** @description the IDs of the images that were used to generate the predictions
+                         *      */
+                        image_ids?: number[];
+                    };
+                };
+            };
+            /** @description An HTTP 400 is returned if the provided parameters are invalid */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    importBatchJobResults: {
+        parameters: {
+            query: {
+                /** @description The type of batch job launched. */
+                job_type: components["parameters"]["job_type"];
+                /** @description The directory path where batch job results are stored */
+                batch_dir: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Data successfully imported. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @description Request successful. Importing processed data. */
+                        status?: string;
+                    };
+                };
+            };
+            /** @description An HTTP 400 is returned if the authentification key is invalid or if the job_type is not supported. */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+}

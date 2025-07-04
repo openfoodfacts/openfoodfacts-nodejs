@@ -66,8 +66,8 @@ export class Robotoff {
   }
 
   async insightDetail(id: string) {
-    const result = await this.raw.GET("/insights/detail/{id}", {
-      params: { path: { id } },
+    const result = await this.raw.GET("/insights/detail/{insight_id}", {
+      params: { path: { insight_id: id } },
     });
     return result.data;
   }

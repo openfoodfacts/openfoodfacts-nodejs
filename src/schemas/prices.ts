@@ -3,1110 +3,3752 @@
  * Do not make direct changes to the file.
  */
 
-
 export interface paths {
-  "/api/v1/status": {
-    /** Status Endpoint */
-    get: operations["status_endpoint_api_v1_status_get"];
-  };
-  "/api/v1/auth": {
-    /**
-     * Authentication
-     * @description Authentication: provide username/password and get a bearer token in return.
-     *
-     * - **username**: Open Food Facts user_id (not email)
-     * - **password**: user password (clear text, but HTTPS encrypted)
-     *
-     * A **token** is returned. If the **set_cookie** parameter is set to 1,
-     * the token is also set as a cookie named "session" in the response.
-     *
-     * To authenticate, you can either:
-     * - use the **Authorization** header with the **Bearer** scheme,
-     *   e.g.: "Authorization: bearer token"
-     * - use the **session** cookie, e.g.: "Cookie: session=token"
-     */
-    post: operations["authentication_api_v1_auth_post"];
-  };
-  "/api/v1/session": {
-    /**
-     * Get User Session
-     * @description Return information about the current user session.
-     */
-    get: operations["get_user_session_api_v1_session_get"];
-  };
-  "/api/v1/users": {
-    /** Get Users */
-    get: operations["get_users_api_v1_users_get"];
-  };
-  "/api/v1/prices": {
-    /** Get Price */
-    get: operations["get_price_api_v1_prices_get"];
-    /**
-     * Create Price
-     * @description Create a new price.
-     *
-     * This endpoint requires authentication.
-     */
-    post: operations["create_price_api_v1_prices_post"];
-  };
-  "/api/v1/proofs/upload": {
-    /**
-     * Upload Proof
-     * @description Upload a proof file.
-     *
-     * The POST request must be a multipart/form-data request with a file field
-     * named "file".
-     *
-     * This endpoint requires authentication.
-     */
-    post: operations["upload_proof_api_v1_proofs_upload_post"];
-  };
-  "/api/v1/proofs": {
-    /**
-     * Get User Proofs
-     * @description Get all the proofs uploaded by the current user.
-     *
-     * This endpoint requires authentication.
-     */
-    get: operations["get_user_proofs_api_v1_proofs_get"];
-  };
-  "/api/v1/products": {
-    /** Get Products */
-    get: operations["get_products_api_v1_products_get"];
-  };
-  "/api/v1/products/code/{product_code}": {
-    /** Get Product By Code */
-    get: operations["get_product_by_code_api_v1_products_code__product_code__get"];
-  };
-  "/api/v1/products/{product_id}": {
-    /** Get Product By Id */
-    get: operations["get_product_by_id_api_v1_products__product_id__get"];
-  };
-  "/api/v1/locations": {
-    /** Get Locations */
-    get: operations["get_locations_api_v1_locations_get"];
-  };
-  "/api/v1/locations/osm/{location_osm_type}/{location_osm_id}": {
-    /** Get Location By Osm */
-    get: operations["get_location_by_osm_api_v1_locations_osm__location_osm_type___location_osm_id__get"];
-  };
-  "/api/v1/locations/{location_id}": {
-    /** Get Location By Id */
-    get: operations["get_location_by_id_api_v1_locations__location_id__get"];
-  };
+    "/api/schema": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description OpenApi3 schema for this API. Format can be selected via content negotiation.
+         *
+         *     - YAML: application/vnd.oai.openapi
+         *     - JSON: application/vnd.oai.openapi+json */
+        get: operations["api_schema_retrieve"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/auth": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** @description Authentication: provide username/password
+         *     and get a bearer token in return.
+         *
+         *     - **username**: Open Food Facts user_id (not email)
+         *     - **password**: user password (clear text, but HTTPS encrypted)
+         *
+         *     A **token** is returned. If the **set_cookie** parameter is set to 1,
+         *     the token is also set as a cookie named "session" in the response.
+         *
+         *     To authenticate, you can either:
+         *     - use the **Authorization** header with the **Bearer** scheme,
+         *     e.g.: "Authorization: bearer token"
+         *     - use the **session** cookie, e.g.: "Cookie: session=token" */
+        post: operations["auth_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/challenges": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["challenges_list"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/challenges/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["challenges_retrieve"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/locations": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["locations_list"];
+        put?: never;
+        post: operations["locations_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/locations/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["locations_retrieve"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/locations/osm/{osm_type}/{osm_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["locations_osm_retrieve"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/price-tags": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["price_tags_list"];
+        put?: never;
+        post: operations["price_tags_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/price-tags/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["price_tags_retrieve"];
+        put?: never;
+        post?: never;
+        delete: operations["price_tags_destroy"];
+        options?: never;
+        head?: never;
+        patch: operations["price_tags_partial_update"];
+        trace?: never;
+    };
+    "/api/v1/prices": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["prices_list"];
+        put?: never;
+        post: operations["prices_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/prices/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["prices_retrieve"];
+        put?: never;
+        post?: never;
+        delete: operations["prices_destroy"];
+        options?: never;
+        head?: never;
+        patch: operations["prices_partial_update"];
+        trace?: never;
+    };
+    "/api/v1/prices/stats": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["prices_stats_retrieve"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/products": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["products_list"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/products/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["products_retrieve"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/products/code/{code}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["products_code_retrieve"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/proofs": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["proofs_list"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/proofs/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["proofs_retrieve"];
+        put?: never;
+        post?: never;
+        delete: operations["proofs_destroy"];
+        options?: never;
+        head?: never;
+        patch: operations["proofs_partial_update"];
+        trace?: never;
+    };
+    "/api/v1/proofs/process-with-gemini": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["proofs_process_with_gemini_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/proofs/upload": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["proofs_upload_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/receipt-items": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["receipt_items_list"];
+        put?: never;
+        post: operations["receipt_items_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/receipt-items/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["receipt_items_retrieve"];
+        put?: never;
+        post?: never;
+        delete: operations["receipt_items_destroy"];
+        options?: never;
+        head?: never;
+        patch: operations["receipt_items_partial_update"];
+        trace?: never;
+    };
+    "/api/v1/session": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["session_retrieve"];
+        put?: never;
+        post?: never;
+        delete: operations["session_destroy"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/stats": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["stats_retrieve"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["status_retrieve"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/users": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["users_list"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/users/{user_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["users_retrieve"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
-
 export type webhooks = Record<string, never>;
-
 export interface components {
-  schemas: {
-    /** Body_authentication_api_v1_auth_post */
-    Body_authentication_api_v1_auth_post: {
-      /** Grant Type */
-      grant_type?: string | null;
-      /** Username */
-      username: string;
-      /** Password */
-      password: string;
-      /**
-       * Scope
-       * @default
-       */
-      scope?: string;
-      /** Client Id */
-      client_id?: string | null;
-      /** Client Secret */
-      client_secret?: string | null;
+    schemas: {
+        /** @enum {unknown} */
+        BlankEnum: "";
+        Challenge: {
+            readonly id: number;
+            readonly status: string;
+            readonly tag: string;
+            title?: string | null;
+            icon?: string | null;
+            subtitle?: string | null;
+            /** Format: date */
+            start_date?: string | null;
+            /** Format: date */
+            end_date?: string | null;
+            categories?: string[];
+            example_proof_url?: string | null;
+            is_published?: boolean;
+            /** Format: date-time */
+            created?: string;
+            /** Format: date-time */
+            readonly updated: string;
+        };
+        /**
+         * @description * `ADP` - ADP
+         *     * `AED` - AED
+         *     * `AFA` - AFA
+         *     * `AFN` - AFN
+         *     * `ALK` - ALK
+         *     * `ALL` - ALL
+         *     * `AMD` - AMD
+         *     * `ANG` - ANG
+         *     * `AOA` - AOA
+         *     * `AOK` - AOK
+         *     * `AON` - AON
+         *     * `AOR` - AOR
+         *     * `ARA` - ARA
+         *     * `ARL` - ARL
+         *     * `ARM` - ARM
+         *     * `ARP` - ARP
+         *     * `ARS` - ARS
+         *     * `ATS` - ATS
+         *     * `AUD` - AUD
+         *     * `AWG` - AWG
+         *     * `AZM` - AZM
+         *     * `AZN` - AZN
+         *     * `BAD` - BAD
+         *     * `BAM` - BAM
+         *     * `BAN` - BAN
+         *     * `BBD` - BBD
+         *     * `BDT` - BDT
+         *     * `BEC` - BEC
+         *     * `BEF` - BEF
+         *     * `BEL` - BEL
+         *     * `BGL` - BGL
+         *     * `BGM` - BGM
+         *     * `BGN` - BGN
+         *     * `BGO` - BGO
+         *     * `BHD` - BHD
+         *     * `BIF` - BIF
+         *     * `BMD` - BMD
+         *     * `BND` - BND
+         *     * `BOB` - BOB
+         *     * `BOL` - BOL
+         *     * `BOP` - BOP
+         *     * `BOV` - BOV
+         *     * `BRB` - BRB
+         *     * `BRC` - BRC
+         *     * `BRE` - BRE
+         *     * `BRL` - BRL
+         *     * `BRN` - BRN
+         *     * `BRR` - BRR
+         *     * `BRZ` - BRZ
+         *     * `BSD` - BSD
+         *     * `BTN` - BTN
+         *     * `BUK` - BUK
+         *     * `BWP` - BWP
+         *     * `BYB` - BYB
+         *     * `BYN` - BYN
+         *     * `BYR` - BYR
+         *     * `BZD` - BZD
+         *     * `CAD` - CAD
+         *     * `CDF` - CDF
+         *     * `CHE` - CHE
+         *     * `CHF` - CHF
+         *     * `CHW` - CHW
+         *     * `CLE` - CLE
+         *     * `CLF` - CLF
+         *     * `CLP` - CLP
+         *     * `CNH` - CNH
+         *     * `CNX` - CNX
+         *     * `CNY` - CNY
+         *     * `COP` - COP
+         *     * `COU` - COU
+         *     * `CRC` - CRC
+         *     * `CSD` - CSD
+         *     * `CSK` - CSK
+         *     * `CUC` - CUC
+         *     * `CUP` - CUP
+         *     * `CVE` - CVE
+         *     * `CYP` - CYP
+         *     * `CZK` - CZK
+         *     * `DDM` - DDM
+         *     * `DEM` - DEM
+         *     * `DJF` - DJF
+         *     * `DKK` - DKK
+         *     * `DOP` - DOP
+         *     * `DZD` - DZD
+         *     * `ECS` - ECS
+         *     * `ECV` - ECV
+         *     * `EEK` - EEK
+         *     * `EGP` - EGP
+         *     * `ERN` - ERN
+         *     * `ESA` - ESA
+         *     * `ESB` - ESB
+         *     * `ESP` - ESP
+         *     * `ETB` - ETB
+         *     * `EUR` - EUR
+         *     * `FIM` - FIM
+         *     * `FJD` - FJD
+         *     * `FKP` - FKP
+         *     * `FRF` - FRF
+         *     * `GBP` - GBP
+         *     * `GEK` - GEK
+         *     * `GEL` - GEL
+         *     * `GHC` - GHC
+         *     * `GHS` - GHS
+         *     * `GIP` - GIP
+         *     * `GMD` - GMD
+         *     * `GNF` - GNF
+         *     * `GNS` - GNS
+         *     * `GQE` - GQE
+         *     * `GRD` - GRD
+         *     * `GTQ` - GTQ
+         *     * `GWE` - GWE
+         *     * `GWP` - GWP
+         *     * `GYD` - GYD
+         *     * `HKD` - HKD
+         *     * `HNL` - HNL
+         *     * `HRD` - HRD
+         *     * `HRK` - HRK
+         *     * `HTG` - HTG
+         *     * `HUF` - HUF
+         *     * `IDR` - IDR
+         *     * `IEP` - IEP
+         *     * `ILP` - ILP
+         *     * `ILR` - ILR
+         *     * `ILS` - ILS
+         *     * `INR` - INR
+         *     * `IQD` - IQD
+         *     * `IRR` - IRR
+         *     * `ISJ` - ISJ
+         *     * `ISK` - ISK
+         *     * `ITL` - ITL
+         *     * `JMD` - JMD
+         *     * `JOD` - JOD
+         *     * `JPY` - JPY
+         *     * `KES` - KES
+         *     * `KGS` - KGS
+         *     * `KHR` - KHR
+         *     * `KMF` - KMF
+         *     * `KPW` - KPW
+         *     * `KRH` - KRH
+         *     * `KRO` - KRO
+         *     * `KRW` - KRW
+         *     * `KWD` - KWD
+         *     * `KYD` - KYD
+         *     * `KZT` - KZT
+         *     * `LAK` - LAK
+         *     * `LBP` - LBP
+         *     * `LKR` - LKR
+         *     * `LRD` - LRD
+         *     * `LSL` - LSL
+         *     * `LTL` - LTL
+         *     * `LTT` - LTT
+         *     * `LUC` - LUC
+         *     * `LUF` - LUF
+         *     * `LUL` - LUL
+         *     * `LVL` - LVL
+         *     * `LVR` - LVR
+         *     * `LYD` - LYD
+         *     * `MAD` - MAD
+         *     * `MAF` - MAF
+         *     * `MCF` - MCF
+         *     * `MDC` - MDC
+         *     * `MDL` - MDL
+         *     * `MGA` - MGA
+         *     * `MGF` - MGF
+         *     * `MKD` - MKD
+         *     * `MKN` - MKN
+         *     * `MLF` - MLF
+         *     * `MMK` - MMK
+         *     * `MNT` - MNT
+         *     * `MOP` - MOP
+         *     * `MRO` - MRO
+         *     * `MRU` - MRU
+         *     * `MTL` - MTL
+         *     * `MTP` - MTP
+         *     * `MUR` - MUR
+         *     * `MVP` - MVP
+         *     * `MVR` - MVR
+         *     * `MWK` - MWK
+         *     * `MXN` - MXN
+         *     * `MXP` - MXP
+         *     * `MXV` - MXV
+         *     * `MYR` - MYR
+         *     * `MZE` - MZE
+         *     * `MZM` - MZM
+         *     * `MZN` - MZN
+         *     * `NAD` - NAD
+         *     * `NGN` - NGN
+         *     * `NIC` - NIC
+         *     * `NIO` - NIO
+         *     * `NLG` - NLG
+         *     * `NOK` - NOK
+         *     * `NPR` - NPR
+         *     * `NZD` - NZD
+         *     * `OMR` - OMR
+         *     * `PAB` - PAB
+         *     * `PEI` - PEI
+         *     * `PEN` - PEN
+         *     * `PES` - PES
+         *     * `PGK` - PGK
+         *     * `PHP` - PHP
+         *     * `PKR` - PKR
+         *     * `PLN` - PLN
+         *     * `PLZ` - PLZ
+         *     * `PTE` - PTE
+         *     * `PYG` - PYG
+         *     * `QAR` - QAR
+         *     * `RHD` - RHD
+         *     * `ROL` - ROL
+         *     * `RON` - RON
+         *     * `RSD` - RSD
+         *     * `RUB` - RUB
+         *     * `RUR` - RUR
+         *     * `RWF` - RWF
+         *     * `SAR` - SAR
+         *     * `SBD` - SBD
+         *     * `SCR` - SCR
+         *     * `SDD` - SDD
+         *     * `SDG` - SDG
+         *     * `SDP` - SDP
+         *     * `SEK` - SEK
+         *     * `SGD` - SGD
+         *     * `SHP` - SHP
+         *     * `SIT` - SIT
+         *     * `SKK` - SKK
+         *     * `SLE` - SLE
+         *     * `SLL` - SLL
+         *     * `SOS` - SOS
+         *     * `SRD` - SRD
+         *     * `SRG` - SRG
+         *     * `SSP` - SSP
+         *     * `STD` - STD
+         *     * `STN` - STN
+         *     * `SUR` - SUR
+         *     * `SVC` - SVC
+         *     * `SYP` - SYP
+         *     * `SZL` - SZL
+         *     * `THB` - THB
+         *     * `TJR` - TJR
+         *     * `TJS` - TJS
+         *     * `TMM` - TMM
+         *     * `TMT` - TMT
+         *     * `TND` - TND
+         *     * `TOP` - TOP
+         *     * `TPE` - TPE
+         *     * `TRL` - TRL
+         *     * `TRY` - TRY
+         *     * `TTD` - TTD
+         *     * `TWD` - TWD
+         *     * `TZS` - TZS
+         *     * `UAH` - UAH
+         *     * `UAK` - UAK
+         *     * `UGS` - UGS
+         *     * `UGX` - UGX
+         *     * `USD` - USD
+         *     * `USN` - USN
+         *     * `USS` - USS
+         *     * `UYI` - UYI
+         *     * `UYP` - UYP
+         *     * `UYU` - UYU
+         *     * `UYW` - UYW
+         *     * `UZS` - UZS
+         *     * `VEB` - VEB
+         *     * `VED` - VED
+         *     * `VEF` - VEF
+         *     * `VES` - VES
+         *     * `VND` - VND
+         *     * `VNN` - VNN
+         *     * `VUV` - VUV
+         *     * `WST` - WST
+         *     * `XAF` - XAF
+         *     * `XAG` - XAG
+         *     * `XAU` - XAU
+         *     * `XBA` - XBA
+         *     * `XBB` - XBB
+         *     * `XBC` - XBC
+         *     * `XBD` - XBD
+         *     * `XCD` - XCD
+         *     * `XDR` - XDR
+         *     * `XEU` - XEU
+         *     * `XFO` - XFO
+         *     * `XFU` - XFU
+         *     * `XOF` - XOF
+         *     * `XPD` - XPD
+         *     * `XPF` - XPF
+         *     * `XPT` - XPT
+         *     * `XRE` - XRE
+         *     * `XSU` - XSU
+         *     * `XTS` - XTS
+         *     * `XUA` - XUA
+         *     * `XXX` - XXX
+         *     * `YDD` - YDD
+         *     * `YER` - YER
+         *     * `YUD` - YUD
+         *     * `YUM` - YUM
+         *     * `YUN` - YUN
+         *     * `YUR` - YUR
+         *     * `ZAL` - ZAL
+         *     * `ZAR` - ZAR
+         *     * `ZMK` - ZMK
+         *     * `ZMW` - ZMW
+         *     * `ZRN` - ZRN
+         *     * `ZRZ` - ZRZ
+         *     * `ZWD` - ZWD
+         *     * `ZWL` - ZWL
+         *     * `ZWR` - ZWR
+         * @enum {string}
+         */
+        CurrencyEnum: "ADP" | "AED" | "AFA" | "AFN" | "ALK" | "ALL" | "AMD" | "ANG" | "AOA" | "AOK" | "AON" | "AOR" | "ARA" | "ARL" | "ARM" | "ARP" | "ARS" | "ATS" | "AUD" | "AWG" | "AZM" | "AZN" | "BAD" | "BAM" | "BAN" | "BBD" | "BDT" | "BEC" | "BEF" | "BEL" | "BGL" | "BGM" | "BGN" | "BGO" | "BHD" | "BIF" | "BMD" | "BND" | "BOB" | "BOL" | "BOP" | "BOV" | "BRB" | "BRC" | "BRE" | "BRL" | "BRN" | "BRR" | "BRZ" | "BSD" | "BTN" | "BUK" | "BWP" | "BYB" | "BYN" | "BYR" | "BZD" | "CAD" | "CDF" | "CHE" | "CHF" | "CHW" | "CLE" | "CLF" | "CLP" | "CNH" | "CNX" | "CNY" | "COP" | "COU" | "CRC" | "CSD" | "CSK" | "CUC" | "CUP" | "CVE" | "CYP" | "CZK" | "DDM" | "DEM" | "DJF" | "DKK" | "DOP" | "DZD" | "ECS" | "ECV" | "EEK" | "EGP" | "ERN" | "ESA" | "ESB" | "ESP" | "ETB" | "EUR" | "FIM" | "FJD" | "FKP" | "FRF" | "GBP" | "GEK" | "GEL" | "GHC" | "GHS" | "GIP" | "GMD" | "GNF" | "GNS" | "GQE" | "GRD" | "GTQ" | "GWE" | "GWP" | "GYD" | "HKD" | "HNL" | "HRD" | "HRK" | "HTG" | "HUF" | "IDR" | "IEP" | "ILP" | "ILR" | "ILS" | "INR" | "IQD" | "IRR" | "ISJ" | "ISK" | "ITL" | "JMD" | "JOD" | "JPY" | "KES" | "KGS" | "KHR" | "KMF" | "KPW" | "KRH" | "KRO" | "KRW" | "KWD" | "KYD" | "KZT" | "LAK" | "LBP" | "LKR" | "LRD" | "LSL" | "LTL" | "LTT" | "LUC" | "LUF" | "LUL" | "LVL" | "LVR" | "LYD" | "MAD" | "MAF" | "MCF" | "MDC" | "MDL" | "MGA" | "MGF" | "MKD" | "MKN" | "MLF" | "MMK" | "MNT" | "MOP" | "MRO" | "MRU" | "MTL" | "MTP" | "MUR" | "MVP" | "MVR" | "MWK" | "MXN" | "MXP" | "MXV" | "MYR" | "MZE" | "MZM" | "MZN" | "NAD" | "NGN" | "NIC" | "NIO" | "NLG" | "NOK" | "NPR" | "NZD" | "OMR" | "PAB" | "PEI" | "PEN" | "PES" | "PGK" | "PHP" | "PKR" | "PLN" | "PLZ" | "PTE" | "PYG" | "QAR" | "RHD" | "ROL" | "RON" | "RSD" | "RUB" | "RUR" | "RWF" | "SAR" | "SBD" | "SCR" | "SDD" | "SDG" | "SDP" | "SEK" | "SGD" | "SHP" | "SIT" | "SKK" | "SLE" | "SLL" | "SOS" | "SRD" | "SRG" | "SSP" | "STD" | "STN" | "SUR" | "SVC" | "SYP" | "SZL" | "THB" | "TJR" | "TJS" | "TMM" | "TMT" | "TND" | "TOP" | "TPE" | "TRL" | "TRY" | "TTD" | "TWD" | "TZS" | "UAH" | "UAK" | "UGS" | "UGX" | "USD" | "USN" | "USS" | "UYI" | "UYP" | "UYU" | "UYW" | "UZS" | "VEB" | "VED" | "VEF" | "VES" | "VND" | "VNN" | "VUV" | "WST" | "XAF" | "XAG" | "XAU" | "XBA" | "XBB" | "XBC" | "XBD" | "XCD" | "XDR" | "XEU" | "XFO" | "XFU" | "XOF" | "XPD" | "XPF" | "XPT" | "XRE" | "XSU" | "XTS" | "XUA" | "XXX" | "YDD" | "YER" | "YUD" | "YUM" | "YUN" | "YUR" | "ZAL" | "ZAR" | "ZMK" | "ZMW" | "ZRN" | "ZRZ" | "ZWD" | "ZWL" | "ZWR";
+        /**
+         * @description * `QUANTITY` - QUANTITY
+         *     * `SALE` - SALE
+         *     * `SEASONAL` - SEASONAL
+         *     * `LOYALTY_PROGRAM` - LOYALTY_PROGRAM
+         *     * `EXPIRES_SOON` - EXPIRES_SOON
+         *     * `PICK_IT_YOURSELF` - PICK_IT_YOURSELF
+         *     * `SECOND_HAND` - SECOND_HAND
+         *     * `OTHER` - OTHER
+         * @enum {string}
+         */
+        DiscountTypeEnum: "QUANTITY" | "SALE" | "SEASONAL" | "LOYALTY_PROGRAM" | "EXPIRES_SOON" | "PICK_IT_YOURSELF" | "SECOND_HAND" | "OTHER";
+        Location: {
+            readonly id: number;
+            type: components["schemas"]["TypeA9eEnum"];
+            /** Format: int64 */
+            osm_id: number | null;
+            osm_type: (components["schemas"]["LocationOsmTypeEnum"] | components["schemas"]["BlankEnum"] | components["schemas"]["NullEnum"]) | null;
+            osm_name?: string | null;
+            osm_display_name?: string | null;
+            osm_tag_key?: string | null;
+            osm_tag_value?: string | null;
+            osm_brand?: string | null;
+            osm_address_postcode?: string | null;
+            osm_address_city?: string | null;
+            osm_address_country?: string | null;
+            osm_address_country_code?: string | null;
+            /** Format: double */
+            osm_lat?: number | null;
+            /** Format: double */
+            osm_lon?: number | null;
+            osm_version?: number | null;
+            /** Format: uri */
+            website_url?: string | null;
+            price_count?: number | null;
+            user_count?: number | null;
+            product_count?: number | null;
+            proof_count?: number | null;
+            source?: string | null;
+            /** Format: date-time */
+            created?: string;
+            /** Format: date-time */
+            readonly updated: string;
+        };
+        LocationCreate: {
+            type: components["schemas"]["TypeA9eEnum"];
+            /** Format: int64 */
+            osm_id?: number | null;
+            osm_type?: (components["schemas"]["LocationOsmTypeEnum"] | components["schemas"]["BlankEnum"] | components["schemas"]["NullEnum"]) | null;
+            /** Format: uri */
+            website_url?: string | null;
+        };
+        /**
+         * @description * `NODE` - NODE
+         *     * `WAY` - WAY
+         *     * `RELATION` - RELATION
+         * @enum {string}
+         */
+        LocationOsmTypeEnum: "NODE" | "WAY" | "RELATION";
+        Login: {
+            username: string;
+            password: string;
+        };
+        /** @enum {unknown} */
+        NullEnum: null;
+        PaginatedChallengeList: {
+            items: components["schemas"]["Challenge"][][];
+            /**
+             * @description Current page number
+             * @example 1
+             */
+            page: number;
+            /**
+             * @description Total number of pages
+             * @example 16
+             */
+            pages: number;
+            /**
+             * @description Number of items per page
+             * @example 100
+             */
+            size: number;
+            /**
+             * @description Total number of items
+             * @example 1531
+             */
+            total: number;
+        };
+        PaginatedLocationList: {
+            items: components["schemas"]["Location"][][];
+            /**
+             * @description Current page number
+             * @example 1
+             */
+            page: number;
+            /**
+             * @description Total number of pages
+             * @example 16
+             */
+            pages: number;
+            /**
+             * @description Number of items per page
+             * @example 100
+             */
+            size: number;
+            /**
+             * @description Total number of items
+             * @example 1531
+             */
+            total: number;
+        };
+        PaginatedPriceFullList: {
+            items: components["schemas"]["PriceFull"][][];
+            /**
+             * @description Current page number
+             * @example 1
+             */
+            page: number;
+            /**
+             * @description Total number of pages
+             * @example 16
+             */
+            pages: number;
+            /**
+             * @description Number of items per page
+             * @example 100
+             */
+            size: number;
+            /**
+             * @description Total number of items
+             * @example 1531
+             */
+            total: number;
+        };
+        PaginatedPriceTagFullList: {
+            items: components["schemas"]["PriceTagFull"][][];
+            /**
+             * @description Current page number
+             * @example 1
+             */
+            page: number;
+            /**
+             * @description Total number of pages
+             * @example 16
+             */
+            pages: number;
+            /**
+             * @description Number of items per page
+             * @example 100
+             */
+            size: number;
+            /**
+             * @description Total number of items
+             * @example 1531
+             */
+            total: number;
+        };
+        PaginatedProductFullList: {
+            items: components["schemas"]["ProductFull"][][];
+            /**
+             * @description Current page number
+             * @example 1
+             */
+            page: number;
+            /**
+             * @description Total number of pages
+             * @example 16
+             */
+            pages: number;
+            /**
+             * @description Number of items per page
+             * @example 100
+             */
+            size: number;
+            /**
+             * @description Total number of items
+             * @example 1531
+             */
+            total: number;
+        };
+        PaginatedProofHalfFullList: {
+            items: components["schemas"]["ProofHalfFull"][][];
+            /**
+             * @description Current page number
+             * @example 1
+             */
+            page: number;
+            /**
+             * @description Total number of pages
+             * @example 16
+             */
+            pages: number;
+            /**
+             * @description Number of items per page
+             * @example 100
+             */
+            size: number;
+            /**
+             * @description Total number of items
+             * @example 1531
+             */
+            total: number;
+        };
+        PaginatedReceiptItemFullList: {
+            items: components["schemas"]["ReceiptItemFull"][][];
+            /**
+             * @description Current page number
+             * @example 1
+             */
+            page: number;
+            /**
+             * @description Total number of pages
+             * @example 16
+             */
+            pages: number;
+            /**
+             * @description Number of items per page
+             * @example 100
+             */
+            size: number;
+            /**
+             * @description Total number of items
+             * @example 1531
+             */
+            total: number;
+        };
+        PaginatedUserList: {
+            items: components["schemas"]["User"][][];
+            /**
+             * @description Current page number
+             * @example 1
+             */
+            page: number;
+            /**
+             * @description Total number of pages
+             * @example 16
+             */
+            pages: number;
+            /**
+             * @description Number of items per page
+             * @example 100
+             */
+            size: number;
+            /**
+             * @description Total number of items
+             * @example 1531
+             */
+            total: number;
+        };
+        PatchedPriceTagUpdate: {
+            /** @description Coordinates of the bounding box, in the format [y_min, x_min, y_max, x_max] */
+            bounding_box?: number[];
+            /** @description The annotation status
+             *
+             *     * `0` - deleted
+             *     * `1` - linked_to_price
+             *     * `2` - not_readable
+             *     * `3` - truncated
+             *     * `4` - not_price_tag */
+            status?: (components["schemas"]["Status579Enum"] | components["schemas"]["NullEnum"]) | null;
+            price_id?: number;
+        };
+        PatchedPriceUpdate: {
+            category_tag?: string | null;
+            labels_tags?: unknown;
+            origins_tags?: unknown;
+            /** Format: double */
+            price?: number | null;
+            price_is_discounted?: boolean;
+            /** Format: double */
+            price_without_discount?: number | null;
+            discount_type?: (components["schemas"]["DiscountTypeEnum"] | components["schemas"]["BlankEnum"] | components["schemas"]["NullEnum"]) | null;
+            price_per?: (components["schemas"]["PricePerEnum"] | components["schemas"]["BlankEnum"] | components["schemas"]["NullEnum"]) | null;
+            currency?: (components["schemas"]["CurrencyEnum"] | components["schemas"]["BlankEnum"] | components["schemas"]["NullEnum"]) | null;
+            /** Format: date */
+            date?: string | null;
+            /**
+             * Receipt's price quantity (user input)
+             * Format: double
+             */
+            receipt_quantity?: number | null;
+            owner_comment?: string | null;
+        };
+        PatchedProofUpdate: {
+            /** Format: int64 */
+            location_osm_id?: number | null;
+            location_osm_type?: (components["schemas"]["LocationOsmTypeEnum"] | components["schemas"]["BlankEnum"] | components["schemas"]["NullEnum"]) | null;
+            type?: components["schemas"]["TypeEbbEnum"];
+            currency?: (components["schemas"]["CurrencyEnum"] | components["schemas"]["BlankEnum"] | components["schemas"]["NullEnum"]) | null;
+            /** Format: date */
+            date?: string | null;
+            /** Receipt's number of prices (user input) */
+            receipt_price_count?: number | null;
+            /**
+             * Receipt's total amount (user input)
+             * Format: double
+             */
+            receipt_price_total?: number | null;
+            /**
+             * Receipt's online delivery costs (user input)
+             * Format: double
+             */
+            receipt_online_delivery_costs?: number | null;
+            ready_for_price_tag_validation?: boolean;
+            owner_consumption?: boolean | null;
+            owner_comment?: string | null;
+        };
+        PatchedReceiptItemFull: {
+            readonly id?: number;
+            proof_id?: number;
+            price_id?: number;
+            /** @description The order of the item in the receipt. Item on top is 1. */
+            order?: number;
+            /** @description A dict representing the predicted data of the receipt item. For example the product name, the price etc. */
+            predicted_data?: unknown;
+            /** @description The current status of the item
+             *
+             *     * `0` - deleted
+             *     * `1` - linked_to_price */
+            status?: (components["schemas"]["ReceiptItemFullStatusEnum"] | components["schemas"]["BlankEnum"] | components["schemas"]["NullEnum"]) | null;
+            /**
+             * Format: date-time
+             * @description When the item was created in DB
+             */
+            created?: string;
+            /**
+             * Format: date-time
+             * @description When the item was last updated
+             */
+            readonly updated?: string;
+            /** @description The proof prediction used to create this receipt item. Null if created by a user. */
+            proof_prediction?: number | null;
+        };
+        PriceCreate: {
+            category_tag?: string | null;
+            labels_tags?: unknown;
+            origins_tags?: unknown;
+            /** Format: double */
+            price?: number | null;
+            price_is_discounted?: boolean;
+            /** Format: double */
+            price_without_discount?: number | null;
+            discount_type?: (components["schemas"]["DiscountTypeEnum"] | components["schemas"]["BlankEnum"] | components["schemas"]["NullEnum"]) | null;
+            price_per?: (components["schemas"]["PricePerEnum"] | components["schemas"]["BlankEnum"] | components["schemas"]["NullEnum"]) | null;
+            currency?: (components["schemas"]["CurrencyEnum"] | components["schemas"]["BlankEnum"] | components["schemas"]["NullEnum"]) | null;
+            /** Format: date */
+            date?: string | null;
+            /**
+             * Receipt's price quantity (user input)
+             * Format: double
+             */
+            receipt_quantity?: number | null;
+            owner_comment?: string | null;
+            type?: components["schemas"]["TypeF36Enum"];
+            product_code?: string | null;
+            product_name?: string | null;
+            /** Format: int64 */
+            location_osm_id?: number | null;
+            location_osm_type?: (components["schemas"]["LocationOsmTypeEnum"] | components["schemas"]["BlankEnum"] | components["schemas"]["NullEnum"]) | null;
+            location_id?: number;
+            proof_id: number;
+        };
+        PriceFull: {
+            readonly id: number;
+            product_id: number;
+            location_id: number;
+            proof_id: number;
+            product: components["schemas"]["ProductFull"];
+            location: components["schemas"]["Location"];
+            proof: components["schemas"]["Proof"];
+            type: components["schemas"]["TypeF36Enum"];
+            product_code?: string | null;
+            product_name?: string | null;
+            category_tag?: string | null;
+            labels_tags?: unknown;
+            origins_tags?: unknown;
+            /** Format: double */
+            price?: number | null;
+            price_is_discounted?: boolean;
+            /** Format: double */
+            price_without_discount?: number | null;
+            discount_type?: (components["schemas"]["DiscountTypeEnum"] | components["schemas"]["BlankEnum"] | components["schemas"]["NullEnum"]) | null;
+            price_per?: (components["schemas"]["PricePerEnum"] | components["schemas"]["BlankEnum"] | components["schemas"]["NullEnum"]) | null;
+            currency?: (components["schemas"]["CurrencyEnum"] | components["schemas"]["BlankEnum"] | components["schemas"]["NullEnum"]) | null;
+            /** Format: int64 */
+            location_osm_id?: number | null;
+            location_osm_type?: (components["schemas"]["LocationOsmTypeEnum"] | components["schemas"]["BlankEnum"] | components["schemas"]["NullEnum"]) | null;
+            /** Format: date */
+            date?: string | null;
+            /**
+             * Receipt's price quantity (user input)
+             * Format: double
+             */
+            receipt_quantity?: number | null;
+            owner_comment?: string | null;
+            owner?: string | null;
+            source?: string | null;
+            tags?: string[];
+            /** Format: date-time */
+            created?: string;
+            /** Format: date-time */
+            readonly updated: string;
+        };
+        /**
+         * @description * `UNIT` - UNIT
+         *     * `KILOGRAM` - KILOGRAM
+         * @enum {string}
+         */
+        PricePerEnum: "UNIT" | "KILOGRAM";
+        PriceStats: {
+            price__count: number;
+            /** Format: double */
+            price__min: number;
+            /** Format: double */
+            price__max: number;
+            /** Format: double */
+            price__avg: number;
+        };
+        PriceTagCreate: {
+            /** @description Coordinates of the bounding box, in the format [y_min, x_min, y_max, x_max] */
+            bounding_box: number[];
+            /** @description The annotation status
+             *
+             *     * `0` - deleted
+             *     * `1` - linked_to_price
+             *     * `2` - not_readable
+             *     * `3` - truncated
+             *     * `4` - not_price_tag */
+            status?: (components["schemas"]["Status579Enum"] | components["schemas"]["NullEnum"]) | null;
+            price_id?: number;
+            proof_id: number;
+        };
+        PriceTagFull: {
+            readonly id: number;
+            /** @description The price linked to this tag */
+            readonly price_id: number | null;
+            readonly predictions: components["schemas"]["PriceTagPrediction"][];
+            proof: components["schemas"]["ProofHalfFull"];
+            /** @description Coordinates of the bounding box, in the format [y_min, x_min, y_max, x_max] */
+            bounding_box: number[];
+            /** @description The annotation status
+             *
+             *     * `0` - deleted
+             *     * `1` - linked_to_price
+             *     * `2` - not_readable
+             *     * `3` - truncated
+             *     * `4` - not_price_tag */
+            status?: (components["schemas"]["Status579Enum"] | components["schemas"]["NullEnum"]) | null;
+            prediction_count?: number | null;
+            /** @description The name of the user who created this price tag. This field is null if the tag was created by a model. */
+            created_by?: string | null;
+            /** @description The name of the user who last updated this price tag bounding boxes. If the price tag bounding boxes were never updated, this field is null. */
+            updated_by?: string | null;
+            tags?: string[];
+            /**
+             * Format: date-time
+             * @description When the tag was created in DB
+             */
+            created?: string;
+            /**
+             * Format: date-time
+             * @description When the tag was last updated
+             */
+            readonly updated: string;
+            /** @description The proof prediction used to create this price tag. Null if created by a user. */
+            proof_prediction?: number | null;
+        };
+        PriceTagPrediction: {
+            /** @description The type of the prediction
+             *
+             *     * `PRICE_TAG_EXTRACTION` - PRICE_TAG_EXTRACTION */
+            type: components["schemas"]["PriceTagPredictionTypeEnum"];
+            /** @description The name of the model that generated the prediction */
+            model_name: string;
+            /** @description The specific version of the model that generated the prediction */
+            model_version: string;
+            /** @description a dict representing the data of the prediction. This field is model-specific. */
+            data?: unknown;
+            /**
+             * Format: date-time
+             * @description When the prediction was created in DB
+             */
+            created?: string;
+        };
+        /**
+         * @description * `PRICE_TAG_EXTRACTION` - PRICE_TAG_EXTRACTION
+         * @enum {string}
+         */
+        PriceTagPredictionTypeEnum: "PRICE_TAG_EXTRACTION";
+        PriceTagUpdate: {
+            /** @description Coordinates of the bounding box, in the format [y_min, x_min, y_max, x_max] */
+            bounding_box: number[];
+            /** @description The annotation status
+             *
+             *     * `0` - deleted
+             *     * `1` - linked_to_price
+             *     * `2` - not_readable
+             *     * `3` - truncated
+             *     * `4` - not_price_tag */
+            status?: (components["schemas"]["Status579Enum"] | components["schemas"]["NullEnum"]) | null;
+            price_id: number;
+        };
+        PriceUpdate: {
+            category_tag?: string | null;
+            labels_tags?: unknown;
+            origins_tags?: unknown;
+            /** Format: double */
+            price?: number | null;
+            price_is_discounted?: boolean;
+            /** Format: double */
+            price_without_discount?: number | null;
+            discount_type?: (components["schemas"]["DiscountTypeEnum"] | components["schemas"]["BlankEnum"] | components["schemas"]["NullEnum"]) | null;
+            price_per?: (components["schemas"]["PricePerEnum"] | components["schemas"]["BlankEnum"] | components["schemas"]["NullEnum"]) | null;
+            currency?: (components["schemas"]["CurrencyEnum"] | components["schemas"]["BlankEnum"] | components["schemas"]["NullEnum"]) | null;
+            /** Format: date */
+            date?: string | null;
+            /**
+             * Receipt's price quantity (user input)
+             * Format: double
+             */
+            receipt_quantity?: number | null;
+            owner_comment?: string | null;
+        };
+        ProductFull: {
+            readonly id: number;
+            code: string;
+            source?: (components["schemas"]["SourceEnum"] | components["schemas"]["BlankEnum"] | components["schemas"]["NullEnum"]) | null;
+            /** Format: date-time */
+            source_last_synced?: string | null;
+            product_name?: string | null;
+            image_url?: string | null;
+            product_quantity?: number | null;
+            product_quantity_unit?: string | null;
+            categories_tags?: string[];
+            brands?: string | null;
+            brands_tags?: string[];
+            labels_tags?: string[];
+            nutriscore_grade?: string | null;
+            ecoscore_grade?: string | null;
+            nova_group?: number | null;
+            unique_scans_n?: number | null;
+            price_count?: number | null;
+            price_currency_count?: number | null;
+            location_count?: number | null;
+            location_type_osm_country_count?: number | null;
+            user_count?: number | null;
+            proof_count?: number | null;
+            /** Format: date-time */
+            created?: string;
+            /** Format: date-time */
+            readonly updated: string;
+        };
+        Proof: {
+            readonly id: number;
+            location_id: number;
+            file_path?: string | null;
+            mimetype?: string | null;
+            type: components["schemas"]["TypeEbbEnum"];
+            image_thumb_path?: string | null;
+            /** Format: int64 */
+            location_osm_id?: number | null;
+            location_osm_type?: (components["schemas"]["LocationOsmTypeEnum"] | components["schemas"]["BlankEnum"] | components["schemas"]["NullEnum"]) | null;
+            /** Format: date */
+            date?: string | null;
+            currency?: (components["schemas"]["CurrencyEnum"] | components["schemas"]["BlankEnum"] | components["schemas"]["NullEnum"]) | null;
+            /** Receipt's number of prices (user input) */
+            receipt_price_count?: number | null;
+            /**
+             * Receipt's total amount (user input)
+             * Format: double
+             */
+            receipt_price_total?: number | null;
+            /**
+             * Receipt's online delivery costs (user input)
+             * Format: double
+             */
+            receipt_online_delivery_costs?: number | null;
+            ready_for_price_tag_validation?: boolean;
+            owner_consumption?: boolean | null;
+            owner_comment?: string | null;
+            price_count?: number | null;
+            prediction_count?: number | null;
+            owner?: string | null;
+            source?: string | null;
+            tags?: string[];
+            /** Format: date-time */
+            created?: string;
+            /** Format: date-time */
+            readonly updated: string;
+        };
+        ProofFull: {
+            readonly id: number;
+            location_id: number;
+            location: components["schemas"]["Location"];
+            readonly predictions: components["schemas"]["ProofPrediction"][];
+            file_path?: string | null;
+            mimetype?: string | null;
+            type: components["schemas"]["TypeEbbEnum"];
+            image_thumb_path?: string | null;
+            /** Format: int64 */
+            location_osm_id?: number | null;
+            location_osm_type?: (components["schemas"]["LocationOsmTypeEnum"] | components["schemas"]["BlankEnum"] | components["schemas"]["NullEnum"]) | null;
+            /** Format: date */
+            date?: string | null;
+            currency?: (components["schemas"]["CurrencyEnum"] | components["schemas"]["BlankEnum"] | components["schemas"]["NullEnum"]) | null;
+            /** Receipt's number of prices (user input) */
+            receipt_price_count?: number | null;
+            /**
+             * Receipt's total amount (user input)
+             * Format: double
+             */
+            receipt_price_total?: number | null;
+            /**
+             * Receipt's online delivery costs (user input)
+             * Format: double
+             */
+            receipt_online_delivery_costs?: number | null;
+            ready_for_price_tag_validation?: boolean;
+            owner_consumption?: boolean | null;
+            owner_comment?: string | null;
+            price_count?: number | null;
+            prediction_count?: number | null;
+            owner?: string | null;
+            source?: string | null;
+            tags?: string[];
+            /** Format: date-time */
+            created?: string;
+            /** Format: date-time */
+            readonly updated: string;
+        };
+        ProofHalfFull: {
+            readonly id: number;
+            location_id: number;
+            location: components["schemas"]["Location"];
+            file_path?: string | null;
+            mimetype?: string | null;
+            type: components["schemas"]["TypeEbbEnum"];
+            image_thumb_path?: string | null;
+            /** Format: int64 */
+            location_osm_id?: number | null;
+            location_osm_type?: (components["schemas"]["LocationOsmTypeEnum"] | components["schemas"]["BlankEnum"] | components["schemas"]["NullEnum"]) | null;
+            /** Format: date */
+            date?: string | null;
+            currency?: (components["schemas"]["CurrencyEnum"] | components["schemas"]["BlankEnum"] | components["schemas"]["NullEnum"]) | null;
+            /** Receipt's number of prices (user input) */
+            receipt_price_count?: number | null;
+            /**
+             * Receipt's total amount (user input)
+             * Format: double
+             */
+            receipt_price_total?: number | null;
+            /**
+             * Receipt's online delivery costs (user input)
+             * Format: double
+             */
+            receipt_online_delivery_costs?: number | null;
+            ready_for_price_tag_validation?: boolean;
+            owner_consumption?: boolean | null;
+            owner_comment?: string | null;
+            price_count?: number | null;
+            prediction_count?: number | null;
+            owner?: string | null;
+            source?: string | null;
+            tags?: string[];
+            /** Format: date-time */
+            created?: string;
+            /** Format: date-time */
+            readonly updated: string;
+        };
+        ProofPrediction: {
+            /** The type of the prediction */
+            type: components["schemas"]["ProofPredictionTypeEnum"];
+            /** The name of the model that generated the prediction */
+            model_name: string;
+            /** The specific version of the model that generated the prediction */
+            model_version: string;
+            /** A dict representing the data of the prediction. This field is model-specific. */
+            data?: unknown;
+            /** The predicted value, only for classification models, null otherwise. */
+            value?: string | null;
+            /**
+             * The maximum confidence of the prediction, may be null for some models.For object detection models, this is the confidence of the most confident object.For classification models, this is the confidence of the predicted class.
+             * Format: double
+             */
+            max_confidence?: number | null;
+            /**
+             * When the prediction was created in DB
+             * Format: date-time
+             */
+            created?: string;
+        };
+        /**
+         * @description * `OBJECT_DETECTION` - OBJECT_DETECTION
+         *     * `CLASSIFICATION` - CLASSIFICATION
+         *     * `RECEIPT_EXTRACTION` - RECEIPT_EXTRACTION
+         * @enum {string}
+         */
+        ProofPredictionTypeEnum: "OBJECT_DETECTION" | "CLASSIFICATION" | "RECEIPT_EXTRACTION";
+        ProofProcessWithGemini: {
+            files: string[];
+            mode: string;
+        };
+        ProofUpdate: {
+            /** Format: int64 */
+            location_osm_id?: number | null;
+            location_osm_type?: (components["schemas"]["LocationOsmTypeEnum"] | components["schemas"]["BlankEnum"] | components["schemas"]["NullEnum"]) | null;
+            type: components["schemas"]["TypeEbbEnum"];
+            currency?: (components["schemas"]["CurrencyEnum"] | components["schemas"]["BlankEnum"] | components["schemas"]["NullEnum"]) | null;
+            /** Format: date */
+            date?: string | null;
+            /** Receipt's number of prices (user input) */
+            receipt_price_count?: number | null;
+            /**
+             * Receipt's total amount (user input)
+             * Format: double
+             */
+            receipt_price_total?: number | null;
+            /**
+             * Receipt's online delivery costs (user input)
+             * Format: double
+             */
+            receipt_online_delivery_costs?: number | null;
+            ready_for_price_tag_validation?: boolean;
+            owner_consumption?: boolean | null;
+            owner_comment?: string | null;
+        };
+        ProofUpload: {
+            file: string;
+            /** Format: int64 */
+            location_osm_id?: number | null;
+            location_osm_type?: (components["schemas"]["LocationOsmTypeEnum"] | components["schemas"]["BlankEnum"] | components["schemas"]["NullEnum"]) | null;
+            type: components["schemas"]["TypeEbbEnum"];
+            currency?: (components["schemas"]["CurrencyEnum"] | components["schemas"]["BlankEnum"] | components["schemas"]["NullEnum"]) | null;
+            /** Format: date */
+            date?: string | null;
+            /** Receipt's number of prices (user input) */
+            receipt_price_count?: number | null;
+            /**
+             * Receipt's total amount (user input)
+             * Format: double
+             */
+            receipt_price_total?: number | null;
+            /**
+             * Receipt's online delivery costs (user input)
+             * Format: double
+             */
+            receipt_online_delivery_costs?: number | null;
+            ready_for_price_tag_validation?: boolean;
+            owner_consumption?: boolean | null;
+            owner_comment?: string | null;
+            location_id?: number;
+        };
+        ReceiptItemFull: {
+            readonly id: number;
+            proof_id: number;
+            price_id: number;
+            /** @description The order of the item in the receipt. Item on top is 1. */
+            order: number;
+            /** @description A dict representing the predicted data of the receipt item. For example the product name, the price etc. */
+            predicted_data?: unknown;
+            /** @description The current status of the item
+             *
+             *     * `0` - deleted
+             *     * `1` - linked_to_price */
+            status?: (components["schemas"]["ReceiptItemFullStatusEnum"] | components["schemas"]["BlankEnum"] | components["schemas"]["NullEnum"]) | null;
+            /**
+             * Format: date-time
+             * @description When the item was created in DB
+             */
+            created?: string;
+            /**
+             * Format: date-time
+             * @description When the item was last updated
+             */
+            readonly updated: string;
+            /** @description The proof prediction used to create this receipt item. Null if created by a user. */
+            proof_prediction?: number | null;
+        };
+        /**
+         * @description * `0` - deleted
+         *     * `1` - linked_to_price
+         * @enum {unknown}
+         */
+        ReceiptItemFullStatusEnum: 0 | 1;
+        SessionFull: {
+            user_id: string;
+            token: string;
+            created: string;
+            last_used: string;
+        };
+        SessionResponse: {
+            access_token: string;
+            token_type: string;
+        };
+        /**
+         * @description * `off` - off
+         *     * `obf` - obf
+         *     * `opff` - opff
+         *     * `opf` - opf
+         * @enum {string}
+         */
+        SourceEnum: "off" | "obf" | "opff" | "opf";
+        Status: {
+            status: string;
+        };
+        /**
+         * @description * `0` - deleted
+         *     * `1` - linked_to_price
+         *     * `2` - not_readable
+         *     * `3` - truncated
+         *     * `4` - not_price_tag
+         * @enum {integer}
+         */
+        Status579Enum: 0 | 1 | 2 | 3 | 4;
+        TotalStats: {
+            price_count?: number;
+            price_type_product_code_count?: number;
+            price_type_category_tag_count?: number;
+            price_with_discount_count?: number;
+            price_currency_count?: number;
+            price_year_count?: number;
+            price_location_country_count?: number;
+            price_kind_community_count?: number;
+            price_kind_consumption_count?: number;
+            price_source_web_count?: number;
+            price_source_mobile_count?: number;
+            price_source_api_count?: number;
+            price_source_other_count?: number;
+            price_in_challenge_count?: number;
+            product_count?: number;
+            product_source_off_count?: number;
+            product_source_obf_count?: number;
+            product_source_opff_count?: number;
+            product_source_opf_count?: number;
+            product_with_price_count?: number;
+            product_source_off_with_price_count?: number;
+            product_source_obf_with_price_count?: number;
+            product_source_opff_with_price_count?: number;
+            product_source_opf_with_price_count?: number;
+            location_count?: number;
+            location_with_price_count?: number;
+            location_type_osm_count?: number;
+            location_type_online_count?: number;
+            location_type_osm_country_count?: number;
+            proof_count?: number;
+            proof_with_price_count?: number;
+            proof_type_price_tag_count?: number;
+            proof_type_receipt_count?: number;
+            proof_type_gdpr_request_count?: number;
+            proof_type_shop_import_count?: number;
+            proof_kind_community_count?: number;
+            proof_kind_consumption_count?: number;
+            proof_source_web_count?: number;
+            proof_source_mobile_count?: number;
+            proof_source_api_count?: number;
+            proof_source_other_count?: number;
+            proof_in_challenge_count?: number;
+            price_tag_count?: number;
+            price_tag_status_unknown_count?: number;
+            price_tag_status_linked_to_price_count?: number;
+            user_count?: number;
+            user_with_price_count?: number;
+            challenge_count?: number;
+            /** Format: date-time */
+            readonly updated: string;
+        };
+        /**
+         * @description * `OSM` - OSM
+         *     * `ONLINE` - ONLINE
+         * @enum {string}
+         */
+        TypeA9eEnum: "OSM" | "ONLINE";
+        /**
+         * @description * `PRICE_TAG` - PRICE_TAG
+         *     * `RECEIPT` - RECEIPT
+         *     * `GDPR_REQUEST` - GDPR_REQUEST
+         *     * `SHOP_IMPORT` - SHOP_IMPORT
+         * @enum {string}
+         */
+        TypeEbbEnum: "PRICE_TAG" | "RECEIPT" | "GDPR_REQUEST" | "SHOP_IMPORT";
+        /**
+         * @description * `PRODUCT` - PRODUCT
+         *     * `CATEGORY` - CATEGORY
+         * @enum {string}
+         */
+        TypeF36Enum: "PRODUCT" | "CATEGORY";
+        User: {
+            user_id: string;
+            price_count?: number | null;
+            price_type_product_count?: number | null;
+            price_type_category_count?: number | null;
+            price_kind_community_count?: number;
+            price_kind_consumption_count?: number;
+            price_currency_count?: number | null;
+            price_in_proof_owned_count?: number | null;
+            price_in_proof_not_owned_count?: number | null;
+            price_not_owned_in_proof_owned_count?: number | null;
+            proof_count?: number | null;
+            proof_kind_community_count?: number;
+            proof_kind_consumption_count?: number;
+            location_count?: number | null;
+            location_type_osm_country_count?: number | null;
+            product_count?: number | null;
+        };
     };
-    /** Body_upload_proof_api_v1_proofs_upload_post */
-    Body_upload_proof_api_v1_proofs_upload_post: {
-      /**
-       * File
-       * Format: binary
-       */
-      file: string;
-      /** @description The type of the proof */
-      type: components["schemas"]["ProofTypeEnum"];
-      /**
-       * Is Public
-       * @description if true, the proof is public and is included in the API response. Set false only for RECEIPT proofs that contain personal information.
-       * @default true
-       */
-      is_public?: boolean;
-    };
-    /**
-     * CurrencyEnum
-     * @enum {string}
-     */
-    CurrencyEnum: "BND" | "UGX" | "HTG" | "ITL" | "SVC" | "VUV" | "XBA" | "COU" | "GRD" | "LTT" | "ZRZ" | "MZM" | "KPW" | "DZD" | "BBD" | "LUC" | "MOP" | "LKR" | "GBP" | "PHP" | "TTD" | "RHD" | "ATS" | "IEP" | "DJF" | "ILP" | "AED" | "ARL" | "INR" | "GEK" | "ZWD" | "CUP" | "RSD" | "XRE" | "BRR" | "NIC" | "USD" | "ZMW" | "MKD" | "BAD" | "XAG" | "BRC" | "BGO" | "NGN" | "UGS" | "IQD" | "TMT" | "VEF" | "ARA" | "ZMK" | "GQE" | "MDL" | "AOR" | "XAU" | "HKD" | "BTN" | "SDD" | "UAK" | "QAR" | "CLP" | "TRY" | "GEL" | "OMR" | "ROL" | "XPT" | "SAR" | "YER" | "UYI" | "ARP" | "BYR" | "JPY" | "COP" | "KZT" | "MAF" | "KGS" | "TZS" | "PGK" | "TOP" | "LUL" | "XBD" | "MMK" | "MNT" | "CAD" | "RON" | "ISK" | "XPF" | "CVE" | "MRU" | "BRL" | "MUR" | "PEI" | "BOP" | "THB" | "BEF" | "SYP" | "LTL" | "MRO" | "MDC" | "AZM" | "XEU" | "SSP" | "YDD" | "UYW" | "EGP" | "FKP" | "MZE" | "ERN" | "PYG" | "XXX" | "SEK" | "SUR" | "XOF" | "LYD" | "HRD" | "SRG" | "PKR" | "SHP" | "CNH" | "GNS" | "BEL" | "SLL" | "CLF" | "BMD" | "BRN" | "NZD" | "MXP" | "GTQ" | "TJS" | "ILR" | "MGA" | "PTE" | "PES" | "ETB" | "BRZ" | "LRD" | "CSK" | "AFA" | "KRH" | "LVL" | "CSD" | "ISJ" | "LAK" | "PLN" | "VEB" | "LVR" | "XFO" | "ZWR" | "XPD" | "TPE" | "DKK" | "ZRN" | "AMD" | "GHS" | "EUR" | "NOK" | "ZWL" | "VNN" | "AON" | "RUB" | "TRL" | "VND" | "MYR" | "UYP" | "ZAR" | "MGF" | "SZL" | "BAN" | "CHF" | "WST" | "XDR" | "BAM" | "CNY" | "MVR" | "BRE" | "DOP" | "MZN" | "FIM" | "BRB" | "PEN" | "SKK" | "USS" | "CZK" | "SOS" | "TND" | "BOB" | "ESB" | "GNF" | "MCF" | "MLF" | "FJD" | "AUD" | "AOA" | "ADP" | "MTL" | "AWG" | "ALK" | "IDR" | "JOD" | "GIP" | "JMD" | "CHW" | "CLE" | "BYB" | "BOV" | "FRF" | "LSL" | "KES" | "SGD" | "KYD" | "CRC" | "GWP" | "XTS" | "BOL" | "AOK" | "RWF" | "SLE" | "SIT" | "VES" | "ZAL" | "CNX" | "XSU" | "GWE" | "GYD" | "BDT" | "MXN" | "XCD" | "GHC" | "TWD" | "XBC" | "CHE" | "YUR" | "BSD" | "DEM" | "BWP" | "MAD" | "RUR" | "HRK" | "STN" | "BUK" | "MWK" | "NLG" | "PLZ" | "UYU" | "SBD" | "EEK" | "DDM" | "MKN" | "MVP" | "HUF" | "MXV" | "KRW" | "ILS" | "ARM" | "YUM" | "ANG" | "SRD" | "CUC" | "AFN" | "NIO" | "IRR" | "KHR" | "VED" | "ECV" | "SDG" | "TMM" | "MTP" | "NAD" | "TJR" | "XBB" | "STD" | "XFU" | "ALL" | "YUN" | "BYN" | "CDF" | "XAF" | "BGM" | "BHD" | "SDP" | "AZN" | "BEC" | "NPR" | "KMF" | "KWD" | "GMD" | "BGN" | "KRO" | "LBP" | "LUF" | "UZS" | "SCR" | "YUD" | "UAH" | "ESP" | "ECS" | "ESA" | "BGL" | "ARS" | "CYP" | "XUA" | "BIF" | "PAB" | "BZD" | "USN" | "HNL";
-    /**
-     * Flavor
-     * @description Flavor is used to refer to a specific Open*Facts project:
-     *
-     * - Open Food Facts
-     * - Open Beauty Facts
-     * - Open Pet Food Facts
-     * - Open Product Facts
-     * - Open Food Facts (Pro plateform)
-     * @enum {string}
-     */
-    Flavor: "off" | "obf" | "opff" | "opf" | "off-pro";
-    /** HTTPValidationError */
-    HTTPValidationError: {
-      /** Detail */
-      detail?: components["schemas"]["ValidationError"][];
-    };
-    /** LocationFull */
-    LocationFull: {
-      /** Osm Id */
-      osm_id: number;
-      osm_type: components["schemas"]["LocationOSMEnum"];
-      /** Id */
-      id: number;
-      /** Osm Name */
-      osm_name: string | null;
-      /** Osm Display Name */
-      osm_display_name: string | null;
-      /** Osm Address Postcode */
-      osm_address_postcode: string | null;
-      /** Osm Address City */
-      osm_address_city: string | null;
-      /** Osm Address Country */
-      osm_address_country: string | null;
-      /** Osm Lat */
-      osm_lat: number | null;
-      /** Osm Lon */
-      osm_lon: number | null;
-      /**
-       * Price Count
-       * @description number of prices for this location.
-       * @default 0
-       */
-      price_count?: number;
-      /**
-       * Created
-       * Format: date-time
-       */
-      created: string;
-      /** Updated */
-      updated: string | null;
-    };
-    /**
-     * LocationOSMEnum
-     * @enum {string}
-     */
-    LocationOSMEnum: "NODE" | "WAY" | "RELATION";
-    /** Page[LocationFull] */
-    Page_LocationFull_: {
-      /** Items */
-      items: components["schemas"]["LocationFull"][];
-      /** Total */
-      total: number | null;
-      /** Page */
-      page: number | null;
-      /** Size */
-      size: number | null;
-      /** Pages */
-      pages?: number | null;
-    };
-    /** Page[PriceFullWithRelations] */
-    Page_PriceFullWithRelations_: {
-      /** Items */
-      items: components["schemas"]["PriceFullWithRelations"][];
-      /** Total */
-      total: number | null;
-      /** Page */
-      page: number | null;
-      /** Size */
-      size: number | null;
-      /** Pages */
-      pages?: number | null;
-    };
-    /** Page[ProductFull] */
-    Page_ProductFull_: {
-      /** Items */
-      items: components["schemas"]["ProductFull"][];
-      /** Total */
-      total: number | null;
-      /** Page */
-      page: number | null;
-      /** Size */
-      size: number | null;
-      /** Pages */
-      pages?: number | null;
-    };
-    /** Page[ProofFull] */
-    Page_ProofFull_: {
-      /** Items */
-      items: components["schemas"]["ProofFull"][];
-      /** Total */
-      total: number | null;
-      /** Page */
-      page: number | null;
-      /** Size */
-      size: number | null;
-      /** Pages */
-      pages?: number | null;
-    };
-    /** Page[UserBase] */
-    Page_UserBase_: {
-      /** Items */
-      items: components["schemas"]["UserBase"][];
-      /** Total */
-      total: number | null;
-      /** Page */
-      page: number | null;
-      /** Size */
-      size: number | null;
-      /** Pages */
-      pages?: number | null;
-    };
-    /**
-     * PriceCreateWithValidation
-     * @description A version of `PriceCreate` with taxonomy validations.
-     *
-     * These validations are not done in the `PriceCreate` model because they
-     * they are time-consuming and only necessary when creating a price from
-     * the API.
-     */
-    PriceCreateWithValidation: {
-      /**
-       * Product Code
-       * @description barcode (EAN) of the product, as a string.
-       */
-      product_code?: string | null;
-      /**
-       * Product Name
-       * @description name of the product, as displayed on the receipt or the price tag.
-       */
-      product_name?: string | null;
-      /**
-       * Category Tag
-       * @description ID of the Open Food Facts category of the product for
-       *         products without barcode.
-       *
-       *         This is mostly for raw products such as vegetables or fruits. This
-       *         field is exclusive with `product_code`: if this field is set, it means
-       *         that the product does not have a barcode.
-       *
-       *         This ID must be a canonical category ID in the Open Food Facts taxonomy.
-       *         If the ID is not valid, the price will be rejected.
-       */
-      category_tag?: string | null;
-      /**
-       * Labels Tags
-       * @description labels of the product, only for products without barcode.
-       *
-       *         The labels must be valid labels in the Open Food Facts taxonomy.
-       *         If one of the labels is not valid, the price will be rejected.
-       *
-       *         The most common labels are:
-       *         - `en:organic`: the product is organic
-       *         - `fr:ab-agriculture-biologique`: the product is organic, in France
-       *         - `en:fair-trade`: the product is fair-trade
-       *
-       *         Other labels can be provided if relevant.
-       */
-      labels_tags?: string[] | null;
-      /**
-       * Origins Tags
-       * @description origins of the product, only for products without barcode.
-       *
-       *         This field is a list as some products may be a mix of several origins,
-       *         but most products have only one origin.
-       *
-       *         The origins must be valid origins in the Open Food Facts taxonomy.
-       *         If one of the origins is not valid, the price will be rejected.
-       */
-      origins_tags?: string[] | null;
-      /**
-       * Price
-       * @description price of the product, without its currency, taxes included.
-       */
-      price: number;
-      /**
-       * Price Is Discounted
-       * @description true if the price is discounted.
-       * @default false
-       */
-      price_is_discounted?: boolean;
-      /**
-       * Price Without Discount
-       * @description price of the product without discount, without its currency, taxes included. If the product is not discounted, this field must be null.
-       */
-      price_without_discount?: number | null;
-      /**
-       * @description if the price is about a barcode-less product
-       *         (if `category_tag` is provided), this field must be set to `KILOGRAM`
-       *         or `UNIT` (KILOGRAM by default).
-       *         This field is set to null and ignored if `product_code` is provided.
-       *
-       * @default KILOGRAM
-       */
-      price_per?: components["schemas"]["PricePerEnum"] | null;
-      /** @description currency of the price, as a string. The currency must be a valid currency code. See https://en.wikipedia.org/wiki/ISO_4217 for a list of valid currency codes. */
-      currency: components["schemas"]["CurrencyEnum"];
-      /**
-       * Location Osm Id
-       * @description ID of the location in OpenStreetMap: the store where the product was bought.
-       */
-      location_osm_id: number;
-      /** @description type of the OpenStreetMap location object. Stores can be represented as nodes, ways or relations in OpenStreetMap. It is necessary to be able to fetch the correct information about the store using the ID. */
-      location_osm_type: components["schemas"]["LocationOSMEnum"];
-      /**
-       * Date
-       * Format: date
-       * @description date when the product was bought.
-       */
-      date: string;
-      /**
-       * Proof Id
-       * @description ID of the proof, if any. The proof is a file (receipt or price tag image) uploaded by the user to prove the price of the product. The proof must be uploaded before the price, and the authenticated user must be the owner of the proof.
-       */
-      proof_id?: number | null;
-    };
-    /** PriceFull */
-    PriceFull: {
-      /**
-       * Product Code
-       * @description barcode (EAN) of the product, as a string.
-       */
-      product_code?: string | null;
-      /**
-       * Product Name
-       * @description name of the product, as displayed on the receipt or the price tag.
-       */
-      product_name?: string | null;
-      /**
-       * Category Tag
-       * @description ID of the Open Food Facts category of the product for
-       *         products without barcode.
-       *
-       *         This is mostly for raw products such as vegetables or fruits. This
-       *         field is exclusive with `product_code`: if this field is set, it means
-       *         that the product does not have a barcode.
-       *
-       *         This ID must be a canonical category ID in the Open Food Facts taxonomy.
-       *         If the ID is not valid, the price will be rejected.
-       */
-      category_tag?: string | null;
-      /**
-       * Labels Tags
-       * @description labels of the product, only for products without barcode.
-       *
-       *         The labels must be valid labels in the Open Food Facts taxonomy.
-       *         If one of the labels is not valid, the price will be rejected.
-       *
-       *         The most common labels are:
-       *         - `en:organic`: the product is organic
-       *         - `fr:ab-agriculture-biologique`: the product is organic, in France
-       *         - `en:fair-trade`: the product is fair-trade
-       *
-       *         Other labels can be provided if relevant.
-       */
-      labels_tags?: string[] | null;
-      /**
-       * Origins Tags
-       * @description origins of the product, only for products without barcode.
-       *
-       *         This field is a list as some products may be a mix of several origins,
-       *         but most products have only one origin.
-       *
-       *         The origins must be valid origins in the Open Food Facts taxonomy.
-       *         If one of the origins is not valid, the price will be rejected.
-       */
-      origins_tags?: string[] | null;
-      /**
-       * Price
-       * @description price of the product, without its currency, taxes included.
-       */
-      price: number;
-      /**
-       * Price Is Discounted
-       * @description true if the price is discounted.
-       * @default false
-       */
-      price_is_discounted?: boolean;
-      /**
-       * Price Without Discount
-       * @description price of the product without discount, without its currency, taxes included. If the product is not discounted, this field must be null.
-       */
-      price_without_discount?: number | null;
-      /**
-       * @description if the price is about a barcode-less product
-       *         (if `category_tag` is provided), this field must be set to `KILOGRAM`
-       *         or `UNIT` (KILOGRAM by default).
-       *         This field is set to null and ignored if `product_code` is provided.
-       *
-       * @default KILOGRAM
-       */
-      price_per?: components["schemas"]["PricePerEnum"] | null;
-      /** @description currency of the price, as a string. The currency must be a valid currency code. See https://en.wikipedia.org/wiki/ISO_4217 for a list of valid currency codes. */
-      currency: components["schemas"]["CurrencyEnum"];
-      /**
-       * Location Osm Id
-       * @description ID of the location in OpenStreetMap: the store where the product was bought.
-       */
-      location_osm_id: number;
-      /** @description type of the OpenStreetMap location object. Stores can be represented as nodes, ways or relations in OpenStreetMap. It is necessary to be able to fetch the correct information about the store using the ID. */
-      location_osm_type: components["schemas"]["LocationOSMEnum"];
-      /**
-       * Date
-       * Format: date
-       * @description date when the product was bought.
-       */
-      date: string;
-      /**
-       * Proof Id
-       * @description ID of the proof, if any. The proof is a file (receipt or price tag image) uploaded by the user to prove the price of the product. The proof must be uploaded before the price, and the authenticated user must be the owner of the proof.
-       */
-      proof_id?: number | null;
-      /** Product Id */
-      product_id: number | null;
-      /** Location Id */
-      location_id: number | null;
-      /** Owner */
-      owner: string;
-      /**
-       * Created
-       * Format: date-time
-       */
-      created: string;
-    };
-    /** PriceFullWithRelations */
-    PriceFullWithRelations: {
-      /**
-       * Product Code
-       * @description barcode (EAN) of the product, as a string.
-       */
-      product_code?: string | null;
-      /**
-       * Product Name
-       * @description name of the product, as displayed on the receipt or the price tag.
-       */
-      product_name?: string | null;
-      /**
-       * Category Tag
-       * @description ID of the Open Food Facts category of the product for
-       *         products without barcode.
-       *
-       *         This is mostly for raw products such as vegetables or fruits. This
-       *         field is exclusive with `product_code`: if this field is set, it means
-       *         that the product does not have a barcode.
-       *
-       *         This ID must be a canonical category ID in the Open Food Facts taxonomy.
-       *         If the ID is not valid, the price will be rejected.
-       */
-      category_tag?: string | null;
-      /**
-       * Labels Tags
-       * @description labels of the product, only for products without barcode.
-       *
-       *         The labels must be valid labels in the Open Food Facts taxonomy.
-       *         If one of the labels is not valid, the price will be rejected.
-       *
-       *         The most common labels are:
-       *         - `en:organic`: the product is organic
-       *         - `fr:ab-agriculture-biologique`: the product is organic, in France
-       *         - `en:fair-trade`: the product is fair-trade
-       *
-       *         Other labels can be provided if relevant.
-       */
-      labels_tags?: string[] | null;
-      /**
-       * Origins Tags
-       * @description origins of the product, only for products without barcode.
-       *
-       *         This field is a list as some products may be a mix of several origins,
-       *         but most products have only one origin.
-       *
-       *         The origins must be valid origins in the Open Food Facts taxonomy.
-       *         If one of the origins is not valid, the price will be rejected.
-       */
-      origins_tags?: string[] | null;
-      /**
-       * Price
-       * @description price of the product, without its currency, taxes included.
-       */
-      price: number;
-      /**
-       * Price Is Discounted
-       * @description true if the price is discounted.
-       * @default false
-       */
-      price_is_discounted?: boolean;
-      /**
-       * Price Without Discount
-       * @description price of the product without discount, without its currency, taxes included. If the product is not discounted, this field must be null.
-       */
-      price_without_discount?: number | null;
-      /**
-       * @description if the price is about a barcode-less product
-       *         (if `category_tag` is provided), this field must be set to `KILOGRAM`
-       *         or `UNIT` (KILOGRAM by default).
-       *         This field is set to null and ignored if `product_code` is provided.
-       *
-       * @default KILOGRAM
-       */
-      price_per?: components["schemas"]["PricePerEnum"] | null;
-      /** @description currency of the price, as a string. The currency must be a valid currency code. See https://en.wikipedia.org/wiki/ISO_4217 for a list of valid currency codes. */
-      currency: components["schemas"]["CurrencyEnum"];
-      /**
-       * Location Osm Id
-       * @description ID of the location in OpenStreetMap: the store where the product was bought.
-       */
-      location_osm_id: number;
-      /** @description type of the OpenStreetMap location object. Stores can be represented as nodes, ways or relations in OpenStreetMap. It is necessary to be able to fetch the correct information about the store using the ID. */
-      location_osm_type: components["schemas"]["LocationOSMEnum"];
-      /**
-       * Date
-       * Format: date
-       * @description date when the product was bought.
-       */
-      date: string;
-      /**
-       * Proof Id
-       * @description ID of the proof, if any. The proof is a file (receipt or price tag image) uploaded by the user to prove the price of the product. The proof must be uploaded before the price, and the authenticated user must be the owner of the proof.
-       */
-      proof_id?: number | null;
-      /** Product Id */
-      product_id: number | null;
-      /** Location Id */
-      location_id: number | null;
-      /** Owner */
-      owner: string;
-      /**
-       * Created
-       * Format: date-time
-       */
-      created: string;
-      product: components["schemas"]["ProductFull"] | null;
-      proof: components["schemas"]["ProofFull"] | null;
-      location: components["schemas"]["LocationFull"] | null;
-    };
-    /**
-     * PricePerEnum
-     * @description For raw products (fruits, vegetables, etc.), the price is either
-     * per unit or per kilogram. This enum is used to store this information.
-     * @enum {string}
-     */
-    PricePerEnum: "UNIT" | "KILOGRAM";
-    /** ProductFull */
-    ProductFull: {
-      /**
-       * Code
-       * @description barcode (EAN) of the product, as a string.
-       */
-      code: string;
-      /** Id */
-      id: number;
-      /** @description source of data, either `off` (Open Food Facts), `obf` (Open Beauty Facts), `opff` (Open Pet Food Facts) or `obf` (Open Beauty Facts) */
-      source: components["schemas"]["Flavor"] | null;
-      /**
-       * Product Name
-       * @description name of the product.
-       */
-      product_name: string | null;
-      /**
-       * Product Quantity
-       * @description quantity of the product, normalized in g or mL (depending on the product).
-       */
-      product_quantity: number | null;
-      /**
-       * Brands
-       * @description brand(s) of the product.
-       */
-      brands: string | null;
-      /**
-       * Image Url
-       * @description URL of the product image.
-       */
-      image_url: string | null;
-      /**
-       * Unique Scans N
-       * @description number of unique scans of the product on Open Food Facts.
-       * @default 0
-       */
-      unique_scans_n?: number;
-      /**
-       * Price Count
-       * @description number of prices for this product.
-       * @default 0
-       */
-      price_count?: number;
-      /**
-       * Created
-       * Format: date-time
-       * @description datetime of the creation.
-       */
-      created: string;
-      /**
-       * Updated
-       * @description datetime of the last update.
-       */
-      updated: string | null;
-    };
-    /** ProofFull */
-    ProofFull: {
-      /** Id */
-      id: number;
-      /** File Path */
-      file_path: string | null;
-      /** Mimetype */
-      mimetype: string;
-      type?: components["schemas"]["ProofTypeEnum"] | null;
-      /** Owner */
-      owner: string;
-      /**
-       * Is Public
-       * @description if true, the proof is public and is included in the API response. Set false only if the proof contains personal information.
-       * @default true
-       */
-      is_public?: boolean;
-      /**
-       * Created
-       * Format: date-time
-       */
-      created: string;
-    };
-    /**
-     * ProofTypeEnum
-     * @enum {string}
-     */
-    ProofTypeEnum: "PRICE_TAG" | "RECEIPT" | "GDPR_REQUEST";
-    /** SessionBase */
-    SessionBase: {
-      /** User Id */
-      user_id: string;
-      /**
-       * Created
-       * Format: date-time
-       */
-      created: string;
-      /** Last Used */
-      last_used: string | null;
-    };
-    /** UserBase */
-    UserBase: {
-      /** User Id */
-      user_id: string;
-      /**
-       * Price Count
-       * @default 0
-       */
-      price_count?: number;
-    };
-    /** ValidationError */
-    ValidationError: {
-      /** Location */
-      loc: (string | number)[];
-      /** Message */
-      msg: string;
-      /** Error Type */
-      type: string;
-    };
-  };
-  responses: never;
-  parameters: never;
-  requestBodies: never;
-  headers: never;
-  pathItems: never;
+    responses: never;
+    parameters: never;
+    requestBodies: never;
+    headers: never;
+    pathItems: never;
 }
-
 export type $defs = Record<string, never>;
-
-export type external = Record<string, never>;
-
 export interface operations {
-
-  /** Status Endpoint */
-  status_endpoint_api_v1_status_get: {
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          "application/json": unknown;
+    api_schema_retrieve: {
+        parameters: {
+            query?: {
+                format?: "json" | "yaml";
+                lang?: "af" | "ar" | "ar-dz" | "ast" | "az" | "be" | "bg" | "bn" | "br" | "bs" | "ca" | "ckb" | "cs" | "cy" | "da" | "de" | "dsb" | "el" | "en" | "en-au" | "en-gb" | "eo" | "es" | "es-ar" | "es-co" | "es-mx" | "es-ni" | "es-ve" | "et" | "eu" | "fa" | "fi" | "fr" | "fy" | "ga" | "gd" | "gl" | "he" | "hi" | "hr" | "hsb" | "hu" | "hy" | "ia" | "id" | "ig" | "io" | "is" | "it" | "ja" | "ka" | "kab" | "kk" | "km" | "kn" | "ko" | "ky" | "lb" | "lt" | "lv" | "mk" | "ml" | "mn" | "mr" | "ms" | "my" | "nb" | "ne" | "nl" | "nn" | "os" | "pa" | "pl" | "pt" | "pt-br" | "ro" | "ru" | "sk" | "sl" | "sq" | "sr" | "sr-latn" | "sv" | "sw" | "ta" | "te" | "tg" | "th" | "tk" | "tr" | "tt" | "udm" | "ug" | "uk" | "ur" | "uz" | "vi" | "zh-hans" | "zh-hant";
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-      };
-    };
-  };
-  /**
-   * Authentication
-   * @description Authentication: provide username/password and get a bearer token in return.
-   *
-   * - **username**: Open Food Facts user_id (not email)
-   * - **password**: user password (clear text, but HTTPS encrypted)
-   *
-   * A **token** is returned. If the **set_cookie** parameter is set to 1,
-   * the token is also set as a cookie named "session" in the response.
-   *
-   * To authenticate, you can either:
-   * - use the **Authorization** header with the **Bearer** scheme,
-   *   e.g.: "Authorization: bearer token"
-   * - use the **session** cookie, e.g.: "Cookie: session=token"
-   */
-  authentication_api_v1_auth_post: {
-    parameters: {
-      query?: {
-        /** @description if set to 1, the token is also set as a cookie named 'session' in the response. This parameter must be passed as a query parameter, e.g.: /auth?set_cookie=1 */
-        set_cookie?: boolean;
-      };
-    };
-    requestBody: {
-      content: {
-        "application/x-www-form-urlencoded": components["schemas"]["Body_authentication_api_v1_auth_post"];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          "application/json": unknown;
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/vnd.oai.openapi": {
+                        [key: string]: unknown;
+                    };
+                    "application/yaml": {
+                        [key: string]: unknown;
+                    };
+                    "application/vnd.oai.openapi+json": {
+                        [key: string]: unknown;
+                    };
+                    "application/json": {
+                        [key: string]: unknown;
+                    };
+                };
+            };
         };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
-        };
-      };
     };
-  };
-  /**
-   * Get User Session
-   * @description Return information about the current user session.
-   */
-  get_user_session_api_v1_session_get: {
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          "application/json": components["schemas"]["SessionBase"];
+    auth_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-      };
-    };
-  };
-  /** Get Users */
-  get_users_api_v1_users_get: {
-    parameters: {
-      query?: {
-        price_count?: number | null;
-        price_count__gte?: number | null;
-        price_count__lte?: number | null;
-        order_by?: string | null;
-        /** @description Page number */
-        page?: number;
-        /** @description Page size */
-        size?: number;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          "application/json": components["schemas"]["Page_UserBase_"];
+        requestBody: {
+            content: {
+                "application/x-www-form-urlencoded": components["schemas"]["Login"];
+                "multipart/form-data": components["schemas"]["Login"];
+            };
         };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SessionResponse"];
+                };
+            };
         };
-      };
     };
-  };
-  /** Get Price */
-  get_price_api_v1_prices_get: {
-    parameters: {
-      query?: {
-        product_code?: string | null;
-        product_id?: number | null;
-        product_id__isnull?: boolean | null;
-        category_tag?: string | null;
-        labels_tags__like?: string | null;
-        origins_tags__like?: string | null;
-        location_osm_id?: number | null;
-        location_osm_type?: components["schemas"]["LocationOSMEnum"] | null;
-        location_id?: number | null;
-        price?: number | null;
-        price_is_discounted?: boolean | null;
-        price__gt?: number | null;
-        price__gte?: number | null;
-        price__lt?: number | null;
-        price__lte?: number | null;
-        currency?: string | null;
-        date?: string | null;
-        date__gt?: string | null;
-        date__gte?: string | null;
-        date__lt?: string | null;
-        date__lte?: string | null;
-        owner?: string | null;
-        created__gte?: string | null;
-        created__lte?: string | null;
-        order_by?: string | null;
-        /** @description Page number */
-        page?: number;
-        /** @description Page size */
-        size?: number;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          "application/json": components["schemas"]["Page_PriceFullWithRelations_"];
+    challenges_list: {
+        parameters: {
+            query?: {
+                end_date__gt?: string;
+                end_date__gte?: string;
+                end_date__lt?: string;
+                end_date__lte?: string;
+                end_date__month?: number;
+                end_date__year?: number;
+                id?: number;
+                is_published?: boolean;
+                /** @description Which field to use when ordering the results. */
+                order_by?: string;
+                /** @description A page number within the paginated result set. */
+                page?: number;
+                /** @description Number of results to return per page. */
+                size?: number;
+                start_date__gt?: string;
+                start_date__gte?: string;
+                start_date__lt?: string;
+                start_date__lte?: string;
+                start_date__month?: number;
+                start_date__year?: number;
+                /** @description * `DRAFT` - DRAFT
+                 *     * `UPCOMING` - UPCOMING
+                 *     * `ONGOING` - ONGOING
+                 *     * `COMPLETED` - COMPLETED */
+                status?: "COMPLETED" | "DRAFT" | "ONGOING" | "UPCOMING";
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PaginatedChallengeList"];
+                };
+            };
         };
-      };
     };
-  };
-  /**
-   * Create Price
-   * @description Create a new price.
-   *
-   * This endpoint requires authentication.
-   */
-  create_price_api_v1_prices_post: {
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["PriceCreateWithValidation"];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      201: {
-        content: {
-          "application/json": components["schemas"]["PriceFull"];
+    challenges_retrieve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this Challenge. */
+                id: number;
+            };
+            cookie?: never;
         };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Challenge"];
+                };
+            };
         };
-      };
     };
-  };
-  /**
-   * Upload Proof
-   * @description Upload a proof file.
-   *
-   * The POST request must be a multipart/form-data request with a file field
-   * named "file".
-   *
-   * This endpoint requires authentication.
-   */
-  upload_proof_api_v1_proofs_upload_post: {
-    requestBody: {
-      content: {
-        "multipart/form-data": components["schemas"]["Body_upload_proof_api_v1_proofs_upload_post"];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      201: {
-        content: {
-          "application/json": components["schemas"]["ProofFull"];
+    locations_list: {
+        parameters: {
+            query?: {
+                /** @description Which field to use when ordering the results. */
+                order_by?: string;
+                osm_address_city__like?: string;
+                osm_address_country__like?: string;
+                osm_name__like?: string;
+                /** @description A page number within the paginated result set. */
+                page?: number;
+                price_count?: number;
+                price_count__gte?: number;
+                price_count__lte?: number;
+                /** @description Number of results to return per page. */
+                size?: number;
+                /** @description * `OSM` - OSM
+                 *     * `ONLINE` - ONLINE */
+                type?: "ONLINE" | "OSM";
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PaginatedLocationList"];
+                };
+            };
         };
-      };
     };
-  };
-  /**
-   * Get User Proofs
-   * @description Get all the proofs uploaded by the current user.
-   *
-   * This endpoint requires authentication.
-   */
-  get_user_proofs_api_v1_proofs_get: {
-    parameters: {
-      query?: {
-        owner?: string | null;
-        type?: components["schemas"]["ProofTypeEnum"] | null;
-        order_by?: string | null;
-        /** @description Page number */
-        page?: number;
-        /** @description Page size */
-        size?: number;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          "application/json": components["schemas"]["Page_ProofFull_"];
+    locations_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["LocationCreate"];
+                "application/x-www-form-urlencoded": components["schemas"]["LocationCreate"];
+                "multipart/form-data": components["schemas"]["LocationCreate"];
+            };
         };
-      };
-    };
-  };
-  /** Get Products */
-  get_products_api_v1_products_get: {
-    parameters: {
-      query?: {
-        code?: string | null;
-        source?: components["schemas"]["Flavor"] | null;
-        product_name__like?: string | null;
-        brands__like?: string | null;
-        unique_scans_n__gte?: number | null;
-        price_count?: number | null;
-        price_count__gte?: number | null;
-        price_count__lte?: number | null;
-        order_by?: string | null;
-        /** @description Page number */
-        page?: number;
-        /** @description Page size */
-        size?: number;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          "application/json": components["schemas"]["Page_ProductFull_"];
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LocationCreate"];
+                };
+            };
         };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
-        };
-      };
     };
-  };
-  /** Get Product By Code */
-  get_product_by_code_api_v1_products_code__product_code__get: {
-    parameters: {
-      path: {
-        product_code: string;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          "application/json": components["schemas"]["ProductFull"];
+    locations_retrieve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this Location. */
+                id: number;
+            };
+            cookie?: never;
         };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Location"];
+                };
+            };
         };
-      };
     };
-  };
-  /** Get Product By Id */
-  get_product_by_id_api_v1_products__product_id__get: {
-    parameters: {
-      path: {
-        product_id: number;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          "application/json": components["schemas"]["ProductFull"];
+    locations_osm_retrieve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                osm_id: string;
+                osm_type: string;
+            };
+            cookie?: never;
         };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Location"];
+                };
+            };
         };
-      };
     };
-  };
-  /** Get Locations */
-  get_locations_api_v1_locations_get: {
-    parameters: {
-      query?: {
-        osm_name__like?: string | null;
-        osm_address_country__like?: string | null;
-        price_count?: number | null;
-        price_count__gte?: number | null;
-        price_count__lte?: number | null;
-        order_by?: string | null;
-        /** @description Page number */
-        page?: number;
-        /** @description Page size */
-        size?: number;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          "application/json": components["schemas"]["Page_LocationFull_"];
+    price_tags_list: {
+        parameters: {
+            query?: {
+                created__gte?: string;
+                created__lte?: string;
+                /** @description Which field to use when ordering the results. */
+                order_by?: string;
+                /** @description A page number within the paginated result set. */
+                page?: number;
+                prediction_count?: number;
+                prediction_count__gte?: number;
+                prediction_count__lte?: number;
+                proof__owner?: string;
+                proof__ready_for_price_tag_validation?: boolean;
+                /** @description The proof this price tag belongs to */
+                proof_id?: number;
+                /** @description Number of results to return per page. */
+                size?: number;
+                /** @description The annotation status
+                 *
+                 *     * `0` - deleted
+                 *     * `1` - linked_to_price
+                 *     * `2` - not_readable
+                 *     * `3` - truncated
+                 *     * `4` - not_price_tag */
+                status?: 0 | 1 | 2 | 3 | 4 | null;
+                status__isnull?: boolean;
+                tags__contains?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PaginatedPriceTagFullList"];
+                };
+            };
         };
-      };
     };
-  };
-  /** Get Location By Osm */
-  get_location_by_osm_api_v1_locations_osm__location_osm_type___location_osm_id__get: {
-    parameters: {
-      path: {
-        location_osm_type: string;
-        location_osm_id: number;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          "application/json": components["schemas"]["LocationFull"];
+    price_tags_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PriceTagCreate"];
+                "application/x-www-form-urlencoded": components["schemas"]["PriceTagCreate"];
+                "multipart/form-data": components["schemas"]["PriceTagCreate"];
+            };
         };
-      };
-    };
-  };
-  /** Get Location By Id */
-  get_location_by_id_api_v1_locations__location_id__get: {
-    parameters: {
-      path: {
-        location_id: number;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          "application/json": components["schemas"]["LocationFull"];
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PriceTagCreate"];
+                };
+            };
         };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
-        };
-      };
     };
-  };
+    price_tags_retrieve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this Price Tag. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PriceTagFull"];
+                };
+            };
+        };
+    };
+    price_tags_destroy: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this Price Tag. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No response body */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    price_tags_partial_update: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this Price Tag. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["PatchedPriceTagUpdate"];
+                "application/x-www-form-urlencoded": components["schemas"]["PatchedPriceTagUpdate"];
+                "multipart/form-data": components["schemas"]["PatchedPriceTagUpdate"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PriceTagUpdate"];
+                };
+            };
+        };
+    };
+    prices_list: {
+        parameters: {
+            query?: {
+                category_tag?: string;
+                created__gte?: string;
+                created__lte?: string;
+                /** @description * `ADP` - ADP
+                 *     * `AED` - AED
+                 *     * `AFA` - AFA
+                 *     * `AFN` - AFN
+                 *     * `ALK` - ALK
+                 *     * `ALL` - ALL
+                 *     * `AMD` - AMD
+                 *     * `ANG` - ANG
+                 *     * `AOA` - AOA
+                 *     * `AOK` - AOK
+                 *     * `AON` - AON
+                 *     * `AOR` - AOR
+                 *     * `ARA` - ARA
+                 *     * `ARL` - ARL
+                 *     * `ARM` - ARM
+                 *     * `ARP` - ARP
+                 *     * `ARS` - ARS
+                 *     * `ATS` - ATS
+                 *     * `AUD` - AUD
+                 *     * `AWG` - AWG
+                 *     * `AZM` - AZM
+                 *     * `AZN` - AZN
+                 *     * `BAD` - BAD
+                 *     * `BAM` - BAM
+                 *     * `BAN` - BAN
+                 *     * `BBD` - BBD
+                 *     * `BDT` - BDT
+                 *     * `BEC` - BEC
+                 *     * `BEF` - BEF
+                 *     * `BEL` - BEL
+                 *     * `BGL` - BGL
+                 *     * `BGM` - BGM
+                 *     * `BGN` - BGN
+                 *     * `BGO` - BGO
+                 *     * `BHD` - BHD
+                 *     * `BIF` - BIF
+                 *     * `BMD` - BMD
+                 *     * `BND` - BND
+                 *     * `BOB` - BOB
+                 *     * `BOL` - BOL
+                 *     * `BOP` - BOP
+                 *     * `BOV` - BOV
+                 *     * `BRB` - BRB
+                 *     * `BRC` - BRC
+                 *     * `BRE` - BRE
+                 *     * `BRL` - BRL
+                 *     * `BRN` - BRN
+                 *     * `BRR` - BRR
+                 *     * `BRZ` - BRZ
+                 *     * `BSD` - BSD
+                 *     * `BTN` - BTN
+                 *     * `BUK` - BUK
+                 *     * `BWP` - BWP
+                 *     * `BYB` - BYB
+                 *     * `BYN` - BYN
+                 *     * `BYR` - BYR
+                 *     * `BZD` - BZD
+                 *     * `CAD` - CAD
+                 *     * `CDF` - CDF
+                 *     * `CHE` - CHE
+                 *     * `CHF` - CHF
+                 *     * `CHW` - CHW
+                 *     * `CLE` - CLE
+                 *     * `CLF` - CLF
+                 *     * `CLP` - CLP
+                 *     * `CNH` - CNH
+                 *     * `CNX` - CNX
+                 *     * `CNY` - CNY
+                 *     * `COP` - COP
+                 *     * `COU` - COU
+                 *     * `CRC` - CRC
+                 *     * `CSD` - CSD
+                 *     * `CSK` - CSK
+                 *     * `CUC` - CUC
+                 *     * `CUP` - CUP
+                 *     * `CVE` - CVE
+                 *     * `CYP` - CYP
+                 *     * `CZK` - CZK
+                 *     * `DDM` - DDM
+                 *     * `DEM` - DEM
+                 *     * `DJF` - DJF
+                 *     * `DKK` - DKK
+                 *     * `DOP` - DOP
+                 *     * `DZD` - DZD
+                 *     * `ECS` - ECS
+                 *     * `ECV` - ECV
+                 *     * `EEK` - EEK
+                 *     * `EGP` - EGP
+                 *     * `ERN` - ERN
+                 *     * `ESA` - ESA
+                 *     * `ESB` - ESB
+                 *     * `ESP` - ESP
+                 *     * `ETB` - ETB
+                 *     * `EUR` - EUR
+                 *     * `FIM` - FIM
+                 *     * `FJD` - FJD
+                 *     * `FKP` - FKP
+                 *     * `FRF` - FRF
+                 *     * `GBP` - GBP
+                 *     * `GEK` - GEK
+                 *     * `GEL` - GEL
+                 *     * `GHC` - GHC
+                 *     * `GHS` - GHS
+                 *     * `GIP` - GIP
+                 *     * `GMD` - GMD
+                 *     * `GNF` - GNF
+                 *     * `GNS` - GNS
+                 *     * `GQE` - GQE
+                 *     * `GRD` - GRD
+                 *     * `GTQ` - GTQ
+                 *     * `GWE` - GWE
+                 *     * `GWP` - GWP
+                 *     * `GYD` - GYD
+                 *     * `HKD` - HKD
+                 *     * `HNL` - HNL
+                 *     * `HRD` - HRD
+                 *     * `HRK` - HRK
+                 *     * `HTG` - HTG
+                 *     * `HUF` - HUF
+                 *     * `IDR` - IDR
+                 *     * `IEP` - IEP
+                 *     * `ILP` - ILP
+                 *     * `ILR` - ILR
+                 *     * `ILS` - ILS
+                 *     * `INR` - INR
+                 *     * `IQD` - IQD
+                 *     * `IRR` - IRR
+                 *     * `ISJ` - ISJ
+                 *     * `ISK` - ISK
+                 *     * `ITL` - ITL
+                 *     * `JMD` - JMD
+                 *     * `JOD` - JOD
+                 *     * `JPY` - JPY
+                 *     * `KES` - KES
+                 *     * `KGS` - KGS
+                 *     * `KHR` - KHR
+                 *     * `KMF` - KMF
+                 *     * `KPW` - KPW
+                 *     * `KRH` - KRH
+                 *     * `KRO` - KRO
+                 *     * `KRW` - KRW
+                 *     * `KWD` - KWD
+                 *     * `KYD` - KYD
+                 *     * `KZT` - KZT
+                 *     * `LAK` - LAK
+                 *     * `LBP` - LBP
+                 *     * `LKR` - LKR
+                 *     * `LRD` - LRD
+                 *     * `LSL` - LSL
+                 *     * `LTL` - LTL
+                 *     * `LTT` - LTT
+                 *     * `LUC` - LUC
+                 *     * `LUF` - LUF
+                 *     * `LUL` - LUL
+                 *     * `LVL` - LVL
+                 *     * `LVR` - LVR
+                 *     * `LYD` - LYD
+                 *     * `MAD` - MAD
+                 *     * `MAF` - MAF
+                 *     * `MCF` - MCF
+                 *     * `MDC` - MDC
+                 *     * `MDL` - MDL
+                 *     * `MGA` - MGA
+                 *     * `MGF` - MGF
+                 *     * `MKD` - MKD
+                 *     * `MKN` - MKN
+                 *     * `MLF` - MLF
+                 *     * `MMK` - MMK
+                 *     * `MNT` - MNT
+                 *     * `MOP` - MOP
+                 *     * `MRO` - MRO
+                 *     * `MRU` - MRU
+                 *     * `MTL` - MTL
+                 *     * `MTP` - MTP
+                 *     * `MUR` - MUR
+                 *     * `MVP` - MVP
+                 *     * `MVR` - MVR
+                 *     * `MWK` - MWK
+                 *     * `MXN` - MXN
+                 *     * `MXP` - MXP
+                 *     * `MXV` - MXV
+                 *     * `MYR` - MYR
+                 *     * `MZE` - MZE
+                 *     * `MZM` - MZM
+                 *     * `MZN` - MZN
+                 *     * `NAD` - NAD
+                 *     * `NGN` - NGN
+                 *     * `NIC` - NIC
+                 *     * `NIO` - NIO
+                 *     * `NLG` - NLG
+                 *     * `NOK` - NOK
+                 *     * `NPR` - NPR
+                 *     * `NZD` - NZD
+                 *     * `OMR` - OMR
+                 *     * `PAB` - PAB
+                 *     * `PEI` - PEI
+                 *     * `PEN` - PEN
+                 *     * `PES` - PES
+                 *     * `PGK` - PGK
+                 *     * `PHP` - PHP
+                 *     * `PKR` - PKR
+                 *     * `PLN` - PLN
+                 *     * `PLZ` - PLZ
+                 *     * `PTE` - PTE
+                 *     * `PYG` - PYG
+                 *     * `QAR` - QAR
+                 *     * `RHD` - RHD
+                 *     * `ROL` - ROL
+                 *     * `RON` - RON
+                 *     * `RSD` - RSD
+                 *     * `RUB` - RUB
+                 *     * `RUR` - RUR
+                 *     * `RWF` - RWF
+                 *     * `SAR` - SAR
+                 *     * `SBD` - SBD
+                 *     * `SCR` - SCR
+                 *     * `SDD` - SDD
+                 *     * `SDG` - SDG
+                 *     * `SDP` - SDP
+                 *     * `SEK` - SEK
+                 *     * `SGD` - SGD
+                 *     * `SHP` - SHP
+                 *     * `SIT` - SIT
+                 *     * `SKK` - SKK
+                 *     * `SLE` - SLE
+                 *     * `SLL` - SLL
+                 *     * `SOS` - SOS
+                 *     * `SRD` - SRD
+                 *     * `SRG` - SRG
+                 *     * `SSP` - SSP
+                 *     * `STD` - STD
+                 *     * `STN` - STN
+                 *     * `SUR` - SUR
+                 *     * `SVC` - SVC
+                 *     * `SYP` - SYP
+                 *     * `SZL` - SZL
+                 *     * `THB` - THB
+                 *     * `TJR` - TJR
+                 *     * `TJS` - TJS
+                 *     * `TMM` - TMM
+                 *     * `TMT` - TMT
+                 *     * `TND` - TND
+                 *     * `TOP` - TOP
+                 *     * `TPE` - TPE
+                 *     * `TRL` - TRL
+                 *     * `TRY` - TRY
+                 *     * `TTD` - TTD
+                 *     * `TWD` - TWD
+                 *     * `TZS` - TZS
+                 *     * `UAH` - UAH
+                 *     * `UAK` - UAK
+                 *     * `UGS` - UGS
+                 *     * `UGX` - UGX
+                 *     * `USD` - USD
+                 *     * `USN` - USN
+                 *     * `USS` - USS
+                 *     * `UYI` - UYI
+                 *     * `UYP` - UYP
+                 *     * `UYU` - UYU
+                 *     * `UYW` - UYW
+                 *     * `UZS` - UZS
+                 *     * `VEB` - VEB
+                 *     * `VED` - VED
+                 *     * `VEF` - VEF
+                 *     * `VES` - VES
+                 *     * `VND` - VND
+                 *     * `VNN` - VNN
+                 *     * `VUV` - VUV
+                 *     * `WST` - WST
+                 *     * `XAF` - XAF
+                 *     * `XAG` - XAG
+                 *     * `XAU` - XAU
+                 *     * `XBA` - XBA
+                 *     * `XBB` - XBB
+                 *     * `XBC` - XBC
+                 *     * `XBD` - XBD
+                 *     * `XCD` - XCD
+                 *     * `XDR` - XDR
+                 *     * `XEU` - XEU
+                 *     * `XFO` - XFO
+                 *     * `XFU` - XFU
+                 *     * `XOF` - XOF
+                 *     * `XPD` - XPD
+                 *     * `XPF` - XPF
+                 *     * `XPT` - XPT
+                 *     * `XRE` - XRE
+                 *     * `XSU` - XSU
+                 *     * `XTS` - XTS
+                 *     * `XUA` - XUA
+                 *     * `XXX` - XXX
+                 *     * `YDD` - YDD
+                 *     * `YER` - YER
+                 *     * `YUD` - YUD
+                 *     * `YUM` - YUM
+                 *     * `YUN` - YUN
+                 *     * `YUR` - YUR
+                 *     * `ZAL` - ZAL
+                 *     * `ZAR` - ZAR
+                 *     * `ZMK` - ZMK
+                 *     * `ZMW` - ZMW
+                 *     * `ZRN` - ZRN
+                 *     * `ZRZ` - ZRZ
+                 *     * `ZWD` - ZWD
+                 *     * `ZWL` - ZWL
+                 *     * `ZWR` - ZWR */
+                currency?: "ADP" | "AED" | "AFA" | "AFN" | "ALK" | "ALL" | "AMD" | "ANG" | "AOA" | "AOK" | "AON" | "AOR" | "ARA" | "ARL" | "ARM" | "ARP" | "ARS" | "ATS" | "AUD" | "AWG" | "AZM" | "AZN" | "BAD" | "BAM" | "BAN" | "BBD" | "BDT" | "BEC" | "BEF" | "BEL" | "BGL" | "BGM" | "BGN" | "BGO" | "BHD" | "BIF" | "BMD" | "BND" | "BOB" | "BOL" | "BOP" | "BOV" | "BRB" | "BRC" | "BRE" | "BRL" | "BRN" | "BRR" | "BRZ" | "BSD" | "BTN" | "BUK" | "BWP" | "BYB" | "BYN" | "BYR" | "BZD" | "CAD" | "CDF" | "CHE" | "CHF" | "CHW" | "CLE" | "CLF" | "CLP" | "CNH" | "CNX" | "CNY" | "COP" | "COU" | "CRC" | "CSD" | "CSK" | "CUC" | "CUP" | "CVE" | "CYP" | "CZK" | "DDM" | "DEM" | "DJF" | "DKK" | "DOP" | "DZD" | "ECS" | "ECV" | "EEK" | "EGP" | "ERN" | "ESA" | "ESB" | "ESP" | "ETB" | "EUR" | "FIM" | "FJD" | "FKP" | "FRF" | "GBP" | "GEK" | "GEL" | "GHC" | "GHS" | "GIP" | "GMD" | "GNF" | "GNS" | "GQE" | "GRD" | "GTQ" | "GWE" | "GWP" | "GYD" | "HKD" | "HNL" | "HRD" | "HRK" | "HTG" | "HUF" | "IDR" | "IEP" | "ILP" | "ILR" | "ILS" | "INR" | "IQD" | "IRR" | "ISJ" | "ISK" | "ITL" | "JMD" | "JOD" | "JPY" | "KES" | "KGS" | "KHR" | "KMF" | "KPW" | "KRH" | "KRO" | "KRW" | "KWD" | "KYD" | "KZT" | "LAK" | "LBP" | "LKR" | "LRD" | "LSL" | "LTL" | "LTT" | "LUC" | "LUF" | "LUL" | "LVL" | "LVR" | "LYD" | "MAD" | "MAF" | "MCF" | "MDC" | "MDL" | "MGA" | "MGF" | "MKD" | "MKN" | "MLF" | "MMK" | "MNT" | "MOP" | "MRO" | "MRU" | "MTL" | "MTP" | "MUR" | "MVP" | "MVR" | "MWK" | "MXN" | "MXP" | "MXV" | "MYR" | "MZE" | "MZM" | "MZN" | "NAD" | "NGN" | "NIC" | "NIO" | "NLG" | "NOK" | "NPR" | "NZD" | "OMR" | "PAB" | "PEI" | "PEN" | "PES" | "PGK" | "PHP" | "PKR" | "PLN" | "PLZ" | "PTE" | "PYG" | "QAR" | "RHD" | "ROL" | "RON" | "RSD" | "RUB" | "RUR" | "RWF" | "SAR" | "SBD" | "SCR" | "SDD" | "SDG" | "SDP" | "SEK" | "SGD" | "SHP" | "SIT" | "SKK" | "SLE" | "SLL" | "SOS" | "SRD" | "SRG" | "SSP" | "STD" | "STN" | "SUR" | "SVC" | "SYP" | "SZL" | "THB" | "TJR" | "TJS" | "TMM" | "TMT" | "TND" | "TOP" | "TPE" | "TRL" | "TRY" | "TTD" | "TWD" | "TZS" | "UAH" | "UAK" | "UGS" | "UGX" | "USD" | "USN" | "USS" | "UYI" | "UYP" | "UYU" | "UYW" | "UZS" | "VEB" | "VED" | "VEF" | "VES" | "VND" | "VNN" | "VUV" | "WST" | "XAF" | "XAG" | "XAU" | "XBA" | "XBB" | "XBC" | "XBD" | "XCD" | "XDR" | "XEU" | "XFO" | "XFU" | "XOF" | "XPD" | "XPF" | "XPT" | "XRE" | "XSU" | "XTS" | "XUA" | "XXX" | "YDD" | "YER" | "YUD" | "YUM" | "YUN" | "YUR" | "ZAL" | "ZAR" | "ZMK" | "ZMW" | "ZRN" | "ZRZ" | "ZWD" | "ZWL" | "ZWR" | null;
+                date?: string;
+                date__gt?: string;
+                date__gte?: string;
+                date__lt?: string;
+                date__lte?: string;
+                date__month?: number;
+                date__year?: number;
+                /** @description * `QUANTITY` - QUANTITY
+                 *     * `SALE` - SALE
+                 *     * `SEASONAL` - SEASONAL
+                 *     * `LOYALTY_PROGRAM` - LOYALTY_PROGRAM
+                 *     * `EXPIRES_SOON` - EXPIRES_SOON
+                 *     * `PICK_IT_YOURSELF` - PICK_IT_YOURSELF
+                 *     * `SECOND_HAND` - SECOND_HAND
+                 *     * `OTHER` - OTHER */
+                discount_type?: "EXPIRES_SOON" | "LOYALTY_PROGRAM" | "OTHER" | "PICK_IT_YOURSELF" | "QUANTITY" | "SALE" | "SEASONAL" | "SECOND_HAND" | null;
+                /** @description * `COMMUNITY` - COMMUNITY
+                 *     * `CONSUMPTION` - CONSUMPTION */
+                kind?: "COMMUNITY" | "CONSUMPTION";
+                labels_tags__contains?: string;
+                location__osm_name__contains?: string;
+                location_id?: number | null;
+                location_id__isnull?: boolean;
+                location_osm_id?: number;
+                /** @description * `NODE` - NODE
+                 *     * `WAY` - WAY
+                 *     * `RELATION` - RELATION */
+                location_osm_type?: "NODE" | "RELATION" | "WAY" | null;
+                /** @description Which field to use when ordering the results. */
+                order_by?: string;
+                origins_tags__contains?: string;
+                owner?: string;
+                /** @description A page number within the paginated result set. */
+                page?: number;
+                price?: number;
+                price__gt?: number;
+                price__gte?: number;
+                price__lt?: number;
+                price__lte?: number;
+                price_is_discounted?: boolean;
+                product__categories_tags__contains?: string;
+                /** @description Provide multiple values as separate query parameters. Example: ?product__categories_tags__overlap=en:breakfasts&product__categories_tags__overlap=en:apples */
+                product__categories_tags__overlap?: string[][];
+                product_code?: string;
+                product_id?: number | null;
+                product_id__isnull?: boolean;
+                product_name?: string;
+                /** @description * `PRICE_TAG` - PRICE_TAG
+                 *     * `RECEIPT` - RECEIPT
+                 *     * `GDPR_REQUEST` - GDPR_REQUEST
+                 *     * `SHOP_IMPORT` - SHOP_IMPORT */
+                proof__type?: ("GDPR_REQUEST" | "PRICE_TAG" | "RECEIPT" | "SHOP_IMPORT")[];
+                proof_id?: number | null;
+                proof_id__isnull?: boolean;
+                /** @description Number of results to return per page. */
+                size?: number;
+                tags__contains?: string;
+                /** @description * `PRODUCT` - PRODUCT
+                 *     * `CATEGORY` - CATEGORY */
+                type?: "CATEGORY" | "PRODUCT";
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PaginatedPriceFullList"];
+                };
+            };
+        };
+    };
+    prices_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PriceCreate"];
+                "application/x-www-form-urlencoded": components["schemas"]["PriceCreate"];
+                "multipart/form-data": components["schemas"]["PriceCreate"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PriceCreate"];
+                };
+            };
+        };
+    };
+    prices_retrieve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this Price. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PriceFull"];
+                };
+            };
+        };
+    };
+    prices_destroy: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this Price. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No response body */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    prices_partial_update: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this Price. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["PatchedPriceUpdate"];
+                "application/x-www-form-urlencoded": components["schemas"]["PatchedPriceUpdate"];
+                "multipart/form-data": components["schemas"]["PatchedPriceUpdate"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PriceUpdate"];
+                };
+            };
+        };
+    };
+    prices_stats_retrieve: {
+        parameters: {
+            query?: {
+                category_tag?: string;
+                created__gte?: string;
+                created__lte?: string;
+                /** @description * `ADP` - ADP
+                 *     * `AED` - AED
+                 *     * `AFA` - AFA
+                 *     * `AFN` - AFN
+                 *     * `ALK` - ALK
+                 *     * `ALL` - ALL
+                 *     * `AMD` - AMD
+                 *     * `ANG` - ANG
+                 *     * `AOA` - AOA
+                 *     * `AOK` - AOK
+                 *     * `AON` - AON
+                 *     * `AOR` - AOR
+                 *     * `ARA` - ARA
+                 *     * `ARL` - ARL
+                 *     * `ARM` - ARM
+                 *     * `ARP` - ARP
+                 *     * `ARS` - ARS
+                 *     * `ATS` - ATS
+                 *     * `AUD` - AUD
+                 *     * `AWG` - AWG
+                 *     * `AZM` - AZM
+                 *     * `AZN` - AZN
+                 *     * `BAD` - BAD
+                 *     * `BAM` - BAM
+                 *     * `BAN` - BAN
+                 *     * `BBD` - BBD
+                 *     * `BDT` - BDT
+                 *     * `BEC` - BEC
+                 *     * `BEF` - BEF
+                 *     * `BEL` - BEL
+                 *     * `BGL` - BGL
+                 *     * `BGM` - BGM
+                 *     * `BGN` - BGN
+                 *     * `BGO` - BGO
+                 *     * `BHD` - BHD
+                 *     * `BIF` - BIF
+                 *     * `BMD` - BMD
+                 *     * `BND` - BND
+                 *     * `BOB` - BOB
+                 *     * `BOL` - BOL
+                 *     * `BOP` - BOP
+                 *     * `BOV` - BOV
+                 *     * `BRB` - BRB
+                 *     * `BRC` - BRC
+                 *     * `BRE` - BRE
+                 *     * `BRL` - BRL
+                 *     * `BRN` - BRN
+                 *     * `BRR` - BRR
+                 *     * `BRZ` - BRZ
+                 *     * `BSD` - BSD
+                 *     * `BTN` - BTN
+                 *     * `BUK` - BUK
+                 *     * `BWP` - BWP
+                 *     * `BYB` - BYB
+                 *     * `BYN` - BYN
+                 *     * `BYR` - BYR
+                 *     * `BZD` - BZD
+                 *     * `CAD` - CAD
+                 *     * `CDF` - CDF
+                 *     * `CHE` - CHE
+                 *     * `CHF` - CHF
+                 *     * `CHW` - CHW
+                 *     * `CLE` - CLE
+                 *     * `CLF` - CLF
+                 *     * `CLP` - CLP
+                 *     * `CNH` - CNH
+                 *     * `CNX` - CNX
+                 *     * `CNY` - CNY
+                 *     * `COP` - COP
+                 *     * `COU` - COU
+                 *     * `CRC` - CRC
+                 *     * `CSD` - CSD
+                 *     * `CSK` - CSK
+                 *     * `CUC` - CUC
+                 *     * `CUP` - CUP
+                 *     * `CVE` - CVE
+                 *     * `CYP` - CYP
+                 *     * `CZK` - CZK
+                 *     * `DDM` - DDM
+                 *     * `DEM` - DEM
+                 *     * `DJF` - DJF
+                 *     * `DKK` - DKK
+                 *     * `DOP` - DOP
+                 *     * `DZD` - DZD
+                 *     * `ECS` - ECS
+                 *     * `ECV` - ECV
+                 *     * `EEK` - EEK
+                 *     * `EGP` - EGP
+                 *     * `ERN` - ERN
+                 *     * `ESA` - ESA
+                 *     * `ESB` - ESB
+                 *     * `ESP` - ESP
+                 *     * `ETB` - ETB
+                 *     * `EUR` - EUR
+                 *     * `FIM` - FIM
+                 *     * `FJD` - FJD
+                 *     * `FKP` - FKP
+                 *     * `FRF` - FRF
+                 *     * `GBP` - GBP
+                 *     * `GEK` - GEK
+                 *     * `GEL` - GEL
+                 *     * `GHC` - GHC
+                 *     * `GHS` - GHS
+                 *     * `GIP` - GIP
+                 *     * `GMD` - GMD
+                 *     * `GNF` - GNF
+                 *     * `GNS` - GNS
+                 *     * `GQE` - GQE
+                 *     * `GRD` - GRD
+                 *     * `GTQ` - GTQ
+                 *     * `GWE` - GWE
+                 *     * `GWP` - GWP
+                 *     * `GYD` - GYD
+                 *     * `HKD` - HKD
+                 *     * `HNL` - HNL
+                 *     * `HRD` - HRD
+                 *     * `HRK` - HRK
+                 *     * `HTG` - HTG
+                 *     * `HUF` - HUF
+                 *     * `IDR` - IDR
+                 *     * `IEP` - IEP
+                 *     * `ILP` - ILP
+                 *     * `ILR` - ILR
+                 *     * `ILS` - ILS
+                 *     * `INR` - INR
+                 *     * `IQD` - IQD
+                 *     * `IRR` - IRR
+                 *     * `ISJ` - ISJ
+                 *     * `ISK` - ISK
+                 *     * `ITL` - ITL
+                 *     * `JMD` - JMD
+                 *     * `JOD` - JOD
+                 *     * `JPY` - JPY
+                 *     * `KES` - KES
+                 *     * `KGS` - KGS
+                 *     * `KHR` - KHR
+                 *     * `KMF` - KMF
+                 *     * `KPW` - KPW
+                 *     * `KRH` - KRH
+                 *     * `KRO` - KRO
+                 *     * `KRW` - KRW
+                 *     * `KWD` - KWD
+                 *     * `KYD` - KYD
+                 *     * `KZT` - KZT
+                 *     * `LAK` - LAK
+                 *     * `LBP` - LBP
+                 *     * `LKR` - LKR
+                 *     * `LRD` - LRD
+                 *     * `LSL` - LSL
+                 *     * `LTL` - LTL
+                 *     * `LTT` - LTT
+                 *     * `LUC` - LUC
+                 *     * `LUF` - LUF
+                 *     * `LUL` - LUL
+                 *     * `LVL` - LVL
+                 *     * `LVR` - LVR
+                 *     * `LYD` - LYD
+                 *     * `MAD` - MAD
+                 *     * `MAF` - MAF
+                 *     * `MCF` - MCF
+                 *     * `MDC` - MDC
+                 *     * `MDL` - MDL
+                 *     * `MGA` - MGA
+                 *     * `MGF` - MGF
+                 *     * `MKD` - MKD
+                 *     * `MKN` - MKN
+                 *     * `MLF` - MLF
+                 *     * `MMK` - MMK
+                 *     * `MNT` - MNT
+                 *     * `MOP` - MOP
+                 *     * `MRO` - MRO
+                 *     * `MRU` - MRU
+                 *     * `MTL` - MTL
+                 *     * `MTP` - MTP
+                 *     * `MUR` - MUR
+                 *     * `MVP` - MVP
+                 *     * `MVR` - MVR
+                 *     * `MWK` - MWK
+                 *     * `MXN` - MXN
+                 *     * `MXP` - MXP
+                 *     * `MXV` - MXV
+                 *     * `MYR` - MYR
+                 *     * `MZE` - MZE
+                 *     * `MZM` - MZM
+                 *     * `MZN` - MZN
+                 *     * `NAD` - NAD
+                 *     * `NGN` - NGN
+                 *     * `NIC` - NIC
+                 *     * `NIO` - NIO
+                 *     * `NLG` - NLG
+                 *     * `NOK` - NOK
+                 *     * `NPR` - NPR
+                 *     * `NZD` - NZD
+                 *     * `OMR` - OMR
+                 *     * `PAB` - PAB
+                 *     * `PEI` - PEI
+                 *     * `PEN` - PEN
+                 *     * `PES` - PES
+                 *     * `PGK` - PGK
+                 *     * `PHP` - PHP
+                 *     * `PKR` - PKR
+                 *     * `PLN` - PLN
+                 *     * `PLZ` - PLZ
+                 *     * `PTE` - PTE
+                 *     * `PYG` - PYG
+                 *     * `QAR` - QAR
+                 *     * `RHD` - RHD
+                 *     * `ROL` - ROL
+                 *     * `RON` - RON
+                 *     * `RSD` - RSD
+                 *     * `RUB` - RUB
+                 *     * `RUR` - RUR
+                 *     * `RWF` - RWF
+                 *     * `SAR` - SAR
+                 *     * `SBD` - SBD
+                 *     * `SCR` - SCR
+                 *     * `SDD` - SDD
+                 *     * `SDG` - SDG
+                 *     * `SDP` - SDP
+                 *     * `SEK` - SEK
+                 *     * `SGD` - SGD
+                 *     * `SHP` - SHP
+                 *     * `SIT` - SIT
+                 *     * `SKK` - SKK
+                 *     * `SLE` - SLE
+                 *     * `SLL` - SLL
+                 *     * `SOS` - SOS
+                 *     * `SRD` - SRD
+                 *     * `SRG` - SRG
+                 *     * `SSP` - SSP
+                 *     * `STD` - STD
+                 *     * `STN` - STN
+                 *     * `SUR` - SUR
+                 *     * `SVC` - SVC
+                 *     * `SYP` - SYP
+                 *     * `SZL` - SZL
+                 *     * `THB` - THB
+                 *     * `TJR` - TJR
+                 *     * `TJS` - TJS
+                 *     * `TMM` - TMM
+                 *     * `TMT` - TMT
+                 *     * `TND` - TND
+                 *     * `TOP` - TOP
+                 *     * `TPE` - TPE
+                 *     * `TRL` - TRL
+                 *     * `TRY` - TRY
+                 *     * `TTD` - TTD
+                 *     * `TWD` - TWD
+                 *     * `TZS` - TZS
+                 *     * `UAH` - UAH
+                 *     * `UAK` - UAK
+                 *     * `UGS` - UGS
+                 *     * `UGX` - UGX
+                 *     * `USD` - USD
+                 *     * `USN` - USN
+                 *     * `USS` - USS
+                 *     * `UYI` - UYI
+                 *     * `UYP` - UYP
+                 *     * `UYU` - UYU
+                 *     * `UYW` - UYW
+                 *     * `UZS` - UZS
+                 *     * `VEB` - VEB
+                 *     * `VED` - VED
+                 *     * `VEF` - VEF
+                 *     * `VES` - VES
+                 *     * `VND` - VND
+                 *     * `VNN` - VNN
+                 *     * `VUV` - VUV
+                 *     * `WST` - WST
+                 *     * `XAF` - XAF
+                 *     * `XAG` - XAG
+                 *     * `XAU` - XAU
+                 *     * `XBA` - XBA
+                 *     * `XBB` - XBB
+                 *     * `XBC` - XBC
+                 *     * `XBD` - XBD
+                 *     * `XCD` - XCD
+                 *     * `XDR` - XDR
+                 *     * `XEU` - XEU
+                 *     * `XFO` - XFO
+                 *     * `XFU` - XFU
+                 *     * `XOF` - XOF
+                 *     * `XPD` - XPD
+                 *     * `XPF` - XPF
+                 *     * `XPT` - XPT
+                 *     * `XRE` - XRE
+                 *     * `XSU` - XSU
+                 *     * `XTS` - XTS
+                 *     * `XUA` - XUA
+                 *     * `XXX` - XXX
+                 *     * `YDD` - YDD
+                 *     * `YER` - YER
+                 *     * `YUD` - YUD
+                 *     * `YUM` - YUM
+                 *     * `YUN` - YUN
+                 *     * `YUR` - YUR
+                 *     * `ZAL` - ZAL
+                 *     * `ZAR` - ZAR
+                 *     * `ZMK` - ZMK
+                 *     * `ZMW` - ZMW
+                 *     * `ZRN` - ZRN
+                 *     * `ZRZ` - ZRZ
+                 *     * `ZWD` - ZWD
+                 *     * `ZWL` - ZWL
+                 *     * `ZWR` - ZWR */
+                currency?: "ADP" | "AED" | "AFA" | "AFN" | "ALK" | "ALL" | "AMD" | "ANG" | "AOA" | "AOK" | "AON" | "AOR" | "ARA" | "ARL" | "ARM" | "ARP" | "ARS" | "ATS" | "AUD" | "AWG" | "AZM" | "AZN" | "BAD" | "BAM" | "BAN" | "BBD" | "BDT" | "BEC" | "BEF" | "BEL" | "BGL" | "BGM" | "BGN" | "BGO" | "BHD" | "BIF" | "BMD" | "BND" | "BOB" | "BOL" | "BOP" | "BOV" | "BRB" | "BRC" | "BRE" | "BRL" | "BRN" | "BRR" | "BRZ" | "BSD" | "BTN" | "BUK" | "BWP" | "BYB" | "BYN" | "BYR" | "BZD" | "CAD" | "CDF" | "CHE" | "CHF" | "CHW" | "CLE" | "CLF" | "CLP" | "CNH" | "CNX" | "CNY" | "COP" | "COU" | "CRC" | "CSD" | "CSK" | "CUC" | "CUP" | "CVE" | "CYP" | "CZK" | "DDM" | "DEM" | "DJF" | "DKK" | "DOP" | "DZD" | "ECS" | "ECV" | "EEK" | "EGP" | "ERN" | "ESA" | "ESB" | "ESP" | "ETB" | "EUR" | "FIM" | "FJD" | "FKP" | "FRF" | "GBP" | "GEK" | "GEL" | "GHC" | "GHS" | "GIP" | "GMD" | "GNF" | "GNS" | "GQE" | "GRD" | "GTQ" | "GWE" | "GWP" | "GYD" | "HKD" | "HNL" | "HRD" | "HRK" | "HTG" | "HUF" | "IDR" | "IEP" | "ILP" | "ILR" | "ILS" | "INR" | "IQD" | "IRR" | "ISJ" | "ISK" | "ITL" | "JMD" | "JOD" | "JPY" | "KES" | "KGS" | "KHR" | "KMF" | "KPW" | "KRH" | "KRO" | "KRW" | "KWD" | "KYD" | "KZT" | "LAK" | "LBP" | "LKR" | "LRD" | "LSL" | "LTL" | "LTT" | "LUC" | "LUF" | "LUL" | "LVL" | "LVR" | "LYD" | "MAD" | "MAF" | "MCF" | "MDC" | "MDL" | "MGA" | "MGF" | "MKD" | "MKN" | "MLF" | "MMK" | "MNT" | "MOP" | "MRO" | "MRU" | "MTL" | "MTP" | "MUR" | "MVP" | "MVR" | "MWK" | "MXN" | "MXP" | "MXV" | "MYR" | "MZE" | "MZM" | "MZN" | "NAD" | "NGN" | "NIC" | "NIO" | "NLG" | "NOK" | "NPR" | "NZD" | "OMR" | "PAB" | "PEI" | "PEN" | "PES" | "PGK" | "PHP" | "PKR" | "PLN" | "PLZ" | "PTE" | "PYG" | "QAR" | "RHD" | "ROL" | "RON" | "RSD" | "RUB" | "RUR" | "RWF" | "SAR" | "SBD" | "SCR" | "SDD" | "SDG" | "SDP" | "SEK" | "SGD" | "SHP" | "SIT" | "SKK" | "SLE" | "SLL" | "SOS" | "SRD" | "SRG" | "SSP" | "STD" | "STN" | "SUR" | "SVC" | "SYP" | "SZL" | "THB" | "TJR" | "TJS" | "TMM" | "TMT" | "TND" | "TOP" | "TPE" | "TRL" | "TRY" | "TTD" | "TWD" | "TZS" | "UAH" | "UAK" | "UGS" | "UGX" | "USD" | "USN" | "USS" | "UYI" | "UYP" | "UYU" | "UYW" | "UZS" | "VEB" | "VED" | "VEF" | "VES" | "VND" | "VNN" | "VUV" | "WST" | "XAF" | "XAG" | "XAU" | "XBA" | "XBB" | "XBC" | "XBD" | "XCD" | "XDR" | "XEU" | "XFO" | "XFU" | "XOF" | "XPD" | "XPF" | "XPT" | "XRE" | "XSU" | "XTS" | "XUA" | "XXX" | "YDD" | "YER" | "YUD" | "YUM" | "YUN" | "YUR" | "ZAL" | "ZAR" | "ZMK" | "ZMW" | "ZRN" | "ZRZ" | "ZWD" | "ZWL" | "ZWR" | null;
+                date?: string;
+                date__gt?: string;
+                date__gte?: string;
+                date__lt?: string;
+                date__lte?: string;
+                date__month?: number;
+                date__year?: number;
+                /** @description * `QUANTITY` - QUANTITY
+                 *     * `SALE` - SALE
+                 *     * `SEASONAL` - SEASONAL
+                 *     * `LOYALTY_PROGRAM` - LOYALTY_PROGRAM
+                 *     * `EXPIRES_SOON` - EXPIRES_SOON
+                 *     * `PICK_IT_YOURSELF` - PICK_IT_YOURSELF
+                 *     * `SECOND_HAND` - SECOND_HAND
+                 *     * `OTHER` - OTHER */
+                discount_type?: "EXPIRES_SOON" | "LOYALTY_PROGRAM" | "OTHER" | "PICK_IT_YOURSELF" | "QUANTITY" | "SALE" | "SEASONAL" | "SECOND_HAND" | null;
+                /** @description * `COMMUNITY` - COMMUNITY
+                 *     * `CONSUMPTION` - CONSUMPTION */
+                kind?: "COMMUNITY" | "CONSUMPTION";
+                labels_tags__contains?: string;
+                location__osm_name__contains?: string;
+                location_id?: number | null;
+                location_id__isnull?: boolean;
+                location_osm_id?: number;
+                /** @description * `NODE` - NODE
+                 *     * `WAY` - WAY
+                 *     * `RELATION` - RELATION */
+                location_osm_type?: "NODE" | "RELATION" | "WAY" | null;
+                /** @description Which field to use when ordering the results. */
+                order_by?: string;
+                origins_tags__contains?: string;
+                owner?: string;
+                price?: number;
+                price__gt?: number;
+                price__gte?: number;
+                price__lt?: number;
+                price__lte?: number;
+                price_is_discounted?: boolean;
+                product__categories_tags__contains?: string;
+                /** @description Provide multiple values as separate query parameters. Example: ?product__categories_tags__overlap=en:breakfasts&product__categories_tags__overlap=en:apples */
+                product__categories_tags__overlap?: string[][];
+                product_code?: string;
+                product_id?: number | null;
+                product_id__isnull?: boolean;
+                product_name?: string;
+                /** @description * `PRICE_TAG` - PRICE_TAG
+                 *     * `RECEIPT` - RECEIPT
+                 *     * `GDPR_REQUEST` - GDPR_REQUEST
+                 *     * `SHOP_IMPORT` - SHOP_IMPORT */
+                proof__type?: ("GDPR_REQUEST" | "PRICE_TAG" | "RECEIPT" | "SHOP_IMPORT")[];
+                proof_id?: number | null;
+                proof_id__isnull?: boolean;
+                tags__contains?: string;
+                /** @description * `PRODUCT` - PRODUCT
+                 *     * `CATEGORY` - CATEGORY */
+                type?: "CATEGORY" | "PRODUCT";
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PriceStats"];
+                };
+            };
+        };
+    };
+    products_list: {
+        parameters: {
+            query?: {
+                brands__like?: string;
+                brands_tags__contains?: string;
+                categories_tags__contains?: string;
+                code?: string;
+                ecoscore_grade?: string;
+                labels_tags__contains?: string;
+                nova_group?: number;
+                nutriscore_grade?: string;
+                /** @description Which field to use when ordering the results. */
+                order_by?: string;
+                /** @description A page number within the paginated result set. */
+                page?: number;
+                price_count?: number;
+                price_count__gte?: number;
+                price_count__lte?: number;
+                product_name__like?: string;
+                /** @description Number of results to return per page. */
+                size?: number;
+                /** @description * `off` - off
+                 *     * `obf` - obf
+                 *     * `opff` - opff
+                 *     * `opf` - opf */
+                source?: "obf" | "off" | "opf" | "opff" | null;
+                unique_scans_n__gte?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PaginatedProductFullList"];
+                };
+            };
+        };
+    };
+    products_retrieve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this Product. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProductFull"];
+                };
+            };
+        };
+    };
+    products_code_retrieve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                code: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProductFull"];
+                };
+            };
+        };
+    };
+    proofs_list: {
+        parameters: {
+            query?: {
+                created__gte?: string;
+                created__lte?: string;
+                /** @description * `ADP` - ADP
+                 *     * `AED` - AED
+                 *     * `AFA` - AFA
+                 *     * `AFN` - AFN
+                 *     * `ALK` - ALK
+                 *     * `ALL` - ALL
+                 *     * `AMD` - AMD
+                 *     * `ANG` - ANG
+                 *     * `AOA` - AOA
+                 *     * `AOK` - AOK
+                 *     * `AON` - AON
+                 *     * `AOR` - AOR
+                 *     * `ARA` - ARA
+                 *     * `ARL` - ARL
+                 *     * `ARM` - ARM
+                 *     * `ARP` - ARP
+                 *     * `ARS` - ARS
+                 *     * `ATS` - ATS
+                 *     * `AUD` - AUD
+                 *     * `AWG` - AWG
+                 *     * `AZM` - AZM
+                 *     * `AZN` - AZN
+                 *     * `BAD` - BAD
+                 *     * `BAM` - BAM
+                 *     * `BAN` - BAN
+                 *     * `BBD` - BBD
+                 *     * `BDT` - BDT
+                 *     * `BEC` - BEC
+                 *     * `BEF` - BEF
+                 *     * `BEL` - BEL
+                 *     * `BGL` - BGL
+                 *     * `BGM` - BGM
+                 *     * `BGN` - BGN
+                 *     * `BGO` - BGO
+                 *     * `BHD` - BHD
+                 *     * `BIF` - BIF
+                 *     * `BMD` - BMD
+                 *     * `BND` - BND
+                 *     * `BOB` - BOB
+                 *     * `BOL` - BOL
+                 *     * `BOP` - BOP
+                 *     * `BOV` - BOV
+                 *     * `BRB` - BRB
+                 *     * `BRC` - BRC
+                 *     * `BRE` - BRE
+                 *     * `BRL` - BRL
+                 *     * `BRN` - BRN
+                 *     * `BRR` - BRR
+                 *     * `BRZ` - BRZ
+                 *     * `BSD` - BSD
+                 *     * `BTN` - BTN
+                 *     * `BUK` - BUK
+                 *     * `BWP` - BWP
+                 *     * `BYB` - BYB
+                 *     * `BYN` - BYN
+                 *     * `BYR` - BYR
+                 *     * `BZD` - BZD
+                 *     * `CAD` - CAD
+                 *     * `CDF` - CDF
+                 *     * `CHE` - CHE
+                 *     * `CHF` - CHF
+                 *     * `CHW` - CHW
+                 *     * `CLE` - CLE
+                 *     * `CLF` - CLF
+                 *     * `CLP` - CLP
+                 *     * `CNH` - CNH
+                 *     * `CNX` - CNX
+                 *     * `CNY` - CNY
+                 *     * `COP` - COP
+                 *     * `COU` - COU
+                 *     * `CRC` - CRC
+                 *     * `CSD` - CSD
+                 *     * `CSK` - CSK
+                 *     * `CUC` - CUC
+                 *     * `CUP` - CUP
+                 *     * `CVE` - CVE
+                 *     * `CYP` - CYP
+                 *     * `CZK` - CZK
+                 *     * `DDM` - DDM
+                 *     * `DEM` - DEM
+                 *     * `DJF` - DJF
+                 *     * `DKK` - DKK
+                 *     * `DOP` - DOP
+                 *     * `DZD` - DZD
+                 *     * `ECS` - ECS
+                 *     * `ECV` - ECV
+                 *     * `EEK` - EEK
+                 *     * `EGP` - EGP
+                 *     * `ERN` - ERN
+                 *     * `ESA` - ESA
+                 *     * `ESB` - ESB
+                 *     * `ESP` - ESP
+                 *     * `ETB` - ETB
+                 *     * `EUR` - EUR
+                 *     * `FIM` - FIM
+                 *     * `FJD` - FJD
+                 *     * `FKP` - FKP
+                 *     * `FRF` - FRF
+                 *     * `GBP` - GBP
+                 *     * `GEK` - GEK
+                 *     * `GEL` - GEL
+                 *     * `GHC` - GHC
+                 *     * `GHS` - GHS
+                 *     * `GIP` - GIP
+                 *     * `GMD` - GMD
+                 *     * `GNF` - GNF
+                 *     * `GNS` - GNS
+                 *     * `GQE` - GQE
+                 *     * `GRD` - GRD
+                 *     * `GTQ` - GTQ
+                 *     * `GWE` - GWE
+                 *     * `GWP` - GWP
+                 *     * `GYD` - GYD
+                 *     * `HKD` - HKD
+                 *     * `HNL` - HNL
+                 *     * `HRD` - HRD
+                 *     * `HRK` - HRK
+                 *     * `HTG` - HTG
+                 *     * `HUF` - HUF
+                 *     * `IDR` - IDR
+                 *     * `IEP` - IEP
+                 *     * `ILP` - ILP
+                 *     * `ILR` - ILR
+                 *     * `ILS` - ILS
+                 *     * `INR` - INR
+                 *     * `IQD` - IQD
+                 *     * `IRR` - IRR
+                 *     * `ISJ` - ISJ
+                 *     * `ISK` - ISK
+                 *     * `ITL` - ITL
+                 *     * `JMD` - JMD
+                 *     * `JOD` - JOD
+                 *     * `JPY` - JPY
+                 *     * `KES` - KES
+                 *     * `KGS` - KGS
+                 *     * `KHR` - KHR
+                 *     * `KMF` - KMF
+                 *     * `KPW` - KPW
+                 *     * `KRH` - KRH
+                 *     * `KRO` - KRO
+                 *     * `KRW` - KRW
+                 *     * `KWD` - KWD
+                 *     * `KYD` - KYD
+                 *     * `KZT` - KZT
+                 *     * `LAK` - LAK
+                 *     * `LBP` - LBP
+                 *     * `LKR` - LKR
+                 *     * `LRD` - LRD
+                 *     * `LSL` - LSL
+                 *     * `LTL` - LTL
+                 *     * `LTT` - LTT
+                 *     * `LUC` - LUC
+                 *     * `LUF` - LUF
+                 *     * `LUL` - LUL
+                 *     * `LVL` - LVL
+                 *     * `LVR` - LVR
+                 *     * `LYD` - LYD
+                 *     * `MAD` - MAD
+                 *     * `MAF` - MAF
+                 *     * `MCF` - MCF
+                 *     * `MDC` - MDC
+                 *     * `MDL` - MDL
+                 *     * `MGA` - MGA
+                 *     * `MGF` - MGF
+                 *     * `MKD` - MKD
+                 *     * `MKN` - MKN
+                 *     * `MLF` - MLF
+                 *     * `MMK` - MMK
+                 *     * `MNT` - MNT
+                 *     * `MOP` - MOP
+                 *     * `MRO` - MRO
+                 *     * `MRU` - MRU
+                 *     * `MTL` - MTL
+                 *     * `MTP` - MTP
+                 *     * `MUR` - MUR
+                 *     * `MVP` - MVP
+                 *     * `MVR` - MVR
+                 *     * `MWK` - MWK
+                 *     * `MXN` - MXN
+                 *     * `MXP` - MXP
+                 *     * `MXV` - MXV
+                 *     * `MYR` - MYR
+                 *     * `MZE` - MZE
+                 *     * `MZM` - MZM
+                 *     * `MZN` - MZN
+                 *     * `NAD` - NAD
+                 *     * `NGN` - NGN
+                 *     * `NIC` - NIC
+                 *     * `NIO` - NIO
+                 *     * `NLG` - NLG
+                 *     * `NOK` - NOK
+                 *     * `NPR` - NPR
+                 *     * `NZD` - NZD
+                 *     * `OMR` - OMR
+                 *     * `PAB` - PAB
+                 *     * `PEI` - PEI
+                 *     * `PEN` - PEN
+                 *     * `PES` - PES
+                 *     * `PGK` - PGK
+                 *     * `PHP` - PHP
+                 *     * `PKR` - PKR
+                 *     * `PLN` - PLN
+                 *     * `PLZ` - PLZ
+                 *     * `PTE` - PTE
+                 *     * `PYG` - PYG
+                 *     * `QAR` - QAR
+                 *     * `RHD` - RHD
+                 *     * `ROL` - ROL
+                 *     * `RON` - RON
+                 *     * `RSD` - RSD
+                 *     * `RUB` - RUB
+                 *     * `RUR` - RUR
+                 *     * `RWF` - RWF
+                 *     * `SAR` - SAR
+                 *     * `SBD` - SBD
+                 *     * `SCR` - SCR
+                 *     * `SDD` - SDD
+                 *     * `SDG` - SDG
+                 *     * `SDP` - SDP
+                 *     * `SEK` - SEK
+                 *     * `SGD` - SGD
+                 *     * `SHP` - SHP
+                 *     * `SIT` - SIT
+                 *     * `SKK` - SKK
+                 *     * `SLE` - SLE
+                 *     * `SLL` - SLL
+                 *     * `SOS` - SOS
+                 *     * `SRD` - SRD
+                 *     * `SRG` - SRG
+                 *     * `SSP` - SSP
+                 *     * `STD` - STD
+                 *     * `STN` - STN
+                 *     * `SUR` - SUR
+                 *     * `SVC` - SVC
+                 *     * `SYP` - SYP
+                 *     * `SZL` - SZL
+                 *     * `THB` - THB
+                 *     * `TJR` - TJR
+                 *     * `TJS` - TJS
+                 *     * `TMM` - TMM
+                 *     * `TMT` - TMT
+                 *     * `TND` - TND
+                 *     * `TOP` - TOP
+                 *     * `TPE` - TPE
+                 *     * `TRL` - TRL
+                 *     * `TRY` - TRY
+                 *     * `TTD` - TTD
+                 *     * `TWD` - TWD
+                 *     * `TZS` - TZS
+                 *     * `UAH` - UAH
+                 *     * `UAK` - UAK
+                 *     * `UGS` - UGS
+                 *     * `UGX` - UGX
+                 *     * `USD` - USD
+                 *     * `USN` - USN
+                 *     * `USS` - USS
+                 *     * `UYI` - UYI
+                 *     * `UYP` - UYP
+                 *     * `UYU` - UYU
+                 *     * `UYW` - UYW
+                 *     * `UZS` - UZS
+                 *     * `VEB` - VEB
+                 *     * `VED` - VED
+                 *     * `VEF` - VEF
+                 *     * `VES` - VES
+                 *     * `VND` - VND
+                 *     * `VNN` - VNN
+                 *     * `VUV` - VUV
+                 *     * `WST` - WST
+                 *     * `XAF` - XAF
+                 *     * `XAG` - XAG
+                 *     * `XAU` - XAU
+                 *     * `XBA` - XBA
+                 *     * `XBB` - XBB
+                 *     * `XBC` - XBC
+                 *     * `XBD` - XBD
+                 *     * `XCD` - XCD
+                 *     * `XDR` - XDR
+                 *     * `XEU` - XEU
+                 *     * `XFO` - XFO
+                 *     * `XFU` - XFU
+                 *     * `XOF` - XOF
+                 *     * `XPD` - XPD
+                 *     * `XPF` - XPF
+                 *     * `XPT` - XPT
+                 *     * `XRE` - XRE
+                 *     * `XSU` - XSU
+                 *     * `XTS` - XTS
+                 *     * `XUA` - XUA
+                 *     * `XXX` - XXX
+                 *     * `YDD` - YDD
+                 *     * `YER` - YER
+                 *     * `YUD` - YUD
+                 *     * `YUM` - YUM
+                 *     * `YUN` - YUN
+                 *     * `YUR` - YUR
+                 *     * `ZAL` - ZAL
+                 *     * `ZAR` - ZAR
+                 *     * `ZMK` - ZMK
+                 *     * `ZMW` - ZMW
+                 *     * `ZRN` - ZRN
+                 *     * `ZRZ` - ZRZ
+                 *     * `ZWD` - ZWD
+                 *     * `ZWL` - ZWL
+                 *     * `ZWR` - ZWR */
+                currency?: "ADP" | "AED" | "AFA" | "AFN" | "ALK" | "ALL" | "AMD" | "ANG" | "AOA" | "AOK" | "AON" | "AOR" | "ARA" | "ARL" | "ARM" | "ARP" | "ARS" | "ATS" | "AUD" | "AWG" | "AZM" | "AZN" | "BAD" | "BAM" | "BAN" | "BBD" | "BDT" | "BEC" | "BEF" | "BEL" | "BGL" | "BGM" | "BGN" | "BGO" | "BHD" | "BIF" | "BMD" | "BND" | "BOB" | "BOL" | "BOP" | "BOV" | "BRB" | "BRC" | "BRE" | "BRL" | "BRN" | "BRR" | "BRZ" | "BSD" | "BTN" | "BUK" | "BWP" | "BYB" | "BYN" | "BYR" | "BZD" | "CAD" | "CDF" | "CHE" | "CHF" | "CHW" | "CLE" | "CLF" | "CLP" | "CNH" | "CNX" | "CNY" | "COP" | "COU" | "CRC" | "CSD" | "CSK" | "CUC" | "CUP" | "CVE" | "CYP" | "CZK" | "DDM" | "DEM" | "DJF" | "DKK" | "DOP" | "DZD" | "ECS" | "ECV" | "EEK" | "EGP" | "ERN" | "ESA" | "ESB" | "ESP" | "ETB" | "EUR" | "FIM" | "FJD" | "FKP" | "FRF" | "GBP" | "GEK" | "GEL" | "GHC" | "GHS" | "GIP" | "GMD" | "GNF" | "GNS" | "GQE" | "GRD" | "GTQ" | "GWE" | "GWP" | "GYD" | "HKD" | "HNL" | "HRD" | "HRK" | "HTG" | "HUF" | "IDR" | "IEP" | "ILP" | "ILR" | "ILS" | "INR" | "IQD" | "IRR" | "ISJ" | "ISK" | "ITL" | "JMD" | "JOD" | "JPY" | "KES" | "KGS" | "KHR" | "KMF" | "KPW" | "KRH" | "KRO" | "KRW" | "KWD" | "KYD" | "KZT" | "LAK" | "LBP" | "LKR" | "LRD" | "LSL" | "LTL" | "LTT" | "LUC" | "LUF" | "LUL" | "LVL" | "LVR" | "LYD" | "MAD" | "MAF" | "MCF" | "MDC" | "MDL" | "MGA" | "MGF" | "MKD" | "MKN" | "MLF" | "MMK" | "MNT" | "MOP" | "MRO" | "MRU" | "MTL" | "MTP" | "MUR" | "MVP" | "MVR" | "MWK" | "MXN" | "MXP" | "MXV" | "MYR" | "MZE" | "MZM" | "MZN" | "NAD" | "NGN" | "NIC" | "NIO" | "NLG" | "NOK" | "NPR" | "NZD" | "OMR" | "PAB" | "PEI" | "PEN" | "PES" | "PGK" | "PHP" | "PKR" | "PLN" | "PLZ" | "PTE" | "PYG" | "QAR" | "RHD" | "ROL" | "RON" | "RSD" | "RUB" | "RUR" | "RWF" | "SAR" | "SBD" | "SCR" | "SDD" | "SDG" | "SDP" | "SEK" | "SGD" | "SHP" | "SIT" | "SKK" | "SLE" | "SLL" | "SOS" | "SRD" | "SRG" | "SSP" | "STD" | "STN" | "SUR" | "SVC" | "SYP" | "SZL" | "THB" | "TJR" | "TJS" | "TMM" | "TMT" | "TND" | "TOP" | "TPE" | "TRL" | "TRY" | "TTD" | "TWD" | "TZS" | "UAH" | "UAK" | "UGS" | "UGX" | "USD" | "USN" | "USS" | "UYI" | "UYP" | "UYU" | "UYW" | "UZS" | "VEB" | "VED" | "VEF" | "VES" | "VND" | "VNN" | "VUV" | "WST" | "XAF" | "XAG" | "XAU" | "XBA" | "XBB" | "XBC" | "XBD" | "XCD" | "XDR" | "XEU" | "XFO" | "XFU" | "XOF" | "XPD" | "XPF" | "XPT" | "XRE" | "XSU" | "XTS" | "XUA" | "XXX" | "YDD" | "YER" | "YUD" | "YUM" | "YUN" | "YUR" | "ZAL" | "ZAR" | "ZMK" | "ZMW" | "ZRN" | "ZRZ" | "ZWD" | "ZWL" | "ZWR" | null;
+                date?: string;
+                date__gt?: string;
+                date__gte?: string;
+                date__lt?: string;
+                date__lte?: string;
+                date__month?: number;
+                date__year?: number;
+                /** @description * `COMMUNITY` - COMMUNITY
+                 *     * `CONSUMPTION` - CONSUMPTION */
+                kind?: "COMMUNITY" | "CONSUMPTION";
+                location_id?: number | null;
+                location_id__isnull?: boolean;
+                location_osm_id?: number;
+                /** @description * `NODE` - NODE
+                 *     * `WAY` - WAY
+                 *     * `RELATION` - RELATION */
+                location_osm_type?: "NODE" | "RELATION" | "WAY" | null;
+                /** @description Which field to use when ordering the results. */
+                order_by?: string;
+                owner?: string;
+                /** @description A page number within the paginated result set. */
+                page?: number;
+                prediction_count?: number;
+                prediction_count__gte?: number;
+                prediction_count__lte?: number;
+                price_count?: number;
+                price_count__gte?: number;
+                price_count__lte?: number;
+                ready_for_price_tag_validation?: boolean;
+                /** @description Number of results to return per page. */
+                size?: number;
+                tags__contains?: string;
+                /** @description * `PRICE_TAG` - PRICE_TAG
+                 *     * `RECEIPT` - RECEIPT
+                 *     * `GDPR_REQUEST` - GDPR_REQUEST
+                 *     * `SHOP_IMPORT` - SHOP_IMPORT */
+                type?: ("GDPR_REQUEST" | "PRICE_TAG" | "RECEIPT" | "SHOP_IMPORT")[];
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PaginatedProofHalfFullList"];
+                };
+            };
+        };
+    };
+    proofs_retrieve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this Proof. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProofFull"];
+                };
+            };
+        };
+    };
+    proofs_destroy: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this Proof. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No response body */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    proofs_partial_update: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this Proof. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["PatchedProofUpdate"];
+                "application/x-www-form-urlencoded": components["schemas"]["PatchedProofUpdate"];
+                "multipart/form-data": components["schemas"]["PatchedProofUpdate"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProofUpdate"];
+                };
+            };
+        };
+    };
+    proofs_process_with_gemini_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "multipart/form-data": components["schemas"]["ProofProcessWithGemini"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProofFull"];
+                };
+            };
+        };
+    };
+    proofs_upload_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "multipart/form-data": components["schemas"]["ProofUpload"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProofFull"];
+                };
+            };
+        };
+    };
+    receipt_items_list: {
+        parameters: {
+            query?: {
+                created__gte?: string;
+                created__lte?: string;
+                /** @description Which field to use when ordering the results. */
+                order_by?: string;
+                /** @description A page number within the paginated result set. */
+                page?: number;
+                proof__owner?: string;
+                /** @description The proof this receipt item belongs to */
+                proof_id?: number;
+                /** @description Number of results to return per page. */
+                size?: number;
+                /** @description The current status of the item
+                 *
+                 *     * `0` - deleted
+                 *     * `1` - linked_to_price */
+                status?: 0 | 1 | null;
+                status__isnull?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PaginatedReceiptItemFullList"];
+                };
+            };
+        };
+    };
+    receipt_items_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ReceiptItemFull"];
+                "application/x-www-form-urlencoded": components["schemas"]["ReceiptItemFull"];
+                "multipart/form-data": components["schemas"]["ReceiptItemFull"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ReceiptItemFull"];
+                };
+            };
+        };
+    };
+    receipt_items_retrieve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this Receipt Item. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ReceiptItemFull"];
+                };
+            };
+        };
+    };
+    receipt_items_destroy: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this Receipt Item. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No response body */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    receipt_items_partial_update: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this Receipt Item. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["PatchedReceiptItemFull"];
+                "application/x-www-form-urlencoded": components["schemas"]["PatchedReceiptItemFull"];
+                "multipart/form-data": components["schemas"]["PatchedReceiptItemFull"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ReceiptItemFull"];
+                };
+            };
+        };
+    };
+    session_retrieve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SessionFull"];
+                };
+            };
+        };
+    };
+    session_destroy: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No response body */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    stats_retrieve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TotalStats"];
+                };
+            };
+        };
+    };
+    status_retrieve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Status"];
+                };
+            };
+        };
+    };
+    users_list: {
+        parameters: {
+            query?: {
+                /** @description Which field to use when ordering the results. */
+                order_by?: string;
+                /** @description A page number within the paginated result set. */
+                page?: number;
+                price_count?: number;
+                price_count__gte?: number;
+                price_count__lte?: number;
+                /** @description Number of results to return per page. */
+                size?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PaginatedUserList"];
+                };
+            };
+        };
+    };
+    users_retrieve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique value identifying this User. */
+                user_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["User"];
+                };
+            };
+        };
+    };
 }

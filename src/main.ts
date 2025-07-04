@@ -2,7 +2,6 @@ import createClient from "openapi-fetch";
 import {
   paths as pathsv2,
   components as componentsv2,
-  external as externalv2,
 } from "$schemas/server/v2";
 
 import { Robotoff } from "./robotoff";
@@ -29,7 +28,7 @@ import {
 } from "./consts";
 
 export type ProductV2 = componentsv2["schemas"]["Product"];
-export type SearchResultV2 = externalv2["responses/search_for_products.yaml"];
+export type SearchResultV2 = componentsv2["schemas"]["search_for_products"];
 
 // By default, use v2
 export { ProductV2 as Product, SearchResultV2 as SearchResult };
@@ -349,16 +348,19 @@ export class OpenFoodFacts {
   async getProductImages(barcode: string): Promise<string[] | null> {
     const res = await this.rawv2.GET("/api/v2/product/{barcode}", {
       params: {
-        query: {
-          fields: "images",
-        },
+        query: { fields: "images" },
         path: { barcode },
       },
     });
 
-    if (!res.data?.product?.images) return null;
+    const product = res.data?.product;
 
-    return Object.keys(res.data.product.images);
+    // Check if the returned type has images
+    if (!product) return null;
+    if (!("images" in product)) return null;
+
+    const images = product.images ?? {};
+    return Object.keys(images);
   }
 
   async search(

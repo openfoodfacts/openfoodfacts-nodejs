@@ -59,6 +59,9 @@ describe("Folksonomy Wrapper", () => {
         k: "test-key",
         v: "test-value",
         product: "12345",
+        comment: "Test comment",
+        owner: "test-owner",
+        version: 1,
       };
       fetchMock.mockResolvedValue(mockResponse("ok", true, 200));
 
@@ -71,6 +74,9 @@ describe("Folksonomy Wrapper", () => {
         k: "test-key",
         v: "test-value",
         product: "12345",
+        comment: "Test comment",
+        owner: "test-owner",
+        version: 1,
       };
       fetchMock.mockResolvedValue(mockResponse(null, false, 500));
 
@@ -97,6 +103,9 @@ describe("Folksonomy Wrapper", () => {
         k: "test-key",
         v: "test-value",
         product: "12345",
+        comment: "Test comment",
+        owner: "test-owner",
+        version: 1,
       };
       fetchMock.mockResolvedValue(mockResponse("ok", true, 200));
 
@@ -109,6 +118,9 @@ describe("Folksonomy Wrapper", () => {
         k: "test-key",
         v: "test-value",
         product: "12345",
+        comment: "Test comment",
+        owner: "test-owner",
+        version: 1,
       };
       fetchMock.mockResolvedValue(mockResponse(null, false, 500));
 
@@ -122,6 +134,8 @@ describe("Folksonomy Wrapper", () => {
         v: "test-value",
         product: "12345",
         version: 1,
+        comment: "Test comment",
+        owner: "test-owner",
       };
       fetchMock.mockResolvedValue(mockResponse("ok", true, 200));
 
@@ -135,6 +149,8 @@ describe("Folksonomy Wrapper", () => {
         v: "test-value",
         product: "12345",
         version: 1,
+        comment: "Test comment",
+        owner: "test-owner",
       };
       fetchMock.mockResolvedValue(mockResponse(null, false, 500));
 
@@ -166,17 +182,26 @@ describe("Folksonomy Wrapper", () => {
     it("should throw an error if auth token is missing and calling putTag", async () => {
       const clientWithoutToken = new Folksonomy(fetchMock);
       expect(() =>
-        clientWithoutToken.putTag({ k: "key", v: "value", product: "12345" }),
+        clientWithoutToken.putTag({
+          k: "key",
+          v: "value",
+          product: "12345",
+          owner: "",
+          comment: "Test comment",
+          version: 1,
+        }),
       ).rejects.toThrow("Auth token is required to perform this action");
     });
 
     it("should throw an error if auth token is missing and calling removeTag", async () => {
       const clientWithoutToken = new Folksonomy(fetchMock);
-      const tagData: FolksonomyTag & { version: number } = {
+      const tagData: FolksonomyTag = {
         k: "test-key",
         v: "test-value",
         product: "12345",
         version: 1,
+        comment: "Test comment",
+        owner: "",
       };
       expect(() => clientWithoutToken.removeTag(tagData)).rejects.toThrow(
         "Auth token is required to perform this action",

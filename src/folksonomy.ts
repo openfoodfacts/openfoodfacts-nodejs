@@ -1,7 +1,6 @@
 import createClient from "openapi-fetch";
 
 import { paths, components } from "./schemas/folksonomy";
-import { formBody as formBodySerializer } from "./formbody";
 import { ApiError, UNKNOWN_API_ERROR } from "./error";
 import { DEFAULT_FOLKSONOMY_API_URL, USER_AGENT } from "./consts";
 
@@ -170,9 +169,8 @@ export class Folksonomy {
     | { error: ApiError }
   > {
     const res = await this.raw.POST("/auth", {
-      body: { username, password },
+      body: { username, password, scope: "email openid" },
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      bodySerializer: formBodySerializer,
     });
 
     if (res.response.status !== 200) {

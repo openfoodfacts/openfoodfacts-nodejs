@@ -4,7 +4,7 @@
  */
 
 export interface paths {
-    "/api/v2/product/{barcode}": {
+    "/api/v3/product/{barcode}": {
         parameters: {
             query?: never;
             header?: never;
@@ -12,10 +12,10 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * Get Product Details
-         * @description Fetches product details by its unique barcode.
-         *     Can return all product details or specific fields like knowledge panels.
+         * Get Product Data
+         * @description Retrieve information for a product with a specific barcode.
          *
+         *     The fields parameter allows to specify what fields to retrieve.
          */
         get: operations["get-product-by-barcode"];
         put?: never;
@@ -23,10 +23,28 @@ export interface paths {
         delete?: never;
         options?: never;
         head?: never;
-        patch?: never;
+        /**
+         * Create or Update Product
+         * @description This API allows to create or update a product (if the product already exists, its data is updated, otherwise it is created), or to analyze a test product (in which case no product is created or updated). To analyze a product, the "barcode" path component needs to contain the value "test" instead of a barcode.
+         *
+         *     New API to send structured product data in a JSON format instead of in a flattened list of key / value pairs field as-in the current product add / edit API that relies on a multipart/form-data format.
+         *
+         *     Important: this new Product WRITE API has been deployed in production, but it is still under development, and it may change.
+         *
+         *     This new API is used in particular to send structured packaging data: https://openfoodfacts.github.io/openfoodfacts-server/dev/explain-packaging-data/
+         *
+         *     The new API is gradually being extended to support other product fields.
+         *
+         *     Currently supported fields are:
+         *       - language specific fields (e.g. product name, ingredients text)
+         *       - tags fields (e.g. categories, labels)
+         *       - packaging fields (e.g. packagings, packagings_add, packagings_complete)
+         *       - image selection of uploaded images (e.g. front, ingredients, nutrition, packaging) for specific languages
+         */
+        patch: operations["patch-api-v3-product-barcode"];
         trace?: never;
     };
-    "/cgi/product_image_upload.pl": {
+    "/api/v3/product/{barcode}/images": {
         parameters: {
             query?: never;
             header?: never;
@@ -37,19 +55,43 @@ export interface paths {
         put?: never;
         /**
          * Upload Product Image
-         * @description Photos are source and proof of data.
-         *     The first photo uploaded for a product is
-         *     auto-selected as the product’s “front” photo.'
+         * @description
+         *     This endpoint allows to upload an image for a product. The image is uploaded in the request body as a base64 encoded string.
+         *     Optionally, it is possible to select the uploaded image for specific information (e.g. front, ingredients, nutrition, packaging) for specific languages. Each selected image is a cropped version of the uploaded image.
          *
+         *     If the product does not exist, it will be created.
          */
-        post: operations["get-cgi-product_image_upload.pl"];
+        post: operations["post-api-v3-product-barcode-images"];
         delete?: never;
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
-    "/cgi/ingredients.pl": {
+    "/api/v3/product/{barcode}/images/uploaded/{imgid}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /**
+         * Delete Product Image
+         * @description This endpoint allows to delete an uploaded image for a product.
+         *     Selected images that are cropped from it will also be deleted.
+         *
+         *     Image deletion is allowed only for moderators and admins, so the request must be authenticated with a session cookie or userid and password.
+         */
+        delete: operations["delete-api-v3-product-barcode-images-uploaded-imgid"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v3/taxonomy_suggestions": {
         parameters: {
             query?: never;
             header?: never;
@@ -57,11 +99,23 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * OCR on Ingredients
-         * @description Open Food Facts uses optical character recognition (OCR) to retrieve nutritional data and other information from the product labels.
+         * Get Taxonomy Suggestions
+         * @description Open Food Facts uses multilingual [taxonomies](https://wiki.openfoodfacts.org/Global_taxonomies) to normalize entries for categories, labels, ingredients, packaging shapes / materials / recycling instructions and many more fields.
          *
+         *     This API returns taxonomy entries suggestions that can be used in product edit forms, search forms etc. (for instance in autocomplete dropdowns using libraries like Tagify or select2 on the Web).
+         *
+         *     Suggestions filtering:
+         *
+         *     The string parameter allows to get only suggestions that contain a specific string (useful for autocomplete suggestions).
+         *
+         *     Suggestions ordering:
+         *
+         *     - For packaging shapes and materials, suggestions are ordered first by the number of packaging components they appear in (restricted by country, categories and shape (for materials) if they are passed as parameters).
+         *     - for all other taxonomies, results are ordered alphabetically
+         *
+         *     If a string is passed, an additional sort is done to put first suggestions that start with the string, followed by suggestions with a word that start with the string, and then suggestions that contain the string anywhere.
          */
-        get: operations["get-cgi-ingredients.pl"];
+        get: operations["get-api-v3-taxonomy_suggestions-taxonomy"];
         put?: never;
         post?: never;
         delete?: never;
@@ -70,36 +124,42 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/cgi/product_image_crop.pl": {
+    "/api/v3/tag/{tagtype}/{tag_or_tagid}": {
         parameters: {
-            query?: never;
+            query?: {
+                /** @description 2 letter code of the country of the user. Used for localizing some fields in returned values (e.g. knowledge panels). If not passed, the country may be inferred by the IP address of the request. */
+                cc?: components["parameters"]["cc"];
+                /** @description 2 letter code of the language of the user. Used for localizing some fields in returned values (e.g. knowledge panels). If not passed, the language may be inferred by the Accept-Language header of the request. */
+                lc?: components["parameters"]["lc"];
+            };
             header?: never;
-            path?: never;
+            path: {
+                /** @description Type of the tag */
+                tagtype: string;
+                /** @description Tag name (e.g. yogurts) or tag id (e.g. en:yogurts) */
+                tag_or_tagid: string;
+            };
             cookie?: never;
         };
         /**
-         * Rotate Image
-         * @description Although we recommend rotating photos manually and uploading a new version of the image,
-         *     the OFF API allows you to make api calls to automate this process.
-         *     You can rotate existing photos by setting the angle to 90º, 180º, or 270º clockwise.
+         * Get Tag Knowledge Panels
+         * @description Return knowledge panels for a tag.
          *
+         *     Currently the knowledge panels returned are:
+         *
+         *     Categories:
+         *     - Packaging stats for a category
          */
-        get: operations["get-cgi-product_image_crop.pl"];
+        get: operations["get-api-v3-tag-tagtype-tag_or_tagid"];
         put?: never;
-        /**
-         * Select and Crop Image
-         * @description Cropping is only relevant for editing existing products.
-         *     You cannot crop an image the first time you upload it to the system.
-         *
-         */
-        post: operations["post-cgi-product_image_crop.pl"];
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
-    "/cgi/product_image_unselect.pl": {
+    "/api/v3/product_revert": {
         parameters: {
             query?: never;
             header?: never;
@@ -109,236 +169,10 @@ export interface paths {
         get?: never;
         put?: never;
         /**
-         * Unselect Image
-         * @description This endpoint allows the user to unselect a photo for a product.
-         *     The user must provide the product code and the image ID to unselect.
-         *
+         * Revert Product to Previous Revision
+         * @description For moderators only, revert a product to a previous revision.
          */
-        post: operations["post-cgi-product_image_unselect.pl"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/cgi/product_jqm2.pl": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Edit Product
-         * @description This updates a product.
-         *
-         *     Note: If the barcode exists then you will be editing the existing product,
-         *     However if it doesn''t you will be creating a new product with that unique barcode,
-         *     and adding properties to the product.
-         *
-         */
-        post: operations["post-cgi-product_jqm2.pl"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/v2/search": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Search Products
-         * @description Search request allows you to get products that match your search criteria.
-         *
-         *     It allows you create many custom APIs for your use case.
-         *
-         *     If the search query parameter has 2 possible values, they are seperated by a comma(,).
-         *     When filtering via a parameter that has different language codes like `fr`, `de` or `en`, specify the language code in the parameter name e.g `categories_tags_en`
-         *
-         *     **Important:** search API v2 does not support full text request (search_term),
-         *     you have to use [search API v1](https://wiki.openfoodfacts.org/API/Read/Search) for that.
-         *     Upcoming [search-a-licious project](https://github.com/openfoodfacts/search-a-licious) will fix that.
-         *
-         *     ### Limiting results
-         *
-         *     You can limit the size of returned objects thanks to the `fields` object (see below).
-         *
-         *     eg: `fields=code,product_name,brands,attribute_groups``
-         *
-         *     Please use it as much as possible to avoid overloading the servers.
-         *
-         *     The search use pagination, see `page` and `page_size` parameters.
-         *
-         *     **Beware:** the `page_count` data in item is a bit counter intuitive…, read the description.
-         *
-         *     ### Conditions on tags
-         *
-         *     All `_tags`` parameters accepts either:
-         *
-         *     * a single value
-         *     * or a comma-separated list of values (doing a AND)
-         *     * or a pipe separated list of values (doing a OR)
-         *
-         *     You can exclude terms by using a "-" prefix.
-         *
-         *     For taxonomized entries, you might either use the tag id (recommended),
-         *     or a known synonym (without language prefix)
-         *
-         *     * `labels_tags=en:organic,en:fair-trade` find items that are fair-trade AND organic
-         *     * `labels_tags=en:organic|en:fair-trade` find items that are fair-trade OR organic
-         *     * `labels_tags=en:organic,en:-fair-trade` find items that are organic BUT NOT fair-trade
-         *
-         *
-         *     ### Conditions on nutriments
-         *
-         *     To get a list of nutrients
-         *
-         *     You can either query on nutrient per 100g (`_100g` suffix)
-         *     or per serving (`serving` suffix).
-         *
-         *     You can also add `_prepared_`
-         *     to get the nutrients in the prepared product instead of as sold.
-         *
-         *     You can add a comparison operator and value to the parameter name
-         *     to get products with nutrient above or bellow a value.
-         *     If you use a parameter value it exactly match it.
-         *
-         *     * `energy-kj_100g<200` products where energy in kj for 100g is less than 200kj
-         *     * `sugars_serving>10` products where sugar per serving is greater than 10g
-         *     * `saturated-fat_100g=1` products where saturated fat per 100g is exactly 10g
-         *     * `salt_prepared_serving<0.1` products where salt per serving for prepared product is less than 0.1g
-         *
-         *     ### More references
-         *
-         *     See also [wiki page](https://wiki.openfoodfacts.org/Open_Food_Facts_Search_API_Version_2)
-         *
-         */
-        get: operations["get-search"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/cgi/suggest.pl": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get Suggestions
-         * @description For example , Dave is looking for packaging_shapes that contain the term "fe",
-         *     all packaging_shapes containing "fe" will be returned.
-         *     This is useful if you have a search in your application,
-         *     for a specific product field.
-         *
-         */
-        get: operations["get-cgi-suggest.pl"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/cgi/nutrients.pl": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get Nutrients List
-         * @description Used to display the nutrition facts table of a product, or to display a form to input those nutrition facts.
-         *
-         */
-        get: operations["get-cgi-nutrients.pl"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/v2/attribute_groups": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get Attribute Groups
-         * @description Attributes are at the heart of personal search.
-         *     They score the products according to different criterias,
-         *     which could then be matched to a user's preferences.
-         *
-         *     This API helps you list attributes and display them in your application,
-         *     for the user to choose the importance of each criteria.
-         *
-         *     note: `/api/v2/attribute_groups_{lc}` is also a valid route, but consider it deprecated
-         *
-         */
-        get: operations["get-attribute-groups"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/v2/preferences": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get Preferences Weights
-         * @description This endpoint retrieves the weights corresponding to attribute preferences
-         *     for computing personal product recommendations. The weights are used to
-         *     personalize the product recommendations based on user preferences.
-         *
-         */
-        get: operations["get-preferences"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/cgi/session.pl": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Login Session
-         * @description Retrieve session cookie for writing operations.
-         */
-        post: operations["get-cgi-session.pl"];
+        post: operations["post-api-v3-product_revert"];
         delete?: never;
         options?: never;
         head?: never;
@@ -349,67 +183,63 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
-        "Product-Base": components["schemas"]["product_base"];
-        "Product-Misc": components["schemas"]["product_misc"];
-        "Product-Tags": components["schemas"]["product_tags"];
-        "Product-Images": components["schemas"]["product_images"];
-        "Product-Eco-Score": components["schemas"]["product_ecoscore"];
-        "Product-Ingredients": components["schemas"]["product_ingredients"];
-        "Product-Nutrition": components["schemas"]["product_nutrition"];
-        "Product-Nutriscore": components["schemas"]["NutriscoreAll"];
-        "Product-Quality": components["schemas"]["product_quality"];
-        "Product-Extended": components["schemas"]["product_extended"];
-        "Product-Metadata": components["schemas"]["product_meta"];
-        "Product-Knowledge-Panels": components["schemas"]["product_knowledge_panels"];
-        "Product-Attribute-Groups": components["schemas"]["product_attribute_groups"];
-        Product: components["schemas"]["product"];
-        /** ingredient */
-        Ingredient: {
-            id?: string;
-            ingredients?: components["schemas"]["Ingredients"];
-            /** @description The percentage of the ingredient. */
-            percent?: number;
-            /** @description Estimated percentage of the ingredient. */
-            percent_estimate?: number;
-            /** @description Maximum percentage of the ingredient. */
-            percent_max?: string | number;
-            /** @description Minimum percentage of the ingredient. */
-            percent_min?: number;
-            /** @description Text description of the ingredient. */
-            text?: string;
-            /** @description Indicates if the ingredient is vegan. */
-            vegan?: string;
-            /** @description Indicates if the ingredient is vegetarian. */
-            vegetarian?: string;
+        /**
+         * Warning or error message
+         * @description Describes a warning or error for a READ or WRITE request, which field triggered it, and what the impact was (e.g. the field was ignored).
+         */
+        "warning-or-error": {
+            message?: {
+                /** @description Identifier of a response message.
+                 *      */
+                id?: string;
+                /** @description Name of the response message entry in English. */
+                name?: string;
+                /** @description Name of the response message entry in the language specified in tags_lc, if supplied. */
+                lc_name?: string;
+                /** @description Description of the problem specific to the request, in English. */
+                description?: string;
+                /** @description Description of the problem specific to the request, in the language specified in tags_lc, if supplied. */
+                lc_description?: string;
+            };
+            /** @description Field that triggered the warning or error. */
+            field?: {
+                /** @description Name of the field that triggered the warning or error. */
+                id?: string;
+                /** @description Value of the field that triggered the warning or error. */
+                value?: string;
+            };
+            impact?: {
+                id?: string;
+                name?: string;
+                lc_name?: string;
+                description?: string;
+                lc_description?: string;
+            };
         };
-        /** nutrient */
-        Nutrient: {
-            /** @description id of the nutrient */
-            id?: string;
-            /** @description Name of the nutrient in the requested language */
-            name?: string;
-            /** @description Indicates if the nutrient is always shown on the nutrition facts table */
-            important?: boolean;
-            /** @description Indicates if the nutrient should be shown in the nutrition facts edit form */
-            display_in_edit_form?: boolean;
-            /** @description Default unit of the nutrient */
-            unit?: components["schemas"]["nutrient_unit"];
-            nutrients?: components["schemas"]["Nutrients"];
-        };
-        /** get_product_by_barcode_base_response */
-        get_product_by_barcode_base: {
-            /** @description Barcode of the product
-             *     (can be EAN-13 or internal codes for some food stores).
-             *     For products without a barcode, Open Food Facts assigns a
-             *     number starting with the 200 reserved prefix.
-             *      */
-            code?: string;
+        /**
+         * Response status
+         * @description A response object to describe if a READ or WRITE request was successful or not, and if there were errors or warnings, and what the impact of those errors or warnings was.
+         */
+        response_status: {
             /**
-             * @description Return values based on ProductOpener/Display.pm analysis
-             * @enum {integer}
+             * @description Overall status of the request: whether it failed or succeeded, with or without warnings or errors.
+             * @enum {string}
              */
-            status?: 0 | 1;
-            status_verbose?: string;
+            status_id?: "success" | "success_with_warnings" | "success_with_errors" | "failure";
+            /** @description Overall result
+             *      of the request (e.g. a product has been created) */
+            result?: {
+                /** @description Identifier of a response result entry */
+                id?: string;
+                /** @description Name of the response result entry in English. */
+                name?: string;
+                /** @description Name of the response result entry in the language specified in tags_lc, if supplied. */
+                lc_name?: string;
+            };
+            /** @description List of warnings. Warnings are used to alert about something that may be wrong, but is not necessarily wrong (e.g. a nutrient value that is unexpectedly high). */
+            warnings?: components["schemas"]["warning-or-error"][];
+            /** @description List of errors. Errors are used to alert about something that is definitely wrong (e.g. a nutrient value that is impossibly high). */
+            errors?: components["schemas"]["warning-or-error"][];
         };
         /** @description Base product data
          *      */
@@ -781,11 +611,12 @@ export interface components {
             nutrient_levels_tags?: string[];
         };
         /**
-         * image_size
-         * @description Width and height of an image
+         * Image Size
+         * @description Contains the information (width, height and URL) about an image in a specific size.
+         *     The URL is generated at runtime if the `generate_images_urls` parameter is set to true.
          *
          */
-        image_size: {
+        ImageSize: {
             /**
              * @description The height of the reduced/full image in pixels.
              *
@@ -798,134 +629,172 @@ export interface components {
              * @example 255
              */
             w?: number;
+            /**
+             * @description The URL of the image. This property is generated at runtime if the generate_images_urls parameter is set to true.
+             *
+             * @example https://static.openfoodfacts.org/images/products/000/000/000/0000/400.jpg
+             */
+            url?: string;
         };
         /**
-         * image_role
-         * @description property of an image (or part thereof) selected for a particular role and a particular language.
-         *
-         */
-        ImageRole: {
-            /**
-             * @description The angle of the image rotation (if it was rotated).
-             * @example 0
-             */
-            angle?: number;
-            /** @example full */
-            coordinates_image_size?: string;
-            /** @example 0x0--1--1 */
-            geometry?: string;
-            /**
-             * @description The id of the original/source image that was selected to edit(rotate, normalize etc) to produce this new image.
-             * @example 121
-             */
-            imgid?: string;
-            /** @description Normalize colors. */
-            normalize?: string | boolean | null;
-            /** @example 420 */
-            rev?: string;
-            /** @description The available image sizes for the product (both reduced and full).
-             *     The reduced images are the ones with numbers as the key( 100, 200 etc)
-             *     while the full images have `full` as the key.
-             *      */
-            sizes?: {
-                100?: components["schemas"]["image_size"];
-                200?: components["schemas"]["image_size"];
-                400?: components["schemas"]["image_size"];
-                full?: components["schemas"]["image_size"];
-            };
-            /** @description Photo on white background : Try to remove the background.
-             *      */
-            white_magic?: string | boolean | null;
-            /** @example -1 */
-            x1?: string;
-            /** @example -1 */
-            x2?: string;
-            /** @example -1 */
-            y1?: string;
-            /** @example -1 */
-            y2?: string;
-        };
-        /** @description The available image sizes for the product (both reduced and full).
-         *     The reduced images are the ones with numbers as the key( 100, 200 etc)
+         * Images Sizes
+         * @description Contains the information about the images of a product in different sizes.
+         *     The reduced images are the ones with numbers as the key(100, 200 and 400)
          *     while the full images have `full` as the key.
-         *      */
-        Sizes: {
-            full?: components["schemas"]["image_size"];
-        };
-        /**
-         * image
-         * @description This object represent an image that was uploaded to a product.
-         *     "imgid" is an integer which is a sequential number unique to each picture.
          *
          */
-        Image: {
-            sizes?: components["schemas"]["Sizes"];
+        ImageSizes: {
+            100?: components["schemas"]["ImageSize"];
+            200?: components["schemas"]["ImageSize"];
+            400?: components["schemas"]["ImageSize"];
+            full?: components["schemas"]["ImageSize"];
+        };
+        /**
+         * Uploaded image
+         * @description Image uploaded by a user or provided by a manufacturer identified by an integer 'imgid'.
+         *
+         */
+        ImageUploaded: {
             /**
-             * @description The time the image was uploaded (as unix timestamp).
+             * @description userid of the user who uploaded the image.
              *
-             * @example 1457680652
-             */
-            uploaded_t?: string;
-            /**
-             * @description The contributor that uploaded the image.
-             *
-             * @example openfoodfacts-contributors
+             * @example stephane
              */
             uploader?: string;
-        };
-        ImageUrls: Record<string, never>;
-        /** @description URLs of thumbnails image of image of type `image_type` */
-        SelectedImage: {
-            /** @description Thumbnail urls of product image (front) adapted to display on product page
-             *      */
-            display?: components["schemas"]["ImageUrls"];
-            /** @description Thumbnail urls of product image (front) adapted to display on product list page
-             *      */
-            small?: components["schemas"]["ImageUrls"];
-            /** @description Thumbnail urls of product image (front) in smallest format
-             *      */
-            thumb?: components["schemas"]["ImageUrls"];
+            sizes?: components["schemas"]["ImageSizes"];
         };
         /**
-         * Product-Images
-         * @description Information about Images of a product.
+         * Selected image
+         * @description Images selected (and possibly cropped or rotated) to show an area of interest
+         *     (front of product, ingredients, nutrition facts, packaging info) in a specific language.
+         *
+         */
+        ImageSelected: {
+            /**
+             * @description The imgid of the original/source image edited (rotated, cropped, normalized etc) to produce the selected image.
+             *     When uploading a new image and selecting it, the imgid will be automatically assigned by the server, and this field should not be passed.
+             *     When selecting a previously uploaded image, the imgid must be passed to identify the source image.
+             *
+             * @example 12
+             */
+            imgid?: number;
+            /**
+             * @description The revision number of the product when the image was selected.
+             * @example 65
+             */
+            readonly rev?: number;
+            /** @description Properties to specify if the image is cropped, rotated, normalized or with the white background removed.
+             *      */
+            generation?: {
+                /**
+                 * @description The angle of the image rotation (if it was rotated). Only supported values are 0, 90, 180, 270.
+                 * @example 0
+                 */
+                angle?: number;
+                /**
+                 * @description Possible values are "full" or "400". Indicates if the crop coordinates are relative to the full image, or to a resized version (max width and max height = 400)
+                 * @example full
+                 */
+                coordinates_image_size?: string;
+                /** @description Normalize colors. Default is false. */
+                normalize?: boolean;
+                /** @description Try to remove the background for photos taken on a white background. Default is false.
+                 *      */
+                white_magic?: boolean;
+                /** @description The x coordinate of the top left corner of the area of interest.
+                 *     If the image is rotated, the coordinates are relative to the rotated image.
+                 *      */
+                x1?: number;
+                /** @description The x coordinate of the bottom right corner of the area of interest.
+                 *     If the image is rotated, the coordinates are relative to the rotated image.
+                 *      */
+                x2?: string;
+                /** @description The y coordinate of the top left corner of the area of interest.
+                 *     If the image is rotated, the coordinates are relative to the rotated image.
+                 *      */
+                y1?: string;
+                /** @description The y coordinate of the bottom right corner of the area of interest.
+                 *     If the image is rotated, the coordinates are relative to the rotated image.
+                 *      */
+                y2?: string;
+            };
+            readonly sizes?: components["schemas"]["ImageSizes"];
+        };
+        /**
+         * Selected images
+         * @description List of all images selected by users or manufacturers.
+         *     Those images are typically displayed to users, and are used in edit mode to crop images with specific information
+         *     for specific languages. (See images.uploaded)
+         */
+        ImagesSelected: {
+            /** @description Front images of the full product in languages shown on the packaging.
+             *     In most cases we have a front image selected for only one language,
+             *     unless the product has different packagings for different countries with the same barcode,
+             *     or if the product has two front sides (e.g. in bilingual countries).
+             *      */
+            front?: unknown;
+            /** @description Cropped images of the ingredients list in languages shown on the packaging.
+             *      */
+            ingredients?: unknown;
+            /** @description Cropped images of the nutrition facts table / list in languages shown on the packaging.
+             *      */
+            nutrition?: unknown;
+            /** @description Cropped images of the packaging / recycling information in languages shown on the packaging.
+             *      */
+            packaging?: unknown;
+        };
+        /**
+         * Product Images
+         * @description Information about images (photos) of a product.
          *
          *     Images ensure the reliability of Open Food Facts data.
-         *     It provides a primary source and proof of all the structured data.
-         *     You may therefore want to display it along the structured information.
+         *     They provides a primary source and proof of all the structured data.
+         *     You may therefore want to display them along the structured information.
+         *
+         *     For each product, we store:
+         *     - the original images uploaded by users or manufacturers in images.uploaded
+         *     - images that have been selected / cropped / rotated etc. containing specific
+         *       information (e.g. the front image, the ingredients image, etc.)
+         *       for specific languages in images.selected
          *
          *     See also tutorials about images:
          *     * [Getting images](https://openfoodfacts.github.io/openfoodfacts-server/api/how-to-download-images/)
          *     * [Uploading images](https://openfoodfacts.github.io/openfoodfacts-server/api/tutorial-uploading-photo-to-a-product/)
          *
          */
-        product_images: {
+        ProductImagesV3: {
             /**
-             * product_images_properties
-             * @description This contains properties for all images contained on the product.
+             * images
+             * @description Uploaded and selected images of the product.
              *
              */
             images?: {
-                front?: components["schemas"]["ImageRole"];
-            } & {
-                [key: string]: components["schemas"]["Image"];
+                /**
+                 * images_uploaded
+                 * @description List of all images uploaded by users or manufacturers.
+                 *     Those images are typically not displayed to users, but are used in edit mode to crop images with specific information
+                 *     for specific languages. (See images.selected)
+                 *     Older uploaded images that may correspond to older revisions of the product are also kept in this list.
+                 *
+                 */
+                uploaded?: Record<string, never>;
+                /** @description List of all images selected by users or manufacturers.
+                 *     Those images are typically displayed to users, and are used in edit mode to crop images with specific information
+                 *     for specific languages. (See images.uploaded)
+                 *      */
+                selected?: components["schemas"]["ImagesSelected"];
             };
-            last_image_dates_tags?: string[];
-            /** @description timestamp of last image upload (or update?) */
-            last_image_t?: number;
             /**
-             * product_selected_images
-             * @description URL for selected (important) images of the product.
-             *
-             *     This is very handy if you display the product to users.
+             * Selected images URLs
+             * @description URLs of selected images, generated at runtime.
              *
              */
-            selected_images?: {
-                front?: components["schemas"]["SelectedImage"];
-            };
-            image_small_url?: string;
-            image_thumb_url?: string;
-            image_url?: string;
+            selected_images?: Record<string, never>;
+            /** @description An array of tags entries to indicated the year, month and day of the last image upload (in formats YYYY, YYYY-MM, YYYY-MM-DD).
+             *      */
+            last_image_dates_tags?: string[];
+            /** @description timestamp of last image upload */
+            last_image_t?: number;
         };
         /** @enum {string} */
         EcoscoreCountryCode: "ad" | "al" | "at" | "ax" | "ba" | "be" | "bg" | "ch" | "cy" | "cz" | "de" | "dk" | "dz" | "ee" | "eg" | "es" | "fi" | "fo" | "fr" | "gg" | "gi" | "gr" | "hr" | "hu" | "ie" | "il" | "im" | "is" | "it" | "je" | "lb" | "li" | "lt" | "lu" | "lv" | "ly" | "ma" | "mc" | "md" | "me" | "mk" | "mt" | "nl" | "no" | "pl" | "ps" | "pt" | "ro" | "rs" | "se" | "si" | "sj" | "sk" | "sm" | "sy" | "tn" | "tr" | "ua" | "uk" | "us" | "va" | "world" | "xk";
@@ -1057,6 +926,25 @@ export interface components {
          *
          */
         Ingredients: components["schemas"]["Ingredient"][];
+        /** ingredient */
+        Ingredient: {
+            id?: string;
+            ingredients?: components["schemas"]["Ingredients"];
+            /** @description The percentage of the ingredient. */
+            percent?: number;
+            /** @description Estimated percentage of the ingredient. */
+            percent_estimate?: number;
+            /** @description Maximum percentage of the ingredient. */
+            percent_max?: string | number;
+            /** @description Minimum percentage of the ingredient. */
+            percent_min?: number;
+            /** @description Text description of the ingredient. */
+            text?: string;
+            /** @description Indicates if the ingredient is vegan. */
+            vegan?: string;
+            /** @description Indicates if the ingredient is vegetarian. */
+            vegetarian?: string;
+        };
         /**
          * product_ingredients
          * @description Fields about ingredients of a product
@@ -1882,6 +1770,7 @@ export interface components {
          *     * [Product Misc](#cmp--schemas-product-misc): Miscellaneous but important fields of a product
          *     * [Product Tags](#cmp--schemas-product-tags): Tags fields on a product
          *     * [Product Images](#cmp--schemas-product-images): Information about Images of a product
+         *     * [Product Images 2](#cmp--schemas-product-images2): Information about Images of a product
          *     * [Product Eco-Score](#cmp--schemas-product-ecoscore): Fields related to Eco-Score for a product
          *     * [Product Ingredients](#cmp--schemas-product-ingredients): Fields about ingredients of a product
          *     * [Product Nutrition](#cmp--schemas-product-nutrition): Nutrition fields of a product
@@ -1892,522 +1781,152 @@ export interface components {
          *     * [Product Attribute Groups](#cmp--schemas-product-attribute-groups): Attribute groups for personal product matching
          *
          */
-        product: components["schemas"]["product_base"] & components["schemas"]["product_misc"] & components["schemas"]["product_tags"] & components["schemas"]["product_images"] & components["schemas"]["product_ecoscore"] & components["schemas"]["product_ingredients"] & components["schemas"]["product_nutrition"] & components["schemas"]["NutriscoreAll"] & components["schemas"]["product_quality"] & components["schemas"]["product_extended"] & components["schemas"]["product_meta"] & components["schemas"]["product_knowledge_panels"] & components["schemas"]["product_attribute_groups"];
-        /** get_product_by_barcode_response */
-        get_product_by_barcode: components["schemas"]["get_product_by_barcode_base"] & {
-            product?: components["schemas"]["product"];
+        product_v3: components["schemas"]["product_base"] & components["schemas"]["product_misc"] & components["schemas"]["product_tags"] & components["schemas"]["ProductImagesV3"] & components["schemas"]["product_ecoscore"] & components["schemas"]["product_ingredients"] & components["schemas"]["product_nutrition"] & components["schemas"]["NutriscoreAll"] & components["schemas"]["product_quality"] & components["schemas"]["product_extended"] & components["schemas"]["product_meta"] & components["schemas"]["product_knowledge_panels"] & components["schemas"]["product_attribute_groups"];
+        /** Language and country of the user */
+        lc_cc: {
+            /** @description 2 letter code of the language of the interface. Used for localizing some fields in returned values (e.g. knowledge panels). If not passed, the language may be inferred by the country of the user (passed through the cc field or inferred by the IP address). Full list at https://static.openfoodfacts.org/data/taxonomies/languages.json */
+            lc?: string;
+            /** @description 2 letter code of the country of the user. Used for localizing some fields in returned values (e.g. knowledge panels). If not passed, the country may be inferred by the IP address of the request. Full list at https://static.openfoodfacts.org/data/taxonomies/countries.json */
+            cc?: string;
         };
-        add_photo_to_existing_product: {
-            /**
-             * @description Barcode of the product
+        /** Fields requested and language for taxonomized tags fields */
+        fields_tags_lc: {
+            /** @description Comma separated list of fields requested in the response. Special values: "updated": returns field that were updated by the query (e.g. sending "packagings" or "packagings_add" would return "packagings"), "none": returns no fields, "all": returns all fields except generated fields that need to be explicitly requested such as "knowledge_panels". Defaults to "updated" for WRITE requests, and "all" for READ requests. */
+            fields?: string;
+            /** @description 2 letter language code to request names of tags in a specific language.
              *
-             * @example 3017620422003
-             */
-            code: string;
-            /**
-             * @description Indicates the type of the image and the corresponding language. It should
-             *     be in the format `{IMAGE_TYPE}_{LANG}` format, where `IMAGE_TYPE` is one
-             *     of `front|ingredients|nutrition|packaging|other` and `LANG` is the 2
-             *     letter language code. Use `other` if you don't want the image to be
-             *     selected. Note that the first image of a product is always selected as front
-             *     picture.
+             *     For READ requets: if passed, all taxonomized tags of the response will include a lc_name property with the translation in the requested language, if available. Otherwise, the property value will contain the name in the original language, prefixed by the 2 language code and a colon.
              *
-             * @example front_en
-             */
-            imagefield: string;
-            /**
-             * Format: binary
-             * @description This field must contain image binary content.
-             *     The format and extension must be one of gif|jpeg|jpg|png|heic.
-             *     This field is dynamic and dependent on the value of imagefield in the
-             *     request body. It wil be imgupload_the value of the imagefield stated
-             *     earlier. For example, if `imagefield=front_en`, the name of this field
-             *     should be `imageupload_front_en`.
-             *
-             */
-            imgupload_front_en: string;
-        };
-        /** @description Properties that goes in change ref
-         *      */
-        change_ref_properties: {
-            /** @description A comment on the contribution.
-             *     Adding meaningful comments help moderators and users understand a single product history.
-             *      */
-            comment?: string;
-            /** @description Name of the app providing the information
-             *      */
-            app_name?: string;
-            /** @description Version of the app providing the information
-             *      */
-            app_version?: string;
-            /** @description When an app uses a single user to log its contributions,
-             *     it might be interesting to know which user of the app is providing the information.
-             *     You can use this field to provide an identifier (eg: an sha1 of the username) that's privacy preserving. Make sure that your salt is strong, perfectly random and secret
-             *
-             *     In case we have trouble with one of your user, it helps our moderators revert edits.
-             *      */
-            app_uuid?: string;
-            /** @description It is required that you pass a specific User-Agent header when you do an API request.
-             *     But some times it's not possible to modify such a header
-             *     (eg. request using JavaScript in a browser).
-             *     In such cases, you can override it with this parameter.
-             *      */
-            "User-Agent"?: string;
-        };
-        /** add_photo_to_existing_product_response */
-        "add_photo_to_existing_product-2": {
-            files?: {
-                /** @example /product/3017620422003/nutella-ferrero */
-                url?: string;
-                /** @example  */
-                filename?: string;
-                /** @example Nutella - Ferrero - 400g */
-                name?: string;
-                /** @example /images/products/301/762/042/2003/123.100.jpg */
-                thumbnailUrl?: string;
-                /** @example 3017620422003 */
-                code?: string;
-            }[];
-            image?: {
-                /** @example 123.100.jpg */
-                thumb_url?: string;
-                /** @example 123 */
-                imgid?: number;
-                /** @example 123.400.jpg */
-                crop_url?: string;
-            };
-            /** @example 123 */
-            imgid?: number;
-            /** @example status ok */
-            status?: string;
-            /** @example front_en */
-            imagefield?: string;
-            /** @example 3017620422003 */
-            code?: string;
-        };
-        /** ocr_on_product_response */
-        ocr_on_product: {
-            /** @example 1 */
-            status?: number;
-        };
-        /** rotate_a_photo_response */
-        rotate_a_photo: {
-            /** @example status ok */
-            status?: string;
-            /** @example nutrition_fr */
-            imagefield?: string;
-            image?: {
-                /** @example nutrition_fr.67.400.jpg */
-                display_url?: string;
-            };
-        };
-        /** @description Select a photo and optionally crop/rotate it.
-         *     The origin of the cropping coordinates is the top-left corner.
-         *     Note that rotation is applied *before* cropping, so the cropping bounding box
-         *     is relative to the rotated image.
-         *      */
-        crop_a_photo: {
-            /**
-             * @description Barcode of the product.
-             * @example 04963406
-             */
-            code: string;
-            /**
-             * @description identifier of the image to select, it should be a number
-             * @example 2
-             */
-            imgid: number;
-            /**
-             * @description identifier of the selected image field, should be in the format
-             *     `{IMAGE_TYPE}_{LANG}` format, where `IMAGE_TYPE` is one of
-             *     `front|ingredients|nutrition|packaging|other` and `LANG` is the 2 letter
-             *     language code.
-             *     Note that if you select an image for the main language of the product (ex:
-             *     `ingredients_it` if `it` is the main language), this image will be
-             *     displayed on Product Opener for all languages (ex: on
-             *     `https://fr.openfoodfacts.org`, unless `ingredients_fr` exists).
-             *
-             * @example front_en
-             */
-            id: string;
-            /**
-             * @description X origin coordinate of the crop, it must be lower than x2
-             * @example 0
-             */
-            x1?: number;
-            /**
-             * @description Y origin coordinate of the crop, it must be lower than y2
-             * @example 0
-             */
-            y1?: number;
-            /**
-             * @description X end coordinate of the crop, it must be higher than x1
-             * @example 145
-             */
-            x2?: number;
-            /**
-             * @description Y end coordinate of the crop, it must be higher than y1
-             * @example 145
-             */
-            y2?: number;
-            /**
-             * @description angle of the rotation to apply on the selected image.
-             *     passing `90` as value rotate the image 90 degrees counter-clockwise.
-             *
-             * @example 0
-             */
-            angle?: number;
-            /**
-             * @description whether the selected image should be normalized using ImageMagick
-             * @example false
-             * @enum {string}
-             */
-            normalize?: "true" | "false";
-            /**
-             * @description whether the source image should be white magiced (background removal) using
-             *     ImageMagick.
-             *
-             * @default false
-             * @enum {string}
-             */
-            white_magic: "true" | "false";
-        };
-        /** unselect_a_photo_request */
-        unselect_a_photo: {
-            /**
-             * @description code of the product
-             * @example 4251105501381
-             */
-            code?: string;
-            /**
-             * @description image field (image id) of the photo to unselect
-             * @example front_fr
-             */
-            id?: string;
-        };
-        /** @description You can provide most of the properties defined in the product schema.
-         *      */
-        add_or_edit_a_product: {
-            /**
-             * @description The barcode of the product to be added or edited
-             * @example 0074570036004
-             */
-            code: string;
-            /** @description Username to authenticate with
-             *
-             *     Note: you must always use the username (and not the email)
-             *     as it is far less brittle.
-             *      */
-            user_id: string;
-            /**
-             * Format: password
-             * @description Password to authenticate with
-             */
-            password: string;
-            /**
-             * @description A comment for the change. It will be shown in product changes history.
-             * @example new packaging from super-app
-             */
-            comment?: string;
-            /** @description The brands of the product (comma separated list of values). */
-            brands?: string[];
-            /** @description The labels of the product (comma separated list of values). */
-            labels?: string[];
-            /** @description The categories of the product (comma separated list of values). */
-            categories?: string[];
-            /**
-             * @description Packaging type, format, material.
-             *     The [v3 API documentation](https://openfoodfacts.github.io/openfoodfacts-server/api/ref-v3/#operation/post-api-v3-product-barcode)
-             *     has a more structured data for `packaging`.
-             *
-             * @example Frozen
-             */
-            packaging?: string;
-        };
-        /** add_or_edit_a_product_response */
-        "add_or_edit_a_product-2": {
-            /** @example fields saved */
-            status_verbose?: string;
-            /** @example 1 */
-            status?: number;
-        };
-        /** search_for_products_response */
-        search_for_products: {
-            /**
-             * @description Total number of products found
-             *
-             * @example 2701
-             */
-            count?: number;
-            /**
-             * @description Page number of returned results.
-             *
-             *     You can get a different page, by using the `page` query parameter.
-             *
-             * @example 1
-             */
-            page?: number;
-            /**
-             * @description Number of products in this page.
-             *
-             *     This will differ from page_size only on the last page.
-             *
-             * @example 24
-             */
-            page_count?: number;
-            /**
-             * @description Requested number of products per pages
-             *
-             *     To get the number of pages, divide count by page_size
-             *     (eg. `Math.floor( count / page_size) + 1 `)
-             *
-             * @example 24
-             */
-            page_size?: number;
-            /** @description The products matching the query corresponding to current page
-             *      */
-            products?: components["schemas"]["product"][];
-            /** @example 0 */
-            skip?: number;
+             *     For WRITE requests: if passed, taxonomized tags fields with a lc_name property will be considered to be in this language. */
+            tags_lc?: string;
         };
         /**
-         * @description The unit in which the nutrient for 100g or per serving is measured.
+         * Input taxonomy tag
+         * @description A tag entry, that will be matched against a taxonomy (e.g. a category, a label)
          *
-         *     The possible values depends on the nutrient.
+         *     The entry is a string that can contain either:
          *
-         *     * `g` for grams
-         *     * `mg` for milligrams
-         *     * `μg` for micrograms
-         *     * `cl` for centiliters
-         *     * `ml` for mililiters
-         *     * `dv` for recommended daily intakes (aka [Dietary Reference Intake](https://en.wikipedia.org/wiki/Dietary_Reference_Intake))
-         *     * `% vol` for percentage per volume (e.g. alcohol vol per 100 ml)
-         *     * `%` for percentage
+         *     - a taxonomy entry id, in the form [2 letter language code]:[normalized canonical name] (e.g. "en:green-teas")
+         *     - a string in a specific language, prefixed by the 2 letter language code (e.g. "fr:Thés verts")
+         *     - API v0 to v2: a string in the language of the request (specified with the lc field, or inferred from the subdomain the request is sent to (e.g. "nl" for requests sent to be.openfoodfacts.org)
+         *     - API v3: a string in the default language of the field (e.g. French for categories_tags_fr) or in the language indicated by the tags_lc request field (e.g. Thés verts)
          *
-         *     🤓 code: see the [Units module][units-module],
-         *     and [Food:default_unit_for_nid function][default-unit]
-         *
-         *     [units-module]: https://openfoodfacts.github.io/openfoodfacts-server/dev/ref-perl-pod/ProductOpener/Units.html
-         *     [default-unit]: https://openfoodfacts.github.io/openfoodfacts-server/dev/ref-perl-pod/ProductOpener/Food.html#default_unit_for_nid_(_%24nid)
-         *
-         * @enum {string}
+         *     All entries will be matched to the corresponding taxonomy. It is possible to specify values that do not exist yet in the taxonomy. They may later be added as new taxonomy entries, or as new translations or synonyms of an existing entry.
          */
-        nutrient_unit: "g" | "mg" | "μg" | "cl" | "ml" | "dv" | "% vol" | "%";
-        /** @description Nutrients and sub-nutrients of a product, with their name and default unit.
-         *     (e.g. saturated-fat is a sub-nutrient of fat).
-         *      */
-        Nutrients: components["schemas"]["Nutrient"][];
-        /** @description List of groups of attributes for personal search in a specific language.
-         *      */
-        get_attribute_groups: {
-            /** @description unique id of the group */
-            id?: string;
-            /** @description Name of the group */
-            name?: string;
-            /** @description Attributes that are part of this group
-             *      */
-            attributes?: {
-                /** @description unique id of the attribute */
-                id?: string;
-                /** @description Name of the attribute */
-                name?: string;
-                /** @description url of icon to display next to the settings for this attribute */
-                icon_url?: string;
-                /** @description a description of the attribute to display to users */
-                setting_name?: string;
-                /** @description a complementary note on the attribute */
-                setting_note?: string;
-                /**
-                 * @description Indicates the default setting for this attribute
-                 * @enum {string}
-                 */
-                default?: "mandatory" | "very_important" | "important" | "not_important";
-                /** @description Linked knowledge panel (optional) */
-                panel_id?: string;
-            }[];
-        }[];
+        input_taxonomy_tag_entry: string;
         /**
-         * get_preferences_response
-         * @description Rules to apply to compute personal ranking of a product,
-         *     based upon the setting value of each attribute.
+         * Tags (WRITE)
+         * @description Products have list of tags of different types (e.g. categories, labels) that can be replaced or added to with the following properties in API v3.
          *
          */
-        get_preferences: {
+        "tags-write": {
+            /** @description An array of categories tag entries that will replace existing categories */
+            categories_tags?: components["schemas"]["input_taxonomy_tag_entry"][];
+            /** @description An array of categories tag entries that will be added to existing categories */
+            categories_tags_add?: components["schemas"]["input_taxonomy_tag_entry"][];
+        };
+        /**
+         * Packaging component shape (WRITE)
+         * @description The shape property is canonicalized using the packaging_shapes taxonomy.
+         */
+        "shape-write": {
+            /** @description Canonical id of the entry in the taxonomy. If the value cannot be mapped to a taxonomy entry, the value must be the name of the entry in its original language prefixed by the language 2 letter code and a colon. */
+            id?: string;
+        } | {
+            /** @description Name of the entry in the language specified in the tags_lc field of the request. If the translation is not available, the value must be the name of the entry in its original language prefixed by the language 2 letter code and a colon. */
+            lc_name?: string;
+        };
+        /**
+         * Packaging component material (WRITE)
+         * @description The material property is canonicalized using the packaging_materials taxonomy.
+         */
+        "material-write": {
+            /** @description Canonical id of the entry in the taxonomy. If the value cannot be mapped to a taxonomy entry, the value must be the name of the entry in its original language prefixed by the language 2 letter code and a colon. */
+            id?: string;
+        } | {
+            /** @description Name of the entry in the language specified in the tags_lc field of the request. If the translation is not available, the value must be the name of the entry in its original language prefixed by the language 2 letter code and a colon. */
+            lc_name?: string;
+        };
+        /**
+         * Packaging component recycling instruction (WRITE)
+         * @description The recycling property is canonicalized using the packaging_recycling taxonomy.
+         */
+        "recycling-write": {
+            /** @description Canonical id of the entry in the taxonomy. If the value cannot be mapped to a taxonomy entry, the value must be the name of the entry in its original language prefixed by the language 2 letter code and a colon. */
+            id?: string;
+        } | {
+            /** @description Name of the entry in the language specified in the tags_lc field of the request. If the translation is not available, the value must be the name of the entry in its original language prefixed by the language 2 letter code and a colon. */
+            lc_name?: string;
+        };
+        /**
+         * Packaging component (WRITE)
+         * @description Each packaging component has different properties to specify how many there are, its shape, material etc.
+         *
+         *     The shape, material and recycling properties will be mapped to one entry in the packaging_shapes, packaging_materials and packaging_recycling taxonomies.
+         *
+         *     For input, clients can either pass the id of a corresponding taxonomy entry (e.g. "en:pizza-box"), or a free text value prefixed with the language code of the text (e.g. "en:Pizza box", "fr:boite à pizza"). If the language code prefix is missing, the value of the "lc" field of the query will be used.
+         *
+         *     The resulting structure will contain the id of the canonical entry in the taxonomy if it good be matched, or the free text value prefixed with the language code otherwise.
+         *
+         *     For weights, the API is expecting a number with the number of grams. If a string is passed instead of a number, we will attempt to convert it to grams. The string may contain units (e.g. "6.9 g"), and use . or , as the decimal separator. Conversion may not work for all inputs. If a string was converted to a number, the API response will include a warning and specify the converted value.
+         */
+        "packaging_component-write": {
+            /** @description Number of units of this packaging component contained in the product (e.g. 6 for a pack of 6 bottles) */
+            number_of_units?: number;
+            shape?: components["schemas"]["shape-write"];
+            material?: components["schemas"]["material-write"];
+            recycling?: components["schemas"]["recycling-write"];
+            /** @description Quantity (weight or volume) of food product contained in the packaging component. (e.g. 75cl for a wine bottle) */
+            quantity_per_unit?: string;
+            /** @description Weight (as specified by the manufacturer) of one unit of the empty packaging component (in grams). (e.g. for a 6 pack of 1.5l water bottles, it might be 30, the weight in grams of 1 empty water bottle without its cap which is a different packaging component). If passed a string - possibly with an unit - it will be converted to a number. */
+            weight_specified?: number | string;
+            /** @description Weight (as measured by one or more users) of one unit of the empty packaging component (in grams). (e.g. for a 6 pack of 1.5l water bottles, it might be 30, the weight in grams of 1 empty water bottle without its cap which is a different packaging component). If passed a string - possibly with an unit - it will be converted to a number. */
+            weight_measured?: number | string;
+            /** @description A comma separated list of brands / product names for the packaging component (e.g. "Tetra Pak", Tetra Brik" */
+            brands?: string;
+            /** @description A comma separated list of labels, canonicalized with the packaging_labels taxonomy (e.g. "en:FSC, fr:Encre végétale") */
+            labels?: string;
+        };
+        /**
+         * Packagings (WRITE)
+         * @description The packagings object is an array of individual packaging component objects.
+         *
+         *     The Packaging data document explains how packaging data is structured in Open Food Facts: https://openfoodfacts.github.io/openfoodfacts-server/dev/explain-packaging-data/
+         */
+        "packagings-write": components["schemas"]["packaging_component-write"][];
+        /**
+         * Product update API V3 (WRITE)
+         * @description Model for creating or updating products using the v3 version of the product update API.
+         */
+        product_update_api_v3: components["schemas"]["tags-write"] & {
+            packagings?: components["schemas"]["packagings-write"];
+            packagings_add?: components["schemas"]["packagings-write"];
+            packagings_complete?: components["schemas"]["packagings_complete"];
             /**
-             * @description id for the setting value
-             * @enum {string}
+             * @description 2 letter language code of the main language of the product (the most prominent on the packaging)
+             * @example fr
              */
-            id?: "not_important" | "important" | "very_important" | "mandatory";
-            /** @description name for the setting value, translated according to `lc` parameter */
-            name?: string;
-            /** @description factor to apply to the property of the product corresponding to attributes
-             *     having this setting value
-             *      */
-            factor?: number;
-            /** @description FIXME
-             *      */
-            minimum_match?: number;
-        }[];
+            lang?: string;
+            quantity?: string;
+            serving_size?: string;
+            images?: {
+                /** @description Images with specific information (e.g. front, ingredients, nutrition, packaging) for specific languages.
+                 *     Each selected image is a cropped version of an uploaded image.
+                 *      */
+                selected?: components["schemas"]["ImagesSelected"];
+            };
+        };
     };
     responses: never;
     parameters: {
-        id: string;
         /** @description 2 letter code of the country of the user. Used for localizing some fields in returned values (e.g. knowledge panels). If not passed, the country may be inferred by the IP address of the request. */
         cc: string;
-        /** @description 2 letter code of the language of the user.
-         *     Used for localizing some fields in returned values (e.g. knowledge panels).
-         *     If not passed, the language may be inferred by the Accept-Language header of the request,
-         *     or from the domain name prefix.
-         *      */
+        /** @description 2 letter code of the language of the user. Used for localizing some fields in returned values (e.g. knowledge panels). If not passed, the language may be inferred by the Accept-Language header of the request. */
         lc: string;
-        /** @description Barcode of the product */
-        code: string;
-        process_image: string;
-        ocr_engine: string;
-        imgid: string;
-        angle: string;
-        /** @description The page number you request to view (eg. in search results spanning multiple pages)
-         *      */
-        page: number;
-        /** @description The number of elements should be sent per page
-         *      */
-        page_size: number;
-        /** @description The allowed values  used to sort/order the search results.
-         *
-         *     * `product_name` sorts on name
-         *     * `ecoscore_score`, `nova_score`, `nutriscore_score` rank on the [Eco-Score](https://world.openfoodfacts.org/eco-score-the-environmental-impact-of-food-products), [Nova](https://world.openfoodfacts.org/nova), or [Nutri-Score](https://world.openfoodfacts.org/nutriscore)
-         *     * `scans_n`, `unique_scans_n` and `popularity_key` are about product popularity: number of scans on unique scans, rank of product
-         *     * `created_t`, `last_modified_t`, are about creation and modification dates
-         *     * `nothing`, tells not to sort at all (because if you do not provide the sort_by argument we default to sorting on popularity (for food) or last modification date)
-         *      */
-        sort_by: "product_name" | "last_modified_t" | "scans_n" | "unique_scans_n" | "created_t" | "completeness" | "popularity_key" | "nutriscore_score" | "nova_score" | "nothing" | "ecoscore_score";
-        fields: string;
-        /** @description When knowledge_panels are requested, you can specify which panels should be in the response. All the others will be excluded.
-         *      */
-        knowledge_panels_included: string;
-        /** @description When knowledge_panels are requested, you can specify which panels to exclude from the response. All the others will be included.
-         *     If a panel is both excluded and included (with the knowledge_panels_excluded parameter), it will be excluded.
-         *      */
-        knowledge_panels_excluded: string;
-        tagtype: string;
-        term: string;
         /** @description Used for READ queries for one product. Expected product type of the requested product. Defaults to the product type of the server the query is sent to (e.g. 'food' for Open Food Facts, 'beauty' for Open Beauty Facts, etc.). 'all' matches all product types. If the product exists on a different server that matches the requested product type, the API will return a 302 redirect to the correct server. Otherwise, the API will return a 404 error. It is possible that new product types will be added in the future.
          *      */
         RequestedProductType: "all" | "beauty" | "food" | "petfood" | "product";
-        /** @description Specific fields to return. Use 'knowledge_panels' for Knowledge Panels only. */
-        ProductAvailableFields: string;
-        /** @description The additives_tags in english of product(s) you are searching for.
-         *     The [Open Food Facts Web App](https://world.openfoodfacts.org/facets/additives) has a list of possible values for `additives`. Translated values are available at https://static.openfoodfacts.org/data/taxonomies/additives.json
-         *
-         *     You can use multiple values by using a comma separated list.
-         *     You can add a "-" before values to avoid matching a tag.
-         *      */
-        additives_tags: string;
-        /** @description The allergens_tags in english of product(s) you are searching for.
-         *     The [Open Food Facts Web App](https://world.openfoodfacts.org/facets/allergens) has a list of possible values for `allergens`. Translated values are available at https://static.openfoodfacts.org/data/taxonomies/allergens.json
-         *
-         *     You can use multiple values by using a comma separated list.
-         *     You can add a "-" before values to avoid matching a tag.
-         *      */
-        allergens_tags: string;
-        /** @description The brands_tags of product(s) you are searching for.
-         *     The [Open Food Facts Web App](https://world.openfoodfacts.org/facets/brands) has a list of possible values for `brands`. Taxonomized values are available at https://static.openfoodfacts.org/data/taxonomies/brands.json
-         *
-         *     You can use multiple values by using a comma separated list.
-         *     You can add a "-" before values to avoid matching a tag.
-         *      */
-        brands_tags: string;
-        /** @description The category of product(s) you are searching for.
-         *     The [Open Food Facts Web App](https://world.openfoodfacts.org/facets/categories) has a list of possible values for `categories`. Translated values are available at https://static.openfoodfacts.org/data/taxonomies/categories.json
-         *
-         *     You can use multiple values by using a comma separated list.
-         *     You can add a "-" before values to avoid matching a tag.
-         *      */
-        categories_tags: string;
-        /** @description The countries_tags_en of product(s) you are searching for.
-         *     The [Open Food Facts Web App](https://world.openfoodfacts.org/facets/countries) shows a list of possible values for `countries`. Translated values are available at https://static.openfoodfacts.org/data/taxonomies/countries.json
-         *
-         *     You can use multiple values by using a comma separated list.
-         *     You can add a "-" before values to avoid matching a tag.
-         *      */
-        countries_tags: string;
-        /** @description The emb_codes_tags of product(s) you are searching for.
-         *
-         *     You can use multiple values by using a comma separated list.
-         *     You can add a "-" before values to avoid matching a tag.
-         *      */
-        emb_codes_tags: string;
-        /** @description The labels_tags in english of product(s) you are searching for.
-         *     The [Open Food Facts Web App](https://world.openfoodfacts.org/facets/labels) has a list of possible values for `labels`.
-         *
-         *     You can use multiple values by using a comma separated list.
-         *     You can add a "-" before values to avoid matching a tag.
-         *      */
-        labels_tags: string;
-        /** @description The manufacturing_places_tags of product(s) you are searching for.
-         *     The [Open Food Facts Web App](https://world.openfoodfacts.org/facets/manufacturing-places) has a list of possible values for `manufacturing-places`.
-         *
-         *     You can use multiple values by using a comma separated list.
-         *     You can add a "-" before values to avoid matching a tag.
-         *      */
-        manufacturing_places_tags: string;
-        /** @description The nutrition_grades_tags of product(s) you are searching for.
-         *     The [Open Food Facts Web App](https://world.openfoodfacts.org/facets/nutrition-grades) has a list of possible values for `nutrition-grades`.
-         *
-         *     You can use multiple values by using a comma separated list.
-         *     You can add a "-" before values to avoid matching a tag.
-         *      */
-        nutrition_grades_tags: string;
-        /** @description The origins_tags of product(s) you are searching for. The [Open Food Facts Web App](https://world.openfoodfacts.org/facets/origins) has a list of possible values for `origins`.
-         *
-         *     You can use multiple values by using a comma separated list.
-         *     You can add a "-" before values to avoid matching a tag.
-         *      */
-        origins_tags: string;
-        /** @description The packaging_tag in german of product(s) you are searching for.
-         *     The [Open Food Facts Web App](https://world.openfoodfacts.org/facets/packaging) has a list of possible values for `packaging`.
-         *
-         *     You can use multiple values by using a comma separated list.
-         *     You can add a "-" before values to avoid matching a tag.
-         *      */
-        packaging_tags: string;
-        /** @description The purchase_places_tags of product(s) you are searching for.
-         *
-         *     You can use multiple values by using a comma separated list.
-         *     You can add a "-" before values to avoid matching a tag.
-         *      */
-        purchase_places_tags: string;
-        /** @description The states_tags in english of product(s) you are searching for.
-         *     The [Open Food Facts Web App](https://world.openfoodfacts.org/facets/states) has a list of possible values for `states`. Translated values are available at https://static.openfoodfacts.org/data/taxonomies/states.json
-         *     You can use multiple values by using a comma separated list.
-         *     You can add a "-" before values to avoid matching a tag.
-         *      */
-        states_tags: string;
-        /** @description The stores_tags of product(s) you are searching for.
-         *
-         *     You can use multiple values by using a comma separated list.
-         *     You can add a "-" before values to avoid matching a tag.
-         *      */
-        stores_tags: string;
-        /** @description The traces_tags of product(s) you are searching for.
-         *     The [Open Food Facts Web App](https://world.openfoodfacts.org/facets/traces) shows a list of possible values for `traces`.
-         *
-         *     You can use multiple values by using a comma separated list.
-         *     You can add a "-" before values to avoid matching a tag.
-         *      */
-        traces_tags: string;
-        /** @description You can add a language code to a specific tag to query it in a specific language
-         *      */
-        tag_name_with_language_code: Record<string, never>;
-        /** @description Search on nutrient lower than a value
-         *      */
-        nutrient_lower_than: Record<string, never>;
-        /** @description Search on nutrient greater than a value
-         *      */
-        nutrient_greater_than: Record<string, never>;
-        /** @description Search on nutrient for an exact quantity
-         *      */
-        nutrient_equal: Record<string, never>;
+        tagtype: string;
     };
     requestBodies: never;
     headers: never;
@@ -2421,19 +1940,31 @@ export interface operations {
                 /** @description Used for READ queries for one product. Expected product type of the requested product. Defaults to the product type of the server the query is sent to (e.g. 'food' for Open Food Facts, 'beauty' for Open Beauty Facts, etc.). 'all' matches all product types. If the product exists on a different server that matches the requested product type, the API will return a 302 redirect to the correct server. Otherwise, the API will return a 404 error. It is possible that new product types will be added in the future.
                  *      */
                 product_type?: components["parameters"]["RequestedProductType"];
-                /** @description Specific fields to return. Use 'knowledge_panels' for Knowledge Panels only. */
-                fields?: components["parameters"]["ProductAvailableFields"];
-                /** @description When knowledge_panels are requested, you can specify which panels should be in the response. All the others will be excluded.
-                 *      */
-                knowledge_panels_included?: components["parameters"]["knowledge_panels_included"];
+                /** @description 2 letter code of the country of the user. Used for localizing some fields in returned values (e.g. knowledge panels). If not passed, the country may be inferred by the IP address of the request. */
+                cc?: components["parameters"]["cc"];
+                /** @description 2 letter code of the language of the user. Used for localizing some fields in returned values (e.g. knowledge panels). If not passed, the language may be inferred by the Accept-Language header of the request. */
+                lc?: components["parameters"]["lc"];
+                /** @description 2 letter language code to request names of tags in a specific language.  For READ requests: if passed, all taxonomized tags of the response will include a `lc_name` property with the translation in the requested language, if available. Otherwise, the property value will contain the name in the original language, prefixed by the 2 language code and a colon. */
+                tags_lc?: string;
+                /** @description Comma separated list of fields requested in the response.
+                 *
+                 *     Special values:
+                 *     * "none": returns no fields
+                 *     * "raw": returns all fields as stored internally in the database
+                 *     * "all": returns all fields except generated fields that need to be explicitly requested such as "knowledge_panels".
+                 *
+                 *     Defaults to "all" for READ requests. The "all" value can also be combined with fields like "attribute_groups" and "knowledge_panels".' */
+                fields?: string;
+                /** @description When knowledge_panels are requested, you can specify which panels should be in the response. All the others will be excluded. */
+                knowledge_panels_included?: string;
                 /** @description When knowledge_panels are requested, you can specify which panels to exclude from the response. All the others will be included.
-                 *     If a panel is both excluded and included (with the knowledge_panels_excluded parameter), it will be excluded.
-                 *      */
-                knowledge_panels_excluded?: components["parameters"]["knowledge_panels_excluded"];
+                 *     If a panel is both excluded and included (with the knowledge_panels_excluded parameter), it will be excluded. */
+                knowledge_panels_excluded?: string;
             };
             header?: never;
             path: {
-                /** @description The barcode of the product to be fetched */
+                /** @description The barcode of the product to be fetched
+                 *      */
                 barcode: string;
             };
             cookie?: never;
@@ -2446,9 +1977,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["get_product_by_barcode"] | (components["schemas"]["get_product_by_barcode_base"] & {
-                        product?: components["schemas"]["product_knowledge_panels"];
-                    });
+                    "application/json": components["schemas"]["response_status"] & components["schemas"]["product_v3"];
                 };
             };
             /** @description Redirect to the correct server for the product type of the requested product */
@@ -2468,465 +1997,290 @@ export interface operations {
             };
         };
     };
-    "get-cgi-product_image_upload.pl": {
+    "patch-api-v3-product-barcode": {
         parameters: {
             query?: never;
             header?: never;
-            path?: never;
+            path: {
+                /** @description The barcode of the product to to create or update, or "test" to analyze the product data sent without creating or updating a product.
+                 *      */
+                barcode: string;
+            };
             cookie?: never;
         };
+        /** @description Structured data for the product is passed in the product field.
+         *
+         *     For complex structures such as the packagings object, it is possible to replace pre-existing data, or completing it:
+         *
+         *     - an object sent in the packagings field will replace any pre-existing data.
+         *     - an object sent in the field suffixed with _add (e.g. packagings_add) will be merged with any pre-existing data.
+         *      */
         requestBody?: {
             content: {
-                "multipart/form-data": components["schemas"]["add_photo_to_existing_product"] & components["schemas"]["change_ref_properties"];
+                "application/json": components["schemas"]["lc_cc"] & components["schemas"]["fields_tags_lc"] & {
+                    user_id?: string;
+                    /**
+                     * Format: password
+                     * @description Password for login
+                     */
+                    password?: string;
+                    product?: components["schemas"]["product_update_api_v3"];
+                };
+                "application/xml": Record<string, never>;
             };
         };
         responses: {
-            /** @description OK */
+            /** @description The response will include a "product" structure. The fields returned in this structure will depend on the value of the "fields" input field:
+             *
+             *     - "updated" (default): all fields updated by the query will be returned, including fields that are directly generated from the updated fields. For instance, sending "packagings" or "packagings_add" will return the "packagings" field.
+             *
+             *     - "none": no fields are returned.
+             *
+             *     - "all": returns all fields except generated fields that need to be explicitly requested such as "knowledge_panels".
+             *
+             *     The "fields" values can also be concatenated: "all,knowledge_panels" */
             200: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["add_photo_to_existing_product-2"];
-                };
-            };
-        };
-    };
-    "get-cgi-ingredients.pl": {
-        parameters: {
-            query: {
-                id: components["parameters"]["id"];
-                /** @description Barcode of the product */
-                code: components["parameters"]["code"];
-                process_image: components["parameters"]["process_image"];
-                ocr_engine: components["parameters"]["ocr_engine"];
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ocr_on_product"];
-                };
-            };
-        };
-    };
-    "get-cgi-product_image_crop.pl": {
-        parameters: {
-            query: {
-                /** @description Barcode of the product */
-                code: components["parameters"]["code"];
-                id: components["parameters"]["id"];
-                imgid: components["parameters"]["imgid"];
-                angle: components["parameters"]["angle"];
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["rotate_a_photo"];
-                };
-            };
-        };
-    };
-    "post-cgi-product_image_crop.pl": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "multipart/form-data": components["schemas"]["crop_a_photo"] & components["schemas"]["change_ref_properties"];
-            };
-        };
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": Record<string, never>;
-                };
-            };
-        };
-    };
-    "post-cgi-product_image_unselect.pl": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "multipart/form-data": components["schemas"]["unselect_a_photo"];
-            };
-        };
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /**
-                         * @description status of the unselect operation
-                         * @example status ok
-                         */
-                        status?: string;
-                        /**
-                         * @description status code of the operation
-                         * @example 0
-                         */
-                        status_code?: number;
-                        /**
-                         * @description image field that was unselected
-                         * @example front_fr
-                         */
-                        imagefield?: string;
+                    "application/json": components["schemas"]["response_status"] & {
+                        product?: components["schemas"]["product_v3"];
                     };
                 };
             };
         };
     };
-    "post-cgi-product_jqm2.pl": {
+    "post-api-v3-product-barcode-images": {
         parameters: {
             query?: never;
             header?: never;
-            path?: never;
+            path: {
+                /** @description The barcode of the product corresponding to the image.
+                 *      */
+                barcode: string;
+            };
             cookie?: never;
         };
+        /** @description Image data for the product is passed in the image_data_base64 field as a base64 encoded string.
+         *      */
         requestBody?: {
             content: {
-                "multipart/form-data": components["schemas"]["add_or_edit_a_product"] & components["schemas"]["change_ref_properties"];
-            };
-        };
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["add_or_edit_a_product-2"];
-                };
-            };
-        };
-    };
-    "get-search": {
-        parameters: {
-            query?: {
-                /** @description The additives_tags in english of product(s) you are searching for.
-                 *     The [Open Food Facts Web App](https://world.openfoodfacts.org/facets/additives) has a list of possible values for `additives`. Translated values are available at https://static.openfoodfacts.org/data/taxonomies/additives.json
-                 *
-                 *     You can use multiple values by using a comma separated list.
-                 *     You can add a "-" before values to avoid matching a tag.
-                 *      */
-                additives_tags?: components["parameters"]["additives_tags"];
-                /** @description The allergens_tags in english of product(s) you are searching for.
-                 *     The [Open Food Facts Web App](https://world.openfoodfacts.org/facets/allergens) has a list of possible values for `allergens`. Translated values are available at https://static.openfoodfacts.org/data/taxonomies/allergens.json
-                 *
-                 *     You can use multiple values by using a comma separated list.
-                 *     You can add a "-" before values to avoid matching a tag.
-                 *      */
-                allergens_tags?: components["parameters"]["allergens_tags"];
-                /** @description The brands_tags of product(s) you are searching for.
-                 *     The [Open Food Facts Web App](https://world.openfoodfacts.org/facets/brands) has a list of possible values for `brands`. Taxonomized values are available at https://static.openfoodfacts.org/data/taxonomies/brands.json
-                 *
-                 *     You can use multiple values by using a comma separated list.
-                 *     You can add a "-" before values to avoid matching a tag.
-                 *      */
-                brands_tags?: components["parameters"]["brands_tags"];
-                /** @description The category of product(s) you are searching for.
-                 *     The [Open Food Facts Web App](https://world.openfoodfacts.org/facets/categories) has a list of possible values for `categories`. Translated values are available at https://static.openfoodfacts.org/data/taxonomies/categories.json
-                 *
-                 *     You can use multiple values by using a comma separated list.
-                 *     You can add a "-" before values to avoid matching a tag.
-                 *      */
-                categories_tags?: components["parameters"]["categories_tags"];
-                /** @description The countries_tags_en of product(s) you are searching for.
-                 *     The [Open Food Facts Web App](https://world.openfoodfacts.org/facets/countries) shows a list of possible values for `countries`. Translated values are available at https://static.openfoodfacts.org/data/taxonomies/countries.json
-                 *
-                 *     You can use multiple values by using a comma separated list.
-                 *     You can add a "-" before values to avoid matching a tag.
-                 *      */
-                countries_tags_en?: components["parameters"]["countries_tags"];
-                /** @description The emb_codes_tags of product(s) you are searching for.
-                 *
-                 *     You can use multiple values by using a comma separated list.
-                 *     You can add a "-" before values to avoid matching a tag.
-                 *      */
-                emb_codes_tags?: components["parameters"]["emb_codes_tags"];
-                /** @description The labels_tags in english of product(s) you are searching for.
-                 *     The [Open Food Facts Web App](https://world.openfoodfacts.org/facets/labels) has a list of possible values for `labels`.
-                 *
-                 *     You can use multiple values by using a comma separated list.
-                 *     You can add a "-" before values to avoid matching a tag.
-                 *      */
-                labels_tags?: components["parameters"]["labels_tags"];
-                /** @description The manufacturing_places_tags of product(s) you are searching for.
-                 *     The [Open Food Facts Web App](https://world.openfoodfacts.org/facets/manufacturing-places) has a list of possible values for `manufacturing-places`.
-                 *
-                 *     You can use multiple values by using a comma separated list.
-                 *     You can add a "-" before values to avoid matching a tag.
-                 *      */
-                manufacturing_places_tags?: components["parameters"]["manufacturing_places_tags"];
-                /** @description The nutrition_grades_tags of product(s) you are searching for.
-                 *     The [Open Food Facts Web App](https://world.openfoodfacts.org/facets/nutrition-grades) has a list of possible values for `nutrition-grades`.
-                 *
-                 *     You can use multiple values by using a comma separated list.
-                 *     You can add a "-" before values to avoid matching a tag.
-                 *      */
-                nutrition_grades_tags?: components["parameters"]["nutrition_grades_tags"];
-                /** @description The origins_tags of product(s) you are searching for. The [Open Food Facts Web App](https://world.openfoodfacts.org/facets/origins) has a list of possible values for `origins`.
-                 *
-                 *     You can use multiple values by using a comma separated list.
-                 *     You can add a "-" before values to avoid matching a tag.
-                 *      */
-                origins_tags?: components["parameters"]["origins_tags"];
-                /** @description The packaging_tag in german of product(s) you are searching for.
-                 *     The [Open Food Facts Web App](https://world.openfoodfacts.org/facets/packaging) has a list of possible values for `packaging`.
-                 *
-                 *     You can use multiple values by using a comma separated list.
-                 *     You can add a "-" before values to avoid matching a tag.
-                 *      */
-                packaging_tags_de?: components["parameters"]["packaging_tags"];
-                /** @description The purchase_places_tags of product(s) you are searching for.
-                 *
-                 *     You can use multiple values by using a comma separated list.
-                 *     You can add a "-" before values to avoid matching a tag.
-                 *      */
-                purchase_places_tags?: components["parameters"]["purchase_places_tags"];
-                /** @description The states_tags in english of product(s) you are searching for.
-                 *     The [Open Food Facts Web App](https://world.openfoodfacts.org/facets/states) has a list of possible values for `states`. Translated values are available at https://static.openfoodfacts.org/data/taxonomies/states.json
-                 *     You can use multiple values by using a comma separated list.
-                 *     You can add a "-" before values to avoid matching a tag.
-                 *      */
-                states_tags?: components["parameters"]["states_tags"];
-                /** @description The stores_tags of product(s) you are searching for.
-                 *
-                 *     You can use multiple values by using a comma separated list.
-                 *     You can add a "-" before values to avoid matching a tag.
-                 *      */
-                stores_tags?: components["parameters"]["stores_tags"];
-                /** @description The traces_tags of product(s) you are searching for.
-                 *     The [Open Food Facts Web App](https://world.openfoodfacts.org/facets/traces) shows a list of possible values for `traces`.
-                 *
-                 *     You can use multiple values by using a comma separated list.
-                 *     You can add a "-" before values to avoid matching a tag.
-                 *      */
-                traces_tags?: components["parameters"]["traces_tags"];
-                /** @description You can add a language code to a specific tag to query it in a specific language
-                 *      */
-                "<tag_name>_tags_<language_code>"?: components["parameters"]["tag_name_with_language_code"];
-                /** @description Search on nutrient lower than a value
-                 *      */
-                "<nutrient>_lt_<value>"?: components["parameters"]["nutrient_lower_than"];
-                /** @description Search on nutrient greater than a value
-                 *      */
-                "<nutrient>_gt_<value>"?: components["parameters"]["nutrient_greater_than"];
-                /** @description Search on nutrient for an exact quantity
-                 *      */
-                "<nutrient>_eq_<value>"?: components["parameters"]["nutrient_equal"];
-                /** @description Specific fields to return. Use 'knowledge_panels' for Knowledge Panels only. */
-                fields?: components["parameters"]["ProductAvailableFields"];
-                /** @description The allowed values  used to sort/order the search results.
-                 *
-                 *     * `product_name` sorts on name
-                 *     * `ecoscore_score`, `nova_score`, `nutriscore_score` rank on the [Eco-Score](https://world.openfoodfacts.org/eco-score-the-environmental-impact-of-food-products), [Nova](https://world.openfoodfacts.org/nova), or [Nutri-Score](https://world.openfoodfacts.org/nutriscore)
-                 *     * `scans_n`, `unique_scans_n` and `popularity_key` are about product popularity: number of scans on unique scans, rank of product
-                 *     * `created_t`, `last_modified_t`, are about creation and modification dates
-                 *     * `nothing`, tells not to sort at all (because if you do not provide the sort_by argument we default to sorting on popularity (for food) or last modification date)
-                 *      */
-                sort_by?: components["parameters"]["sort_by"];
-                /** @description The page number you request to view (eg. in search results spanning multiple pages)
-                 *      */
-                page?: components["parameters"]["page"];
-                /** @description The number of elements should be sent per page
-                 *      */
-                page_size?: components["parameters"]["page_size"];
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["search_for_products"];
-                };
-            };
-        };
-    };
-    "get-cgi-suggest.pl": {
-        parameters: {
-            query?: {
-                tagtype?: components["parameters"]["tagtype"];
-                term?: components["parameters"]["term"];
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": string[];
-                };
-            };
-        };
-    };
-    "get-cgi-nutrients.pl": {
-        parameters: {
-            query?: {
-                /** @description 2 letter code of the country of the user. Used for localizing some fields in returned values (e.g. knowledge panels). If not passed, the country may be inferred by the IP address of the request. */
-                cc?: components["parameters"]["cc"];
-                /** @description 2 letter code of the language of the user.
-                 *     Used for localizing some fields in returned values (e.g. knowledge panels).
-                 *     If not passed, the language may be inferred by the Accept-Language header of the request,
-                 *     or from the domain name prefix.
-                 *      */
-                lc?: components["parameters"]["lc"];
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Nutrients"];
-                };
-            };
-        };
-    };
-    "get-attribute-groups": {
-        parameters: {
-            query?: {
-                /** @description 2 letter code of the language of the user.
-                 *     Used for localizing some fields in returned values (e.g. knowledge panels).
-                 *     If not passed, the language may be inferred by the Accept-Language header of the request,
-                 *     or from the domain name prefix.
-                 *      */
-                lc?: components["parameters"]["lc"];
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["get_attribute_groups"];
-                };
-            };
-        };
-    };
-    "get-preferences": {
-        parameters: {
-            query?: {
-                /** @description 2 letter code of the language of the user.
-                 *     Used for localizing some fields in returned values (e.g. knowledge panels).
-                 *     If not passed, the language may be inferred by the Accept-Language header of the request,
-                 *     or from the domain name prefix.
-                 *      */
-                lc?: components["parameters"]["lc"];
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["get_preferences"];
-                };
-            };
-        };
-    };
-    "get-cgi-session.pl": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/x-www-form-urlencoded": {
+                "application/json": components["schemas"]["lc_cc"] & {
                     /** @description Username for login
                      *
                      *     Note: you must always use the username (and not the email)
                      *     as it is far less brittle.
                      *      */
-                    user_id: string;
+                    user_id?: string;
                     /**
                      * Format: password
                      * @description Password for login
                      */
-                    password: string;
+                    password?: string;
+                    /** @description Base64 encoded image data (supported formats: JPEG, PNG, GIF, HEIC) */
+                    image_data_base64?: string;
+                    /** @description Optional instructions to select (and possibly crop) the uploaded image for specific information (e.g. front, ingredients, nutrition, packaging) for specific languages.
+                     *      */
+                    selected?: components["schemas"]["ImagesSelected"];
+                };
+                "application/xml": Record<string, never>;
+            };
+        };
+        responses: {
+            /** @description The response will include a "product" structure. The fields returned in this structure will depend on the value of the "fields" input field:
+             *
+             *     - "updated" (default): all fields updated by the query will be returned, including fields that are directly generated from the updated fields. For instance, sending "packagings" or "packagings_add" will return the "packagings" field.
+             *
+             *     - "none": no fields are returned.
+             *
+             *     - "all": returns all fields except generated fields that need to be explicitly requested such as "knowledge_panels".
+             *
+             *     The "fields" values can also be concatenated: "all,knowledge_panels" */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["response_status"] & {
+                        product?: {
+                            images?: {
+                                /**
+                                 * images_uploaded
+                                 * @description List with only the image just uploaded by the user. The key is the image id (imgid) and the value is an object with the image data.
+                                 *
+                                 */
+                                uploaded?: Record<string, never>;
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "delete-api-v3-product-barcode-images-uploaded-imgid": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description The barcode of the product corresponding to the image.
+                 *      */
+                barcode: string;
+                /** @description The id of the image to be deleted.
+                 *      */
+                imgid: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["response_status"];
+                };
+            };
+            /** @description User not authenticated or not allowed to delete the image */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Product or image not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    "get-api-v3-taxonomy_suggestions-taxonomy": {
+        parameters: {
+            query?: {
+                tagtype?: components["parameters"]["tagtype"];
+                /** @description 2 letter code of the country of the user. Used for localizing some fields in returned values (e.g. knowledge panels). If not passed, the country may be inferred by the IP address of the request. */
+                cc?: components["parameters"]["cc"];
+                /** @description 2 letter code of the language of the user. Used for localizing some fields in returned values (e.g. knowledge panels). If not passed, the language may be inferred by the Accept-Language header of the request. */
+                lc?: components["parameters"]["lc"];
+                /** @description Optional string used to filter suggestions (useful for autocomplete).  If passed, suggestions starting with the string will be returned first, followed by suggestions matching the string at the beginning of a word, and suggestions matching the string inside a word. */
+                string?: string;
+                /** @description Comma separated list of categories tags (e.g. "en:fats,en:unsalted-butters" or categories names in the language indicated by the "lc" field (e.g. "graisses, beurres salés" in French) */
+                categories?: string;
+                /** @description Shape of packaging component (tag identified in the packaging_shapes taxonomy, or plain text tag name in the language indicated by the "lc" field) */
+                shape?: string;
+                /** @description Maximum number of suggestions. Default is 25, max is 400. */
+                limit?: string;
+                /** @description Whether or not to include "matched_synonyms" in the response. Set to 1 to include. */
+                get_synonyms?: string;
+                /** @description Alias for the "string" parameter provided for backward compatibility. "string" takes precedence. */
+                term?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["response_status"] & {
+                        /** @description Array of sorted strings suggestions in the language requested in the "lc" field. */
+                        suggestions?: string[];
+                        /** @description Dictionary of strings associating canonical names (as seen in suggestions field) with the synonym that best matches the query. An entry is present for all suggestions, even when the synonym is the same with the canonical name.
+                         *
+                         *     This value is present only if get_synonyms parameter is present.
+                         *      */
+                        matched_synonyms?: {
+                            [key: string]: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    "get-api-v3-tag-tagtype-tag_or_tagid": {
+        parameters: {
+            query?: {
+                /** @description 2 letter code of the country of the user. Used for localizing some fields in returned values (e.g. knowledge panels). If not passed, the country may be inferred by the IP address of the request. */
+                cc?: components["parameters"]["cc"];
+                /** @description 2 letter code of the language of the user. Used for localizing some fields in returned values (e.g. knowledge panels). If not passed, the language may be inferred by the Accept-Language header of the request. */
+                lc?: components["parameters"]["lc"];
+            };
+            header?: never;
+            path: {
+                /** @description Type of the tag */
+                tagtype: string;
+                /** @description Tag name (e.g. yogurts) or tag id (e.g. en:yogurts) */
+                tag_or_tagid: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["response_status"] & {
+                        /** @description Input tagtype
+                         *      */
+                        tagtype?: string;
+                        /** @description Input tagid
+                         *      */
+                        tagid?: string;
+                        tag?: {
+                            /** @description Canonicalized tagid corresponding to the input tag_or_tagid */
+                            tagid?: string;
+                            /** @description Canonicalized tagtype */
+                            tagtype?: string;
+                            /** @description Knowledge panels for the tag */
+                            knowledge_panels?: components["schemas"]["panels"];
+                        };
+                    };
+                    "application/xml": Record<string, never>;
+                };
+            };
+        };
+    };
+    "post-api-v3-product_revert": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description The code and rev fields are mandatory.
+         *      */
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["fields_tags_lc"] & {
+                    /** @description Barcode of the product */
+                    code?: string;
+                    /** @description Revision number to revert to */
+                    rev?: number;
                 };
             };
         };
         responses: {
-            /** @description Successful login */
+            /** @description OK */
             200: {
                 headers: {
-                    "Set-Cookie"?: string;
                     [name: string]: unknown;
                 };
-                content?: never;
-            };
-            /** @description Authentication failed */
-            401: {
-                headers: {
-                    [name: string]: unknown;
+                content: {
+                    "application/json": components["schemas"]["response_status"];
                 };
-                content?: never;
             };
         };
     };

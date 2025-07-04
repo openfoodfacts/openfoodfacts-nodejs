@@ -59,6 +59,7 @@ describe("Prices Wrapper", () => {
         location_osm_id: 1,
         location_osm_type: "NODE",
         date: "2023-10-01",
+        proof_id: 1,
       });
       expect(result.data).toEqual(mockData);
     });
@@ -74,6 +75,7 @@ describe("Prices Wrapper", () => {
         location_osm_id: 1,
         location_osm_type: "NODE",
         date: "2023-10-01",
+        proof_id: 1,
       });
       expect(result.error).toBeDefined();
       expect(result.response.status).toBe(400);

@@ -4,3 +4,8 @@
 GitHub Actions:
   - changed-files:
       - any-glob-to-any-file: ".github/**/*"
+
+🏷️ Folksonomy Project:
+  - changed-files:
+      - any-glob-to-any-file: "src/schemas/folksonomy.ts"
+      - any-glob-to-any-file: "src/folksonomy.ts"

@@ -9,3 +9,23 @@ GitHub Actions:
   - changed-files:
       - any-glob-to-any-file: "src/schemas/folksonomy.ts"
       - any-glob-to-any-file: "src/folksonomy.ts"
+
+💸 Prices:
+  - changed-files:
+      - any-glob-to-any-file: "src/schemas/prices.ts"
+      - any-glob-to-any-file: "src/prices.ts"
+
+🤖 Robotoff:
+  - changed-files:
+      - any-glob-to-any-file: "src/schemas/robotoff.ts"
+      - any-glob-to-any-file: "src/robotoff.ts"
+
+🔍 Search:
+  - changed-files:
+      - any-glob-to-any-file: "src/schemas/search.ts"
+      - any-glob-to-any-file: "src/search.ts"
+
+🛡️ Nutri-Patrol:
+  - changed-files:
+      - any-glob-to-any-file: "src/schemas/nutripatrol.ts"
+      - any-glob-to-any-file: "src/nutripatrol.ts"

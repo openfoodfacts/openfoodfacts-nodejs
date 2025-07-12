@@ -1,5 +1,5 @@
 import createClient from "openapi-fetch";
-import type { paths } from "$schemas/prices";
+import type { paths } from "./schemas/prices";
 import { USER_AGENT } from "./consts";
 
 type PricesQuery = paths["/api/v1/prices"]["get"]["parameters"]["query"];

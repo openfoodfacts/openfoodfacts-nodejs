@@ -1,4 +1,4 @@
-import type { paths } from "$schemas/search";
+import type { paths } from "./schemas/search";
 import createClient from "openapi-fetch";
 import { USER_AGENT } from "./consts";
 

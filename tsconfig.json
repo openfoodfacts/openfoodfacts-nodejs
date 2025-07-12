@@ -1,8 +1,5 @@
 {
   "compilerOptions": {
-    "paths": {
-      "$schemas/*": ["./src/schemas/*"]
-    },
     "forceConsistentCasingInFileNames": true,
     "target": "ES2015",
     "rootDir": ".",

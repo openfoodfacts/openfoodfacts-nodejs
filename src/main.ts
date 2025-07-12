@@ -2,7 +2,8 @@ import createClient from "openapi-fetch";
 import {
   paths as pathsv2,
   components as componentsv2,
-} from "$schemas/server/v2";
+  external as externalv2,
+} from "./schemas/server/v2";
 
 import { Robotoff } from "./robotoff";
 import { TAXONOMY_URL } from "./taxonomy/api";

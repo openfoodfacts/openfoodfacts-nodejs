@@ -68,4 +68,18 @@ export class PricesApi {
     const res = await this.client.GET("/api/v1/status");
     return res.data as { status: string };
   }
+
+  async getSchema(format?: "json" | "yaml") {
+    const res = await this.client.GET("/api/schema", {
+      params: { query: format ? { format } : {} },
+    });
+    return res;
+  }
+
+  async getCurrenciesList(): Promise<string[]> {
+    const res = await this.getSchema("json");
+    
+   // @ts-expect-error - OpenAPI types do not reflect the dynamic structure of schema paths
+    return res?.data?.components?.schemas?.CurrencyEnum?.enum || [];
+  }
 }

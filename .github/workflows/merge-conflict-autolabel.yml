@@ -1,4 +1,4 @@
-name: '💥 Auto-Label Merge Conflicts on PRs'
+name: "💥 Auto-Label Merge Conflicts on PRs"
 on:
   push:
     branches:
@@ -7,12 +7,12 @@ on:
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
-  
+
 jobs:
   triage:
     runs-on: ubuntu-latest
     steps:
-      - uses: mschilde/auto-label-merge-conflicts@5981f8933e92b78098af86b9e33fe0871cc7a3be  # v2.0 (2020-01-27)
+      - uses: mschilde/auto-label-merge-conflicts@5981f8933e92b78098af86b9e33fe0871cc7a3be # v2.0 (2020-01-27)
         with:
           CONFLICT_LABEL_NAME: "💥 Merge Conflicts"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -8,7 +8,6 @@ import {
 import {
   paths as pathsv3,
   operations as operationsv3,
-  components as componentsv3,
 } from "./schemas/server/v3";
 
 import { Robotoff } from "./robotoff";

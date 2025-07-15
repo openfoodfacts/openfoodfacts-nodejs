@@ -78,8 +78,8 @@ export class PricesApi {
 
   async getCurrenciesList(): Promise<string[]> {
     const res = await this.getSchema("json");
-    
-   // @ts-expect-error - OpenAPI types do not reflect the dynamic structure of schema paths
+
+    // @ts-expect-error - OpenAPI types do not reflect the dynamic structure of schema paths
     return res?.data?.components?.schemas?.CurrencyEnum?.enum || [];
   }
 }

@@ -69,7 +69,7 @@ export class PricesApi {
     return res.data as { status: string };
   }
 
-  async getSchema(format?: "json" | "yaml") {
+  private async getSchema(format?: "json" | "yaml") {
     const res = await this.client.GET("/api/schema", {
       params: { query: format ? { format } : {} },
     });

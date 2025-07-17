@@ -37,6 +37,9 @@ import {
 export type ProductV2 = componentsv2["schemas"]["Product"];
 export type SearchResultV2 = componentsv2["schemas"]["search_for_products"];
 
+export type ProductV3 = componentsv3["schemas"]["product_v3"];
+export type ResponseStatusV3 = componentsv3["schemas"]["response_status"];
+
 // By default, use v2
 export { ProductV2 as Product, SearchResultV2 as SearchResult };
 
@@ -341,14 +344,37 @@ export class OpenFoodFacts {
     return res.data?.product;
   }
 
-  async getProductV3(
+  /**
+   * Returns product details by barcode with optional fields
+   * @param barcode - The barcode of the product
+   * @param query - An optional query object to filter the returned fields
+   * @template T - An array of keys from ProductV3 to return
+   * @example
+   * ```typescript
+   * const result = await client.getProductV3("1234567890123", { fields: ["product_name", "brands"] });
+   * console.log(result.product.product_name, result.product.brands);
+   * ```
+   * @returns A promise that resolves to a product object with the specified fields or undefined if not found
+   */
+  async getProductV3<T extends Array<keyof ProductV3>>(
     barcode: string,
-    query?: operationsv3["get-product-by-barcode"]["parameters"]["query"],
-  ) {
+    query?: Omit<
+      operationsv3["get-product-by-barcode"]["parameters"]["query"],
+      "fields"
+    > & {
+      fields?: T;
+    },
+  ): Promise<
+    (ResponseStatusV3 & { product: Pick<ProductV3, T[number]> }) | undefined
+  > {
     const res = await this.rawV3.GET("/api/v3/product/{barcode}", {
-      params: { path: { barcode }, query },
+      params: {
+        path: { barcode },
+        query: { ...query, fields: query?.fields?.join(",") },
+      },
     });
 
+    // @ts-expect-error - OpenAPI is wrong here!
     return res.data;
   }
 

@@ -46,6 +46,7 @@ export * from "./folksonomy";
 export * from "./prices";
 export * from "./nutripatrol";
 export * from "./search";
+export * from "./products";
 
 export type OpenFoodFactsOptions = {
   type?: BackendType;

@@ -32,3 +32,9 @@ export const DEFAULT_NUTRIPATROL_API_URL =
   "https://nutripatrol.openfoodfacts.org";
 export const PRODUCT_IMAGE_BASE_URL =
   "https://images.openfoodfacts.org/images/products";
+
+export const PRODUCT_API_HOST = "https://world.openfoodfacts.org";
+export const PRODUCT_URL = (barcode: string) =>
+  `${PRODUCT_API_HOST}/api/v3/product/${barcode}.json`;
+export const PRODUCT_IMAGE_URL = (path: string) =>
+  `${PRODUCT_IMAGE_BASE_URL}/${path}`;

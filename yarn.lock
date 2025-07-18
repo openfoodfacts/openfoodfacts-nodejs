@@ -1114,7 +1114,6 @@ __metadata:
     "@commitlint/config-conventional": "npm:^19.8.0"
     "@eslint/eslintrc": "npm:^3.3.1"
     "@eslint/js": "npm:^9.25.0"
-    "@jest/globals": "npm:^29.7.0"
     "@types/jest": "npm:^29.5.14"
     "@types/node": "npm:^24.0.14"
     "@typescript-eslint/eslint-plugin": "npm:^8.30.1"

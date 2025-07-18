@@ -10,6 +10,25 @@ describe("ProductsApi", () => {
   >;
   let productsApi: ProductsApi;
 
+  // Common test data
+  const testBarcode = "7622210288257";
+  const testBarcodeV3 = "3154230805984";
+  const mockFile = new File(["test"], "test.jpg", { type: "image/jpeg" });
+  const networkError = new Error("Network error");
+
+  // Helper functions
+  const mockV2Success = (data: any) =>
+    jest.spyOn(productsApi.rawV2, "GET").mockResolvedValue({ data });
+  const mockV3Success = (data: any) =>
+    jest.spyOn(productsApi.rawV3, "GET").mockResolvedValue({ data });
+  const mockV2Error = (error: Error) =>
+    jest.spyOn(productsApi.rawV2, "GET").mockRejectedValue(error);
+  const mockV3Error = (error: Error) =>
+    jest.spyOn(productsApi.rawV3, "GET").mockRejectedValue(error);
+  const mockFetchSuccess = (data: any) =>
+    mockFetch.mockResolvedValue(TestUtils.mockResponse(data, true, 200));
+  const mockFetchError = (error: Error) => mockFetch.mockRejectedValue(error);
+
   beforeEach(() => {
     mockFetch = jest.fn<
       ReturnType<typeof window.fetch>,
@@ -22,10 +41,6 @@ describe("ProductsApi", () => {
 
   afterEach(() => {
     jest.resetAllMocks();
-  });
-
-  afterAll(() => {
-    jest.clearAllMocks();
   });
 
   describe("constructor", () => {
@@ -50,39 +65,36 @@ describe("ProductsApi", () => {
 
   describe("getProductAttributes", () => {
     it("should return product attributes for a valid barcode", async () => {
-      // Mock the fetch to return a successful response with attribute data
       const mockData = {
-        data: {
-          product: {
-            attribute_groups_en: [
-              {
-                id: "nutritional_quality",
-                name: "Nutritional quality",
-                attributes: [
-                  {
-                    id: "nutriscore",
-                    name: "Nutri-Score",
-                    grade: "c",
-                    title: "Average nutritional quality",
-                  },
-                ],
-              },
-            ],
-          },
+        product: {
+          attribute_groups_en: [
+            {
+              id: "nutritional_quality",
+              name: "Nutritional quality",
+              attributes: [
+                {
+                  id: "nutriscore",
+                  name: "Nutri-Score",
+                  grade: "c",
+                  title: "Average nutritional quality",
+                },
+              ],
+            },
+          ],
         },
       };
 
-      jest.spyOn(productsApi.rawV2, "GET").mockResolvedValue(mockData);
+      mockV2Success(mockData);
 
-      const result = await productsApi.getProductAttributes("7622210288257");
+      const result = await productsApi.getProductAttributes(testBarcode);
 
       expect(result).toBeDefined();
-      expect(result).toEqual(mockData.data.product.attribute_groups_en);
+      expect(result).toEqual(mockData.product.attribute_groups_en);
       expect(productsApi.rawV2.GET).toHaveBeenCalledWith(
         "/api/v2/product/{barcode}",
         {
           params: {
-            path: { barcode: "7622210288257" },
+            path: { barcode: testBarcode },
             query: { fields: "product_name,code,attribute_groups_en" },
           },
         },
@@ -90,13 +102,7 @@ describe("ProductsApi", () => {
     });
 
     it("should return empty array when no attributes found", async () => {
-      const mockData = {
-        data: {
-          product: null,
-        },
-      };
-
-      jest.spyOn(productsApi.rawV2, "GET").mockResolvedValue(mockData);
+      mockV2Success({ product: null });
 
       const result = await productsApi.getProductAttributes("invalid");
 
@@ -104,43 +110,38 @@ describe("ProductsApi", () => {
     });
 
     it("should handle network errors when fetching attributes", async () => {
-      jest
-        .spyOn(productsApi.rawV2, "GET")
-        .mockRejectedValue(new Error("Network error"));
+      mockV2Error(networkError);
 
       await expect(
-        productsApi.getProductAttributes("7622210288257"),
+        productsApi.getProductAttributes(testBarcode),
       ).rejects.toThrow("Network error");
     });
   });
 
   describe("getProductV3", () => {
     it("should return product details for a valid barcode and fields", async () => {
-      // Mock the fetch to return a successful response with product data
       const mockData = {
-        data: {
-          status: "success",
-          product: {
-            product_name: "Test Product",
-            brands: "Test Brand",
-          },
+        status: "success",
+        product: {
+          product_name: "Test Product",
+          brands: "Test Brand",
         },
       };
 
-      jest.spyOn(productsApi.rawV3, "GET").mockResolvedValue(mockData);
+      mockV3Success(mockData);
 
-      const result = await productsApi.getProductV3("7622210288257", {
+      const result = await productsApi.getProductV3(testBarcode, {
         fields: ["product_name", "brands"],
       });
 
       console.debug("result", result);
       expect(result).toBeDefined();
-      expect(result).toEqual(mockData.data);
+      expect(result).toEqual(mockData);
       expect(productsApi.rawV3.GET).toHaveBeenCalledWith(
         "/api/v3/product/{barcode}",
         {
           params: {
-            path: { barcode: "7622210288257" },
+            path: { barcode: testBarcode },
             query: { fields: "product_name,brands" },
           },
         },
@@ -148,22 +149,17 @@ describe("ProductsApi", () => {
     });
 
     it("should return product details without specific fields", async () => {
-      // Mock the fetch to return a successful response with full product data
-      const mockData = {
-        data: productV3MockData,
-      };
+      mockV3Success(productV3MockData);
 
-      jest.spyOn(productsApi.rawV3, "GET").mockResolvedValue(mockData);
-
-      const result = await productsApi.getProductV3("3154230805984");
+      const result = await productsApi.getProductV3(testBarcodeV3);
 
       expect(result).toBeDefined();
-      expect(result).toEqual(mockData.data);
+      expect(result).toEqual(productV3MockData);
       expect(productsApi.rawV3.GET).toHaveBeenCalledWith(
         "/api/v3/product/{barcode}",
         {
           params: {
-            path: { barcode: "3154230805984" },
+            path: { barcode: testBarcodeV3 },
             query: { fields: undefined },
           },
         },
@@ -171,11 +167,9 @@ describe("ProductsApi", () => {
     });
 
     it("should handle network errors when fetching product V3", async () => {
-      jest
-        .spyOn(productsApi.rawV3, "GET")
-        .mockRejectedValue(new Error("Network error"));
+      mockV3Error(networkError);
 
-      await expect(productsApi.getProductV3("7622210288257")).rejects.toThrow(
+      await expect(productsApi.getProductV3(testBarcode)).rejects.toThrow(
         "Network error",
       );
     });
@@ -183,36 +177,27 @@ describe("ProductsApi", () => {
 
   describe("getProductV2", () => {
     it("should return product details for a valid barcode", async () => {
-      // Mock the fetch to return a successful response with product data
       const mockData = {
-        data: {
-          product: productMockData.product,
-        },
+        product: productMockData.product,
       };
 
-      jest.spyOn(productsApi.rawV2, "GET").mockResolvedValue(mockData);
+      mockV2Success(mockData);
 
-      const result = await productsApi.getProductV2("7622210288257");
+      const result = await productsApi.getProductV2(testBarcode);
 
       console.debug("result", result);
       expect(result).toBeDefined();
-      expect(result).toEqual(mockData.data.product);
+      expect(result).toEqual(mockData.product);
       expect(productsApi.rawV2.GET).toHaveBeenCalledWith(
         "/api/v2/product/{barcode}",
         {
-          params: { path: { barcode: "7622210288257" } },
+          params: { path: { barcode: testBarcode } },
         },
       );
     });
 
     it("should return null when product not found", async () => {
-      const mockData = {
-        data: {
-          product: null,
-        },
-      };
-
-      jest.spyOn(productsApi.rawV2, "GET").mockResolvedValue(mockData);
+      mockV2Success({ product: null });
 
       const result = await productsApi.getProductV2("invalid");
 
@@ -220,11 +205,9 @@ describe("ProductsApi", () => {
     });
 
     it("should handle network errors", async () => {
-      jest
-        .spyOn(productsApi.rawV2, "GET")
-        .mockRejectedValue(new Error("Network error"));
+      mockV2Error(networkError);
 
-      await expect(productsApi.getProductV2("7622210288257")).rejects.toThrow(
+      await expect(productsApi.getProductV2(testBarcode)).rejects.toThrow(
         "Network error",
       );
     });
@@ -233,20 +216,18 @@ describe("ProductsApi", () => {
   describe("getProductImages", () => {
     it("should fetch product images successfully", async () => {
       const mockResponse = {
-        data: {
-          product: {
-            images: {
-              front: { rev: "1" },
-              ingredients: { rev: "2" },
-              nutrition: { rev: "3" },
-            },
+        product: {
+          images: {
+            front: { rev: "1" },
+            ingredients: { rev: "2" },
+            nutrition: { rev: "3" },
           },
         },
       };
 
-      jest.spyOn(productsApi.rawV2, "GET").mockResolvedValue(mockResponse);
+      mockV2Success(mockResponse);
 
-      const result = await productsApi.getProductImages("7622210288257");
+      const result = await productsApi.getProductImages(testBarcode);
 
       expect(result).toEqual(["front", "ingredients", "nutrition"]);
       expect(productsApi.rawV2.GET).toHaveBeenCalledWith(
@@ -254,20 +235,14 @@ describe("ProductsApi", () => {
         {
           params: {
             query: { fields: "images" },
-            path: { barcode: "7622210288257" },
+            path: { barcode: testBarcode },
           },
         },
       );
     });
 
     it("should return null when no product found", async () => {
-      const mockResponse = {
-        data: {
-          product: null,
-        },
-      };
-
-      jest.spyOn(productsApi.rawV2, "GET").mockResolvedValue(mockResponse);
+      mockV2Success({ product: null });
 
       const result = await productsApi.getProductImages("invalid");
 
@@ -276,52 +251,46 @@ describe("ProductsApi", () => {
 
     it("should return null when product has no images", async () => {
       const mockResponse = {
-        data: {
-          product: {
-            code: "7622210288257",
-          },
+        product: {
+          code: testBarcode,
         },
       };
 
-      jest.spyOn(productsApi.rawV2, "GET").mockResolvedValue(mockResponse);
+      mockV2Success(mockResponse);
 
-      const result = await productsApi.getProductImages("7622210288257");
+      const result = await productsApi.getProductImages(testBarcode);
 
       expect(result).toBeNull();
     });
 
     it("should handle network errors when fetching images", async () => {
-      jest
-        .spyOn(productsApi.rawV2, "GET")
-        .mockRejectedValue(new Error("Network error"));
+      mockV2Error(networkError);
 
-      await expect(
-        productsApi.getProductImages("7622210288257"),
-      ).rejects.toThrow("Network error");
+      await expect(productsApi.getProductImages(testBarcode)).rejects.toThrow(
+        "Network error",
+      );
     });
   });
 
   describe("getProductName", () => {
     it("should fetch product name successfully", async () => {
       const mockResponse = {
-        data: {
-          status: "success",
-          product: {
-            product_name: "Test Product",
-          },
+        status: "success",
+        product: {
+          product_name: "Test Product",
         },
       };
 
-      jest.spyOn(productsApi.rawV3, "GET").mockResolvedValue(mockResponse);
+      mockV3Success(mockResponse);
 
-      const result = await productsApi.getProductName("7622210288257");
+      const result = await productsApi.getProductName(testBarcode);
 
       expect(result).toEqual({ product_name: "Test Product" });
       expect(productsApi.rawV3.GET).toHaveBeenCalledWith(
         "/api/v3/product/{barcode}",
         {
           params: {
-            path: { barcode: "7622210288257" },
+            path: { barcode: testBarcode },
             query: { fields: "product_name" },
           },
         },
@@ -330,24 +299,22 @@ describe("ProductsApi", () => {
 
     it("should fetch product name with language", async () => {
       const mockResponse = {
-        data: {
-          status: "success",
-          product: {
-            product_name: "Produit Test",
-          },
+        status: "success",
+        product: {
+          product_name: "Produit Test",
         },
       };
 
-      jest.spyOn(productsApi.rawV3, "GET").mockResolvedValue(mockResponse);
+      mockV3Success(mockResponse);
 
-      const result = await productsApi.getProductName("7622210288257", "fr");
+      const result = await productsApi.getProductName(testBarcode, "fr");
 
       expect(result).toEqual({ product_name: "Produit Test" });
       expect(productsApi.rawV3.GET).toHaveBeenCalledWith(
         "/api/v3/product/{barcode}",
         {
           params: {
-            path: { barcode: "7622210288257" },
+            path: { barcode: testBarcode },
             query: { fields: "product_name", lc: "fr" },
           },
         },
@@ -356,13 +323,11 @@ describe("ProductsApi", () => {
 
     it("should return null when product not found", async () => {
       const mockResponse = {
-        data: {
-          status: "failure",
-          errors: [],
-        },
+        status: "failure",
+        errors: [],
       };
 
-      jest.spyOn(productsApi.rawV3, "GET").mockResolvedValue(mockResponse);
+      mockV3Success(mockResponse);
 
       const result = await productsApi.getProductName("invalid");
 
@@ -370,11 +335,9 @@ describe("ProductsApi", () => {
     });
 
     it("should handle network errors when fetching product name", async () => {
-      jest
-        .spyOn(productsApi.rawV3, "GET")
-        .mockRejectedValue(new Error("Network error"));
+      mockV3Error(networkError);
 
-      await expect(productsApi.getProductName("7622210288257")).rejects.toThrow(
+      await expect(productsApi.getProductName(testBarcode)).rejects.toThrow(
         "Network error",
       );
     });
@@ -383,33 +346,30 @@ describe("ProductsApi", () => {
   describe("getProductReducedForCard", () => {
     it("should fetch reduced product data successfully", async () => {
       const mockResponse = {
-        data: {
-          status: "success",
-          product: {
-            code: "7622210288257",
-            product_name: "Test Product",
-            brands: "Test Brand",
-            quantity: "100g",
-            nutriscore_grade: "c",
-            ecoscore_grade: "b",
-            nova_group: 3,
-            product_type: "food",
-            image_front_small_url: "https://example.com/image.jpg",
-          },
+        status: "success",
+        product: {
+          code: testBarcode,
+          product_name: "Test Product",
+          brands: "Test Brand",
+          quantity: "100g",
+          nutriscore_grade: "c",
+          ecoscore_grade: "b",
+          nova_group: 3,
+          product_type: "food",
+          image_front_small_url: "https://example.com/image.jpg",
         },
       };
 
-      jest.spyOn(productsApi.rawV3, "GET").mockResolvedValue(mockResponse);
+      mockV3Success(mockResponse);
 
-      const result =
-        await productsApi.getProductReducedForCard("7622210288257");
+      const result = await productsApi.getProductReducedForCard(testBarcode);
 
-      expect(result).toEqual(mockResponse.data);
+      expect(result).toEqual(mockResponse);
       expect(productsApi.rawV3.GET).toHaveBeenCalledWith(
         "/api/v3/product/{barcode}",
         {
           params: {
-            path: { barcode: "7622210288257" },
+            path: { barcode: testBarcode },
             query: {
               fields:
                 "image_front_small_url,code,product_name,brands,quantity,nutriscore_grade,ecoscore_grade,nova_group,product_type",
@@ -421,28 +381,26 @@ describe("ProductsApi", () => {
 
     it("should fetch reduced product data with language", async () => {
       const mockResponse = {
-        data: {
-          status: "success",
-          product: {
-            code: "7622210288257",
-            product_name: "Produit Test",
-          },
+        status: "success",
+        product: {
+          code: testBarcode,
+          product_name: "Produit Test",
         },
       };
 
-      jest.spyOn(productsApi.rawV3, "GET").mockResolvedValue(mockResponse);
+      mockV3Success(mockResponse);
 
       const result = await productsApi.getProductReducedForCard(
-        "7622210288257",
+        testBarcode,
         "fr",
       );
 
-      expect(result).toEqual(mockResponse.data);
+      expect(result).toEqual(mockResponse);
       expect(productsApi.rawV3.GET).toHaveBeenCalledWith(
         "/api/v3/product/{barcode}",
         {
           params: {
-            path: { barcode: "7622210288257" },
+            path: { barcode: testBarcode },
             query: {
               fields:
                 "image_front_small_url,code,product_name,brands,quantity,nutriscore_grade,ecoscore_grade,nova_group,product_type",
@@ -454,31 +412,25 @@ describe("ProductsApi", () => {
     });
 
     it("should handle network errors when fetching reduced product data", async () => {
-      jest
-        .spyOn(productsApi.rawV3, "GET")
-        .mockRejectedValue(new Error("Network error"));
+      mockV3Error(networkError);
 
       await expect(
-        productsApi.getProductReducedForCard("7622210288257"),
+        productsApi.getProductReducedForCard(testBarcode),
       ).rejects.toThrow("Network error");
     });
   });
 
   describe("uploadImage", () => {
     it("should upload image successfully for a valid barcode", async () => {
-      // Mock the fetch to return a successful response
       const mockResponseData = {
         status: "success",
         image_id: "123",
       };
 
-      mockFetch.mockResolvedValue(
-        TestUtils.mockResponse(mockResponseData, true, 200),
-      );
+      mockFetchSuccess(mockResponseData);
 
-      const mockFile = new File(["test"], "test.jpg", { type: "image/jpeg" });
       const result = await productsApi.uploadImage(
-        "7622210288257",
+        testBarcode,
         mockFile,
         "front",
       );
@@ -501,33 +453,26 @@ describe("ProductsApi", () => {
     it("should throw error when upload fails", async () => {
       mockFetch.mockResolvedValue(TestUtils.mockResponse({}, false, 500));
 
-      const mockFile = new File(["test"], "test.jpg", { type: "image/jpeg" });
-
       await expect(
-        productsApi.uploadImage("7622210288257", mockFile, "front"),
+        productsApi.uploadImage(testBarcode, mockFile, "front"),
       ).rejects.toThrow(
-        "Failed to upload image for product with barcode: 7622210288257",
+        `Failed to upload image for product with barcode: ${testBarcode}`,
       );
     });
 
     it("should handle network errors during upload", async () => {
-      mockFetch.mockRejectedValue(new Error("Network error"));
-
-      const mockFile = new File(["test"], "test.jpg", { type: "image/jpeg" });
+      mockFetchError(networkError);
 
       await expect(
-        productsApi.uploadImage("7622210288257", mockFile, "front"),
+        productsApi.uploadImage(testBarcode, mockFile, "front"),
       ).rejects.toThrow("Network error");
     });
 
     it("should properly format FormData for image upload", async () => {
       const mockResponseData = { status: "success" };
-      mockFetch.mockResolvedValue(
-        TestUtils.mockResponse(mockResponseData, true, 200),
-      );
+      mockFetchSuccess(mockResponseData);
 
-      const mockFile = new File(["test"], "test.jpg", { type: "image/jpeg" });
-      await productsApi.uploadImage("7622210288257", mockFile, "front");
+      await productsApi.uploadImage(testBarcode, mockFile, "front");
 
       const callArgs = mockFetch.mock.calls[0];
       expect(callArgs).toBeDefined();
@@ -535,88 +480,90 @@ describe("ProductsApi", () => {
 
       const formData = callArgs[1]?.body as FormData;
       expect(formData).toBeInstanceOf(FormData);
-      expect(formData.get("code")).toBe("7622210288257");
+      expect(formData.get("code")).toBe(testBarcode);
       expect(formData.get("imagefield")).toBe("front");
       expect(formData.get("imgupload_front")).toBe(mockFile);
     });
   });
 
   describe("addOrEditProductV2", () => {
+    const baseProductData = {
+      code: testBarcode,
+      product_name: "Test Product",
+      brands: "Test Brand",
+      categories: "Test Category",
+      quantity: "100g",
+      languages_codes: { en: 1 },
+      // Required ProductDataSection fields
+      created_t: Date.now(),
+      creator: "test",
+      last_modified_t: Date.now(),
+      last_editor: "test",
+      editors_tags: [],
+      last_checked_t: Date.now(),
+      checkers_tags: [],
+      states_hierarchy: [],
+      // Required Product fields
+      knowledge_panels: {},
+      _id: testBarcode,
+      _keywords: [],
+      additives_n: 0,
+      ingredients: [],
+      additives_tags: [],
+      ingredients_text: "",
+      image_front_url: "",
+      image_front_small_url: "",
+      image_ingredients_url: "",
+      image_ingredients_small_url: "",
+      image_ingredients_thumb_url: "",
+      images: {},
+      image_nutrition_url: "",
+      image_nutrition_small_url: "",
+      image_nutrition_thumb_url: "",
+      serving_size: "",
+      nutriscore_grade: "",
+      ecoscore_grade: "",
+      nova_group: 1,
+      packaging: "",
+      manufacturing_places: "",
+      brands_tags: [],
+      categories_tags: [],
+      categories_hierarchy: [],
+      stores: "",
+      stores_tags: [],
+      labels: "",
+      labels_tags: [],
+      product_type: "",
+      origins: "",
+      origins_tags: [],
+      countries: "",
+      countries_tags: [],
+      emb_codes: "",
+      emb_codes_tags: [],
+      nutriments: {},
+      source: {
+        fields: [],
+        id: "",
+        images: [],
+        import_t: Date.now(),
+        manufacturer: "",
+        name: "",
+        source_licence: "",
+        source_licence_url: "",
+      },
+      link: "",
+      lang: "en",
+    };
+
+    const testCredentials = { username: "testuser", password: "testpass" };
+
     it("should add/edit product successfully", async () => {
       mockFetch.mockResolvedValue(TestUtils.mockResponse({}, true, 200));
 
-      const productData = {
-        code: "7622210288257",
-        product_name: "Test Product",
-        brands: "Test Brand",
-        categories: "Test Category",
-        quantity: "100g",
-        languages_codes: { en: 1 },
-        // Required ProductDataSection fields
-        created_t: Date.now(),
-        creator: "test",
-        last_modified_t: Date.now(),
-        last_editor: "test",
-        editors_tags: [],
-        last_checked_t: Date.now(),
-        checkers_tags: [],
-        states_hierarchy: [],
-        // Required Product fields
-        knowledge_panels: {},
-        _id: "7622210288257",
-        _keywords: [],
-        additives_n: 0,
-        ingredients: [],
-        additives_tags: [],
-        ingredients_text: "",
-        image_front_url: "",
-        image_front_small_url: "",
-        image_ingredients_url: "",
-        image_ingredients_small_url: "",
-        image_ingredients_thumb_url: "",
-        images: {},
-        image_nutrition_url: "",
-        image_nutrition_small_url: "",
-        image_nutrition_thumb_url: "",
-        serving_size: "",
-        nutriscore_grade: "",
-        ecoscore_grade: "",
-        nova_group: 1,
-        packaging: "",
-        manufacturing_places: "",
-        brands_tags: [],
-        categories_tags: [],
-        categories_hierarchy: [],
-        stores: "",
-        stores_tags: [],
-        labels: "",
-        labels_tags: [],
-        product_type: "",
-        origins: "",
-        origins_tags: [],
-        countries: "",
-        countries_tags: [],
-        emb_codes: "",
-        emb_codes_tags: [],
-        nutriments: {},
-        source: {
-          fields: [],
-          id: "",
-          images: [],
-          import_t: Date.now(),
-          manufacturer: "",
-          name: "",
-          source_licence: "",
-          source_licence_url: "",
-        },
-        link: "",
-        lang: "en",
-      };
-
-      const result = await productsApi.addOrEditProductV2(productData, {
-        username: "testuser",
-        password: "testpass",
-      });
+      const result = await productsApi.addOrEditProductV2(
+        baseProductData,
+        testCredentials,
+      );
 
       expect(result).toBe(true);
       expect(mockFetch).toHaveBeenCalledWith(
@@ -632,48 +579,45 @@ describe("ProductsApi", () => {
     });
 
     it("should throw error when credentials are missing", async () => {
-      const productData = {
-        code: "7622210288257",
-        product_name: "Test Product",
-        languages_codes: {},
-      } as any; // Use any to bypass type checking for minimal test data
-
-      await expect(productsApi.addOrEditProductV2(productData)).rejects.toThrow(
-        "Username and password are required",
-      );
-    });
-
-    it("should return false when request fails", async () => {
-      mockFetch.mockResolvedValue(TestUtils.mockResponse({}, false, 400));
-
-      const productData = {
-        code: "7622210288257",
-        product_name: "Test Product",
-        languages_codes: {},
-      } as any; // Use any to bypass type checking for minimal test data
-
-      const result = await productsApi.addOrEditProductV2(productData, {
-        username: "testuser",
-        password: "testpass",
-      });
-
-      expect(result).toBe(false);
-    });
-
-    it("should handle network errors during product update", async () => {
-      mockFetch.mockRejectedValue(new Error("Network error"));
-
-      const productData = {
-        code: "7622210288257",
+      const minimalProductData = {
+        code: testBarcode,
         product_name: "Test Product",
         languages_codes: {},
       } as any;
 
       await expect(
-        productsApi.addOrEditProductV2(productData, {
-          username: "testuser",
-          password: "testpass",
-        }),
+        productsApi.addOrEditProductV2(minimalProductData),
+      ).rejects.toThrow("Username and password are required");
+    });
+
+    it("should return false when request fails", async () => {
+      mockFetch.mockResolvedValue(TestUtils.mockResponse({}, false, 400));
+
+      const minimalProductData = {
+        code: testBarcode,
+        product_name: "Test Product",
+        languages_codes: {},
+      } as any;
+
+      const result = await productsApi.addOrEditProductV2(
+        minimalProductData,
+        testCredentials,
+      );
+
+      expect(result).toBe(false);
+    });
+
+    it("should handle network errors during product update", async () => {
+      const minimalProductData = {
+        code: testBarcode,
+        product_name: "Test Product",
+        languages_codes: {},
+      } as any;
+
+      mockFetchError(networkError);
+
+      await expect(
+        productsApi.addOrEditProductV2(minimalProductData, testCredentials),
       ).rejects.toThrow("Network error");
     });
 
@@ -686,13 +630,14 @@ describe("ProductsApi", () => {
 
       mockFetch.mockResolvedValue(TestUtils.mockResponse({}, true, 200));
 
-      const productData = {
-        code: "7622210288257",
+      const minimalProductData = {
+        code: testBarcode,
         product_name: "Test Product",
         languages_codes: {},
       } as any;
 
-      const result = await apiWithDefaults.addOrEditProductV2(productData);
+      const result =
+        await apiWithDefaults.addOrEditProductV2(minimalProductData);
 
       expect(result).toBe(true);
       expect(mockFetch).toHaveBeenCalledWith(
@@ -706,35 +651,46 @@ describe("ProductsApi", () => {
   });
 
   describe("getProductImageUrl", () => {
-    it("should generate correct image URL with selected image", () => {
-      const barcode = "7622210288257";
-      const imageName = "front";
-      const images = {
-        front: {
-          angle: 0,
-          coordinates_image_size: "400x400",
-          geometry: "0x0+0+0",
-          imgid: "1",
-          normalize: null,
-          rev: "1",
-          sizes: {
-            100: { h: 100, w: 100 },
-            200: { h: 200, w: 200 },
-            400: { h: 400, w: 400 },
-            full: { h: 800, w: 800 },
-          },
-          white_magic: null,
-          x1: "0",
-          x2: "400",
-          y1: "0",
-          y2: "400",
+    const mockSelectedImage = {
+      front: {
+        angle: 0,
+        coordinates_image_size: "400x400",
+        geometry: "0x0+0+0",
+        imgid: "1",
+        normalize: null,
+        rev: "1",
+        sizes: {
+          100: { h: 100, w: 100 },
+          200: { h: 200, w: 200 },
+          400: { h: 400, w: 400 },
+          full: { h: 800, w: 800 },
         },
-      };
+        white_magic: null,
+        x1: "0",
+        x2: "400",
+        y1: "0",
+        y2: "400",
+      },
+    };
 
+    const mockRawImage = {
+      front: {
+        url: "https://example.com/image.jpg",
+        sizes: {
+          100: { h: 100, w: 100 },
+          400: { h: 400, w: 400 },
+          full: { h: 800, w: 800 },
+        },
+        uploaded_t: "1234567890",
+        uploader: "test",
+      },
+    };
+
+    it("should generate correct image URL with selected image", () => {
       const result = ProductsApi.getProductImageUrl(
-        barcode,
-        imageName,
-        images,
+        testBarcode,
+        "front",
+        mockSelectedImage,
         "400",
       );
 
@@ -743,25 +699,10 @@ describe("ProductsApi", () => {
     });
 
     it("should generate correct image URL with raw image", () => {
-      const barcode = "7622210288257";
-      const imageName = "front";
-      const images = {
-        front: {
-          url: "https://example.com/image.jpg",
-          sizes: {
-            100: { h: 100, w: 100 },
-            400: { h: 400, w: 400 },
-            full: { h: 800, w: 800 },
-          },
-          uploaded_t: "1234567890",
-          uploader: "test",
-        },
-      };
-
       const result = ProductsApi.getProductImageUrl(
-        barcode,
-        imageName,
-        images,
+        testBarcode,
+        "front",
+        mockRawImage,
         "400",
       );
 
@@ -770,14 +711,10 @@ describe("ProductsApi", () => {
     });
 
     it("should return null when image not found", () => {
-      const barcode = "7622210288257";
-      const imageName = "front";
-      const images = {};
-
       const result = ProductsApi.getProductImageUrl(
-        barcode,
-        imageName,
-        images,
+        testBarcode,
+        "front",
+        {},
         "400",
       );
 
@@ -785,80 +722,32 @@ describe("ProductsApi", () => {
     });
 
     it("should return null when image not found in images object", () => {
-      const barcode = "7622210288257";
-      const imageName = "nonexistent";
-      const images = {
-        front: {
-          angle: 0,
-          coordinates_image_size: "400x400",
-          geometry: "0x0+0+0",
-          imgid: "1",
-          normalize: null,
-          rev: "1",
-          sizes: {
-            100: { h: 100, w: 100 },
-            200: { h: 200, w: 200 },
-            400: { h: 400, w: 400 },
-            full: { h: 800, w: 800 },
-          },
-          white_magic: null,
-          x1: "0",
-          x2: "400",
-          y1: "0",
-          y2: "400",
-        },
-      };
-
       const result = ProductsApi.getProductImageUrl(
-        barcode,
-        imageName,
-        images,
+        testBarcode,
+        "nonexistent",
+        mockSelectedImage,
         "400",
       );
       expect(result).toBeNull();
     });
 
     it("should handle different image sizes correctly", () => {
-      const barcode = "7622210288257";
-      const imageName = "front";
-      const images = {
-        front: {
-          angle: 0,
-          coordinates_image_size: "400x400",
-          geometry: "0x0+0+0",
-          imgid: "1",
-          normalize: null,
-          rev: "1",
-          sizes: {
-            100: { h: 100, w: 100 },
-            200: { h: 200, w: 200 },
-            400: { h: 400, w: 400 },
-            full: { h: 800, w: 800 },
-          },
-          white_magic: null,
-          x1: "0",
-          x2: "400",
-          y1: "0",
-          y2: "400",
-        },
-      };
-
       const result100 = ProductsApi.getProductImageUrl(
-        barcode,
-        imageName,
-        images,
+        testBarcode,
+        "front",
+        mockSelectedImage,
         "100",
       );
       const result200 = ProductsApi.getProductImageUrl(
-        barcode,
-        imageName,
-        images,
+        testBarcode,
+        "front",
+        mockSelectedImage,
         "200",
       );
       const resultFull = ProductsApi.getProductImageUrl(
-        barcode,
-        imageName,
-        images,
+        testBarcode,
+        "front",
+        mockSelectedImage,
         "full",
       );
 
@@ -869,33 +758,10 @@ describe("ProductsApi", () => {
 
     it("should handle barcode padding correctly", () => {
       const shortBarcode = "123";
-      const imageName = "front";
-      const images = {
-        front: {
-          angle: 0,
-          coordinates_image_size: "400x400",
-          geometry: "0x0+0+0",
-          imgid: "1",
-          normalize: null,
-          rev: "1",
-          sizes: {
-            100: { h: 100, w: 100 },
-            200: { h: 200, w: 200 },
-            400: { h: 400, w: 400 },
-            full: { h: 800, w: 800 },
-          },
-          white_magic: null,
-          x1: "0",
-          x2: "400",
-          y1: "0",
-          y2: "400",
-        },
-      };
-
       const result = ProductsApi.getProductImageUrl(
         shortBarcode,
-        imageName,
-        images,
+        "front",
+        mockSelectedImage,
         "400",
       );
 
@@ -952,59 +818,46 @@ describe("ProductsApi", () => {
   });
 
   describe("error handling and edge cases", () => {
-    it("should handle empty barcode gracefully", async () => {
-      const mockResponse = {
-        data: { product: null },
-      };
+    const testCases = [
+      { description: "empty barcode", barcode: "", expected: null },
+      {
+        description: "very long barcode",
+        barcode: "1234567890123456789012345678901234567890",
+        expected: { code: "1234567890123456789012345678901234567890" },
+      },
+      {
+        description: "special characters in barcode",
+        barcode: "123-456-789",
+        expected: { code: "123-456-789" },
+      },
+    ];
 
-      jest.spyOn(productsApi.rawV2, "GET").mockResolvedValue(mockResponse);
+    testCases.forEach(({ description, barcode, expected }) => {
+      it(`should handle ${description} gracefully`, async () => {
+        const mockResponse = {
+          product: expected,
+        };
 
-      const result = await productsApi.getProductV2("");
-      expect(result).toBeNull();
-    });
+        mockV2Success(mockResponse);
 
-    it("should handle very long barcode", async () => {
-      const longBarcode = "1234567890123456789012345678901234567890";
-      const mockResponse = {
-        data: { product: { code: longBarcode } },
-      };
-
-      jest.spyOn(productsApi.rawV2, "GET").mockResolvedValue(mockResponse);
-
-      const result = await productsApi.getProductV2(longBarcode);
-      expect(result).toEqual({ code: longBarcode });
-    });
-
-    it("should handle special characters in barcode", async () => {
-      const specialBarcode = "123-456-789";
-      const mockResponse = {
-        data: { product: { code: specialBarcode } },
-      };
-
-      jest.spyOn(productsApi.rawV2, "GET").mockResolvedValue(mockResponse);
-
-      const result = await productsApi.getProductV2(specialBarcode);
-      expect(result).toEqual({ code: specialBarcode });
+        const result = await productsApi.getProductV2(barcode);
+        expect(result).toEqual(expected);
+      });
     });
 
     it("should handle API timeout", async () => {
-      jest
-        .spyOn(productsApi.rawV2, "GET")
-        .mockRejectedValue(new Error("Request timeout"));
+      mockV2Error(new Error("Request timeout"));
 
-      await expect(productsApi.getProductV2("7622210288257")).rejects.toThrow(
+      await expect(productsApi.getProductV2(testBarcode)).rejects.toThrow(
         "Request timeout",
       );
     });
 
     it("should handle malformed API response", async () => {
-      const malformedResponse = {
-        data: "invalid json",
-      };
+      const malformedResponse = "invalid json";
+      mockV2Success(malformedResponse);
 
-      jest.spyOn(productsApi.rawV2, "GET").mockResolvedValue(malformedResponse);
-
-      const result = await productsApi.getProductV2("7622210288257");
+      const result = await productsApi.getProductV2(testBarcode);
       expect(result).toBeUndefined();
     });
   });

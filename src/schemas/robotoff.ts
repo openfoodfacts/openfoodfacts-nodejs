@@ -46,48 +46,6 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/questions/random": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get random questions
-         * @deprecated
-         */
-        get: operations["getRandomQuestions"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/questions/popular": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get questions about popular products
-         * @deprecated
-         * @description Questions are ranked by the product popularity (based on scan count).
-         *
-         */
-        get: operations["getPopularQuestions"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
     "/questions/unanswered": {
         parameters: {
             query?: never;
@@ -127,46 +85,6 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/insights/random": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get a random insight, use GET /insights?order_by=random instead
-         * @deprecated
-         */
-        get: operations["getRandomInsights"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/insights/{barcode}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get all insights for a specific product, use GET /insights?barcode={barcode} instead
-         * @deprecated
-         */
-        get: operations["getInsightsByBarcode"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
     "/insights": {
         parameters: {
             query?: never;
@@ -174,7 +92,13 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** List insights */
+        /**
+         * List insights
+         * @description Return insights based on various filters. The results can be filtered by insight type, barcode, annotation status, and more.
+         *     The `insight_types` parameter is a comma-separated list of insight types to filter by.
+         *     If no `insight_types` are provided, insights of all types are returned.
+         *
+         */
         get: operations["getInsights"];
         put?: never;
         post?: never;
@@ -289,7 +213,11 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get image predictions */
+        /**
+         * Get image predictions
+         * @description Return image predictions based on various filters. The results can be filtered by model name, type, confidence, and more.
+         *
+         */
         get: operations["getImagePredictions"];
         put?: never;
         post?: never;
@@ -829,7 +757,11 @@ export interface components {
          * @example {
          *       "id": "3cd5aecd-edcc-4237-87d0-6595fc4e53c9",
          *       "type": "label",
-         *       "barcode": 9782012805866
+         *       "barcode": 9782012805866,
+         *       "countries": [
+         *         "en:france",
+         *         "en:united-kingdom"
+         *       ]
          *     }
          */
         InsightSearchResult: {
@@ -842,16 +774,6 @@ export interface components {
             /** @description country tags of the product */
             countries: string[];
         };
-        /**
-         * @description The server domain associated with the image/product.
-         *
-         *     If the `server_domain` top level domain does not match the server configuration,
-         *     an HTTP 400 error will be raised
-         *
-         * @example api.openfoodfacts.org
-         * @enum {string}
-         */
-        ServerDomainParameter: "api.openfoodfacts.org" | "api.openbeautyfacts.org" | "api.openproductfacts.org" | "api.openpetfoodfacts.org" | "api.pro.openfoodfacts.org";
         /** @description a Robotoff Prediction */
         Prediction: {
             /**
@@ -889,7 +811,7 @@ export interface components {
              *
              * @example null
              */
-            value?: string;
+            value?: string | null;
             /**
              * @description a boolean indicating whether we're confident enough in the prediction to apply it
              *     automatically in Open Food Facts without human supervision. This does not mean it will
@@ -935,12 +857,11 @@ export interface components {
              */
             server_type?: "off" | "obf" | "opff" | "opf" | "off_pro";
             /**
-             * Format: number
              * @description confidence score of the prediction, it is only provided for ML-based predictions. It may be null.
              *
              * @example 0.95
              */
-            confidence?: string;
+            confidence?: number;
         };
     };
     responses: never;
@@ -1107,116 +1028,6 @@ export interface operations {
             };
         };
     };
-    getRandomQuestions: {
-        parameters: {
-            query?: {
-                /** @description The language of the question/value */
-                lang?: components["parameters"]["lang"];
-                /** @description The number of items to return */
-                count?: components["parameters"]["count"];
-                /** @description The server type (=project) to use, such as 'off' (Open Food Facts), 'obf' (Open Beauty Facts),... */
-                server_type?: components["parameters"]["server_type"];
-                /** @description Comma-separated list, filter by insight types */
-                insight_types?: components["parameters"]["insight_types"];
-                /**
-                 * @description Comma separated list, filter by country value (2-letter code)
-                 * @example uk
-                 */
-                countries?: components["parameters"]["countries"];
-                /** @description Comma-separated list, filter by brands */
-                brands?: components["parameters"]["brands"];
-                /**
-                 * @description Filter by value tag, i.e the value that is going to be sent to Product Opener
-                 * @example en:organic
-                 */
-                value_tag?: components["parameters"]["value_tag"];
-                /** @description Page index to return (starting at 1) */
-                page?: components["parameters"]["page"];
-                /** @description If true, also return questions about products with reserved barcodes */
-                reserved_barcode?: components["parameters"]["reserved_barcode"];
-                /** @description Filter by annotation campaigns (the insight must have all the campaigns) An annotation campaign allows to only retrieve questions or insights based on arbitrary criteria defined during insight import. */
-                campaigns?: components["parameters"]["campaigns"];
-                /** @description Filter by predictor value A predictor refers to the model/method that was used to generate the prediction. */
-                predictor?: components["parameters"]["predictor"];
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description The queried insights */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /** @enum {string} */
-                        status?: "no_questions" | "found";
-                        questions?: Record<string, never>[];
-                        /** @description The total number of results with the provided filters */
-                        count?: number;
-                    };
-                };
-            };
-        };
-    };
-    getPopularQuestions: {
-        parameters: {
-            query?: {
-                /** @description The language of the question/value */
-                lang?: components["parameters"]["lang"];
-                /** @description The number of items to return */
-                count?: components["parameters"]["count"];
-                /** @description The server type (=project) to use, such as 'off' (Open Food Facts), 'obf' (Open Beauty Facts),... */
-                server_type?: components["parameters"]["server_type"];
-                /** @description Comma-separated list, filter by insight types */
-                insight_types?: components["parameters"]["insight_types"];
-                /**
-                 * @description Comma separated list, filter by country value (2-letter code)
-                 * @example uk
-                 */
-                countries?: components["parameters"]["countries"];
-                /** @description Comma-separated list, filter by brands */
-                brands?: components["parameters"]["brands"];
-                /**
-                 * @description Filter by value tag, i.e the value that is going to be sent to Product Opener
-                 * @example en:organic
-                 */
-                value_tag?: components["parameters"]["value_tag"];
-                /** @description Page index to return (starting at 1) */
-                page?: components["parameters"]["page"];
-                /** @description If true, also return questions about products with reserved barcodes */
-                reserved_barcode?: components["parameters"]["reserved_barcode"];
-                /** @description Filter by annotation campaigns (the insight must have all the campaigns) An annotation campaign allows to only retrieve questions or insights based on arbitrary criteria defined during insight import. */
-                campaigns?: components["parameters"]["campaigns"];
-                /** @description Filter by predictor value A predictor refers to the model/method that was used to generate the prediction. */
-                predictor?: components["parameters"]["predictor"];
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Questions about popular products */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        /** @enum {string} */
-                        status?: "no_questions" | "found";
-                        questions?: Record<string, never>[];
-                        /** @description The total number of results with the provided filters */
-                        count?: number;
-                    };
-                };
-            };
-        };
-    };
     getUnansweredQuestions: {
         parameters: {
             query?: {
@@ -1297,79 +1108,6 @@ export interface operations {
                         status?: "no_predictions" | "found";
                         predictions?: Record<string, never>[];
                         /** @description The total number of results with the provided filters */
-                        count?: number;
-                    };
-                };
-            };
-        };
-    };
-    getRandomInsights: {
-        parameters: {
-            query?: {
-                /** @description Filter by insight type */
-                type?: components["parameters"]["insight_type"];
-                /**
-                 * @description Comma separated list, filter by country value (2-letter code)
-                 * @example uk
-                 */
-                countries?: components["parameters"]["countries"];
-                /**
-                 * @description Filter by value tag, i.e the value that is going to be sent to Product Opener
-                 * @example en:organic
-                 */
-                value_tag?: components["parameters"]["value_tag"];
-                /** @description The server type (=project) to use, such as 'off' (Open Food Facts), 'obf' (Open Beauty Facts),... */
-                server_type?: components["parameters"]["server_type"];
-                /** @description The number of items to return */
-                count?: components["parameters"]["count"];
-                /** @description Filter by predictor value A predictor refers to the model/method that was used to generate the prediction. */
-                predictor?: components["parameters"]["predictor"];
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Random insights matching the criteria */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        insights?: components["schemas"]["InsightSearchResult"][];
-                    };
-                };
-            };
-        };
-    };
-    getInsightsByBarcode: {
-        parameters: {
-            query?: {
-                /** @description The server type (=project) to use, such as 'off' (Open Food Facts), 'obf' (Open Beauty Facts),... */
-                server_type?: components["parameters"]["server_type"];
-            };
-            header?: never;
-            path: {
-                /** @description The barcode of the product */
-                barcode: components["parameters"]["barcode_path"];
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description All insights for the specific product */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        insights?: components["schemas"]["InsightSearchResult"][];
-                        /** @enum {string} */
-                        status?: "no_insights" | "found";
-                        /** @description The total number of results */
                         count?: number;
                     };
                 };
@@ -1552,9 +1290,9 @@ export interface operations {
                 /** @description Filter by barcode value */
                 barcode?: components["parameters"]["barcode_query_filter"];
                 /** @description The annotation status of the insight. If not provided, both annotated and non-annotated insights are returned */
-                annotated?: boolean;
+                annotated?: boolean | null;
                 /** @description Maximum number of insights to return. If not provided, an HTTP 400 response may be returned if more than 10,000 insights match the criteria */
-                count?: number;
+                count?: number | null;
             };
             header?: never;
             path?: never;
@@ -1592,13 +1330,37 @@ export interface operations {
             query?: {
                 /** @description The URL of the input image */
                 image_url?: components["parameters"]["image_url"];
-                /** @example 0.47795143723487854 */
+                /**
+                 * @description The minimum y-coordinate for cropping, relative to the image height.
+                 *     We use relative coordinates, with (0, 0) being the upper left corner and
+                 *     (1, 1) being the lower right corner.
+                 *
+                 * @example 0.47795143723487854
+                 */
                 y_min?: number;
-                /** @example 0.5583494305610657 */
+                /**
+                 * @description The minimum x-coordinate for cropping, relative to the image width.
+                 *     We use relative coordinates, with (0, 0) being the upper left corner and
+                 *     (1, 1) being the lower right corner.
+                 *
+                 * @example 0.5583494305610657
+                 */
                 x_min?: number;
-                /** @example 0.5653171539306641 */
+                /**
+                 * @description The maximum y-coordinate for cropping, relative to the image height.
+                 *     We use relative coordinates, with (0, 0) being the upper left corner and
+                 *     (1, 1) being the lower right corner.
+                 *
+                 * @example 0.5653171539306641
+                 */
                 y_max?: number;
-                /** @example 0.6795185804367065 */
+                /**
+                 * @description The maximum x-coordinate for cropping, relative to the image width.
+                 *     We use relative coordinates, with (0, 0) being the upper left corner and
+                 *     (1, 1) being the lower right corner.
+                 *
+                 * @example 0.6795185804367065
+                 */
                 x_max?: number;
             };
             header?: never;
@@ -1685,7 +1447,7 @@ export interface operations {
                 content: {
                     "application/json": {
                         /** @description Details about requested logos */
-                        logos: unknown[];
+                        logos: Record<string, never>[];
                         /** @description Number of returned results */
                         count: number;
                     };
@@ -1722,7 +1484,7 @@ export interface operations {
                 /** @description If true, randomized result order */
                 random?: boolean;
                 /** @description The annotation status of the logo. If not provided, both annotated and non-annotated logos are returned */
-                annotated?: boolean;
+                annotated?: boolean | null;
             };
             header?: never;
             path?: never;
@@ -1738,7 +1500,7 @@ export interface operations {
                 content: {
                     "application/json": {
                         /** @description Found logos */
-                        logos: unknown[];
+                        logos: Record<string, never>[];
                         /** @description Number of returned results */
                         count: number;
                     };
@@ -2004,8 +1766,7 @@ export interface operations {
                         /** @description Value/name of the logo */
                         value: string | null;
                     }[];
-                    // @ts-ignore
-                    server_type?: components["parameters"]["server_type"]["schema"];
+                    server_type?: components["parameters"]["server_type"];
                 };
             };
         };
@@ -2292,7 +2053,7 @@ export interface operations {
                 "application/json": {
                     /**
                      * @description The barcode of the product to categorize
-                     * @example 748162621021
+                     * @example 0748162621021
                      */
                     barcode: string;
                     /**

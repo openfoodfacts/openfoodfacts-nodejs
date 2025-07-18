@@ -4,11 +4,17 @@ import productMockData from "./mockdata/product-7622210288257.json";
 import productV3MockData from "./mockdata/product-v3-3154230805984.json";
 
 describe("ProductsApi", () => {
-  let mockFetch: jest.Mock<ReturnType<typeof window.fetch>, [RequestInfo | URL, RequestInit?]>;
+  let mockFetch: jest.Mock<
+    ReturnType<typeof window.fetch>,
+    [RequestInfo | URL, RequestInit?]
+  >;
   let productsApi: ProductsApi;
 
   beforeEach(() => {
-    mockFetch = jest.fn<ReturnType<typeof window.fetch>, [RequestInfo | URL, RequestInit?]>();
+    mockFetch = jest.fn<
+      ReturnType<typeof window.fetch>,
+      [RequestInfo | URL, RequestInit?]
+    >();
     productsApi = new ProductsApi(mockFetch as any, {
       baseUrl: "https://world.openfoodfacts.org",
     });
@@ -98,9 +104,13 @@ describe("ProductsApi", () => {
     });
 
     it("should handle network errors when fetching attributes", async () => {
-      jest.spyOn(productsApi.rawV2, "GET").mockRejectedValue(new Error("Network error"));
+      jest
+        .spyOn(productsApi.rawV2, "GET")
+        .mockRejectedValue(new Error("Network error"));
 
-      await expect(productsApi.getProductAttributes("7622210288257")).rejects.toThrow("Network error");
+      await expect(
+        productsApi.getProductAttributes("7622210288257"),
+      ).rejects.toThrow("Network error");
     });
   });
 
@@ -161,9 +171,13 @@ describe("ProductsApi", () => {
     });
 
     it("should handle network errors when fetching product V3", async () => {
-      jest.spyOn(productsApi.rawV3, "GET").mockRejectedValue(new Error("Network error"));
+      jest
+        .spyOn(productsApi.rawV3, "GET")
+        .mockRejectedValue(new Error("Network error"));
 
-      await expect(productsApi.getProductV3("7622210288257")).rejects.toThrow("Network error");
+      await expect(productsApi.getProductV3("7622210288257")).rejects.toThrow(
+        "Network error",
+      );
     });
   });
 
@@ -206,9 +220,13 @@ describe("ProductsApi", () => {
     });
 
     it("should handle network errors", async () => {
-      jest.spyOn(productsApi.rawV2, "GET").mockRejectedValue(new Error("Network error"));
+      jest
+        .spyOn(productsApi.rawV2, "GET")
+        .mockRejectedValue(new Error("Network error"));
 
-      await expect(productsApi.getProductV2("7622210288257")).rejects.toThrow("Network error");
+      await expect(productsApi.getProductV2("7622210288257")).rejects.toThrow(
+        "Network error",
+      );
     });
   });
 
@@ -273,9 +291,13 @@ describe("ProductsApi", () => {
     });
 
     it("should handle network errors when fetching images", async () => {
-      jest.spyOn(productsApi.rawV2, "GET").mockRejectedValue(new Error("Network error"));
+      jest
+        .spyOn(productsApi.rawV2, "GET")
+        .mockRejectedValue(new Error("Network error"));
 
-      await expect(productsApi.getProductImages("7622210288257")).rejects.toThrow("Network error");
+      await expect(
+        productsApi.getProductImages("7622210288257"),
+      ).rejects.toThrow("Network error");
     });
   });
 
@@ -348,9 +370,13 @@ describe("ProductsApi", () => {
     });
 
     it("should handle network errors when fetching product name", async () => {
-      jest.spyOn(productsApi.rawV3, "GET").mockRejectedValue(new Error("Network error"));
+      jest
+        .spyOn(productsApi.rawV3, "GET")
+        .mockRejectedValue(new Error("Network error"));
 
-      await expect(productsApi.getProductName("7622210288257")).rejects.toThrow("Network error");
+      await expect(productsApi.getProductName("7622210288257")).rejects.toThrow(
+        "Network error",
+      );
     });
   });
 
@@ -375,7 +401,8 @@ describe("ProductsApi", () => {
 
       jest.spyOn(productsApi.rawV3, "GET").mockResolvedValue(mockResponse);
 
-      const result = await productsApi.getProductReducedForCard("7622210288257");
+      const result =
+        await productsApi.getProductReducedForCard("7622210288257");
 
       expect(result).toEqual(mockResponse.data);
       expect(productsApi.rawV3.GET).toHaveBeenCalledWith(
@@ -384,7 +411,8 @@ describe("ProductsApi", () => {
           params: {
             path: { barcode: "7622210288257" },
             query: {
-              fields: "image_front_small_url,code,product_name,brands,quantity,nutriscore_grade,ecoscore_grade,nova_group,product_type",
+              fields:
+                "image_front_small_url,code,product_name,brands,quantity,nutriscore_grade,ecoscore_grade,nova_group,product_type",
             },
           },
         },
@@ -404,7 +432,10 @@ describe("ProductsApi", () => {
 
       jest.spyOn(productsApi.rawV3, "GET").mockResolvedValue(mockResponse);
 
-      const result = await productsApi.getProductReducedForCard("7622210288257", "fr");
+      const result = await productsApi.getProductReducedForCard(
+        "7622210288257",
+        "fr",
+      );
 
       expect(result).toEqual(mockResponse.data);
       expect(productsApi.rawV3.GET).toHaveBeenCalledWith(
@@ -413,7 +444,8 @@ describe("ProductsApi", () => {
           params: {
             path: { barcode: "7622210288257" },
             query: {
-              fields: "image_front_small_url,code,product_name,brands,quantity,nutriscore_grade,ecoscore_grade,nova_group,product_type",
+              fields:
+                "image_front_small_url,code,product_name,brands,quantity,nutriscore_grade,ecoscore_grade,nova_group,product_type",
               lc: "fr",
             },
           },
@@ -422,9 +454,13 @@ describe("ProductsApi", () => {
     });
 
     it("should handle network errors when fetching reduced product data", async () => {
-      jest.spyOn(productsApi.rawV3, "GET").mockRejectedValue(new Error("Network error"));
+      jest
+        .spyOn(productsApi.rawV3, "GET")
+        .mockRejectedValue(new Error("Network error"));
 
-      await expect(productsApi.getProductReducedForCard("7622210288257")).rejects.toThrow("Network error");
+      await expect(
+        productsApi.getProductReducedForCard("7622210288257"),
+      ).rejects.toThrow("Network error");
     });
   });
 
@@ -441,7 +477,11 @@ describe("ProductsApi", () => {
       );
 
       const mockFile = new File(["test"], "test.jpg", { type: "image/jpeg" });
-      const result = await productsApi.uploadImage("7622210288257", mockFile, "front");
+      const result = await productsApi.uploadImage(
+        "7622210288257",
+        mockFile,
+        "front",
+      );
 
       expect(mockFetch).toHaveBeenCalled();
       expect(result).toBeDefined();
@@ -459,15 +499,15 @@ describe("ProductsApi", () => {
     });
 
     it("should throw error when upload fails", async () => {
-      mockFetch.mockResolvedValue(
-        TestUtils.mockResponse({}, false, 500),
-      );
+      mockFetch.mockResolvedValue(TestUtils.mockResponse({}, false, 500));
 
       const mockFile = new File(["test"], "test.jpg", { type: "image/jpeg" });
 
       await expect(
         productsApi.uploadImage("7622210288257", mockFile, "front"),
-      ).rejects.toThrow("Failed to upload image for product with barcode: 7622210288257");
+      ).rejects.toThrow(
+        "Failed to upload image for product with barcode: 7622210288257",
+      );
     });
 
     it("should handle network errors during upload", async () => {
@@ -492,7 +532,7 @@ describe("ProductsApi", () => {
       const callArgs = mockFetch.mock.calls[0];
       expect(callArgs).toBeDefined();
       expect(callArgs[1]).toBeDefined();
-      
+
       const formData = callArgs[1]?.body as FormData;
       expect(formData).toBeInstanceOf(FormData);
       expect(formData.get("code")).toBe("7622210288257");
@@ -503,9 +543,7 @@ describe("ProductsApi", () => {
 
   describe("addOrEditProductV2", () => {
     it("should add/edit product successfully", async () => {
-      mockFetch.mockResolvedValue(
-        TestUtils.mockResponse({}, true, 200),
-      );
+      mockFetch.mockResolvedValue(TestUtils.mockResponse({}, true, 200));
 
       const productData = {
         code: "7622210288257",
@@ -600,15 +638,13 @@ describe("ProductsApi", () => {
         languages_codes: {},
       } as any; // Use any to bypass type checking for minimal test data
 
-      await expect(
-        productsApi.addOrEditProductV2(productData),
-      ).rejects.toThrow("Username and password are required");
+      await expect(productsApi.addOrEditProductV2(productData)).rejects.toThrow(
+        "Username and password are required",
+      );
     });
 
     it("should return false when request fails", async () => {
-      mockFetch.mockResolvedValue(
-        TestUtils.mockResponse({}, false, 400),
-      );
+      mockFetch.mockResolvedValue(TestUtils.mockResponse({}, false, 400));
 
       const productData = {
         code: "7622210288257",
@@ -648,9 +684,7 @@ describe("ProductsApi", () => {
         password: "defaultpass",
       });
 
-      mockFetch.mockResolvedValue(
-        TestUtils.mockResponse({}, true, 200),
-      );
+      mockFetch.mockResolvedValue(TestUtils.mockResponse({}, true, 200));
 
       const productData = {
         code: "7622210288257",
@@ -697,7 +731,12 @@ describe("ProductsApi", () => {
         },
       };
 
-      const result = ProductsApi.getProductImageUrl(barcode, imageName, images, "400");
+      const result = ProductsApi.getProductImageUrl(
+        barcode,
+        imageName,
+        images,
+        "400",
+      );
 
       expect(result).toContain("front.1.400.jpg");
       expect(result).toContain("762/221/028/8257");
@@ -719,7 +758,12 @@ describe("ProductsApi", () => {
         },
       };
 
-      const result = ProductsApi.getProductImageUrl(barcode, imageName, images, "400");
+      const result = ProductsApi.getProductImageUrl(
+        barcode,
+        imageName,
+        images,
+        "400",
+      );
 
       expect(result).toContain("front.400.jpg");
       expect(result).toContain("762/221/028/8257");
@@ -730,7 +774,12 @@ describe("ProductsApi", () => {
       const imageName = "front";
       const images = {};
 
-      const result = ProductsApi.getProductImageUrl(barcode, imageName, images, "400");
+      const result = ProductsApi.getProductImageUrl(
+        barcode,
+        imageName,
+        images,
+        "400",
+      );
 
       expect(result).toBeNull();
     });
@@ -760,7 +809,12 @@ describe("ProductsApi", () => {
         },
       };
 
-      const result = ProductsApi.getProductImageUrl(barcode, imageName, images, "400");
+      const result = ProductsApi.getProductImageUrl(
+        barcode,
+        imageName,
+        images,
+        "400",
+      );
       expect(result).toBeNull();
     });
 
@@ -789,9 +843,24 @@ describe("ProductsApi", () => {
         },
       };
 
-      const result100 = ProductsApi.getProductImageUrl(barcode, imageName, images, "100");
-      const result200 = ProductsApi.getProductImageUrl(barcode, imageName, images, "200");
-      const resultFull = ProductsApi.getProductImageUrl(barcode, imageName, images, "full");
+      const result100 = ProductsApi.getProductImageUrl(
+        barcode,
+        imageName,
+        images,
+        "100",
+      );
+      const result200 = ProductsApi.getProductImageUrl(
+        barcode,
+        imageName,
+        images,
+        "200",
+      );
+      const resultFull = ProductsApi.getProductImageUrl(
+        barcode,
+        imageName,
+        images,
+        "full",
+      );
 
       expect(result100).toContain("front.1.100.jpg");
       expect(result200).toContain("front.1.200.jpg");
@@ -823,8 +892,13 @@ describe("ProductsApi", () => {
         },
       };
 
-      const result = ProductsApi.getProductImageUrl(shortBarcode, imageName, images, "400");
-      
+      const result = ProductsApi.getProductImageUrl(
+        shortBarcode,
+        imageName,
+        images,
+        "400",
+      );
+
       // Should pad the barcode to 13 digits: 0000000000123
       expect(result).toContain("000/000/000/0123");
     });
@@ -852,7 +926,7 @@ describe("ProductsApi", () => {
 
       // Access private method through prototype
       const getNameInLang = (ProductsApi as any).getProductNameInLang;
-      
+
       expect(getNameInLang(product, "fr")).toBe("Produit Français");
       expect(getNameInLang(product, "es")).toBe("Producto Español");
       expect(getNameInLang(product, "de")).toBe("Default Product"); // fallback
@@ -866,10 +940,13 @@ describe("ProductsApi", () => {
       } as any;
 
       // Access private method through prototype
-      const getIngredientsInLang = (ProductsApi as any).getProductIngredientsInLang;
-      
+      const getIngredientsInLang = (ProductsApi as any)
+        .getProductIngredientsInLang;
+
       expect(getIngredientsInLang(product, "fr")).toBe("Ingrédients français");
-      expect(getIngredientsInLang(product, "es")).toBe("Ingredientes españoles");
+      expect(getIngredientsInLang(product, "es")).toBe(
+        "Ingredientes españoles",
+      );
       expect(getIngredientsInLang(product, "de")).toBe("Default ingredients"); // fallback
     });
   });
@@ -911,9 +988,13 @@ describe("ProductsApi", () => {
     });
 
     it("should handle API timeout", async () => {
-      jest.spyOn(productsApi.rawV2, "GET").mockRejectedValue(new Error("Request timeout"));
+      jest
+        .spyOn(productsApi.rawV2, "GET")
+        .mockRejectedValue(new Error("Request timeout"));
 
-      await expect(productsApi.getProductV2("7622210288257")).rejects.toThrow("Request timeout");
+      await expect(productsApi.getProductV2("7622210288257")).rejects.toThrow(
+        "Request timeout",
+      );
     });
 
     it("should handle malformed API response", async () => {

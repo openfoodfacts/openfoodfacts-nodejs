@@ -26,11 +26,7 @@ import {
   TaxoNode,
   Taxonomy,
 } from "./taxonomy/types";
-import {
-  BackendType,
-  BACKEND_DOMAINS,
-  BACKEND_NAMES,
-} from "./consts";
+import { BackendType, BACKEND_DOMAINS, BACKEND_NAMES } from "./consts";
 
 export type ProductV2 = componentsv2["schemas"]["Product"];
 export type SearchResultV2 = componentsv2["schemas"]["search_for_products"];

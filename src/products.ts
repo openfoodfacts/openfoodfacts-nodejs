@@ -1,9 +1,5 @@
 import createClient from "openapi-fetch";
-import {
-  PRODUCT_API_HOST,
-  PRODUCT_IMAGE_URL,
-  USER_AGENT,
-} from "./consts";
+import { PRODUCT_API_HOST, PRODUCT_IMAGE_URL, USER_AGENT } from "./consts";
 import {
   paths as pathsv2,
   components as componentsv2,
@@ -67,9 +63,9 @@ export class ProductsApi {
    */
   async getProductAttributes(barcode: string): Promise<ProductAttribute[]> {
     const res = await this.rawV2.GET("/api/v2/product/{barcode}", {
-      params: { 
+      params: {
         path: { barcode },
-        query: { fields: "product_name,code,attribute_groups_en" }
+        query: { fields: "product_name,code,attribute_groups_en" },
       },
     });
 
@@ -237,7 +233,7 @@ export class ProductsApi {
     const query: Record<string, string> = {
       fields: REDUCED_FIELDS.join(","),
     };
-    
+
     const selectedLang = lang || this.defaultOptions.lang;
     if (selectedLang) {
       query.lc = selectedLang;
@@ -266,7 +262,7 @@ export class ProductsApi {
     const query: Record<string, string> = {
       fields: "product_name",
     };
-    
+
     const selectedLang = lang || this.defaultOptions.lang;
     if (selectedLang) {
       query.lc = selectedLang;
@@ -279,8 +275,10 @@ export class ProductsApi {
       },
     });
 
-    const productState = res.data as ProductState<Pick<Product, "product_name">>;
-    
+    const productState = res.data as ProductState<
+      Pick<Product, "product_name">
+    >;
+
     if (productState?.status !== "success") return null;
     return productState.product;
   }
@@ -349,7 +347,7 @@ export class ProductsApi {
     barcode: string,
     imageName: string,
     images: Record<string, SelectedImage | RawImage>,
-    size: '100' | '200' | '400' | 'full' = '400'
+    size: "100" | "200" | "400" | "full" = "400",
   ): string | null {
     const paddedBarcode = barcode.toString().padStart(13, "0");
     const match = paddedBarcode.match(/^(.{3})(.{3})(.{3})(.*)$/);

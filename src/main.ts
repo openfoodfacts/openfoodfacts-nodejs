@@ -7,7 +7,6 @@ import {
 
 import {
   paths as pathsv3,
-  operations as operationsv3,
   components as componentsv3,
 } from "./schemas/server/v3";
 
@@ -31,7 +30,6 @@ import {
   BackendType,
   BACKEND_DOMAINS,
   BACKEND_NAMES,
-  PRODUCT_IMAGE_BASE_URL as IMAGE_BASE_URL,
 } from "./consts";
 
 export type ProductV2 = componentsv2["schemas"]["Product"];
@@ -330,54 +328,6 @@ export class OpenFoodFacts {
     return (await res.json()) as Taxonomy<T>;
   }
 
-  /**
-   * Returns product details by barcode
-   * @param barcode the product barcode
-   */
-  getProduct = this.getProductV2;
-
-  async getProductV2(barcode: string) {
-    const res = await this.rawV2.GET("/api/v2/product/{barcode}", {
-      params: { path: { barcode } },
-    });
-
-    return res.data?.product;
-  }
-
-  /**
-   * Returns product details by barcode with optional fields
-   * @param barcode - The barcode of the product
-   * @param query - An optional query object to filter the returned fields
-   * @template T - An array of keys from ProductV3 to return
-   * @example
-   * ```typescript
-   * const result = await client.getProductV3("1234567890123", { fields: ["product_name", "brands"] });
-   * console.log(result.product.product_name, result.product.brands);
-   * ```
-   * @returns A promise that resolves to a product object with the specified fields or undefined if not found
-   */
-  async getProductV3<T extends Array<keyof ProductV3>>(
-    barcode: string,
-    query?: Omit<
-      operationsv3["get-product-by-barcode"]["parameters"]["query"],
-      "fields"
-    > & {
-      fields?: T;
-    },
-  ): Promise<
-    (ResponseStatusV3 & { product: Pick<ProductV3, T[number]> }) | undefined
-  > {
-    const res = await this.rawV3.GET("/api/v3/product/{barcode}", {
-      params: {
-        path: { barcode },
-        query: { ...query, fields: query?.fields?.join(",") },
-      },
-    });
-
-    // @ts-expect-error - OpenAPI is wrong here!
-    return res.data;
-  }
-
   async performOCR(
     barcode: string,
     photoId: string,
@@ -397,24 +347,6 @@ export class OpenFoodFacts {
     return res.data;
   }
 
-  async getProductImages(barcode: string): Promise<string[] | null> {
-    const res = await this.rawV2.GET("/api/v2/product/{barcode}", {
-      params: {
-        query: { fields: "images" },
-        path: { barcode },
-      },
-    });
-
-    const product = res.data?.product;
-
-    // Check if the returned type has images
-    if (!product) return null;
-    if (!("images" in product)) return null;
-
-    const images = product.images ?? {};
-    return Object.keys(images);
-  }
-
   async search(query: operationsv2["get-search"]["parameters"]["query"]) {
     const res = await this.rawV2.GET("/api/v2/search", {
       params: { query },
@@ -422,21 +354,6 @@ export class OpenFoodFacts {
 
     return res.data;
   }
-}
-
-/**
- * Get base folder URL for a product's image
- * @param productCode Barcode of the product
- * @returns Folder path for the image files
- */
-export function getProductImageFolder(productCode: string): string {
-  if (!productCode) return "";
-  // All but last 4 digits in 3-digit chunks, last 4 as one chunk
-  const prefix = productCode.slice(0, -4);
-  const suffix = productCode.slice(-4);
-  const chunks: string[] = prefix.match(/.{1,3}/g) || [];
-  if (suffix) chunks.push(suffix);
-  return IMAGE_BASE_URL + "/" + chunks.join("/") + "/";
 }
 
 export default OpenFoodFacts;

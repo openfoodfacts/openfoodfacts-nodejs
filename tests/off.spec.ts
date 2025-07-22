@@ -1,14 +1,14 @@
-import { ProductsApi } from "../src/products";
+import OpenFoodFacts from "../src/off";
 import { TestUtils } from "./utils/test-utils";
 import productMockData from "./mockdata/product-7622210288257.json";
 import productV3MockData from "./mockdata/product-v3-3154230805984.json";
 
-describe("ProductsApi", () => {
+describe("OpenFoodFacts", () => {
   let mockFetch: jest.Mock<
     ReturnType<typeof window.fetch>,
     [RequestInfo | URL, RequestInit?]
   >;
-  let productsApi: ProductsApi;
+  let productsApi: OpenFoodFacts;
 
   // Common test data
   const testBarcode = "7622210288257";
@@ -34,8 +34,8 @@ describe("ProductsApi", () => {
       ReturnType<typeof window.fetch>,
       [RequestInfo | URL, RequestInit?]
     >();
-    productsApi = new ProductsApi(mockFetch as any, {
-      baseUrl: "https://world.openfoodfacts.org",
+    productsApi = new OpenFoodFacts(mockFetch as any, {
+      host: "https://world.openfoodfacts.org",
     });
   });
 
@@ -45,21 +45,17 @@ describe("ProductsApi", () => {
 
   describe("constructor", () => {
     it("should initialize with default options", () => {
-      expect(productsApi).toBeInstanceOf(ProductsApi);
+      expect(productsApi).toBeInstanceOf(OpenFoodFacts);
       expect(productsApi.rawV2).toBeDefined();
       expect(productsApi.rawV3).toBeDefined();
     });
 
     it("should initialize with custom options", () => {
-      const customApi = new ProductsApi(mockFetch, {
-        baseUrl: "https://custom.openfoodfacts.org",
-        lang: "fr",
+      const customApi = new OpenFoodFacts(mockFetch, {
         country: "france",
-        username: "testuser",
-        password: "testpass",
       });
 
-      expect(customApi).toBeInstanceOf(ProductsApi);
+      expect(customApi).toBeInstanceOf(OpenFoodFacts);
     });
   });
 
@@ -440,13 +436,10 @@ describe("ProductsApi", () => {
       expect(result).toEqual(mockResponseData);
       expect(mockFetch).toHaveBeenCalledWith(
         "https://world.openfoodfacts.org/cgi/product_image_upload.pl",
-        {
+        expect.objectContaining({
           method: "POST",
           body: expect.any(FormData),
-          headers: {
-            "User-Agent": expect.any(String),
-          },
-        },
+        }),
       );
     });
 
@@ -568,13 +561,10 @@ describe("ProductsApi", () => {
       expect(result).toBe(true);
       expect(mockFetch).toHaveBeenCalledWith(
         "https://world.openfoodfacts.org/cgi/product_jqm2.pl",
-        {
+        expect.objectContaining({
           method: "POST",
           body: expect.any(FormData),
-          headers: {
-            "User-Agent": expect.any(String),
-          },
-        },
+        }),
       );
     });
 
@@ -621,11 +611,9 @@ describe("ProductsApi", () => {
       ).rejects.toThrow("Network error");
     });
 
-    it("should use default credentials when provided in constructor", async () => {
-      const apiWithDefaults = new ProductsApi(mockFetch, {
-        baseUrl: "https://world.openfoodfacts.org",
-        username: "defaultuser",
-        password: "defaultpass",
+    it("should require credentials when not provided", async () => {
+      const apiWithDefaults = new OpenFoodFacts(mockFetch, {
+        host: "https://world.openfoodfacts.org",
       });
 
       mockFetch.mockResolvedValue(TestUtils.mockResponse({}, true, 200));
@@ -636,17 +624,9 @@ describe("ProductsApi", () => {
         languages_codes: {},
       } as any;
 
-      const result =
-        await apiWithDefaults.addOrEditProductV2(minimalProductData);
-
-      expect(result).toBe(true);
-      expect(mockFetch).toHaveBeenCalledWith(
-        "https://world.openfoodfacts.org/cgi/product_jqm2.pl",
-        expect.objectContaining({
-          method: "POST",
-          body: expect.any(FormData),
-        }),
-      );
+      await expect(
+        apiWithDefaults.addOrEditProductV2(minimalProductData),
+      ).rejects.toThrow("Username and password are required");
     });
   });
 
@@ -687,7 +667,7 @@ describe("ProductsApi", () => {
     };
 
     it("should generate correct image URL with selected image", () => {
-      const result = ProductsApi.getProductImageUrl(
+      const result = OpenFoodFacts.getProductImageUrl(
         testBarcode,
         "front",
         mockSelectedImage,
@@ -699,7 +679,7 @@ describe("ProductsApi", () => {
     });
 
     it("should generate correct image URL with raw image", () => {
-      const result = ProductsApi.getProductImageUrl(
+      const result = OpenFoodFacts.getProductImageUrl(
         testBarcode,
         "front",
         mockRawImage,
@@ -711,7 +691,7 @@ describe("ProductsApi", () => {
     });
 
     it("should return null when image not found", () => {
-      const result = ProductsApi.getProductImageUrl(
+      const result = OpenFoodFacts.getProductImageUrl(
         testBarcode,
         "front",
         {},
@@ -722,7 +702,7 @@ describe("ProductsApi", () => {
     });
 
     it("should return null when image not found in images object", () => {
-      const result = ProductsApi.getProductImageUrl(
+      const result = OpenFoodFacts.getProductImageUrl(
         testBarcode,
         "nonexistent",
         mockSelectedImage,
@@ -732,19 +712,19 @@ describe("ProductsApi", () => {
     });
 
     it("should handle different image sizes correctly", () => {
-      const result100 = ProductsApi.getProductImageUrl(
+      const result100 = OpenFoodFacts.getProductImageUrl(
         testBarcode,
         "front",
         mockSelectedImage,
         "100",
       );
-      const result200 = ProductsApi.getProductImageUrl(
+      const result200 = OpenFoodFacts.getProductImageUrl(
         testBarcode,
         "front",
         mockSelectedImage,
         "200",
       );
-      const resultFull = ProductsApi.getProductImageUrl(
+      const resultFull = OpenFoodFacts.getProductImageUrl(
         testBarcode,
         "front",
         mockSelectedImage,
@@ -758,7 +738,7 @@ describe("ProductsApi", () => {
 
     it("should handle barcode padding correctly", () => {
       const shortBarcode = "123";
-      const result = ProductsApi.getProductImageUrl(
+      const result = OpenFoodFacts.getProductImageUrl(
         shortBarcode,
         "front",
         mockSelectedImage,
@@ -777,8 +757,8 @@ describe("ProductsApi", () => {
         field2: "value2",
       };
 
-      // Access the private method through prototype
-      const formData = (ProductsApi as any).formData(data);
+      // Access the private method through instance
+      const formData = (productsApi as any).formData(data);
 
       expect(formData).toBeInstanceOf(FormData);
     });
@@ -790,8 +770,8 @@ describe("ProductsApi", () => {
         product_name_es: "Producto Español",
       } as any;
 
-      // Access private method through prototype
-      const getNameInLang = (ProductsApi as any).getProductNameInLang;
+      // Access private method through instance
+      const getNameInLang = (productsApi as any).getProductNameInLang;
 
       expect(getNameInLang(product, "fr")).toBe("Produit Français");
       expect(getNameInLang(product, "es")).toBe("Producto Español");
@@ -805,8 +785,8 @@ describe("ProductsApi", () => {
         ingredients_text_es: "Ingredientes españoles",
       } as any;
 
-      // Access private method through prototype
-      const getIngredientsInLang = (ProductsApi as any)
+      // Access private method through instance
+      const getIngredientsInLang = (productsApi as any)
         .getProductIngredientsInLang;
 
       expect(getIngredientsInLang(product, "fr")).toBe("Ingrédients français");

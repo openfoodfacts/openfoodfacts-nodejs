@@ -1029,8 +1029,10 @@ export interface components {
              *     * `1` - linked_to_price
              *     * `2` - not_readable
              *     * `3` - truncated
-             *     * `4` - not_price_tag */
-            status?: (components["schemas"]["Status579Enum"] | components["schemas"]["NullEnum"]) | null;
+             *     * `4` - not_price_tag
+             *     * `5` - no_barcode
+             *     * `10` - other */
+            status?: (components["schemas"]["StatusDe1Enum"] | components["schemas"]["NullEnum"]) | null;
             price_id?: number;
         };
         PatchedPriceUpdate: {
@@ -1198,8 +1200,10 @@ export interface components {
              *     * `1` - linked_to_price
              *     * `2` - not_readable
              *     * `3` - truncated
-             *     * `4` - not_price_tag */
-            status?: (components["schemas"]["Status579Enum"] | components["schemas"]["NullEnum"]) | null;
+             *     * `4` - not_price_tag
+             *     * `5` - no_barcode
+             *     * `10` - other */
+            status?: (components["schemas"]["StatusDe1Enum"] | components["schemas"]["NullEnum"]) | null;
             price_id?: number;
             proof_id: number;
         };
@@ -1217,8 +1221,10 @@ export interface components {
              *     * `1` - linked_to_price
              *     * `2` - not_readable
              *     * `3` - truncated
-             *     * `4` - not_price_tag */
-            status?: (components["schemas"]["Status579Enum"] | components["schemas"]["NullEnum"]) | null;
+             *     * `4` - not_price_tag
+             *     * `5` - no_barcode
+             *     * `10` - other */
+            status?: (components["schemas"]["StatusDe1Enum"] | components["schemas"]["NullEnum"]) | null;
             prediction_count?: number | null;
             /** @description The name of the user who created this price tag. This field is null if the tag was created by a model. */
             created_by?: string | null;
@@ -1247,6 +1253,8 @@ export interface components {
             model_name: string;
             /** @description The specific version of the model that generated the prediction */
             model_version: string;
+            /** @description The schema version of the prediction data. Used to handle changes in the prediction data structure. It is currently used when calling Gemine API to extract price tags. */
+            schema_version?: string | null;
             /** @description a dict representing the data of the prediction. This field is model-specific. */
             data?: unknown;
             /**
@@ -1269,8 +1277,10 @@ export interface components {
              *     * `1` - linked_to_price
              *     * `2` - not_readable
              *     * `3` - truncated
-             *     * `4` - not_price_tag */
-            status?: (components["schemas"]["Status579Enum"] | components["schemas"]["NullEnum"]) | null;
+             *     * `4` - not_price_tag
+             *     * `5` - no_barcode
+             *     * `10` - other */
+            status?: (components["schemas"]["StatusDe1Enum"] | components["schemas"]["NullEnum"]) | null;
             price_id: number;
         };
         PriceUpdate: {
@@ -1582,9 +1592,11 @@ export interface components {
          *     * `2` - not_readable
          *     * `3` - truncated
          *     * `4` - not_price_tag
+         *     * `5` - no_barcode
+         *     * `10` - other
          * @enum {integer}
          */
-        Status579Enum: 0 | 1 | 2 | 3 | 4;
+        StatusDe1Enum: 0 | 1 | 2 | 3 | 4 | 5 | 10;
         TotalStats: {
             price_count?: number;
             price_type_product_code_count?: number;
@@ -1936,8 +1948,10 @@ export interface operations {
                  *     * `1` - linked_to_price
                  *     * `2` - not_readable
                  *     * `3` - truncated
-                 *     * `4` - not_price_tag */
-                status?: 0 | 1 | 2 | 3 | 4 | null;
+                 *     * `4` - not_price_tag
+                 *     * `5` - no_barcode
+                 *     * `10` - other */
+                status?: 0 | 1 | 10 | 2 | 3 | 4 | 5 | null;
                 status__isnull?: boolean;
                 tags__contains?: string;
             };

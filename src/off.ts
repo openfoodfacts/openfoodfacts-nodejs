@@ -356,6 +356,11 @@ export class OpenFoodFacts {
     return res.data;
   }
 
+  async getAttributeGroups() {
+    const res = await this.rawV2.GET("/api/v2/attribute_groups");
+    return res.data;
+  }
+
   /**
    * Returns all available attribute groups
    * @returns A promise that resolves to an array of attribute groups

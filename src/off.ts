@@ -357,6 +357,18 @@ export class OpenFoodFacts {
   }
 
   /**
+   * Returns all available attribute groups
+   * @returns A promise that resolves to an array of attribute groups
+   */
+  async getAttributeGroups(): Promise<
+    componentsv2["schemas"]["get_attribute_groups"]
+  > {
+    const res = await this.rawV2.GET("/api/v2/attribute_groups");
+
+    return res.data || [];
+  }
+
+  /**
    * Returns product attributes for a given barcode
    * @param barcode - The barcode of the product
    * @returns A promise that resolves to an array of product attributes

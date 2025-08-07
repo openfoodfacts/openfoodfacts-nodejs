@@ -558,7 +558,7 @@ export class OpenFoodFacts {
   ): Promise<any> {
     const url = `${this.baseUrl}/cgi/product_image_crop.pl`;
     const formData = new FormData();
-    
+
     // Required fields
     formData.append("code", barcode);
     formData.append("imgid", imgid.toString());
@@ -567,7 +567,7 @@ export class OpenFoodFacts {
     formData.append("y1", cropData.y1.toString());
     formData.append("x2", cropData.x2.toString());
     formData.append("y2", cropData.y2.toString());
-    
+
     // Optional fields
     if (cropData.angle !== undefined) {
       formData.append("angle", cropData.angle.toString());
@@ -673,11 +673,14 @@ export class OpenFoodFacts {
     barcode: string,
     imgid: number,
   ): Promise<componentsv3["schemas"]["response_status"]> {
-    const res = await this.rawV3.DELETE("/api/v3/product/{barcode}/images/uploaded/{imgid}", {
-      params: {
-        path: { barcode, imgid },
+    const res = await this.rawV3.DELETE(
+      "/api/v3/product/{barcode}/images/uploaded/{imgid}",
+      {
+        params: {
+          path: { barcode, imgid },
+        },
       },
-    });
+    );
 
     return res.data || {};
   }

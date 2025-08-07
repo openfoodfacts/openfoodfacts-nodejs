@@ -356,11 +356,6 @@ export class OpenFoodFacts {
     return res.data;
   }
 
-  async getAttributeGroups() {
-    const res = await this.rawV2.GET("/api/v2/attribute_groups");
-    return res.data;
-  }
-
   /**
    * Returns all available attribute groups
    * @returns A promise that resolves to an array of attribute groups
@@ -532,6 +527,116 @@ export class OpenFoodFacts {
     }
 
     return res.json();
+  }
+
+  /**
+   * Crops and selects an image for a product
+   * @param barcode - The barcode of the product
+   * @param imgid - Identifier of the image to select (should be a number)
+   * @param id - Identifier of the selected image field (format: {IMAGE_TYPE}_{LANG})
+   * @param cropData - Crop coordinates and options
+   * @returns A promise that resolves to the crop response
+   */
+  async cropImage(
+    barcode: string,
+    imgid: number,
+    id: string,
+    cropData: {
+      x1: number;
+      y1: number;
+      x2: number;
+      y2: number;
+      angle?: number;
+      normalize?: boolean;
+      white_magic?: boolean;
+      comment?: string;
+      app_name?: string;
+      app_version?: string;
+      app_uuid?: string;
+      user_agent?: string;
+    },
+  ): Promise<any> {
+    const url = `${this.baseUrl}/cgi/product_image_crop.pl`;
+    const formData = new FormData();
+    
+    // Required fields
+    formData.append("code", barcode);
+    formData.append("imgid", imgid.toString());
+    formData.append("id", id);
+    formData.append("x1", cropData.x1.toString());
+    formData.append("y1", cropData.y1.toString());
+    formData.append("x2", cropData.x2.toString());
+    formData.append("y2", cropData.y2.toString());
+    
+    // Optional fields
+    if (cropData.angle !== undefined) {
+      formData.append("angle", cropData.angle.toString());
+    }
+    if (cropData.normalize !== undefined) {
+      formData.append("normalize", cropData.normalize.toString());
+    }
+    if (cropData.white_magic !== undefined) {
+      formData.append("white_magic", cropData.white_magic.toString());
+    }
+    if (cropData.comment) {
+      formData.append("comment", cropData.comment);
+    }
+    if (cropData.app_name) {
+      formData.append("app_name", cropData.app_name);
+    }
+    if (cropData.app_version) {
+      formData.append("app_version", cropData.app_version);
+    }
+    if (cropData.app_uuid) {
+      formData.append("app_uuid", cropData.app_uuid);
+    }
+    if (cropData.user_agent) {
+      formData.append("User-Agent", cropData.user_agent);
+    }
+
+    const res = await this.fetch(url, {
+      method: "POST",
+      body: formData,
+      headers: {
+        "User-Agent": USER_AGENT,
+      },
+    });
+
+    if (!res.ok) {
+      throw new Error(
+        `Failed to crop image for product with barcode: ${barcode}. Status: ${res.status}`,
+      );
+    }
+
+    return res.json();
+  }
+
+  /**
+   * Rotates an image for a product
+   * @param barcode - The barcode of the product
+   * @param id - Identifier of the selected image field (format: {IMAGE_TYPE}_{LANG})
+   * @param imgid - Identifier of the image to rotate (should be a number as string)
+   * @param angle - Angle of rotation in degrees (90, 180, or 270 clockwise)
+   * @returns A promise that resolves to the rotation response
+   */
+  async rotateImage(
+    barcode: string,
+    id: string,
+    imgid: string,
+    angle: string,
+  ): Promise<any> {
+    const res = await this.rawV2.GET("/cgi/product_image_crop.pl", {
+      params: {
+        query: {
+          code: barcode,
+          id: id,
+          imgid: imgid,
+          angle: angle,
+        },
+      },
+    });
+
+    return res.data;
   }
 
   /**

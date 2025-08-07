@@ -640,6 +640,49 @@ export class OpenFoodFacts {
   }
 
   /**
+   * Unselects an image for a product
+   * @param barcode - The barcode of the product
+   * @param id - Image field (image id) of the photo to unselect (e.g., "front_fr")
+   * @returns A promise that resolves to the unselect response
+   */
+  async unselectImage(
+    barcode: string,
+    id: string,
+  ): Promise<{
+    status?: string;
+    status_code?: number;
+    imagefield?: string;
+  }> {
+    const res = await this.rawV2.POST("/cgi/product_image_unselect.pl", {
+      body: {
+        code: barcode,
+        id: id,
+      },
+    });
+
+    return res.data || {};
+  }
+
+  /**
+   * Deletes an uploaded image for a product
+   * @param barcode - The barcode of the product corresponding to the image
+   * @param imgid - The id of the image to be deleted
+   * @returns A promise that resolves to the deletion response
+   */
+  async deleteProductImage(
+    barcode: string,
+    imgid: number,
+  ): Promise<componentsv3["schemas"]["response_status"]> {
+    const res = await this.rawV3.DELETE("/api/v3/product/{barcode}/images/uploaded/{imgid}", {
+      params: {
+        path: { barcode, imgid },
+      },
+    });
+
+    return res.data || {};
+  }
+
+  /**
    * Returns reduced product data suitable for displaying on cards
    * @param barcode - The barcode of the product
    * @param lang - Optional language code for localization

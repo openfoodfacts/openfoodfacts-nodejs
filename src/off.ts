@@ -505,7 +505,7 @@ export class OpenFoodFacts {
     barcode: string,
     imageFile: File,
     imagefield: string,
-  ): Promise<any> {
+  ): Promise<componentsv2["schemas"]["add_photo_to_existing_product-2"]> {
     const url = `${this.baseUrl}/cgi/product_image_upload.pl`;
     const formData = new FormData();
     formData.append("code", barcode);
@@ -555,60 +555,28 @@ export class OpenFoodFacts {
       app_uuid?: string;
       user_agent?: string;
     },
-  ): Promise<any> {
-    const url = `${this.baseUrl}/cgi/product_image_crop.pl`;
-    const formData = new FormData();
-
-    // Required fields
-    formData.append("code", barcode);
-    formData.append("imgid", imgid.toString());
-    formData.append("id", id);
-    formData.append("x1", cropData.x1.toString());
-    formData.append("y1", cropData.y1.toString());
-    formData.append("x2", cropData.x2.toString());
-    formData.append("y2", cropData.y2.toString());
-
-    // Optional fields
-    if (cropData.angle !== undefined) {
-      formData.append("angle", cropData.angle.toString());
-    }
-    if (cropData.normalize !== undefined) {
-      formData.append("normalize", cropData.normalize.toString());
-    }
-    if (cropData.white_magic !== undefined) {
-      formData.append("white_magic", cropData.white_magic.toString());
-    }
-    if (cropData.comment) {
-      formData.append("comment", cropData.comment);
-    }
-    if (cropData.app_name) {
-      formData.append("app_name", cropData.app_name);
-    }
-    if (cropData.app_version) {
-      formData.append("app_version", cropData.app_version);
-    }
-    if (cropData.app_uuid) {
-      formData.append("app_uuid", cropData.app_uuid);
-    }
-    if (cropData.user_agent) {
-      formData.append("User-Agent", cropData.user_agent);
-    }
-
-    const res = await this.fetch(url, {
-      method: "POST",
-      body: formData,
-      headers: {
-        "User-Agent": USER_AGENT,
+  ): Promise<Record<string, never>> {
+    const res = await this.rawV2.POST("/cgi/product_image_crop.pl", {
+      body: {
+        code: barcode,
+        imgid: imgid,
+        id: id,
+        x1: cropData.x1,
+        y1: cropData.y1,
+        x2: cropData.x2,
+        y2: cropData.y2,
+        angle: cropData.angle,
+        normalize: cropData.normalize ? "true" : "false",
+        white_magic: cropData.white_magic ? "true" : "false",
+        comment: cropData.comment,
+        app_name: cropData.app_name,
+        app_version: cropData.app_version,
+        app_uuid: cropData.app_uuid,
+        "User-Agent": cropData.user_agent,
       },
     });
 
-    if (!res.ok) {
-      throw new Error(
-        `Failed to crop image for product with barcode: ${barcode}. Status: ${res.status}`,
-      );
-    }
-
-    return res.json();
+    return res.data || {};
   }
 
   /**
@@ -624,7 +592,7 @@ export class OpenFoodFacts {
     id: string,
     imgid: string,
     angle: string,
-  ): Promise<any> {
+  ): Promise<componentsv2["schemas"]["rotate_a_photo"]> {
     const res = await this.rawV2.GET("/cgi/product_image_crop.pl", {
       params: {
         query: {
@@ -636,7 +604,7 @@ export class OpenFoodFacts {
       },
     });
 
-    return res.data;
+    return res.data || {};
   }
 
   /**
@@ -648,11 +616,9 @@ export class OpenFoodFacts {
   async unselectImage(
     barcode: string,
     id: string,
-  ): Promise<{
-    status?: string;
-    status_code?: number;
-    imagefield?: string;
-  }> {
+  ): Promise<
+    operationsv2["post-cgi-product_image_unselect.pl"]["responses"][200]["content"]["application/json"]
+  > {
     const res = await this.rawV2.POST("/cgi/product_image_unselect.pl", {
       body: {
         code: barcode,

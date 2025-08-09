@@ -7,14 +7,20 @@ This is the official JS/TS SDK for the Open Food Facts API.
 
 ## Installation
 
-### Development version
+### From NPM
 
 ```shell
-npm install git+https://github.com/openfoodfacts/openfoodfacts-nodejs.git
+npm install @openfoodfacts/openfoodfacts-nodejs
+```
+
+### Using the latest git version
+
+```shell
+npm install git+https://github.com/openfoodfacts/openfoodfacts-js.git
 # or
-yarn add git+https://github.com/openfoodfacts/openfoodfacts-nodejs.git
+yarn add git+https://github.com/openfoodfacts/openfoodfacts-js.git
 # or
-pnpm add git+https://github.com/openfoodfacts/openfoodfacts-nodejs.git
+pnpm add git+https://github.com/openfoodfacts/openfoodfacts-js.git
 ```
 
 #### Example code snippet:

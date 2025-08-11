@@ -604,7 +604,7 @@ export class OpenFoodFacts {
       },
     });
 
-    return res.data || {};
+    return res.data ?? {};
   }
 
   /**
@@ -640,7 +640,7 @@ export class OpenFoodFacts {
       },
     );
 
-    return res.data || {};
+    return res.data ?? {};
   }
 
   /**

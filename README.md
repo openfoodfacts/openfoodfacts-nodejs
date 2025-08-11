@@ -17,20 +17,37 @@ npm install @openfoodfacts/openfoodfacts-nodejs
 
 ```shell
 npm install git+https://github.com/openfoodfacts/openfoodfacts-js.git
-# or
-yarn add git+https://github.com/openfoodfacts/openfoodfacts-js.git
-# or
-pnpm add git+https://github.com/openfoodfacts/openfoodfacts-js.git
 ```
 
-#### Example code snippet:
+## Usage
+
+> [!WARNING]
+> Be sure to read the [Open Food Facts API documentation](https://openfoodfacts.github.io/openfoodfacts-server/) to understand how the API should be used and what data is available **BEFORE** starting to use the SDK.
+
+Import the SDK in your project and create a client instance:
 
 ```ts
-import OpenFoodFacts from "openfoodfacts-nodejs";
+import OpenFoodFacts from "@openfoodfacts/openfoodfacts-nodejs";
 
-const client = new OpenFoodFacts();
-client.getProduct("5000112546415").then((it) => console.log(it));
+// if you're on the browser, you can pass the fetch function as a parameter
+const client = new OpenFoodFacts(window.fetch);
+
+// or if you're on Node.js, you can pass the global fetch function
+const client = new OpenFoodFacts(globalThis.fetch);
+
+// or if you're using a custom fetch implementation
+import fetch from "node-fetch";
+const client = new OpenFoodFacts(fetch);
+
+// then you can use the client to access the Open Food Facts API
+client.getProduct("5000112546415").then((product) => {
+  console.log(product);
+});
 ```
+
+- See the [Open Food Facts API documentation](https://openfoodfacts.github.io/openfoodfacts-server/) for more details on the API endpoints.
+
+- See the [SDK auto generated documentation](https://openfoodfacts.github.io/openfoodfacts-js/) for a complete list of available methods and classes.
 
 ## Development
 

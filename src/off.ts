@@ -555,7 +555,7 @@ export class OpenFoodFacts {
       app_uuid?: string;
       user_agent?: string;
     },
-  ): Promise<Record<string, never>> {
+  ) {
     const res = await this.rawV2.POST("/cgi/product_image_crop.pl", {
       body: {
         code: barcode,
@@ -576,7 +576,7 @@ export class OpenFoodFacts {
       },
     });
 
-    return res.data || {};
+    return res.data ?? {};
   }
 
   /**
@@ -613,20 +613,12 @@ export class OpenFoodFacts {
    * @param id - Image field (image id) of the photo to unselect (e.g., "front_fr")
    * @returns A promise that resolves to the unselect response
    */
-  async unselectImage(
-    barcode: string,
-    id: string,
-  ): Promise<
-    operationsv2["post-cgi-product_image_unselect.pl"]["responses"][200]["content"]["application/json"]
-  > {
+  async unselectImage(barcode: string, id: string) {
     const res = await this.rawV2.POST("/cgi/product_image_unselect.pl", {
-      body: {
-        code: barcode,
-        id: id,
-      },
+      body: { code: barcode, id: id },
     });
 
-    return res.data || {};
+    return res.data ?? {};
   }
 
   /**

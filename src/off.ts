@@ -356,11 +356,6 @@ export class OpenFoodFacts {
     return res.data;
   }
 
-  async getAttributeGroups() {
-    const res = await this.rawV2.GET("/api/v2/attribute_groups");
-    return res.data;
-  }
-
   /**
    * Returns all available attribute groups
    * @returns A promise that resolves to an array of attribute groups
@@ -510,7 +505,7 @@ export class OpenFoodFacts {
     barcode: string,
     imageFile: File,
     imagefield: string,
-  ): Promise<any> {
+  ): Promise<componentsv2["schemas"]["add_photo_to_existing_product-2"]> {
     const url = `${this.baseUrl}/cgi/product_image_upload.pl`;
     const formData = new FormData();
     formData.append("code", barcode);
@@ -532,6 +527,120 @@ export class OpenFoodFacts {
     }
 
     return res.json();
+  }
+
+  /**
+   * Crops and selects an image for a product
+   * @param barcode - The barcode of the product
+   * @param imgid - Identifier of the image to select (should be a number)
+   * @param id - Identifier of the selected image field (format: {IMAGE_TYPE}_{LANG})
+   * @param cropData - Crop coordinates and options
+   * @returns A promise that resolves to the crop response
+   */
+  async cropImage(
+    barcode: string,
+    imgid: number,
+    id: string,
+    cropData: {
+      x1: number;
+      y1: number;
+      x2: number;
+      y2: number;
+      angle?: number;
+      normalize?: boolean;
+      white_magic?: boolean;
+      comment?: string;
+      app_name?: string;
+      app_version?: string;
+      app_uuid?: string;
+      user_agent?: string;
+    },
+  ) {
+    const res = await this.rawV2.POST("/cgi/product_image_crop.pl", {
+      body: {
+        code: barcode,
+        imgid: imgid,
+        id: id,
+        x1: cropData.x1,
+        y1: cropData.y1,
+        x2: cropData.x2,
+        y2: cropData.y2,
+        angle: cropData.angle,
+        normalize: cropData.normalize ? "true" : "false",
+        white_magic: cropData.white_magic ? "true" : "false",
+        comment: cropData.comment,
+        app_name: cropData.app_name,
+        app_version: cropData.app_version,
+        app_uuid: cropData.app_uuid,
+        "User-Agent": cropData.user_agent,
+      },
+    });
+
+    return res.data ?? {};
+  }
+
+  /**
+   * Rotates an image for a product
+   * @param barcode - The barcode of the product
+   * @param id - Identifier of the selected image field (format: {IMAGE_TYPE}_{LANG})
+   * @param imgid - Identifier of the image to rotate (should be a number as string)
+   * @param angle - Angle of rotation in degrees (90, 180, or 270 clockwise)
+   * @returns A promise that resolves to the rotation response
+   */
+  async rotateImage(
+    barcode: string,
+    id: string,
+    imgid: string,
+    angle: string,
+  ): Promise<componentsv2["schemas"]["rotate_a_photo"]> {
+    const res = await this.rawV2.GET("/cgi/product_image_crop.pl", {
+      params: {
+        query: {
+          code: barcode,
+          id: id,
+          imgid: imgid,
+          angle: angle,
+        },
+      },
+    });
+
+    return res.data ?? {};
+  }
+
+  /**
+   * Unselects an image for a product
+   * @param barcode - The barcode of the product
+   * @param id - Image field (image id) of the photo to unselect (e.g., "front_fr")
+   * @returns A promise that resolves to the unselect response
+   */
+  async unselectImage(barcode: string, id: string) {
+    const res = await this.rawV2.POST("/cgi/product_image_unselect.pl", {
+      body: { code: barcode, id: id },
+    });
+
+    return res.data ?? {};
+  }
+
+  /**
+   * Deletes an uploaded image for a product
+   * @param barcode - The barcode of the product corresponding to the image
+   * @param imgid - The id of the image to be deleted
+   * @returns A promise that resolves to the deletion response
+   */
+  async deleteProductImage(
+    barcode: string,
+    imgid: number,
+  ): Promise<componentsv3["schemas"]["response_status"]> {
+    const res = await this.rawV3.DELETE(
+      "/api/v3/product/{barcode}/images/uploaded/{imgid}",
+      {
+        params: {
+          path: { barcode, imgid },
+        },
+      },
+    );
+
+    return res.data ?? {};
   }
 
   /**

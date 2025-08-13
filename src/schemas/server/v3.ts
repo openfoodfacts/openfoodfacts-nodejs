@@ -246,6 +246,18 @@ export interface components {
         product_base: {
             /** @description Abbreviated name in requested language */
             abbreviated_product_name?: string;
+            /**
+             * @description The product type is a fundamental separation that tells on which platform the product is made available:
+             *     Open Food Facts, Open Beauty Facts, Open Pet Food Facts or Open Products Facts.
+             *
+             *     Each platform has variations on the way it analyses the product.
+             *
+             *     Changing the product type moves the product to the new platform.
+             *     It must be done thoughtfully.
+             *
+             * @enum {string}
+             */
+            product_type?: "beauty" | "food" | "petfood" | "product";
             /** @description barcode of the product (can be EAN-13 or internal codes for some food stores),
              *     for products without a barcode,
              *     Open Food Facts assigns a number starting with the 200 reserved prefix
@@ -323,7 +335,7 @@ export interface components {
         };
         /**
          * Packaging component shape
-         * @description The shape property is canonicalized using the packaging_shapes taxonomy.
+         * @description The shape property is canonicalized using the packaging_shapes taxonomy. Taxonomized values are available using the partial taxonomy API, the autosuggest API or the full packaging_shapes taxonomy JSON export.
          */
         shape: {
             /** @description Canonical id of the entry in the taxonomy. If the value cannot be mapped to a taxonomy entry, the value will be the name of the entry in its original language prefixed by the language 2 letter code and a colon. */
@@ -333,7 +345,7 @@ export interface components {
         };
         /**
          * Packaging component material
-         * @description The material property is canonicalized using the packaging_materials taxonomy.
+         * @description The material property is canonicalized using the packaging_materials taxonomy. Taxonomized values are available using the partial taxonomy API, the autosuggest API or the full packaging_material taxonomy JSON export.
          */
         material: {
             /** @description Canonical id of the entry in the taxonomy. If the value cannot be mapped to a taxonomy entry, the value will be the name of the entry in its original language prefixed by the language 2 letter code and a colon. */
@@ -343,7 +355,7 @@ export interface components {
         };
         /**
          * Packaging component recycling instruction
-         * @description The recycling property is canonicalized using the packaging_recycling taxonomy.
+         * @description The recycling property is canonicalized using the packaging_recycling taxonomy. Taxonomized values are available using the partial taxonomy API, the autosuggest API or the full packaging_recycling taxonomy JSON export.
          */
         recycling: {
             /** @description Canonical id of the entry in the taxonomy. If the value cannot be mapped to a taxonomy entry, the value will be the name of the entry in its original language prefixed by the language 2 letter code and a colon. */
@@ -1033,170 +1045,266 @@ export interface components {
             traces_tags?: (Record<string, never> | string)[];
             unknown_ingredients_n?: number;
         };
-        /**
-         * product_nutrition
-         * @description Nutrition fields of a product
-         *
-         *     Most of these properties are read-only.
-         *
-         *     See [how to add nutrition data](https://openfoodfacts.github.io/openfoodfacts-server/api/ref-cheatsheet/#add-nutrition-facts-values-units-and-base)
-         *
-         */
-        product_nutrition: {
+        product_nutrition_properties: {
             /**
-             * @description When a product does not have nutrition data displayed on the
-             *     packaging, the user can check the field "Nutrition facts are
-             *     not specified on the product".
-             *     By doing so, the no_nutrition_data field takes the value "on".
-             *     This case is frequent (thousands of products).
+             * @description Indicates whether the nutrition values refer to the product *as_sold* or *prepared*.
              *
-             * @example on
-             */
-            no_nutrition_data?: string;
-            /**
-             * @description The nutrition data on the package can be per serving or per 100g.
-             *
-             *     This is essential to understand if `<nutrient>_value` and `<nutrient>`
-             *     values in `nutriments` applies for a serving or for 100g.
-             *
-             *     **IMPORTANT:**
-             *     When writing products,
-             *     this setting applies to all existing nutrients values for the product,
-             *     not only the nutrient values sent in the write request.
-             *     So it should not be changed unless all nutrients values are provided
-             *     with values that match the nutrition_data_per field.
+             *     The preparation state affects nutrient values.
              *
              * @enum {string}
              */
-            nutrition_data_per?: "serving" | "100g";
+            preparation?: "as_sold" | "prepared";
             /**
-             * @description The nutrition data for prepared product on the package (if any) can be per serving or per 100g.
+             * @description The nutrition data on the package can be per serving, per 100g or per 100ml.
              *
-             *     This is essential to understand if `<nutrient>_prepared_value` and `<nutrient>_prepared`
-             *     values in `nutriments` applies for a serving or for 100g.
-             *
-             *     See also important note on `nutrition_data_per`.
+             *     This is essential to understand if values in the `nutrients` object apply for a serving, for 100g or for 100ml.
              *
              * @enum {string}
              */
-            nutrition_data_prepared_per?: "serving" | "100g";
+            per?: "100g" | "100ml" | "serving";
+            /**
+             * @description The nutrition data on the package can be per serving, per 100g or per 100ml.
+             *     When the data is given per serving,
+             *     the actual quantity that defines one serving may vary between products
+             *     and is stored in this field.
+             *
+             *     This is essential to understand to which quantity values in `nutrients` apply for.
+             *
+             *     For example, if the label states "per 250g", then this field should be *250*.
+             *
+             * @example 250
+             */
+            per_quantity?: number;
+            /**
+             * @description The nutrition data on the package can be per serving, per 100g or per 100ml.
+             *     When the data is given per serving,
+             *     the actual unit that defines one serving may vary between products
+             *     and is stored in this field.
+             *
+             *     This is essential to understand to which quantity values in `nutrients` apply for.
+             *
+             *     For example, if the label states "per 250g", then this field should be *g*.
+             *
+             * @example g
+             */
+            per_unit?: string;
+        };
+        /** @description Quantity of a nutrient
+         *
+         *     (per 100g, per 100ml or per serving) in a standard unit (g or ml)
+         *      */
+        product_nutrient_values: {
+            /** @description A string representing the value of the quantity.
+             *      */
+            value_string?: string;
+            /** @description A normalized float value for the quantity, computed from `value_string` if it exists.
+             *      */
+            value?: number;
+            /** @description The unit of the value entered by the contributor (a user or the manufacturer), for the product.
+             *     In most cases, this unit is the unit displayed on the product for the nutrient, but it is not guaranteed, as some apps may force specific units when writing nutrient values.
+             *
+             *     The possible values depends on the nutrient.
+             *
+             *     * `g` for grams
+             *     * `mg` for milligrams
+             *     * `μg` for micrograms
+             *     * `cl` for centiliters
+             *     * `ml` for mililiters
+             *     * `dv` for recommended daily intakes (aka [Dietary Reference Intake](https://en.wikipedia.org/wiki/Dietary_Reference_Intake))
+             *     * `% vol` for alcohol vol per 100 ml
+             *
+             *     🤓 code: see the [Units module][units-module],
+             *     and [Food:default_unit_for_nid function][default-unit]
+             *
+             *     [units-module]: https://openfoodfacts.github.io/openfoodfacts-server/dev/ref-perl-pod/ProductOpener/Units.html
+             *     [default-unit]: https://openfoodfacts.github.io/openfoodfacts-server/dev/ref-perl-pod/ProductOpener/Food.html#default_unit_for_nid_(_%24nid)
+             *      */
+            unit?: string;
+            /**
+             * @description This property is optional.
+             *
+             * @enum {string}
+             */
+            modifier?: "<" | "<=" | "~" | ">=" | ">";
+        };
+        nutrients_source_v3: {
+            /**
+             * @description Indicates the original source like “packaging”, “manufacturer”, “estimate”, “usda”
+             *
+             * @example packaging
+             */
+            source?: string;
+            /**
+             * @description Indicates if the original source is per serving or per 100g, 100ml
+             *
+             * @enum {string}
+             */
+            source_per?: "100g" | "100ml" | "serving";
+        };
+        nutrients_v3_with_source: {
             /** @description All known nutrients for the product.
              *
-             *     Note that each nutrients are declined with a variety of suffixes like `_100g`, `_serving`,
-             *     see patternProperties below.
-             *
-             *     A specific `_unit` is the unit of the value that was entered by the contributor (a user or the manufacturer).
-             *     It is not necessarily the unit that is printed on the product, as some apps may force specific units when writing nutrient values.
-             *
-             *     Beware that some properties are to be interpreted based upon `nutrition_data_per` value.
-             *
-             *     For most use cases, you should use the `<nutrient>_100g` or `<nutrient>_serving` fields, as they are always in the same standard unit, for a specific quantity (100g or 1 serving).
-             *
-             *     For products that have a nutrition table for prepared product
-             *     (eg. the nutrition facts for a bowl of milk with cocoa powder),
-             *     a `_prepared` suffix is added (before other suffixes).
-             *
              *     You can get all possible nutrients from the
-             *     [nutrients taxonomy](https://static.openfoodfacts.org/data/taxonomies/nutrients.json)
+             *     [nutrients taxonomy](https://static.openfoodfacts.org/data/taxonomies/nutrients.json).
              *
-             *     **FIXME** add more nutrients with description.
+             *     New nutrients are regularly added.
+             *
+             *     Clients should not break if they encounter an unexpected nutrient to preserve compatibility.
              *      */
-            nutriments?: {
-                /** @description Quantity of alcohol
-                 *
-                 *     (per 100g or per serving) in a standard unit (g or ml)
-                 *      */
-                alcohol?: number;
-                /** @description This is the available carbohydrates (excluding fiber), also known as net carbohydrates */
-                carbohydrates?: number;
-                /** @description This follows the US / Canada definition of carbohydrates which includes fiber, also known as gross carbohydrates */
-                "carbohydrates-total"?: number;
+            nutrients?: {
                 /** @description It is the same as `energy-kj` if we have it, or computed from `energy-kcal` otherwise
                  *
                  *     (per 100g or per serving) in kj
                  *      */
-                energy?: number;
-                /** @description energy_value will be equal to energy-kj_value if we have it or to energy-kcal_value otherwise
-                 *      */
-                energy_value?: number;
-                /**
-                 * @description Equal to energy-kj_unit if we have it or to energy-kcal_unit otherwise
-                 *
-                 * @enum {string}
-                 */
-                energy_unit?: "kcal" | "kJ";
+                energy?: components["schemas"]["product_nutrient_values"] & components["schemas"]["nutrients_source_v3"];
                 /** @description energy in kcal, if it is specified
                  *
                  *     (per 100g or per serving) in a standard unit (g or ml)
                  *      */
-                "energy-kcal"?: number;
+                energy_kcal?: components["schemas"]["product_nutrient_values"] & components["schemas"]["nutrients_source_v3"];
                 /** @description energy in kj, if it is specified
                  *
                  *     (per 100g or per serving) in a standard unit (g or ml)
                  *      */
-                "energy-kj"?: number;
-                fat?: number;
-                /** @description An estimate, from the ingredients list of the percentage of fruits, vegetable and legumes.
-                 *     This is an important information for Nutri-Score (2023 version) computation.
-                 *      */
-                "fruits-vegetables-legumes-estimate-from-ingredients"?: number;
-                /** @description An estimate, from the ingredients list of the percentage of fruits, vegetable and nuts.
-                 *     This is an important information for Nutri-Score (2021 version) computation.
-                 *      */
-                "fruits-vegetables-nuts-estimate-from-ingredients"?: number;
-                "nova-group"?: number;
-                /** @description Experimental nutrition score derived from
-                 *     the UK FSA score and adapted for the French market
-                 *     (formula defined by the team of Professor Hercberg).
-                 *      */
-                "nutrition-score-fr"?: unknown;
-                proteins?: number;
-                salt?: number;
-                "saturated-fat"?: number;
-                sodium?: number;
-                sugars?: number;
-                "carbon-footprint-from-known-ingredients_product"?: number;
-                "carbon-footprint-from-known-ingredients_serving"?: number;
-                /**
-                 * @description erythritol is a polyol which is not providing any energy.
-                 *     As such, it needs not be taken into account when computing
-                 *     the energy of a product. Eryhtritol is now displayed on
-                 *     nutrition facts sheet of some products, mainly in the USA.
-                 *     This value is entered either by contributors, either by
-                 *     imports.
+                energy_kj?: components["schemas"]["product_nutrient_values"] & components["schemas"]["nutrients_source_v3"];
+                fat?: components["schemas"]["product_nutrient_values"] & components["schemas"]["nutrients_source_v3"];
+                "saturated-fat"?: components["schemas"]["product_nutrient_values"] & components["schemas"]["nutrients_source_v3"];
+                "trans-fat"?: components["schemas"]["product_nutrient_values"] & components["schemas"]["nutrients_source_v3"];
+                cholesterol?: components["schemas"]["product_nutrient_values"] & components["schemas"]["nutrients_source_v3"];
+                salt?: components["schemas"]["product_nutrient_values"] & components["schemas"]["nutrients_source_v3"];
+                sodium?: components["schemas"]["product_nutrient_values"] & components["schemas"]["nutrients_source_v3"];
+                /** @description This is the available carbohydrates (excluding fiber), also known as net carbohydrates
                  *
-                 * @example 12.5
-                 */
-                erythritol?: number;
+                 *     (per 100g, per 100ml or per serving) in a standard unit (g or ml)
+                 *      */
+                carbohydrates?: components["schemas"]["product_nutrient_values"] & components["schemas"]["nutrients_source_v3"];
+                /** @description This follows the US / Canada definition of carbohydrates which includes fiber, also known as gross carbohydrates
+                 *
+                 *     (per 100g, per 100ml or per serving) in a standard unit (g or ml)
+                 *      */
+                "carbohydrates-total"?: components["schemas"]["product_nutrient_values"] & components["schemas"]["nutrients_source_v3"];
+                fiber?: components["schemas"]["product_nutrient_values"] & components["schemas"]["nutrients_source_v3"];
+                sugars?: components["schemas"]["product_nutrient_values"] & components["schemas"]["nutrients_source_v3"];
+                "added-sugars"?: components["schemas"]["product_nutrient_values"] & components["schemas"]["nutrients_source_v3"];
+                proteins?: components["schemas"]["product_nutrient_values"] & components["schemas"]["nutrients_source_v3"];
+                "vitamin-d"?: components["schemas"]["product_nutrient_values"] & components["schemas"]["nutrients_source_v3"];
+                calcium?: components["schemas"]["product_nutrient_values"] & components["schemas"]["nutrients_source_v3"];
+                iron?: components["schemas"]["product_nutrient_values"] & components["schemas"]["nutrients_source_v3"];
+                potassium?: components["schemas"]["product_nutrient_values"] & components["schemas"]["nutrients_source_v3"];
+            } & {
+                [key: string]: components["schemas"]["product_nutrient_values"] & {
+                    /** @description Indicates the original source like “packaging”, “manufacturer”, “estimate”, “usda”
+                     *      */
+                    source?: string;
+                    /** @description Indicates if the original source is per serving or per 100g, 100ml
+                     *      */
+                    source_per?: string;
+                };
             };
-            /** @description Detail of data the Nutri-Score was computed upon.
+        };
+        nutrients_v3_base: {
+            /** @description All known nutrients for the product.
              *
-             *     **Note**: this might not be stable, don't rely too much on this, or, at least, tell us !
+             *     You can get all possible nutrients from the
+             *     [nutrients taxonomy](https://static.openfoodfacts.org/data/taxonomies/nutrients.json).
              *
-             *     **TODO** document each property
+             *     New nutrients are regularly added.
+             *
+             *     Clients should not break if they encounter an unexpected nutrient to preserve compatibility.
              *      */
-            nutriscore_data?: {
-                saturated_fat_ratio?: number;
-                saturated_fat_ratio_points?: number;
-                saturated_fat_ratio_value?: number;
+            nutrients?: {
+                /** @description It is the same as `energy-kj` if we have it, or computed from `energy-kcal` otherwise
+                 *
+                 *     (per 100g or per serving) in kj
+                 *      */
+                energy?: components["schemas"]["product_nutrient_values"];
+                /** @description energy in kcal, if it is specified
+                 *
+                 *     (per 100g or per serving) in a standard unit (g or ml)
+                 *      */
+                energy_kcal?: components["schemas"]["product_nutrient_values"];
+                /** @description energy in kj, if it is specified
+                 *
+                 *     (per 100g or per serving) in a standard unit (g or ml)
+                 *      */
+                energy_kj?: components["schemas"]["product_nutrient_values"];
+                fat?: components["schemas"]["product_nutrient_values"];
+                "saturated-fat"?: components["schemas"]["product_nutrient_values"];
+                "trans-fat"?: components["schemas"]["product_nutrient_values"];
+                cholesterol?: components["schemas"]["product_nutrient_values"];
+                salt?: components["schemas"]["product_nutrient_values"];
+                sodium?: components["schemas"]["product_nutrient_values"];
+                /** @description This follows the US / Canada definition of carbohydrates which includes fiber, also known as gross carbohydrates
+                 *
+                 *     (per 100g, per 100ml or per serving) in a standard unit (g or ml)
+                 *      */
+                "carbohydrates-total"?: components["schemas"]["product_nutrient_values"];
+                /** @description This is the available carbohydrates (excluding fiber), also known as net carbohydrates
+                 *
+                 *     (per 100g, per 100ml or per serving) in a standard unit (g or ml)
+                 *      */
+                carbohydrates?: components["schemas"]["product_nutrient_values"];
+                fiber?: components["schemas"]["product_nutrient_values"];
+                sugars?: components["schemas"]["product_nutrient_values"];
+                "added-sugars"?: components["schemas"]["product_nutrient_values"];
+                proteins?: components["schemas"]["product_nutrient_values"];
+                "vitamin-d"?: components["schemas"]["product_nutrient_values"];
+                calcium?: components["schemas"]["product_nutrient_values"];
+                iron?: components["schemas"]["product_nutrient_values"];
+                potassium?: components["schemas"]["product_nutrient_values"];
+            } & {
+                [key: string]: components["schemas"]["product_nutrient_values"];
             };
-            /** @description Nutrition grade (‘a’ to ‘e’),
-             *     https://world.openfoodfacts.org/nutriscore.
-             *      */
-            nutrition_grade_fr?: string;
-            /** @description Nutrition grades as a comma separated list.
+        };
+        /** Product Nutrition Data */
+        ProductNutritionDataV3: {
+            /** @description Nutrition fields of a product
              *
-             *     Some products with multiple components might have multiple Nutri-Score
+             *     Most of these properties are read-only.
+             *
+             *     See [how to add nutrition data](https://openfoodfacts.github.io/openfoodfacts-server/api/ref-cheatsheet/#add-nutrition-facts-values-units-and-base)
              *      */
-            nutrition_grades?: string;
-            nutrition_grades_tags?: string[];
-            nutrition_score_beverage?: number;
-            nutrition_score_warning_fruits_vegetables_nuts_estimate_from_ingredients?: number;
-            nutrition_score_warning_fruits_vegetables_nuts_estimate_from_ingredients_value?: number;
-            nutrition_score_warning_no_fiber?: number;
-            other_nutritional_substances_tags?: Record<string, never>[];
-            unknown_nutrients_tags?: Record<string, never>[];
-            vitamins_tags?: Record<string, never>[];
+            nutrition?: {
+                /** @description A set that combines nutrient data from preferred sources, with normalized units.
+                 *
+                 *     It takes values from multiple sources (by priority: manufacturer, packaging, usda, estimate)
+                 *     and normalizes all values to the same unit: g for weights, kJ for energy and energy-kj, kcal for energy-kcal.
+                 *      */
+                nutrient_set_preferred?: components["schemas"]["product_nutrition_properties"] & components["schemas"]["nutrients_v3_with_source"];
+                /** @description An array of nutrient sets of the product.
+                 *
+                 *     Each nutrient set represents a version of the nutrition facts, defined by a combination of:
+                 *     - the preparation state (e.g. *as_sold* or *prepared*),
+                 *     - the reference quantity (*per 100g*, *per 100ml* or *per serving*), and
+                 *     - the source of the data (e.g. *packaging*, *manufacturer*, *estimate*).
+                 *
+                 *     This structure allows capturing multiple nutritional profiles for a single product.
+                 *      */
+                nutrient_sets?: (components["schemas"]["nutrients_v3_base"] & components["schemas"]["product_nutrition_properties"] & {
+                    /** @description The nutrition data of products can be obtained through several sources.
+                     *      */
+                    source?: string;
+                    /** @description A description of the source used for this nutrition set.
+                     *
+                     *     This provides more information on how and when the source was used.
+                     *      */
+                    source_description?: string;
+                    /** @description A timestamp indicating when this nutrition set was last updated.
+                     *      */
+                    last_updated_t?: number;
+                    /**
+                     * @description A list of nutrients that are typically present, but that are not specified for this particular product,
+                     *     especially for packaging source.
+                     *
+                     *     This property is optional.
+                     *
+                     * @example [
+                     *       "fibers"
+                     *     ]
+                     */
+                    unspecified_nutrients?: string[];
+                })[];
+            };
         };
         /**
          * @description Nutri-Score for the product as a letter.
@@ -1781,7 +1889,7 @@ export interface components {
          *     * [Product Attribute Groups](#cmp--schemas-product-attribute-groups): Attribute groups for personal product matching
          *
          */
-        product_v3: components["schemas"]["product_base"] & components["schemas"]["product_misc"] & components["schemas"]["product_tags"] & components["schemas"]["ProductImagesV3"] & components["schemas"]["product_ecoscore"] & components["schemas"]["product_ingredients"] & components["schemas"]["product_nutrition"] & components["schemas"]["NutriscoreAll"] & components["schemas"]["product_quality"] & components["schemas"]["product_extended"] & components["schemas"]["product_meta"] & components["schemas"]["product_knowledge_panels"] & components["schemas"]["product_attribute_groups"];
+        product_v3: components["schemas"]["product_base"] & components["schemas"]["product_misc"] & components["schemas"]["product_tags"] & components["schemas"]["ProductImagesV3"] & components["schemas"]["product_ecoscore"] & components["schemas"]["product_ingredients"] & components["schemas"]["ProductNutritionDataV3"] & components["schemas"]["NutriscoreAll"] & components["schemas"]["product_quality"] & components["schemas"]["product_extended"] & components["schemas"]["product_meta"] & components["schemas"]["product_knowledge_panels"] & components["schemas"]["product_attribute_groups"];
         /** Language and country of the user */
         lc_cc: {
             /** @description 2 letter code of the language of the interface. Used for localizing some fields in returned values (e.g. knowledge panels). If not passed, the language may be inferred by the country of the user (passed through the cc field or inferred by the IP address). Full list at https://static.openfoodfacts.org/data/taxonomies/languages.json */
@@ -1977,7 +2085,9 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["response_status"] & components["schemas"]["product_v3"];
+                    "application/json": components["schemas"]["response_status"] & {
+                        product?: components["schemas"]["product_v3"];
+                    };
                 };
             };
             /** @description Redirect to the correct server for the product type of the requested product */

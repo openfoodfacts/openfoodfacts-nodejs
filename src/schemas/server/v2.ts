@@ -416,6 +416,18 @@ export interface components {
         product_base: {
             /** @description Abbreviated name in requested language */
             abbreviated_product_name?: string;
+            /**
+             * @description The product type is a fundamental separation that tells on which platform the product is made available:
+             *     Open Food Facts, Open Beauty Facts, Open Pet Food Facts or Open Products Facts.
+             *
+             *     Each platform has variations on the way it analyses the product.
+             *
+             *     Changing the product type moves the product to the new platform.
+             *     It must be done thoughtfully.
+             *
+             * @enum {string}
+             */
+            product_type?: "beauty" | "food" | "petfood" | "product";
             /** @description barcode of the product (can be EAN-13 or internal codes for some food stores),
              *     for products without a barcode,
              *     Open Food Facts assigns a number starting with the 200 reserved prefix
@@ -493,7 +505,7 @@ export interface components {
         };
         /**
          * Packaging component shape
-         * @description The shape property is canonicalized using the packaging_shapes taxonomy.
+         * @description The shape property is canonicalized using the packaging_shapes taxonomy. Taxonomized values are available using the partial taxonomy API, the autosuggest API or the full packaging_shapes taxonomy JSON export.
          */
         shape: {
             /** @description Canonical id of the entry in the taxonomy. If the value cannot be mapped to a taxonomy entry, the value will be the name of the entry in its original language prefixed by the language 2 letter code and a colon. */
@@ -503,7 +515,7 @@ export interface components {
         };
         /**
          * Packaging component material
-         * @description The material property is canonicalized using the packaging_materials taxonomy.
+         * @description The material property is canonicalized using the packaging_materials taxonomy. Taxonomized values are available using the partial taxonomy API, the autosuggest API or the full packaging_material taxonomy JSON export.
          */
         material: {
             /** @description Canonical id of the entry in the taxonomy. If the value cannot be mapped to a taxonomy entry, the value will be the name of the entry in its original language prefixed by the language 2 letter code and a colon. */
@@ -513,7 +525,7 @@ export interface components {
         };
         /**
          * Packaging component recycling instruction
-         * @description The recycling property is canonicalized using the packaging_recycling taxonomy.
+         * @description The recycling property is canonicalized using the packaging_recycling taxonomy. Taxonomized values are available using the partial taxonomy API, the autosuggest API or the full packaging_recycling taxonomy JSON export.
          */
         recycling: {
             /** @description Canonical id of the entry in the taxonomy. If the value cannot be mapped to a taxonomy entry, the value will be the name of the entry in its original language prefixed by the language 2 letter code and a colon. */
@@ -2072,6 +2084,19 @@ export interface components {
              */
             white_magic: "true" | "false";
         };
+        /** product_image_crop */
+        product_image_crop: {
+            status?: string;
+            /**
+             * @description identifier of the processed image
+             * @example 2
+             */
+            imgid?: number;
+            /** @description identifier of the selected image field
+             *     (corresponding to the `id` parameter)
+             *      */
+            imagefield?: string;
+        };
         /** unselect_a_photo_request */
         unselect_a_photo: {
             /**
@@ -2563,7 +2588,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": Record<string, never>;
+                    "application/json": components["schemas"]["product_image_crop"];
                 };
             };
         };

@@ -12,6 +12,7 @@ apis=(
   "https://raw.githubusercontent.com/openfoodfacts/openfoodfacts-server/main/docs/api/ref/api-v3.yaml src/schemas/server/v3.ts"
   "https://nutripatrol.openfoodfacts.org/api/openapi.json src/schemas/nutripatrol.ts"
   "https://search.openfoodfacts.org/openapi.json src/schemas/search.ts"
+  "https://facets-kp.openfoodfacts.org/openapi.json src/schemas/facets-kp.ts"
 )
 
 # Iterate over the array and run openapi-typescript for each

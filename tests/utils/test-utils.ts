@@ -30,16 +30,16 @@ export class TestUtils {
       body: null,
       bodyUsed: false,
       clone: notImpl,
-      arrayBuffer: function (): Promise<ArrayBuffer> {
+      arrayBuffer: () => {
         throw new Error("Function not implemented.");
       },
-      blob: function (): Promise<Blob> {
+      blob: () => {
         throw new Error("Function not implemented.");
       },
-      bytes: function (): Promise<Uint8Array> {
+      bytes: () => {
         throw new Error("Function not implemented.");
       },
-      formData: function (): Promise<FormData> {
+      formData: () => {
         throw new Error("Function not implemented.");
       },
     };

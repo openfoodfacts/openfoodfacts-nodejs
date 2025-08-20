@@ -160,6 +160,11 @@ describe("OpenFoodFacts", () => {
           },
         },
       );
+
+      expect(result.status).toBe("success");
+      if (result.status !== "success") return; // for type narrowing
+
+      expect(result.product).toEqual(productV3MockData.product);
     });
 
     it("should handle network errors when fetching product V3", async () => {
@@ -265,154 +270,6 @@ describe("OpenFoodFacts", () => {
       await expect(productsApi.getProductImages(testBarcode)).rejects.toThrow(
         "Network error",
       );
-    });
-  });
-
-  describe("getProductName", () => {
-    it("should fetch product name successfully", async () => {
-      const mockResponse = {
-        status: "success",
-        product: {
-          product_name: "Test Product",
-        },
-      };
-
-      mockV3Success(mockResponse);
-
-      const result = await productsApi.getProductName(testBarcode);
-
-      expect(result).toEqual({ product_name: "Test Product" });
-      expect(productsApi.rawV3.GET).toHaveBeenCalledWith(
-        "/api/v3/product/{barcode}",
-        {
-          params: {
-            path: { barcode: testBarcode },
-            query: { fields: "product_name" },
-          },
-        },
-      );
-    });
-
-    it("should fetch product name with language", async () => {
-      const mockResponse = {
-        status: "success",
-        product: {
-          product_name: "Produit Test",
-        },
-      };
-
-      mockV3Success(mockResponse);
-
-      const result = await productsApi.getProductName(testBarcode, "fr");
-
-      expect(result).toEqual({ product_name: "Produit Test" });
-      expect(productsApi.rawV3.GET).toHaveBeenCalledWith(
-        "/api/v3/product/{barcode}",
-        {
-          params: {
-            path: { barcode: testBarcode },
-            query: { fields: "product_name", lc: "fr" },
-          },
-        },
-      );
-    });
-
-    it("should return null when product not found", async () => {
-      const mockResponse = {
-        status: "failure",
-        errors: [],
-      };
-
-      mockV3Success(mockResponse);
-
-      const result = await productsApi.getProductName("invalid");
-
-      expect(result).toBeNull();
-    });
-
-    it("should handle network errors when fetching product name", async () => {
-      mockV3Error(networkError);
-
-      await expect(productsApi.getProductName(testBarcode)).rejects.toThrow(
-        "Network error",
-      );
-    });
-  });
-
-  describe("getProductReducedForCard", () => {
-    it("should fetch reduced product data successfully", async () => {
-      const mockResponse = {
-        status: "success",
-        product: {
-          code: testBarcode,
-          product_name: "Test Product",
-          brands: "Test Brand",
-          quantity: "100g",
-          nutriscore_grade: "c",
-          ecoscore_grade: "b",
-          nova_group: 3,
-          product_type: "food",
-          image_front_small_url: "https://example.com/image.jpg",
-        },
-      };
-
-      mockV3Success(mockResponse);
-
-      const result = await productsApi.getProductReducedForCard(testBarcode);
-
-      expect(result).toEqual(mockResponse);
-      expect(productsApi.rawV3.GET).toHaveBeenCalledWith(
-        "/api/v3/product/{barcode}",
-        {
-          params: {
-            path: { barcode: testBarcode },
-            query: {
-              fields:
-                "image_front_small_url,code,product_name,brands,quantity,nutriscore_grade,ecoscore_grade,nova_group,product_type",
-            },
-          },
-        },
-      );
-    });
-
-    it("should fetch reduced product data with language", async () => {
-      const mockResponse = {
-        status: "success",
-        product: {
-          code: testBarcode,
-          product_name: "Produit Test",
-        },
-      };
-
-      mockV3Success(mockResponse);
-
-      const result = await productsApi.getProductReducedForCard(
-        testBarcode,
-        "fr",
-      );
-
-      expect(result).toEqual(mockResponse);
-      expect(productsApi.rawV3.GET).toHaveBeenCalledWith(
-        "/api/v3/product/{barcode}",
-        {
-          params: {
-            path: { barcode: testBarcode },
-            query: {
-              fields:
-                "image_front_small_url,code,product_name,brands,quantity,nutriscore_grade,ecoscore_grade,nova_group,product_type",
-              lc: "fr",
-            },
-          },
-        },
-      );
-    });
-
-    it("should handle network errors when fetching reduced product data", async () => {
-      mockV3Error(networkError);
-
-      await expect(
-        productsApi.getProductReducedForCard(testBarcode),
-      ).rejects.toThrow("Network error");
     });
   });
 

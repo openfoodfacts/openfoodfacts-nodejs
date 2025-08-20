@@ -400,16 +400,19 @@ export class OpenFoodFacts {
    * ```
    * @returns A promise that resolves to a product object with the specified fields or undefined if not found
    */
-  async getProductV3<T extends Array<keyof ProductV3>>(
+  async getProductV3<T extends Array<keyof ProductV3 | "all">>(
     barcode: string,
     query?: Omit<
-      operationsv3["get-product-by-barcode"]["parameters"]["query"],
+      NonNullable<
+        operationsv3["get-product-by-barcode"]["parameters"]["query"]
+      >,
       "fields"
     > & {
       fields?: T;
     },
   ): Promise<
-    (ResponseStatusV3 & { product: Pick<ProductV3, T[number]> }) | undefined
+    // TODO: Remove once the OpenAPI spec is fixed to replace status_id with status
+    ProductState<Pick<ProductV3, Extract<T[number], keyof ProductV3>>>
   > {
     const res = await this.rawV3.GET("/api/v3/product/{barcode}", {
       params: {
@@ -417,6 +420,10 @@ export class OpenFoodFacts {
         query: { ...query, fields: query?.fields?.join(",") },
       },
     });
+
+    if ("error" in res) {
+      throw new Error(`${res.error}`);
+    }
 
     // @ts-expect-error - OpenAPI is wrong here!
     return res.data;
@@ -647,69 +654,6 @@ export class OpenFoodFacts {
   }
 
   /**
-   * Returns reduced product data suitable for displaying on cards
-   * @param barcode - The barcode of the product
-   * @param lang - Optional language code for localization
-   * @returns A promise that resolves to reduced product data
-   */
-  async getProductReducedForCard(
-    barcode: string,
-    lang?: string,
-  ): Promise<ProductState<ProductReduced>> {
-    const query: Record<string, string> = {
-      fields: REDUCED_FIELDS.join(","),
-    };
-
-    const selectedLang = lang || this.defaultOptions.lang;
-    if (selectedLang) {
-      query.lc = selectedLang;
-    }
-
-    const res = await this.rawV3.GET("/api/v3/product/{barcode}", {
-      params: {
-        path: { barcode },
-        query,
-      },
-    });
-
-    return res.data as ProductState<ProductReduced>;
-  }
-
-  /**
-   * Returns only the product name for a given barcode
-   * @param barcode - The barcode of the product
-   * @param lang - Optional language code for localization
-   * @returns A promise that resolves to the product name or null if not found
-   */
-  async getProductName(
-    barcode: string,
-    lang?: string,
-  ): Promise<Pick<ProductDataType, "product_name"> | null> {
-    const query: Record<string, string> = {
-      fields: "product_name",
-    };
-
-    const selectedLang = lang || this.defaultOptions.lang;
-    if (selectedLang) {
-      query.lc = selectedLang;
-    }
-
-    const res = await this.rawV3.GET("/api/v3/product/{barcode}", {
-      params: {
-        path: { barcode },
-        query,
-      },
-    });
-
-    const productState = res.data as ProductState<
-      Pick<ProductDataType, "product_name">
-    >;
-
-    if (productState?.status !== "success") return null;
-    return productState.product;
-  }
-
-  /**
    * Returns product data using the V2 API
    * @param barcode - The barcode of the product
    * @returns A promise that resolves to the product data or undefined if not found
@@ -839,9 +783,9 @@ export type ProductStateBase = {
 };
 
 export type ProductStateError = {
-  field: { id: string; value: string };
-  impact: { lc_name: string; name: string; id: string };
-  message: { lc_name: string; name: string; id: string };
+  field?: { id?: string; value?: string };
+  impact?: { lc_name?: string; name?: string; id?: string };
+  message?: { lc_name?: string; name?: string; id?: string };
 };
 
 export type ProductStateFailure = ProductStateBase & {
@@ -1027,23 +971,6 @@ export type ProductDataType = ProductDataSection & {
   };
   lang: string;
 };
-
-const REDUCED_FIELDS = [
-  "image_front_small_url",
-  "code",
-  "product_name",
-  "brands",
-  "quantity",
-  "nutriscore_grade",
-  "ecoscore_grade",
-  "nova_group",
-  "product_type",
-] as const;
-
-export type ProductReduced = Pick<
-  ProductDataType,
-  (typeof REDUCED_FIELDS)[number]
->;
 
 // By default, use v2
 export { ProductV2 as Product, SearchResultV2 as SearchResult };

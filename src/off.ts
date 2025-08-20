@@ -41,6 +41,7 @@ export type SearchResultV2 = componentsv2["schemas"]["search_for_products"];
 export type OpenFoodFactsOptions = {
   type?: BackendType;
   country?: string;
+  language?: string;
   host?: string;
 
   accessToken?: string;
@@ -74,7 +75,7 @@ export class OpenFoodFacts {
    */
   constructor(
     fetch: typeof global.fetch,
-    options: OpenFoodFactsOptions = { country: "world" },
+    options: OpenFoodFactsOptions = { country: "world", language: "en" },
   ) {
     this.validateOptions(options);
     this.backendType = options.type;
@@ -83,7 +84,7 @@ export class OpenFoodFacts {
     this.accessToken = options.accessToken;
     this.fetch = this.createFetchWrapper(fetch, options);
     this.defaultOptions = {
-      lang: options.country,
+      lang: options.language,
       country: options.country,
       username: undefined,
       password: undefined,

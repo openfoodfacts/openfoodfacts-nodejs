@@ -32,6 +32,8 @@ import {
   TaxoNode,
   Taxonomy,
 } from "./taxonomy/types";
+import { FacetResponse, FacetSortOption, FacetValueResponse } from "./facets";
+import { KnowledgePanel } from "./knowledgepanels";
 
 export type ProductV2 = componentsv2["schemas"]["Product"];
 export type ProductV3 = componentsv3["schemas"]["product_v3"];
@@ -742,6 +744,37 @@ export class OpenFoodFacts {
     return Object.keys(images);
   }
 
+  async getFacet(
+    facet: string,
+    opts?: { page?: number; pageSize?: number; sortBy?: FacetSortOption },
+  ): Promise<FacetResponse> {
+    const params = new URLSearchParams();
+    if (opts?.page) params.set("page", `${opts.page}`);
+    if (opts?.pageSize) params.set("page_size", `${opts.pageSize}`);
+    if (opts?.sortBy) params.set("sort_by", opts.sortBy);
+
+    const res = await this.fetch(
+      `${this.baseUrl}/facets/${facet}.json?${params}`,
+    );
+    return await res.json();
+  }
+
+  async getFacetValue(
+    facet: string,
+    value: string,
+    opts: { page?: number; pageSize?: number; sortBy?: FacetSortOption },
+  ): Promise<FacetValueResponse> {
+    const params = new URLSearchParams();
+    if (opts?.page) params.set("page", `${opts.page}`);
+    if (opts?.pageSize) params.set("page_size", `${opts.pageSize}`);
+    if (opts?.sortBy) params.set("sort_by", opts.sortBy);
+
+    const res = await this.fetch(
+      `${this.baseUrl}/facets/${facet}/${value}.json?${params}`,
+    );
+    return await res.json();
+  }
+
   private getProductNameInLang(product: ProductDataType, lang: string) {
     return product[`product_name_${lang}`] ?? product.product_name;
   }
@@ -903,7 +936,7 @@ export type ProductDataSection = {
 };
 
 export type ProductDataType = ProductDataSection & {
-  knowledge_panels: Record<string, any>;
+  knowledge_panels: Record<string, KnowledgePanel>;
   product_name: string;
   [lang: LangProduct]: string;
   _id: string;

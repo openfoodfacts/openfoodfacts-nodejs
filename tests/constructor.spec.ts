@@ -64,38 +64,38 @@ describe("OpenFoodFacts Constructor", () => {
         host: "https://custom.example.com",
       });
       // We can't directly access baseUrl, but we can verify it's working by checking the client exists
-      expect(client.rawV2).toBeDefined();
-      expect(client.rawV3).toBeDefined();
+      expect(client.apiv2.client).toBeDefined();
+      expect(client.apiv3.client).toBeDefined();
     });
 
     it("should create URL from backend type", () => {
       const client = new OpenFoodFacts(mockFetch, {
         type: BackendType.OBF,
       });
-      expect(client.rawV2).toBeDefined();
-      expect(client.rawV3).toBeDefined();
+      expect(client.apiv2.client).toBeDefined();
+      expect(client.apiv3.client).toBeDefined();
     });
 
     it("should create URL from country", () => {
       const client = new OpenFoodFacts(mockFetch, {
         country: "fr",
       });
-      expect(client.rawV2).toBeDefined();
-      expect(client.rawV3).toBeDefined();
+      expect(client.apiv2.client).toBeDefined();
+      expect(client.apiv3.client).toBeDefined();
     });
 
     it("should default to world.openfoodfacts.org when no options provided", () => {
       const client = new OpenFoodFacts(mockFetch);
-      expect(client.rawV2).toBeDefined();
-      expect(client.rawV3).toBeDefined();
+      expect(client.apiv2.client).toBeDefined();
+      expect(client.apiv3.client).toBeDefined();
     });
 
     it("should handle undefined country gracefully", () => {
       const client = new OpenFoodFacts(mockFetch, {
         country: undefined,
       });
-      expect(client.rawV2).toBeDefined();
-      expect(client.rawV3).toBeDefined();
+      expect(client.apiv2.client).toBeDefined();
+      expect(client.apiv3.client).toBeDefined();
     });
   });
 
@@ -340,7 +340,7 @@ describe("OpenFoodFacts Constructor", () => {
         host: "https://test.example.com",
       });
 
-      expect(client.rawV2).toBeDefined();
+      expect(client.apiv2.client).toBeDefined();
     });
 
     it("should initialize robotoff client", () => {
@@ -373,7 +373,7 @@ describe("OpenFoodFacts Constructor", () => {
         onAccessTokenExpired: () => Promise.resolve("new-token"),
       });
 
-      expect(client.rawV2).toBeDefined();
+      expect(client.apiv2.client).toBeDefined();
 
       await client.getAdditives();
 

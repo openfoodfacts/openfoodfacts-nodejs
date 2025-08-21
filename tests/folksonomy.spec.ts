@@ -23,27 +23,34 @@ describe("Folksonomy Wrapper", () => {
 
   describe("Keys", () => {
     it("should fetch keys successfully", async () => {
-      const data = [{ k: "test-key", count: 1, values: 1 }];
-      fetchMock.mockResolvedValue(mockResponse(data));
+      const mockData = [{ k: "test-key", count: 1, values: 1 }];
+      fetchMock.mockResolvedValue(mockResponse(mockData));
 
-      const result = await client.getKeys();
-      expect(result).toEqual(data);
+      const { data, error } = await client.getKeys();
+      expect(error).toBeUndefined();
+      expect(data).toEqual(mockData);
     });
 
     it("should handle error when fetching keys", async () => {
       fetchMock.mockResolvedValue(mockResponse(null, false, 500));
 
-      expect(await client.getKeys()).toBeNull;
+      const { data, error } = await client.getKeys();
+      expect(data).toBeUndefined();
+      expect(error).toBeDefined();
     });
   });
 
   describe("Products", () => {
     it("should fetch products successfully", async () => {
-      const data = [{ product: 1, k: "Test Product", v: "Test Value" }];
-      fetchMock.mockResolvedValue(mockResponse(data));
+      const mockData = [{ product: 1, k: "Test Product", v: "Test Value" }];
+      fetchMock.mockResolvedValue(mockResponse(mockData));
 
-      const result = await client.getProducts("test-key", "test-value");
-      expect(result).toEqual(data);
+      const { data, error } = await client.getProducts(
+        "test-key",
+        "test-value",
+      );
+      expect(error).toBeUndefined();
+      expect(data).toEqual(mockData);
     });
 
     it("should handle error when fetching products", async () => {
@@ -66,7 +73,7 @@ describe("Folksonomy Wrapper", () => {
       fetchMock.mockResolvedValue(mockResponse("ok", true, 200));
 
       const error = await client.putTag(tagData);
-      expect(error).toBeNull();
+      expect(error).toBeUndefined();
     });
 
     it("should handle error when putting tag", async () => {
@@ -110,7 +117,7 @@ describe("Folksonomy Wrapper", () => {
       fetchMock.mockResolvedValue(mockResponse("ok", true, 200));
 
       const error = await client.addTag(tagData);
-      expect(error).toBeNull();
+      expect(error).toBeUndefined();
     });
 
     it("should handle error when adding tag", async () => {
@@ -140,7 +147,7 @@ describe("Folksonomy Wrapper", () => {
       fetchMock.mockResolvedValue(mockResponse("ok", true, 200));
 
       const error = await client.removeTag(tagData);
-      expect(error).toBeNull();
+      expect(error).toBeUndefined();
     });
 
     it("should handle error when removing tag", async () => {
@@ -161,20 +168,21 @@ describe("Folksonomy Wrapper", () => {
 
   describe("Authentication", () => {
     it("should login successfully", async () => {
-      const data = { access_token: "test-token", token_type: "Bearer" };
-      fetchMock.mockResolvedValue(mockResponse(data));
+      const responseData = { access_token: "test-token", token_type: "Bearer" };
+      fetchMock.mockResolvedValue(mockResponse(responseData));
 
-      const result = await client.login("test-user", "test-password");
-      expect(result).toEqual({ token: data });
+      const { data, error } = await client.login("test-user", "test-password");
+
+      expect(error).toBeUndefined();
+      expect(data).toEqual(responseData);
     });
 
     it("should handle error when logging in", async () => {
       fetchMock.mockResolvedValue(mockResponse(null, false, 401));
 
-      const result = await client.login("test-user", "test-password");
-      expect(result).toEqual({
-        error: { detail: [{ msg: "Status code 401", type: "error", loc: [] }] },
-      });
+      const { data, error } = await client.login("test-user", "test-password");
+      expect(data).toBeUndefined();
+      expect(error).toBeDefined();
     });
   });
 

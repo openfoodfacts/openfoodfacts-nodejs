@@ -286,6 +286,148 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/admin/property/check-clash": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Check Property Clash
+         * @description Check for potential clashes when renaming a property
+         *
+         *     Returns information about products that would be affected by the rename:
+         *     - **old_property**: The current property name
+         *     - **new_property**: The target property name
+         *
+         *     Returns counts and list of conflicting products where both properties exist
+         */
+        post: operations["check_property_clash_admin_property_check_clash_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/admin/property/rename": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Rename Property
+         * @description Rename a property across all products
+         *
+         *     When renaming a property that already exists:
+         *     - If both properties have the same value: keep one entry
+         *     - If both properties have different values: keep the original property's value
+         *
+         *     - **old_property**: The current property name
+         *     - **new_property**: The target property name
+         */
+        post: operations["rename_property_admin_property_rename_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/admin/property": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /**
+         * Delete Property
+         * @description Delete a property from all products
+         *
+         *     - **property**: The property name to delete
+         */
+        delete: operations["delete_property_admin_property_delete"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/user/me": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get User Info
+         * @description Get current user roles (admin, moderator, user)
+         */
+        get: operations["get_user_info_user_me_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/admin/value/replace": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Replace Value
+         * @description Replace a value for a specific property across all products
+         *
+         *     - **property**: The property name
+         *     - **old_value**: The value to replace
+         *     - **new_value**: The new value
+         */
+        post: operations["replace_value_admin_value_replace_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/admin/value": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /**
+         * Delete Value
+         * @description Delete a specific value for a property from all products
+         *
+         *     - **property**: The property name
+         *     - **value**: The value to delete
+         */
+        delete: operations["delete_value_admin_value_delete"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -383,6 +525,36 @@ export interface components {
              */
             comment: string | null;
         };
+        /** PropertyClashCheck */
+        PropertyClashCheck: {
+            /** Products With Both */
+            products_with_both: number;
+            /** Products With Old Only */
+            products_with_old_only: number;
+            /** Products With New Only */
+            products_with_new_only: number;
+            /** Conflicting Products */
+            conflicting_products: unknown[];
+        };
+        /** PropertyClashCheckRequest */
+        PropertyClashCheckRequest: {
+            /** Old Property */
+            old_property: string;
+            /** New Property */
+            new_property: string;
+        };
+        /** PropertyDeleteRequest */
+        PropertyDeleteRequest: {
+            /** Property */
+            property: string;
+        };
+        /** PropertyRenameRequest */
+        PropertyRenameRequest: {
+            /** Old Property */
+            old_property: string;
+            /** New Property */
+            new_property: string;
+        };
         /** TokenResponse */
         TokenResponse: {
             /** Access Token */
@@ -405,6 +577,22 @@ export interface components {
             v: string;
             /** Product Count */
             product_count: number;
+        };
+        /** ValueDeleteRequest */
+        ValueDeleteRequest: {
+            /** Property */
+            property: string;
+            /** Value */
+            value: string;
+        };
+        /** ValueRenameRequest */
+        ValueRenameRequest: {
+            /** Property */
+            property: string;
+            /** Old Value */
+            old_value: string;
+            /** New Value */
+            new_value: string;
         };
     };
     responses: never;
@@ -440,9 +628,7 @@ export interface operations {
             query?: never;
             header?: never;
             path?: never;
-            cookie?: {
-                session?: string | null;
-            };
+            cookie?: never;
         };
         requestBody: {
             content: {
@@ -854,6 +1040,191 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["PingResponse"];
+                };
+            };
+        };
+    };
+    check_property_clash_admin_property_check_clash_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PropertyClashCheckRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PropertyClashCheck"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    rename_property_admin_property_rename_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PropertyRenameRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    delete_property_admin_property_delete: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PropertyDeleteRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_user_info_user_me_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
+            };
+        };
+    };
+    replace_value_admin_value_replace_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ValueRenameRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    delete_value_admin_value_delete: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ValueDeleteRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
                 };
             };
         };

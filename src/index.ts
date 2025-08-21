@@ -5,5 +5,7 @@ export * from "./prices";
 export * from "./nutripatrol";
 export * from "./search";
 export * from "./off";
+export * from "./types";
+export * from "./knowledgepanels";
 
 export { default } from "./off";

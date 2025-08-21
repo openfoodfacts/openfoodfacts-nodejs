@@ -291,7 +291,7 @@ export interface components {
              * @description Additional parameters when using  a sort script in sort_by.
              *                 If the sort script needs parameters, you can only be used the POST method.
              */
-            sort_params?: Record<string, never> | null;
+            sort_params?: Record<string, unknown> | null;
             /**
              * Index Id
              * @description Index ID to use for the search, if not provided, the default index is used.
@@ -302,7 +302,7 @@ export interface components {
         /** SearchResponseDebug */
         SearchResponseDebug: {
             /** Query */
-            query: Record<string, never>;
+            query: Record<string, unknown>;
         };
         /** SearchResponseError */
         SearchResponseError: {
@@ -314,16 +314,16 @@ export interface components {
         /** SuccessSearchResponse */
         SuccessSearchResponse: {
             /** Hits */
-            hits: Record<string, never>[];
+            hits: Record<string, unknown>[];
             /** Aggregations */
-            aggregations?: Record<string, never> | null;
+            aggregations?: Record<string, unknown> | null;
             /** Facets */
             facets?: {
                 [key: string]: components["schemas"]["FacetInfo"];
             } | null;
             /** Charts */
             charts?: {
-                [key: string]: Record<string, never>;
+                [key: string]: Record<string, unknown>;
             } | null;
             /** Page */
             page: number;

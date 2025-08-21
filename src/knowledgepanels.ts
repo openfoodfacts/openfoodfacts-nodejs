@@ -30,7 +30,7 @@ export type KnowledgeElement =
   | KnowledgeActionElement
   | KnowledgeMapElement;
 
-interface KnowledgeElementBase {
+export interface KnowledgeElementBase {
   element_type: string;
 }
 

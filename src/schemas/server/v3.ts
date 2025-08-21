@@ -585,7 +585,7 @@ export interface components {
             categories_tags?: components["schemas"]["indexed_taxonomy_tag_entry"][];
             checkers_tags?: string[];
             cities?: string;
-            cities_tags?: Record<string, never>[];
+            cities_tags?: Record<string, unknown>[];
             correctors_tags?: string[];
             /** @description List of countries where the product is sold.
              *      */
@@ -607,7 +607,7 @@ export interface components {
              */
             emb_codes?: string;
             emb_codes_orig?: string;
-            emb_codes_tags?: Record<string, never>[];
+            emb_codes_tags?: Record<string, unknown>[];
             labels?: string;
             labels_hierarchy?: string[];
             labels_lc?: string;
@@ -789,7 +789,7 @@ export interface components {
                  *     Older uploaded images that may correspond to older revisions of the product are also kept in this list.
                  *
                  */
-                uploaded?: Record<string, never>;
+                uploaded?: Record<string, unknown>;
                 /** @description List of all images selected by users or manufacturers.
                  *     Those images are typically displayed to users, and are used in edit mode to crop images with specific information
                  *     for specific languages. (See images.uploaded)
@@ -801,7 +801,7 @@ export interface components {
              * @description URLs of selected images, generated at runtime.
              *
              */
-            selected_images?: Record<string, never>;
+            selected_images?: Record<string, unknown>;
             /** @description An array of tags entries to indicated the year, month and day of the last image upload (in formats YYYY, YYYY-MM, YYYY-MM-DD).
              *      */
             last_image_dates_tags?: string[];
@@ -911,7 +911,7 @@ export interface components {
                 };
                 agribalyse?: components["schemas"]["agribalyse"];
                 grade?: string;
-                grades?: Record<string, never>;
+                grades?: Record<string, unknown>;
                 missing?: {
                     labels?: number;
                     origins?: number;
@@ -924,12 +924,12 @@ export interface components {
                     agribalyse?: components["schemas"]["agribalyse"];
                 };
                 score?: number;
-                scores?: Record<string, never>;
+                scores?: Record<string, unknown>;
                 status?: string;
             };
             ecoscore_extended_data_version?: string;
             environment_impact_level?: string;
-            environment_impact_level_tags?: Record<string, never>[];
+            environment_impact_level_tags?: Record<string, unknown>[];
         };
         /**
          * ingredients
@@ -978,7 +978,7 @@ export interface components {
             ingredients_analysis_tags?: string[];
             ingredients_from_or_that_may_be_from_palm_oil_n?: number;
             ingredients_from_palm_oil_n?: number;
-            ingredients_from_palm_oil_tags?: Record<string, never>[];
+            ingredients_from_palm_oil_tags?: Record<string, unknown>[];
             ingredients_hierarchy?: string[];
             ingredients_n?: number;
             ingredients_n_tags?: string[];
@@ -1021,7 +1021,7 @@ export interface components {
              */
             ingredients_text_with_allergens?: string;
             ingredients_that_may_be_from_palm_oil_n?: number;
-            ingredients_that_may_be_from_palm_oil_tags?: Record<string, never>[];
+            ingredients_that_may_be_from_palm_oil_tags?: Record<string, unknown>[];
             ingredients_with_specified_percent_n?: number;
             ingredients_with_specified_percent_sum?: number;
             ingredients_with_unspecified_percent_n?: number;
@@ -1030,9 +1030,9 @@ export interface components {
             /** @description Origins of ingredients
              *      */
             origins?: string;
-            origins_hierarchy?: Record<string, never>[];
+            origins_hierarchy?: Record<string, unknown>[];
             origins_lc?: string;
-            origins_tags?: Record<string, never>[];
+            origins_tags?: Record<string, unknown>[];
             /** @description List of substances that might cause allergies
              *     that are present in trace amounts in the product
              *     (this does not include the ingredients, as they
@@ -1040,9 +1040,9 @@ export interface components {
              *     It is taxonomized with the allergens taxonomy. Refer to the [allergens taxonomy](https://static.openfoodfacts.org/data/taxonomies/allergens.json)
              *      */
             traces?: string;
-            traces_hierarchy?: (Record<string, never> | string)[];
+            traces_hierarchy?: (Record<string, unknown> | string)[];
             traces_lc?: string;
-            traces_tags?: (Record<string, never> | string)[];
+            traces_tags?: (Record<string, unknown> | string)[];
             unknown_ingredients_n?: number;
         };
         product_nutrition_properties: {
@@ -1062,41 +1062,12 @@ export interface components {
              * @enum {string}
              */
             per?: "100g" | "100ml" | "serving";
-            /**
-             * @description The nutrition data on the package can be per serving, per 100g or per 100ml.
-             *     When the data is given per serving,
-             *     the actual quantity that defines one serving may vary between products
-             *     and is stored in this field.
-             *
-             *     This is essential to understand to which quantity values in `nutrients` apply for.
-             *
-             *     For example, if the label states "per 250g", then this field should be *250*.
-             *
-             * @example 250
-             */
-            per_quantity?: number;
-            /**
-             * @description The nutrition data on the package can be per serving, per 100g or per 100ml.
-             *     When the data is given per serving,
-             *     the actual unit that defines one serving may vary between products
-             *     and is stored in this field.
-             *
-             *     This is essential to understand to which quantity values in `nutrients` apply for.
-             *
-             *     For example, if the label states "per 250g", then this field should be *g*.
-             *
-             * @example g
-             */
-            per_unit?: string;
         };
         /** @description Quantity of a nutrient
          *
          *     (per 100g, per 100ml or per serving) in a standard unit (g or ml)
          *      */
-        product_nutrient_values: {
-            /** @description A string representing the value of the quantity.
-             *      */
-            value_string?: string;
+        nutrient_values_v3_base: {
             /** @description A normalized float value for the quantity, computed from `value_string` if it exists.
              *      */
             value?: number;
@@ -1140,6 +1111,9 @@ export interface components {
              * @enum {string}
              */
             source_per?: "100g" | "100ml" | "serving";
+            /** @description Index of the source nutrient set in the input_sets array of the nutrition field
+             *      */
+            source_index?: number;
         };
         nutrients_v3_with_source: {
             /** @description All known nutrients for the product.
@@ -1156,43 +1130,43 @@ export interface components {
                  *
                  *     (per 100g or per serving) in kj
                  *      */
-                energy?: components["schemas"]["product_nutrient_values"] & components["schemas"]["nutrients_source_v3"];
+                energy?: components["schemas"]["nutrient_values_v3_base"] & components["schemas"]["nutrients_source_v3"];
                 /** @description energy in kcal, if it is specified
                  *
                  *     (per 100g or per serving) in a standard unit (g or ml)
                  *      */
-                energy_kcal?: components["schemas"]["product_nutrient_values"] & components["schemas"]["nutrients_source_v3"];
+                energy_kcal?: components["schemas"]["nutrient_values_v3_base"] & components["schemas"]["nutrients_source_v3"];
                 /** @description energy in kj, if it is specified
                  *
                  *     (per 100g or per serving) in a standard unit (g or ml)
                  *      */
-                energy_kj?: components["schemas"]["product_nutrient_values"] & components["schemas"]["nutrients_source_v3"];
-                fat?: components["schemas"]["product_nutrient_values"] & components["schemas"]["nutrients_source_v3"];
-                "saturated-fat"?: components["schemas"]["product_nutrient_values"] & components["schemas"]["nutrients_source_v3"];
-                "trans-fat"?: components["schemas"]["product_nutrient_values"] & components["schemas"]["nutrients_source_v3"];
-                cholesterol?: components["schemas"]["product_nutrient_values"] & components["schemas"]["nutrients_source_v3"];
-                salt?: components["schemas"]["product_nutrient_values"] & components["schemas"]["nutrients_source_v3"];
-                sodium?: components["schemas"]["product_nutrient_values"] & components["schemas"]["nutrients_source_v3"];
+                energy_kj?: components["schemas"]["nutrient_values_v3_base"] & components["schemas"]["nutrients_source_v3"];
+                fat?: components["schemas"]["nutrient_values_v3_base"] & components["schemas"]["nutrients_source_v3"];
+                "saturated-fat"?: components["schemas"]["nutrient_values_v3_base"] & components["schemas"]["nutrients_source_v3"];
+                "trans-fat"?: components["schemas"]["nutrient_values_v3_base"] & components["schemas"]["nutrients_source_v3"];
+                cholesterol?: components["schemas"]["nutrient_values_v3_base"] & components["schemas"]["nutrients_source_v3"];
+                salt?: components["schemas"]["nutrient_values_v3_base"] & components["schemas"]["nutrients_source_v3"];
+                sodium?: components["schemas"]["nutrient_values_v3_base"] & components["schemas"]["nutrients_source_v3"];
                 /** @description This is the available carbohydrates (excluding fiber), also known as net carbohydrates
                  *
                  *     (per 100g, per 100ml or per serving) in a standard unit (g or ml)
                  *      */
-                carbohydrates?: components["schemas"]["product_nutrient_values"] & components["schemas"]["nutrients_source_v3"];
+                carbohydrates?: components["schemas"]["nutrient_values_v3_base"] & components["schemas"]["nutrients_source_v3"];
                 /** @description This follows the US / Canada definition of carbohydrates which includes fiber, also known as gross carbohydrates
                  *
                  *     (per 100g, per 100ml or per serving) in a standard unit (g or ml)
                  *      */
-                "carbohydrates-total"?: components["schemas"]["product_nutrient_values"] & components["schemas"]["nutrients_source_v3"];
-                fiber?: components["schemas"]["product_nutrient_values"] & components["schemas"]["nutrients_source_v3"];
-                sugars?: components["schemas"]["product_nutrient_values"] & components["schemas"]["nutrients_source_v3"];
-                "added-sugars"?: components["schemas"]["product_nutrient_values"] & components["schemas"]["nutrients_source_v3"];
-                proteins?: components["schemas"]["product_nutrient_values"] & components["schemas"]["nutrients_source_v3"];
-                "vitamin-d"?: components["schemas"]["product_nutrient_values"] & components["schemas"]["nutrients_source_v3"];
-                calcium?: components["schemas"]["product_nutrient_values"] & components["schemas"]["nutrients_source_v3"];
-                iron?: components["schemas"]["product_nutrient_values"] & components["schemas"]["nutrients_source_v3"];
-                potassium?: components["schemas"]["product_nutrient_values"] & components["schemas"]["nutrients_source_v3"];
+                "carbohydrates-total"?: components["schemas"]["nutrient_values_v3_base"] & components["schemas"]["nutrients_source_v3"];
+                fiber?: components["schemas"]["nutrient_values_v3_base"] & components["schemas"]["nutrients_source_v3"];
+                sugars?: components["schemas"]["nutrient_values_v3_base"] & components["schemas"]["nutrients_source_v3"];
+                "added-sugars"?: components["schemas"]["nutrient_values_v3_base"] & components["schemas"]["nutrients_source_v3"];
+                proteins?: components["schemas"]["nutrient_values_v3_base"] & components["schemas"]["nutrients_source_v3"];
+                "vitamin-d"?: components["schemas"]["nutrient_values_v3_base"] & components["schemas"]["nutrients_source_v3"];
+                calcium?: components["schemas"]["nutrient_values_v3_base"] & components["schemas"]["nutrients_source_v3"];
+                iron?: components["schemas"]["nutrient_values_v3_base"] & components["schemas"]["nutrients_source_v3"];
+                potassium?: components["schemas"]["nutrient_values_v3_base"] & components["schemas"]["nutrients_source_v3"];
             } & {
-                [key: string]: components["schemas"]["product_nutrient_values"] & {
+                [key: string]: components["schemas"]["nutrient_values_v3_base"] & {
                     /** @description Indicates the original source like “packaging”, “manufacturer”, “estimate”, “usda”
                      *      */
                     source?: string;
@@ -1202,6 +1176,15 @@ export interface components {
                 };
             };
         };
+        /** @description Quantity of a nutrient
+         *
+         *     (per 100g, per 100ml or per serving) in a standard unit (g or ml)
+         *      */
+        nutrient_values_v3_with_value_string: {
+            /** @description A string representing the value of the quantity.
+             *      */
+            value_string?: string;
+        } & components["schemas"]["nutrient_values_v3_base"];
         nutrients_v3_base: {
             /** @description All known nutrients for the product.
              *
@@ -1217,43 +1200,43 @@ export interface components {
                  *
                  *     (per 100g or per serving) in kj
                  *      */
-                energy?: components["schemas"]["product_nutrient_values"];
+                energy?: components["schemas"]["nutrient_values_v3_with_value_string"];
                 /** @description energy in kcal, if it is specified
                  *
                  *     (per 100g or per serving) in a standard unit (g or ml)
                  *      */
-                energy_kcal?: components["schemas"]["product_nutrient_values"];
+                energy_kcal?: components["schemas"]["nutrient_values_v3_with_value_string"];
                 /** @description energy in kj, if it is specified
                  *
                  *     (per 100g or per serving) in a standard unit (g or ml)
                  *      */
-                energy_kj?: components["schemas"]["product_nutrient_values"];
-                fat?: components["schemas"]["product_nutrient_values"];
-                "saturated-fat"?: components["schemas"]["product_nutrient_values"];
-                "trans-fat"?: components["schemas"]["product_nutrient_values"];
-                cholesterol?: components["schemas"]["product_nutrient_values"];
-                salt?: components["schemas"]["product_nutrient_values"];
-                sodium?: components["schemas"]["product_nutrient_values"];
+                energy_kj?: components["schemas"]["nutrient_values_v3_with_value_string"];
+                fat?: components["schemas"]["nutrient_values_v3_with_value_string"];
+                "saturated-fat"?: components["schemas"]["nutrient_values_v3_with_value_string"];
+                "trans-fat"?: components["schemas"]["nutrient_values_v3_with_value_string"];
+                cholesterol?: components["schemas"]["nutrient_values_v3_with_value_string"];
+                salt?: components["schemas"]["nutrient_values_v3_with_value_string"];
+                sodium?: components["schemas"]["nutrient_values_v3_with_value_string"];
                 /** @description This follows the US / Canada definition of carbohydrates which includes fiber, also known as gross carbohydrates
                  *
                  *     (per 100g, per 100ml or per serving) in a standard unit (g or ml)
                  *      */
-                "carbohydrates-total"?: components["schemas"]["product_nutrient_values"];
+                "carbohydrates-total"?: components["schemas"]["nutrient_values_v3_with_value_string"];
                 /** @description This is the available carbohydrates (excluding fiber), also known as net carbohydrates
                  *
                  *     (per 100g, per 100ml or per serving) in a standard unit (g or ml)
                  *      */
-                carbohydrates?: components["schemas"]["product_nutrient_values"];
-                fiber?: components["schemas"]["product_nutrient_values"];
-                sugars?: components["schemas"]["product_nutrient_values"];
-                "added-sugars"?: components["schemas"]["product_nutrient_values"];
-                proteins?: components["schemas"]["product_nutrient_values"];
-                "vitamin-d"?: components["schemas"]["product_nutrient_values"];
-                calcium?: components["schemas"]["product_nutrient_values"];
-                iron?: components["schemas"]["product_nutrient_values"];
-                potassium?: components["schemas"]["product_nutrient_values"];
+                carbohydrates?: components["schemas"]["nutrient_values_v3_with_value_string"];
+                fiber?: components["schemas"]["nutrient_values_v3_with_value_string"];
+                sugars?: components["schemas"]["nutrient_values_v3_with_value_string"];
+                "added-sugars"?: components["schemas"]["nutrient_values_v3_with_value_string"];
+                proteins?: components["schemas"]["nutrient_values_v3_with_value_string"];
+                "vitamin-d"?: components["schemas"]["nutrient_values_v3_with_value_string"];
+                calcium?: components["schemas"]["nutrient_values_v3_with_value_string"];
+                iron?: components["schemas"]["nutrient_values_v3_with_value_string"];
+                potassium?: components["schemas"]["nutrient_values_v3_with_value_string"];
             } & {
-                [key: string]: components["schemas"]["product_nutrient_values"];
+                [key: string]: components["schemas"]["nutrient_values_v3_with_value_string"];
             };
         };
         /** Product Nutrition Data */
@@ -1265,12 +1248,13 @@ export interface components {
              *     See [how to add nutrition data](https://openfoodfacts.github.io/openfoodfacts-server/api/ref-cheatsheet/#add-nutrition-facts-values-units-and-base)
              *      */
             nutrition?: {
-                /** @description A set that combines nutrient data from preferred sources, with normalized units.
+                /** @description A set that combines nutrient data from preferred sources, with normalized units,
+                 *     and for a normalized 100g or 100ml quantity.
                  *
                  *     It takes values from multiple sources (by priority: manufacturer, packaging, usda, estimate)
                  *     and normalizes all values to the same unit: g for weights, kJ for energy and energy-kj, kcal for energy-kcal.
                  *      */
-                nutrient_set_preferred?: components["schemas"]["product_nutrition_properties"] & components["schemas"]["nutrients_v3_with_source"];
+                aggregated_set?: components["schemas"]["product_nutrition_properties"] & components["schemas"]["nutrients_v3_with_source"];
                 /** @description An array of nutrient sets of the product.
                  *
                  *     Each nutrient set represents a version of the nutrition facts, defined by a combination of:
@@ -1280,13 +1264,41 @@ export interface components {
                  *
                  *     This structure allows capturing multiple nutritional profiles for a single product.
                  *      */
-                nutrient_sets?: (components["schemas"]["nutrients_v3_base"] & components["schemas"]["product_nutrition_properties"] & {
+                input_sets?: (components["schemas"]["nutrients_v3_base"] & components["schemas"]["product_nutrition_properties"] & {
+                    /**
+                     * @description The nutrition data on the package can be per serving, per 100g or per 100ml.
+                     *     When the data is given per serving,
+                     *     the actual quantity that defines one serving may vary between products
+                     *     and is stored in this field.
+                     *
+                     *     This is essential to understand to which quantity values in `nutrients` apply for.
+                     *
+                     *     For example, if the label states "per 250g", then this field should be *250*.
+                     *
+                     * @example 250
+                     */
+                    per_quantity?: number;
+                    /**
+                     * @description The nutrition data on the package can be per serving, per 100g or per 100ml.
+                     *     When the data is given per serving,
+                     *     the actual unit that defines one serving may vary between products
+                     *     and is stored in this field.
+                     *
+                     *     This is essential to understand to which quantity values in `nutrients` apply for.
+                     *
+                     *     For example, if the label states "per 250g", then this field should be *g*.
+                     *
+                     * @example g
+                     */
+                    per_unit?: string;
                     /** @description The nutrition data of products can be obtained through several sources.
                      *      */
                     source?: string;
                     /** @description A description of the source used for this nutrition set.
                      *
                      *     This provides more information on how and when the source was used.
+                     *
+                     *     This property is optional.
                      *      */
                     source_description?: string;
                     /** @description A timestamp indicating when this nutrition set was last updated.
@@ -1465,11 +1477,11 @@ export interface components {
         product_extended: {
             additives_original_tags?: string[];
             additives_prev_original_tags?: string[];
-            added_countries_tags?: Record<string, never>[];
+            added_countries_tags?: Record<string, unknown>[];
             allergens_from_ingredients?: string;
             allergens_from_user?: string;
-            amino_acids_prev_tags?: Record<string, never>[];
-            amino_acids_tags?: Record<string, never>[];
+            amino_acids_prev_tags?: Record<string, unknown>[];
+            amino_acids_tags?: Record<string, unknown>[];
             carbon_footprint_percent_of_known_ingredients?: number;
             categories_properties?: {
                 "agribalyse_food_code:en"?: string;
@@ -1494,9 +1506,9 @@ export interface components {
             /** @description link to the product on the website of the producer
              *      */
             link?: string;
-            main_countries_tags?: Record<string, never>[];
-            minerals_prev_tags?: Record<string, never>[];
-            minerals_tags?: Record<string, never>[];
+            main_countries_tags?: Record<string, unknown>[];
+            minerals_prev_tags?: Record<string, unknown>[];
+            minerals_tags?: Record<string, unknown>[];
             /** @description Those are fields provided by the producer (through producers platform),
              *     and the value he provided.
              *      */
@@ -1504,14 +1516,14 @@ export interface components {
                 /** @description you can retrieve all kind of properties, the same as on the parent object (the product).
                  *     It's not processed entries (like tags for example) but raw ones.
                  *      */
-                additionalProperties?: number | string | Record<string, never>;
+                additionalProperties?: number | string | Record<string, unknown>;
             };
             /** @description Detail of ingredients or processing that makes the products having Nova 3 or 4
              *      */
             nova_groups_markers?: {
                 [key: string]: string[][];
             };
-            nucleotides_tags?: Record<string, never>[];
+            nucleotides_tags?: Record<string, unknown>[];
             origin?: string;
             /**
              * @description Country, state, or city where the product can be purchased.
@@ -1549,10 +1561,10 @@ export interface components {
             informers_tags?: string[];
             interface_version_created?: string;
             interface_version_modified?: string;
-            languages?: Record<string, never>;
+            languages?: Record<string, unknown>;
             /** @description Same as `languages` but by language code, instead of language tags
              *      */
-            languages_codes?: Record<string, never>;
+            languages_codes?: Record<string, unknown>;
             languages_hierarchy?: string[];
             languages_tags?: string[];
             last_edit_dates_tags?: string[];
@@ -1585,7 +1597,7 @@ export interface components {
             sources?: {
                 fields?: string[];
                 id?: string;
-                images?: Record<string, never>[];
+                images?: Record<string, unknown>[];
                 import_t?: number;
                 manufacturer?: number | string;
                 name?: string;
@@ -1718,7 +1730,7 @@ export interface components {
             /** @description The ids of the panels to include. The ids are the keys of the panels in the panels object returned in the knowledge_panels field. */
             panel_ids?: string[];
             /** @description An image related to the panel group (e.g. the ingredients or nutrition facts image for the ingredients and nutrition panel groups). */
-            image?: Record<string, never>;
+            image?: Record<string, unknown>;
         };
         /**
          * table_element
@@ -2136,7 +2148,7 @@ export interface operations {
                     password?: string;
                     product?: components["schemas"]["product_update_api_v3"];
                 };
-                "application/xml": Record<string, never>;
+                "application/xml": Record<string, unknown>;
             };
         };
         responses: {
@@ -2194,7 +2206,7 @@ export interface operations {
                      *      */
                     selected?: components["schemas"]["ImagesSelected"];
                 };
-                "application/xml": Record<string, never>;
+                "application/xml": Record<string, unknown>;
             };
         };
         responses: {
@@ -2220,7 +2232,7 @@ export interface operations {
                                  * @description List with only the image just uploaded by the user. The key is the image id (imgid) and the value is an object with the image data.
                                  *
                                  */
-                                uploaded?: Record<string, never>;
+                                uploaded?: Record<string, unknown>;
                             };
                         };
                     };
@@ -2358,7 +2370,7 @@ export interface operations {
                             knowledge_panels?: components["schemas"]["panels"];
                         };
                     };
-                    "application/xml": Record<string, never>;
+                    "application/xml": Record<string, unknown>;
                 };
             };
         };

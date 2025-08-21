@@ -7,24 +7,47 @@ This is the official JS/TS SDK for the Open Food Facts API.
 
 ## Installation
 
-### Development version
+### From NPM
 
 ```shell
-npm install git+https://github.com/openfoodfacts/openfoodfacts-nodejs.git
-# or
-yarn add git+https://github.com/openfoodfacts/openfoodfacts-nodejs.git
-# or
-pnpm add git+https://github.com/openfoodfacts/openfoodfacts-nodejs.git
+npm install @openfoodfacts/openfoodfacts-nodejs
 ```
 
-#### Example code snippet:
+### Using the latest git version
+
+```shell
+npm install git+https://github.com/openfoodfacts/openfoodfacts-js.git
+```
+
+## Usage
+
+> [!WARNING]
+> Be sure to read the [Open Food Facts API documentation](https://openfoodfacts.github.io/openfoodfacts-server/) to understand how the API should be used and what data is available **BEFORE** starting to use the SDK.
+
+Import the SDK in your project and create a client instance:
 
 ```ts
-import OpenFoodFacts from "openfoodfacts-nodejs";
+import OpenFoodFacts from "@openfoodfacts/openfoodfacts-nodejs";
 
-const client = new OpenFoodFacts();
-client.getProduct("5000112546415").then((it) => console.log(it));
+// if you're on the browser, you can pass the fetch function as a parameter
+const client = new OpenFoodFacts(window.fetch);
+
+// or if you're on Node.js, you can pass the global fetch function
+const client = new OpenFoodFacts(globalThis.fetch);
+
+// or if you're using a custom fetch implementation
+import fetch from "node-fetch";
+const client = new OpenFoodFacts(fetch);
+
+// then you can use the client to access the Open Food Facts API
+client.getProduct("5000112546415").then((product) => {
+  console.log(product);
+});
 ```
+
+- See the [Open Food Facts API documentation](https://openfoodfacts.github.io/openfoodfacts-server/) for more details on the API endpoints.
+
+- See the [SDK auto generated documentation](https://openfoodfacts.github.io/openfoodfacts-js/) for a complete list of available methods and classes.
 
 ## Development
 
@@ -58,4 +81,6 @@ When submitting a PR, please use the [angular commit guideline](https://github.c
 
 If you use this SDK, feel free to open a PR to add your application in this list.
 
-- openfoodfacts-explorer : https://github.com/openfoodfacts/openfoodfacts-explorer
+- openfoodfacts-explorer : https://github.com/openfoodfacts/openfoodfacts-explorer uses this to create the future JS frontend of Open Food Facts
+- openfoodfacts-webcomponents : https://github.com/openfoodfacts/openfoodfacts-webcomponents uses this to create reusable Open Food Facts components (used by all of our web frontends, Hunger Games)
+- Hunger Games

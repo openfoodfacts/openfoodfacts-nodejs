@@ -1,5 +1,53 @@
 # Changelog
 
+## [2.0.0-alpha.12](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.11...v2.0.0-alpha.12) (2025-08-20)
+
+
+### Features
+
+* **api:** add Facets Knowledge Panel API and Facets types ([db99d62](https://github.com/openfoodfacts/openfoodfacts-js/commit/db99d620391361884008d1e3548326c64a0471c4))
+* **api:** add KnowledgePanel types and elements structure ([04b9199](https://github.com/openfoodfacts/openfoodfacts-js/commit/04b9199f649c73e8b8df6c911e8e6e95b4fbf447))
+* **api:** add methods to fetch facet and facet values ([f35ed4d](https://github.com/openfoodfacts/openfoodfacts-js/commit/f35ed4da422f064f742fa489dfaec26c9301aad4))
+* implement facet api ([402cf24](https://github.com/openfoodfacts/openfoodfacts-js/commit/402cf24fa3af848ea325411bf40f106fcfbcb366))
+
+
+### Bug Fixes
+
+* add language option to OpenFoodFactsOptions and constructor defaults ([a8d9c15](https://github.com/openfoodfacts/openfoodfacts-js/commit/a8d9c15a0114e16d5e3c8abf3d8c511b7e0b6f97))
+* **test:** do not specify return type if not needed ([d28c691](https://github.com/openfoodfacts/openfoodfacts-js/commit/d28c691d27c134b6688072ba72df642eadab34b1))
+
+
+### Miscellaneous Chores
+
+* bump version to 2.0.0-alpha.12 ([3d64d4e](https://github.com/openfoodfacts/openfoodfacts-js/commit/3d64d4e65bb66727dafa5fd8fede73edc3292d9f))
+
+## [2.0.0-alpha.11](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.10...v2.0.0-alpha.11) (2025-08-12)
+
+
+### Features
+
+* implement image edit api ([#675](https://github.com/openfoodfacts/openfoodfacts-js/issues/675)) ([f86e0c8](https://github.com/openfoodfacts/openfoodfacts-js/commit/f86e0c88f1aa22dd32ce623c09db4ac04bb19f23))
+
+
+### Miscellaneous Chores
+
+* bump version to 2.0.0-alpha.11 ([0fe67be](https://github.com/openfoodfacts/openfoodfacts-js/commit/0fe67beab1527842e00a5537da088088fee9d973))
+
+## [2.0.0-alpha.10](https://github.com/openfoodfacts/openfoodfacts-nodejs/compare/v2.0.0-alpha.9...v2.0.0-alpha.10) (2025-08-02)
+
+
+### Features
+
+* add getAttributeGroups method ([9c0f72b](https://github.com/openfoodfacts/openfoodfacts-nodejs/commit/9c0f72b6647d3673ef0aa85a5523bd1e01ee3b51))
+* api to get attribute-groups ([#669](https://github.com/openfoodfacts/openfoodfacts-nodejs/issues/669)) ([934030f](https://github.com/openfoodfacts/openfoodfacts-nodejs/commit/934030fb6031ec920958eeba57a5a37e67ecf616))
+* moved products api to off.ts and added functions used in explorer ([#660](https://github.com/openfoodfacts/openfoodfacts-nodejs/issues/660)) ([1f654c6](https://github.com/openfoodfacts/openfoodfacts-nodejs/commit/1f654c60d1d0e4259979216cd88d04de75fde092))
+* streamline api typing generation ([ffafc0a](https://github.com/openfoodfacts/openfoodfacts-nodejs/commit/ffafc0a270910788359d3e9aad4b97bb8f5bd5fd))
+
+
+### Miscellaneous Chores
+
+* bump version to 2.0.0-alpha.10 ([fef12ca](https://github.com/openfoodfacts/openfoodfacts-nodejs/commit/fef12cab2922e18d320de6cb4bb81ff518fa590b))
+
 ## [2.0.0-alpha.9](https://github.com/openfoodfacts/openfoodfacts-nodejs/compare/v2.0.0-alpha.8...v2.0.0-alpha.9) (2025-07-18)
 
 

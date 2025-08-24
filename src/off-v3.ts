@@ -214,7 +214,7 @@ export class ProductOpenerApiV3 {
     }
 
     type ProductStateType<T extends Array<string>> = "all" extends T[number]
-      ? Product
+      ? Product & Pick<Product, Extract<T[number], keyof Product>>
       : Pick<Product, Extract<T[number], keyof Product>>;
 
     return {

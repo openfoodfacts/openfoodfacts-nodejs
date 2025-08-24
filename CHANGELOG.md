@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.0.0-alpha.15](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.14...v2.0.0-alpha.15) (2025-08-24)
+
+
+### Features
+
+* add getValues method to Folksonomy class ([68a4567](https://github.com/openfoodfacts/openfoodfacts-js/commit/68a4567599f65d72d5b051d486e48c32b9e1f7e1))
+
+
+### Bug Fixes
+
+* add build step to Node.js workflow, fix tests setup ([1cd9d71](https://github.com/openfoodfacts/openfoodfacts-js/commit/1cd9d710d4755c96f7f5f3494ba3cf3ced89578b))
+* refactor ProductState type inference in ProductOpenerApiV3 ([4379908](https://github.com/openfoodfacts/openfoodfacts-js/commit/43799086a307272b9b26038d5caf8e920e405c01))
+* try to fix getProductV3 return type pt.2 ([946c825](https://github.com/openfoodfacts/openfoodfacts-js/commit/946c825c3b050c862ce4abe0d64acb07fd189451))
+* try to fix getProductV3 return type pt.3 ([5a8c1b1](https://github.com/openfoodfacts/openfoodfacts-js/commit/5a8c1b19750c747fdf2b70f6f780eeed0f9121e6))
+* Use VERSION constant for User-Agent string ([11341c9](https://github.com/openfoodfacts/openfoodfacts-js/commit/11341c9406a628e24d261131b308f0b970f8cb70))
+
 ## [2.0.0-alpha.14](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.13...v2.0.0-alpha.14) (2025-08-24)
 
 

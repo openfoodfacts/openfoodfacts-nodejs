@@ -21,5 +21,7 @@ for entry in "${apis[@]}"; do
   url=$1
   output=$2
   echo "Generating $output from $url"
-  openapi-typescript "$url" --output "$output"
+  openapi-typescript "$url" \
+    --empty-objects-unknown \
+    --output "$output"
 done

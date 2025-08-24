@@ -795,7 +795,7 @@ export interface components {
             /** @description a JSON structure containing prediction data. It either complements `value` and `value_tag`
              *     with additional data or contains the full prediction data.
              *      */
-            data?: Record<string, never>;
+            data?: Record<string, unknown>;
             /**
              * @description the value tag of the prediction. The use of this field depends of the prediction type,
              *     but it contains most of the time the canonical tag that should be sent to Product Opener.
@@ -961,7 +961,7 @@ export interface operations {
                     "application/json": {
                         /** @enum {string} */
                         status?: "no_questions" | "found";
-                        questions?: Record<string, never>[];
+                        questions?: Record<string, unknown>[];
                     };
                 };
             };
@@ -1020,7 +1020,7 @@ export interface operations {
                     "application/json": {
                         /** @enum {string} */
                         status?: "no_questions" | "found";
-                        questions?: Record<string, never>[];
+                        questions?: Record<string, unknown>[];
                         /** @description The total number of results with the provided filters */
                         count?: number;
                     };
@@ -1106,7 +1106,7 @@ export interface operations {
                     "application/json": {
                         /** @enum {string} */
                         status?: "no_predictions" | "found";
-                        predictions?: Record<string, never>[];
+                        predictions?: Record<string, unknown>[];
                         /** @description The total number of results with the provided filters */
                         count?: number;
                     };
@@ -1236,7 +1236,7 @@ export interface operations {
                      */
                     update?: 0 | 1;
                     /** @description Additional data provided by the user as key-value pairs (required when annotation=2) */
-                    data?: Record<string, never> | null;
+                    data?: Record<string, unknown> | null;
                     /** @description Device identifier for tracking anonymous votes */
                     device_id?: string;
                 };
@@ -1419,7 +1419,7 @@ export interface operations {
                     "application/json": {
                         /** @enum {string} */
                         status?: "no_image_predictions" | "found";
-                        image_predictions?: Record<string, never>[];
+                        image_predictions?: Record<string, unknown>[];
                         /** @description The total number of results with the provided filters */
                         count?: number;
                     };
@@ -1447,7 +1447,7 @@ export interface operations {
                 content: {
                     "application/json": {
                         /** @description Details about requested logos */
-                        logos: Record<string, never>[];
+                        logos: Record<string, unknown>[];
                         /** @description Number of returned results */
                         count: number;
                     };
@@ -1500,7 +1500,7 @@ export interface operations {
                 content: {
                     "application/json": {
                         /** @description Found logos */
-                        logos: Record<string, never>[];
+                        logos: Record<string, unknown>[];
                         /** @description Number of returned results */
                         count: number;
                     };
@@ -1629,11 +1629,11 @@ export interface operations {
                 content: {
                     "application/json": {
                         /** @description Detailed health check results */
-                        message?: Record<string, never>;
+                        message?: Record<string, unknown>;
                         /** @description HTTP status code */
                         status?: number;
                         /** @description Response headers */
-                        headers?: Record<string, never>;
+                        headers?: Record<string, unknown>;
                     };
                 };
             };
@@ -1706,7 +1706,7 @@ export interface operations {
                     "application/json": {
                         /** @enum {string} */
                         status?: "no_images" | "found";
-                        images?: Record<string, never>[];
+                        images?: Record<string, unknown>[];
                         /** @description Total number of results */
                         count?: number;
                     };
@@ -1739,7 +1739,7 @@ export interface operations {
                 };
                 content: {
                     "application/json": {
-                        predictions?: Record<string, never>[];
+                        predictions?: Record<string, unknown>[];
                     };
                 };
             };
@@ -1835,7 +1835,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": Record<string, never>;
+                    "application/json": Record<string, unknown>;
                 };
             };
             /** @description Logo not found */
@@ -1911,7 +1911,7 @@ export interface operations {
                         /** @description Version of the prediction model */
                         model_version: string;
                         /** @description Prediction data */
-                        data: Record<string, never>;
+                        data: Record<string, unknown>;
                         /** @description Server type */
                         server_type?: string;
                     }[];
@@ -1962,7 +1962,7 @@ export interface operations {
                     "application/json": {
                         /** @enum {string} */
                         status?: "no_annotation" | "found";
-                        annotation?: Record<string, never>[];
+                        annotation?: Record<string, unknown>[];
                         /** @description Total number of results */
                         count?: number;
                     };
@@ -1994,7 +1994,7 @@ export interface operations {
                 content: {
                     "application/json": {
                         /** @description Extracted ingredients */
-                        ingredients?: Record<string, never>[];
+                        ingredients?: Record<string, unknown>[];
                     };
                 };
             };
@@ -2178,11 +2178,11 @@ export interface operations {
                             /** @description a dictionary mapping nutrient keys in Open Food Facts format (ex: `fat_100g`) to a dictionary
                              *     containing the detected nutrient value.
                              *      */
-                            nutrients?: Record<string, never>;
+                            nutrients?: Record<string, unknown>;
                             entities?: {
-                                aggregated?: Record<string, never>[];
-                                postprocessed?: Record<string, never>[];
-                                raw?: Record<string, never>[];
+                                aggregated?: Record<string, unknown>[];
+                                postprocessed?: Record<string, unknown>[];
+                                raw?: Record<string, unknown>[];
                             };
                         }[];
                     };

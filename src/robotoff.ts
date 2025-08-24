@@ -4,10 +4,11 @@ import { paths } from "./schemas/robotoff";
 import { DEFAULT_ROBOTOFF_API_URL, USER_AGENT } from "./consts";
 import { formBody } from "./formbody";
 
-type InsightQuery = paths["/insights"]["get"]["parameters"]["query"];
-type InsightResponse =
+export type RobotoffInsightQuery =
+  paths["/insights"]["get"]["parameters"]["query"];
+export type RobotoffInsightResponse =
   paths["/insights"]["get"]["responses"]["200"]["content"]["application/json"];
-type AnnotateBody =
+export type RobotoffAnnotateBody =
   paths["/insights/annotate"]["post"]["requestBody"]["content"]["application/x-www-form-urlencoded"];
 
 export type Question = {
@@ -17,7 +18,7 @@ export type Question = {
   value?: string;
 };
 
-type QuestionsResponse = {
+export type QuestionsResponse = {
   status?: "found" | "no_questions";
   questions?: Question[];
 };
@@ -43,8 +44,8 @@ export class Robotoff {
     });
   }
 
-  async annotate(body: AnnotateBody) {
-    const stringifyValues = (body: AnnotateBody) => {
+  async annotate(body: RobotoffAnnotateBody) {
+    const stringifyValues = (body: RobotoffAnnotateBody) => {
       return Object.fromEntries(
         Object.entries(body).map(([key, value]) => [key, String(value)]),
       );
@@ -75,11 +76,13 @@ export class Robotoff {
   /**
    * Fetches insights based on the provided query.
    *
-   * @param {InsightQuery} query - The query object containing parameters for fetching insights.
-   * @returns {Promise<InsightResponse | undefined>} A promise that resolves to the data from the insights endpoint
+   * @param {RobotoffInsightQuery} query - The query object containing parameters for fetching insights.
+   * @returns {Promise<RobotoffInsightResponse | undefined>} A promise that resolves to the data from the insights endpoint
    *
    */
-  async insights(query: InsightQuery): Promise<InsightResponse | undefined> {
+  async insights(
+    query: RobotoffInsightQuery,
+  ): Promise<RobotoffInsightResponse | undefined> {
     const result = await this.raw.GET("/insights", { params: { query } });
     return result.data;
   }

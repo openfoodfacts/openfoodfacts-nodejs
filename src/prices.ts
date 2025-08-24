@@ -1,12 +1,12 @@
 import createClient from "openapi-fetch";
-import type { paths } from "./schemas/prices";
+import type { components, paths } from "./schemas/prices";
 import { USER_AGENT } from "./consts";
 
-type PricesQuery = paths["/api/v1/prices"]["get"]["parameters"]["query"];
-export type PricesCreate =
-  paths["/api/v1/prices"]["post"]["requestBody"]["content"]["application/json"];
-export type Prices =
-  paths["/api/v1/prices"]["get"]["responses"]["200"]["content"]["application/json"];
+type GetPricesQuery = paths["/api/v1/prices"]["get"]["parameters"]["query"];
+
+export type PricesCreate = components["schemas"]["PriceCreate"];
+export type PaginatedPriceFullList =
+  components["schemas"]["PaginatedPriceFullList"];
 
 const BASE_URL = "https://prices.openfoodfacts.org";
 
@@ -29,7 +29,7 @@ export class PricesApi {
     });
   }
 
-  getPrices(query: PricesQuery) {
+  getPrices(query: GetPricesQuery) {
     return this.client.GET("/api/v1/prices", { params: { query } });
   }
   createPrice(body: PricesCreate) {

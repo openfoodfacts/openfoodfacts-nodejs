@@ -1,5 +1,4 @@
-import { NutriPatrolError } from "../src/error";
-import { Flag, NutriPatrol, Ticket } from "../src/nutripatrol";
+import { NutriPatrol } from "../src";
 import { TestUtils } from "./utils/test-utils";
 
 describe("NutriPatrol Wrapper", () => {
@@ -24,33 +23,40 @@ describe("NutriPatrol Wrapper", () => {
 
   describe("Flags", () => {
     it("should fetch flags successfully", async () => {
-      const data = { flags: [{ id: 1 }] };
-      fetchMock.mockResolvedValue(mockResponse(data));
+      const mockData = { flags: [{ id: 1 }] };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
 
-      const result = await client.getFlags();
-      expect(result).toEqual([{ id: 1 }]);
+      const { data, error } = await client.getFlags();
+      expect(data).toEqual(mockData);
+      expect(error).toBeUndefined();
     });
 
     it("should handle error when fetching flags", async () => {
       fetchMock.mockResolvedValue(mockResponse(null, false, 500));
 
       const result = await client.getFlags();
-      expect((result as NutriPatrolError).error.statusCode).toBe(500);
+      expect(result.response.status).toBe(500);
+      expect(result.error).toBeDefined();
+      expect(result.data).toBeUndefined();
     });
 
     it("should fetch a flag by ID successfully", async () => {
-      const data = { __data__: { id: 1, name: "Test Flag" } };
-      fetchMock.mockResolvedValue(mockResponse(data));
+      const mockData = { __data__: { id: 1, name: "Test Flag" } };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
 
-      const result = await client.getFlagById(1);
-      expect(result).toEqual(data.__data__);
+      const { data, error } = await client.getFlagById(1);
+      expect(data).toEqual(mockData);
+      expect(error).toBeUndefined();
     });
 
     it("should handle error when fetching a flag by ID", async () => {
       fetchMock.mockResolvedValue(mockResponse(null, false, 404));
 
       const result = await client.getFlagById(1);
-      expect((result as NutriPatrolError).error.statusCode).toBe(404);
+      expect(result.data).toBeUndefined();
+
+      expect(result.error).toBeDefined();
+      expect(result.response?.status).toBe(404);
     });
 
     it("should handle error when fetching a flag by a wrong ID", async () => {
@@ -68,14 +74,14 @@ describe("NutriPatrol Wrapper", () => {
       fetchMock.mockResolvedValue(mockResponse(data, false, 422));
 
       const result = await client.getFlagById("wrong-id" as any);
-      expect((result as NutriPatrolError).error.statusCode).toBe(422);
-      expect((result as NutriPatrolError).error.details[0]).toBe(
+      expect(result.response?.status).toBe(422);
+      expect(result.error?.detail?.[0].msg).toBe(
         "Input should be a valid integer, unable to parse string as an integer",
       );
     });
 
     it("should create a flag successfully", async () => {
-      const flagData: Flag = {
+      const flagData = {
         barcode: "barcode-test",
         type: "product",
         url: "url-test",
@@ -84,15 +90,17 @@ describe("NutriPatrol Wrapper", () => {
         created_at: "2024-10-12T15:49:28.485Z",
         user_id: "1",
         source: "web",
-      };
+      } as const;
+
       fetchMock.mockResolvedValue(mockResponse(flagData));
 
-      const result = await client.createFlag(flagData);
-      expect(result).toEqual(flagData);
+      const { data, error } = await client.createFlag(flagData);
+      expect(data).toEqual(flagData);
+      expect(error).toBeUndefined();
     });
 
     it("should handle error when creating a flag", async () => {
-      const data = {
+      const mockData = {
         detail: [
           {
             type: "enum",
@@ -106,9 +114,9 @@ describe("NutriPatrol Wrapper", () => {
           },
         ],
       };
-      fetchMock.mockResolvedValue(mockResponse(data, false, 422));
+      fetchMock.mockResolvedValue(mockResponse(mockData, false, 422));
 
-      const flagData: Flag = {
+      const flagData = {
         barcode: "barcode-test",
         type: "product",
         url: "url-test",
@@ -117,72 +125,55 @@ describe("NutriPatrol Wrapper", () => {
         created_at: "2024-10-12T15:49:28.485Z",
         user_id: "1",
         source: "web",
-      };
+      } as const;
+
       const result = await client.createFlag(flagData);
-      expect((result as NutriPatrolError).error.statusCode).toBe(422);
-      expect((result as NutriPatrolError).error.details[0]).toBe(
+      expect(result.response.status).toBe(422);
+      expect(result.error?.detail?.[0].msg).toBe(
         "Input should be 'product', 'image' or 'search'",
       );
     });
 
     it("should fetch flags by ticket batch successfully", async () => {
-      const data = {
+      const mockData = {
         ticket_id_to_flags: { "1": [{ id: 1, name: "Test Flag" }] },
       };
-      fetchMock.mockResolvedValue(mockResponse(data));
+      fetchMock.mockResolvedValue(mockResponse(mockData));
 
-      const result = await client.getFlagsByTicketBatch([1]);
-      expect(result).toEqual(data.ticket_id_to_flags);
+      const { data, error } = await client.getFlagsByTicketBatch([1]);
+      expect(data).toEqual(mockData);
+      expect(error).toBeUndefined();
     });
 
     it("should handle error when fetching flags by ticket batch", async () => {
       fetchMock.mockResolvedValue(mockResponse(null, false, 500));
 
       const result = await client.getFlagsByTicketBatch([1]);
-      expect((result as NutriPatrolError).error.statusCode).toBe(500);
-    });
-
-    it("should handle malformed API response error", async () => {
-      fetchMock.mockResolvedValue(mockResponse(null, true, 200));
-
-      const result = await client.getFlags();
-      expect((result as NutriPatrolError).error.statusCode).toBe(500);
-      expect((result as NutriPatrolError).error.message).toBe(
-        "Malformed API response",
-      );
-    });
-
-    it("should handle unexpected error occurred", async () => {
-      fetchMock.mockImplementation(() => {
-        throw new Error("Unexpected error");
-      });
-
-      const result = await client.getFlags();
-      expect((result as NutriPatrolError).error.statusCode).toBe(500);
-      expect((result as NutriPatrolError).error.message).toBe(
-        "An unexpected error occurred",
-      );
+      expect(result.data).toBeUndefined();
+      expect(result.response?.status).toBe(500);
     });
   });
 
   describe("Tickets", () => {
     it("should fetch tickets successfully", async () => {
-      const data = { tickets: [{ id: 1, status: "open" }] };
-      fetchMock.mockResolvedValue(mockResponse(data));
+      const mockData = { tickets: [{ id: 1, status: "open" }] };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
 
-      const result = await client.getTickets({ status: "open" });
-      expect(result).toEqual(data.tickets);
+      const { data, error } = await client.getTickets({ status: "open" });
+
+      expect(error).toBeUndefined();
+      expect(data).toEqual(mockData);
     });
 
     it("should handle error when fetching tickets", async () => {
       fetchMock.mockResolvedValue(mockResponse(null, false, 404));
 
       const result = await client.getTickets({ status: "open" });
-      expect((result as NutriPatrolError).error.statusCode).toBe(404);
+      expect(result.response.status).toBe(404);
     });
 
     it("should fetch a ticket by ID successfully", async () => {
-      const ticketData: Ticket = {
+      const ticketData = {
         id: 1,
         barcode: "barcode-test",
         type: "image",
@@ -191,63 +182,25 @@ describe("NutriPatrol Wrapper", () => {
         image_id: "2",
         flavor: "off",
         created_at: "2024-03-25T14:33:41.785848",
-      };
+      } as const;
+
       fetchMock.mockResolvedValue(mockResponse(ticketData));
 
       const result = await client.getTicketById(1);
-      expect(result).toEqual(ticketData);
+      expect(result.error).toBeUndefined();
+      expect(result.data).toEqual(ticketData);
     });
 
     it("should handle error when fetching a ticket by ID", async () => {
       fetchMock.mockResolvedValue(mockResponse(null, false, 500));
 
-      const result = await client.getTicketById(1);
-      expect((result as NutriPatrolError).error.statusCode).toBe(500);
-    });
-
-    it("should create a ticket successfully", async () => {
-      const ticketData: Omit<Ticket, "id"> = {
-        type: "product",
-        barcode: "barcode-test",
-        url: "url-test",
-        status: "open",
-        image_id: "1",
-        flavor: "off",
-      };
-      fetchMock.mockResolvedValue(mockResponse(ticketData));
-
-      const result = await client.createTicket(ticketData);
-      expect(result).toEqual(ticketData);
-    });
-
-    it("should handle error when creating a ticket", async () => {
-      const data = {
-        detail: [
-          {
-            type: "enum",
-            loc: ["body", "status"],
-            msg: "Input should be 'open' or 'closed'",
-            input: "opsen",
-            ctx: {
-              expected: "'open' or 'closed'",
-            },
-            url: "https://errors.pydantic.dev/2.9/v/enum",
-          },
-        ],
-      };
-
-      fetchMock.mockResolvedValue(mockResponse(data, false, 422));
-
-      const ticketData: Ticket = { status: "opsen" } as any;
-      const result = await client.createTicket(ticketData);
-      expect((result as NutriPatrolError).error.statusCode).toBe(422);
-      expect((result as NutriPatrolError).error.details[0]).toBe(
-        "Input should be 'open' or 'closed'",
-      );
+      const { error, response } = await client.getTicketById(1);
+      expect(error).toBeDefined();
+      expect(response?.status).toBe(500);
     });
 
     it("should update a ticket status successfully", async () => {
-      const updatedTicketData: Ticket = {
+      const updatedTicketData = {
         id: 1,
         barcode: "barcode-test",
         type: "product",
@@ -258,32 +211,32 @@ describe("NutriPatrol Wrapper", () => {
       };
       fetchMock.mockResolvedValue(mockResponse(updatedTicketData));
 
-      const result = await client.updateTicketStatus(1, "closed");
-      expect(result).toEqual(updatedTicketData);
+      const { data } = await client.updateTicketStatus(1, "closed");
+      expect(data).toEqual(updatedTicketData);
     });
 
     it("should handle error when updating a ticket status", async () => {
       fetchMock.mockResolvedValue(mockResponse(null, false, 404));
 
-      const result = await client.updateTicketStatus(1, "closed");
-      expect((result as NutriPatrolError).error.statusCode).toBe(404);
+      const { data } = await client.updateTicketStatus(1, "closed");
+      expect(data).toBeUndefined();
     });
   });
 
   describe("API Status", () => {
-    it("should get API status successfully", async () => {
-      const data = { status: "ok" };
-      fetchMock.mockResolvedValue(mockResponse(data));
+    it("should return data when API is up", async () => {
+      const mockData = { status: "ok" };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
 
-      const result = await client.getApiStatus();
-      expect(result).toEqual(data);
+      const { data } = await client.getApiStatus();
+      expect(data).toEqual(mockData);
     });
 
-    it("should handle error when getting API status", async () => {
+    it("should return data == null when API is down", async () => {
       fetchMock.mockResolvedValue(mockResponse(null, false, 500));
 
-      const result = await client.getApiStatus();
-      expect((result as NutriPatrolError).error.statusCode).toBe(500);
+      const { data } = await client.getApiStatus();
+      expect(data).toBeUndefined();
     });
   });
 });

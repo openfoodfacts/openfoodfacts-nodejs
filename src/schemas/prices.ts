@@ -457,6 +457,7 @@ export interface components {
             categories?: string[];
             example_proof_url?: string | null;
             is_published?: boolean;
+            stats?: unknown;
             /** Format: date-time */
             created?: string;
             /** Format: date-time */

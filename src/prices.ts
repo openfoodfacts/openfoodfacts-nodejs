@@ -5,8 +5,7 @@ import { USER_AGENT } from "./consts.js";
 type GetPricesQuery = paths["/api/v1/prices"]["get"]["parameters"]["query"];
 
 export type PricesCreate = components["schemas"]["PriceCreate"];
-export type PaginatedPriceFullList =
-  components["schemas"]["PaginatedPriceFullList"];
+export type PriceFull = components["schemas"]["PriceFull"];
 
 const BASE_URL = "https://prices.openfoodfacts.org";
 
@@ -37,8 +36,7 @@ export class PricesApi {
   }
   login(body: { username: string; password: string }) {
     return this.client.POST("/api/v1/auth", {
-      // @ts-expect-error - The type definition currently specify set_cookie as a boolean which is incorrect.
-      // until that is fixed, we need to use this workaround.
+      // @ts-expect-error - TODO: Wrong OpenAPI spec, there is no set_cookie query param
       params: { query: { set_cookie: 1 } },
       body,
       headers: { "Content-Type": "application/x-www-form-urlencoded" },

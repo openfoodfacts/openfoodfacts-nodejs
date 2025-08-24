@@ -61,6 +61,7 @@
     "openapi-typescript": "^7.6.1",
     "prettier": "^3.5.3",
     "ts-jest": "^29.3.2",
+    "ts-jest-resolver": "^2.0.1",
     "ts-node": "^10.9.2",
     "typedoc": "^0.28.2",
     "typescript": "^5.8.3",

@@ -1,4 +1,4 @@
-export * from "./taxonomy/types";
+export type * from "./taxonomy/types";
 export * from "./robotoff";
 export * from "./folksonomy";
 export * from "./prices";

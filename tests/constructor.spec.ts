@@ -1,4 +1,4 @@
-import OpenFoodFacts from "../src/main";
+import OpenFoodFacts from "../src";
 import { BackendType } from "../src/consts";
 
 describe("OpenFoodFacts Constructor", () => {

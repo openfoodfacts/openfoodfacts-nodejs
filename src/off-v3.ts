@@ -213,13 +213,12 @@ export class ProductOpenerApiV3 {
       return { error, data: undefined };
     }
 
-    type ProductFieldsType =
-      T extends Array<"all">
-        ? Product
-        : Pick<Product, Extract<T[number], keyof Product>>;
+    type ProductStateType<T extends Array<string>> = "all" extends T[number]
+      ? Product
+      : Pick<Product, Extract<T[number], keyof Product>>;
 
     return {
-      data: data as ProductState<ProductFieldsType>,
+      data: data as ProductState<ProductStateType<T>>,
       error: undefined,
     };
   }

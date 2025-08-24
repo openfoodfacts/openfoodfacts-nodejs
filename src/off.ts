@@ -65,6 +65,7 @@ import type {
   ProductState as ProductStateV3,
   ResponseStatus as ResponseStatusV3,
 } from "./off-v3.js";
+import { VERSION } from "./version.js";
 export type {
   ProductDataType,
   ProductImageUploadParamsV3,
@@ -170,14 +171,12 @@ export class OpenFoodFacts {
    * Creates the User-Agent string based on backend type
    */
   private createUserAgent(): string {
-    const version = require("../package.json").version;
-
     if (this.backendType != null) {
       const backendName = BACKEND_NAMES[this.backendType];
-      return `${backendName} - NodeJS ${version}`;
+      return `${backendName} - NodeJS ${VERSION}`;
     }
 
-    return `OpenFoodFacts - NodeJS ${version}`;
+    return `OpenFoodFacts - NodeJS ${VERSION}`;
   }
 
   /**

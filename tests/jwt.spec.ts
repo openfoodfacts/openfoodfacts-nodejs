@@ -1,4 +1,4 @@
-import OpenFoodFacts from "../src/main";
+import OpenFoodFacts from "../src/index";
 
 function mockJWT(token: { exp: number }) {
   const payload = JSON.stringify(token);

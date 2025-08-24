@@ -18,12 +18,20 @@
   "bugs": {
     "url": "https://github.com/openfoodfacts/openfoodfacts-nodejs/issues"
   },
-  "exports": "./dist/main.js",
-  "types": "dist/main.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs",
+      "types": "./dist/types/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
+    "build": "tsc -b tsconfig.cjs.json tsconfig.esm.json",
     "prepack": "yarn run build",
-    "build": "tsc -p tsconfig.build.json",
-    "build:docs": "typedoc src/main.ts",
+    "build:docs": "typedoc src/index.ts",
     "commitmsg": "commitlint -quiet=0 --extends=@commitlint/config-conventional -e",
     "api": "bash scripts/generate-apis.sh",
     "lint": "eslint .",

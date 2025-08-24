@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "forceConsistentCasingInFileNames": true,
+    "rootDir": "./src",
+    "strict": true,
+    "moduleResolution": "node"
+  },
+  "include": ["src"]
+}

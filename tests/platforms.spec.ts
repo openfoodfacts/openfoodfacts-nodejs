@@ -1,5 +1,5 @@
 import { describe, it, expect } from "@jest/globals";
-import { OpenFoodFacts } from "../src/main";
+import { OpenFoodFacts } from "../src";
 import { BackendType, BACKEND_DOMAINS, BACKEND_NAMES } from "../src/consts";
 
 describe("Platform support tests", () => {

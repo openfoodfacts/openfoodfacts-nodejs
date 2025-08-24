@@ -1,13 +1,19 @@
-import type { Config } from "@jest/types";
+import type { Config } from "jest";
+import { createDefaultPreset } from "ts-jest";
 
-const config: Config.InitialOptions = {
+const tsJestTransformCfg = createDefaultPreset({
+  tsconfig: "tsconfig.tests.json",
+}).transform;
+
+const config: Config = {
   preset: "ts-jest",
   testEnvironment: "node",
   roots: ["<rootDir>/tests"],
   verbose: true,
   transform: {
-    "^.+\\.tsx?$": "ts-jest",
+    ...tsJestTransformCfg,
   },
+
   testMatch: ["**/tests/**/*.spec.ts"],
   coverageDirectory: "coverage",
   coverageReporters: ["text", "lcov"],

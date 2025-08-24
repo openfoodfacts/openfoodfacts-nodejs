@@ -5,13 +5,6 @@ import tsParser from "@typescript-eslint/parser";
 
 export default tseslint.config(
   {
-    files: ["**/*.ts"],
-    languageOptions: {
-      parser: tsParser,
-      parserOptions: {
-        project: "./tsconfig.json",
-      },
-    },
     plugins: {
       "@typescript-eslint": tseslint,
     },
@@ -23,6 +16,24 @@ export default tseslint.config(
   {
     languageOptions: {
       globals: { ...globals.browser, ...globals.node, ...globals.jest },
+    },
+  },
+  {
+    files: ["src/**/*.ts"],
+    languageOptions: {
+      parser: tsParser,
+      parserOptions: {
+        project: "./tsconfig.esm.json",
+      },
+    },
+  },
+  {
+    files: ["tests/**/*.ts"],
+    languageOptions: {
+      parser: tsParser,
+      parserOptions: {
+        project: "./tsconfig.tests.json",
+      },
     },
   },
   {

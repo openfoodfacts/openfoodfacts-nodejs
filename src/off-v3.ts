@@ -1,7 +1,12 @@
 import createClient from "openapi-fetch";
 import type { components, operations, paths } from "./schemas/server/v3.js";
 import type { KnowledgePanel } from "./knowledgepanels.js";
-import type { LangIngredient, LangProduct, RawImage, SelectedImage } from "./types.js";
+import type {
+  LangIngredient,
+  LangProduct,
+  RawImage,
+  SelectedImage,
+} from "./types.js";
 
 export type ResponseStatus = components["schemas"]["response_status"];
 export type Product = components["schemas"]["product_v3"];
@@ -208,13 +213,14 @@ export class ProductOpenerApiV3 {
       return { error, data: undefined };
     }
 
+    type ProductFieldsType =
+      T extends Array<"all">
+        ? Product
+        : Pick<Product, Extract<T[number], keyof Product>>;
+
     return {
-      data: data as ProductState<
-        Pick<Product, Extract<T[number], keyof Product>>
-      >,
+      data: data as ProductState<ProductFieldsType>,
       error: undefined,
     };
   }
 }
-
-

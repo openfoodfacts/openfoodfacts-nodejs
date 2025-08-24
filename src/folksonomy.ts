@@ -1,6 +1,6 @@
 import createClient from "openapi-fetch";
 
-import type { paths, components } from "./schemas/folksonomy.js";
+import type { paths, components, operations } from "./schemas/folksonomy.js";
 import { DEFAULT_FOLKSONOMY_API_URL, USER_AGENT } from "./consts.js";
 
 export type FolksonomyTag = components["schemas"]["ProductTag"];
@@ -154,6 +154,15 @@ export class Folksonomy {
     return this.client.POST("/auth", {
       body: { username, password, scope: "email openid" },
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    });
+  }
+
+  async getValues(
+    key: string,
+    opts?: operations["get_unique_values_values__k__get"]["parameters"]["query"],
+  ) {
+    return this.client.GET("/values/{k}", {
+      params: { path: { k: key }, query: opts },
     });
   }
 }

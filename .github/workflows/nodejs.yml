@@ -1,4 +1,4 @@
-name: NodeJS Checks
+name: JS Checks
 
 on:
   push:
@@ -49,22 +49,76 @@ jobs:
       - name: Run tests
         run: yarn test
 
-      # Build documentation only for Node.js 22.x
+  coverage:
+    name: Coverage Report
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Install and enable Corepack
+        run: |
+          npm install -g corepack --force
+          corepack enable
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: "yarn"
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Run tests with coverage
+        run: yarn test --coverage
+
+      - name: Write coverage report to GitHub Summary
+        uses: livewing/lcov-job-summary@v1.2.0
+        with:
+          lcov: "coverage/lcov.info"
+
+  docs:
+    name: Build Docs
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Install and enable Corepack
+        run: |
+          npm install -g corepack --force
+          corepack enable
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: "yarn"
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
       - name: Build documentation
-        if: matrix.node-version == env.STD_NODE_VERSION
         run: yarn build:docs
 
       # Upload documentation artifact (only for Node.js 22.x)
       - name: Upload docs
-        if: matrix.node-version == env.STD_NODE_VERSION
         uses: actions/upload-pages-artifact@v3
         with:
           path: "docs"
 
-  docs:
+  deploy_docs:
     name: Deploy Docs
     runs-on: ubuntu-latest
-    needs: build
+    needs: docs
+
+    # only deploy docs when changes are pushed to the develop branch
     if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
 
     permissions:
@@ -80,33 +134,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
-  coverage:
-    name: Coverage Report
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v5
-
-      - name: Install and enable Corepack
-        run: |
-          npm install -g corepack --force
-          corepack enable
-
-      - name: Setup Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: "yarn"
-
-      - name: Install dependencies
-        run: yarn install --immutable
-
-      - name: Run tests with coverage
-        run: yarn test --coverage
-
-      - name: Write coverage report to GitHub Summary
-        uses: livewing/lcov-job-summary@v1.2.0
-        with:
-          lcov: "coverage/lcov.info"

@@ -1,7 +1,7 @@
 import createClient from "openapi-fetch";
 
-import { paths, components } from "./schemas/folksonomy";
-import { DEFAULT_FOLKSONOMY_API_URL, USER_AGENT } from "./consts";
+import type { paths, components } from "./schemas/folksonomy.js";
+import { DEFAULT_FOLKSONOMY_API_URL, USER_AGENT } from "./consts.js";
 
 export type FolksonomyTag = components["schemas"]["ProductTag"];
 export type FolksonomyKey = {

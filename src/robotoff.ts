@@ -1,8 +1,8 @@
 import createClient from "openapi-fetch";
 
-import { paths } from "./schemas/robotoff";
-import { DEFAULT_ROBOTOFF_API_URL, USER_AGENT } from "./consts";
-import { formBody } from "./formbody";
+import type { paths } from "./schemas/robotoff.js";
+import { DEFAULT_ROBOTOFF_API_URL, USER_AGENT } from "./consts.js";
+import { formBody } from "./formbody.js";
 
 export type RobotoffInsightQuery =
   paths["/insights"]["get"]["parameters"]["query"];

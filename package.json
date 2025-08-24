@@ -4,6 +4,7 @@
   "license": "Apache-2.0",
   "version": "2.0.0-alpha.13",
   "description": "Open Food Facts API NodeJS Wrapper",
+  "type": "module",
   "keywords": [
     "OFF",
     "OpenFoodFacts",

@@ -3,12 +3,12 @@ import {
   BackendType,
   BACKEND_DOMAINS,
   BACKEND_NAMES,
-} from "./consts";
+} from "./consts.js";
 
-import { Robotoff } from "./robotoff";
+import { Robotoff } from "./robotoff.js";
 
-import { TAXONOMY_URL } from "./taxonomy/api";
-import {
+import { TAXONOMY_URL } from "./taxonomy/api.js";
+import type {
   Additive,
   Allergen,
   Brand,
@@ -21,47 +21,61 @@ import {
   Store,
   TaxoNode,
   Taxonomy,
-} from "./taxonomy/types";
+} from "./taxonomy/types.js";
 
-import { RawImage, SelectedImage } from "./types";
+import type { RawImage, SelectedImage } from "./types.js";
 
-import { FacetResponse, FacetSortOption, FacetValueResponse } from "./facets";
-export { FacetResponse, FacetSortOption, FacetValueResponse };
+import type {
+  FacetResponse,
+  FacetSortOption,
+  FacetValueResponse,
+} from "./facets.js";
+export type { FacetResponse, FacetSortOption, FacetValueResponse };
 
 import {
   ProductOpenerApiV2,
+  getProductNameInLang,
+  getProductIngredientsInLang,
+} from "./off-v2.js";
+import { ProductOpenerApiV3 } from "./off-v3.js";
+export { getProductNameInLang, getProductIngredientsInLang };
+
+// Type-only imports and re-exports for off-v2.js
+import type {
   SearchQuery as SearchQueryV2,
   Product as ProductV2,
   SearchResult as SearchResultV2,
   ProductAttribute as ProductAttributeV2,
   Attribute as AttributeV2,
-  getProductNameInLang,
-  getProductIngredientsInLang,
-} from "./off-v2";
-
-export {
+} from "./off-v2.js";
+export type {
+  SearchQueryV2,
   ProductV2,
   SearchResultV2,
   ProductAttributeV2,
   AttributeV2,
-  getProductNameInLang,
-  getProductIngredientsInLang,
 };
 
-import {
+// Type-only imports and re-exports for off-v3.js
+import type {
   ProductDataType,
   ProductImageUploadParams as ProductImageUploadParamsV3,
-  ProductOpenerApiV3,
   ProductQuery as ProductQueryV3,
   Product as ProductV3,
   ProductState as ProductStateV3,
   ResponseStatus as ResponseStatusV3,
-} from "./off-v3";
-
-export { ProductStateV3, ResponseStatusV3, ProductV3 };
+} from "./off-v3.js";
+export type {
+  ProductDataType,
+  ProductImageUploadParamsV3,
+  ProductQueryV3,
+  ProductV3,
+  ProductStateV3,
+  ResponseStatusV3,
+};
 
 // By default, use v2
-export { ProductV2 as Product, SearchResultV2 as SearchResult };
+export type { ProductV2 as Product, SearchResultV2 as SearchResult };
 
 export type OpenFoodFactsOptions = {
   type?: BackendType;

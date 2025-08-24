@@ -1,6 +1,6 @@
 import createClient from "openapi-fetch";
-import type { components, paths } from "./schemas/prices";
-import { USER_AGENT } from "./consts";
+import type { components, paths } from "./schemas/prices.js";
+import { USER_AGENT } from "./consts.js";
 
 type GetPricesQuery = paths["/api/v1/prices"]["get"]["parameters"]["query"];
 

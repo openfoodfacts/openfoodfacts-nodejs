@@ -1,8 +1,8 @@
 import createClient from "openapi-fetch";
 
-import { components, paths } from "./schemas/nutripatrol";
+import type { components, paths } from "./schemas/nutripatrol.js";
 
-import { DEFAULT_NUTRIPATROL_API_URL, USER_AGENT } from "./consts";
+import { DEFAULT_NUTRIPATROL_API_URL, USER_AGENT } from "./consts.js";
 
 export class NutriPatrol {
   private readonly fetch: typeof global.fetch;

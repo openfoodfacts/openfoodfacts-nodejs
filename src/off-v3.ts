@@ -1,7 +1,7 @@
 import createClient from "openapi-fetch";
-import { components, operations, paths } from "./schemas/server/v3";
-import { KnowledgePanel } from "./knowledgepanels";
-import { LangIngredient, LangProduct, RawImage, SelectedImage } from "./types";
+import type { components, operations, paths } from "./schemas/server/v3.js";
+import type { KnowledgePanel } from "./knowledgepanels.js";
+import type { LangIngredient, LangProduct, RawImage, SelectedImage } from "./types.js";
 
 export type ResponseStatus = components["schemas"]["response_status"];
 export type Product = components["schemas"]["product_v3"];
@@ -216,3 +216,5 @@ export class ProductOpenerApiV3 {
     };
   }
 }
+
+

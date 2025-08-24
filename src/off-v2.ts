@@ -1,9 +1,9 @@
 import createClient from "openapi-fetch";
-import { components, operations, paths } from "./schemas/server/v2";
-import { TaxoNode } from "./taxonomy/types";
-import { formData } from "./openapi";
-import { USER_AGENT } from "./consts";
-import { ProductDataType } from "./off-v3";
+import type { components, operations, paths } from "./schemas/server/v2.js";
+import type { TaxoNode } from "./taxonomy/types.js";
+import { formData } from "./openapi.js";
+import { USER_AGENT } from "./consts.js";
+import type { ProductDataType } from "./off-v3.js";
 
 export type SearchQuery = operations["get-search"]["parameters"]["query"];
 export type AttributeGroups = components["schemas"]["get_attribute_groups"];

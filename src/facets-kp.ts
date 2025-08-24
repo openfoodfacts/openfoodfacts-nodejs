@@ -1,6 +1,6 @@
 import createClient from "openapi-fetch";
-import { KnowledgePanel } from "./knowledgepanels";
-import { paths } from "./schemas/facets-kp";
+import type { KnowledgePanel } from "./knowledgepanels.js";
+import type { paths } from "./schemas/facets-kp.js";
 
 export type FacetKnowledgePanelResponse = {
   knowledge_panels: Record<string, KnowledgePanel>;

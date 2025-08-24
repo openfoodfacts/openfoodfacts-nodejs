@@ -1,10 +1,17 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "outDir": "./dist/esm",
+    "module": "nodenext",
+    "target": "ES2020",
+    "moduleResolution": "NodeNext",
+
+    "outDir": "dist/esm",
+
     "declaration": true,
-    "declarationDir": "./dist/types"
+    "declarationDir": "dist/types",
+
+    "declarationMap": true,
+    "sourceMap": true,
+    "verbatimModuleSyntax": true
   }
 }

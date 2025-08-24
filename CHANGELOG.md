@@ -1,5 +1,20 @@
 # Changelog
 
+## [2.0.0-alpha.14](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.13...v2.0.0-alpha.14) (2025-08-24)
+
+
+### Bug Fixes
+
+* auto-generate version.ts and update build process ([66ae03a](https://github.com/openfoodfacts/openfoodfacts-js/commit/66ae03abfa12b1c984569f3774b4afb4e0a1e13a))
+* point export fields to the right paths ([056349c](https://github.com/openfoodfacts/openfoodfacts-js/commit/056349c6ad403c06b3db9d7e80d93dcc04c752dc))
+* replace export with export type to make bundlers work ([4b57979](https://github.com/openfoodfacts/openfoodfacts-js/commit/4b57979e80a361f939bf12c8e17beeda6a51baa7))
+* switch import paths to ES modules ([3bed3ac](https://github.com/openfoodfacts/openfoodfacts-js/commit/3bed3ac1d21c41a60c623f7cff0e7405ff1e0304))
+
+
+### Miscellaneous Chores
+
+* trigger 2.0.0-alpha.14 release ([ac1f117](https://github.com/openfoodfacts/openfoodfacts-js/commit/ac1f11765f9169ea5cde6c1824a572bacc08cece))
+
 ## [2.0.0-alpha.13](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.12...v2.0.0-alpha.13) (2025-08-24)
 
 

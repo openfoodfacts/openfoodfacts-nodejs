@@ -81,10 +81,7 @@ You can also help us by reporting bugs, suggesting improvements or testing new f
 
 When submitting a PR, please use the [angular commit guideline](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#commits).
 
-## Third party applications
+## Using this SDK and Third party applications
 
-If you use this SDK, feel free to open a PR to add your application in this list.
-
-- openfoodfacts-explorer : https://github.com/openfoodfacts/openfoodfacts-explorer uses this to create the future JS frontend of Open Food Facts
-- openfoodfacts-webcomponents : https://github.com/openfoodfacts/openfoodfacts-webcomponents uses this to create reusable Open Food Facts components (used by all of our web frontends, Hunger Games)
-- Hunger Games
+- If you use this SDK, feel free to open a PR to add your application in the list in [REUSERS.md](https://github.com/openfoodfacts/openfoodfacts-js/blob/develop/REUSERS.md)
+- Make sure you comply with the OdBL licence, mentioning the Source of your data, and ensuring to avoid combining non free data you can't release legally as open data. Another requirement is contributing back any product you add using this SDK.

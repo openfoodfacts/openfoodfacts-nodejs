@@ -83,5 +83,5 @@ When submitting a PR, please use the [angular commit guideline](https://github.c
 
 ## Using this SDK and Third party applications
 
-- If you use this SDK, feel free to open a PR to add your application in the list in REUSERS.md
-- Make sure you comply with LICENSE.md, mentioning the Source of your data, and ensuring to avoid combining non free data you can't release legally as open data. Another requirement is contributing back any product you add using this SDK.
+- If you use this SDK, feel free to open a PR to add your application in the list in [REUSERS.md](https://github.com/openfoodfacts/openfoodfacts-js/REUSERS.md)
+- Make sure you comply with [LICENSE.md](https://github.com/openfoodfacts/openfoodfacts-js/LICENSE.md), mentioning the Source of your data, and ensuring to avoid combining non free data you can't release legally as open data. Another requirement is contributing back any product you add using this SDK.

@@ -19,6 +19,8 @@
   "bugs": {
     "url": "https://github.com/openfoodfacts/openfoodfacts-nodejs/issues"
   },
+  "types": "./dist/types/index.d.ts",
+  "main": "./dist/cjs/index.js",
   "exports": {
     ".": {
       "import": "./dist/esm/index.js",

@@ -1,6 +1,6 @@
 import createClient from "openapi-fetch";
 
-import type { paths } from "./schemas/robotoff.js";
+import type { operations, paths } from "./schemas/robotoff.js";
 import { DEFAULT_ROBOTOFF_API_URL, USER_AGENT } from "./consts.js";
 import { formBody } from "./formbody.js";
 
@@ -57,34 +57,30 @@ export class Robotoff {
     });
   }
 
-  async questionsByProductCode(code: number): Promise<QuestionsResponse> {
-    const result = await this.raw.GET("/questions/{barcode}", {
-      params: {
-        path: { barcode: code },
-      },
+  questionsByProductCode(
+    code: number,
+    query?: operations["getQuestionsByBarcode"]["parameters"]["query"],
+  ) {
+    return this.raw.GET("/questions/{barcode}", {
+      params: { path: { barcode: code }, query: query },
     });
-    return result.data as QuestionsResponse;
   }
 
-  async insightDetail(id: string) {
-    const result = await this.raw.GET("/insights/detail/{insight_id}", {
+  insightDetail(id: string) {
+    return this.raw.GET("/insights/detail/{insight_id}", {
       params: { path: { insight_id: id } },
     });
-    return result.data;
   }
 
   /**
    * Fetches insights based on the provided query.
    *
    * @param {RobotoffInsightQuery} query - The query object containing parameters for fetching insights.
-   * @returns {Promise<RobotoffInsightResponse | undefined>} A promise that resolves to the data from the insights endpoint
+   * @returns A promise that resolves to the data from the insights endpoint
    *
    */
-  async insights(
-    query: RobotoffInsightQuery,
-  ): Promise<RobotoffInsightResponse | undefined> {
-    const result = await this.raw.GET("/insights", { params: { query } });
-    return result.data;
+  insights(query: RobotoffInsightQuery) {
+    return this.raw.GET("/insights", { params: { query } });
   }
 
   // TODO: replace any with proper type

@@ -17,6 +17,7 @@ import type {
   Ingredient,
   Label,
   Language,
+  Nutrient,
   State,
   Store,
   TaxoNode,
@@ -348,6 +349,10 @@ export class OpenFoodFacts {
 
   getStores(): Promise<Taxonomy<Store>> {
     return this.getTaxo<Store>("stores");
+  }
+
+  getNutrients(): Promise<Taxonomy<Nutrient>> {
+    return this.getTaxo<Nutrient>("nutrients");
   }
 
   async getTaxo<T extends TaxoNode>(taxo: string): Promise<Taxonomy<T>> {

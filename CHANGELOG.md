@@ -1,5 +1,23 @@
 # Changelog
 
+## [2.0.0-alpha.16](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.15...v2.0.0-alpha.16) (2025-09-01)
+
+
+### Features
+
+* add getNutrients method and update type definitions for nutrient-related entities ([842689a](https://github.com/openfoodfacts/openfoodfacts-js/commit/842689acad469f94cbe6e8de0c7249bb83b9ba8d))
+* export PriceFull type ([c401940](https://github.com/openfoodfacts/openfoodfacts-js/commit/c40194065234d9cfad92d9c0bc5e760a028a9b53))
+
+
+### Bug Fixes
+
+* add missing types and main entry points in package.json ([de6cc4c](https://github.com/openfoodfacts/openfoodfacts-js/commit/de6cc4cbc1a1de91234b9ce20b9eaee9e5ec22cd))
+
+
+### Miscellaneous Chores
+
+* trigger 2.0.0-alpha.16 release ([dacdfe9](https://github.com/openfoodfacts/openfoodfacts-js/commit/dacdfe9aad9f8b1ba89cc6d30d6da2296b300e39))
+
 ## [2.0.0-alpha.15](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.14...v2.0.0-alpha.15) (2025-08-24)
 
 

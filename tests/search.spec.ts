@@ -87,6 +87,16 @@ describe("SearchApi Wrapper", () => {
       expect(result.response.ok).toBe(true);
     });
 
+    it("should fetch products by label successfully", async () => {
+      const label = "en:no-palm-oil";
+      fetchMock.mockResolvedValue(mockResponse({ hits: [] }));
+
+      const result = await client.getProductsByLabel(label);
+      expect(result.data).toBeDefined();
+      expect(result.response).toBeDefined();
+      expect(result.response.ok).toBe(true);
+    });
+
     it("should handle error when performing POST search", async () => {
       const body = {
         q: "test",

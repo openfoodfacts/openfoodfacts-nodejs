@@ -47,6 +47,11 @@ export class SearchApi {
     return this.client.GET("/search", { params: { query } });
   }
 
+  async getProductsByLabel(label: string) {
+    const parsedLabel = label.replace(/"/g, "");
+    return await this.searchGet({ q: `labels_tags:"${parsedLabel}"` });
+  }
+
   async autocomplete(query: AutocompleteQuery) {
     return this.client.GET("/autocomplete", { params: { query } });
   }

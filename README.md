@@ -27,22 +27,26 @@ npm install git+https://github.com/openfoodfacts/openfoodfacts-js.git
 Import the SDK in your project and create a client instance:
 
 ```ts
-import OpenFoodFacts from "@openfoodfacts/openfoodfacts-nodejs";
+import { OpenFoodFacts } from "@openfoodfacts/openfoodfacts-nodejs";
 
 // if you're on the browser, you can pass the fetch function as a parameter
 const client = new OpenFoodFacts(window.fetch);
-
 // or if you're on Node.js, you can pass the global fetch function
 const client = new OpenFoodFacts(globalThis.fetch);
-
 // or if you're using a custom fetch implementation
 import fetch from "node-fetch";
+
 const client = new OpenFoodFacts(fetch);
 
-// then you can use the client to access the Open Food Facts API
-client.getProduct("5000112546415").then((product) => {
-  console.log(product);
-});
+(async () => {
+  // then you can use the client to access the Open Food Facts API
+  const { data, error } = await client.getProduct("5000112546415");
+  if (!data) {
+    console.error("Error fetching product:", error);
+    return;
+  }
+  console.log("Product data:", data);
+})();
 ```
 
 - See the [Open Food Facts API documentation](https://openfoodfacts.github.io/openfoodfacts-server/) for more details on the API endpoints.
@@ -77,10 +81,7 @@ You can also help us by reporting bugs, suggesting improvements or testing new f
 
 When submitting a PR, please use the [angular commit guideline](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#commits).
 
-## Third party applications
+## Using this SDK and Third party applications
 
-If you use this SDK, feel free to open a PR to add your application in this list.
-
-- openfoodfacts-explorer : https://github.com/openfoodfacts/openfoodfacts-explorer uses this to create the future JS frontend of Open Food Facts
-- openfoodfacts-webcomponents : https://github.com/openfoodfacts/openfoodfacts-webcomponents uses this to create reusable Open Food Facts components (used by all of our web frontends, Hunger Games)
-- Hunger Games
+- If you use this SDK, feel free to open a PR to add your application in the list in [REUSERS.md](https://github.com/openfoodfacts/openfoodfacts-js/blob/develop/REUSERS.md)
+- Make sure you comply with the OdBL licence, mentioning the Source of your data, and ensuring to avoid combining non free data you can't release legally as open data. Another requirement is contributing back any product you add using this SDK.

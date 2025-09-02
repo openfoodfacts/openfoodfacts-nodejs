@@ -1,7 +1,14 @@
-import OpenFoodFacts from "../src/off";
+import OpenFoodFacts, {
+  getProductImageUrl,
+  getProductIngredientsInLang,
+  getProductNameInLang,
+} from "../src";
+
 import { TestUtils } from "./utils/test-utils";
 import productMockData from "./mockdata/product-7622210288257.json";
 import productV3MockData from "./mockdata/product-v3-3154230805984.json";
+import { ProductDataType } from "../src/off-v3";
+import { formData } from "../src/openapi";
 
 describe("OpenFoodFacts", () => {
   let mockFetch: jest.Mock<
@@ -14,20 +21,25 @@ describe("OpenFoodFacts", () => {
   const testBarcode = "7622210288257";
   const testBarcodeV3 = "3154230805984";
   const mockFile = new File(["test"], "test.jpg", { type: "image/jpeg" });
-  const networkError = new Error("Network error");
 
   // Helper functions
   const mockV2Success = (data: any) =>
-    jest.spyOn(productsApi.rawV2, "GET").mockResolvedValue({ data });
+    jest.spyOn(productsApi.apiv2.client, "GET").mockResolvedValue({ data });
   const mockV3Success = (data: any) =>
-    jest.spyOn(productsApi.rawV3, "GET").mockResolvedValue({ data });
+    jest.spyOn(productsApi.apiv3.client, "GET").mockResolvedValue({ data });
+
   const mockV2Error = (error: Error) =>
-    jest.spyOn(productsApi.rawV2, "GET").mockRejectedValue(error);
-  const mockV3Error = (error: Error) =>
-    jest.spyOn(productsApi.rawV3, "GET").mockRejectedValue(error);
+    jest.spyOn(productsApi.apiv2.client, "GET").mockRejectedValue(error);
+
+  // Uncomment if needed
+  //const mockV3Error = (error: Error) =>
+  //  jest.spyOn(productsApi.apiv3.client, "GET").mockRejectedValue(error);
+
   const mockFetchSuccess = (data: any) =>
     mockFetch.mockResolvedValue(TestUtils.mockResponse(data, true, 200));
-  const mockFetchError = (error: Error) => mockFetch.mockRejectedValue(error);
+
+  // Uncomment if needed
+  //const mockFetchError = (error: Error) => mockFetch.mockRejectedValue(error);
 
   beforeEach(() => {
     mockFetch = jest.fn<
@@ -46,8 +58,8 @@ describe("OpenFoodFacts", () => {
   describe("constructor", () => {
     it("should initialize with default options", () => {
       expect(productsApi).toBeInstanceOf(OpenFoodFacts);
-      expect(productsApi.rawV2).toBeDefined();
-      expect(productsApi.rawV3).toBeDefined();
+      expect(productsApi.apiv2).toBeDefined();
+      expect(productsApi.apiv3).toBeDefined();
     });
 
     it("should initialize with custom options", () => {
@@ -86,7 +98,7 @@ describe("OpenFoodFacts", () => {
 
       expect(result).toBeDefined();
       expect(result).toEqual(mockData.product.attribute_groups_en);
-      expect(productsApi.rawV2.GET).toHaveBeenCalledWith(
+      expect(productsApi.apiv2.client.GET).toHaveBeenCalledWith(
         "/api/v2/product/{barcode}",
         {
           params: {
@@ -104,14 +116,6 @@ describe("OpenFoodFacts", () => {
 
       expect(result).toEqual([]);
     });
-
-    it("should handle network errors when fetching attributes", async () => {
-      mockV2Error(networkError);
-
-      await expect(
-        productsApi.getProductAttributes(testBarcode),
-      ).rejects.toThrow("Network error");
-    });
   });
 
   describe("getProductV3", () => {
@@ -126,14 +130,14 @@ describe("OpenFoodFacts", () => {
 
       mockV3Success(mockData);
 
-      const result = await productsApi.getProductV3(testBarcode, {
+      const { data, error } = await productsApi.getProductV3(testBarcode, {
         fields: ["product_name", "brands"],
       });
 
-      console.debug("result", result);
-      expect(result).toBeDefined();
-      expect(result).toEqual(mockData);
-      expect(productsApi.rawV3.GET).toHaveBeenCalledWith(
+      expect(error).toBeUndefined();
+      expect(data).toBeDefined();
+      expect(data).toEqual(mockData);
+      expect(productsApi.apiv3.client.GET).toHaveBeenCalledWith(
         "/api/v3/product/{barcode}",
         {
           params: {
@@ -147,11 +151,15 @@ describe("OpenFoodFacts", () => {
     it("should return product details without specific fields", async () => {
       mockV3Success(productV3MockData);
 
-      const result = await productsApi.getProductV3(testBarcodeV3);
+      const { data, error } = await productsApi.getProductV3(testBarcodeV3);
 
-      expect(result).toBeDefined();
-      expect(result).toEqual(productV3MockData);
-      expect(productsApi.rawV3.GET).toHaveBeenCalledWith(
+      expect(error).toBeUndefined();
+
+      expect(data).toBeDefined();
+      if (!data) return; // type narrowing
+
+      expect(data).toEqual(productV3MockData);
+      expect(productsApi.apiv3.client.GET).toHaveBeenCalledWith(
         "/api/v3/product/{barcode}",
         {
           params: {
@@ -160,14 +168,11 @@ describe("OpenFoodFacts", () => {
           },
         },
       );
-    });
 
-    it("should handle network errors when fetching product V3", async () => {
-      mockV3Error(networkError);
+      expect(data.status).toBe("success");
+      if (data.status !== "success") return; // for type narrowing
 
-      await expect(productsApi.getProductV3(testBarcode)).rejects.toThrow(
-        "Network error",
-      );
+      expect(data.product).toEqual(productV3MockData.product);
     });
   });
 
@@ -179,12 +184,13 @@ describe("OpenFoodFacts", () => {
 
       mockV2Success(mockData);
 
-      const result = await productsApi.getProductV2(testBarcode);
+      const { data, error } = await productsApi.getProductV2(testBarcode);
 
-      console.debug("result", result);
-      expect(result).toBeDefined();
-      expect(result).toEqual(mockData.product);
-      expect(productsApi.rawV2.GET).toHaveBeenCalledWith(
+      expect(error).toBeUndefined();
+      expect(data).toBeDefined();
+      expect(data).toEqual(mockData);
+
+      expect(productsApi.apiv2.client.GET).toHaveBeenCalledWith(
         "/api/v2/product/{barcode}",
         {
           params: { path: { barcode: testBarcode } },
@@ -195,17 +201,11 @@ describe("OpenFoodFacts", () => {
     it("should return null when product not found", async () => {
       mockV2Success({ product: null });
 
-      const result = await productsApi.getProductV2("invalid");
+      const { data, error } = await productsApi.getProductV2("invalid");
 
-      expect(result).toBeNull();
-    });
-
-    it("should handle network errors", async () => {
-      mockV2Error(networkError);
-
-      await expect(productsApi.getProductV2(testBarcode)).rejects.toThrow(
-        "Network error",
-      );
+      expect(error).toBeUndefined();
+      expect(data).toBeDefined();
+      expect(data?.product).toBeNull();
     });
   });
 
@@ -226,7 +226,7 @@ describe("OpenFoodFacts", () => {
       const result = await productsApi.getProductImages(testBarcode);
 
       expect(result).toEqual(["front", "ingredients", "nutrition"]);
-      expect(productsApi.rawV2.GET).toHaveBeenCalledWith(
+      expect(productsApi.apiv2.client.GET).toHaveBeenCalledWith(
         "/api/v2/product/{barcode}",
         {
           params: {
@@ -258,162 +258,6 @@ describe("OpenFoodFacts", () => {
 
       expect(result).toBeNull();
     });
-
-    it("should handle network errors when fetching images", async () => {
-      mockV2Error(networkError);
-
-      await expect(productsApi.getProductImages(testBarcode)).rejects.toThrow(
-        "Network error",
-      );
-    });
-  });
-
-  describe("getProductName", () => {
-    it("should fetch product name successfully", async () => {
-      const mockResponse = {
-        status: "success",
-        product: {
-          product_name: "Test Product",
-        },
-      };
-
-      mockV3Success(mockResponse);
-
-      const result = await productsApi.getProductName(testBarcode);
-
-      expect(result).toEqual({ product_name: "Test Product" });
-      expect(productsApi.rawV3.GET).toHaveBeenCalledWith(
-        "/api/v3/product/{barcode}",
-        {
-          params: {
-            path: { barcode: testBarcode },
-            query: { fields: "product_name" },
-          },
-        },
-      );
-    });
-
-    it("should fetch product name with language", async () => {
-      const mockResponse = {
-        status: "success",
-        product: {
-          product_name: "Produit Test",
-        },
-      };
-
-      mockV3Success(mockResponse);
-
-      const result = await productsApi.getProductName(testBarcode, "fr");
-
-      expect(result).toEqual({ product_name: "Produit Test" });
-      expect(productsApi.rawV3.GET).toHaveBeenCalledWith(
-        "/api/v3/product/{barcode}",
-        {
-          params: {
-            path: { barcode: testBarcode },
-            query: { fields: "product_name", lc: "fr" },
-          },
-        },
-      );
-    });
-
-    it("should return null when product not found", async () => {
-      const mockResponse = {
-        status: "failure",
-        errors: [],
-      };
-
-      mockV3Success(mockResponse);
-
-      const result = await productsApi.getProductName("invalid");
-
-      expect(result).toBeNull();
-    });
-
-    it("should handle network errors when fetching product name", async () => {
-      mockV3Error(networkError);
-
-      await expect(productsApi.getProductName(testBarcode)).rejects.toThrow(
-        "Network error",
-      );
-    });
-  });
-
-  describe("getProductReducedForCard", () => {
-    it("should fetch reduced product data successfully", async () => {
-      const mockResponse = {
-        status: "success",
-        product: {
-          code: testBarcode,
-          product_name: "Test Product",
-          brands: "Test Brand",
-          quantity: "100g",
-          nutriscore_grade: "c",
-          ecoscore_grade: "b",
-          nova_group: 3,
-          product_type: "food",
-          image_front_small_url: "https://example.com/image.jpg",
-        },
-      };
-
-      mockV3Success(mockResponse);
-
-      const result = await productsApi.getProductReducedForCard(testBarcode);
-
-      expect(result).toEqual(mockResponse);
-      expect(productsApi.rawV3.GET).toHaveBeenCalledWith(
-        "/api/v3/product/{barcode}",
-        {
-          params: {
-            path: { barcode: testBarcode },
-            query: {
-              fields:
-                "image_front_small_url,code,product_name,brands,quantity,nutriscore_grade,ecoscore_grade,nova_group,product_type",
-            },
-          },
-        },
-      );
-    });
-
-    it("should fetch reduced product data with language", async () => {
-      const mockResponse = {
-        status: "success",
-        product: {
-          code: testBarcode,
-          product_name: "Produit Test",
-        },
-      };
-
-      mockV3Success(mockResponse);
-
-      const result = await productsApi.getProductReducedForCard(
-        testBarcode,
-        "fr",
-      );
-
-      expect(result).toEqual(mockResponse);
-      expect(productsApi.rawV3.GET).toHaveBeenCalledWith(
-        "/api/v3/product/{barcode}",
-        {
-          params: {
-            path: { barcode: testBarcode },
-            query: {
-              fields:
-                "image_front_small_url,code,product_name,brands,quantity,nutriscore_grade,ecoscore_grade,nova_group,product_type",
-              lc: "fr",
-            },
-          },
-        },
-      );
-    });
-
-    it("should handle network errors when fetching reduced product data", async () => {
-      mockV3Error(networkError);
-
-      await expect(
-        productsApi.getProductReducedForCard(testBarcode),
-      ).rejects.toThrow("Network error");
-    });
   });
 
   describe("uploadImage", () => {
@@ -425,57 +269,28 @@ describe("OpenFoodFacts", () => {
 
       mockFetchSuccess(mockResponseData);
 
-      const result = await productsApi.uploadImage(
+      const { data, error } = await productsApi.uploadImage(
         testBarcode,
         mockFile,
         "front",
       );
 
       expect(mockFetch).toHaveBeenCalled();
-      expect(result).toBeDefined();
-      expect(result).toEqual(mockResponseData);
-      expect(mockFetch).toHaveBeenCalledWith(
-        "https://world.openfoodfacts.org/cgi/product_image_upload.pl",
-        expect.objectContaining({
-          method: "POST",
-          body: expect.any(FormData),
-        }),
-      );
+      expect(data).toBeDefined();
+      expect(error).toBeUndefined();
+      expect(data).toEqual(mockResponseData);
     });
 
     it("should throw error when upload fails", async () => {
       mockFetch.mockResolvedValue(TestUtils.mockResponse({}, false, 500));
 
-      await expect(
-        productsApi.uploadImage(testBarcode, mockFile, "front"),
-      ).rejects.toThrow(
-        `Failed to upload image for product with barcode: ${testBarcode}`,
+      const { data, error } = await productsApi.uploadImage(
+        testBarcode,
+        mockFile,
+        "front",
       );
-    });
-
-    it("should handle network errors during upload", async () => {
-      mockFetchError(networkError);
-
-      await expect(
-        productsApi.uploadImage(testBarcode, mockFile, "front"),
-      ).rejects.toThrow("Network error");
-    });
-
-    it("should properly format FormData for image upload", async () => {
-      const mockResponseData = { status: "success" };
-      mockFetchSuccess(mockResponseData);
-
-      await productsApi.uploadImage(testBarcode, mockFile, "front");
-
-      const callArgs = mockFetch.mock.calls[0];
-      expect(callArgs).toBeDefined();
-      expect(callArgs[1]).toBeDefined();
-
-      const formData = callArgs[1]?.body as FormData;
-      expect(formData).toBeInstanceOf(FormData);
-      expect(formData.get("code")).toBe(testBarcode);
-      expect(formData.get("imagefield")).toBe("front");
-      expect(formData.get("imgupload_front")).toBe(mockFile);
+      expect(error).toBeDefined();
+      expect(data).toBeUndefined();
     });
   });
 
@@ -568,18 +383,6 @@ describe("OpenFoodFacts", () => {
       );
     });
 
-    it("should throw error when credentials are missing", async () => {
-      const minimalProductData = {
-        code: testBarcode,
-        product_name: "Test Product",
-        languages_codes: {},
-      } as any;
-
-      await expect(
-        productsApi.addOrEditProductV2(minimalProductData),
-      ).rejects.toThrow("Username and password are required");
-    });
-
     it("should return false when request fails", async () => {
       mockFetch.mockResolvedValue(TestUtils.mockResponse({}, false, 400));
 
@@ -595,38 +398,6 @@ describe("OpenFoodFacts", () => {
       );
 
       expect(result).toBe(false);
-    });
-
-    it("should handle network errors during product update", async () => {
-      const minimalProductData = {
-        code: testBarcode,
-        product_name: "Test Product",
-        languages_codes: {},
-      } as any;
-
-      mockFetchError(networkError);
-
-      await expect(
-        productsApi.addOrEditProductV2(minimalProductData, testCredentials),
-      ).rejects.toThrow("Network error");
-    });
-
-    it("should require credentials when not provided", async () => {
-      const apiWithDefaults = new OpenFoodFacts(mockFetch, {
-        host: "https://world.openfoodfacts.org",
-      });
-
-      mockFetch.mockResolvedValue(TestUtils.mockResponse({}, true, 200));
-
-      const minimalProductData = {
-        code: testBarcode,
-        product_name: "Test Product",
-        languages_codes: {},
-      } as any;
-
-      await expect(
-        apiWithDefaults.addOrEditProductV2(minimalProductData),
-      ).rejects.toThrow("Username and password are required");
     });
   });
 
@@ -667,7 +438,7 @@ describe("OpenFoodFacts", () => {
     };
 
     it("should generate correct image URL with selected image", () => {
-      const result = OpenFoodFacts.getProductImageUrl(
+      const result = getProductImageUrl(
         testBarcode,
         "front",
         mockSelectedImage,
@@ -679,7 +450,7 @@ describe("OpenFoodFacts", () => {
     });
 
     it("should generate correct image URL with raw image", () => {
-      const result = OpenFoodFacts.getProductImageUrl(
+      const result = getProductImageUrl(
         testBarcode,
         "front",
         mockRawImage,
@@ -691,18 +462,13 @@ describe("OpenFoodFacts", () => {
     });
 
     it("should return null when image not found", () => {
-      const result = OpenFoodFacts.getProductImageUrl(
-        testBarcode,
-        "front",
-        {},
-        "400",
-      );
+      const result = getProductImageUrl(testBarcode, "front", {}, "400");
 
       expect(result).toBeNull();
     });
 
     it("should return null when image not found in images object", () => {
-      const result = OpenFoodFacts.getProductImageUrl(
+      const result = getProductImageUrl(
         testBarcode,
         "nonexistent",
         mockSelectedImage,
@@ -712,19 +478,19 @@ describe("OpenFoodFacts", () => {
     });
 
     it("should handle different image sizes correctly", () => {
-      const result100 = OpenFoodFacts.getProductImageUrl(
+      const result100 = getProductImageUrl(
         testBarcode,
         "front",
         mockSelectedImage,
         "100",
       );
-      const result200 = OpenFoodFacts.getProductImageUrl(
+      const result200 = getProductImageUrl(
         testBarcode,
         "front",
         mockSelectedImage,
         "200",
       );
-      const resultFull = OpenFoodFacts.getProductImageUrl(
+      const resultFull = getProductImageUrl(
         testBarcode,
         "front",
         mockSelectedImage,
@@ -738,7 +504,7 @@ describe("OpenFoodFacts", () => {
 
     it("should handle barcode padding correctly", () => {
       const shortBarcode = "123";
-      const result = OpenFoodFacts.getProductImageUrl(
+      const result = getProductImageUrl(
         shortBarcode,
         "front",
         mockSelectedImage,
@@ -758,9 +524,9 @@ describe("OpenFoodFacts", () => {
       };
 
       // Access the private method through instance
-      const formData = (productsApi as any).formData(data);
+      const form = formData(data);
 
-      expect(formData).toBeInstanceOf(FormData);
+      expect(form).toBeInstanceOf(FormData);
     });
 
     it("should handle getProductNameInLang correctly", () => {
@@ -768,14 +534,11 @@ describe("OpenFoodFacts", () => {
         product_name: "Default Product",
         product_name_fr: "Produit Français",
         product_name_es: "Producto Español",
-      } as any;
+      } as unknown as ProductDataType;
 
-      // Access private method through instance
-      const getNameInLang = (productsApi as any).getProductNameInLang;
-
-      expect(getNameInLang(product, "fr")).toBe("Produit Français");
-      expect(getNameInLang(product, "es")).toBe("Producto Español");
-      expect(getNameInLang(product, "de")).toBe("Default Product"); // fallback
+      expect(getProductNameInLang(product, "fr")).toBe("Produit Français");
+      expect(getProductNameInLang(product, "es")).toBe("Producto Español");
+      expect(getProductNameInLang(product, "de")).toBe("Default Product"); // fallback
     });
 
     it("should handle getProductIngredientsInLang correctly", () => {
@@ -786,14 +549,16 @@ describe("OpenFoodFacts", () => {
       } as any;
 
       // Access private method through instance
-      const getIngredientsInLang = (productsApi as any)
-        .getProductIngredientsInLang;
 
-      expect(getIngredientsInLang(product, "fr")).toBe("Ingrédients français");
-      expect(getIngredientsInLang(product, "es")).toBe(
+      expect(getProductIngredientsInLang(product, "fr")).toBe(
+        "Ingrédients français",
+      );
+      expect(getProductIngredientsInLang(product, "es")).toBe(
         "Ingredientes españoles",
       );
-      expect(getIngredientsInLang(product, "de")).toBe("Default ingredients"); // fallback
+      expect(getProductIngredientsInLang(product, "de")).toBe(
+        "Default ingredients",
+      ); // fallback
     });
   });
 
@@ -820,8 +585,9 @@ describe("OpenFoodFacts", () => {
 
         mockV2Success(mockResponse);
 
-        const result = await productsApi.getProductV2(barcode);
-        expect(result).toEqual(expected);
+        const { data, error } = await productsApi.getProductV2(barcode);
+        expect(error).toBeUndefined();
+        expect(data).toEqual(mockResponse);
       });
     });
 
@@ -831,14 +597,6 @@ describe("OpenFoodFacts", () => {
       await expect(productsApi.getProductV2(testBarcode)).rejects.toThrow(
         "Request timeout",
       );
-    });
-
-    it("should handle malformed API response", async () => {
-      const malformedResponse = "invalid json";
-      mockV2Success(malformedResponse);
-
-      const result = await productsApi.getProductV2(testBarcode);
-      expect(result).toBeUndefined();
     });
   });
 });

@@ -1,7 +1,6 @@
 import createClient from "openapi-fetch";
-import { KnowledgePanel } from "./knowledgepanels";
-import { paths } from "./schemas/facets-kp";
-import { dataOrThrow } from "./openapi";
+import type { KnowledgePanel } from "./knowledgepanels.js";
+import type { paths } from "./schemas/facets-kp.js";
 
 export type FacetKnowledgePanelResponse = {
   knowledge_panels: Record<string, KnowledgePanel>;
@@ -28,10 +27,8 @@ export class FacetsKp {
   }
 
   async getFacetKnowledgePanels(facet: string, value?: string) {
-    const resp = await this.client.GET("/knowledge_panel", {
+    return this.client.GET("/knowledge_panel", {
       params: { query: { facet_tag: facet, value_tag: value } },
     });
-
-    return dataOrThrow(resp);
   }
 }

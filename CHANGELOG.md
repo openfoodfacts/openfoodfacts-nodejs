@@ -1,5 +1,65 @@
 # Changelog
 
+## [2.0.0-alpha.16](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.15...v2.0.0-alpha.16) (2025-09-01)
+
+
+### Features
+
+* add getNutrients method and update type definitions for nutrient-related entities ([842689a](https://github.com/openfoodfacts/openfoodfacts-js/commit/842689acad469f94cbe6e8de0c7249bb83b9ba8d))
+* export PriceFull type ([c401940](https://github.com/openfoodfacts/openfoodfacts-js/commit/c40194065234d9cfad92d9c0bc5e760a028a9b53))
+
+
+### Bug Fixes
+
+* add missing types and main entry points in package.json ([de6cc4c](https://github.com/openfoodfacts/openfoodfacts-js/commit/de6cc4cbc1a1de91234b9ce20b9eaee9e5ec22cd))
+
+
+### Miscellaneous Chores
+
+* trigger 2.0.0-alpha.16 release ([dacdfe9](https://github.com/openfoodfacts/openfoodfacts-js/commit/dacdfe9aad9f8b1ba89cc6d30d6da2296b300e39))
+
+## [2.0.0-alpha.15](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.14...v2.0.0-alpha.15) (2025-08-24)
+
+
+### Features
+
+* add getValues method to Folksonomy class ([68a4567](https://github.com/openfoodfacts/openfoodfacts-js/commit/68a4567599f65d72d5b051d486e48c32b9e1f7e1))
+
+
+### Bug Fixes
+
+* add build step to Node.js workflow, fix tests setup ([1cd9d71](https://github.com/openfoodfacts/openfoodfacts-js/commit/1cd9d710d4755c96f7f5f3494ba3cf3ced89578b))
+* refactor ProductState type inference in ProductOpenerApiV3 ([4379908](https://github.com/openfoodfacts/openfoodfacts-js/commit/43799086a307272b9b26038d5caf8e920e405c01))
+* try to fix getProductV3 return type pt.2 ([946c825](https://github.com/openfoodfacts/openfoodfacts-js/commit/946c825c3b050c862ce4abe0d64acb07fd189451))
+* try to fix getProductV3 return type pt.3 ([5a8c1b1](https://github.com/openfoodfacts/openfoodfacts-js/commit/5a8c1b19750c747fdf2b70f6f780eeed0f9121e6))
+* Use VERSION constant for User-Agent string ([11341c9](https://github.com/openfoodfacts/openfoodfacts-js/commit/11341c9406a628e24d261131b308f0b970f8cb70))
+
+## [2.0.0-alpha.14](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.13...v2.0.0-alpha.14) (2025-08-24)
+
+
+### Bug Fixes
+
+* auto-generate version.ts and update build process ([66ae03a](https://github.com/openfoodfacts/openfoodfacts-js/commit/66ae03abfa12b1c984569f3774b4afb4e0a1e13a))
+* point export fields to the right paths ([056349c](https://github.com/openfoodfacts/openfoodfacts-js/commit/056349c6ad403c06b3db9d7e80d93dcc04c752dc))
+* replace export with export type to make bundlers work ([4b57979](https://github.com/openfoodfacts/openfoodfacts-js/commit/4b57979e80a361f939bf12c8e17beeda6a51baa7))
+* switch import paths to ES modules ([3bed3ac](https://github.com/openfoodfacts/openfoodfacts-js/commit/3bed3ac1d21c41a60c623f7cff0e7405ff1e0304))
+
+
+### Miscellaneous Chores
+
+* trigger 2.0.0-alpha.14 release ([ac1f117](https://github.com/openfoodfacts/openfoodfacts-js/commit/ac1f11765f9169ea5cde6c1824a572bacc08cece))
+
+## [2.0.0-alpha.13](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.12...v2.0.0-alpha.13) (2025-08-24)
+
+
+### ⚠ BREAKING CHANGES
+
+* split v2 and v3, reorganize exports, use multiple returns ([#690](https://github.com/openfoodfacts/openfoodfacts-js/issues/690))
+
+### Code Refactoring
+
+* split v2 and v3, reorganize exports, use multiple returns ([#690](https://github.com/openfoodfacts/openfoodfacts-js/issues/690)) ([9c3b1d4](https://github.com/openfoodfacts/openfoodfacts-js/commit/9c3b1d4d5639256f1b2f1fc051349e06dc0b54b1))
+
 ## [2.0.0-alpha.12](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.11...v2.0.0-alpha.12) (2025-08-20)
 
 

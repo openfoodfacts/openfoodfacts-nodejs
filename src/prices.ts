@@ -1,12 +1,11 @@
 import createClient from "openapi-fetch";
-import type { paths } from "./schemas/prices";
-import { USER_AGENT } from "./consts";
+import type { components, paths } from "./schemas/prices.js";
+import { USER_AGENT } from "./consts.js";
 
-type PricesQuery = paths["/api/v1/prices"]["get"]["parameters"]["query"];
-export type PricesCreate =
-  paths["/api/v1/prices"]["post"]["requestBody"]["content"]["application/json"];
-export type Prices =
-  paths["/api/v1/prices"]["get"]["responses"]["200"]["content"]["application/json"];
+type GetPricesQuery = paths["/api/v1/prices"]["get"]["parameters"]["query"];
+
+export type PricesCreate = components["schemas"]["PriceCreate"];
+export type PriceFull = components["schemas"]["PriceFull"];
 
 const BASE_URL = "https://prices.openfoodfacts.org";
 
@@ -29,7 +28,7 @@ export class PricesApi {
     });
   }
 
-  getPrices(query: PricesQuery) {
+  getPrices(query: GetPricesQuery) {
     return this.client.GET("/api/v1/prices", { params: { query } });
   }
   createPrice(body: PricesCreate) {
@@ -37,8 +36,7 @@ export class PricesApi {
   }
   login(body: { username: string; password: string }) {
     return this.client.POST("/api/v1/auth", {
-      // @ts-expect-error - The type definition currently specify set_cookie as a boolean which is incorrect.
-      // until that is fixed, we need to use this workaround.
+      // @ts-expect-error - TODO: Wrong OpenAPI spec, there is no set_cookie query param
       params: { query: { set_cookie: 1 } },
       body,
       headers: { "Content-Type": "application/x-www-form-urlencoded" },

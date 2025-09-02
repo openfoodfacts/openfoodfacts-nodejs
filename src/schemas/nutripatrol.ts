@@ -3,541 +3,821 @@
  * Do not make direct changes to the file.
  */
 
-
 export interface paths {
-  "/": {
-    /** Main Page */
-    get: operations["main_page__get"];
-  };
-  "/robots.txt": {
-    /** Robots Txt */
-    get: operations["robots_txt_robots_txt_get"];
-  };
-  "/api/v1/flags": {
-    /**
-     * Get Flags
-     * @description Get all flags.
-     *
-     * This function is used to get all flags.
-     */
-    get: operations["get_flags_api_v1_flags_get"];
-    /**
-     * Create Flag
-     * @description Create a flag for a product.
-     *
-     * This function is used to create a flag for a product or an image.
-     * A flag is a request for a product or an image to be reviewed.
-     * A flag is associated with a ticket.
-     * A ticket is created if it does not exist for this product or image.
-     * A ticket can be associated with multiple flags.
-     */
-    post: operations["create_flag_api_v1_flags_post"];
-  };
-  "/api/v1/flags/{flag_id}": {
-    /**
-     * Get Flag
-     * @description Get a flag by ID.
-     *
-     * This function is used to get a flag by its ID.
-     */
-    get: operations["get_flag_api_v1_flags__flag_id__get"];
-  };
-  "/api/v1/tickets": {
-    /**
-     * Get Tickets
-     * @description Get all tickets.
-     *
-     * This function is used to get all tickets with status open.
-     */
-    get: operations["get_tickets_api_v1_tickets_get"];
-    /**
-     * Create Ticket
-     * @description Create a ticket.
-     *
-     * This function is used to create a ticket for a product or an image.
-     * A ticket is a request for a product or an image to be reviewed.
-     */
-    post: operations["create_ticket_api_v1_tickets_post"];
-  };
-  "/api/v1/tickets/{ticket_id}": {
-    /**
-     * Get Ticket
-     * @description Get a ticket by ID.
-     *
-     * This function is used to get a ticket by its ID.
-     */
-    get: operations["get_ticket_api_v1_tickets__ticket_id__get"];
-  };
-  "/api/v1/flags/batch": {
-    /**
-     * Get Flags By Ticket Batch
-     * @description Get all flags for tickets by IDs.
-     *
-     * This function is used to get all flags for tickets by there IDs.
-     */
-    post: operations["get_flags_by_ticket_batch_api_v1_flags_batch_post"];
-  };
-  "/api/v1/tickets/{ticket_id}/status": {
-    /**
-     * Update Ticket Status
-     * @description Update the status of a ticket by ID.
-     *
-     * This function is used to update the status of a ticket by its ID.
-     */
-    put: operations["update_ticket_status_api_v1_tickets__ticket_id__status_put"];
-  };
-  "/api/v1/status": {
-    /**
-     * Status
-     * @description Health check endpoint.
-     */
-    get: operations["status_api_v1_status_get"];
-  };
+    "/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Main Page */
+        get: operations["main_page__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/robots.txt": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Robots Txt */
+        get: operations["robots_txt_robots_txt_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/flags": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Flags
+         * @description Get all flags.
+         *
+         *     This function is used to get all flags.
+         */
+        get: operations["get_flags_api_v1_flags_get"];
+        put?: never;
+        /**
+         * Create Flag
+         * @description Create a flag for a product.
+         *
+         *     This function is used to create a flag for a product or an image.
+         *     A flag is a request for a product or an image to be reviewed.
+         *     A flag is associated with a ticket.
+         *     A ticket is created if it does not exist for this product or image.
+         *     A ticket can be associated with multiple flags.
+         */
+        post: operations["create_flag_api_v1_flags_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/flags/{flag_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Flag
+         * @description Get a flag by ID.
+         *
+         *     This function is used to get a flag by its ID.
+         */
+        get: operations["get_flag_api_v1_flags__flag_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/tickets": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Tickets
+         * @description Get all tickets.
+         *
+         *     This function is used to get all tickets with status open.
+         */
+        get: operations["get_tickets_api_v1_tickets_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/tickets/{ticket_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Ticket
+         * @description Get a ticket by ID.
+         *
+         *     This function is used to get a ticket by its ID.
+         */
+        get: operations["get_ticket_api_v1_tickets__ticket_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/flags/batch": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Get Flags By Ticket Batch
+         * @description Get all flags for tickets by IDs.
+         *
+         *     This function is used to get all flags for tickets by there IDs.
+         */
+        post: operations["get_flags_by_ticket_batch_api_v1_flags_batch_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/tickets/{ticket_id}/status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /**
+         * Update Ticket Status
+         * @description Update the status of a ticket by ID.
+         *
+         *     This function is used to update the status of a ticket by its ID.
+         */
+        put: operations["update_ticket_status_api_v1_tickets__ticket_id__status_put"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/stats": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Stats
+         * @description Get number of tickets by status for the last n days.
+         *
+         *     Args:
+         *         n_days (int): The number of days from which to fetch ticket data.
+         *         Default is 31 days.
+         */
+        get: operations["get_stats_api_v1_stats_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Status
+         * @description Health check endpoint.
+         */
+        get: operations["status_api_v1_status_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
-
 export type webhooks = Record<string, never>;
-
 export interface components {
-  schemas: {
-    /** FlagCreate */
-    FlagCreate: {
-      /**
-       * Barcode
-       * @description Barcode of the product, if the flag is about a product or a product image. In case of a search issue, this field is null.
-       */
-      barcode?: string | null;
-      /** @description Type of the issue */
-      type: components["schemas"]["IssueType"];
-      /**
-       * Url
-       * @description URL of the product or of the flagged image
-       */
-      url: string;
-      /**
-       * User Id
-       * @description Open Food Facts User ID of the flagger
-       */
-      user_id: string;
-      /** @description Source of the flag. It can be a user from the mobile app, the web or a flag generated automatically by robotoff. */
-      source: components["schemas"]["SourceType"];
-      /**
-       * Confidence
-       * @description Confidence score of the model that generated the flag, this field should only be provided by Robotoff.
-       */
-      confidence?: number | null;
-      /**
-       * Image Id
-       * @description ID of the flagged image
-       */
-      image_id?: string | null;
-      /** @description Flavor (project) associated with the ticket */
-      flavor: components["schemas"]["Flavor"];
-      /**
-       * Reason
-       * @description Reason for flagging provided by the user. The field is optional.
-       */
-      reason?: string | null;
-      /**
-       * Comment
-       * @description Comment provided by the user during flagging. This is a free text field.
-       */
-      comment?: string | null;
-      /**
-       * Created At
-       * Format: date-time
-       * @description Creation datetime of the flag
-       */
-      created_at?: string;
+    schemas: {
+        /** Flag */
+        Flag: {
+            /**
+             * Barcode
+             * @description Barcode of the product, if the flag is about a product or a product image. In case of a search issue, this field is null.
+             */
+            barcode?: string | null;
+            /** @description Type of the issue */
+            type: components["schemas"]["IssueType"];
+            /**
+             * Url
+             * @description URL of the product or of the flagged image
+             */
+            url: string;
+            /**
+             * User Id
+             * @description Open Food Facts User ID of the flagger
+             */
+            user_id: string;
+            /** @description Source of the flag. It can be a user from the mobile app, the web or a flag generated automatically by robotoff. */
+            source: components["schemas"]["SourceType"];
+            /**
+             * Confidence
+             * @description Confidence score of the model that generated the flag, this field should only be provided by Robotoff.
+             */
+            confidence?: number | null;
+            /**
+             * Image Id
+             * @description ID of the flagged image
+             */
+            image_id?: string | null;
+            /** @description Flavor (project) associated with the ticket */
+            flavor: components["schemas"]["Flavor"];
+            /**
+             * Reason
+             * @description Reason for flagging provided by the user. The field is optional.
+             */
+            reason?: string | null;
+            /**
+             * Comment
+             * @description Comment provided by the user during flagging. This is a free text field.
+             */
+            comment?: string | null;
+            /**
+             * Created At
+             * Format: date-time
+             * @description Creation datetime of the flag
+             */
+            created_at?: string;
+            /**
+             * Id
+             * @description ID of the flag
+             */
+            id: number;
+            /**
+             * Ticket Id
+             * @description ID of the ticket associated with the flag
+             */
+            ticket_id: number;
+            /**
+             * Device Id
+             * @description Device ID of the flagger
+             */
+            device_id: string;
+        };
+        /** FlagCreate */
+        FlagCreate: {
+            /**
+             * Barcode
+             * @description Barcode of the product, if the flag is about a product or a product image. In case of a search issue, this field is null.
+             */
+            barcode?: string | null;
+            /** @description Type of the issue */
+            type: components["schemas"]["IssueType"];
+            /**
+             * Url
+             * @description URL of the product or of the flagged image
+             */
+            url: string;
+            /**
+             * User Id
+             * @description Open Food Facts User ID of the flagger
+             */
+            user_id: string;
+            /** @description Source of the flag. It can be a user from the mobile app, the web or a flag generated automatically by robotoff. */
+            source: components["schemas"]["SourceType"];
+            /**
+             * Confidence
+             * @description Confidence score of the model that generated the flag, this field should only be provided by Robotoff.
+             */
+            confidence?: number | null;
+            /**
+             * Image Id
+             * @description ID of the flagged image
+             */
+            image_id?: string | null;
+            /** @description Flavor (project) associated with the ticket */
+            flavor: components["schemas"]["Flavor"];
+            /**
+             * Reason
+             * @description Reason for flagging provided by the user. The field is optional.
+             */
+            reason?: string | null;
+            /**
+             * Comment
+             * @description Comment provided by the user during flagging. This is a free text field.
+             */
+            comment?: string | null;
+            /**
+             * Created At
+             * Format: date-time
+             * @description Creation datetime of the flag
+             */
+            created_at?: string;
+        };
+        /** FlagsByTicketIdRequest */
+        FlagsByTicketIdRequest: {
+            /** Ticket Ids */
+            ticket_ids: number[];
+        };
+        /**
+         * Flavor
+         * @description Flavor is used to refer to a specific Open*Facts project:
+         *
+         *     - Open Food Facts
+         *     - Open Beauty Facts
+         *     - Open Pet Food Facts
+         *     - Open Product Facts
+         *     - Open Food Facts (Pro plateform)
+         * @enum {string}
+         */
+        Flavor: "off" | "obf" | "opff" | "opf" | "off-pro";
+        /** GetFlagsResponse */
+        GetFlagsResponse: {
+            /** Flags */
+            flags: components["schemas"]["Flag"][];
+        };
+        /**
+         * GetTicketsResponse
+         * @description Response model for get_tickets endpoint.
+         */
+        GetTicketsResponse: {
+            /** Tickets */
+            tickets: components["schemas"]["Ticket"][];
+            /** Max Page */
+            max_page: number;
+        };
+        /** HTTPValidationError */
+        HTTPValidationError: {
+            /** Detail */
+            detail?: components["schemas"]["ValidationError"][];
+        };
+        /**
+         * IssueType
+         * @description Type of the flag/ticket.
+         * @enum {string}
+         */
+        IssueType: "product" | "image" | "search";
+        /**
+         * ReasonType
+         * @description Type of the reason for flagging.
+         * @enum {string}
+         */
+        ReasonType: "inappropriate" | "human" | "beauty" | "other";
+        /**
+         * SourceType
+         * @enum {string}
+         */
+        SourceType: "mobile" | "web" | "robotoff";
+        /**
+         * StatsResponse
+         * @description Response model for get_stats endpoint.
+         */
+        StatsResponse: {
+            /**
+             * Total Tickets
+             * @description Total number of tickets in the database
+             */
+            total_tickets: number;
+            /**
+             * Tickets By Status
+             * @description A dictionary with ticket status as keys and the count of tickets as values
+             */
+            tickets_by_status: {
+                [key: string]: unknown;
+            };
+            /**
+             * Tickets By Flavor
+             * @description A dictionary with ticket flavor as keys and the count of tickets as values
+             */
+            tickets_by_flavor: {
+                [key: string]: unknown;
+            };
+            /**
+             * Tickets By Type
+             * @description A dictionary with ticket type as keys and the count of tickets as values
+             */
+            tickets_by_type: {
+                [key: string]: unknown;
+            };
+            /**
+             * N Days
+             * @description The number of days for which the data is fetched
+             */
+            n_days: number;
+            /**
+             * Start Date
+             * @description The start date of the data range in ISO format
+             */
+            start_date: string;
+            /**
+             * End Date
+             * @description The end date of the data range in ISO format
+             */
+            end_date: string;
+        };
+        /** StatusResponse */
+        StatusResponse: {
+            /**
+             * Status
+             * @description Health status of the API
+             */
+            status: string;
+        };
+        /** Ticket */
+        Ticket: {
+            /**
+             * Barcode
+             * @description Barcode of the product, if the ticket is about a product or a product image. In case of a search issue, this field is null.
+             */
+            barcode?: string | null;
+            /** @description Type of the issue */
+            type: components["schemas"]["IssueType"];
+            /**
+             * Url
+             * @description URL of the product or of the flagged image
+             */
+            url: string;
+            /**
+             * @description Status of the ticket
+             * @default open
+             */
+            status: components["schemas"]["TicketStatus"];
+            /**
+             * Image Id
+             * @description ID of the flagged image, if the ticket type is `image`
+             */
+            image_id?: string | null;
+            /** @description Flavor (project) associated with the ticket */
+            flavor: components["schemas"]["Flavor"];
+            /**
+             * Created At
+             * Format: date-time
+             * @description Creation datetime of the ticket
+             */
+            created_at?: string;
+            /**
+             * Id
+             * @description ID of the ticket
+             */
+            id: number;
+        };
+        /**
+         * TicketStatus
+         * @enum {string}
+         */
+        TicketStatus: "open" | "closed";
+        /** ValidationError */
+        ValidationError: {
+            /** Location */
+            loc: (string | number)[];
+            /** Message */
+            msg: string;
+            /** Error Type */
+            type: string;
+        };
     };
-    /** FlagsByTicketIdRequest */
-    FlagsByTicketIdRequest: {
-      /** Ticket Ids */
-      ticket_ids: number[];
-    };
-    /**
-     * Flavor
-     * @description Flavor is used to refer to a specific Open*Facts project:
-     *
-     * - Open Food Facts
-     * - Open Beauty Facts
-     * - Open Pet Food Facts
-     * - Open Product Facts
-     * - Open Food Facts (Pro plateform)
-     * @enum {string}
-     */
-    Flavor: "off" | "obf" | "opff" | "opf" | "off-pro";
-    /** HTTPValidationError */
-    HTTPValidationError: {
-      /** Detail */
-      detail?: components["schemas"]["ValidationError"][];
-    };
-    /**
-     * IssueType
-     * @description Type of the flag/ticket.
-     * @enum {string}
-     */
-    IssueType: "product" | "image" | "search";
-    /**
-     * ReasonType
-     * @description Type of the reason for flagging.
-     * @enum {string}
-     */
-    ReasonType: "inappropriate" | "human" | "beauty" | "other";
-    /**
-     * SourceType
-     * @enum {string}
-     */
-    SourceType: "mobile" | "web" | "robotoff";
-    /** Ticket */
-    Ticket: {
-      /**
-       * Barcode
-       * @description Barcode of the product, if the ticket is about a product or a product image. In case of a search issue, this field is null.
-       */
-      barcode?: string | null;
-      /** @description Type of the issue */
-      type: components["schemas"]["IssueType"];
-      /**
-       * Url
-       * @description URL of the product or of the flagged image
-       */
-      url: string;
-      /**
-       * @description Status of the ticket
-       * @default open
-       */
-      status?: components["schemas"]["TicketStatus"];
-      /**
-       * Image Id
-       * @description ID of the flagged image, if the ticket type is `image`
-       */
-      image_id?: string | null;
-      /** @description Flavor (project) associated with the ticket */
-      flavor: components["schemas"]["Flavor"];
-      /**
-       * Created At
-       * Format: date-time
-       * @description Creation datetime of the ticket
-       */
-      created_at?: string;
-      /**
-       * Id
-       * @description ID of the ticket
-       */
-      id: number;
-    };
-    /** TicketCreate */
-    TicketCreate: {
-      /**
-       * Barcode
-       * @description Barcode of the product, if the ticket is about a product or a product image. In case of a search issue, this field is null.
-       */
-      barcode?: string | null;
-      /** @description Type of the issue */
-      type: components["schemas"]["IssueType"];
-      /**
-       * Url
-       * @description URL of the product or of the flagged image
-       */
-      url: string;
-      /**
-       * @description Status of the ticket
-       * @default open
-       */
-      status?: components["schemas"]["TicketStatus"];
-      /**
-       * Image Id
-       * @description ID of the flagged image, if the ticket type is `image`
-       */
-      image_id?: string | null;
-      /** @description Flavor (project) associated with the ticket */
-      flavor: components["schemas"]["Flavor"];
-      /**
-       * Created At
-       * Format: date-time
-       * @description Creation datetime of the ticket
-       */
-      created_at?: string;
-    };
-    /**
-     * TicketStatus
-     * @enum {string}
-     */
-    TicketStatus: "open" | "closed";
-    /** ValidationError */
-    ValidationError: {
-      /** Location */
-      loc: (string | number)[];
-      /** Message */
-      msg: string;
-      /** Error Type */
-      type: string;
-    };
-  };
-  responses: never;
-  parameters: never;
-  requestBodies: never;
-  headers: never;
-  pathItems: never;
+    responses: never;
+    parameters: never;
+    requestBodies: never;
+    headers: never;
+    pathItems: never;
 }
-
 export type $defs = Record<string, never>;
-
-export type external = Record<string, never>;
-
 export interface operations {
-
-  /** Main Page */
-  main_page__get: {
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          "text/html": string;
+    main_page__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-      };
-    };
-  };
-  /** Robots Txt */
-  robots_txt_robots_txt_get: {
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          "text/plain": string;
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "text/html": string;
+                };
+            };
         };
-      };
     };
-  };
-  /**
-   * Get Flags
-   * @description Get all flags.
-   *
-   * This function is used to get all flags.
-   */
-  get_flags_api_v1_flags_get: {
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          "application/json": unknown;
+    robots_txt_robots_txt_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-      };
-    };
-  };
-  /**
-   * Create Flag
-   * @description Create a flag for a product.
-   *
-   * This function is used to create a flag for a product or an image.
-   * A flag is a request for a product or an image to be reviewed.
-   * A flag is associated with a ticket.
-   * A ticket is created if it does not exist for this product or image.
-   * A ticket can be associated with multiple flags.
-   */
-  create_flag_api_v1_flags_post: {
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["FlagCreate"];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          "application/json": unknown;
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "text/plain": string;
+                };
+            };
         };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
-        };
-      };
     };
-  };
-  /**
-   * Get Flag
-   * @description Get a flag by ID.
-   *
-   * This function is used to get a flag by its ID.
-   */
-  get_flag_api_v1_flags__flag_id__get: {
-    parameters: {
-      path: {
-        flag_id: number;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          "application/json": unknown;
+    get_flags_api_v1_flags_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GetFlagsResponse"];
+                };
+            };
         };
-      };
     };
-  };
-  /**
-   * Get Tickets
-   * @description Get all tickets.
-   *
-   * This function is used to get all tickets with status open.
-   */
-  get_tickets_api_v1_tickets_get: {
-    parameters: {
-      query?: {
-        status?: components["schemas"]["TicketStatus"] | null;
-        type_?: components["schemas"]["IssueType"] | null;
-        reason?: components["schemas"]["ReasonType"][] | null;
-        page?: number;
-        page_size?: number;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          "application/json": unknown;
+    create_flag_api_v1_flags_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["FlagCreate"];
+            };
         };
-      };
-    };
-  };
-  /**
-   * Create Ticket
-   * @description Create a ticket.
-   *
-   * This function is used to create a ticket for a product or an image.
-   * A ticket is a request for a product or an image to be reviewed.
-   */
-  create_ticket_api_v1_tickets_post: {
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["TicketCreate"];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          "application/json": components["schemas"]["Ticket"];
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Flag"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
         };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
-        };
-      };
     };
-  };
-  /**
-   * Get Ticket
-   * @description Get a ticket by ID.
-   *
-   * This function is used to get a ticket by its ID.
-   */
-  get_ticket_api_v1_tickets__ticket_id__get: {
-    parameters: {
-      path: {
-        ticket_id: number;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          "application/json": unknown;
+    get_flag_api_v1_flags__flag_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                flag_id: number;
+            };
+            cookie?: never;
         };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Flag"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
         };
-      };
     };
-  };
-  /**
-   * Get Flags By Ticket Batch
-   * @description Get all flags for tickets by IDs.
-   *
-   * This function is used to get all flags for tickets by there IDs.
-   */
-  get_flags_by_ticket_batch_api_v1_flags_batch_post: {
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["FlagsByTicketIdRequest"];
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          "application/json": unknown;
+    get_tickets_api_v1_tickets_get: {
+        parameters: {
+            query?: {
+                status?: components["schemas"]["TicketStatus"] | null;
+                type_?: components["schemas"]["IssueType"] | null;
+                reason?: components["schemas"]["ReasonType"][] | null;
+                page?: number;
+                page_size?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GetTicketsResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
         };
-      };
     };
-  };
-  /**
-   * Update Ticket Status
-   * @description Update the status of a ticket by ID.
-   *
-   * This function is used to update the status of a ticket by its ID.
-   */
-  update_ticket_status_api_v1_tickets__ticket_id__status_put: {
-    parameters: {
-      query: {
-        status: components["schemas"]["TicketStatus"];
-      };
-      path: {
-        ticket_id: number;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          "application/json": unknown;
+    get_ticket_api_v1_tickets__ticket_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                ticket_id: number;
+            };
+            cookie?: never;
         };
-      };
-      /** @description Validation Error */
-      422: {
-        content: {
-          "application/json": components["schemas"]["HTTPValidationError"];
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
         };
-      };
     };
-  };
-  /**
-   * Status
-   * @description Health check endpoint.
-   */
-  status_api_v1_status_get: {
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          "application/json": unknown;
+    get_flags_by_ticket_batch_api_v1_flags_batch_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-      };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["FlagsByTicketIdRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
     };
-  };
+    update_ticket_status_api_v1_tickets__ticket_id__status_put: {
+        parameters: {
+            query: {
+                status: components["schemas"]["TicketStatus"];
+            };
+            header?: never;
+            path: {
+                ticket_id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Ticket"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_stats_api_v1_stats_get: {
+        parameters: {
+            query?: {
+                n_days?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StatsResponse"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    status_api_v1_status_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StatusResponse"];
+                };
+            };
+        };
+    };
 }

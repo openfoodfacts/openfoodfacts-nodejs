@@ -1,6 +1,6 @@
-import type { paths } from "./schemas/search";
+import type { paths } from "./schemas/search.js";
 import createClient from "openapi-fetch";
-import { USER_AGENT } from "./consts";
+import { USER_AGENT } from "./consts.js";
 
 const SEARCH_BASE_URL = "https://search.openfoodfacts.org";
 

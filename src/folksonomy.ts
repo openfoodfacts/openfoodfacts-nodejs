@@ -1,8 +1,7 @@
 import createClient from "openapi-fetch";
 
-import { paths, components } from "./schemas/folksonomy";
-import { ApiError, UNKNOWN_API_ERROR } from "./error";
-import { DEFAULT_FOLKSONOMY_API_URL, USER_AGENT } from "./consts";
+import type { paths, components, operations } from "./schemas/folksonomy.js";
+import { DEFAULT_FOLKSONOMY_API_URL, USER_AGENT } from "./consts.js";
 
 export type FolksonomyTag = components["schemas"]["ProductTag"];
 export type FolksonomyKey = {
@@ -15,7 +14,8 @@ export class Folksonomy {
   private readonly fetch: typeof global.fetch;
   private readonly baseUrl: string;
   private authToken?: string;
-  readonly raw: ReturnType<typeof createClient<paths>>;
+
+  readonly client: ReturnType<typeof createClient<paths>>;
 
   constructor(
     fetch: typeof global.fetch,
@@ -25,7 +25,7 @@ export class Folksonomy {
     this.authToken = options?.authToken;
 
     this.fetch = fetch;
-    this.raw = createClient({
+    this.client = createClient({
       baseUrl: this.baseUrl,
       fetch,
       headers: {
@@ -49,20 +49,18 @@ export class Folksonomy {
    *
    * The keys list can be restricted to private tags from some owner.
    */
-  async getKeys(): Promise<FolksonomyKey[]> {
-    const res = await this.raw.GET("/keys");
-    return (res?.data ?? []) as FolksonomyKey[];
+  async getKeys() {
+    return this.client.GET("/keys");
   }
 
   /**
    * Get the list of products that have a `key` or `key=value` if `value` is provided
    */
-  async getProducts(key: string, value?: string): Promise<FolksonomyTag[]> {
+  async getProducts(key: string, value?: string) {
     const queryParams = value ? { k: key, v: value } : { k: key };
-    const res = await this.raw.GET("/products", {
+    return this.client.GET("/products", {
       params: { query: queryParams },
     });
-    return (res?.data ?? []) as FolksonomyTag[];
   }
 
   /**
@@ -76,27 +74,24 @@ export class Folksonomy {
    * - `owner`: user_id of the owner of the tag (empty for public tags)
    *
    * @returns if the tag was added or updated
+   * @example
+   * const err = await folksonomy.putTag({ k: "vegan", v: "yes", product: "1234567890123", version: 2 });
+   * if (err) console.error("Error updating tag:", err);
    */
-  async putTag(tag: FolksonomyTag): Promise<ApiError | null> {
+  async putTag(tag: FolksonomyTag) {
     this.validateAuthToken();
 
-    const res = await this.raw.PUT("/product", { body: tag });
-
-    if (res.response.status !== 200) {
-      return (res.error as ApiError) ?? UNKNOWN_API_ERROR;
-    }
-    return null;
+    const { error } = await this.client.PUT("/product", { body: tag });
+    return error;
   }
 
   /**
    * Get a list of existing tags for a product
    */
-  async getProductTags(barcode: string): Promise<FolksonomyTag[]> {
-    const res = await this.raw.GET("/product/{product}", {
+  async getProductTags(barcode: string) {
+    return this.client.GET("/product/{product}", {
       params: { path: { product: barcode } },
     });
-
-    return (res.data ?? []) as FolksonomyTag[];
   }
 
   /**
@@ -110,18 +105,18 @@ export class Folksonomy {
    * - `owner`: user_id of the owner of the tag (empty for public tags)
    *
    * @returns if the tag was added or updated
+   * @example
+   * const err = await folksonomy.addTag({ k: "vegan", v: "yes", product: "1234567890123", version: 1 });
+   * if (err) console.error("Error adding tag:", err);
    */
-  async addTag(tag: FolksonomyTag): Promise<ApiError | null> {
+  async addTag(tag: FolksonomyTag) {
     this.validateAuthToken();
 
-    const res = await this.raw.POST("/product", {
+    const { error } = await this.client.POST("/product", {
       body: tag,
     });
 
-    if (res.response.status !== 200) {
-      return (res.error as ApiError) ?? UNKNOWN_API_ERROR;
-    }
-    return null;
+    return error;
   }
 
   /**
@@ -136,22 +131,16 @@ export class Folksonomy {
    *
    * @returns if the tag was deleted
    */
-  async removeTag(
-    tag: FolksonomyTag & { version: number },
-  ): Promise<ApiError | null> {
+  async removeTag(tag: FolksonomyTag & { version: number }) {
     this.validateAuthToken();
 
-    const res = await this.raw.DELETE("/product/{product}/{k}", {
+    const { error } = await this.client.DELETE("/product/{product}/{k}", {
       params: {
         path: { product: tag.product, k: tag.k },
         query: { version: tag.version },
       },
     });
-
-    if (res.response.status !== 200) {
-      return (res.error as ApiError) ?? UNKNOWN_API_ERROR;
-    }
-    return null;
+    return error;
   }
 
   /**
@@ -161,35 +150,19 @@ export class Folksonomy {
    * @param password user password
    * @returns the bearer token, to be used in later requests with usual "Authorization: bearer token" headers
    */
-  async login(
-    username: string,
-    password: string,
-  ): Promise<
-    | { token: { access_token: string; token_type: string } }
-    | { error: ApiError }
-  > {
-    const res = await this.raw.POST("/auth", {
+  async login(username: string, password: string) {
+    return this.client.POST("/auth", {
       body: { username, password, scope: "email openid" },
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
     });
+  }
 
-    if (res.response.status !== 200) {
-      return {
-        error: {
-          detail: [
-            {
-              msg: "Status code " + res.response.status,
-              type: "error",
-              loc: [],
-            },
-          ],
-        },
-      };
-    } else if (res.error != null) {
-      return { error: res.error };
-    }
-
-    const data = res.data as { access_token: string; token_type: string };
-    return { token: data };
+  async getValues(
+    key: string,
+    opts?: operations["get_unique_values_values__k__get"]["parameters"]["query"],
+  ) {
+    return this.client.GET("/values/{k}", {
+      params: { path: { k: key }, query: opts },
+    });
   }
 }

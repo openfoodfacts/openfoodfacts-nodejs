@@ -1,4 +1,4 @@
-import { Product } from "./off";
+import type { Product } from "./off.js";
 
 export const FACETS_SORT_OPTIONS = [
   "last_modified_t",

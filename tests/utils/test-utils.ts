@@ -4,23 +4,29 @@ const notImpl = () => {
 
 export class TestUtils {
   static mockResponse(data: any, ok = true, status = 200): Response {
+    const mockHeaders = {
+      get: (header: string) => {
+        const headers: { [key: string]: string } = {
+          "Content-Type": "application/json",
+        };
+        return headers[header];
+      },
+      append: () => {},
+      has: () => true,
+      set: () => {},
+      delete: () => {},
+      forEach: () => {},
+      getSetCookie: () => [],
+      entries: notImpl,
+      keys: notImpl,
+      values: notImpl,
+      [Symbol.iterator]: notImpl,
+    };
+
     return {
       ok,
       status,
-      headers: {
-        get: (header: string) => {
-          const headers: { [key: string]: string } = {
-            "Content-Type": "application/json",
-          };
-          return headers[header];
-        },
-        append: () => {},
-        has: () => true,
-        set: () => {},
-        delete: () => {},
-        forEach: () => {},
-        getSetCookie: () => [],
-      },
+      headers: mockHeaders,
       json: () => data,
       text: async () => JSON.stringify(data),
       redirected: false,

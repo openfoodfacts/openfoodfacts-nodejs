@@ -1,24 +1,14 @@
-import createClient from "openapi-fetch";
 import {
   PRODUCT_IMAGE_URL,
-  USER_AGENT,
   BackendType,
   BACKEND_DOMAINS,
   BACKEND_NAMES,
-} from "./consts";
-import {
-  paths as pathsv2,
-  components as componentsv2,
-  operations as operationsv2,
-} from "./schemas/server/v2";
-import {
-  paths as pathsv3,
-  operations as operationsv3,
-  components as componentsv3,
-} from "./schemas/server/v3";
-import { Robotoff } from "./robotoff";
-import { TAXONOMY_URL } from "./taxonomy/api";
-import {
+} from "./consts.js";
+
+import { Robotoff } from "./robotoff.js";
+
+import { TAXONOMY_URL } from "./taxonomy/api.js";
+import type {
   Additive,
   Allergen,
   Brand,
@@ -27,18 +17,67 @@ import {
   Ingredient,
   Label,
   Language,
+  Nutrient,
   State,
   Store,
   TaxoNode,
   Taxonomy,
-} from "./taxonomy/types";
-import { FacetResponse, FacetSortOption, FacetValueResponse } from "./facets";
-import { KnowledgePanel } from "./knowledgepanels";
+} from "./taxonomy/types.js";
 
-export type ProductV2 = componentsv2["schemas"]["Product"];
-export type ProductV3 = componentsv3["schemas"]["product_v3"];
-export type ResponseStatusV3 = componentsv3["schemas"]["response_status"];
-export type SearchResultV2 = componentsv2["schemas"]["search_for_products"];
+import type { RawImage, SelectedImage } from "./types.js";
+
+import type {
+  FacetResponse,
+  FacetSortOption,
+  FacetValueResponse,
+} from "./facets.js";
+export type { FacetResponse, FacetSortOption, FacetValueResponse };
+
+import {
+  ProductOpenerApiV2,
+  getProductNameInLang,
+  getProductIngredientsInLang,
+} from "./off-v2.js";
+import { ProductOpenerApiV3 } from "./off-v3.js";
+export { getProductNameInLang, getProductIngredientsInLang };
+
+// Type-only imports and re-exports for off-v2.js
+import type {
+  SearchQuery as SearchQueryV2,
+  Product as ProductV2,
+  SearchResult as SearchResultV2,
+  ProductAttribute as ProductAttributeV2,
+  Attribute as AttributeV2,
+} from "./off-v2.js";
+export type {
+  SearchQueryV2,
+  ProductV2,
+  SearchResultV2,
+  ProductAttributeV2,
+  AttributeV2,
+};
+
+// Type-only imports and re-exports for off-v3.js
+import type {
+  ProductDataType,
+  ProductImageUploadParams as ProductImageUploadParamsV3,
+  ProductQuery as ProductQueryV3,
+  Product as ProductV3,
+  ProductState as ProductStateV3,
+  ResponseStatus as ResponseStatusV3,
+} from "./off-v3.js";
+import { VERSION } from "./version.js";
+export type {
+  ProductDataType,
+  ProductImageUploadParamsV3,
+  ProductQueryV3,
+  ProductV3,
+  ProductStateV3,
+  ResponseStatusV3,
+};
+
+// By default, use v2
+export type { ProductV2 as Product, SearchResultV2 as SearchResult };
 
 export type OpenFoodFactsOptions = {
   type?: BackendType;
@@ -64,10 +103,12 @@ export class OpenFoodFacts {
     password?: string;
   };
 
-  readonly rawV2: ReturnType<typeof createClient<pathsv2>>;
-  readonly rawV3: ReturnType<typeof createClient<pathsv3>>;
+  /** The V2 ProductOpener API class. Do not use directly unless you know what you're doing.  */
+  readonly apiv2: ProductOpenerApiV2;
+  /** The V3 ProductOpener API class. Do not use directly unless you know what you're doing. */
+  readonly apiv3: ProductOpenerApiV3;
 
-  /** Robotoff API */
+  /** The Robotoff API class. */
   readonly robotoff: Robotoff;
 
   /**
@@ -92,16 +133,8 @@ export class OpenFoodFacts {
       password: undefined,
     };
 
-    this.rawV2 = createClient<pathsv2>({
-      fetch: this.fetch,
-      baseUrl: this.baseUrl,
-    });
-
-    this.rawV3 = createClient<pathsv3>({
-      fetch: this.fetch,
-      baseUrl: this.baseUrl,
-    });
-
+    this.apiv2 = new ProductOpenerApiV2(this.fetch, { host: this.baseUrl });
+    this.apiv3 = new ProductOpenerApiV3(this.fetch, { host: this.baseUrl });
     this.robotoff = new Robotoff(fetch);
   }
 
@@ -139,14 +172,12 @@ export class OpenFoodFacts {
    * Creates the User-Agent string based on backend type
    */
   private createUserAgent(): string {
-    const version = require("../package.json").version;
-
     if (this.backendType != null) {
       const backendName = BACKEND_NAMES[this.backendType];
-      return `${backendName} - NodeJS ${version}`;
+      return `${backendName} - NodeJS ${VERSION}`;
     }
 
-    return `OpenFoodFacts - NodeJS ${version}`;
+    return `OpenFoodFacts - NodeJS ${VERSION}`;
   }
 
   /**
@@ -264,23 +295,16 @@ export class OpenFoodFacts {
     return payload.exp && Date.now() >= payload.exp * 1000;
   }
 
-  private async getTaxoEntry<T extends TaxoNode>(
-    taxo: string,
-    entry: string,
-  ): Promise<T> {
-    const res = await this.fetch(
-      `${this.baseUrl}/api/v2/taxonomy?tagtype=${taxo}&tags=${entry}`,
-    );
-
-    return (await res.json()) as T;
-  }
+  ////////////////
+  // TAXONOMIES
+  ////////////////
 
   getBrand(brandName: string): Promise<Brand> {
-    return this.getTaxoEntry("brands", brandName);
+    return this.apiv2.getTaxoEntry("brands", brandName);
   }
 
   getLanguage(languageName: string): Promise<Language> {
-    return this.getTaxoEntry("languages", languageName);
+    return this.apiv2.getTaxoEntry("languages", languageName);
   }
 
   getBrands(): Promise<Taxonomy<Brand>> {
@@ -327,66 +351,40 @@ export class OpenFoodFacts {
     return this.getTaxo<Store>("stores");
   }
 
+  getNutrients(): Promise<Taxonomy<Nutrient>> {
+    return this.getTaxo<Nutrient>("nutrients");
+  }
+
   async getTaxo<T extends TaxoNode>(taxo: string): Promise<Taxonomy<T>> {
     const res = await this.fetch(TAXONOMY_URL(taxo));
     return (await res.json()) as Taxonomy<T>;
   }
 
-  async performOCR(
+  ///////////
+  // API V2
+  ///////////
+
+  performOCR = (
     barcode: string,
     photoId: string,
-    ocrEngine: "google_cloud_vision" = "google_cloud_vision",
-  ): Promise<{ status?: number } | undefined> {
-    const res = await this.rawV2.GET("/cgi/ingredients.pl", {
-      params: {
-        query: {
-          code: barcode,
-          id: photoId,
-          ocr_engine: ocrEngine,
-          process_image: "1",
-        },
-      },
-    });
+    ocrEngine?: "google_cloud_vision",
+  ) => this.apiv2.performOCR(barcode, photoId, ocrEngine);
 
-    return res.data;
-  }
-
-  async search(query: operationsv2["get-search"]["parameters"]["query"]) {
-    const res = await this.rawV2.GET("/api/v2/search", {
-      params: { query },
-    });
-
-    return res.data;
-  }
+  search = (query: SearchQueryV2) => this.apiv2.search(query);
 
   /**
    * Returns all available attribute groups
    * @returns A promise that resolves to an array of attribute groups
    */
-  async getAttributeGroups(): Promise<
-    componentsv2["schemas"]["get_attribute_groups"]
-  > {
-    const res = await this.rawV2.GET("/api/v2/attribute_groups");
-
-    return res.data || [];
-  }
+  getAttributeGroups = () => this.apiv2.getAttributeGroups();
 
   /**
    * Returns product attributes for a given barcode
    * @param barcode - The barcode of the product
    * @returns A promise that resolves to an array of product attributes
    */
-  async getProductAttributes(barcode: string): Promise<ProductAttribute[]> {
-    const res = await this.rawV2.GET("/api/v2/product/{barcode}", {
-      params: {
-        path: { barcode },
-        query: { fields: "product_name,code,attribute_groups_en" },
-      },
-    });
-
-    // @ts-expect-error - OpenAPI schema may not include all possible fields
-    return res.data?.product?.attribute_groups_en || [];
-  }
+  getProductAttributes = (barcode: string) =>
+    this.apiv2.getProductAttributes(barcode);
 
   /**
    * Returns product details by barcode with optional fields
@@ -400,27 +398,10 @@ export class OpenFoodFacts {
    * ```
    * @returns A promise that resolves to a product object with the specified fields or undefined if not found
    */
-  async getProductV3<T extends Array<keyof ProductV3>>(
+  getProductV3 = <T extends Array<keyof ProductV3 | "all">>(
     barcode: string,
-    query?: Omit<
-      operationsv3["get-product-by-barcode"]["parameters"]["query"],
-      "fields"
-    > & {
-      fields?: T;
-    },
-  ): Promise<
-    (ResponseStatusV3 & { product: Pick<ProductV3, T[number]> }) | undefined
-  > {
-    const res = await this.rawV3.GET("/api/v3/product/{barcode}", {
-      params: {
-        path: { barcode },
-        query: { ...query, fields: query?.fields?.join(",") },
-      },
-    });
-
-    // @ts-expect-error - OpenAPI is wrong here!
-    return res.data;
-  }
+    query?: Omit<ProductQueryV3, "fields"> & { fields?: T },
+  ) => this.apiv3.getProductV3(barcode, query);
 
   /**
    * Adds or edits a product using the V2 API
@@ -428,74 +409,17 @@ export class OpenFoodFacts {
    * @param credentials - Optional credentials for authentication
    * @returns A promise that resolves to true if successful, false otherwise
    */
-  async addOrEditProductV2(
+  addOrEditProductV2 = (
     product: ProductDataType & { comment?: string },
     credentials?: { username: string; password: string },
-  ): Promise<boolean> {
-    const url = `${this.baseUrl}/cgi/product_jqm2.pl`;
+  ) => {
+    const username = credentials?.username ?? this.defaultOptions.username;
+    const password = credentials?.password ?? this.defaultOptions.password;
 
-    const username = credentials?.username || this.defaultOptions.username;
-    const password = credentials?.password || this.defaultOptions.password;
-
-    if (!username || !password) {
-      throw new Error("Username and password are required");
-    }
-
-    const languageCodes = Object.keys(product.languages_codes || {});
-    const productNames = languageCodes.reduce(
-      (acc, lang) => {
-        const productName = this.getProductNameInLang(product, lang);
-        if (productName != null) {
-          acc[`product_name_${lang}`] = productName;
-        }
-        return acc;
-      },
-      {} as Record<string, string>,
-    );
-
-    const ingredientsTexts = languageCodes.reduce(
-      (acc, lang) => {
-        const ingredientsText = this.getProductIngredientsInLang(product, lang);
-        if (ingredientsText != null) {
-          acc[`ingredients_text_${lang}`] = ingredientsText;
-        }
-        return acc;
-      },
-      {} as Record<string, string>,
-    );
-
-    const body = this.formData({
-      code: product.code,
-      user_id: username,
-      password: password,
-      categories: product.categories || "",
-      labels: product.labels || "",
-      brands: product.brands || "",
-      quantity: product.quantity || "",
-      serving_size: product.serving_size || "",
-      stores: product.stores || "",
-      origins: product.origins || "",
-      countries: product.countries || "",
-      emb_codes: product.emb_codes || "",
-      packaging: product.packaging || "",
-      manufacturing_places: product.manufacturing_places || "",
-      comment: product.comment ?? "",
-      product_name: product.product_name || "",
-      ingredients_text: product.ingredients_text || "",
-      ...productNames,
-      ...ingredientsTexts,
-    });
-
-    const res = await this.fetch(url, {
-      method: "POST",
-      body,
-      headers: {
-        "User-Agent": USER_AGENT,
-      },
-    });
-
-    return res.status === 200;
-  }
+    const nullableCredentials =
+      username != null && password != null ? { username, password } : undefined;
+    return this.apiv2.addOrEditProductV2(product, nullableCredentials);
+  };
 
   /**
    * Uploads an image to OpenFoodFacts for a product.
@@ -504,33 +428,8 @@ export class OpenFoodFacts {
    * @param imagefield - The field name for the image (e.g., "front", "ingredients", "nutrition")
    * @returns A promise that resolves to the upload response
    */
-  async uploadImage(
-    barcode: string,
-    imageFile: File,
-    imagefield: string,
-  ): Promise<componentsv2["schemas"]["add_photo_to_existing_product-2"]> {
-    const url = `${this.baseUrl}/cgi/product_image_upload.pl`;
-    const formData = new FormData();
-    formData.append("code", barcode);
-    formData.append("imagefield", imagefield);
-    formData.append(`imgupload_${imagefield}`, imageFile);
-
-    const res = await this.fetch(url, {
-      method: "POST",
-      body: formData,
-      headers: {
-        "User-Agent": USER_AGENT,
-      },
-    });
-
-    if (!res.ok) {
-      throw new Error(
-        `Failed to upload image for product with barcode: ${barcode}. Status: ${res.status}`,
-      );
-    }
-
-    return res.json();
-  }
+  uploadImage = (barcode: string, imageFile: File, imagefield: string) =>
+    this.apiv2.uploadImage(barcode, imageFile, imagefield);
 
   /**
    * Crops and selects an image for a product
@@ -540,7 +439,7 @@ export class OpenFoodFacts {
    * @param cropData - Crop coordinates and options
    * @returns A promise that resolves to the crop response
    */
-  async cropImage(
+  cropImage = (
     barcode: string,
     imgid: number,
     id: string,
@@ -558,29 +457,7 @@ export class OpenFoodFacts {
       app_uuid?: string;
       user_agent?: string;
     },
-  ) {
-    const res = await this.rawV2.POST("/cgi/product_image_crop.pl", {
-      body: {
-        code: barcode,
-        imgid: imgid,
-        id: id,
-        x1: cropData.x1,
-        y1: cropData.y1,
-        x2: cropData.x2,
-        y2: cropData.y2,
-        angle: cropData.angle,
-        normalize: cropData.normalize ? "true" : "false",
-        white_magic: cropData.white_magic ? "true" : "false",
-        comment: cropData.comment,
-        app_name: cropData.app_name,
-        app_version: cropData.app_version,
-        app_uuid: cropData.app_uuid,
-        "User-Agent": cropData.user_agent,
-      },
-    });
-
-    return res.data ?? {};
-  }
+  ) => this.apiv2.cropImage(barcode, imgid, id, cropData);
 
   /**
    * Rotates an image for a product
@@ -590,25 +467,8 @@ export class OpenFoodFacts {
    * @param angle - Angle of rotation in degrees (90, 180, or 270 clockwise)
    * @returns A promise that resolves to the rotation response
    */
-  async rotateImage(
-    barcode: string,
-    id: string,
-    imgid: string,
-    angle: string,
-  ): Promise<componentsv2["schemas"]["rotate_a_photo"]> {
-    const res = await this.rawV2.GET("/cgi/product_image_crop.pl", {
-      params: {
-        query: {
-          code: barcode,
-          id: id,
-          imgid: imgid,
-          angle: angle,
-        },
-      },
-    });
-
-    return res.data ?? {};
-  }
+  rotateImage = (barcode: string, id: string, imgid: string, angle: string) =>
+    this.apiv2.rotateImage(barcode, id, imgid, angle);
 
   /**
    * Unselects an image for a product
@@ -616,13 +476,8 @@ export class OpenFoodFacts {
    * @param id - Image field (image id) of the photo to unselect (e.g., "front_fr")
    * @returns A promise that resolves to the unselect response
    */
-  async unselectImage(barcode: string, id: string) {
-    const res = await this.rawV2.POST("/cgi/product_image_unselect.pl", {
-      body: { code: barcode, id: id },
-    });
-
-    return res.data ?? {};
-  }
+  unselectImage = (barcode: string, id: string) =>
+    this.apiv2.unselectImage(barcode, id);
 
   /**
    * Deletes an uploaded image for a product
@@ -630,120 +485,31 @@ export class OpenFoodFacts {
    * @param imgid - The id of the image to be deleted
    * @returns A promise that resolves to the deletion response
    */
-  async deleteProductImage(
-    barcode: string,
-    imgid: number,
-  ): Promise<componentsv3["schemas"]["response_status"]> {
-    const res = await this.rawV3.DELETE(
-      "/api/v3/product/{barcode}/images/uploaded/{imgid}",
-      {
-        params: {
-          path: { barcode, imgid },
-        },
-      },
-    );
-
-    return res.data ?? {};
-  }
+  deleteProductImage = (barcode: string, imgid: number) =>
+    this.apiv3.deleteProductImage(barcode, imgid);
 
   /**
-   * Returns reduced product data suitable for displaying on cards
-   * @param barcode - The barcode of the product
-   * @param lang - Optional language code for localization
-   * @returns A promise that resolves to reduced product data
+   *
+   * @param barcode
+   * @param params
+   * @returns
    */
-  async getProductReducedForCard(
-    barcode: string,
-    lang?: string,
-  ): Promise<ProductState<ProductReduced>> {
-    const query: Record<string, string> = {
-      fields: REDUCED_FIELDS.join(","),
-    };
-
-    const selectedLang = lang || this.defaultOptions.lang;
-    if (selectedLang) {
-      query.lc = selectedLang;
-    }
-
-    const res = await this.rawV3.GET("/api/v3/product/{barcode}", {
-      params: {
-        path: { barcode },
-        query,
-      },
-    });
-
-    return res.data as ProductState<ProductReduced>;
-  }
-
-  /**
-   * Returns only the product name for a given barcode
-   * @param barcode - The barcode of the product
-   * @param lang - Optional language code for localization
-   * @returns A promise that resolves to the product name or null if not found
-   */
-  async getProductName(
-    barcode: string,
-    lang?: string,
-  ): Promise<Pick<ProductDataType, "product_name"> | null> {
-    const query: Record<string, string> = {
-      fields: "product_name",
-    };
-
-    const selectedLang = lang || this.defaultOptions.lang;
-    if (selectedLang) {
-      query.lc = selectedLang;
-    }
-
-    const res = await this.rawV3.GET("/api/v3/product/{barcode}", {
-      params: {
-        path: { barcode },
-        query,
-      },
-    });
-
-    const productState = res.data as ProductState<
-      Pick<ProductDataType, "product_name">
-    >;
-
-    if (productState?.status !== "success") return null;
-    return productState.product;
-  }
+  uploadProductImage = (barcode: string, params: ProductImageUploadParamsV3) =>
+    this.apiv3.uploadProductImage(barcode, params);
 
   /**
    * Returns product data using the V2 API
    * @param barcode - The barcode of the product
    * @returns A promise that resolves to the product data or undefined if not found
    */
-  async getProductV2(barcode: string): Promise<ProductV2 | undefined> {
-    const res = await this.rawV2.GET("/api/v2/product/{barcode}", {
-      params: { path: { barcode } },
-    });
-
-    return res.data?.product;
-  }
+  getProductV2 = (barcode: string) => this.apiv2.getProductV2(barcode);
 
   /**
    * Returns an array of image names for the product
    * @param barcode - The barcode of the product
    * @returns A promise that resolves to an array of image names or null if not found
    */
-  async getProductImages(barcode: string): Promise<string[] | null> {
-    const res = await this.rawV2.GET("/api/v2/product/{barcode}", {
-      params: {
-        query: { fields: "images" },
-        path: { barcode },
-      },
-    });
-
-    const product = res.data?.product;
-
-    // Check if the returned type has images
-    if (!product) return null;
-    if (!("images" in product)) return null;
-
-    const images = product.images ?? {};
-    return Object.keys(images);
-  }
+  getProductImages = (barcode: string) => this.apiv2.getProductImages(barcode);
 
   async getFacet(
     facet: string,
@@ -775,90 +541,7 @@ export class OpenFoodFacts {
     );
     return await res.json();
   }
-
-  private getProductNameInLang(product: ProductDataType, lang: string) {
-    return product[`product_name_${lang}`] ?? product.product_name;
-  }
-
-  private getProductIngredientsInLang(product: ProductDataType, lang: string) {
-    return product[`ingredients_text_${lang}`] ?? product.ingredients_text;
-  }
-
-  private formData(data: Record<string, string | Blob>) {
-    const form = new FormData();
-    for (const [key, value] of Object.entries(data)) {
-      form.append(key, value);
-    }
-    return form;
-  }
-
-  /**
-   * Gets URL for a product image based on its barcode and image name
-   * @param barcode - Product barcode
-   * @param imageName - Name of the image (e.g., "front", "ingredients", "nutrition")
-   * @param images - Image metadata from product data
-   * @param size - Image size (100, 200, 400, or full) - defaults to 400
-   * @returns Complete URL to the specific image or null if not found
-   */
-  static getProductImageUrl(
-    barcode: string,
-    imageName: string,
-    images: Record<string, SelectedImage | RawImage>,
-    size: "100" | "200" | "400" | "full" = "400",
-  ): string | null {
-    const paddedBarcode = barcode.toString().padStart(13, "0");
-    const match = paddedBarcode.match(/^(.{3})(.{3})(.{3})(.*)$/);
-    if (!match) {
-      throw new Error(`Invalid barcode format: ${paddedBarcode}`);
-    }
-
-    const path = `${match[1]}/${match[2]}/${match[3]}/${match[4]}`;
-    const image = images[imageName];
-
-    if (!image) {
-      return null;
-    }
-
-    const rev = (image as SelectedImage).rev;
-    let filename: string;
-    if (rev) {
-      filename = `${imageName}.${rev}.${size}.jpg`;
-    } else {
-      filename = `${imageName}.${size}.jpg`;
-    }
-    return PRODUCT_IMAGE_URL(`${path}/${filename}`);
-  }
 }
-
-export type ProductStateBase = {
-  result: {
-    id: string;
-    name: string;
-    lc_name: string;
-  };
-};
-
-export type ProductStateError = {
-  field: { id: string; value: string };
-  impact: { lc_name: string; name: string; id: string };
-  message: { lc_name: string; name: string; id: string };
-};
-
-export type ProductStateFailure = ProductStateBase & {
-  status: "failure";
-  errors: ProductStateError[];
-};
-
-export type ProductStateFound<T = ProductDataType> = ProductStateBase & {
-  product: T;
-} & (
-    | { status: "success" }
-    | { status: "success_with_warnings"; warnings: object[] }
-    | { status: "success_with_errors"; errors: ProductStateError[] }
-  );
-
-export type ProductState<T = ProductDataType> = ProductStateBase &
-  (ProductStateFound<T> | ProductStateFailure);
 
 export type ProductSearch<T = ProductDataType> = {
   count: number;
@@ -869,183 +552,41 @@ export type ProductSearch<T = ProductDataType> = {
   skip: number;
 };
 
-export type Attribute = {
-  id: string;
-  name: string;
-  grade: string;
-  title: string;
-  description_short?: string;
-  icon_url?: string;
-};
-
-export type ProductAttribute = {
-  id: string;
-  name: string;
-  attributes: Attribute[];
-};
-
-export type ProductAttributes = ProductAttribute[];
-
-type LangIngredient = `ingredients_text_${string}`;
-type LangProduct = `product_name_${string}`;
-
-type ImageSize = {
-  h: number;
-  w: number;
-};
-
-export type SelectedImage = {
-  angle: number;
-  coordinates_image_size: string;
-  geometry: string;
-  imgid: string;
-  normalize: string | boolean | null;
-  rev: string;
-  sizes: {
-    100: ImageSize;
-    200: ImageSize;
-    400: ImageSize;
-    full: ImageSize;
-  };
-  white_magic: string | boolean | null;
-  x1: string;
-  x2: string;
-  y1: string;
-  y2: string;
-};
-
-export type RawImage = {
-  url: string;
-  sizes: {
-    full: ImageSize;
-    100: ImageSize;
-    400: ImageSize;
-  };
-  uploaded_t: string;
-  uploader: string;
-};
-
-export type ProductDataSection = {
-  created_t: number;
-  creator: string;
-  last_modified_t: number;
-  last_editor: string;
-  editors_tags: string[];
-  last_checked_t: number;
-  checkers_tags: string[];
-  states_hierarchy: string[];
-};
-
-export type ProductDataType = ProductDataSection & {
-  knowledge_panels: Record<string, KnowledgePanel>;
-  product_name: string;
-  [lang: LangProduct]: string;
-  _id: string;
-  code: string;
-  _keywords: string[];
-  additives_n: number;
-  ingredients: {
-    id: string;
-    percent: number;
-    percent_estimate: number;
-    percent_max: number;
-    percent_min: number;
-    text: string;
-    vegan: string;
-    vegetarian: string;
-  }[];
-  additives_tags: string[];
-
-  ingredients_text: string;
-  [lang: LangIngredient]: string;
-
-  image_front_url: string;
-  image_front_small_url: string;
-
-  image_ingredients_url: string;
-  image_ingredients_small_url: string;
-  image_ingredients_thumb_url: string;
-
-  images: Record<string, SelectedImage | RawImage>;
-
-  image_nutrition_url: string;
-  image_nutrition_small_url: string;
-  image_nutrition_thumb_url: string;
-
-  quantity: string;
-  serving_size: string;
-  nutriscore_grade: string;
-  ecoscore_grade: string;
-  nova_group: number;
-
-  packaging: string;
-  manufacturing_places: string;
-
-  brands: string;
-  brands_tags: string[];
-
-  categories: string;
-  categories_tags: string[];
-  categories_hierarchy: object[];
-
-  stores: string;
-  stores_tags: string[];
-
-  labels: string;
-  labels_tags: string[];
-  product_type: string;
-
-  origins: string;
-  origins_tags: string[];
-
-  countries: string;
-  countries_tags: string[];
-
-  emb_codes: string;
-  emb_codes_tags: string[];
-
-  nutriments: any;
-
-  no_nutrition_data?: boolean;
-
-  source: {
-    fields: string[];
-    id: string;
-    images: object[];
-    import_t: number;
-    manufacturer: number | string;
-    name: string;
-    source_licence: string;
-    source_licence_url: string;
-    url?: string;
-  };
-
-  link: string;
-
-  languages_codes: {
-    [lang: string]: number;
-  };
-  lang: string;
-};
-
-const REDUCED_FIELDS = [
-  "image_front_small_url",
-  "code",
-  "product_name",
-  "brands",
-  "quantity",
-  "nutriscore_grade",
-  "ecoscore_grade",
-  "nova_group",
-  "product_type",
-] as const;
-
-export type ProductReduced = Pick<
-  ProductDataType,
-  (typeof REDUCED_FIELDS)[number]
->;
-
-// By default, use v2
-export { ProductV2 as Product, SearchResultV2 as SearchResult };
-
 export default OpenFoodFacts;
+
+/**
+ * Gets URL for a product image based on its barcode and image name
+ * @param barcode - Product barcode
+ * @param imageName - Name of the image (e.g., "front", "ingredients", "nutrition")
+ * @param images - Image metadata from product data
+ * @param size - Image size (100, 200, 400, or full) - defaults to 400
+ * @returns Complete URL to the specific image or null if not found
+ */
+export function getProductImageUrl(
+  barcode: string,
+  imageName: string,
+  images: Record<string, SelectedImage | RawImage>,
+  size: "100" | "200" | "400" | "full" = "400",
+): string | null {
+  const paddedBarcode = barcode.toString().padStart(13, "0");
+  const match = paddedBarcode.match(/^(.{3})(.{3})(.{3})(.*)$/);
+  if (!match) {
+    throw new Error(`Invalid barcode format: ${paddedBarcode}`);
+  }
+
+  const path = `${match[1]}/${match[2]}/${match[3]}/${match[4]}`;
+  const image = images[imageName];
+
+  if (!image) {
+    return null;
+  }
+
+  const rev = (image as SelectedImage).rev;
+  let filename: string;
+  if (rev) {
+    filename = `${imageName}.${rev}.${size}.jpg`;
+  } else {
+    filename = `${imageName}.${size}.jpg`;
+  }
+  return PRODUCT_IMAGE_URL(`${path}/${filename}`);
+}

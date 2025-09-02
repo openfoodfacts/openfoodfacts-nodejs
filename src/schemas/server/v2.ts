@@ -506,6 +506,10 @@ export interface components {
         /**
          * Packaging component shape
          * @description The shape property is canonicalized using the packaging_shapes taxonomy. Taxonomized values are available using the partial taxonomy API, the autosuggest API or the full packaging_shapes taxonomy JSON export.
+         * @example {
+         *       "id": "en:bottle",
+         *       "lc_name": "bouteille"
+         *     }
          */
         shape: {
             /** @description Canonical id of the entry in the taxonomy. If the value cannot be mapped to a taxonomy entry, the value will be the name of the entry in its original language prefixed by the language 2 letter code and a colon. */
@@ -516,6 +520,10 @@ export interface components {
         /**
          * Packaging component material
          * @description The material property is canonicalized using the packaging_materials taxonomy. Taxonomized values are available using the partial taxonomy API, the autosuggest API or the full packaging_material taxonomy JSON export.
+         * @example {
+         *       "id": "en:bottle",
+         *       "lc_name": "bouteille"
+         *     }
          */
         material: {
             /** @description Canonical id of the entry in the taxonomy. If the value cannot be mapped to a taxonomy entry, the value will be the name of the entry in its original language prefixed by the language 2 letter code and a colon. */
@@ -526,6 +534,10 @@ export interface components {
         /**
          * Packaging component recycling instruction
          * @description The recycling property is canonicalized using the packaging_recycling taxonomy. Taxonomized values are available using the partial taxonomy API, the autosuggest API or the full packaging_recycling taxonomy JSON export.
+         * @example {
+         *       "id": "en:bottle",
+         *       "lc_name": "bouteille"
+         *     }
          */
         recycling: {
             /** @description Canonical id of the entry in the taxonomy. If the value cannot be mapped to a taxonomy entry, the value will be the name of the entry in its original language prefixed by the language 2 letter code and a colon. */
@@ -540,6 +552,29 @@ export interface components {
          *     The shape, material and recycling properties are mapped to one entry in the packaging_shapes, packaging_materials and packaging_recycling taxonomies, and the value of the property is the canonical name of the taxonomy entry (e.g. en:bottle).
          *
          *     They may contain values that could not yet get matched to their respective taxonomy, in which case they will contain a free text value prefixed with the language code of this text value (e.g. "fr:Bouteille sphérique" might have been entered by a French user to indicate it is a spherical bottle).
+         * @example {
+         *       "number_of_units": 6,
+         *       "shape": {
+         *         "id": "en:bottle",
+         *         "lc_name": "bouteille"
+         *       },
+         *       "material": {
+         *         "id": "en:bottle",
+         *         "lc_name": "bouteille"
+         *       },
+         *       "recycling": {
+         *         "id": "en:bottle",
+         *         "lc_name": "bouteille"
+         *       },
+         *       "quantity_per_unit": "25 cl",
+         *       "quantity_per_unit_value": 25,
+         *       "quantity_per_unit_unit": "cl",
+         *       "weight_specified": 30,
+         *       "weight_measured": 32,
+         *       "weight_estimated": 26,
+         *       "weight": 30,
+         *       "weight_source_id": "specified"
+         *     }
          */
         packaging_component: {
             /** @description umber of units of this packaging component contained in the product (e.g. 6 for a pack of 6 bottles) */
@@ -577,6 +612,31 @@ export interface components {
          *     https://world.openfoodfacts.org/data/taxonomies/packaging_recycling.json
          *
          *     If the tags_lc field is set, the properties will include a lc_name field with the translation in the requested language.
+         * @example [
+         *       {
+         *         "number_of_units": 6,
+         *         "shape": {
+         *           "id": "en:bottle",
+         *           "lc_name": "bouteille"
+         *         },
+         *         "material": {
+         *           "id": "en:bottle",
+         *           "lc_name": "bouteille"
+         *         },
+         *         "recycling": {
+         *           "id": "en:bottle",
+         *           "lc_name": "bouteille"
+         *         },
+         *         "quantity_per_unit": "25 cl",
+         *         "quantity_per_unit_value": 25,
+         *         "quantity_per_unit_unit": "cl",
+         *         "weight_specified": 30,
+         *         "weight_measured": 32,
+         *         "weight_estimated": 26,
+         *         "weight": 30,
+         *         "weight_source_id": "specified"
+         *       }
+         *     ]
          */
         packagings: components["schemas"]["packaging_component"][];
         /**
@@ -755,7 +815,7 @@ export interface components {
             categories_tags?: components["schemas"]["indexed_taxonomy_tag_entry"][];
             checkers_tags?: string[];
             cities?: string;
-            cities_tags?: Record<string, never>[];
+            cities_tags?: Record<string, unknown>[];
             correctors_tags?: string[];
             /** @description List of countries where the product is sold.
              *      */
@@ -777,13 +837,20 @@ export interface components {
              */
             emb_codes?: string;
             emb_codes_orig?: string;
-            emb_codes_tags?: Record<string, never>[];
+            emb_codes_tags?: Record<string, unknown>[];
             labels?: string;
             labels_hierarchy?: string[];
             labels_lc?: string;
             labels_tags?: string[];
-            /** @description The data as a series of tag: `yyyy-mm-dd`, `yyyy-mm`, `yyyy`
-             *      */
+            /**
+             * @description The data as a series of tag: `yyyy-mm-dd`, `yyyy-mm`, `yyyy`
+             *
+             * @example [
+             *       "2016-03-11",
+             *       "2016-03",
+             *       "2016"
+             *     ]
+             */
             entry_dates_tags?: string[];
             /** @description Places where the product was manufactured or transformed.
              *      */
@@ -831,7 +898,12 @@ export interface components {
              * @example 121
              */
             imgid?: string;
-            /** @description Normalize colors. */
+            /**
+             * @description Normalize colors.
+             * @example null
+             * @example false
+             * @example true
+             */
             normalize?: string | boolean | null;
             /** @example 420 */
             rev?: string;
@@ -845,8 +917,13 @@ export interface components {
                 400?: components["schemas"]["image_size"];
                 full?: components["schemas"]["image_size"];
             };
-            /** @description Photo on white background : Try to remove the background.
-             *      */
+            /**
+             * @description Photo on white background : Try to remove the background.
+             *
+             * @example null
+             * @example false
+             * @example true
+             */
             white_magic?: string | boolean | null;
             /** @example -1 */
             x1?: string;
@@ -885,7 +962,7 @@ export interface components {
              */
             uploader?: string;
         };
-        ImageUrls: Record<string, never>;
+        ImageUrls: Record<string, unknown>;
         /** @description URLs of thumbnails image of image of type `image_type` */
         SelectedImage: {
             /** @description Thumbnail urls of product image (front) adapted to display on product page
@@ -1018,12 +1095,20 @@ export interface components {
                             ecoscore_shape_ratio?: number;
                             material?: string;
                             shape?: string;
+                            /** @example 1 */
                             number_of_units?: number;
-                            /** @description The quantity per packaging unit, as a string. */
+                            /**
+                             * @description The quantity per packaging unit, as a string.
+                             * @example 33 cL
+                             */
                             quantity_per_unit?: string;
+                            /** @example cl */
                             quantity_per_unit_unit?: string;
+                            /** @example 33 */
                             quantity_per_unit_value?: number;
+                            /** @example en:recycle-in-sorting-bin */
                             recycling?: string;
+                            /** @example 12.08 */
                             weight_measured?: number;
                         }[];
                         score?: number;
@@ -1031,6 +1116,11 @@ export interface components {
                         warning?: string;
                     };
                     production_system?: {
+                        /**
+                         * @example vegan
+                         * @example fat free
+                         * @example Kosher
+                         */
                         labels?: string[];
                         value?: number;
                         warning?: string;
@@ -1042,7 +1132,7 @@ export interface components {
                 };
                 agribalyse?: components["schemas"]["agribalyse"];
                 grade?: string;
-                grades?: Record<string, never>;
+                grades?: Record<string, unknown>;
                 missing?: {
                     labels?: number;
                     origins?: number;
@@ -1055,12 +1145,12 @@ export interface components {
                     agribalyse?: components["schemas"]["agribalyse"];
                 };
                 score?: number;
-                scores?: Record<string, never>;
+                scores?: Record<string, unknown>;
                 status?: string;
             };
             ecoscore_extended_data_version?: string;
             environment_impact_level?: string;
-            environment_impact_level_tags?: Record<string, never>[];
+            environment_impact_level_tags?: Record<string, unknown>[];
         };
         /**
          * ingredients
@@ -1090,7 +1180,7 @@ export interface components {
             ingredients_analysis_tags?: string[];
             ingredients_from_or_that_may_be_from_palm_oil_n?: number;
             ingredients_from_palm_oil_n?: number;
-            ingredients_from_palm_oil_tags?: Record<string, never>[];
+            ingredients_from_palm_oil_tags?: Record<string, unknown>[];
             ingredients_hierarchy?: string[];
             ingredients_n?: number;
             ingredients_n_tags?: string[];
@@ -1133,7 +1223,7 @@ export interface components {
              */
             ingredients_text_with_allergens?: string;
             ingredients_that_may_be_from_palm_oil_n?: number;
-            ingredients_that_may_be_from_palm_oil_tags?: Record<string, never>[];
+            ingredients_that_may_be_from_palm_oil_tags?: Record<string, unknown>[];
             ingredients_with_specified_percent_n?: number;
             ingredients_with_specified_percent_sum?: number;
             ingredients_with_unspecified_percent_n?: number;
@@ -1142,9 +1232,9 @@ export interface components {
             /** @description Origins of ingredients
              *      */
             origins?: string;
-            origins_hierarchy?: Record<string, never>[];
+            origins_hierarchy?: Record<string, unknown>[];
             origins_lc?: string;
-            origins_tags?: Record<string, never>[];
+            origins_tags?: Record<string, unknown>[];
             /** @description List of substances that might cause allergies
              *     that are present in trace amounts in the product
              *     (this does not include the ingredients, as they
@@ -1152,9 +1242,9 @@ export interface components {
              *     It is taxonomized with the allergens taxonomy. Refer to the [allergens taxonomy](https://static.openfoodfacts.org/data/taxonomies/allergens.json)
              *      */
             traces?: string;
-            traces_hierarchy?: (Record<string, never> | string)[];
+            traces_hierarchy?: (Record<string, unknown> | string)[];
             traces_lc?: string;
-            traces_tags?: (Record<string, never> | string)[];
+            traces_tags?: (Record<string, unknown> | string)[];
             unknown_ingredients_n?: number;
         };
         /**
@@ -1318,9 +1408,9 @@ export interface components {
             nutrition_score_warning_fruits_vegetables_nuts_estimate_from_ingredients?: number;
             nutrition_score_warning_fruits_vegetables_nuts_estimate_from_ingredients_value?: number;
             nutrition_score_warning_no_fiber?: number;
-            other_nutritional_substances_tags?: Record<string, never>[];
-            unknown_nutrients_tags?: Record<string, never>[];
-            vitamins_tags?: Record<string, never>[];
+            other_nutritional_substances_tags?: Record<string, unknown>[];
+            unknown_nutrients_tags?: Record<string, unknown>[];
+            vitamins_tags?: Record<string, unknown>[];
         };
         /**
          * @description Nutri-Score for the product as a letter.
@@ -1331,97 +1421,229 @@ export interface components {
          */
         NutriscoreGrade: "a" | "b" | "c" | "d" | "e";
         NutriscoreYearData: {
-            /** @enum {integer} */
+            /**
+             * @example 1
+             * @enum {integer}
+             */
             category_available?: 0 | 1;
+            /** @example d */
             grade?: components["schemas"]["NutriscoreGrade"];
-            /** @enum {integer} */
+            /**
+             * @example 1
+             * @enum {integer}
+             */
             nutrients_available?: 0 | 1;
-            /** @enum {integer} */
+            /**
+             * @example 1
+             * @enum {integer}
+             */
             nutriscore_applicable?: 0 | 1;
-            /** @enum {integer} */
+            /**
+             * @example 1
+             * @enum {integer}
+             */
             nutriscore_computed?: 0 | 1;
+            /**
+             * @example 13
+             * @example 18
+             */
             score?: number;
         };
         ProductType: {
-            /** @enum {integer} */
+            /**
+             * @example 0
+             * @enum {integer}
+             */
             is_beverage?: 0 | 1;
-            /** @enum {integer} */
+            /**
+             * @example 0
+             * @enum {integer}
+             */
             is_cheese?: 0 | 1;
-            /** @enum {integer} */
+            /**
+             * @example 0
+             * @enum {integer}
+             */
             is_water?: 0 | 1;
         };
         /** Nutriscore2021InnerData */
         Nutriscore2021InnerData: components["schemas"]["ProductType"] & {
-            /** @enum {integer} */
+            /**
+             * @example 0
+             * @enum {integer}
+             */
             is_fat?: 0 | 1;
+            /** @example 1996 */
             energy?: number;
+            /** @example 5 */
             energy_points?: number;
+            /** @example 1996 */
             energy_value?: number;
-            /** Format: float */
+            /**
+             * Format: float
+             * @example 3.8
+             */
             fiber?: number;
+            /** @example 4 */
             fiber_points?: number;
-            /** Format: float */
+            /**
+             * Format: float
+             * @example 3.8
+             */
             fiber_value?: number;
-            /** Format: float */
+            /**
+             * Format: float
+             * @example 0
+             */
             fruits_vegetables_nuts_colza_walnut_olive_oils?: number;
+            /** @example 0 */
             fruits_vegetables_nuts_colza_walnut_olive_oils_points?: number;
-            /** Format: float */
+            /**
+             * Format: float
+             * @example 0
+             */
             fruits_vegetables_nuts_colza_walnut_olive_oils_value?: number;
-            /** Format: float */
+            /**
+             * Format: float
+             * @example 6.6
+             */
             proteins?: number;
+            /** @example 4 */
             proteins_points?: number;
-            /** Format: float */
+            /**
+             * Format: float
+             * @example 6.6
+             */
             proteins_value?: number;
-            /** Format: float */
+            /**
+             * Format: float
+             * @example 6.2
+             */
             saturated_fat?: number;
+            /** @example 6 */
             saturated_fat_points?: number;
-            /** Format: float */
+            /**
+             * Format: float
+             * @example 6.2
+             */
             saturated_fat_value?: number;
-            /** Format: float */
+            /**
+             * Format: float
+             * @example 210
+             */
             sodium?: number;
+            /** @example 2 */
             sodium_points?: number;
-            /** Format: float */
+            /**
+             * Format: float
+             * @example 210
+             */
             sodium_value?: number;
-            /** Format: float */
+            /**
+             * Format: float
+             * @example 21.5
+             */
             sugars?: number;
+            /** @example 4 */
             sugars_points?: number;
-            /** Format: float */
+            /**
+             * Format: float
+             * @example 21.5
+             */
             sugars_value?: number;
+            /** @example 17 */
             negative_points?: number;
+            /** @example 4 */
             positive_points?: number;
         };
         /** Nutriscore2021Data */
         Nutriscore2021Data: components["schemas"]["Nutriscore2021InnerData"] & {
+            /** @example d */
             grade?: components["schemas"]["NutriscoreGrade"];
+            /** @example 13 */
             score?: number;
         };
         /** NutriscoreComponent */
         NutriscoreComponent: {
+            /**
+             * @example energy
+             * @example sugars
+             * @example saturated_fat
+             * @example salt
+             * @example fiber
+             * @example fruits_vegetables_legumes
+             */
             id?: string;
+            /**
+             * @example 5
+             * @example 6
+             * @example 7
+             * @example 2
+             * @example 1
+             * @example 0
+             */
             points?: number;
+            /**
+             * @example 10
+             * @example 15
+             * @example 20
+             * @example 25
+             * @example 5
+             * @example 5
+             */
             points_max?: number;
+            /**
+             * @example kJ
+             * @example g
+             * @example %
+             */
             unit?: string;
-            /** Format: float */
+            /**
+             * Format: float
+             * @example 21.5
+             * @example 6.2
+             * @example 0.53
+             * @example 3.8
+             * @example 0
+             */
             value?: null | number;
         };
         /** Nutriscore2023Data */
         Nutriscore2023Data: components["schemas"]["ProductType"] & {
-            /** @enum {integer} */
+            /**
+             * @example 0
+             * @enum {integer}
+             */
             is_fat_oil_nuts_seeds?: 0 | 1;
-            /** @enum {integer} */
+            /**
+             * @example 0
+             * @enum {integer}
+             */
             is_red_meat_product?: 0 | 1;
             /** Nutriscore2023DataComponents */
             components?: {
                 negative?: components["schemas"]["NutriscoreComponent"][];
                 positive?: components["schemas"]["NutriscoreComponent"][];
             };
-            /** Format: float */
+            /**
+             * Format: float
+             * @example 0
+             */
             count_proteins?: number;
+            /** @example negative_points_greater_than_or_equal_to_11 */
             count_proteins_reason?: string;
+            /** @example 19 */
             negative_points?: number;
+            /** @example 1 */
             positive_points?: number;
+            /** @example 55 */
             negative_points_max?: number;
+            /** @example 10 */
             positive_points_max?: number;
+            /** @example [
+             *       "fiber",
+             *       "fruits_vegetables_legumes"
+             *     ] */
             positive_nutrients?: string[];
         };
         /** Nutriscores */
@@ -1435,6 +1657,9 @@ export interface components {
                 data?: components["schemas"]["Nutriscore2023Data"];
             };
         };
+        /** @example [
+         *       "d"
+         *     ] */
         NutriscoreGradeTags: components["schemas"]["NutriscoreGrade"][];
         /** ProductNutriscore */
         NutriscoreAll: {
@@ -1442,10 +1667,15 @@ export interface components {
             nutriscore_2021_tags?: components["schemas"]["NutriscoreGradeTags"];
             nutriscore_2023_tags?: components["schemas"]["NutriscoreGradeTags"];
             nutriscore_data?: components["schemas"]["Nutriscore2021Data"];
+            /** @example d */
             nutriscore_grade?: components["schemas"]["NutriscoreGrade"];
-            /** @description Nutri-Score for the product as an integer (see also `nutriscore_grade`).
-             *      */
+            /**
+             * @description Nutri-Score for the product as an integer (see also `nutriscore_grade`).
+             *
+             * @example 13
+             */
             nutriscore_score?: number;
+            /** @example -13 */
             nutriscore_score_opposite?: number;
             nutriscore_tags?: components["schemas"]["NutriscoreGradeTags"];
             nutriscore_version?: string;
@@ -1481,11 +1711,11 @@ export interface components {
         product_extended: {
             additives_original_tags?: string[];
             additives_prev_original_tags?: string[];
-            added_countries_tags?: Record<string, never>[];
+            added_countries_tags?: Record<string, unknown>[];
             allergens_from_ingredients?: string;
             allergens_from_user?: string;
-            amino_acids_prev_tags?: Record<string, never>[];
-            amino_acids_tags?: Record<string, never>[];
+            amino_acids_prev_tags?: Record<string, unknown>[];
+            amino_acids_tags?: Record<string, unknown>[];
             carbon_footprint_percent_of_known_ingredients?: number;
             categories_properties?: {
                 "agribalyse_food_code:en"?: string;
@@ -1510,9 +1740,9 @@ export interface components {
             /** @description link to the product on the website of the producer
              *      */
             link?: string;
-            main_countries_tags?: Record<string, never>[];
-            minerals_prev_tags?: Record<string, never>[];
-            minerals_tags?: Record<string, never>[];
+            main_countries_tags?: Record<string, unknown>[];
+            minerals_prev_tags?: Record<string, unknown>[];
+            minerals_tags?: Record<string, unknown>[];
             /** @description Those are fields provided by the producer (through producers platform),
              *     and the value he provided.
              *      */
@@ -1520,14 +1750,14 @@ export interface components {
                 /** @description you can retrieve all kind of properties, the same as on the parent object (the product).
                  *     It's not processed entries (like tags for example) but raw ones.
                  *      */
-                additionalProperties?: number | string | Record<string, never>;
+                additionalProperties?: number | string | Record<string, unknown>;
             };
             /** @description Detail of ingredients or processing that makes the products having Nova 3 or 4
              *      */
             nova_groups_markers?: {
                 [key: string]: string[][];
             };
-            nucleotides_tags?: Record<string, never>[];
+            nucleotides_tags?: Record<string, unknown>[];
             origin?: string;
             /**
              * @description Country, state, or city where the product can be purchased.
@@ -1565,10 +1795,10 @@ export interface components {
             informers_tags?: string[];
             interface_version_created?: string;
             interface_version_modified?: string;
-            languages?: Record<string, never>;
+            languages?: Record<string, unknown>;
             /** @description Same as `languages` but by language code, instead of language tags
              *      */
-            languages_codes?: Record<string, never>;
+            languages_codes?: Record<string, unknown>;
             languages_hierarchy?: string[];
             languages_tags?: string[];
             last_edit_dates_tags?: string[];
@@ -1601,7 +1831,7 @@ export interface components {
             sources?: {
                 fields?: string[];
                 id?: string;
-                images?: Record<string, never>[];
+                images?: Record<string, unknown>[];
                 import_t?: number;
                 manufacturer?: number | string;
                 name?: string;
@@ -1734,7 +1964,7 @@ export interface components {
             /** @description The ids of the panels to include. The ids are the keys of the panels in the panels object returned in the knowledge_panels field. */
             panel_ids?: string[];
             /** @description An image related to the panel group (e.g. the ingredients or nutrition facts image for the ingredients and nutrition panel groups). */
-            image?: Record<string, never>;
+            image?: Record<string, unknown>;
         };
         /**
          * table_element
@@ -1831,9 +2061,12 @@ export interface components {
          *     Each key of the dictionary is the id of the panel, and the value is the panel object.
          *
          *     Apps typically display a number of root panels with known panel ids (e.g. health_card and environment_card). Panels can reference other panels and display them as sub-panels.
+         * @example {
+         *       "additionalProperties": "string"
+         *     }
          */
         panels: {
-            additionalProperties?: components["schemas"]["panel"];
+            [key: string]: components["schemas"]["panel"];
         };
         /** @description Knowledge panels for a product
          *      */
@@ -2086,6 +2319,11 @@ export interface components {
         };
         /** product_image_crop */
         product_image_crop: {
+            /**
+             * @example status ok
+             * @example status not ok - image not selected - imgid not in uploaded images
+             * @example status not ok - image not selected - image cannot be read
+             */
             status?: string;
             /**
              * @description identifier of the processed image
@@ -2134,11 +2372,26 @@ export interface components {
              * @example new packaging from super-app
              */
             comment?: string;
-            /** @description The brands of the product (comma separated list of values). */
+            /**
+             * @description The brands of the product (comma separated list of values).
+             * @example [
+             *       "Häagen-Dazs General-mills"
+             *     ]
+             */
             brands?: string[];
-            /** @description The labels of the product (comma separated list of values). */
+            /**
+             * @description The labels of the product (comma separated list of values).
+             * @example [
+             *       "Kosher Ferroro"
+             *     ]
+             */
             labels?: string[];
-            /** @description The categories of the product (comma separated list of values). */
+            /**
+             * @description The categories of the product (comma separated list of values).
+             * @example [
+             *       "Desserts Frozen foods"
+             *     ]
+             */
             categories?: string[];
             /**
              * @description Packaging type, format, material.
@@ -2423,16 +2676,16 @@ export interface components {
         traces_tags: string;
         /** @description You can add a language code to a specific tag to query it in a specific language
          *      */
-        tag_name_with_language_code: Record<string, never>;
+        tag_name_with_language_code: Record<string, unknown>;
         /** @description Search on nutrient lower than a value
          *      */
-        nutrient_lower_than: Record<string, never>;
+        nutrient_lower_than: Record<string, unknown>;
         /** @description Search on nutrient greater than a value
          *      */
-        nutrient_greater_than: Record<string, never>;
+        nutrient_greater_than: Record<string, unknown>;
         /** @description Search on nutrient for an exact quantity
          *      */
-        nutrient_equal: Record<string, never>;
+        nutrient_equal: Record<string, unknown>;
     };
     requestBodies: never;
     headers: never;

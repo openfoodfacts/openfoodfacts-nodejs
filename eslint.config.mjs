@@ -41,7 +41,6 @@ export default tseslint.config(
     ignores: [
       "dist",
       "docs",
-      ".yarn",
       "node_modules",
       "**/node_modules",
       "src/schemas",

@@ -58,20 +58,20 @@ const client = new OpenFoodFacts(fetch);
 ### Prerequisites
 
 - Node.js
-- Yarn v4
+- Corepack / PNPM
 
 ### API bindings
 
 The project uses [openapi-typescript](https://github.com/drwpow/openapi-typescript) to generate the API bindings automatically from the OpenAPI specification.
 
-To generate the API bindings, run `yarn api`.
+To generate the API bindings, run `pnpm api`.
 The files are to be committed to the repository, so that the SDK can be used without having to download the specs every time.
 
 ### Building
 
-- Clone the repository and run `yarn install` in the directory.
-- Run `yarn build` to generate the OpenAPI bindings and build the project.
-- Run `yarn test` to run the tests.
+- Clone the repository and run `pnpm install` in the directory.
+- Run `pnpm build` to generate the OpenAPI bindings and build the project.
+- Run `pnpm test` to run the tests.
 
 ## Contribute
 

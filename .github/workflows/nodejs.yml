@@ -27,23 +27,23 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "yarn"
+          cache: "pnpm"
 
       - name: Install dependencies
-        run: yarn install --immutable
+        run: pnpm install --frozen-lockfile
 
       - name: Lint code
-        run: yarn lint
+        run: pnpm lint
 
       - name: Check code formatting
-        run: yarn format
+        run: pnpm format
 
       - name: Build
-        run: yarn build
+        run: pnpm build
 
       # Run tests
       - name: Run tests
-        run: yarn test
+        run: pnpm test
 
   coverage:
     name: Coverage Report
@@ -62,16 +62,16 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: lts/*
-          cache: "yarn"
+          cache: "pnpm"
 
       - name: Install dependencies
-        run: yarn install --immutable
+        run: pnpm install --frozen-lockfile
 
       - name: Build project
-        run: yarn build
+        run: pnpm build
 
       - name: Run tests with coverage
-        run: yarn test --coverage
+        run: pnpm test --coverage
 
       - name: Write coverage report to GitHub Summary
         uses: livewing/lcov-job-summary@v1.2.0
@@ -98,16 +98,16 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: lts/*
-          cache: "yarn"
+          cache: "pnpm"
 
       - name: Install dependencies
-        run: yarn install --immutable
+        run: pnpm install --frozen-lockfile
 
       - name: Build project
-        run: yarn build
+        run: pnpm build
 
       - name: Build documentation
-        run: yarn build:docs
+        run: pnpm build:docs
 
       - name: Upload docs
         uses: actions/upload-pages-artifact@v4

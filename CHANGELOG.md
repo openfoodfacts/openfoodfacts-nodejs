@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.0.0-alpha.17](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.16...v2.0.0-alpha.17) (2025-09-07)
+
+
+### Features
+
+* export ProductDataType and recorder imports ([d15d14d](https://github.com/openfoodfacts/openfoodfacts-js/commit/d15d14d42a1093a55b7ddf020a75db75f3ffa885))
+* update API generation process and remove obsolete script ([0588baa](https://github.com/openfoodfacts/openfoodfacts-js/commit/0588baa6b278b55390cada13a9c0f507a06aa8d4))
+
+
+### Miscellaneous Chores
+
+* trigger 2.0.0-alpha.17 release ([bc04b46](https://github.com/openfoodfacts/openfoodfacts-js/commit/bc04b465c76a055043957ac50153f43575f92b1d))
+
 ## [2.0.0-alpha.16](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.15...v2.0.0-alpha.16) (2025-09-01)
 
 

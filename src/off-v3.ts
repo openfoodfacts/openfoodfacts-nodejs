@@ -213,9 +213,10 @@ export class ProductOpenerApiV3 {
       return { error, data: undefined };
     }
 
-    type ProductStateType<T extends Array<string>> = "all" extends T[number]
-      ? Product & Pick<Product, Extract<T[number], keyof Product>>
-      : Pick<Product, Extract<T[number], keyof Product>>;
+    type ProductStateType<T extends Array<string | number>> =
+      "all" extends T[number]
+        ? Product & Pick<Product, Extract<T[number], keyof Product>>
+        : Pick<Product, Extract<T[number], keyof Product>>;
 
     return {
       data: data as ProductState<ProductStateType<T>>,

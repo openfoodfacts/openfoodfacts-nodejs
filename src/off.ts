@@ -60,21 +60,24 @@ export type {
 // Type-only imports and re-exports for off-v3.js
 import type {
   ProductDataType,
+  ProductDataSection,
   ProductImageUploadParams as ProductImageUploadParamsV3,
   ProductQuery as ProductQueryV3,
   Product as ProductV3,
   ProductState as ProductStateV3,
   ResponseStatus as ResponseStatusV3,
 } from "./off-v3.js";
-import { VERSION } from "./version.js";
 export type {
   ProductDataType,
+  ProductDataSection,
   ProductImageUploadParamsV3,
   ProductQueryV3,
   ProductV3,
   ProductStateV3,
   ResponseStatusV3,
 };
+
+import { VERSION } from "./version.js";
 
 // By default, use v2
 export type { ProductV2 as Product, SearchResultV2 as SearchResult };

@@ -502,6 +502,8 @@ export interface components {
              * @example 999
              */
             schema_version?: number;
+        } & {
+            [key: string]: string;
         };
         /**
          * Packaging component shape
@@ -743,6 +745,8 @@ export interface components {
              *     We expect a quantity + unit but the user is free to input any string.
              *      */
             serving_size?: string;
+        } & {
+            [key: string]: string;
         };
         /**
          * Canonicalized taxonomy tag entry
@@ -940,6 +944,8 @@ export interface components {
          *      */
         Sizes: {
             full?: components["schemas"]["image_size"];
+        } & {
+            [key: string]: string;
         };
         /**
          * image
@@ -962,7 +968,9 @@ export interface components {
              */
             uploader?: string;
         };
-        ImageUrls: Record<string, unknown>;
+        ImageUrls: {
+            [key: string]: string;
+        };
         /** @description URLs of thumbnails image of image of type `image_type` */
         SelectedImage: {
             /** @description Thumbnail urls of product image (front) adapted to display on product page
@@ -997,7 +1005,7 @@ export interface components {
             images?: {
                 front?: components["schemas"]["ImageRole"];
             } & {
-                [key: string]: components["schemas"]["Image"];
+                [key: string]: components["schemas"]["Image"] | string;
             };
             last_image_dates_tags?: string[];
             /** @description timestamp of last image upload (or update?) */
@@ -1011,10 +1019,14 @@ export interface components {
              */
             selected_images?: {
                 front?: components["schemas"]["SelectedImage"];
+            } & {
+                [key: string]: string;
             };
             image_small_url?: string;
             image_thumb_url?: string;
             image_url?: string;
+        } & {
+            [key: string]: string;
         };
         /** @enum {string} */
         EcoscoreCountryCode: "ad" | "al" | "at" | "ax" | "ba" | "be" | "bg" | "ch" | "cy" | "cz" | "de" | "dk" | "dz" | "ee" | "eg" | "es" | "fi" | "fo" | "fr" | "gg" | "gi" | "gr" | "hr" | "hu" | "ie" | "il" | "im" | "is" | "it" | "je" | "lb" | "li" | "lt" | "lu" | "lv" | "ly" | "ma" | "mc" | "md" | "me" | "mk" | "mt" | "nl" | "no" | "pl" | "ps" | "pt" | "ro" | "rs" | "se" | "si" | "sj" | "sk" | "sm" | "sy" | "tn" | "tr" | "ua" | "uk" | "us" | "va" | "world" | "xk";
@@ -1132,7 +1144,9 @@ export interface components {
                 };
                 agribalyse?: components["schemas"]["agribalyse"];
                 grade?: string;
-                grades?: Record<string, unknown>;
+                grades?: {
+                    [key: string]: string;
+                };
                 missing?: {
                     labels?: number;
                     origins?: number;
@@ -1145,7 +1159,9 @@ export interface components {
                     agribalyse?: components["schemas"]["agribalyse"];
                 };
                 score?: number;
-                scores?: Record<string, unknown>;
+                scores?: {
+                    [key: string]: number;
+                };
                 status?: string;
             };
             ecoscore_extended_data_version?: string;
@@ -1246,6 +1262,8 @@ export interface components {
             traces_lc?: string;
             traces_tags?: (Record<string, unknown> | string)[];
             unknown_ingredients_n?: number;
+        } & {
+            [key: string]: string;
         };
         /**
          * product_nutrition
@@ -1382,6 +1400,8 @@ export interface components {
                  * @example 12.5
                  */
                 erythritol?: number;
+            } & {
+                [key: string]: ("公斤" | "公升" | "kg" | "кг" | "l" | "л" | "毫克" | "mg" | "мг" | "mcg" | "µg" | "oz" | "fl oz" | "dl" | "дл" | "cl" | "кл" | "斤" | "g" | "" | " " | "kJ" | "克" | "公克" | "г" | "мл" | "ml" | "mmol/l" | "毫升" | "% vol" | "ph" | "%" | "% dv" | "% vol (alcohol)" | "iu" | "mol/l" | "mval/l" | "ppm" | "�rh" | "�fh" | "�e" | "�dh" | "gpg") | number | string;
             };
             /** @description Detail of data the Nutri-Score was computed upon.
              *
@@ -1775,6 +1795,8 @@ export interface components {
             stores_tags?: string[];
             traces_from_ingredients?: string;
             traces_from_user?: string;
+        } & {
+            [key: string]: string;
         };
         /** @description Metadata of a product (author, editors, creation date, etc.)
          *      */
@@ -1795,10 +1817,14 @@ export interface components {
             informers_tags?: string[];
             interface_version_created?: string;
             interface_version_modified?: string;
-            languages?: Record<string, unknown>;
+            languages?: {
+                [key: string]: number;
+            };
             /** @description Same as `languages` but by language code, instead of language tags
              *      */
-            languages_codes?: Record<string, unknown>;
+            languages_codes?: {
+                [key: string]: number;
+            };
             languages_hierarchy?: string[];
             languages_tags?: string[];
             last_edit_dates_tags?: string[];
@@ -2676,16 +2702,24 @@ export interface components {
         traces_tags: string;
         /** @description You can add a language code to a specific tag to query it in a specific language
          *      */
-        tag_name_with_language_code: Record<string, unknown>;
+        tag_name_with_language_code: {
+            [key: string]: string;
+        };
         /** @description Search on nutrient lower than a value
          *      */
-        nutrient_lower_than: Record<string, unknown>;
+        nutrient_lower_than: {
+            [key: string]: string;
+        };
         /** @description Search on nutrient greater than a value
          *      */
-        nutrient_greater_than: Record<string, unknown>;
+        nutrient_greater_than: {
+            [key: string]: string;
+        };
         /** @description Search on nutrient for an exact quantity
          *      */
-        nutrient_equal: Record<string, unknown>;
+        nutrient_equal: {
+            [key: string]: string;
+        };
     };
     requestBodies: never;
     headers: never;

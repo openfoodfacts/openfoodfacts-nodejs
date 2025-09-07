@@ -60,7 +60,7 @@
     "eslint": "^9.25.0",
     "globals": "^16.0.0",
     "jest": "^30.0.4",
-    "openapi-typescript": "^7.6.1",
+    "openapi-typescript": "github:VaiTon/openapi-typescript#path:/packages/openapi-typescript",
     "prettier": "^3.5.3",
     "ts-jest": "^29.3.2",
     "ts-jest-resolver": "^2.0.1",

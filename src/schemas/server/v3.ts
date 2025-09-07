@@ -382,6 +382,8 @@ export interface components {
              * @example 999
              */
             schema_version?: number;
+        } & {
+            [key: string]: string;
         };
         /**
          * Packaging component shape
@@ -623,6 +625,8 @@ export interface components {
              *     We expect a quantity + unit but the user is free to input any string.
              *      */
             serving_size?: string;
+        } & {
+            [key: string]: string;
         };
         /**
          * Canonicalized taxonomy tag entry
@@ -861,16 +865,24 @@ export interface components {
              *     unless the product has different packagings for different countries with the same barcode,
              *     or if the product has two front sides (e.g. in bilingual countries).
              *      */
-            front?: unknown;
+            front?: {
+                [key: string]: components["schemas"]["ImageSelected"] | null;
+            };
             /** @description Cropped images of the ingredients list in languages shown on the packaging.
              *      */
-            ingredients?: unknown;
+            ingredients?: {
+                [key: string]: components["schemas"]["ImageSelected"] | null;
+            };
             /** @description Cropped images of the nutrition facts table / list in languages shown on the packaging.
              *      */
-            nutrition?: unknown;
+            nutrition?: {
+                [key: string]: components["schemas"]["ImageSelected"] | null;
+            };
             /** @description Cropped images of the packaging / recycling information in languages shown on the packaging.
              *      */
-            packaging?: unknown;
+            packaging?: {
+                [key: string]: components["schemas"]["ImageSelected"] | null;
+            };
         };
         /**
          * Product Images
@@ -906,7 +918,9 @@ export interface components {
                  *     Older uploaded images that may correspond to older revisions of the product are also kept in this list.
                  *
                  */
-                uploaded?: Record<string, unknown>;
+                uploaded?: {
+                    [key: string]: components["schemas"]["ImageUploaded"];
+                };
                 /** @description List of all images selected by users or manufacturers.
                  *     Those images are typically displayed to users, and are used in edit mode to crop images with specific information
                  *     for specific languages. (See images.uploaded)
@@ -918,7 +932,21 @@ export interface components {
              * @description URLs of selected images, generated at runtime.
              *
              */
-            selected_images?: Record<string, unknown>;
+            selected_images?: {
+                [key: string]: {
+                    [key: string]: {
+                        /** @description The URL of the image in max 100px width and height.
+                         *      */
+                        100?: string;
+                        /** @description The URL of the image in max 200px width and height.
+                         *      */
+                        200?: string;
+                        /** @description The URL of the image in max 400px width and height.
+                         *      */
+                        400?: string;
+                    };
+                };
+            };
             /** @description An array of tags entries to indicated the year, month and day of the last image upload (in formats YYYY, YYYY-MM, YYYY-MM-DD).
              *      */
             last_image_dates_tags?: string[];
@@ -1041,7 +1069,9 @@ export interface components {
                 };
                 agribalyse?: components["schemas"]["agribalyse"];
                 grade?: string;
-                grades?: Record<string, unknown>;
+                grades?: {
+                    [key: string]: string;
+                };
                 missing?: {
                     labels?: number;
                     origins?: number;
@@ -1054,7 +1084,9 @@ export interface components {
                     agribalyse?: components["schemas"]["agribalyse"];
                 };
                 score?: number;
-                scores?: Record<string, unknown>;
+                scores?: {
+                    [key: string]: number;
+                };
                 status?: string;
             };
             ecoscore_extended_data_version?: string;
@@ -1174,6 +1206,8 @@ export interface components {
             traces_lc?: string;
             traces_tags?: (Record<string, unknown> | string)[];
             unknown_ingredients_n?: number;
+        } & {
+            [key: string]: string;
         };
         product_nutrition_properties: {
             /**
@@ -1879,6 +1913,8 @@ export interface components {
             stores_tags?: string[];
             traces_from_ingredients?: string;
             traces_from_user?: string;
+        } & {
+            [key: string]: string;
         };
         /** @description Metadata of a product (author, editors, creation date, etc.)
          *      */
@@ -1899,10 +1935,14 @@ export interface components {
             informers_tags?: string[];
             interface_version_created?: string;
             interface_version_modified?: string;
-            languages?: Record<string, unknown>;
+            languages?: {
+                [key: string]: number;
+            };
             /** @description Same as `languages` but by language code, instead of language tags
              *      */
-            languages_codes?: Record<string, unknown>;
+            languages_codes?: {
+                [key: string]: number;
+            };
             languages_hierarchy?: string[];
             languages_tags?: string[];
             last_edit_dates_tags?: string[];
@@ -2301,6 +2341,8 @@ export interface components {
             categories_tags?: components["schemas"]["input_taxonomy_tag_entry"][];
             /** @description An array of categories tag entries that will be added to existing categories */
             categories_tags_add?: components["schemas"]["input_taxonomy_tag_entry"][];
+        } & {
+            [key: string]: components["schemas"]["input_taxonomy_tag_entry"][] | components["schemas"]["input_taxonomy_tag_entry"][];
         };
         /**
          * Packaging component shape (WRITE)
@@ -2621,7 +2663,9 @@ export interface operations {
                                  * @description List with only the image just uploaded by the user. The key is the image id (imgid) and the value is an object with the image data.
                                  *
                                  */
-                                uploaded?: Record<string, unknown>;
+                                uploaded?: {
+                                    [key: string]: components["schemas"]["ImageUploaded"];
+                                };
                             };
                         };
                     };

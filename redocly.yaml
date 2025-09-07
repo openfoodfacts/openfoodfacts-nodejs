@@ -1,0 +1,40 @@
+apis:
+  folksonomy:
+    root: https://api.folksonomy.openfoodfacts.org/openapi.json
+    x-openapi-ts:
+      output: ./src/schemas/folksonomy.ts
+
+  prices:
+    root: https://prices.openfoodfacts.org/api/schema
+    x-openapi-ts:
+      output: ./src/schemas/prices.ts
+
+  robotoff:
+    root: https://raw.githubusercontent.com/openfoodfacts/robotoff/main/doc/references/api.yml
+    x-openapi-ts:
+      output: ./src/schemas/robotoff.ts
+
+  server@v2:
+    root: https://raw.githubusercontent.com/openfoodfacts/openfoodfacts-server/main/docs/api/ref/api.yaml
+    x-openapi-ts:
+      output: ./src/schemas/server/v2.ts
+
+  server@v3:
+    root: https://raw.githubusercontent.com/openfoodfacts/openfoodfacts-server/main/docs/api/ref/api-v3.yaml
+    x-openapi-ts:
+      output: ./src/schemas/server/v3.ts
+
+  nutripatrol:
+    root: https://nutripatrol.openfoodfacts.org/api/openapi.json
+    x-openapi-ts:
+      output: ./src/schemas/nutripatrol.ts
+
+  search:
+    root: https://search.openfoodfacts.org/openapi.json
+    x-openapi-ts:
+      output: ./src/schemas/search.ts
+
+  facets-kp:
+    root: https://facets-kp.openfoodfacts.org/openapi.json
+    x-openapi-ts:
+      output: ./src/schemas/facets-kp.ts

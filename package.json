@@ -37,7 +37,7 @@
     "build:docs": "typedoc src/index.ts",
     "build": "yarn run prebuild && tsc -b tsconfig.cjs.json tsconfig.esm.json",
     "commitmsg": "commitlint -quiet=0 --extends=@commitlint/config-conventional -e",
-    "api": "bash scripts/generate-apis.sh",
+    "api": "yarn run openapi-typescript --empty-objects-unknown",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "format": "prettier --check .",

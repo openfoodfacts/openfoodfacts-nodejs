@@ -312,7 +312,7 @@ export interface components {
              *     for products without a barcode,
              *     Open Food Facts assigns a number starting with the 200 reserved prefix
              *      */
-            code?: string;
+            code: string;
             codes_tags?: string[];
             /** @description Legal name of the product as regulated
              *     by the European authorities.
@@ -381,7 +381,7 @@ export interface components {
              *
              * @example 999
              */
-            schema_version?: number;
+            schema_version: number;
         } & {
             [key: string]: string;
         };

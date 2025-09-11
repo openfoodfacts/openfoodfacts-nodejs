@@ -20,7 +20,7 @@ export class SearchApi {
   private readonly client: ReturnType<typeof createClient<paths>>;
 
   constructor(
-    fetch: typeof window.fetch,
+    fetch: typeof globalThis.fetch,
     options: { baseUrl: string } = { baseUrl: SEARCH_BASE_URL },
   ) {
     this.client = createClient<paths>({

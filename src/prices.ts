@@ -13,7 +13,7 @@ export class PricesApi {
   private readonly client: ReturnType<typeof createClient<paths>>;
 
   constructor(
-    fetch: typeof window.fetch,
+    fetch: typeof globalThis.fetch,
     options: { baseUrl: string; authToken?: string } = { baseUrl: BASE_URL },
   ) {
     this.client = createClient({

@@ -13,11 +13,14 @@ export type FacetKnowledgePanelResponse = {
  * @param baseUrl - The base URL for the API. If not provided, it defaults to "https://facets-kp.openfoodfacts.org".
  */
 export class FacetsKp {
-  readonly fetch: typeof window.fetch;
+  readonly fetch: typeof globalThis.fetch;
   readonly baseUrl: string;
   readonly client: ReturnType<typeof createClient<paths>>;
 
-  constructor(fetch: typeof window.fetch, { baseUrl }: { baseUrl?: string }) {
+  constructor(
+    fetch: typeof globalThis.fetch,
+    { baseUrl }: { baseUrl?: string },
+  ) {
     this.fetch = fetch;
     this.baseUrl = baseUrl || "https://facets-kp.openfoodfacts.org";
     this.client = createClient<paths>({

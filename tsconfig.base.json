@@ -1,10 +1,13 @@
 {
   "compilerOptions": {
-    "forceConsistentCasingInFileNames": true,
     "rootDir": "./src",
     "strict": true,
 
+    "lib": ["ES2017"],
+    "target": "ES2017",
+
     "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true
   },

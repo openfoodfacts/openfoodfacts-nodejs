@@ -229,9 +229,12 @@ export class OpenFoodFacts {
    * Creates a fetch wrapper that adds User-Agent header
    */
   private createUserAgentFetch(
-    fetch: typeof global.fetch,
-  ): typeof global.fetch {
-    return (url: RequestInfo | URL, init?: RequestInit) => {
+    fetch: typeof globalThis.fetch,
+  ): typeof globalThis.fetch {
+    return (
+      url: string | URL | globalThis.Request,
+      init?: globalThis.RequestInit,
+    ) => {
       const headers = new Headers(init?.headers);
       headers.set("User-Agent", this.customUserAgent);
       return fetch(url, { ...init, headers });
@@ -245,7 +248,10 @@ export class OpenFoodFacts {
     fetch: typeof global.fetch,
     options: OpenFoodFactsOptions,
   ): typeof global.fetch {
-    return async (url: RequestInfo | URL, init?: RequestInit) => {
+    return async (
+      url: string | URL | globalThis.Request | URL,
+      init?: globalThis.RequestInit,
+    ) => {
       const headers = new Headers(init?.headers);
 
       if (this.accessToken == null) {
@@ -526,7 +532,7 @@ export class OpenFoodFacts {
     const res = await this.fetch(
       `${this.baseUrl}/facets/${facet}.json?${params}`,
     );
-    return await res.json();
+    return (await res.json()) as FacetResponse;
   }
 
   async getFacetValue(
@@ -542,7 +548,7 @@ export class OpenFoodFacts {
     const res = await this.fetch(
       `${this.baseUrl}/facets/${facet}/${value}.json?${params}`,
     );
-    return await res.json();
+    return (await res.json()) as FacetValueResponse;
   }
 }
 

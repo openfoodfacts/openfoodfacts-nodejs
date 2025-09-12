@@ -45,15 +45,10 @@ export class Robotoff {
   }
 
   async annotate(body: RobotoffAnnotateBody) {
-    const stringifyValues = (body: RobotoffAnnotateBody) => {
-      return Object.fromEntries(
-        Object.entries(body).map(([key, value]) => [key, String(value)]),
-      );
-    };
     return this.raw.POST("/insights/annotate", {
       body: body,
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      bodySerializer: (body) => formBody(stringifyValues(body)),
+      bodySerializer: formBody,
     });
   }
 

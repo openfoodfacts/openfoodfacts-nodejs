@@ -432,7 +432,7 @@ export interface components {
              *     for products without a barcode,
              *     Open Food Facts assigns a number starting with the 200 reserved prefix
              *      */
-            code?: string;
+            code: string;
             codes_tags?: string[];
             /** @description Legal name of the product as regulated
              *     by the European authorities.
@@ -501,7 +501,7 @@ export interface components {
              *
              * @example 999
              */
-            schema_version?: number;
+            schema_version: number;
         };
         /**
          * Packaging component shape
@@ -948,6 +948,26 @@ export interface components {
          *
          */
         Image: {
+            /**
+             * @description If the image is selected as the front / ingredients / nutrition / packaging image,
+             *     this is the index to access the original image URL in the `images` field of the product.
+             *     If the image is not selected as one of these, this field is null.
+             *
+             *     So if the product has the following `images` field:
+             *
+             *     ```json
+             *     "images": {
+             *       1: { ... },
+             *       front_en: { imgid: 1, ... },
+             *       ...
+             *     }
+             *     ```
+             *
+             *     then the front image can be accessed by `images[1]`.
+             *
+             * @example 123456789
+             */
+            imgid?: number;
             sizes?: components["schemas"]["Sizes"];
             /**
              * @description The time the image was uploaded (as unix timestamp).

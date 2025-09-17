@@ -1,5 +1,24 @@
 # Changelog
 
+## [2.0.0-alpha.18](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.17...v2.0.0-alpha.18) (2025-09-17)
+
+
+### Features
+
+* unify TS target for CJS and ESM to ES2017 ([1352669](https://github.com/openfoodfacts/openfoodfacts-js/commit/13526695537530f834a2d5e57a192312b42bdf17))
+
+
+### Bug Fixes
+
+* make 'code' and 'schema_version' required field, add imgid ([7ebfe26](https://github.com/openfoodfacts/openfoodfacts-js/commit/7ebfe26e125b42c727127f82447dec5a260a5071))
+* replace window.fetch with globalThis.fetch ([92ef159](https://github.com/openfoodfacts/openfoodfacts-js/commit/92ef159edba119cee9ee7e6db69ae50f21209665))
+* send nested objects as json serialized in robotoff.annotate ([a6a9194](https://github.com/openfoodfacts/openfoodfacts-js/commit/a6a91945d0dc32e2b5fb2b18d1e20f33fdfd8393))
+
+
+### Miscellaneous Chores
+
+* trigger 2.0.0-alpha.18 release ([983d454](https://github.com/openfoodfacts/openfoodfacts-js/commit/983d45457aab48bf431553b4da3499fea05bf611))
+
 ## [2.0.0-alpha.17](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.16...v2.0.0-alpha.17) (2025-09-07)
 
 

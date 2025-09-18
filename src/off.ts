@@ -546,11 +546,30 @@ export class OpenFoodFacts {
     if (opts?.sortBy) params.set("sort_by", opts.sortBy);
 
     const res = await this.fetch(
-      `${this.baseUrl}/facets/${facet}/${value}.json?${params}`,
+      new URL(`${this.baseUrl}/facets/${facet}/${value}.json?${params}`),
     );
     return (await res.json()) as FacetValueResponse;
   }
+
+  async getLoginStatus(): Promise<LoginStatus | undefined> {
+    const response = await this.fetch(
+      new URL("/cgi/auth.pl?body=1", this.baseUrl),
+    );
+
+    if (!response.ok) return undefined;
+    return (await response.json()) as LoginStatus;
+  }
 }
+
+type BaseLoginStatus = { status: 0 | 1; status_verbose: string };
+
+type LoggedOutStatus = BaseLoginStatus;
+type LoggedInStatus = BaseLoginStatus & {
+  user: { admin: 0 | 1; moderator: 1 | 0; name: string };
+  user_id: string;
+};
+
+export type LoginStatus = LoggedInStatus | LoggedOutStatus;
 
 export type ProductSearch<T = ProductDataType> = {
   count: number;

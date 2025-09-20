@@ -445,6 +445,7 @@ export interface components {
         BlankEnum: "";
         Challenge: {
             readonly id: number;
+            readonly locations: components["schemas"]["Location"][];
             readonly status: string;
             readonly tag: string;
             title?: string | null;
@@ -1038,8 +1039,8 @@ export interface components {
         };
         PatchedPriceUpdate: {
             category_tag?: string | null;
-            labels_tags?: unknown;
-            origins_tags?: unknown;
+            labels_tags?: string[] | null;
+            origins_tags?: string[] | null;
             /** Format: double */
             price?: number | null;
             price_is_discounted?: boolean;
@@ -1109,8 +1110,8 @@ export interface components {
         };
         PriceCreate: {
             category_tag?: string | null;
-            labels_tags?: unknown;
-            origins_tags?: unknown;
+            labels_tags?: string[] | null;
+            origins_tags?: string[] | null;
             /** Format: double */
             price?: number | null;
             price_is_discounted?: boolean;
@@ -1148,8 +1149,8 @@ export interface components {
             product_code?: string | null;
             product_name?: string | null;
             category_tag?: string | null;
-            labels_tags?: unknown;
-            origins_tags?: unknown;
+            labels_tags?: string[] | null;
+            origins_tags?: string[] | null;
             /** Format: double */
             price?: number | null;
             price_is_discounted?: boolean;
@@ -1286,8 +1287,8 @@ export interface components {
         };
         PriceUpdate: {
             category_tag?: string | null;
-            labels_tags?: unknown;
-            origins_tags?: unknown;
+            labels_tags?: string[] | null;
+            origins_tags?: string[] | null;
             /** Format: double */
             price?: number | null;
             price_is_discounted?: boolean;
@@ -1340,6 +1341,7 @@ export interface components {
             file_path?: string | null;
             mimetype?: string | null;
             type: components["schemas"]["TypeEbbEnum"];
+            image_md5_hash?: string | null;
             image_thumb_path?: string | null;
             /** Format: int64 */
             location_osm_id?: number | null;
@@ -1380,6 +1382,7 @@ export interface components {
             file_path?: string | null;
             mimetype?: string | null;
             type: components["schemas"]["TypeEbbEnum"];
+            image_md5_hash?: string | null;
             image_thumb_path?: string | null;
             /** Format: int64 */
             location_osm_id?: number | null;
@@ -1419,6 +1422,7 @@ export interface components {
             file_path?: string | null;
             mimetype?: string | null;
             type: components["schemas"]["TypeEbbEnum"];
+            image_md5_hash?: string | null;
             image_thumb_path?: string | null;
             /** Format: int64 */
             location_osm_id?: number | null;
@@ -1640,6 +1644,7 @@ export interface components {
             proof_source_mobile_count?: number;
             proof_source_api_count?: number;
             proof_source_other_count?: number;
+            proof_currency_count?: number;
             proof_in_challenge_count?: number;
             price_tag_count?: number;
             price_tag_status_unknown_count?: number;
@@ -1684,6 +1689,7 @@ export interface components {
             proof_count?: number | null;
             proof_kind_community_count?: number;
             proof_kind_consumption_count?: number;
+            proof_currency_count?: number;
             location_count?: number | null;
             location_type_osm_country_count?: number | null;
             product_count?: number | null;
@@ -3343,6 +3349,7 @@ export interface operations {
                 date__lte?: string;
                 date__month?: number;
                 date__year?: number;
+                image_md5_hash?: string;
                 /** @description * `COMMUNITY` - COMMUNITY
                  *     * `CONSUMPTION` - CONSUMPTION */
                 kind?: "COMMUNITY" | "CONSUMPTION";

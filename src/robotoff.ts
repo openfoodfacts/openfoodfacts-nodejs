@@ -41,6 +41,7 @@ export class Robotoff {
       headers: {
         "User-Agent": USER_AGENT,
       },
+      credentials: "include",
     });
   }
 

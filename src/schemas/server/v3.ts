@@ -2098,8 +2098,8 @@ export interface components {
         element: {
             /**
              * @description The type of the included element object.
-             *     The type also indicates which field contains the included element object.
-             *     e.g. if the type is "text", the included element object will be in the "text_element" field.
+             *     The element_type also indicates which field contains the included element object.
+             *     e.g. if the element_type is "text", the included element object will be in the "text_element" field.
              *
              *     Note that in the future, new type of element may be added,
              *     so your code should ignore unrecognized types, and unknown properties.
@@ -2108,7 +2108,7 @@ export interface components {
              *
              * @enum {string}
              */
-            type: "text" | "image" | "action" | "panel" | "panel_group" | "table";
+            element_type: "text" | "image" | "action" | "panel" | "panel_group" | "table";
             text_element?: components["schemas"]["text_element"];
             image_element?: components["schemas"]["image_element"];
             action_element?: string;

@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.0.0-alpha.19](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.18...v2.0.0-alpha.19) (2025-09-20)
+
+
+### Features
+
+* add getLoginStatus method ([e14b8fe](https://github.com/openfoodfacts/openfoodfacts-js/commit/e14b8fe57f1eb9c0abd85d1dc219d81c35b4a6fb))
+
+
+### Miscellaneous Chores
+
+* trigger 2.0.0-alpha.19 release ([d659b53](https://github.com/openfoodfacts/openfoodfacts-js/commit/d659b53285fc05dc06f7d2db5b456b7e3a447a25))
+
 ## [2.0.0-alpha.18](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.17...v2.0.0-alpha.18) (2025-09-17)
 
 

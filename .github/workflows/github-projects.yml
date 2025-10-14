@@ -1,4 +1,8 @@
 name: Add bugs to the relevant GitHub Projects
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
 
 on:
   issues:

@@ -24,7 +24,7 @@ jobs:
           corepack enable
 
       - name: Setup Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node-version }}
           cache: "yarn"
@@ -59,7 +59,7 @@ jobs:
           corepack enable
 
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: lts/*
           cache: "yarn"
@@ -95,7 +95,7 @@ jobs:
           corepack enable
 
       - name: Setup Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: lts/*
           cache: "yarn"

@@ -10,7 +10,7 @@ apis:
       output: ./src/schemas/prices.ts
 
   robotoff:
-    root: https://raw.githubusercontent.com/openfoodfacts/robotoff/main/doc/references/api.yml
+    root: https://raw.githubusercontent.com/openfoodfacts/robotoff/main/docs/references/api.yml
     x-openapi-ts:
       output: ./src/schemas/robotoff.ts
 

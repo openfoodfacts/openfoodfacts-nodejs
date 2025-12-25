@@ -407,9 +407,9 @@ export class OpenFoodFacts {
    * ```
    * @returns A promise that resolves to a product object with the specified fields or undefined if not found
    */
-  getProductV3 = <T extends Array<keyof ProductV3 | "all">>(
+  getProductV3 = <Key extends Array<Extract<keyof ProductV3, string> | "all">>(
     barcode: string,
-    query?: Omit<ProductQueryV3, "fields"> & { fields?: T },
+    query?: Omit<ProductQueryV3, "fields"> & { fields?: Key },
   ) => this.apiv3.getProductV3(barcode, query);
 
   /**

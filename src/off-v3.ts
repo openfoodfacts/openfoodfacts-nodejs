@@ -12,11 +12,11 @@ export type ResponseStatus = components["schemas"]["response_status"];
 export type Product = components["schemas"]["product_v3"];
 
 export type ProductImageUploadParams = NonNullable<
-  operations["post-api-v3-product-barcode-images"]["requestBody"]
+  operations["post-api-v3-product-code-images"]["requestBody"]
 >["content"]["application/json"];
 
 export type ProductQuery = NonNullable<
-  operations["get-product-by-barcode"]["parameters"]["query"]
+  operations["get-api-v3-product-code"]["parameters"]["query"]
 >;
 
 export type ProductDataSection = {
@@ -166,9 +166,9 @@ export class ProductOpenerApiV3 {
     });
   }
 
-  async uploadProductImage(barcode: string, params: ProductImageUploadParams) {
-    return this.client.POST("/api/v3/product/{barcode}/images", {
-      params: { path: { barcode } },
+  async uploadProductImage(code: string, params: ProductImageUploadParams) {
+    return this.client.POST("/api/v3/product/{code}/images", {
+      params: { path: { code } },
       body: { ...params },
     });
   }
@@ -179,18 +179,18 @@ export class ProductOpenerApiV3 {
    * @param imgid - The id of the image to be deleted
    * @returns A promise that resolves to the deletion response
    */
-  async deleteProductImage(barcode: string, imgid: number) {
+  async deleteProductImage(code: string, imgid: number) {
     return await this.client.DELETE(
-      "/api/v3/product/{barcode}/images/uploaded/{imgid}",
-      { params: { path: { barcode, imgid } } },
+      "/api/v3/product/{code}/images/uploaded/{imgid}",
+      { params: { path: { code, imgid } } },
     );
   }
 
   /**
    * Returns product details by barcode with optional fields
-   * @param barcode - The barcode of the product
+   * @param code - The barcode of the product
    * @param query - An optional query object to filter the returned fields
-   * @template T - An array of keys from ProductV3 to return
+   * @template Keys - An array of keys from ProductV3 to return
    * @example
    * ```typescript
    * const result = await api.getProductV3("1234567890123", { fields: ["product_name", "brands"] });
@@ -198,13 +198,12 @@ export class ProductOpenerApiV3 {
    * ```
    * @returns A promise that resolves to a product object with the specified fields or undefined if not found
    */
-  async getProductV3<T extends Array<keyof Product | "all">>(
-    barcode: string,
-    query?: Omit<ProductQuery, "fields"> & { fields?: T },
-  ) {
-    const { error, data } = await this.client.GET("/api/v3/product/{barcode}", {
+  async getProductV3<
+    Keys extends Array<Extract<keyof Product, string> | "all">,
+  >(code: string, query?: Omit<ProductQuery, "fields"> & { fields?: Keys }) {
+    const { error, data } = await this.client.GET("/api/v3/product/{code}", {
       params: {
-        path: { barcode },
+        path: { code },
         query: { ...query, fields: query?.fields?.join(",") },
       },
     });
@@ -218,7 +217,7 @@ export class ProductOpenerApiV3 {
       : Pick<Product, Extract<T[number], keyof Product>>;
 
     return {
-      data: data as ProductState<ProductStateType<T>>,
+      data: data as ProductState<ProductStateType<Keys>>,
       error: undefined,
     };
   }

@@ -99,10 +99,10 @@ describe("OpenFoodFacts", () => {
       expect(result).toBeDefined();
       expect(result).toEqual(mockData.product.attribute_groups_en);
       expect(productsApi.apiv2.client.GET).toHaveBeenCalledWith(
-        "/api/v2/product/{barcode}",
+        "/api/v2/product/{code}",
         {
           params: {
-            path: { barcode: testBarcode },
+            path: { code: testBarcode },
             query: { fields: "product_name,code,attribute_groups_en" },
           },
         },
@@ -138,10 +138,10 @@ describe("OpenFoodFacts", () => {
       expect(data).toBeDefined();
       expect(data).toEqual(mockData);
       expect(productsApi.apiv3.client.GET).toHaveBeenCalledWith(
-        "/api/v3/product/{barcode}",
+        "/api/v3/product/{code}",
         {
           params: {
-            path: { barcode: testBarcode },
+            path: { code: testBarcode },
             query: { fields: "product_name,brands" },
           },
         },
@@ -160,10 +160,10 @@ describe("OpenFoodFacts", () => {
 
       expect(data).toEqual(productV3MockData);
       expect(productsApi.apiv3.client.GET).toHaveBeenCalledWith(
-        "/api/v3/product/{barcode}",
+        "/api/v3/product/{code}",
         {
           params: {
-            path: { barcode: testBarcodeV3 },
+            path: { code: testBarcodeV3 },
             query: { fields: undefined },
           },
         },
@@ -191,9 +191,9 @@ describe("OpenFoodFacts", () => {
       expect(data).toEqual(mockData);
 
       expect(productsApi.apiv2.client.GET).toHaveBeenCalledWith(
-        "/api/v2/product/{barcode}",
+        "/api/v2/product/{code}",
         {
-          params: { path: { barcode: testBarcode } },
+          params: { path: { code: testBarcode } },
         },
       );
     });
@@ -227,11 +227,11 @@ describe("OpenFoodFacts", () => {
 
       expect(result).toEqual(["front", "ingredients", "nutrition"]);
       expect(productsApi.apiv2.client.GET).toHaveBeenCalledWith(
-        "/api/v2/product/{barcode}",
+        "/api/v2/product/{code}",
         {
           params: {
             query: { fields: "images" },
-            path: { barcode: testBarcode },
+            path: { code: testBarcode },
           },
         },
       );

@@ -117,10 +117,10 @@ export class ProductOpenerApiV2 {
    * @param barcode - The barcode of the product
    * @returns A promise that resolves to an array of product attributes
    */
-  async getProductAttributes(barcode: string): Promise<ProductAttribute[]> {
-    const res = await this.client.GET("/api/v2/product/{barcode}", {
+  async getProductAttributes(code: string): Promise<ProductAttribute[]> {
+    const res = await this.client.GET("/api/v2/product/{code}", {
       params: {
-        path: { barcode },
+        path: { code },
         query: { fields: "product_name,code,attribute_groups_en" },
       },
     });
@@ -296,22 +296,22 @@ export class ProductOpenerApiV2 {
    * @example
    * const {data, error} = await getProductV2(barcode);
    */
-  async getProductV2(barcode: string) {
-    return this.client.GET("/api/v2/product/{barcode}", {
-      params: { path: { barcode } },
+  async getProductV2(code: string) {
+    return this.client.GET("/api/v2/product/{code}", {
+      params: { path: { code } },
     });
   }
 
   /**
    * Returns an array of image names for the product
-   * @param barcode - The barcode of the product
+   * @param code - The barcode of the product
    * @returns A promise that resolves to an array of image names or null if not found
    */
-  async getProductImages(barcode: string): Promise<string[] | null> {
-    const res = await this.client.GET("/api/v2/product/{barcode}", {
+  async getProductImages(code: string): Promise<string[] | null> {
+    const res = await this.client.GET("/api/v2/product/{code}", {
       params: {
         query: { fields: "images" },
-        path: { barcode },
+        path: { code },
       },
     });
 

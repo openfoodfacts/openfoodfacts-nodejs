@@ -1,5 +1,22 @@
 # Changelog
 
+## [2.0.0-alpha.20](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.19...v2.0.0-alpha.20) (2026-01-12)
+
+
+### Bug Fixes
+
+* **auth:** enhance getLoginStatus to return error details on failure ([0a84b34](https://github.com/openfoodfacts/openfoodfacts-js/commit/0a84b34b97c5268501a0dd22885d0d9d7b825565))
+* Potential fix for code scanning alert no. 10: Workflow does not contain permissions ([fd6e1c2](https://github.com/openfoodfacts/openfoodfacts-js/commit/fd6e1c240ba4aae197de1d7082a9c0aaa8ea0a19))
+* Potential fix for code scanning alert no. 11: Workflow does not contain permissions ([416c7ef](https://github.com/openfoodfacts/openfoodfacts-js/commit/416c7ef32305510334193a8a0b48f0fa77231d63))
+* Potential fix for code scanning alert no. 20: Workflow does not contain permissions ([35c5e43](https://github.com/openfoodfacts/openfoodfacts-js/commit/35c5e43b44023ea13f64f2996dc442dba8561eda))
+* Potential fix for code scanning alert no. 9: Workflow does not contain permissions ([c9ba350](https://github.com/openfoodfacts/openfoodfacts-js/commit/c9ba3509c106e95a4f6f0975f10bcfb0fd408735))
+* **search:** improve typing for charts parameter in POST /search ([a21b9f1](https://github.com/openfoodfacts/openfoodfacts-js/commit/a21b9f1843a079aed481f77cf74ead5c1d00316f))
+
+
+### Miscellaneous Chores
+
+* trigger 2.0.0-alpha.20 release ([04950ad](https://github.com/openfoodfacts/openfoodfacts-js/commit/04950ad6b60b7125740c8d6808330ae34acd308b))
+
 ## [2.0.0-alpha.19](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.18...v2.0.0-alpha.19) (2025-09-20)
 
 

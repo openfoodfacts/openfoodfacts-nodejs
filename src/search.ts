@@ -8,8 +8,26 @@ export type DocumentQuery =
   paths["/document/{identifier}"]["get"]["parameters"]["query"];
 
 export type SearchQuery = paths["/search"]["get"]["parameters"]["query"];
-export type SearchBody =
+type RawSearchBody =
   paths["/search"]["post"]["requestBody"]["content"]["application/json"];
+
+// TODO: These are defined because openapi does not have correct typing for
+// the /search POST charts parameter.
+// Once the OpenAPI spec is fixed, these types can be removed.
+type DistributionChartParam = {
+  chart_type: "DistributionChart";
+  field: string;
+};
+
+type ScatterChartParam = {
+  chart_type: "ScatterChart";
+  x: string;
+  y: string;
+};
+
+export type SearchBody = Omit<RawSearchBody, "charts"> & {
+  charts?: (DistributionChartParam | ScatterChartParam)[];
+};
 
 export type AutocompleteQuery =
   paths["/autocomplete"]["get"]["parameters"]["query"];
@@ -40,7 +58,9 @@ export class SearchApi {
   }
 
   async search(body: SearchBody) {
-    return this.client.POST("/search", { body });
+    return this.client.POST("/search", {
+      body: body as unknown as RawSearchBody,
+    });
   }
 
   async searchGet(query: SearchQuery) {

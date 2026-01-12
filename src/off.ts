@@ -551,13 +551,15 @@ export class OpenFoodFacts {
     return (await res.json()) as FacetValueResponse;
   }
 
-  async getLoginStatus(): Promise<LoginStatus | undefined> {
+  async getLoginStatus() {
     const response = await this.fetch(
       new URL("/cgi/auth.pl?body=1", this.baseUrl),
     );
 
-    if (!response.ok) return undefined;
-    return (await response.json()) as LoginStatus;
+    if (!response.ok) {
+      return { error: `HTTP error! status: ${response.status}` };
+    }
+    return { data: (await response.json()) as LoginStatus };
   }
 }
 

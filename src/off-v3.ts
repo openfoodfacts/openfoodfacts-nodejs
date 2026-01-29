@@ -19,6 +19,12 @@ export type ProductQuery = NonNullable<
   operations["get-api-v3-product-code"]["parameters"]["query"]
 >;
 
+export type ImageSelectionData = NonNullable<
+  NonNullable<
+    operations["patch-api-v3-product-code"]["requestBody"]
+  >["content"]["application/json"]["product"]
+>["images"];
+
 export type ProductDataSection = {
   created_t: number;
   creator: string;
@@ -184,6 +190,18 @@ export class ProductOpenerApiV3 {
       "/api/v3/product/{code}/images/uploaded/{imgid}",
       { params: { path: { code, imgid } } },
     );
+  }
+
+  /**
+   * Select and crop images using API v3.3
+   * @param barcode Product barcode
+   * @param images Object containing image selections and crop parameters
+   */
+  async selectAndCropImagesV3(barcode: string, images: ImageSelectionData) {
+    return await this.client.PATCH("/api/v3/product/{code}", {
+      params: { path: { code: barcode } },
+      body: { fields: "updated", product: { images } },
+    });
   }
 
   /**

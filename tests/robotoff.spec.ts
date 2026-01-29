@@ -1,53 +1,72 @@
-import { Robotoff } from "../src";
-
+import { LogoAnnotation, Robotoff } from "../src";
+import { TestUtils } from "./utils/test-utils";
 describe("Robotoff", () => {
+  let fetchMock: jest.Mock;
+  let robotoff: Robotoff;
+  let testLogoId = 12345;
+  const mockResponse = TestUtils.mockResponse;
 
-    const robotoff = new Robotoff(fetch as any);
-    let testLogoId: number;
-    it("searches logo crops", async () => {
- 
-        const res = await robotoff.searchLogos({
-          barcode: "5410041040807",
-          count: 2,
-        });
- 
-        expect(res.data).toBeDefined();
-        expect(res.data?.logos).toBeDefined();
-        expect(res.data!.logos.length).toBeGreaterThan(0);
-        testLogoId = res.data!.logos[0].id as number;
+  beforeEach(() => {
+    fetchMock = jest.fn();
+    global.fetch = fetchMock as any;
+    robotoff = new Robotoff(fetchMock);
+  });
+
+  afterEach(() => {
+    jest.resetAllMocks();
+  });
+  it("searches logo crops", async () => {
+    const mockData = { logos: [{ id: testLogoId }], count: 1 };
+    fetchMock.mockResolvedValue(mockResponse(mockData));
+
+    const res = await robotoff.searchLogos({
+      barcode: "5410041040807",
+      count: 2,
     });
-    it("annotates a logo", async () => {
-        const annotations: {
-            logo_id: number;
-            type: "brand" | "category" | "label" | "no_logo" | "nutritional_label" | "packager_code" | "packaging" | "qr_code" | "store";
-            value: string | null;
-            server_type?: "off" | "obf" | "opff" | "opf" | "off_pro";
-          }[] = [
-            {
-              logo_id: testLogoId,
-              type: "brand",
-              value: "test-brand",
-              server_type: "off",
-            },
-        ];
+    expect(res.data).toBeDefined();
+    expect(res.data?.logos).toBeDefined();
+    expect(res.data!.logos.length).toBeGreaterThan(0);
+    testLogoId = res.data!.logos[0].id as number;
+  });
+  it("annotates a logo", async () => {
+    const annotations: LogoAnnotation[] = [
+      {
+        logo_id: testLogoId,
+        type: "brand",
+        value: "test-brand",
+        server_type: "off",
+      },
+    ];
 
-        const res = await robotoff.annotateLogos(annotations);
-        expect(res).toBeDefined();
-    });
+    const mockData = { annotated: 1 };
+    fetchMock.mockResolvedValue(mockResponse(mockData));
 
+    const res = await robotoff.annotateLogos(annotations);
 
-    it("gets logo annotations", async () => {
-        const res = await robotoff.getLogoAnnotations(testLogoId);
+    expect(res.data).toBeDefined();
+    expect(res.data?.annotated).toBeGreaterThan(0);
+  });
 
-        expect(res.data).toBeDefined();
-        expect(Array.isArray(res.data?.annotations || [])).toBe(true);
-    
-    }, 15000);
+  it("gets logo annotations", async () => {
+    const mockData = {
+      annotations: [
+        { logo_id: testLogoId, type: "brand", value: "test-brand" },
+      ],
+    };
+    fetchMock.mockResolvedValue(mockResponse(mockData));
 
-    it("resets a logo", async () => {
-        const res = await robotoff.resetLogo(testLogoId);
-    
-        expect(res).toBeDefined();
-    });
+    const res = await robotoff.getLogoAnnotations(testLogoId);
 
+    expect(res.data).toBeDefined();
+    expect(Array.isArray(res.data?.annotations)).toBe(true);
+    expect(res.data?.annotations.length).toBeGreaterThan(0);
+  }, 15000);
+
+  it("resets a logo", async () => {
+    fetchMock.mockResolvedValue(mockResponse(null, true, 204));
+
+    const res = await robotoff.resetLogo(testLogoId);
+
+    expect(res.response.status).toBe(204);
+  });
 });

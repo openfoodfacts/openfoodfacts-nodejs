@@ -10,19 +10,15 @@ export type AttributeGroups = components["schemas"]["get_attribute_groups"];
 export type Product = components["schemas"]["Product"];
 export type SearchResult = components["schemas"]["search_for_products"];
 
-export type Attribute = {
-  id: string;
-  name: string;
-  grade: string;
-  title: string;
-  description_short?: string;
-  icon_url?: string;
-};
+export type ProductAttribute = NonNullable<
+  components["schemas"]["product_attribute_groups"]["attribute_groups"]
+>[number];
 
-export type ProductAttribute = {
+export type ProductAttributeGroup = {
   id: string;
   name: string;
-  attributes: Attribute[];
+  warning?: string;
+  attributes: ProductAttribute[];
 };
 
 /**

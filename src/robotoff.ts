@@ -35,19 +35,12 @@ export type LogoSearchParams = {
 };
 export type LogoAnnotation = {
   logo_id: number;
-  type:
-    | "brand"
-    | "category"
-    | "label"
-    | "no_logo"
-    | "nutritional_label"
-    | "packager_code"
-    | "packaging"
-    | "qr_code"
-    | "store";
+  type: "brand" | "category" | "label" | "no_logo" | "nutritional_label" | "packager_code" | "packaging" | "qr_code" | "store";
   value: string | null;
   server_type?: "off" | "obf" | "opff" | "opf" | "off_pro";
 };
+
+
 
 export class Robotoff {
   /** The fetch function used for every request */
@@ -119,38 +112,42 @@ export class Robotoff {
     });
   }
 
-  annotateLogos(annotations: LogoAnnotation[]) {
-    return this.raw.POST("/images/logos/annotate", {
-      body: { annotations },
-    });
-  }
+  annotateLogos(
+    annotations: LogoAnnotation[]
+) {
+  return this.raw.POST("/images/logos/annotate", {
+    body: { annotations },
+  });
+}
 
-  resetLogo(logoId: number) {
-    return this.raw.POST("/images/logos/{logo_id}/reset", {
-      params: { path: { logo_id: logoId } },
-    });
-  }
 
-  getLogoAnnotations(logoId?: number, index = 0, count = 25) {
-    const common = {
-      params: {
-        query: { index, count },
-      },
-    };
-    if (logoId != null) {
-      interface AnnSearchByIdParams {
-        path: { logo_id: number };
-        query: { index: number; count: number };
-      }
-      return this.raw.GET("/ann/search/{logo_id:int}", {
-        ...common,
-        params: {
-          ...common.params,
-          path: { logo_id: logoId },
-        } as AnnSearchByIdParams,
-      } as any);
+ resetLogo(logoId: number) {
+  return this.raw.POST("/images/logos/{logo_id}/reset", {
+    params: { path: { logo_id: logoId } },
+  });
+}
+
+getLogoAnnotations(logoId?: number, index = 0, count = 25) {
+  const common = {
+    params: {
+      query: { index, count },
+    },
+  };
+  if (logoId != null) {
+    interface AnnSearchByIdParams {
+      path: { logo_id: number };
+      query: { index: number; count: number };
     }
-
-    return this.raw.GET("/ann/search", common);
+    return this.raw.GET("/ann/search/{logo_id:int}", {
+      ...common,
+      params: {
+        ...common.params,
+        path: { logo_id: logoId },
+      } as AnnSearchByIdParams, 
+    } as any); 
   }
+
+  return this.raw.GET("/ann/search", common);
+}
+  
 }

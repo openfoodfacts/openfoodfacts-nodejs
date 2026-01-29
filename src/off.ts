@@ -47,13 +47,15 @@ import type {
   Product as ProductV2,
   SearchResult as SearchResultV2,
   ProductAttribute as ProductAttributeV2,
-  Attribute as AttributeV2,
+  AttributeGroups as AttributeGroupV2,
+  ProductAttribute as AttributeV2,
 } from "./off-v2.js";
 export type {
   SearchQueryV2,
   ProductV2,
   SearchResultV2,
   ProductAttributeV2,
+  AttributeGroupV2,
   AttributeV2,
 };
 

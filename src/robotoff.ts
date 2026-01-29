@@ -87,4 +87,52 @@ export class Robotoff {
     });
     return result.data;
   }
+  searchLogos(params: {
+  server_type?: "off" | "obf" | "opff" | "opf" | "off_pro";
+  barcode?: string;
+  count?: number;
+  type?: string;
+  value?: string;
+  taxonomy_value?: string;
+  min_confidence?: number;
+  random?: boolean;
+  annotated?: boolean | null;
+  }) {
+    return this.raw.GET("/images/logos/search", {
+      params: { query: params },
+    });
+  }
+
+ annotateLogos(
+  annotations: Array<{
+    logo_id: number;
+    type: "brand" | "category" | "label" | "no_logo" | "nutritional_label" | "packager_code" | "packaging" | "qr_code" | "store";
+    value: string | null;
+    server_type?: "off" | "obf" | "opff" | "opf" | "off_pro";
+  }>
+) {
+  return this.raw.POST("/images/logos/annotate", {
+    body: { annotations },
+  });
+}
+
+
+ resetLogo(logoId: number) {
+  return this.raw.POST("/images/logos/{logo_id}/reset", {
+    params: { path: { logo_id: logoId } },
+  });
+}
+
+getLogoAnnotations(logoId?: number, index = 0, count = 25) {
+  const path = logoId
+    ? "/ann/search/{logo_id}"
+    : "/ann/search";
+  return this.raw.GET(path as any, {
+    params: {
+      path: logoId ? { logo_id: logoId } : undefined,
+      query: { index, count },
+    },
+  });
+}
+  
 }

@@ -34,7 +34,6 @@ describe("Robotoff", () => {
         logo_id: testLogoId,
         type: "brand",
         value: "test-brand",
-        server_type: "off",
       },
     ];
 

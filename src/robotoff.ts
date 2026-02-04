@@ -22,31 +22,11 @@ export type QuestionsResponse = {
   status?: "found" | "no_questions";
   questions?: Question[];
 };
-// export type LogoSearchParams =
-  // paths["/images/logos/search"]["get"]["parameters"]["query"];
+export type LogoSearchParams =
+  paths["/images/logos/search"]["get"]["parameters"]["query"];
 
-// export type LogoAnnotation =
-  // paths["/images/logos/annotate"]["post"]["requestBody"]["content"]["application/json"]["annotations"][number];
-
-export type LogoSearchParams = {
-  server_type?: "off" | "obf" | "opff" | "opf" | "off_pro";
-  barcode?: string;
-  count?: number;
-  type?: string;
-  value?: string;
-  taxonomy_value?: string;
-  min_confidence?: number;
-  random?: boolean;
-  annotated?: boolean | null;
-};
-export type LogoAnnotation = {
-  logo_id: number;
-  type: "brand" | "category" | "label" | "no_logo" | "nutritional_label" | "packager_code" | "packaging" | "qr_code" | "store";
-  value: string | null;
-  server_type?: "off" | "obf" | "opff" | "opf" | "off_pro";
-};
-
-
+export type LogoAnnotation =
+  paths["/images/logos/annotate"]["post"]["requestBody"]["content"]["application/json"]["annotations"][number];
 
 export class Robotoff {
   /** The fetch function used for every request */

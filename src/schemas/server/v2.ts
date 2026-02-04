@@ -1792,9 +1792,9 @@ export interface components {
              *     See also `entry_dates_tags`
              * @example 1457680652
              */
-            created_t?: number;
+            created_t: number;
             /** @description The contributor who added the product first. */
-            creator?: string;
+            creator: string;
             /** @description List of editors who edited the product. */
             editors_tags?: string[];
             informers_tags?: string[];
@@ -1815,26 +1815,26 @@ export interface components {
              * @description The username of the user who last modified the product.
              * @example sebleouf
              */
-            last_modified_by?: string;
+            last_modified_by: string;
             /**
              * @description Date when the product page was last modified.
              *     This date is updated only when primary data is modified (data entered by the user or updated by an interface)
              */
-            last_modified_t?: number;
+            last_modified_t: number;
             /**
              * @description Date when the product page was last modified.
              *     This date is updated when primary data or secondary data is modified
              *     (primary: data entered by a user or read from an interface, secondary: data computed by a utility
              *     such as update_all_products.pl)
              */
-            last_updated_t?: number;
+            last_updated_t: number;
             /** @description Id of the producer in case he provides his own data about a product (producer platform). */
             owner?: string;
             /** @description Tagyfied version of owner */
             owners_tags?: string;
             photographers_tags?: string[];
             /** @description revision number of this product version (each edit adds a revision) */
-            rev?: number;
+            rev: number;
             sources?: {
                 fields?: string[];
                 id?: string;

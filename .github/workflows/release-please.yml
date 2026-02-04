@@ -11,12 +11,15 @@ permissions:
 jobs:
   release-please:
     runs-on: ubuntu-latest
-    outputs:
-      new_version: ${{ steps.release-please.outputs.release_created }}
-      sha: ${{ steps.release-please.outputs.sha }}
+
     steps:
       - uses: googleapis/release-please-action@v4
+        id: release-please
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           release-type: node
           target-branch: develop
+
+      - name: Trigger npm publish workflow
+        if: ${{ steps.release-please.outputs.release_created == 'true' }}
+        uses: gh workflow run package.yml -F git_ref=refs/tags/${{ steps.release-please.outputs.tag_name }}

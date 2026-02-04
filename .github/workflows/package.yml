@@ -1,12 +1,12 @@
 name: Publish to npm
 on:
-  # Trigger on successful completion of release-please workflow
-  workflow_run:
-    workflows: [release-please]
-    types: [completed]
-
-  # Allows manual triggering
+  # Allows triggering both from release-please workflow and manually
   workflow_dispatch:
+    inputs:
+      git_ref:
+        description: "Git ref to build from (tag or branch)"
+        required: true
+        type: string
 
 jobs:
   build:
@@ -15,18 +15,14 @@ jobs:
       contents: read
       id-token: write
 
-    # We want to run this job only when
-    # - the workflow is manually triggered
-    # - the release-please workflow has completed successfully and created a release
-    if: |
-      (github.event_name == 'workflow_dispatch' && startsWith(github.event.ref, 'refs/tags/')) ||
-      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.outputs.release_created)
+    # Trigger only on tags
+    if: startsWith(github.event.inputs.git_ref, 'refs/tags/')
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
         with:
-          ref: ${{ github.event.workflow_run.outputs.sha || github.event.ref }}
+          ref: ${{ github.event.inputs.git_ref }}
 
       - name: Setup Node.js and .npmrc
         uses: actions/setup-node@v6

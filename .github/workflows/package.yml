@@ -9,14 +9,13 @@ on:
         type: string
 
 jobs:
-  build:
+  publish:
     runs-on: ubuntu-latest
     permissions:
       contents: read
       id-token: write
 
-    # Trigger only on tags
-    if: startsWith(github.event.inputs.git_ref, 'refs/tags/')
+    if: github.event_name == 'workflow_dispatch' || startsWith(github.git_ref, 'refs/tags/'))
 
     steps:
       - name: Checkout code
@@ -31,6 +30,9 @@ jobs:
           # needed to publish to npm registry
           registry-url: "https://registry.npmjs.org"
           scope: "@openfoodfacts"
+
+      - name: Enable Corepack
+        run: corepack enable
 
       - name: Install dependencies
         run: yarn install --immutable

@@ -46,4 +46,4 @@ jobs:
       - name: Publish to npm
         run: yarn npm publish --access public --provenance
         env:
-          NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          YARN_NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

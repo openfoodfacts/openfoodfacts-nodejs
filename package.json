@@ -11,13 +11,13 @@
     "NodeJS",
     "Wrapper"
   ],
-  "homepage": "https://github.com/openfoodfacts/openfoodfacts-nodejs#readme",
+  "homepage": "https://github.com/openfoodfacts/openfoodfacts-js#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/openfoodfacts/openfoodfacts-nodejs.git"
+    "url": "https://github.com/openfoodfacts/openfoodfacts-js.git"
   },
   "bugs": {
-    "url": "https://github.com/openfoodfacts/openfoodfacts-nodejs/issues"
+    "url": "https://github.com/openfoodfacts/openfoodfacts-js/issues"
   },
   "types": "./dist/types/index.d.ts",
   "main": "./dist/cjs/index.js",

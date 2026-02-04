@@ -14,7 +14,7 @@
   "homepage": "https://github.com/openfoodfacts/openfoodfacts-nodejs#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/openfoodfacts/openfoodfacts-nodejs.git"
+    "url": "https://github.com/openfoodfacts/openfoodfacts-nodejs.git"
   },
   "bugs": {
     "url": "https://github.com/openfoodfacts/openfoodfacts-nodejs/issues"

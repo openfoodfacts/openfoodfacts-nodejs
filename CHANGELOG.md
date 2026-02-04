@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.0.0-alpha.24](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.23...v2.0.0-alpha.24) (2026-02-04)
+
+
+### Bug Fixes
+
+* Update package URLs to openfoodfacts-js ([32892c5](https://github.com/openfoodfacts/openfoodfacts-js/commit/32892c526f999f037200f70e2d981baf42cc5a49))
+
+
+### Continuous Integration
+
+* Remove build step in package.yml ([32892c5](https://github.com/openfoodfacts/openfoodfacts-js/commit/32892c526f999f037200f70e2d981baf42cc5a49))
+
 ## [2.0.0-alpha.23](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.22...v2.0.0-alpha.23) (2026-02-04)
 
 

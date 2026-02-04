@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.0.0-alpha.22](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.21...v2.0.0-alpha.22) (2026-02-04)
+
+
+### Bug Fixes
+
+* Change trigger condition for NPM publish workflow, add permissions ([814233a](https://github.com/openfoodfacts/openfoodfacts-js/commit/814233a63690d5eaac4ac363378bde6c5829bfa5))
+
+
+### Miscellaneous Chores
+
+* trigger 2.0.0-alpha.22 release ([f931df2](https://github.com/openfoodfacts/openfoodfacts-js/commit/f931df2cab420c4e7a8055697b7e8ce3214d8605))
+
 ## [2.0.0-alpha.21](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.20...v2.0.0-alpha.21) (2026-02-04)
 
 

@@ -169,6 +169,22 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/locations/osm/countries": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["locations_osm_countries_list"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/price-tags": {
         parameters: {
             query?: never;
@@ -604,6 +620,12 @@ export interface components {
          * @enum {string}
          */
         ChallengeStatusEnum: "DRAFT" | "UPCOMING" | "ONGOING" | "COMPLETED";
+        Country: {
+            id: number;
+            name: string;
+            country_code_2: string;
+            osm_name?: string | null;
+        };
         /**
          * @description * `ADP` - ADP
          *     * `AED` - AED
@@ -1045,6 +1067,29 @@ export interface components {
              */
             total: number;
         };
+        PaginatedCountryList: {
+            items: components["schemas"]["Country"][][];
+            /**
+             * @description Current page number
+             * @example 1
+             */
+            page: number;
+            /**
+             * @description Total number of pages
+             * @example 16
+             */
+            pages: number;
+            /**
+             * @description Number of items per page
+             * @example 100
+             */
+            size: number;
+            /**
+             * @description Total number of items
+             * @example 1531
+             */
+            total: number;
+        };
         PaginatedFlagList: {
             items: components["schemas"]["Flag"][][];
             /**
@@ -1385,6 +1430,8 @@ export interface components {
              *     * `1` - linked_to_price
              */
             status?: (components["schemas"]["ReceiptItemFullStatusEnum"] | components["schemas"]["BlankEnum"] | components["schemas"]["NullEnum"]) | null;
+            /** @description The schema version of the predicted data. Used to handle changes in the prediction data structure. */
+            schema_version?: string | null;
             /**
              * Format: date-time
              * @description When the item was created in DB
@@ -1467,6 +1514,7 @@ export interface components {
             created?: string;
             /** Format: date-time */
             readonly updated: string;
+            duplicate_of?: number | null;
         };
         PriceHistory: {
             history_id: number;
@@ -1561,7 +1609,7 @@ export interface components {
             model_name: string;
             /** @description The specific version of the model that generated the prediction */
             model_version: string;
-            /** @description The schema version of the prediction data. Used to handle changes in the prediction data structure. It is currently used when calling Gemine API to extract price tags. */
+            /** @description The schema version of the prediction data. Used to handle changes in the prediction data structure. It is currently used when calling Gemini API to extract price tags. */
             schema_version?: string | null;
             /** @description a dict representing the data of the prediction. This field is model-specific. */
             data?: unknown;
@@ -1907,6 +1955,8 @@ export interface components {
              *     * `1` - linked_to_price
              */
             status?: (components["schemas"]["ReceiptItemFullStatusEnum"] | components["schemas"]["BlankEnum"] | components["schemas"]["NullEnum"]) | null;
+            /** @description The schema version of the predicted data. Used to handle changes in the prediction data structure. */
+            schema_version?: string | null;
             /**
              * Format: date-time
              * @description When the item was created in DB
@@ -2321,8 +2371,8 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                osm_id: string;
-                osm_type: string;
+                osm_id: number;
+                osm_type: "NODE" | "RELATION" | "WAY";
             };
             cookie?: never;
         };
@@ -2334,6 +2384,30 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["Location"];
+                };
+            };
+        };
+    };
+    locations_osm_countries_list: {
+        parameters: {
+            query?: {
+                /** @description A page number within the paginated result set. */
+                page?: number;
+                /** @description Number of results to return per page. */
+                size?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PaginatedCountryList"];
                 };
             };
         };
@@ -2351,6 +2425,7 @@ export interface operations {
                 prediction_count__gte?: number;
                 prediction_count__lte?: number;
                 price_id?: number;
+                proof__location__osm_address_country_code?: string;
                 proof__owner?: string;
                 proof__ready_for_price_tag_validation?: boolean;
                 proof_id?: number;
@@ -2817,6 +2892,7 @@ export interface operations {
                  *     * `OTHER` - OTHER
                  */
                 discount_type?: "EXPIRES_SOON" | "LOYALTY_PROGRAM" | "OTHER" | "PICK_IT_YOURSELF" | "QUANTITY" | "SALE" | "SEASONAL" | "SECOND_HAND" | null;
+                duplicate_of__isnull?: boolean;
                 /**
                  * @description * `COMMUNITY` - COMMUNITY
                  *     * `CONSUMPTION` - CONSUMPTION
@@ -2824,6 +2900,11 @@ export interface operations {
                 kind?: "COMMUNITY" | "CONSUMPTION";
                 labels_tags__contains?: string;
                 location__osm_name__contains?: string;
+                /**
+                 * @description * `OSM` - OSM
+                 *     * `ONLINE` - ONLINE
+                 */
+                location__type?: "ONLINE" | "OSM";
                 location_id?: number;
                 /** @description Multiple values may be separated by commas. */
                 location_id__in?: number[];
@@ -2850,6 +2931,13 @@ export interface operations {
                 product__categories_tags__contains?: string;
                 /** @description Multiple values may be separated by commas. */
                 product__categories_tags__overlap?: string[][];
+                /**
+                 * @description * `off` - off
+                 *     * `obf` - obf
+                 *     * `opff` - opff
+                 *     * `opf` - opf
+                 */
+                product__source?: "obf" | "off" | "opf" | "opff" | null;
                 product_code?: string;
                 /** @description Multiple values may be separated by commas. */
                 product_code__in?: string[];
@@ -3353,6 +3441,7 @@ export interface operations {
                  *     * `OTHER` - OTHER
                  */
                 discount_type?: "EXPIRES_SOON" | "LOYALTY_PROGRAM" | "OTHER" | "PICK_IT_YOURSELF" | "QUANTITY" | "SALE" | "SEASONAL" | "SECOND_HAND" | null;
+                duplicate_of__isnull?: boolean;
                 /**
                  * @description * `COMMUNITY` - COMMUNITY
                  *     * `CONSUMPTION` - CONSUMPTION
@@ -3360,6 +3449,11 @@ export interface operations {
                 kind?: "COMMUNITY" | "CONSUMPTION";
                 labels_tags__contains?: string;
                 location__osm_name__contains?: string;
+                /**
+                 * @description * `OSM` - OSM
+                 *     * `ONLINE` - ONLINE
+                 */
+                location__type?: "ONLINE" | "OSM";
                 location_id?: number;
                 /** @description Multiple values may be separated by commas. */
                 location_id__in?: number[];
@@ -3386,6 +3480,13 @@ export interface operations {
                 product__categories_tags__contains?: string;
                 /** @description Multiple values may be separated by commas. */
                 product__categories_tags__overlap?: string[][];
+                /**
+                 * @description * `off` - off
+                 *     * `obf` - obf
+                 *     * `opff` - opff
+                 *     * `opf` - opf
+                 */
+                product__source?: "obf" | "off" | "opf" | "opff" | null;
                 product_code?: string;
                 /** @description Multiple values may be separated by commas. */
                 product_code__in?: string[];
@@ -3768,6 +3869,7 @@ export interface operations {
                  *     * `OTHER` - OTHER
                  */
                 discount_type?: "EXPIRES_SOON" | "LOYALTY_PROGRAM" | "OTHER" | "PICK_IT_YOURSELF" | "QUANTITY" | "SALE" | "SEASONAL" | "SECOND_HAND" | null;
+                duplicate_of__isnull?: boolean;
                 /**
                  * @description * `COMMUNITY` - COMMUNITY
                  *     * `CONSUMPTION` - CONSUMPTION
@@ -3775,6 +3877,11 @@ export interface operations {
                 kind?: "COMMUNITY" | "CONSUMPTION";
                 labels_tags__contains?: string;
                 location__osm_name__contains?: string;
+                /**
+                 * @description * `OSM` - OSM
+                 *     * `ONLINE` - ONLINE
+                 */
+                location__type?: "ONLINE" | "OSM";
                 location_id?: number;
                 /** @description Multiple values may be separated by commas. */
                 location_id__in?: number[];
@@ -3799,6 +3906,13 @@ export interface operations {
                 product__categories_tags__contains?: string;
                 /** @description Multiple values may be separated by commas. */
                 product__categories_tags__overlap?: string[][];
+                /**
+                 * @description * `off` - off
+                 *     * `obf` - obf
+                 *     * `opff` - opff
+                 *     * `opf` - opf
+                 */
+                product__source?: "obf" | "off" | "opf" | "opff" | null;
                 product_code?: string;
                 /** @description Multiple values may be separated by commas. */
                 product_code__in?: string[];
@@ -4314,7 +4428,14 @@ export interface operations {
                  *     * `CONSUMPTION` - CONSUMPTION
                  */
                 kind?: "COMMUNITY" | "CONSUMPTION";
+                /**
+                 * @description * `OSM` - OSM
+                 *     * `ONLINE` - ONLINE
+                 */
+                location__type?: "ONLINE" | "OSM";
                 location_id?: number;
+                /** @description Multiple values may be separated by commas. */
+                location_id__in?: number[];
                 location_id__isnull?: boolean;
                 location_osm_id?: number;
                 /**
@@ -4789,7 +4910,14 @@ export interface operations {
                  *     * `CONSUMPTION` - CONSUMPTION
                  */
                 kind?: "COMMUNITY" | "CONSUMPTION";
+                /**
+                 * @description * `OSM` - OSM
+                 *     * `ONLINE` - ONLINE
+                 */
+                location__type?: "ONLINE" | "OSM";
                 location_id?: number;
+                /** @description Multiple values may be separated by commas. */
+                location_id__in?: number[];
                 location_id__isnull?: boolean;
                 location_osm_id?: number;
                 /**

@@ -4,15 +4,36 @@ on:
     tags:
       - "v*"
 
+  # Trigger on successful completion of release-please workflow
+  workflow_run:
+    workflows: [release-please]
+    types: [completed]
+
+  # Allows manual triggering
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: "The release tag to checkout"
+        required: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
       contents: read
       id-token: write
+
+    # We want to run this job only when
+    # - a new release is manually created / the workflow is manually triggered
+    # - the release-please workflow has completed successfully and created a release
+    if: github.event_name != 'workflow_run' ||
+      (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.outputs.release_created)
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.release.tag_name || github.event.inputs.release_tag || github.event.workflow_run.outputs || github.sha }}
 
       - name: Setup Node.js and .npmrc
         uses: actions/setup-node@v6
@@ -20,7 +41,7 @@ jobs:
           node-version: "24.x"
           # needed to publish to npm registry
           registry-url: "https://registry.npmjs.org"
-          scope: "@octocat"
+          scope: "@openfoodfacts"
 
       - name: Install dependencies
         run: yarn install --immutable
@@ -32,6 +53,6 @@ jobs:
         run: yarn test
 
       - name: Publish to npm
-        run: yarn publish --access public --provenance
+        run: yarn npm publish --access public --provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

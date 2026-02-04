@@ -11,6 +11,9 @@ permissions:
 jobs:
   release-please:
     runs-on: ubuntu-latest
+    outputs:
+      new_version: ${{ steps.release-please.outputs.release_created }}
+      sha: ${{ steps.release-please.outputs.sha }}
     steps:
       - uses: googleapis/release-please-action@v4
         with:

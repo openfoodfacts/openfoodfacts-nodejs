@@ -1,5 +1,23 @@
 # Changelog
 
+## [2.0.0-alpha.21](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.20...v2.0.0-alpha.21) (2026-02-04)
+
+
+### Features
+
+* **images:** add selectAndCropImagesV3 method ([e23ef4f](https://github.com/openfoodfacts/openfoodfacts-js/commit/e23ef4fca3814183031be14fe693ab1a3e3b1eec))
+
+
+### Bug Fixes
+
+* Require product metadata fields in PO schemas ([837f031](https://github.com/openfoodfacts/openfoodfacts-js/commit/837f031c0461bc893dac43d40a726ec78e62f52f))
+* Update GitHub workflow to publish via Yarn ([36bf328](https://github.com/openfoodfacts/openfoodfacts-js/commit/36bf328a04723283578a6c989e3dc7ef0c7379ee))
+
+
+### Miscellaneous Chores
+
+* trigger 2.0.0-alpha.21 release ([94f9e63](https://github.com/openfoodfacts/openfoodfacts-js/commit/94f9e63298e8e491c92356454c4652799f258585))
+
 ## [2.0.0-alpha.20](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.19...v2.0.0-alpha.20) (2026-01-12)
 
 

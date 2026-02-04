@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.0.0-alpha.28](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.27...v2.0.0-alpha.28) (2026-02-04)
+
+
+### Features
+
+* update OpenPrices schema ([bbc90ec](https://github.com/openfoodfacts/openfoodfacts-js/commit/bbc90ec7cddb648c0c7a66ac6f1f83e61774227d))
+
+
+### Miscellaneous Chores
+
+* Trigger 2.0.0-alpha.28 release ([58ff532](https://github.com/openfoodfacts/openfoodfacts-js/commit/58ff532a30b985c288c1c46ad56428762f45672a))
+
 ## [2.0.0-alpha.27](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.26...v2.0.0-alpha.27) (2026-02-04)
 
 

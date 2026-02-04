@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.0-alpha.26](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.25...v2.0.0-alpha.26) (2026-02-04)
+
+
+### Bug Fixes
+
+* Update release workflow to include outputs and streamline npm publish process ([6369bc6](https://github.com/openfoodfacts/openfoodfacts-js/commit/6369bc68a45c460caf4eb80a92db5cc7f6401184))
+
 ## [2.0.0-alpha.25](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.24...v2.0.0-alpha.25) (2026-02-04)
 
 

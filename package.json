@@ -32,7 +32,7 @@
     "dist"
   ],
   "scripts": {
-    "prepack": "yarn run build",
+    "prepack": "yarn run prebuild && yarn run build",
     "prebuild": "node scripts/prebuild.js",
     "build:docs": "typedoc src/index.ts",
     "build": "yarn run prebuild && tsc -b tsconfig.cjs.json tsconfig.esm.json",

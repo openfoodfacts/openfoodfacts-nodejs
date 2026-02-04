@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.0-alpha.25](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.24...v2.0.0-alpha.25) (2026-02-04)
+
+
+### Continuous Integration
+
+* Include prebuild in prepack script ([616007c](https://github.com/openfoodfacts/openfoodfacts-js/commit/616007cc0cea4f46d3bad90f3379a6561e1963ad))
+
 ## [2.0.0-alpha.24](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.23...v2.0.0-alpha.24) (2026-02-04)
 
 

@@ -17,6 +17,18 @@ on:
           - alpha
         default: "latest"
 
+  workflow_call:
+    inputs:
+      git_ref:
+        description: "Git ref to build from (tag or branch)"
+        required: true
+        type: string
+      tag:
+        description: "Tag to publish (optional)"
+        required: false
+        type: string
+        default: "latest"
+
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -24,7 +36,8 @@ jobs:
       contents: read
       id-token: write
 
-    if: (github.event_name == 'workflow_dispatch' || startsWith(github.git_ref, 'refs/tags/'))
+    # only publish from tags
+    if: startsWith(github.event.inputs.git_ref, 'refs/tags/')
 
     steps:
       - name: Checkout code

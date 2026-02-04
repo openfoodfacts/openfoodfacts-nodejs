@@ -12,6 +12,10 @@ jobs:
   release-please:
     runs-on: ubuntu-latest
 
+    outputs:
+      release_created: ${{ steps.release-please.outputs.release_created }}
+      tag_name: ${{ steps.release-please.outputs.tag_name }}
+
     steps:
       - uses: googleapis/release-please-action@v4
         id: release-please
@@ -20,11 +24,10 @@ jobs:
           release-type: node
           target-branch: develop
 
-      - name: Checkout code
-        uses: actions/checkout@v6
-
-      - name: Trigger npm publish workflow
-        if: ${{ steps.release-please.outputs.release_created == 'true' }}
-        run: gh workflow run package.yml -F git_ref=refs/tags/${{ steps.release-please.outputs.tag_name }}
-        env:
-          GH_TOKEN: ${{ github.token }}
+  release-publish:
+    needs: release-please
+    uses: ./.github/workflows/package.yml
+    if: needs.release-please.outputs.release_created == 'true'
+    with:
+      git_ref: refs/tags/${{ needs.release-please.outputs.tag_name }}
+      tag: latest

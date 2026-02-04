@@ -26,7 +26,7 @@ describe("Robotoff", () => {
     expect(res.data).toBeDefined();
     expect(res.data?.logos).toBeDefined();
     expect(res.data!.logos.length).toBeGreaterThan(0);
-    testLogoId = res.data!.logos[0].id as number;
+    expect(res.data!.logos[0].id).toBe(testLogoId);
   });
   it("annotates a logo", async () => {
     const annotations: LogoAnnotation[] = [
@@ -59,7 +59,14 @@ describe("Robotoff", () => {
 
     expect(res.data).toBeDefined();
     expect(Array.isArray(res.data?.annotations)).toBe(true);
-    expect(res.data?.annotations.length).toBeGreaterThan(0);
+    expect(res.data!.annotations.length).toBe(1);
+
+    expect(res.data!.annotations[0]).toEqual({
+      logo_id: testLogoId,
+      type: "brand",
+      value: "test-brand",
+    });
+
   }, 15000);
 
   it("resets a logo", async () => {
@@ -67,6 +74,8 @@ describe("Robotoff", () => {
 
     const res = await robotoff.resetLogo(testLogoId);
 
-    expect(res.response.status).toBe(204);
+    expect(res.error).toBeUndefined();
+    expect(res.data).toBeUndefined();
+  
   });
 });

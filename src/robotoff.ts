@@ -22,6 +22,12 @@ export type QuestionsResponse = {
   status?: "found" | "no_questions";
   questions?: Question[];
 };
+// export type LogoSearchParams =
+  // paths["/images/logos/search"]["get"]["parameters"]["query"];
+
+// export type LogoAnnotation =
+  // paths["/images/logos/annotate"]["post"]["requestBody"]["content"]["application/json"]["annotations"][number];
+
 export type LogoSearchParams = {
   server_type?: "off" | "obf" | "opff" | "opf" | "off_pro";
   barcode?: string;
@@ -106,6 +112,7 @@ export class Robotoff {
     });
     return result.data;
   }
+
   searchLogos(params: LogoSearchParams) {
     return this.raw.GET("/images/logos/search", {
       params: { query: params },
@@ -126,7 +133,9 @@ export class Robotoff {
     params: { path: { logo_id: logoId } },
   });
 }
-
+// TODO: Fix OpenAPI schema.
+// It defines /ann/search/{logo_id:int} but does not declare logo_id in parameters.path.
+// Once schema is fixed, cast can be removed.
 getLogoAnnotations(logoId?: number, index = 0, count = 25) {
   const common = {
     params: {

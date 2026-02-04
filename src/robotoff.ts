@@ -117,7 +117,7 @@ export class Robotoff {
 // It defines /ann/search/{logo_id:int} but does not declare logo_id in parameters.path.
 // Once schema is fixed, cast can be removed.
 getLogoAnnotations(logoId?: number, index = 0, count = 25) {
-  const common = {
+  const paginationParams = {
     params: {
       query: { index, count },
     },
@@ -128,15 +128,15 @@ getLogoAnnotations(logoId?: number, index = 0, count = 25) {
       query: { index: number; count: number };
     }
     return this.raw.GET("/ann/search/{logo_id:int}", {
-      ...common,
+      ...paginationParams,
       params: {
-        ...common.params,
+        ...paginationParams.params,
         path: { logo_id: logoId },
       } as AnnSearchByIdParams, 
     } as any); 
   }
 
-  return this.raw.GET("/ann/search", common);
+  return this.raw.GET("/ann/search", paginationParams);
 }
   
 }

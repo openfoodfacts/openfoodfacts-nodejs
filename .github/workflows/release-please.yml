@@ -28,6 +28,11 @@ jobs:
     needs: release-please
     uses: ./.github/workflows/package.yml
     if: needs.release-please.outputs.release_created == 'true'
+
+    permissions:
+      contents: read
+      id-token: write
+
     with:
       git_ref: refs/tags/${{ needs.release-please.outputs.tag_name }}
       tag: latest

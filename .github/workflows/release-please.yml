@@ -20,6 +20,9 @@ jobs:
           release-type: node
           target-branch: develop
 
+      - name: Checkout code
+        uses: actions/checkout@v6
+
       - name: Trigger npm publish workflow
         if: ${{ steps.release-please.outputs.release_created == 'true' }}
         run: gh workflow run package.yml -F git_ref=refs/tags/${{ steps.release-please.outputs.tag_name }}

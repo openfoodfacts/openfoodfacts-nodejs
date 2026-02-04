@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.0-alpha.27](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.26...v2.0.0-alpha.27) (2026-02-04)
+
+
+### Bug Fixes
+
+* Simplify condition for release-publish job execution ([f7ac365](https://github.com/openfoodfacts/openfoodfacts-js/commit/f7ac36505cb15b8df728e74243767f3e0a5becc0))
+
 ## [2.0.0-alpha.26](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.25...v2.0.0-alpha.26) (2026-02-04)
 
 

@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.0.0-alpha.23](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.22...v2.0.0-alpha.23) (2026-02-04)
+
+
+### Bug Fixes
+
+* Fix package workflow triggers and publishing ([2ecdcb7](https://github.com/openfoodfacts/openfoodfacts-js/commit/2ecdcb748ecef9f3e6fe4da435fcd9f4ed953978))
+* Remove git+ prefix from repository URL ([9e47031](https://github.com/openfoodfacts/openfoodfacts-js/commit/9e470319b1e3fe4cfccce8d2a0f6a6d35908c2f2))
+
+
+### Miscellaneous Chores
+
+* trigger 2.0.0-alpha.23 release ([fa44d36](https://github.com/openfoodfacts/openfoodfacts-js/commit/fa44d361965309a31e6247e16e7513a3ac1d7da7))
+
 ## [2.0.0-alpha.22](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.21...v2.0.0-alpha.22) (2026-02-04)
 
 

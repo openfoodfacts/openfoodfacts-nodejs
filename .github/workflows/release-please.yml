@@ -23,3 +23,5 @@ jobs:
       - name: Trigger npm publish workflow
         if: ${{ steps.release-please.outputs.release_created == 'true' }}
         run: gh workflow run package.yml -F git_ref=refs/tags/${{ steps.release-please.outputs.tag_name }}
+        env:
+          GH_TOKEN: ${{ github.token }}

@@ -27,7 +27,7 @@ jobs:
   release-publish:
     needs: release-please
     uses: ./.github/workflows/package.yml
-    if: needs.release-please.outputs.release_created == 'true'
+    if: ${{ needs.release-please.outputs.release_created }}
 
     permissions:
       contents: read

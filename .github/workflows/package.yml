@@ -11,10 +11,6 @@ on:
 
   # Allows manual triggering
   workflow_dispatch:
-    inputs:
-      release_tag:
-        description: "The release tag to checkout"
-        required: true
 
 jobs:
   build:
@@ -26,8 +22,10 @@ jobs:
     # We want to run this job only when
     # - a new release is manually created / the workflow is manually triggered
     # - the release-please workflow has completed successfully and created a release
-    if: github.event_name != 'workflow_run' ||
-      (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.outputs.release_created)
+    if: |
+      (github.event_name == 'workflow_dispatch' && startsWith(github.event.ref, 'refs/tags/')) ||
+      (github.event_name == 'release' && github.event.action == 'published') ||
+      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.outputs.release_created)
 
     steps:
       - name: Checkout code

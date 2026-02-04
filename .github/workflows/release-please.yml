@@ -22,4 +22,4 @@ jobs:
 
       - name: Trigger npm publish workflow
         if: ${{ steps.release-please.outputs.release_created == 'true' }}
-        uses: gh workflow run package.yml -F git_ref=refs/tags/${{ steps.release-please.outputs.tag_name }}
+        run: gh workflow run package.yml -F git_ref=refs/tags/${{ steps.release-please.outputs.tag_name }}

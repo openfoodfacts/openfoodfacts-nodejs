@@ -301,7 +301,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/ann/search/{logo_id:int}": {
+    "/ann/search/{logo_id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -1548,7 +1548,10 @@ export interface operations {
                 server_type?: components["parameters"]["server_type"];
             };
             header?: never;
-            path?: never;
+            path: {
+                /** @description The ID of the logo to search for. */
+                logo_id: number;
+            };
             cookie?: never;
         };
         requestBody?: never;

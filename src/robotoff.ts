@@ -99,37 +99,33 @@ export class Robotoff {
     });
   }
 
-  annotateLogos(
-    annotations: LogoAnnotation[]
-) {
-  return this.raw.POST("/images/logos/annotate", {
-    body: { annotations },
-  });
-}
-
-
- resetLogo(logoId: number) {
-  return this.raw.POST("/images/logos/{logo_id}/reset", {
-    params: { path: { logo_id: logoId } },
-  });
-}
-getLogoAnnotations(logoId?: number, index = 0, count = 25) {
-  const paginationParams = {
-    params: {
-      query: { index, count },
-    },
-  };
-  if (logoId != null) {
-    return this.raw.GET("/ann/search/{logo_id}", {
-      ...paginationParams,
-      params: {
-        ...paginationParams.params,
-        path: { logo_id: logoId },
-      }, 
-    }); 
+  annotateLogos(annotations: LogoAnnotation[]) {
+    return this.raw.POST("/images/logos/annotate", {
+      body: { annotations },
+    });
   }
 
-  return this.raw.GET("/ann/search", paginationParams);
-}
-  
+  resetLogo(logoId: number) {
+    return this.raw.POST("/images/logos/{logo_id}/reset", {
+      params: { path: { logo_id: logoId } },
+    });
+  }
+  getLogoAnnotations(logoId?: number, index = 0, count = 25) {
+    const paginationParams = {
+      params: {
+        query: { index, count },
+      },
+    };
+    if (logoId != null) {
+      return this.raw.GET("/ann/search/{logo_id}", {
+        ...paginationParams,
+        params: {
+          ...paginationParams.params,
+          path: { logo_id: logoId },
+        },
+      });
+    }
+
+    return this.raw.GET("/ann/search", paginationParams);
+  }
 }

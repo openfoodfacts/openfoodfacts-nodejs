@@ -48,9 +48,7 @@ describe("Robotoff", () => {
 
   it("gets logo annotations", async () => {
     const mockData = {
-      results: [
-        { logo_id: testLogoId, type: "brand", value: "test-brand" },
-      ],
+      results: [{ logo_id: testLogoId, type: "brand", value: "test-brand" }],
     };
     fetchMock.mockResolvedValue(mockResponse(mockData));
 
@@ -65,7 +63,6 @@ describe("Robotoff", () => {
       type: "brand",
       value: "test-brand",
     });
-
   }, 15000);
 
   it("resets a logo", async () => {
@@ -75,6 +72,5 @@ describe("Robotoff", () => {
 
     expect(res.error).toBeUndefined();
     expect(res.data).toBeUndefined();
-  
   });
 });

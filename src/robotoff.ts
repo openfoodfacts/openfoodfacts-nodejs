@@ -22,6 +22,11 @@ export type QuestionsResponse = {
   status?: "found" | "no_questions";
   questions?: Question[];
 };
+export type LogoSearchParams =
+  paths["/images/logos/search"]["get"]["parameters"]["query"];
+
+export type LogoAnnotation =
+  paths["/images/logos/annotate"]["post"]["requestBody"]["content"]["application/json"]["annotations"][number];
 
 export class Robotoff {
   /** The fetch function used for every request */
@@ -86,5 +91,38 @@ export class Robotoff {
       params: { path: { logoId } },
     });
     return result.data;
+  }
+
+  searchLogos(params: LogoSearchParams) {
+    return this.raw.GET("/images/logos/search", {
+      params: { query: params },
+    });
+  }
+
+  annotateLogos(annotations: LogoAnnotation[]) {
+    return this.raw.POST("/images/logos/annotate", {
+      body: { annotations },
+    });
+  }
+
+  resetLogo(logoId: number) {
+    return this.raw.POST("/images/logos/{logo_id}/reset", {
+      params: { path: { logo_id: logoId } },
+    });
+  }
+
+  getLogoAnnotations(logoId?: number, index = 0, count = 25) {
+    const paginationParams = { query: { index, count } };
+
+    if (logoId == null) {
+      return this.raw.GET("/ann/search", { params: paginationParams });
+    }
+
+    return this.raw.GET("/ann/search/{logo_id}", {
+      params: {
+        ...paginationParams,
+        path: { logo_id: logoId },
+      },
+    });
   }
 }

@@ -110,22 +110,19 @@ export class Robotoff {
       params: { path: { logo_id: logoId } },
     });
   }
+
   getLogoAnnotations(logoId?: number, index = 0, count = 25) {
-    const paginationParams = {
-      params: {
-        query: { index, count },
-      },
-    };
-    if (logoId != null) {
-      return this.raw.GET("/ann/search/{logo_id}", {
-        ...paginationParams,
-        params: {
-          ...paginationParams.params,
-          path: { logo_id: logoId },
-        },
-      });
+    const paginationParams = { query: { index, count } };
+
+    if (logoId == null) {
+      return this.raw.GET("/ann/search", { params: paginationParams });
     }
 
-    return this.raw.GET("/ann/search", paginationParams);
+    return this.raw.GET("/ann/search/{logo_id}", {
+      params: {
+        ...paginationParams,
+        path: { logo_id: logoId },
+      },
+    });
   }
 }

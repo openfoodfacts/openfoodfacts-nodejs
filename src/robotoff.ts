@@ -113,7 +113,6 @@ export class Robotoff {
     params: { path: { logo_id: logoId } },
   });
 }
-
 getLogoAnnotations(logoId?: number, index = 0, count = 25) {
   const paginationParams = {
     params: {

@@ -113,9 +113,7 @@ export class Robotoff {
     params: { path: { logo_id: logoId } },
   });
 }
-// TODO: Fix OpenAPI schema.
-// It defines /ann/search/{logo_id:int} but does not declare logo_id in parameters.path.
-// Once schema is fixed, cast can be removed.
+
 getLogoAnnotations(logoId?: number, index = 0, count = 25) {
   const paginationParams = {
     params: {
@@ -123,17 +121,13 @@ getLogoAnnotations(logoId?: number, index = 0, count = 25) {
     },
   };
   if (logoId != null) {
-    interface AnnSearchByIdParams {
-      path: { logo_id: number };
-      query: { index: number; count: number };
-    }
-    return this.raw.GET("/ann/search/{logo_id:int}", {
+    return this.raw.GET("/ann/search/{logo_id}", {
       ...paginationParams,
       params: {
         ...paginationParams.params,
         path: { logo_id: logoId },
-      } as AnnSearchByIdParams, 
-    } as any); 
+      }, 
+    }); 
   }
 
   return this.raw.GET("/ann/search", paginationParams);

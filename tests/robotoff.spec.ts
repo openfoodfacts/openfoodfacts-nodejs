@@ -48,7 +48,7 @@ describe("Robotoff", () => {
 
   it("gets logo annotations", async () => {
     const mockData = {
-      annotations: [
+      results: [
         { logo_id: testLogoId, type: "brand", value: "test-brand" },
       ],
     };
@@ -57,10 +57,10 @@ describe("Robotoff", () => {
     const res = await robotoff.getLogoAnnotations(testLogoId);
 
     expect(res.data).toBeDefined();
-    expect(Array.isArray(res.data?.annotations)).toBe(true);
-    expect(res.data!.annotations.length).toBe(1);
+    expect(Array.isArray(res.data?.results)).toBe(true);
+    expect(res.data!.results.length).toBe(1);
 
-    expect(res.data!.annotations[0]).toEqual({
+    expect(res.data!.results[0]).toEqual({
       logo_id: testLogoId,
       type: "brand",
       value: "test-brand",

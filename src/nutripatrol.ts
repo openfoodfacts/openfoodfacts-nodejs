@@ -4,7 +4,7 @@ import type { components, paths } from "./schemas/nutripatrol.js";
 
 import { DEFAULT_NUTRIPATROL_API_URL, USER_AGENT } from "./consts.js";
 
-export type { components, paths } from "./schemas/nutripatrol.js";
+export type { components } from "./schemas/nutripatrol.js";
 
 export class NutriPatrol {
   private readonly fetch: typeof global.fetch;

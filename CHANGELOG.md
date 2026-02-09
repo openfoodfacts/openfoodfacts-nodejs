@@ -1,5 +1,23 @@
 # Changelog
 
+## [2.0.0-alpha.29](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.28...v2.0.0-alpha.29) (2026-02-09)
+
+
+### Features
+
+* **nutripatrol:** Export type `FlagCreate` ([08da5ea](https://github.com/openfoodfacts/openfoodfacts-js/commit/08da5eafd707dce8f9e63552fd69290e51c7e022))
+* **robotoff:** Implement logos & labels crops fetch and annotate routes [#528](https://github.com/openfoodfacts/openfoodfacts-js/issues/528) ([#762](https://github.com/openfoodfacts/openfoodfacts-js/issues/762)) ([810e057](https://github.com/openfoodfacts/openfoodfacts-js/commit/810e0575c8018d1e934b2cc4c578049c462d07d4))
+
+
+### Bug Fixes
+
+* robotoff logo_id path parameter ([745d30e](https://github.com/openfoodfacts/openfoodfacts-js/commit/745d30e8b8fee3423fb229345159236258328124))
+
+
+### Miscellaneous Chores
+
+* Trigger 2.0.0-alpha.29 release ([4bb3db4](https://github.com/openfoodfacts/openfoodfacts-js/commit/4bb3db42eefeb23c61d14c40864ca61168eb74ce))
+
 ## [2.0.0-alpha.28](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.27...v2.0.0-alpha.28) (2026-02-04)
 
 

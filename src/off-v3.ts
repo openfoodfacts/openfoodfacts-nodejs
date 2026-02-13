@@ -239,4 +239,8 @@ export class ProductOpenerApiV3 {
       error: undefined,
     };
   }
+
+  async getAttributeGroups() {
+    return this.client.GET("/api/v3.4/attribute_groups");
+  }
 }

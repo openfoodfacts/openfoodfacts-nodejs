@@ -113,7 +113,7 @@ export class ProductOpenerApiV2 {
    * @param barcode - The barcode of the product
    * @returns A promise that resolves to an array of product attributes
    */
-  async getProductAttributes(code: string): Promise<ProductAttribute[]> {
+  async getProductAttributes(code: string): Promise<ProductAttributeGroup[]> {
     const res = await this.client.GET("/api/v2/product/{code}", {
       params: {
         path: { code },

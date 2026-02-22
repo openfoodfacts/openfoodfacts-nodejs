@@ -6,6 +6,7 @@ export const FACETS_SORT_OPTIONS = [
   "environmental_score_score",
   "created_t",
   "last_modified_t",
+  "nutriscore_score",
 ] as const;
 
 export type FacetSortOption = (typeof FACETS_SORT_OPTIONS)[number];

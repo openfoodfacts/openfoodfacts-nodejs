@@ -320,6 +320,31 @@ export class ProductOpenerApiV2 {
     const images = product.images ?? {};
     return Object.keys(images);
   }
+
+  /**
+   * Updates the barcode of a product (moderator-only action)
+   * @param currentCode - The current barcode of the product
+   * @param newCode - The correct barcode to replace the current one
+   * @returns A promise that resolves to true if successful, false otherwise
+   * @example
+   * const success = await changeBarcode("12345", "54321");
+   */
+  async changeBarcode(
+    currentCode: string,
+    newCode: string,
+    credentials?: { username?: string; password?: string },
+  ): Promise<boolean> {
+    const res = await this.client.POST("/cgi/product_jqm2.pl", {
+      body: {
+        code: currentCode,
+        new_code: newCode,
+        user_id: credentials?.username ?? "",
+        password: credentials?.password ?? "",
+      } as any, // Bypass schema check for missing new_code
+    });
+
+    return res.response.ok;
+  }
 }
 
 export function getProductNameInLang(product: ProductDataType, lang: string) {

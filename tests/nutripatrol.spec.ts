@@ -223,6 +223,50 @@ describe("NutriPatrol Wrapper", () => {
     });
   });
 
+  describe("Stats", () => {
+    it("should fetch stats successfully", async () => {
+      const mockData = {
+        total_tickets: 100,
+        tickets_by_status: { open: 60, closed: 40 },
+        tickets_by_flavor: { off: 80, obf: 20 },
+        tickets_by_type: { product: 50, image: 50 },
+        n_days: 31,
+        start_date: "2026-01-23T00:00:00",
+        end_date: "2026-02-23T00:00:00",
+      };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
+
+      const { data, error } = await client.getStats();
+      expect(data).toEqual(mockData);
+      expect(error).toBeUndefined();
+    });
+
+    it("should fetch stats with custom nDays", async () => {
+      const mockData = {
+        total_tickets: 10,
+        tickets_by_status: { open: 7, closed: 3 },
+        tickets_by_flavor: { off: 10 },
+        tickets_by_type: { image: 10 },
+        n_days: 7,
+        start_date: "2026-02-16T00:00:00",
+        end_date: "2026-02-23T00:00:00",
+      };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
+
+      const { data, error } = await client.getStats(7);
+      expect(data).toEqual(mockData);
+      expect(error).toBeUndefined();
+    });
+
+    it("should handle error when fetching stats", async () => {
+      fetchMock.mockResolvedValue(mockResponse(null, false, 500));
+
+      const { data, error } = await client.getStats();
+      expect(data).toBeUndefined();
+      expect(error).toBeDefined();
+    });
+  });
+
   describe("API Status", () => {
     it("should return data when API is up", async () => {
       const mockData = { status: "ok" };

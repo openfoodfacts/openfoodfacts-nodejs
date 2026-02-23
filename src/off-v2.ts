@@ -340,7 +340,7 @@ export class ProductOpenerApiV2 {
         new_code: newCode,
         user_id: credentials?.username ?? "",
         password: credentials?.password ?? "",
-      } as any, // Bypass schema check for missing new_code
+      },
     });
 
     return res.response.ok;

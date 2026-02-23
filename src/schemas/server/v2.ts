@@ -2501,6 +2501,11 @@ export interface components {
              */
             code: string;
             /**
+             * @description The new barcode to replace the current one (moderator-only action)
+             * @example 0074570036005
+             */
+            new_code?: string;
+            /**
              * @description Username to authenticate with
              *
              *     Note: you must always use the username (and not the email)
@@ -2704,6 +2709,14 @@ export interface components {
              */
             value?: number;
             /**
+             * @description A normalized float value for the quantity, computed by the system (not entered by a user or manufacturer).
+             *     This is used only for values that are computed from other nutrient values, like energy computed from fat, carbohydrates and proteins.
+             *     And salt or sodium computed from each other.
+             * @example 150
+             * @example 250.5
+             */
+            value_computed?: number;
+            /**
              * @description The unit of the value entered by the contributor (a user or the manufacturer), for the product.
              *     In most cases, this unit is the unit displayed on the product for the nutrient, but it is not guaranteed, as some apps may force specific units when writing nutrient values.
              *
@@ -2810,13 +2823,13 @@ export interface components {
                  *
                  *     (per 100g or per serving) in a standard unit (g or ml)
                  */
-                energy_kcal?: components["schemas"]["nutrient_values_v3_base"] & components["schemas"]["nutrients_source_v3"];
+                "energy-kcal"?: components["schemas"]["nutrient_values_v3_base"] & components["schemas"]["nutrients_source_v3"];
                 /**
                  * @description energy in kj, if it is specified
                  *
                  *     (per 100g or per serving) in a standard unit (g or ml)
                  */
-                energy_kj?: components["schemas"]["nutrient_values_v3_base"] & components["schemas"]["nutrients_source_v3"];
+                "energy-kj"?: components["schemas"]["nutrient_values_v3_base"] & components["schemas"]["nutrients_source_v3"];
                 fat?: components["schemas"]["nutrient_values_v3_base"] & components["schemas"]["nutrients_source_v3"];
                 "saturated-fat"?: components["schemas"]["nutrient_values_v3_base"] & components["schemas"]["nutrients_source_v3"];
                 "trans-fat"?: components["schemas"]["nutrient_values_v3_base"] & components["schemas"]["nutrients_source_v3"];
@@ -2888,13 +2901,13 @@ export interface components {
                  *
                  *     (per 100g or per serving) in a standard unit (g or ml)
                  */
-                energy_kcal?: components["schemas"]["nutrient_values_v3_with_value_string"];
+                "energy-kcal"?: components["schemas"]["nutrient_values_v3_with_value_string"];
                 /**
                  * @description energy in kj, if it is specified
                  *
                  *     (per 100g or per serving) in a standard unit (g or ml)
                  */
-                energy_kj?: components["schemas"]["nutrient_values_v3_with_value_string"];
+                "energy-kj"?: components["schemas"]["nutrient_values_v3_with_value_string"];
                 fat?: components["schemas"]["nutrient_values_v3_with_value_string"];
                 "saturated-fat"?: components["schemas"]["nutrient_values_v3_with_value_string"];
                 "trans-fat"?: components["schemas"]["nutrient_values_v3_with_value_string"];

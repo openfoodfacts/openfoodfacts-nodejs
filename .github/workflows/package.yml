@@ -67,3 +67,5 @@ jobs:
 
       - name: Publish to npm
         run: npm publish --tag ${{ github.event.inputs.tag }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

@@ -3,6 +3,8 @@ import {
   BackendType,
   BACKEND_DOMAINS,
   BACKEND_NAMES,
+  getProductApiHost,      // ..
+  getProductImageBaseUrl, // ..
 } from "./consts.js";
 
 import { Robotoff } from "./robotoff.js";
@@ -157,7 +159,7 @@ export class OpenFoodFacts {
     }
   }
 
-  /**
+ /**
    * Creates the base URL based on options
    */
   private createBaseUrl(options: OpenFoodFactsOptions): string {
@@ -165,9 +167,9 @@ export class OpenFoodFacts {
       return options.host;
     }
 
+    // Part of Issue #518: Using the dynamic helper we created
     if (options.type != null) {
-      const domain = BACKEND_DOMAINS[options.type];
-      return `https://world.${domain}`;
+      return getProductApiHost(options.type); 
     }
 
     return `https://${options.country || "world"}.openfoodfacts.org`;
@@ -599,6 +601,7 @@ export function getProductImageUrl(
   imageName: string,
   images: Record<string, SelectedImage | RawImage>,
   size: "100" | "200" | "400" | "full" = "400",
+  backend: BackendType = BackendType.OFF, // <--- Naya parameter add kiya
 ): string | null {
   const paddedBarcode = barcode.toString().padStart(13, "0");
   const match = paddedBarcode.match(/^(.{3})(.{3})(.{3})(.*)$/);
@@ -620,5 +623,8 @@ export function getProductImageUrl(
   } else {
     filename = `${imageName}.${size}.jpg`;
   }
-  return PRODUCT_IMAGE_URL(`${path}/${filename}`);
+
+  // Isse image URL bhi flavor ke hisaab se generate hoga
+export const PRODUCT_IMAGE_URL = (path: string, backend: BackendType = BackendType.OFF) =>
+  `${getProductImageBaseUrl(backend)}/${path}`;
 }

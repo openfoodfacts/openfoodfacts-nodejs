@@ -10,6 +10,8 @@ import type {
 
 export type ResponseStatus = components["schemas"]["response_status"];
 export type Product = components["schemas"]["product_v3"];
+export type PackagingComponent = components["schemas"]["packaging_component"];
+export type PackagingTaxonomyTag = components["schemas"]["shape"];
 
 export type ProductImageUploadParams = NonNullable<
   operations["post-api-v3-product-code-images"]["requestBody"]
@@ -17,6 +19,10 @@ export type ProductImageUploadParams = NonNullable<
 
 export type ProductQuery = NonNullable<
   operations["get-api-v3-product-code"]["parameters"]["query"]
+>;
+
+export type TaxonomySuggestionsQuery = NonNullable<
+  operations["get-api-v3-taxonomy_suggestions-taxonomy"]["parameters"]["query"]
 >;
 
 export type ImageSelectionData = NonNullable<
@@ -79,6 +85,8 @@ export type ProductDataType = ProductDataSection & {
   nova_group: number;
 
   packaging: string;
+  packagings?: PackagingComponent[];
+  packagings_complete?: number;
   manufacturing_places: string;
 
   brands: string;
@@ -201,6 +209,16 @@ export class ProductOpenerApiV3 {
     return await this.client.PATCH("/api/v3/product/{code}", {
       params: { path: { code: barcode } },
       body: { fields: "updated", product: { images } },
+    });
+  }
+
+  /**
+   * Fetch taxonomy suggestions for autocomplete
+   * @param query - Suggestion query parameters
+   */
+  async getTaxonomySuggestions(query: TaxonomySuggestionsQuery) {
+    return this.client.GET("/api/v3/taxonomy_suggestions", {
+      params: { query },
     });
   }
 

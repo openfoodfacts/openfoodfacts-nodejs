@@ -1,10 +1,8 @@
 import {
-  PRODUCT_IMAGE_URL,
   BackendType,
-  BACKEND_DOMAINS,
   BACKEND_NAMES,
-  getProductApiHost,      // ..
-  getProductImageBaseUrl, // ..
+  getProductApiHost,
+  getProductImageBaseUrl,
 } from "./consts.js";
 
 import { Robotoff } from "./robotoff.js";
@@ -159,7 +157,19 @@ export class OpenFoodFacts {
     }
   }
 
- /**
+  /**
+   * Validates if the current method is supported by the selected backend flavor.
+   */
+  private validateFlavorSupport(supportedFlavors: BackendType[], methodName: string): void {
+    const currentFlavor = this.backendType || BackendType.OFF;
+    if (!supportedFlavors.includes(currentFlavor)) {
+      throw new Error(
+        `Method '${methodName}' is not supported by the ${BACKEND_NAMES[currentFlavor]} backend.`
+      );
+    }
+  }
+
+  /**
    * Creates the base URL based on options
    */
   private createBaseUrl(options: OpenFoodFactsOptions): string {
@@ -167,7 +177,7 @@ export class OpenFoodFacts {
       return options.host;
     }
 
-    // Part of Issue #518: Using the dynamic helper we created
+    // Part of Issue #518: Using the dynamic helper
     if (options.type != null) {
       return getProductApiHost(options.type); 
     }
@@ -364,7 +374,9 @@ export class OpenFoodFacts {
     return this.getTaxo<Store>("stores");
   }
 
-  getNutrients(): Promise<Taxonomy<Nutrient>> {
+ getNutrients(): Promise<Taxonomy<Nutrient>> {
+    // Ye line ensure karegi ki Beauty Facts ya Pet Food Facts par error aaye
+    this.validateFlavorSupport([BackendType.OFF], "getNutrients");
     return this.getTaxo<Nutrient>("nutrients");
   }
 
@@ -381,16 +393,11 @@ export class OpenFoodFacts {
     barcode: string,
     photoId: string,
     ocrEngine?: "google_cloud_vision",
-  ) => this.apiv2.performOCR(barcode, photoId, ocrEngine);
-
-  search = (query: SearchQueryV2) => this.apiv2.search(query);
-
-  /**
-   * Returns all available attribute groups
-   * @returns A promise that resolves to an array of attribute groups
-   */
-  getAttributeGroups = () => this.apiv2.getAttributeGroups();
-
+  ) => {
+    // OCR sirf Food aur Beauty facts par chalta hai, Pet food par nahi
+    this.validateFlavorSupport([BackendType.OFF, BackendType.OBF], "performOCR");
+    return this.apiv2.performOCR(barcode, photoId, ocrEngine);
+  };
   /**
    * Returns product attributes for a given barcode
    * @param barcode - The barcode of the product
@@ -594,6 +601,7 @@ export default OpenFoodFacts;
  * @param imageName - Name of the image (e.g., "front", "ingredients", "nutrition")
  * @param images - Image metadata from product data
  * @param size - Image size (100, 200, 400, or full) - defaults to 400
+ * @param backend - The backend flavor (OFF, OBF, etc.)
  * @returns Complete URL to the specific image or null if not found
  */
 export function getProductImageUrl(
@@ -601,7 +609,7 @@ export function getProductImageUrl(
   imageName: string,
   images: Record<string, SelectedImage | RawImage>,
   size: "100" | "200" | "400" | "full" = "400",
-  backend: BackendType = BackendType.OFF, // <--- Naya parameter add kiya
+  backend: BackendType = BackendType.OFF,
 ): string | null {
   const paddedBarcode = barcode.toString().padStart(13, "0");
   const match = paddedBarcode.match(/^(.{3})(.{3})(.{3})(.*)$/);
@@ -624,7 +632,8 @@ export function getProductImageUrl(
     filename = `${imageName}.${size}.jpg`;
   }
 
-  // Isse image URL bhi flavor ke hisaab se generate hoga
-export const PRODUCT_IMAGE_URL = (path: string, backend: BackendType = BackendType.OFF) =>
-  `${getProductImageBaseUrl(backend)}/${path}`;
+  // Mentor VaiTon's point: Use the dynamic base URL
+  const baseUrl = getProductImageBaseUrl(backend);
+  return `${baseUrl}/${path}/${filename}`;
 }
+

@@ -46,7 +46,6 @@ export type ProductDataSection = {
 export type ProductDataType = ProductDataSection & {
   knowledge_panels: Record<string, KnowledgePanel>;
   product_name: string;
-  [lang: LangProduct]: string;
   _id: string;
   code: string;
   _keywords: string[];
@@ -64,7 +63,6 @@ export type ProductDataType = ProductDataSection & {
   additives_tags: string[];
 
   ingredients_text: string;
-  [lang: LangIngredient]: string;
 
   image_front_url: string;
   image_front_small_url: string;
@@ -86,8 +84,7 @@ export type ProductDataType = ProductDataSection & {
   nova_group: number;
 
   packaging: string;
-  packaging_text: string;
-  [lang: LangPackagingText]: string;
+  packaging_text?: string;
   packagings?: PackagingComponent[];
   packagings_complete?: number;
   manufacturing_places: string;
@@ -137,7 +134,7 @@ export type ProductDataType = ProductDataSection & {
     [lang: string]: number;
   };
   lang: string;
-};
+} & Partial<Record<LangProduct | LangIngredient | LangPackagingText, string>>;
 
 export type ProductStateBase = {
   result: {

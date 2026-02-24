@@ -4,6 +4,7 @@ import type { KnowledgePanel } from "./knowledgepanels.js";
 import type {
   LangIngredient,
   LangProduct,
+  LangPackagingText,
   RawImage,
   SelectedImage,
 } from "./types.js";
@@ -85,6 +86,8 @@ export type ProductDataType = ProductDataSection & {
   nova_group: number;
 
   packaging: string;
+  packaging_text: string;
+  [lang: LangPackagingText]: string;
   packagings?: PackagingComponent[];
   packagings_complete?: number;
   manufacturing_places: string;

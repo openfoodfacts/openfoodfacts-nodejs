@@ -68,6 +68,9 @@ import type {
   Product as ProductV3,
   ProductState as ProductStateV3,
   ResponseStatus as ResponseStatusV3,
+  PackagingComponent,
+  PackagingTaxonomyTag,
+  TaxonomySuggestionsQuery,
 } from "./off-v3.js";
 export type {
   ProductDataType,
@@ -77,6 +80,9 @@ export type {
   ProductV3,
   ProductStateV3,
   ResponseStatusV3,
+  PackagingComponent,
+  PackagingTaxonomyTag,
+  TaxonomySuggestionsQuery,
 };
 
 import { VERSION } from "./version.js";

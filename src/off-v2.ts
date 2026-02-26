@@ -334,13 +334,15 @@ export class ProductOpenerApiV2 {
     newCode: string,
     credentials?: { username?: string; password?: string },
   ): Promise<boolean> {
+    // @ts-expect-error - OpenAPI schema requires user_id and password, but we want to omit them if undefined
     const res = await this.client.POST("/cgi/product_jqm2.pl", {
       body: {
         code: currentCode,
         new_code: newCode,
-        user_id: credentials?.username ?? "",
-        password: credentials?.password ?? "",
+        ...(credentials?.username ? { user_id: credentials.username } : {}),
+        ...(credentials?.password ? { password: credentials.password } : {}),
       },
+      bodySerializer: formData,
     });
 
     return res.response.ok;

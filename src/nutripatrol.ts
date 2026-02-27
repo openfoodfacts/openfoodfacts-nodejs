@@ -4,6 +4,12 @@ import type { components, paths } from "./schemas/nutripatrol.js";
 
 import { DEFAULT_NUTRIPATROL_API_URL, USER_AGENT } from "./consts.js";
 
+export type FlagCreate = components["schemas"]["FlagCreate"];
+export type Flag = components["schemas"]["Flag"];
+export type Ticket = components["schemas"]["Ticket"];
+export type TicketStatus = components["schemas"]["TicketStatus"];
+export type StatsResponse = components["schemas"]["StatsResponse"];
+
 export class NutriPatrol {
   private readonly fetch: typeof global.fetch;
   private readonly baseUrl: string;
@@ -130,6 +136,28 @@ export class NutriPatrol {
         path: { ticket_id: ticketId },
         query: { status },
       },
+    });
+  }
+
+  /**
+   * Get ticket statistics for the last N days.
+   *
+   * Returns the total number of tickets, broken down by status, flavor, and type,
+   * along with the date range of the data.
+   *
+   * @param {number} [nDays] - Number of days to fetch stats for (defaults to 31 on the server).
+   * @returns A promise that resolves with the stats data or error.
+   * @example
+   * const { data, error } = await nutripatrol.getStats();
+   * if (data) console.log("Total tickets:", data.total_tickets);
+   *
+   * @example
+   * // Get stats for the last 7 days
+   * const { data } = await nutripatrol.getStats(7);
+   */
+  getStats(nDays?: number) {
+    return this.client.GET("/api/v1/stats", {
+      params: { query: { n_days: nDays } },
     });
   }
 

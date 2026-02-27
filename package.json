@@ -2,7 +2,7 @@
   "name": "@openfoodfacts/openfoodfacts-nodejs",
   "author": "openfoodfacts",
   "license": "Apache-2.0",
-  "version": "2.0.0-alpha.19",
+  "version": "2.0.0-alpha.29",
   "description": "Open Food Facts API NodeJS Wrapper",
   "type": "module",
   "keywords": [
@@ -11,13 +11,13 @@
     "NodeJS",
     "Wrapper"
   ],
-  "homepage": "https://github.com/openfoodfacts/openfoodfacts-nodejs#readme",
+  "homepage": "https://github.com/openfoodfacts/openfoodfacts-js#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/openfoodfacts/openfoodfacts-nodejs.git"
+    "url": "https://github.com/openfoodfacts/openfoodfacts-js.git"
   },
   "bugs": {
-    "url": "https://github.com/openfoodfacts/openfoodfacts-nodejs/issues"
+    "url": "https://github.com/openfoodfacts/openfoodfacts-js/issues"
   },
   "types": "./dist/types/index.d.ts",
   "main": "./dist/cjs/index.js",
@@ -32,7 +32,7 @@
     "dist"
   ],
   "scripts": {
-    "prepack": "yarn run build",
+    "prepack": "yarn run prebuild && yarn run build",
     "prebuild": "node scripts/prebuild.js",
     "build:docs": "typedoc src/index.ts",
     "build": "yarn run prebuild && tsc -b tsconfig.cjs.json tsconfig.esm.json",
@@ -46,18 +46,18 @@
     "test:coverage": "jest --coverage"
   },
   "dependencies": {
-    "openapi-fetch": "^0.14.0"
+    "openapi-fetch": "^0.17.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^19.8.0",
-    "@commitlint/config-conventional": "^19.8.0",
+    "@commitlint/cli": "^20.1.0",
+    "@commitlint/config-conventional": "^20.0.0",
     "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^9.25.0",
     "@types/jest": "^30.0.0",
-    "@types/node": "^24.0.14",
+    "@types/node": "^25.0.3",
     "@typescript-eslint/eslint-plugin": "^8.30.1",
     "@typescript-eslint/parser": "^8.30.1",
-    "eslint": "^9.25.0",
+    "eslint": "^10.0.2",
     "globals": "^16.0.0",
     "jest": "^30.0.4",
     "openapi-typescript": "^7.6.1",
@@ -69,5 +69,5 @@
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.30.1"
   },
-  "packageManager": "yarn@4.9.4"
+  "packageManager": "yarn@4.12.0+sha512.f45ab632439a67f8bc759bf32ead036a1f413287b9042726b7cc4818b7b49e14e9423ba49b18f9e06ea4941c1ad062385b1d8760a8d5091a1a31e5f6219afca8"
 }

@@ -11,9 +11,28 @@ permissions:
 jobs:
   release-please:
     runs-on: ubuntu-latest
+
+    outputs:
+      release_created: ${{ steps.release-please.outputs.release_created }}
+      tag_name: ${{ steps.release-please.outputs.tag_name }}
+
     steps:
       - uses: googleapis/release-please-action@v4
+        id: release-please
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           release-type: node
           target-branch: develop
+
+  release-publish:
+    needs: release-please
+    uses: ./.github/workflows/package.yml
+    if: ${{ needs.release-please.outputs.release_created }}
+
+    permissions:
+      contents: read
+      id-token: write
+
+    with:
+      git_ref: refs/tags/${{ needs.release-please.outputs.tag_name }}
+      tag: latest

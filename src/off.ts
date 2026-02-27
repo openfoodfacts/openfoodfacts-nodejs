@@ -47,13 +47,15 @@ import type {
   Product as ProductV2,
   SearchResult as SearchResultV2,
   ProductAttribute as ProductAttributeV2,
-  Attribute as AttributeV2,
+  AttributeGroups as AttributeGroupV2,
+  ProductAttribute as AttributeV2,
 } from "./off-v2.js";
 export type {
   SearchQueryV2,
   ProductV2,
   SearchResultV2,
   ProductAttributeV2,
+  AttributeGroupV2,
   AttributeV2,
 };
 
@@ -66,6 +68,9 @@ import type {
   Product as ProductV3,
   ProductState as ProductStateV3,
   ResponseStatus as ResponseStatusV3,
+  PackagingComponent,
+  PackagingTaxonomyTag,
+  TaxonomySuggestionsQuery,
 } from "./off-v3.js";
 export type {
   ProductDataType,
@@ -75,6 +80,9 @@ export type {
   ProductV3,
   ProductStateV3,
   ResponseStatusV3,
+  PackagingComponent,
+  PackagingTaxonomyTag,
+  TaxonomySuggestionsQuery,
 };
 
 import { VERSION } from "./version.js";
@@ -407,9 +415,9 @@ export class OpenFoodFacts {
    * ```
    * @returns A promise that resolves to a product object with the specified fields or undefined if not found
    */
-  getProductV3 = <T extends Array<keyof ProductV3 | "all">>(
+  getProductV3 = <Key extends Array<Extract<keyof ProductV3, string> | "all">>(
     barcode: string,
-    query?: Omit<ProductQueryV3, "fields"> & { fields?: T },
+    query?: Omit<ProductQueryV3, "fields"> & { fields?: Key },
   ) => this.apiv3.getProductV3(barcode, query);
 
   /**
@@ -551,13 +559,15 @@ export class OpenFoodFacts {
     return (await res.json()) as FacetValueResponse;
   }
 
-  async getLoginStatus(): Promise<LoginStatus | undefined> {
+  async getLoginStatus() {
     const response = await this.fetch(
       new URL("/cgi/auth.pl?body=1", this.baseUrl),
     );
 
-    if (!response.ok) return undefined;
-    return (await response.json()) as LoginStatus;
+    if (!response.ok) {
+      return { error: `HTTP error! status: ${response.status}` };
+    }
+    return { data: (await response.json()) as LoginStatus };
   }
 }
 

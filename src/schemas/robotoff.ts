@@ -18,7 +18,6 @@ export interface paths {
          *       - label
          *       - brand
          *       - remaining types
-         *
          */
         get: operations["getQuestionsByBarcode"];
         put?: never;
@@ -57,7 +56,6 @@ export interface paths {
          * Get unanswered question counts
          * @description Get number of unanswered questions grouped by `value_tag`.
          *     The list is ordered from highest count to lowest.
-         *
          */
         get: operations["getUnansweredQuestions"];
         put?: never;
@@ -97,7 +95,6 @@ export interface paths {
          * @description Return insights based on various filters. The results can be filtered by insight type, barcode, annotation status, and more.
          *     The `insight_types` parameter is a comma-separated list of insight types to filter by.
          *     If no `insight_types` are provided, insights of all types are returned.
-         *
          */
         get: operations["getInsights"];
         put?: never;
@@ -152,7 +149,6 @@ export interface paths {
          *     (for example in some cases of category annotation or ingredients spellcheck).
          *
          *     We use the voting mecanism system to remember which insight to skip for a user (authenticated or not).
-         *
          */
         post: operations["annotateInsight"];
         delete?: never;
@@ -172,7 +168,6 @@ export interface paths {
          * Generate a CSV dump
          * @description Generate a CSV dump of insights with specific criteria.
          *     If more than 10,000 insights match provided criteria and `count` is not provided, a `HTTP 400` is returned
-         *
          */
         get: operations["dumpInsights"];
         put?: never;
@@ -195,7 +190,6 @@ export interface paths {
          * @description This endpoint is currently only used to generate cropped logos on Hunger Games from a
          *     base image and cropping coordinates. Cropping coordinates are relative (between 0.
          *     and 1. inclusive), with (0, 0) being the upper left corner.
-         *
          */
         get: operations["cropImage"];
         put?: never;
@@ -216,7 +210,6 @@ export interface paths {
         /**
          * Get image predictions
          * @description Return image predictions based on various filters. The results can be filtered by model name, type, confidence, and more.
-         *
          */
         get: operations["getImagePredictions"];
         put?: never;
@@ -258,7 +251,6 @@ export interface paths {
          * Search for logos
          * @description Search for logos detected using the universal-logo-detector model that
          *     meet some criteria (annotation status, annotated, type,...)
-         *
          */
         get: operations["searchLogos"];
         put?: never;
@@ -309,7 +301,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/ann/search/{logo_id:int}": {
+    "/ann/search/{logo_id}": {
         parameters: {
             query?: never;
             header?: never;
@@ -596,7 +588,6 @@ export interface paths {
          *     - expected inputs under a `product` key. The neural category model
          *       accepts the following fields as input: `product_name`, `ingredients_tags`,
          *       `ocr`, `nutriments`, `image_embeddings`. All fields are optional (but you should at least provide one).
-         *
          */
         post: operations["predictCategory"];
         delete?: never;
@@ -619,7 +610,6 @@ export interface paths {
          *     The model takes an image and the OCR result (as a JSON file) obtained from Google Cloud Vision.
          *     For more information about the model, see the
          *     [Nutri-Sight documentation](https://openfoodfacts.github.io/robotoff/references/predictions/nutrient-extraction/).
-         *
          */
         get: operations["extractNutrition"];
         put?: never;
@@ -662,7 +652,6 @@ export interface paths {
          *
          *     Use the POST version if you want to predict the language of a long text, as the GET version
          *     has a limit on the length of the text that can be provided.
-         *
          */
         get: operations["predictLanguage"];
         put?: never;
@@ -671,7 +660,6 @@ export interface paths {
          * @description Predict the language of a text using a neural model.
          *     Use this POST version for long texts, as the GET version has a limit on the length
          *     of the text that can be provided in the query string.
-         *
          */
         post: operations["predictLanguagePost"];
         delete?: never;
@@ -694,7 +682,6 @@ export interface paths {
          *
          *     Language detection is not performed on the fly, but is based on predictions of type
          *     `image_lang` stored in the `prediction` table.
-         *
          */
         get: operations["predictProductLanguages"];
         put?: never;
@@ -719,7 +706,6 @@ export interface paths {
          * @description Import batch job data into Robotoff database. This endpoint is secured and requires bearer authentication.
          *
          *     This endpoint is mainly used by the batch job once the job is finished.
-         *
          */
         post: operations["importBatchJobResults"];
         delete?: never;
@@ -742,7 +728,6 @@ export interface components {
                 logo_id: number;
                 /**
                  * @description distance between the query logo and the result logo (closer to 0 means a more similar logo)
-                 *
                  * @example 0.1
                  */
                 distance: number;
@@ -792,15 +777,15 @@ export interface components {
              * @example 2023-05-13 02:10:09.107262
              */
             timestamp?: string;
-            /** @description a JSON structure containing prediction data. It either complements `value` and `value_tag`
+            /**
+             * @description a JSON structure containing prediction data. It either complements `value` and `value_tag`
              *     with additional data or contains the full prediction data.
-             *      */
+             */
             data?: Record<string, unknown>;
             /**
              * @description the value tag of the prediction. The use of this field depends of the prediction type,
              *     but it contains most of the time the canonical tag that should be sent to Product Opener.
              *     For example, for a category prediction, `value_tag` can be `en:beverages`.
-             *
              * @example en:beverages
              */
             value_tag?: string;
@@ -808,7 +793,6 @@ export interface components {
              * @description the value of the prediction. It is used if no canonical tag can be used
              *     for the prediction type. For example, we use it to store the detected product weight
              *     value (example: `100 g`)
-             *
              * @example null
              */
             value?: string | null;
@@ -817,14 +801,12 @@ export interface components {
              *     automatically in Open Food Facts without human supervision. This does not mean it will
              *     indeed be applied automatically, please refer to the import mechanism description in the
              *     documentation to know how automatic processing works.
-             *
              * @example false
              */
             automatic_processing?: boolean;
             /**
              * @description the path of the image the prediction was generated from.
              *     May be null, it is mainly provided for OCR and object detection-based predictions.
-             *
              * @example 541/004/104/0807/3.jpg
              */
             source_image?: string;
@@ -837,7 +819,6 @@ export interface components {
              * @description this is a version ID that is used to know when to replace predictions in database
              *     by new ones during import, and when to keep them. It is either an incrementing integer
              *     (for regex-based predictions) or the version of the model that generated the predictions.
-             *
              * @example keras-image-embeddings-3.0
              */
             predictor_version?: string;
@@ -846,7 +827,6 @@ export interface components {
              *       - `universal-logo-detector` for predictions generated by the nearest-neighbors logo detector
              *       - `flashtext` for all predictions generated using flashtext library
              *       - `regex` for all predictions generated using simple regex
-             *
              * @example neural
              */
             predictor?: string;
@@ -858,7 +838,6 @@ export interface components {
             server_type?: "off" | "obf" | "opff" | "opf" | "off_pro";
             /**
              * @description confidence score of the prediction, it is only provided for ML-based predictions. It may be null.
-             *
              * @example 0.95
              */
             confidence?: number;
@@ -904,11 +883,12 @@ export interface components {
         campaigns: string;
         /** @description Filter by predictor value A predictor refers to the model/method that was used to generate the prediction. */
         predictor: string;
-        /** @description How to order by insight results.
+        /**
+         * @description How to order by insight results.
          *     By default, results are not ordered. Possible values are:
          *       - `random`: insights are ordered randomly
          *       - `popularity`: insights are returned by decreasing popularity, using the number of scans as proxy
-         *      */
+         */
         insight_order_by: "random" | "popularity";
         /** @description Number of neighbors to return */
         ann_search_count: number;
@@ -998,11 +978,12 @@ export interface operations {
                 campaigns?: components["parameters"]["campaigns"];
                 /** @description Filter by predictor value A predictor refers to the model/method that was used to generate the prediction. */
                 predictor?: components["parameters"]["predictor"];
-                /** @description The field to use for ordering results:
+                /**
+                 * @description The field to use for ordering results:
                  *       - confidence: order by (descending) model confidence, null confidence insights come last
                  *       - popularity: order by (descending) popularity (=scan count)
                  *       - random: use a random order
-                 *      */
+                 */
                 order_by?: "confidence" | "random" | "popularity";
             };
             header?: never;
@@ -1141,11 +1122,12 @@ export interface operations {
                 server_type?: components["parameters"]["server_type"];
                 /** @description Filter by predictor value A predictor refers to the model/method that was used to generate the prediction. */
                 predictor?: components["parameters"]["predictor"];
-                /** @description How to order by insight results.
+                /**
+                 * @description How to order by insight results.
                  *     By default, results are not ordered. Possible values are:
                  *       - `random`: insights are ordered randomly
                  *       - `popularity`: insights are returned by decreasing popularity, using the number of scans as proxy
-                 *      */
+                 */
                 order_by?: components["parameters"]["insight_order_by"];
                 /** @description The number of items to return */
                 count?: components["parameters"]["count"];
@@ -1334,7 +1316,6 @@ export interface operations {
                  * @description The minimum y-coordinate for cropping, relative to the image height.
                  *     We use relative coordinates, with (0, 0) being the upper left corner and
                  *     (1, 1) being the lower right corner.
-                 *
                  * @example 0.47795143723487854
                  */
                 y_min?: number;
@@ -1342,7 +1323,6 @@ export interface operations {
                  * @description The minimum x-coordinate for cropping, relative to the image width.
                  *     We use relative coordinates, with (0, 0) being the upper left corner and
                  *     (1, 1) being the lower right corner.
-                 *
                  * @example 0.5583494305610657
                  */
                 x_min?: number;
@@ -1350,7 +1330,6 @@ export interface operations {
                  * @description The maximum y-coordinate for cropping, relative to the image height.
                  *     We use relative coordinates, with (0, 0) being the upper left corner and
                  *     (1, 1) being the lower right corner.
-                 *
                  * @example 0.5653171539306641
                  */
                 y_max?: number;
@@ -1358,7 +1337,6 @@ export interface operations {
                  * @description The maximum x-coordinate for cropping, relative to the image width.
                  *     We use relative coordinates, with (0, 0) being the upper left corner and
                  *     (1, 1) being the lower right corner.
-                 *
                  * @example 0.6795185804367065
                  */
                 x_max?: number;
@@ -1570,7 +1548,10 @@ export interface operations {
                 server_type?: components["parameters"]["server_type"];
             };
             header?: never;
-            path?: never;
+            path: {
+                /** @description The ID of the logo to search for. */
+                logo_id: number;
+            };
             cookie?: never;
         };
         requestBody?: never;
@@ -2059,25 +2040,25 @@ export interface operations {
                     /**
                      * @description The server type (=project) to use, such as 'off' (Open Food Facts), 'obf' (Open Beauty Facts),...
                      *     Only 'off' is currently supported for category prediction
-                     *
                      * @default off
                      * @enum {string}
                      */
                     server_type?: "off" | "obf" | "opff" | "opf";
-                    /** @description If true, only return the deepest elements in the category taxonomy
+                    /**
+                     * @description If true, only return the deepest elements in the category taxonomy
                      *     (don't return categories that are parents of other predicted categories)
-                     *      */
+                     */
                     deepest_only?: boolean;
                     /**
                      * @description The score above which we consider the category to be detected
-                     *
                      * @default 0.5
                      */
                     threshold?: number;
                 } | {
-                    /** @description product information used as model input. All fields are optional, but at
+                    /**
+                     * @description product information used as model input. All fields are optional, but at
                      *     least one field must be provided.
-                     *      */
+                     */
                     product: {
                         /** @example roasted chicken */
                         product_name?: string;
@@ -2089,20 +2070,23 @@ export interface operations {
                          *     ]
                          */
                         ingredients_tags?: string[];
-                        /** @description Embeddings of the 10 most recent product images generated with clip-vit-base-patch32 model.
+                        /**
+                         * @description Embeddings of the 10 most recent product images generated with clip-vit-base-patch32 model.
                          *     Each item of the list is the embedding of a single image, provided as a list of dimension 512.
                          *     Shape: (num_images, 512)
-                         *      */
+                         */
                         image_embeddings?: number[][];
-                        /** @description A list of string corresponding to the text extracted from the product images with OCR.
+                        /**
+                         * @description A list of string corresponding to the text extracted from the product images with OCR.
                          *     Each element of the list is the text of a single image, the list order doesn't affect predictions.
                          *     We use OCR text to detect ingredient mentions and use it as a model input.
                          *     For optimal results, this field should be provided even if `ingredients_tags` is provided.
-                         *      */
+                         */
                         ocr?: string[];
-                        /** @description Nutriment values. These fields have exactly the same meaning as those of Product Opener.
+                        /**
+                         * @description Nutriment values. These fields have exactly the same meaning as those of Product Opener.
                          *     All fields are optional, only send data for the field for which the value is not missing.
-                         *      */
+                         */
                         nutriments?: {
                             fat_100g?: number;
                             "saturated-fat_100g"?: number;
@@ -2115,13 +2099,13 @@ export interface operations {
                             "fruits-vegetables-nuts_100g"?: number;
                         };
                     };
-                    /** @description If true, only return the deepest elements in the category taxonomy
+                    /**
+                     * @description If true, only return the deepest elements in the category taxonomy
                      *     (don't return categories that are parents of other predicted categories)
-                     *      */
+                     */
                     deepest_only?: boolean;
                     /**
                      * @description The score above which we consider the category to be detected
-                     *
                      * @default 0.5
                      */
                     threshold?: number;
@@ -2175,9 +2159,10 @@ export interface operations {
                 content: {
                     "application/json": {
                         predictions?: {
-                            /** @description a dictionary mapping nutrient keys in Open Food Facts format (ex: `fat_100g`) to a dictionary
+                            /**
+                             * @description a dictionary mapping nutrient keys in Open Food Facts format (ex: `fat_100g`) to a dictionary
                              *     containing the detected nutrient value.
-                             *      */
+                             */
                             nutrients?: Record<string, unknown>;
                             entities?: {
                                 aggregated?: Record<string, unknown>[];
@@ -2204,9 +2189,10 @@ export interface operations {
                 ocr_url: string;
                 /** @description The server type (=project) to use, such as 'off' (Open Food Facts), 'obf' (Open Beauty Facts),... */
                 server_type?: components["parameters"]["server_type"];
-                /** @description a comma-separated list of prediction types to use for extraction. If not provided, we use the default:
+                /**
+                 * @description a comma-separated list of prediction types to use for extraction. If not provided, we use the default:
                  *     set of OCR prediction types (see `DEFAULT_OCR_PREDICTION_TYPES` variable in Robotoff codebase)
-                 *      */
+                 */
                 prediction_types?: string;
             };
             header?: never;
@@ -2241,11 +2227,9 @@ export interface operations {
             query: {
                 /** @description The text to predict language of */
                 text: string;
-                /** @description the number of predictions to return
-                 *      */
+                /** @description the number of predictions to return */
                 k?: number;
-                /** @description the minimum probability for a language to be returned
-                 *      */
+                /** @description the minimum probability for a language to be returned */
                 threshold?: number;
             };
             header?: never;
@@ -2356,8 +2340,7 @@ export interface operations {
                 server_type?: components["parameters"]["server_type"];
                 /** @description Number of language predictions to return */
                 k?: number;
-                /** @description the minimum probability for a language to be returned
-                 *      */
+                /** @description the minimum probability for a language to be returned */
                 threshold?: number;
             };
             header?: never;
@@ -2366,17 +2349,17 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description The predicted languages, sorted by descending probability.
-             *      */
+            /** @description The predicted languages, sorted by descending probability. */
             200: {
                 headers: {
                     [name: string]: unknown;
                 };
                 content: {
                     "application/json": {
-                        /** @description the number of words detected for each language, over all images,
+                        /**
+                         * @description the number of words detected for each language, over all images,
                          *     sorted by descending count
-                         *      */
+                         */
                         counts?: {
                             /**
                              * @description the predicted language (2-letter code). `null` if the language could not be detected.
@@ -2389,9 +2372,10 @@ export interface operations {
                              */
                             count?: number;
                         }[];
-                        /** @description the percentage of words detected for each language, over all images,
+                        /**
+                         * @description the percentage of words detected for each language, over all images,
                          *     sorted by descending percentage
-                         *      */
+                         */
                         percent?: {
                             /**
                              * @description the predicted language (2-letter code). `null` if the language could not be detected.
@@ -2404,8 +2388,7 @@ export interface operations {
                              */
                             percent?: number;
                         }[];
-                        /** @description the IDs of the images that were used to generate the predictions
-                         *      */
+                        /** @description the IDs of the images that were used to generate the predictions */
                         image_ids?: number[];
                     };
                 };

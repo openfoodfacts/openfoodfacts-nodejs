@@ -1,5 +1,128 @@
 # Changelog
 
+## [2.0.0-alpha.29](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.28...v2.0.0-alpha.29) (2026-02-09)
+
+
+### Features
+
+* **nutripatrol:** Export type `FlagCreate` ([08da5ea](https://github.com/openfoodfacts/openfoodfacts-js/commit/08da5eafd707dce8f9e63552fd69290e51c7e022))
+* **robotoff:** Implement logos & labels crops fetch and annotate routes [#528](https://github.com/openfoodfacts/openfoodfacts-js/issues/528) ([#762](https://github.com/openfoodfacts/openfoodfacts-js/issues/762)) ([810e057](https://github.com/openfoodfacts/openfoodfacts-js/commit/810e0575c8018d1e934b2cc4c578049c462d07d4))
+
+
+### Bug Fixes
+
+* robotoff logo_id path parameter ([745d30e](https://github.com/openfoodfacts/openfoodfacts-js/commit/745d30e8b8fee3423fb229345159236258328124))
+
+
+### Miscellaneous Chores
+
+* Trigger 2.0.0-alpha.29 release ([4bb3db4](https://github.com/openfoodfacts/openfoodfacts-js/commit/4bb3db42eefeb23c61d14c40864ca61168eb74ce))
+
+## [2.0.0-alpha.28](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.27...v2.0.0-alpha.28) (2026-02-04)
+
+
+### Features
+
+* update OpenPrices schema ([bbc90ec](https://github.com/openfoodfacts/openfoodfacts-js/commit/bbc90ec7cddb648c0c7a66ac6f1f83e61774227d))
+
+
+### Miscellaneous Chores
+
+* Trigger 2.0.0-alpha.28 release ([58ff532](https://github.com/openfoodfacts/openfoodfacts-js/commit/58ff532a30b985c288c1c46ad56428762f45672a))
+
+## [2.0.0-alpha.27](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.26...v2.0.0-alpha.27) (2026-02-04)
+
+
+### Bug Fixes
+
+* Simplify condition for release-publish job execution ([f7ac365](https://github.com/openfoodfacts/openfoodfacts-js/commit/f7ac36505cb15b8df728e74243767f3e0a5becc0))
+
+## [2.0.0-alpha.26](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.25...v2.0.0-alpha.26) (2026-02-04)
+
+
+### Bug Fixes
+
+* Update release workflow to include outputs and streamline npm publish process ([6369bc6](https://github.com/openfoodfacts/openfoodfacts-js/commit/6369bc68a45c460caf4eb80a92db5cc7f6401184))
+
+## [2.0.0-alpha.25](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.24...v2.0.0-alpha.25) (2026-02-04)
+
+
+### Continuous Integration
+
+* Include prebuild in prepack script ([616007c](https://github.com/openfoodfacts/openfoodfacts-js/commit/616007cc0cea4f46d3bad90f3379a6561e1963ad))
+
+## [2.0.0-alpha.24](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.23...v2.0.0-alpha.24) (2026-02-04)
+
+
+### Bug Fixes
+
+* Update package URLs to openfoodfacts-js ([32892c5](https://github.com/openfoodfacts/openfoodfacts-js/commit/32892c526f999f037200f70e2d981baf42cc5a49))
+
+
+### Continuous Integration
+
+* Remove build step in package.yml ([32892c5](https://github.com/openfoodfacts/openfoodfacts-js/commit/32892c526f999f037200f70e2d981baf42cc5a49))
+
+## [2.0.0-alpha.23](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.22...v2.0.0-alpha.23) (2026-02-04)
+
+
+### Bug Fixes
+
+* Fix package workflow triggers and publishing ([2ecdcb7](https://github.com/openfoodfacts/openfoodfacts-js/commit/2ecdcb748ecef9f3e6fe4da435fcd9f4ed953978))
+* Remove git+ prefix from repository URL ([9e47031](https://github.com/openfoodfacts/openfoodfacts-js/commit/9e470319b1e3fe4cfccce8d2a0f6a6d35908c2f2))
+
+
+### Miscellaneous Chores
+
+* trigger 2.0.0-alpha.23 release ([fa44d36](https://github.com/openfoodfacts/openfoodfacts-js/commit/fa44d361965309a31e6247e16e7513a3ac1d7da7))
+
+## [2.0.0-alpha.22](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.21...v2.0.0-alpha.22) (2026-02-04)
+
+
+### Bug Fixes
+
+* Change trigger condition for NPM publish workflow, add permissions ([814233a](https://github.com/openfoodfacts/openfoodfacts-js/commit/814233a63690d5eaac4ac363378bde6c5829bfa5))
+
+
+### Miscellaneous Chores
+
+* trigger 2.0.0-alpha.22 release ([f931df2](https://github.com/openfoodfacts/openfoodfacts-js/commit/f931df2cab420c4e7a8055697b7e8ce3214d8605))
+
+## [2.0.0-alpha.21](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.20...v2.0.0-alpha.21) (2026-02-04)
+
+
+### Features
+
+* **images:** add selectAndCropImagesV3 method ([e23ef4f](https://github.com/openfoodfacts/openfoodfacts-js/commit/e23ef4fca3814183031be14fe693ab1a3e3b1eec))
+
+
+### Bug Fixes
+
+* Require product metadata fields in PO schemas ([837f031](https://github.com/openfoodfacts/openfoodfacts-js/commit/837f031c0461bc893dac43d40a726ec78e62f52f))
+* Update GitHub workflow to publish via Yarn ([36bf328](https://github.com/openfoodfacts/openfoodfacts-js/commit/36bf328a04723283578a6c989e3dc7ef0c7379ee))
+
+
+### Miscellaneous Chores
+
+* trigger 2.0.0-alpha.21 release ([94f9e63](https://github.com/openfoodfacts/openfoodfacts-js/commit/94f9e63298e8e491c92356454c4652799f258585))
+
+## [2.0.0-alpha.20](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.19...v2.0.0-alpha.20) (2026-01-12)
+
+
+### Bug Fixes
+
+* **auth:** enhance getLoginStatus to return error details on failure ([0a84b34](https://github.com/openfoodfacts/openfoodfacts-js/commit/0a84b34b97c5268501a0dd22885d0d9d7b825565))
+* Potential fix for code scanning alert no. 10: Workflow does not contain permissions ([fd6e1c2](https://github.com/openfoodfacts/openfoodfacts-js/commit/fd6e1c240ba4aae197de1d7082a9c0aaa8ea0a19))
+* Potential fix for code scanning alert no. 11: Workflow does not contain permissions ([416c7ef](https://github.com/openfoodfacts/openfoodfacts-js/commit/416c7ef32305510334193a8a0b48f0fa77231d63))
+* Potential fix for code scanning alert no. 20: Workflow does not contain permissions ([35c5e43](https://github.com/openfoodfacts/openfoodfacts-js/commit/35c5e43b44023ea13f64f2996dc442dba8561eda))
+* Potential fix for code scanning alert no. 9: Workflow does not contain permissions ([c9ba350](https://github.com/openfoodfacts/openfoodfacts-js/commit/c9ba3509c106e95a4f6f0975f10bcfb0fd408735))
+* **search:** improve typing for charts parameter in POST /search ([a21b9f1](https://github.com/openfoodfacts/openfoodfacts-js/commit/a21b9f1843a079aed481f77cf74ead5c1d00316f))
+
+
+### Miscellaneous Chores
+
+* trigger 2.0.0-alpha.20 release ([04950ad](https://github.com/openfoodfacts/openfoodfacts-js/commit/04950ad6b60b7125740c8d6808330ae34acd308b))
+
 ## [2.0.0-alpha.19](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.18...v2.0.0-alpha.19) (2025-09-20)
 
 

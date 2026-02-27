@@ -4,7 +4,7 @@
 
 - openfoodfacts-explorer : https://github.com/openfoodfacts/openfoodfacts-explorer uses this to create the future JS frontend of Open Food Facts
 - openfoodfacts-webcomponents : https://github.com/openfoodfacts/openfoodfacts-webcomponents uses this to create reusable Open Food Facts components (used by all of our web frontends, Hunger Games)
-- Hunger Games
+- Hunger Games : https://github.com/openfoodfacts/hunger-games
 
 ### Targets
 

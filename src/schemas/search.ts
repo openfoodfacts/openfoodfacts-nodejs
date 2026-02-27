@@ -253,8 +253,7 @@ export interface components {
             fields?: string[] | null;
             /**
              * Sort By
-             * @description
-             *     Field name to use to sort results, the field should exist
+             * @description Field name to use to sort results, the field should exist
              *     and be sortable. If it is not provided, results are sorted by descending relevance score.
              *
              *     If you put a minus before the name, the results will be sorted by descending order.
@@ -271,7 +270,6 @@ export interface components {
              *
              *     [perf_link]: https://openfoodfacts.github.io/search-a-licious/users/how-to-use-scripts/#performance-considerations
              *     [privacy_link]: https://openfoodfacts.github.io/search-a-licious/users/how-to-use-scripts/#performance-considerations
-             *
              */
             sort_by?: string | null;
             /**
@@ -364,8 +362,10 @@ export interface operations {
     get_document_document__identifier__get: {
         parameters: {
             query?: {
-                /** @description Index ID to use for the search, if not provided, the default index is used.
-                 *             If there is only one index, this parameter is not needed. */
+                /**
+                 * @description Index ID to use for the search, if not provided, the default index is used.
+                 *             If there is only one index, this parameter is not needed.
+                 */
                 index_id?: string | null;
             };
             header?: never;
@@ -399,7 +399,8 @@ export interface operations {
     search_get_search_get: {
         parameters: {
             query?: {
-                /** @description The search query, it supports Lucene search query
+                /**
+                 * @description The search query, it supports Lucene search query
                  *     syntax (https://lucene.apache.org/core/3_6_0/queryparsersyntax.html). Words
                  *     that are not recognized by the lucene query parser are searched as full text
                  *     search.
@@ -408,16 +409,19 @@ export interface operations {
                  *     filter clause for categories and brands and look for "strawberry" in multiple
                  *     fields.
                  *
-                 *     The query is optional, but `sort_by` value must then be provided. */
+                 *     The query is optional, but `sort_by` value must then be provided.
+                 */
                 q?: string | null;
-                /** @description List of languages we want to support during search.
+                /**
+                 * @description List of languages we want to support during search.
                  *     This list should include the user expected language, and additional languages (such
                  *     as english for example).
                  *
                  *     This is currently used for language-specific subfields to choose in which
                  *     subfields we're searching in.
                  *
-                 *     If not provided, `['en']` is used. */
+                 *     If not provided, `['en']` is used.
+                 */
                 langs?: string;
                 /** @description Number of results to return per page. */
                 page_size?: number;
@@ -425,8 +429,8 @@ export interface operations {
                 page?: number;
                 /** @description List of fields to include in the response. All other fields will be ignored. */
                 fields?: string;
-                /** @description
-                 *     Field name to use to sort results, the field should exist
+                /**
+                 * @description Field name to use to sort results, the field should exist
                  *     and be sortable. If it is not provided, results are sorted by descending relevance score.
                  *
                  *     If you put a minus before the name, the results will be sorted by descending order.
@@ -443,16 +447,22 @@ export interface operations {
                  *
                  *     [perf_link]: https://openfoodfacts.github.io/search-a-licious/users/how-to-use-scripts/#performance-considerations
                  *     [privacy_link]: https://openfoodfacts.github.io/search-a-licious/users/how-to-use-scripts/#performance-considerations
-                 *      */
+                 */
                 sort_by?: string | null;
-                /** @description Name of facets to return in the response as a comma-separated value.
-                 *                 If None (default) no facets are returned. */
+                /**
+                 * @description Name of facets to return in the response as a comma-separated value.
+                 *                 If None (default) no facets are returned.
+                 */
                 facets?: string;
-                /** @description Name of vega representations to return in the response.
-                 *                 Can be distribution chart or scatter plot */
+                /**
+                 * @description Name of vega representations to return in the response.
+                 *                 Can be distribution chart or scatter plot
+                 */
                 charts?: string;
-                /** @description Index ID to use for the search, if not provided, the default index is used.
-                 *             If there is only one index, this parameter is not needed. */
+                /**
+                 * @description Index ID to use for the search, if not provided, the default index is used.
+                 *             If there is only one index, this parameter is not needed.
+                 */
                 index_id?: string | null;
             };
             header?: never;
@@ -527,8 +537,10 @@ export interface operations {
                 size?: number;
                 /** @description Fuzziness level to use, default to no fuzziness. */
                 fuzziness?: number | null;
-                /** @description Index ID to use for the search, if not provided, the default index is used.
-                 *             If there is only one index, this parameter is not needed. */
+                /**
+                 * @description Index ID to use for the search, if not provided, the default index is used.
+                 *             If there is only one index, this parameter is not needed.
+                 */
                 index_id?: string | null;
             };
             header?: never;
@@ -585,8 +597,10 @@ export interface operations {
                 page_size?: number;
                 langs?: string;
                 sort_by?: string | null;
-                /** @description Index ID to use for the search, if not provided, the default index is used.
-                 *             If there is only one index, this parameter is not needed. */
+                /**
+                 * @description Index ID to use for the search, if not provided, the default index is used.
+                 *             If there is only one index, this parameter is not needed.
+                 */
                 index_id?: string | null;
                 display_debug?: boolean;
             };

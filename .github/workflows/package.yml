@@ -1,18 +1,69 @@
-name: Node.js Package
+name: Publish to npm
 on:
-  release:
-    types: [created]
+  # Allows triggering both from release-please workflow and manually
+  workflow_dispatch:
+    inputs:
+      git_ref:
+        description: "Git ref to build from (tag or branch)"
+        required: true
+        type: string
+      tag:
+        description: "Tag to publish (optional)"
+        required: false
+        type: choice
+        options:
+          - latest
+          - beta
+          - alpha
+        default: "latest"
+
+  workflow_call:
+    inputs:
+      git_ref:
+        description: "Git ref to build from (tag or branch)"
+        required: true
+        type: string
+      tag:
+        description: "Tag to publish (optional)"
+        required: false
+        type: string
+        default: "latest"
+
 jobs:
-  build:
+  publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    # only publish from tags
+    if: startsWith(github.event.inputs.git_ref, 'refs/tags/')
+
     steps:
-      - uses: actions/checkout@v5
-      # Setup .npmrc file to publish to npm
-      - uses: actions/setup-node@v5
+      - name: Checkout code
+        uses: actions/checkout@v6
         with:
-          node-version: "20.x"
+          ref: ${{ github.event.inputs.git_ref }}
+
+      - name: Setup Node.js and .npmrc
+        uses: actions/setup-node@v6
+        with:
+          node-version: "24.x"
+          # needed to publish to npm registry
           registry-url: "https://registry.npmjs.org"
-      - run: npm install
-      - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          scope: "@openfoodfacts"
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Build project
+        run: yarn build
+
+      - name: Run tests
+        run: yarn test
+
+      - name: Publish to npm
+        run: npm publish --tag ${{ github.event.inputs.tag }}

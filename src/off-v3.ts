@@ -4,12 +4,15 @@ import type { KnowledgePanel } from "./knowledgepanels.js";
 import type {
   LangIngredient,
   LangProduct,
+  LangPackagingText,
   RawImage,
   SelectedImage,
 } from "./types.js";
 
 export type ResponseStatus = components["schemas"]["response_status"];
 export type Product = components["schemas"]["product_v3"];
+export type PackagingComponent = components["schemas"]["packaging_component"];
+export type PackagingTaxonomyTag = components["schemas"]["shape"];
 
 export type ProductImageUploadParams = NonNullable<
   operations["post-api-v3-product-code-images"]["requestBody"]
@@ -17,6 +20,10 @@ export type ProductImageUploadParams = NonNullable<
 
 export type ProductQuery = NonNullable<
   operations["get-api-v3-product-code"]["parameters"]["query"]
+>;
+
+export type TaxonomySuggestionsQuery = NonNullable<
+  operations["get-api-v3-taxonomy_suggestions-taxonomy"]["parameters"]["query"]
 >;
 
 export type ImageSelectionData = NonNullable<
@@ -39,7 +46,6 @@ export type ProductDataSection = {
 export type ProductDataType = ProductDataSection & {
   knowledge_panels: Record<string, KnowledgePanel>;
   product_name: string;
-  [lang: LangProduct]: string;
   _id: string;
   code: string;
   _keywords: string[];
@@ -57,7 +63,6 @@ export type ProductDataType = ProductDataSection & {
   additives_tags: string[];
 
   ingredients_text: string;
-  [lang: LangIngredient]: string;
 
   image_front_url: string;
   image_front_small_url: string;
@@ -78,7 +83,10 @@ export type ProductDataType = ProductDataSection & {
   ecoscore_grade: string;
   nova_group: number;
 
-  packaging: string;
+  packaging?: string;
+  packaging_text?: string;
+  packagings?: PackagingComponent[];
+  packagings_complete?: number;
   manufacturing_places: string;
 
   brands: string;
@@ -126,7 +134,7 @@ export type ProductDataType = ProductDataSection & {
     [lang: string]: number;
   };
   lang: string;
-};
+} & Partial<Record<LangProduct | LangIngredient | LangPackagingText, string>>;
 
 export type ProductStateBase = {
   result: {
@@ -201,6 +209,16 @@ export class ProductOpenerApiV3 {
     return await this.client.PATCH("/api/v3/product/{code}", {
       params: { path: { code: barcode } },
       body: { fields: "updated", product: { images } },
+    });
+  }
+
+  /**
+   * Fetch taxonomy suggestions for autocomplete
+   * @param query - Suggestion query parameters
+   */
+  async getTaxonomySuggestions(query: TaxonomySuggestionsQuery) {
+    return this.client.GET("/api/v3/taxonomy_suggestions", {
+      params: { query },
     });
   }
 

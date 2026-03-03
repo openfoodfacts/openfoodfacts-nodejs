@@ -1,4 +1,6 @@
-import { STATIC_HOST } from "../consts.js";
+import { STATIC_HOSTS, BackendType } from "../consts.js";
 
-export const TAXONOMY_URL = (taxo: string) =>
-  `${STATIC_HOST}/data/taxonomies/${taxo}.json`;
+export const TAXONOMY_URL = (
+  taxo: string,
+  type: BackendType = BackendType.OFF,
+) => `${STATIC_HOSTS[type]}/data/taxonomies/${taxo}.json`;

@@ -26,6 +26,11 @@ import type {
 
 import type { RawImage, SelectedImage } from "./types.js";
 
+import {
+  AuthenticationError,
+  ValidationError,
+} from "./error.js";
+
 import type {
   FacetResponse,
   FacetSortOption,
@@ -151,7 +156,7 @@ export class OpenFoodFacts {
       (options.host && options.country) ||
       (options.type && options.country)
     ) {
-      throw new Error(
+      throw new ValidationError(
         "You must provide either `host`, `type`, or `country`, not multiple.",
       );
     }
@@ -190,21 +195,21 @@ export class OpenFoodFacts {
    */
   private validateAccessToken(token: string): void {
     if (typeof token !== "string") {
-      throw new Error("Access token must be a string.");
+      throw new ValidationError("Access token must be a string.");
     }
 
     if (token.length === 0) {
-      throw new Error("Access token cannot be an empty string.");
+      throw new ValidationError("Access token cannot be an empty string.");
     }
 
     if (!/^[A-Za-z0-9-_.]+$/.test(token)) {
-      throw new Error(
+      throw new ValidationError(
         "Access token can only contain alphanumeric characters, dashes, underscores, and periods.",
       );
     }
 
     if (this.isTokenExpired(token)) {
-      throw new Error("Access token is expired.");
+      throw new AuthenticationError("Access token is expired.");
     }
   }
 
@@ -257,7 +262,9 @@ export class OpenFoodFacts {
       const headers = new Headers(init?.headers);
 
       if (this.accessToken == null) {
-        throw new Error("Access token was first specified and now is null.");
+        throw new AuthenticationError(
+          "Access token was first specified and now is null.",
+        );
       }
 
       if (this.isTokenExpired(this.accessToken)) {
@@ -276,7 +283,7 @@ export class OpenFoodFacts {
     options: OpenFoodFactsOptions,
   ): Promise<string> {
     if (options.onAccessTokenExpired == null) {
-      throw new Error(
+      throw new AuthenticationError(
         "Access token expired and no handler provided to refresh it." +
           " You should provide `onAccessTokenExpired` option or wrap the fetch function to handle token expiration.",
       );
@@ -285,7 +292,7 @@ export class OpenFoodFacts {
     const newAccessToken = await options.onAccessTokenExpired();
 
     if (newAccessToken == null) {
-      throw new Error(
+      throw new AuthenticationError(
         "onAccessTokenExpired handler did not return a new access token.",
       );
     }
@@ -296,7 +303,7 @@ export class OpenFoodFacts {
   private isTokenExpired(token: string) {
     const parts = token.split(".");
     if (parts.length !== 3) {
-      throw new Error("Invalid JWT token format");
+      throw new ValidationError("Invalid JWT token format");
     }
     const payload = JSON.parse(
       Buffer.from(parts[1], "base64").toString("utf-8"),
@@ -603,7 +610,7 @@ export function getProductImageUrl(
   const paddedBarcode = barcode.toString().padStart(13, "0");
   const match = paddedBarcode.match(/^(.{3})(.{3})(.{3})(.*)$/);
   if (!match) {
-    throw new Error(`Invalid barcode format: ${paddedBarcode}`);
+    throw new ValidationError(`Invalid barcode format: ${paddedBarcode}`, "barcode");
   }
 
   const path = `${match[1]}/${match[2]}/${match[3]}/${match[4]}`;

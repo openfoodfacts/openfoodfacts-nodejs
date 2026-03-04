@@ -29,6 +29,8 @@ export type KnowledgePanel = {
   type: "card" | "inline";
   expanded: boolean;
   expand_for: string;
+  evaluation?: string;
+  half_width_on_mobile?: boolean;
   title_element: KnowledgePanelTitle;
   elements: KnowledgeElement[];
   topics: string[];

@@ -1,6 +1,6 @@
 export type KnowledgePanels = { [key: string]: KnowledgePanel };
 
-export type KnowledgePanelTitleBase  = {
+export type KnowledgePanelTitleBase = {
   title: string;
   subtitle?: string;
   icon_url: string;
@@ -10,12 +10,12 @@ export type KnowledgePanelTitleBase  = {
 };
 
 type KnowledgePanelTitleGrade = KnowledgePanelTitleBase & {
-  type: 'grade';
-  grade: 'a' | 'b' | 'c' | 'd' | 'e' | 'unknown';
+  type: "grade";
+  grade: "a" | "b" | "c" | "d" | "e" | "unknown";
 };
 
 type KnowledgePanelTitlePercentage = KnowledgePanelTitleBase & {
-  type: 'percentage';
+  type: "percentage";
   value: number;
 };
 

@@ -8,6 +8,7 @@ export type KnowledgePanelTitleBase  = {
   icon_size: string;
   type?: never;
 };
+
 type KnowledgePanelTitleGrade = KnowledgePanelTitleBase & {
   type: 'grade';
   grade: 'a' | 'b' | 'c' | 'd' | 'e' | 'unknown';

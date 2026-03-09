@@ -101,6 +101,20 @@ describe("SearchApi Wrapper", () => {
       expect(result.error).toBeDefined();
       expect(result.response.status).toBe(400);
     });
+
+    it("should handle network failure when performing search", async () => {
+      const body = {
+        q: "test",
+        langs: ["en"],
+        page_size: 20,
+        page: 1,
+      };
+      fetchMock.mockRejectedValue(new Error("Network error"));
+
+      await expect(client.search(body)).rejects.toThrow("Network error");
+    });  
+     
+      
   });
 
   describe("Autocomplete", () => {

@@ -1,3 +1,5 @@
+export type KnowledgePanels = { [key: string]: KnowledgePanel };
+
 export type KnowledgePanelTitle = {
   title: string;
   subtitle?: string;

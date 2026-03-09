@@ -387,7 +387,7 @@ export class OpenFoodFacts {
   }
 
   async getTaxo<T extends TaxoNode>(taxo: string): Promise<Taxonomy<T>> {
-    const res = await this.fetch(TAXONOMY_URL(taxo));
+    const res = await this.fetch(TAXONOMY_URL(taxo, this.backendType));
     return (await res.json()) as Taxonomy<T>;
   }
 

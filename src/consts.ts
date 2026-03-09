@@ -18,6 +18,13 @@ export const BACKEND_DOMAINS = {
   [BackendType.OPF]: "openproductsfacts.org",
 };
 
+export const STATIC_HOSTS = {
+  [BackendType.OFF]: `https://static.${BACKEND_DOMAINS[BackendType.OFF]}`,
+  [BackendType.OBF]: `https://static.${BACKEND_DOMAINS[BackendType.OBF]}`,
+  [BackendType.OPFF]: `https://static.${BACKEND_DOMAINS[BackendType.OPFF]}`,
+  [BackendType.OPF]: `https://static.${BACKEND_DOMAINS[BackendType.OPF]}`,
+};
+
 export const BACKEND_NAMES = {
   [BackendType.OFF]: "OpenFoodFacts",
   [BackendType.OBF]: "OpenBeautyFacts",

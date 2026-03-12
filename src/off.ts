@@ -576,6 +576,7 @@ export class OpenFoodFacts {
    * @returns User permissions including moderator/admin flags, or error details
    */
   async getCurrentUserPermissions() {
+    // TODO: use auto-generated openapi types when they become available
     const response = await this.fetch(
       new URL("/api/v3/current-user/permissions", this.baseUrl),
     );

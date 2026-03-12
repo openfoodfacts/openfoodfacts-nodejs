@@ -575,10 +575,7 @@ export class OpenFoodFacts {
    * Requires a valid access token (set via constructor options).
    * @returns User permissions including moderator/admin flags, or error details
    */
-  async getCurrentUserPermissions(): Promise<
-    | { data: CurrentUserPermissions; error?: undefined }
-    | { data?: undefined; error: string }
-  > {
+  async getCurrentUserPermissions() {
     const response = await this.fetch(
       new URL("/api/v3/current-user/permissions", this.baseUrl),
     );

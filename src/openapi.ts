@@ -9,3 +9,9 @@ export function formData(
   }
   return form;
 }
+
+export type UnwrapContent<T> = T extends {
+  content: { "application/json": infer U };
+}
+  ? U
+  : never;

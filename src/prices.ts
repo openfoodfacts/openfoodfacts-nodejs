@@ -1,6 +1,7 @@
 import createClient from "openapi-fetch";
 import type { components, paths } from "./schemas/prices.js";
 import { USER_AGENT } from "./consts.js";
+import type { UnwrapContent } from "./openapi.js";
 
 type GetPricesQuery = paths["/api/v1/prices"]["get"]["parameters"]["query"];
 
@@ -13,10 +14,6 @@ export type Challenge = components["schemas"]["Challenge"];
 export type PriceTag = components["schemas"]["PriceTagFull"];
 export type ReceiptItem = components["schemas"]["ReceiptItemFull"];
 export type PriceFlag = components["schemas"]["Flag"];
-
-type UnwrapContent<T> = T extends { content: { "application/json": infer U } }
-  ? U
-  : never;
 
 export type PriceUpdate = UnwrapContent<
   paths["/api/v1/prices/{id}"]["patch"]["requestBody"]

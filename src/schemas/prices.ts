@@ -153,6 +153,27 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/locations/compare": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * @description Compare two locations by their IDs.
+         *     Returns shared product prices with the latest price per location,
+         *     the date of that price, and the total sum.
+         */
+        get: operations["locations_compare_retrieve"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/locations/osm/{osm_type}/{osm_id}": {
         parameters: {
             query?: never;
@@ -177,6 +198,22 @@ export interface paths {
             cookie?: never;
         };
         get: operations["locations_osm_countries_list"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/locations/osm/countries/{country_code}/cities": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["locations_osm_countries_cities_list"];
         put?: never;
         post?: never;
         delete?: never;
@@ -624,7 +661,15 @@ export interface components {
             id: number;
             name: string;
             country_code_2: string;
-            osm_name?: string | null;
+            osm_name: string;
+            location_count: number;
+            price_count: number;
+        };
+        CountryCity: {
+            osm_name: string;
+            country_code_2: string;
+            location_count: number;
+            price_count: number;
         };
         /**
          * @description * `ADP` - ADP
@@ -1017,6 +1062,15 @@ export interface components {
             /** Format: date-time */
             readonly updated: string;
         };
+        LocationCompare: {
+            location_a: components["schemas"]["Location"];
+            location_b: components["schemas"]["Location"];
+            shared_products: unknown;
+            /** Format: double */
+            total_sum_location_a: number;
+            /** Format: double */
+            total_sum_location_b: number;
+        };
         LocationCreate: {
             type: components["schemas"]["LocationTypeEnum"];
             /** Format: int64 */
@@ -1046,6 +1100,29 @@ export interface components {
         NullEnum: null;
         PaginatedChallengeList: {
             items: components["schemas"]["Challenge"][][];
+            /**
+             * @description Current page number
+             * @example 1
+             */
+            page: number;
+            /**
+             * @description Total number of pages
+             * @example 16
+             */
+            pages: number;
+            /**
+             * @description Number of items per page
+             * @example 100
+             */
+            size: number;
+            /**
+             * @description Total number of items
+             * @example 1531
+             */
+            total: number;
+        };
+        PaginatedCountryCityList: {
+            items: components["schemas"]["CountryCity"][][];
             /**
              * @description Current page number
              * @example 1
@@ -2366,6 +2443,34 @@ export interface operations {
             };
         };
     };
+    locations_compare_retrieve: {
+        parameters: {
+            query: {
+                /** @description Filter prices with date greater than or equal to this date (YYYY-MM-DD) */
+                date__gte?: string;
+                /** @description Filter prices with date less than or equal to this date (YYYY-MM-DD) */
+                date__lte?: string;
+                location_id_a: number;
+                location_id_b: number;
+                /** @description Filter to keep only discounted or non-discounted prices */
+                price_is_discounted?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LocationCompare"];
+                };
+            };
+        };
+    };
     locations_osm_retrieve: {
         parameters: {
             query?: never;
@@ -2408,6 +2513,32 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["PaginatedCountryList"];
+                };
+            };
+        };
+    };
+    locations_osm_countries_cities_list: {
+        parameters: {
+            query?: {
+                /** @description A page number within the paginated result set. */
+                page?: number;
+                /** @description Number of results to return per page. */
+                size?: number;
+            };
+            header?: never;
+            path: {
+                country_code: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PaginatedCountryCityList"];
                 };
             };
         };

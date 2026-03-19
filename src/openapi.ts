@@ -1,6 +1,6 @@
 export function formData(
   data: Record<string, string | Blob | undefined> | undefined,
-) {
+): FormData {
   const form = new FormData();
   const entries = Object.entries(data ?? {});
   for (const [key, value] of entries) {
@@ -9,3 +9,9 @@ export function formData(
   }
   return form;
 }
+
+export type UnwrapContent<T> = T extends {
+  content: { "application/json": infer U };
+}
+  ? U
+  : never;

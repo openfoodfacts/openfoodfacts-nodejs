@@ -7,6 +7,7 @@ on:
 permissions:
   contents: write
   pull-requests: write
+  id-token: write # Added to allow OIDC token generation
 
 jobs:
   release-please:

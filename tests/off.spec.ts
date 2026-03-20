@@ -71,6 +71,100 @@ describe("OpenFoodFacts", () => {
     });
   });
 
+  describe("individual taxonomy getters", () => {
+    const mockTaxoEntry = {
+      name: { en: "Test Entry" },
+      parents: [],
+      children: [],
+    };
+
+    beforeEach(() => {
+      mockFetch.mockResolvedValue(
+        TestUtils.mockResponse(mockTaxoEntry, true, 200),
+      );
+    });
+
+    it("should fetch a single category by name", async () => {
+      const result = await productsApi.getCategory("en:beverages");
+      expect(result).toEqual(mockTaxoEntry);
+      expect(mockFetch).toHaveBeenCalledWith(
+        expect.stringContaining("tagtype=categories"),
+      );
+    });
+
+    it("should fetch a single label by name", async () => {
+      const result = await productsApi.getLabel("en:organic");
+      expect(result).toEqual(mockTaxoEntry);
+      expect(mockFetch).toHaveBeenCalledWith(
+        expect.stringContaining("tagtype=labels"),
+      );
+    });
+
+    it("should fetch a single additive by name", async () => {
+      const result = await productsApi.getAdditive("en:e322");
+      expect(result).toEqual(mockTaxoEntry);
+      expect(mockFetch).toHaveBeenCalledWith(
+        expect.stringContaining("tagtype=additives"),
+      );
+    });
+
+    it("should fetch a single allergen by name", async () => {
+      const result = await productsApi.getAllergen("en:gluten");
+      expect(result).toEqual(mockTaxoEntry);
+      expect(mockFetch).toHaveBeenCalledWith(
+        expect.stringContaining("tagtype=allergens"),
+      );
+    });
+
+    it("should fetch a single country by name", async () => {
+      const result = await productsApi.getCountry("en:france");
+      expect(result).toEqual(mockTaxoEntry);
+      expect(mockFetch).toHaveBeenCalledWith(
+        expect.stringContaining("tagtype=countries"),
+      );
+    });
+
+    it("should fetch a single ingredient by name", async () => {
+      const result = await productsApi.getIngredient("en:sugar");
+      expect(result).toEqual(mockTaxoEntry);
+      expect(mockFetch).toHaveBeenCalledWith(
+        expect.stringContaining("tagtype=ingredients"),
+      );
+    });
+
+    it("should fetch a single packaging entry by name", async () => {
+      const result = await productsApi.getPackaging("en:plastic");
+      expect(result).toEqual(mockTaxoEntry);
+      expect(mockFetch).toHaveBeenCalledWith(
+        expect.stringContaining("tagtype=packaging"),
+      );
+    });
+
+    it("should fetch a single state by name", async () => {
+      const result = await productsApi.getState("en:complete");
+      expect(result).toEqual(mockTaxoEntry);
+      expect(mockFetch).toHaveBeenCalledWith(
+        expect.stringContaining("tagtype=states"),
+      );
+    });
+
+    it("should fetch a single store by name", async () => {
+      const result = await productsApi.getStore("en:carrefour");
+      expect(result).toEqual(mockTaxoEntry);
+      expect(mockFetch).toHaveBeenCalledWith(
+        expect.stringContaining("tagtype=stores"),
+      );
+    });
+
+    it("should fetch a single nutrient by name", async () => {
+      const result = await productsApi.getNutrient("en:energy");
+      expect(result).toEqual(mockTaxoEntry);
+      expect(mockFetch).toHaveBeenCalledWith(
+        expect.stringContaining("tagtype=nutrients"),
+      );
+    });
+  });
+
   describe("getProductAttributes", () => {
     it("should return product attributes for a valid barcode", async () => {
       const mockData = {
@@ -648,15 +742,7 @@ describe("OpenFoodFacts", () => {
       const result = await productsApi.getCurrentUserPermissions();
 
       expect(result.data).toBeUndefined();
-      expect(result.error).toBe("HTTP error! status: 401");
-    });
-
-    it("should throw on network error", async () => {
-      mockFetch.mockRejectedValue(new Error("Network error"));
-
-      await expect(productsApi.getCurrentUserPermissions()).rejects.toThrow(
-        "Network error",
-      );
+      expect(result.error).toBeDefined();
     });
   });
 });

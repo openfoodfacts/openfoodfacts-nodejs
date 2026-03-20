@@ -324,6 +324,86 @@ export class OpenFoodFacts {
     return this.apiv2.getTaxoEntry("languages", languageName);
   }
 
+  /**
+   * Returns a single category taxonomy entry by name
+   * @param categoryName - The name/id of the category (e.g., "en:beverages")
+   */
+  getCategory(categoryName: string): Promise<Category> {
+    return this.apiv2.getTaxoEntry("categories", categoryName);
+  }
+
+  /**
+   * Returns a single label taxonomy entry by name
+   * @param labelName - The name/id of the label (e.g., "en:organic")
+   */
+  getLabel(labelName: string): Promise<Label> {
+    return this.apiv2.getTaxoEntry("labels", labelName);
+  }
+
+  /**
+   * Returns a single additive taxonomy entry by name
+   * @param additiveName - The name/id of the additive (e.g., "en:e322")
+   */
+  getAdditive(additiveName: string): Promise<Additive> {
+    return this.apiv2.getTaxoEntry("additives", additiveName);
+  }
+
+  /**
+   * Returns a single allergen taxonomy entry by name
+   * @param allergenName - The name/id of the allergen (e.g., "en:gluten")
+   */
+  getAllergen(allergenName: string): Promise<Allergen> {
+    return this.apiv2.getTaxoEntry("allergens", allergenName);
+  }
+
+  /**
+   * Returns a single country taxonomy entry by name
+   * @param countryName - The name/id of the country (e.g., "en:france")
+   */
+  getCountry(countryName: string): Promise<Country> {
+    return this.apiv2.getTaxoEntry("countries", countryName);
+  }
+
+  /**
+   * Returns a single ingredient taxonomy entry by name
+   * @param ingredientName - The name/id of the ingredient (e.g., "en:sugar")
+   */
+  getIngredient(ingredientName: string): Promise<Ingredient> {
+    return this.apiv2.getTaxoEntry("ingredients", ingredientName);
+  }
+
+  /**
+   * Returns a single packaging taxonomy entry by name
+   * @param packagingName - The name/id of the packaging (e.g., "en:plastic")
+   */
+  getPackaging(packagingName: string): Promise<TaxoNode> {
+    return this.apiv2.getTaxoEntry("packaging", packagingName);
+  }
+
+  /**
+   * Returns a single state taxonomy entry by name
+   * @param stateName - The name/id of the state (e.g., "en:complete")
+   */
+  getState(stateName: string): Promise<State> {
+    return this.apiv2.getTaxoEntry("states", stateName);
+  }
+
+  /**
+   * Returns a single store taxonomy entry by name
+   * @param storeName - The name/id of the store (e.g., "en:carrefour")
+   */
+  getStore(storeName: string): Promise<Store> {
+    return this.apiv2.getTaxoEntry("stores", storeName);
+  }
+
+  /**
+   * Returns a single nutrient taxonomy entry by name
+   * @param nutrientName - The name/id of the nutrient (e.g., "en:energy")
+   */
+  getNutrient(nutrientName: string): Promise<Nutrient> {
+    return this.apiv2.getTaxoEntry("nutrients", nutrientName);
+  }
+
   getBrands(): Promise<Taxonomy<Brand>> {
     return this.getTaxo<Brand>("brands");
   }

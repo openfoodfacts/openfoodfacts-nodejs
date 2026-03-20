@@ -66,4 +66,6 @@ jobs:
         run: yarn test
 
       - name: Publish to npm
-        run: npm publish --tag ${{ inputs.tag }}
+        env:
+          NPM_TAG: ${{ inputs.tag }}
+        run: npm publish --tag $NPM_TAG

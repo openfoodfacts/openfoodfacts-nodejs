@@ -4,14 +4,15 @@ on:
     branches:
       - develop
 
-permissions:
-  contents: write
-  pull-requests: write
-  id-token: write # Added to allow OIDC token generation
+
 
 jobs:
   release-please:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      id-token: write # Added to allow OIDC token generation
 
     outputs:
       release_created: ${{ steps.release-please.outputs.release_created }}

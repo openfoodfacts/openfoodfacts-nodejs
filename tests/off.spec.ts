@@ -599,4 +599,64 @@ describe("OpenFoodFacts", () => {
       );
     });
   });
+
+  describe("getCurrentUserPermissions", () => {
+    it("should return user permissions when authenticated", async () => {
+      const mockData = {
+        status: "success",
+        result: { id: "user_found" },
+        user: {
+          userid: "stephane",
+          name: "Stephane Gigandet",
+          moderator: 1,
+          admin: 1,
+        },
+      };
+
+      mockFetchSuccess(mockData);
+
+      const result = await productsApi.getCurrentUserPermissions();
+
+      expect(result.error).toBeUndefined();
+      expect(result.data).toEqual(mockData);
+      expect(mockFetch).toHaveBeenCalledWith(
+        new URL(
+          "/api/v3/current-user/permissions",
+          "https://world.openfoodfacts.org",
+        ),
+        expect.anything(),
+      );
+    });
+
+    it("should return error when not authenticated (401)", async () => {
+      mockFetch.mockResolvedValue(
+        TestUtils.mockResponse(
+          {
+            status: "failure",
+            errors: [
+              {
+                message: { id: "authentication_required" },
+                impact: { id: "failure" },
+              },
+            ],
+          },
+          false,
+          401,
+        ),
+      );
+
+      const result = await productsApi.getCurrentUserPermissions();
+
+      expect(result.data).toBeUndefined();
+      expect(result.error).toBe("HTTP error! status: 401");
+    });
+
+    it("should throw on network error", async () => {
+      mockFetch.mockRejectedValue(new Error("Network error"));
+
+      await expect(productsApi.getCurrentUserPermissions()).rejects.toThrow(
+        "Network error",
+      );
+    });
+  });
 });

@@ -373,7 +373,7 @@ export class OpenFoodFacts {
   }
 
   async getTaxo<T extends TaxoNode>(taxo: string): Promise<Taxonomy<T>> {
-    const res = await this.fetch(TAXONOMY_URL(taxo));
+    const res = await this.fetch(TAXONOMY_URL(taxo, this.backendType));
     return (await res.json()) as Taxonomy<T>;
   }
 
@@ -569,6 +569,23 @@ export class OpenFoodFacts {
     }
     return { data: (await response.json()) as LoginStatus };
   }
+
+  /**
+   * Returns the current authenticated user's permissions.
+   * Requires a valid access token (set via constructor options).
+   * @returns User permissions including moderator/admin flags, or error details
+   */
+  async getCurrentUserPermissions() {
+    // TODO: use auto-generated openapi types when they become available
+    const response = await this.fetch(
+      new URL("/api/v3/current-user/permissions", this.baseUrl),
+    );
+
+    if (!response.ok) {
+      return { error: `HTTP error! status: ${response.status}` };
+    }
+    return { data: (await response.json()) as CurrentUserPermissions };
+  }
 }
 
 type BaseLoginStatus = { status: 0 | 1; status_verbose: string };
@@ -580,6 +597,21 @@ type LoggedInStatus = BaseLoginStatus & {
 };
 
 export type LoginStatus = LoggedInStatus | LoggedOutStatus;
+
+export type CurrentUserPermissions = {
+  status: "success" | "failure";
+  result?: { id: string };
+  user?: {
+    userid: string;
+    name: string;
+    moderator: 0 | 1;
+    admin: 0 | 1;
+  };
+  errors?: Array<{
+    message?: { id: string };
+    impact?: { id: string };
+  }>;
+};
 
 export type ProductSearch<T = ProductDataType> = {
   count: number;

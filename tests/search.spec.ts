@@ -182,4 +182,63 @@ describe("SearchApi Wrapper", () => {
       expect(result.response.status).toBe(503);
     });
   });
+
+  describe("Malformed responses", () => {
+    it("should return null data when 200 response body is null", async () => {
+      // openapi-fetch treats 200 + null body as a successful response
+      // with data === null. The SDK should not crash in this case.
+      fetchMock.mockResolvedValue(mockResponse(null));
+
+      const result = await client.search({
+        q: "test",
+        langs: ["en"],
+        page_size: 20,
+        page: 1,
+      });
+      // null body comes back as null data — callers must check before iterating
+      expect(result.data).toBeNull();
+      expect(result.response.status).toBe(200);
+    });
+
+    it("should return hits as empty array when 200 response is missing hits field", async () => {
+      // Backend returns 200 but hits is undefined — guard should warn and fallback
+      const consoleSpy = jest
+        .spyOn(console, "warn")
+        .mockImplementation(() => {});
+      fetchMock.mockResolvedValue(mockResponse({ count: 0 }));
+
+      const result = await client.search({
+        q: "test",
+        langs: ["en"],
+        page_size: 20,
+        page: 1,
+      });
+
+      expect(result.data).toBeDefined();
+      expect(result.data!.hits).toEqual([]);
+      expect(consoleSpy).toHaveBeenCalledWith(
+        expect.stringContaining("missing 'hits' field"),
+        expect.anything(),
+      );
+      consoleSpy.mockRestore();
+    });
+
+    it("should return empty hits as fallback for GET search when hits field is missing", async () => {
+      // Same guard applies to searchGet()
+      const consoleSpy = jest
+        .spyOn(console, "warn")
+        .mockImplementation(() => {});
+      fetchMock.mockResolvedValue(mockResponse({ count: 0 }));
+
+      const result = await client.searchGet({ q: "test" });
+
+      expect(result.data).toBeDefined();
+      expect(result.data!.hits).toEqual([]);
+      expect(consoleSpy).toHaveBeenCalledWith(
+        expect.stringContaining("missing 'hits' field"),
+        expect.anything(),
+      );
+      consoleSpy.mockRestore();
+    });
+  });
 });

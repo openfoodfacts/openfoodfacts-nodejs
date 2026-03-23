@@ -6,6 +6,7 @@ import {
 } from "./consts.js";
 
 import { Robotoff } from "./robotoff.js";
+import { NutriPatrol } from "./nutripatrol.js";
 
 import { TAXONOMY_URL } from "./taxonomy/api.js";
 import type {
@@ -122,6 +123,9 @@ export class OpenFoodFacts {
   /** The Robotoff API class. */
   readonly robotoff: Robotoff;
 
+  /** The NutriPatrol API class. */
+  readonly nutriPatrol: NutriPatrol;
+
   /**
    * Create OFF object
    * @param fetch - Fetch implementation to use
@@ -147,6 +151,7 @@ export class OpenFoodFacts {
     this.apiv2 = new ProductOpenerApiV2(this.fetch, { host: this.baseUrl });
     this.apiv3 = new ProductOpenerApiV3(this.fetch, { host: this.baseUrl });
     this.robotoff = new Robotoff(fetch);
+    this.nutriPatrol = new NutriPatrol(fetch);
   }
 
   /**

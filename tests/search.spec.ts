@@ -184,9 +184,18 @@ describe("SearchApi Wrapper", () => {
   });
 
   describe("Malformed responses", () => {
-    it("should return null data when 200 response body is null", async () => {
-      // openapi-fetch treats 200 + null body as a successful response
-      // with data === null. The SDK should not crash in this case.
+    let consoleSpy: jest.SpyInstance;
+
+    beforeEach(() => {
+      consoleSpy = jest.spyOn(console, "warn").mockImplementation(() => {});
+    });
+
+    afterEach(() => {
+      consoleSpy.mockRestore();
+    });
+
+    it("should return null data when POST search 200 response body is null", async () => {
+      // openapi-fetch treats 200 + null body as data === null; SDK must not crash.
       fetchMock.mockResolvedValue(mockResponse(null));
 
       const result = await client.search({
@@ -195,92 +204,50 @@ describe("SearchApi Wrapper", () => {
         page_size: 20,
         page: 1,
       });
-      // null body comes back as null data — callers must check before iterating
+
       expect(result.data).toBeNull();
       expect(result.response.status).toBe(200);
     });
 
-    it("should return hits as empty array when 200 response is missing hits field", async () => {
-      // Backend returns 200 but hits is undefined — guard should warn and fallback
-      const consoleSpy = jest
-        .spyOn(console, "warn")
-        .mockImplementation(() => {});
-      fetchMock.mockResolvedValue(mockResponse({ count: 0 }));
+    it.each([
+      ["hits field is missing", { count: 0 }],
+      ["hits is a non-array value", { count: 1, hits: {} }],
+    ])(
+      "should normalise hits to [] for POST search when %s",
+      async (_label, responseBody) => {
+        fetchMock.mockResolvedValue(mockResponse(responseBody));
 
-      const result = await client.search({
-        q: "test",
-        langs: ["en"],
-        page_size: 20,
-        page: 1,
-      });
+        const result = await client.search({
+          q: "test",
+          langs: ["en"],
+          page_size: 20,
+          page: 1,
+        });
 
-      expect(result.data).toBeDefined();
-      expect(result.data!.hits).toEqual([]);
-      expect(consoleSpy).toHaveBeenCalledWith(
-        expect.stringContaining("missing 'hits' field"),
-        expect.anything(),
-      );
-      consoleSpy.mockRestore();
-    });
+        expect(result.data!.hits).toEqual([]);
+        expect(consoleSpy).toHaveBeenCalledWith(
+          expect.stringContaining("missing 'hits' field"),
+          expect.anything(),
+        );
+      },
+    );
 
-    it("should return empty hits as fallback for GET search when hits field is missing", async () => {
-      // Same guard applies to searchGet()
-      const consoleSpy = jest
-        .spyOn(console, "warn")
-        .mockImplementation(() => {});
-      fetchMock.mockResolvedValue(mockResponse({ count: 0 }));
+    it.each([
+      ["hits field is missing", { count: 0 }],
+      ["hits is a non-array value", { count: 1, hits: {} }],
+    ])(
+      "should normalise hits to [] for GET search when %s",
+      async (_label, responseBody) => {
+        fetchMock.mockResolvedValue(mockResponse(responseBody));
 
-      const result = await client.searchGet({ q: "test" });
+        const result = await client.searchGet({ q: "test" });
 
-      expect(result.data).toBeDefined();
-      expect(result.data!.hits).toEqual([]);
-      expect(consoleSpy).toHaveBeenCalledWith(
-        expect.stringContaining("missing 'hits' field"),
-        expect.anything(),
-      );
-      consoleSpy.mockRestore();
-    });
-
-    it("should return hits as empty array when hits is a non-array value in POST search", async () => {
-      // The Array.isArray guard also catches malformed values like {} or strings,
-      // not just null/undefined — this test documents that behaviour.
-      const consoleSpy = jest
-        .spyOn(console, "warn")
-        .mockImplementation(() => {});
-      fetchMock.mockResolvedValue(mockResponse({ count: 1, hits: {} }));
-
-      const result = await client.search({
-        q: "test",
-        langs: ["en"],
-        page_size: 20,
-        page: 1,
-      });
-
-      expect(result.data).toBeDefined();
-      expect(result.data!.hits).toEqual([]);
-      expect(consoleSpy).toHaveBeenCalledWith(
-        expect.stringContaining("missing 'hits' field"),
-        expect.anything(),
-      );
-      consoleSpy.mockRestore();
-    });
-
-    it("should return hits as empty array when hits is a non-array value in GET search", async () => {
-      // Same Array.isArray guard applies to searchGet()
-      const consoleSpy = jest
-        .spyOn(console, "warn")
-        .mockImplementation(() => {});
-      fetchMock.mockResolvedValue(mockResponse({ count: 1, hits: {} }));
-
-      const result = await client.searchGet({ q: "test" });
-
-      expect(result.data).toBeDefined();
-      expect(result.data!.hits).toEqual([]);
-      expect(consoleSpy).toHaveBeenCalledWith(
-        expect.stringContaining("missing 'hits' field"),
-        expect.anything(),
-      );
-      consoleSpy.mockRestore();
-    });
+        expect(result.data!.hits).toEqual([]);
+        expect(consoleSpy).toHaveBeenCalledWith(
+          expect.stringContaining("missing 'hits' field"),
+          expect.anything(),
+        );
+      },
+    );
   });
 });

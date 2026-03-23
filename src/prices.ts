@@ -293,7 +293,7 @@ export class PricesApi {
 
   login(body: { username: string; password: string }) {
     return this.client.POST("/api/v1/auth", {
-      // @ts-expect-error - TODO: Wrong OpenAPI spec, there is no set_cookie query param
+      // @ts-expect-error - OpenAPI schema does not define set_cookie query parameter used by API
       params: { query: { set_cookie: 1 } },
       body,
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -312,7 +312,7 @@ export class PricesApi {
 
   uploadProof(body: { file: Blob }) {
     return this.client.POST("/api/v1/proofs/upload", {
-      // @ts-expect-error - FormData is not supported by openapi-fetch
+      // @ts-expect-error - openapi-fetch types do not support multipart/form-data body with Blob
       body: body,
       headers: { "Content-Type": "multipart/form-data" },
     });
@@ -380,7 +380,7 @@ export class PricesApi {
   async getCurrenciesList(): Promise<string[]> {
     const res = await this.getSchema("json");
 
-    // @ts-expect-error - OpenAPI types do not reflect the dynamic structure of schema paths
+    // @ts-expect-error - OpenAPI types do not include dynamic schema structure for CurrencyEnum
     return res?.data?.components?.schemas?.CurrencyEnum?.enum || [];
   }
 }

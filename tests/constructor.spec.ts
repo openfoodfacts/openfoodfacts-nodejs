@@ -166,7 +166,7 @@ describe("OpenFoodFacts Constructor", () => {
 
     it("should reject non-string tokens", () => {
       expect(() => {
-        // @ts-expect-error - intentionally testing invalid type
+        // @ts-expect-error - accessToken must be a string, passing number to test validation logic
         new OpenFoodFacts(mockFetch, { accessToken: 123 });
       }).toThrow("Access token must be a string.");
     });

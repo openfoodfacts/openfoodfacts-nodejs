@@ -16,7 +16,7 @@ describe("JWT tokens", () => {
 
   it("should error on numeric jwt", () => {
     expect(() => {
-      // @ts-expect-error
+      // @ts-expect-error - accessToken must be a string, passing number should trigger runtime validation error
       new OpenFoodFacts(fetch, { accessToken: 1234 });
     }).toThrow("Access token must be a string.");
   });

@@ -86,7 +86,7 @@ export class Robotoff {
   // TODO: replace any with proper type
   // ATM not specifying the type makes tsc fail sometimes
   async loadLogo(logoId: string): Promise<any> {
-    // @ts-expect-error TODO: still not documented
+    // @ts-expect-error - endpoint response type is missing in OpenAPI schema, causing TypeScript mismatch
     const result = await this.raw.GET("/images/logos/{logoId}", {
       params: { path: { logoId } },
     });

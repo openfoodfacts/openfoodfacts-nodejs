@@ -58,13 +58,41 @@ export class SearchApi {
   }
 
   async search(body: SearchBody) {
-    return this.client.POST("/search", {
+    const result = await this.client.POST("/search", {
       body: body as unknown as RawSearchBody,
     });
+
+    const data = result.data as any;
+
+    if (data != null && data.hits == null) {
+      console.warn(
+        "SearchApi: response missing 'hits' field — returning empty array as fallback",
+        data
+      );
+
+      data.hits = [];
+    }
+
+    return result;
   }
 
   async searchGet(query: SearchQuery) {
-    return this.client.GET("/search", { params: { query } });
+    const result = await this.client.GET("/search", {
+      params: { query },
+    });
+
+    const data = result.data as any;
+
+    if (data != null && data.hits == null) {
+      console.warn(
+        "SearchApi: response missing 'hits' field — returning empty array as fallback",
+        data
+      );
+
+      data.hits = [];
+    }
+
+    return result;
   }
 
   async autocomplete(query: AutocompleteQuery) {

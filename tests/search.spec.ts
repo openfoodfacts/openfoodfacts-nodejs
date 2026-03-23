@@ -61,7 +61,7 @@ describe("SearchApi Wrapper", () => {
 
   describe("Search", () => {
     it("should perform POST search successfully", async () => {
-      const data = { results: [{ id: 1 }] };
+      const data = { hits: [{ id: 1 }] };
       const body = {
         q: "test",
         langs: ["en"],
@@ -75,9 +75,43 @@ describe("SearchApi Wrapper", () => {
       expect(result.response).toBeDefined();
       expect(result.response.ok).toBe(true);
     });
+    it("should fallback to empty hits when hits is undefined (POST)", async () => {
+      const data = { hits: undefined };
 
+      fetchMock.mockResolvedValue(mockResponse(data));
+
+      const result = await client.search({
+        q: "test",
+        langs: ["en"],
+        page_size: 20,
+        page: 1,
+      });
+
+      expect(result.data.hits).toEqual([]);
+    });
+    it("should fallback to empty hits when hits is undefined (GET)", async () => {
+      const data = { hits: undefined };
+
+      fetchMock.mockResolvedValue(mockResponse(data));
+
+      const result = await client.searchGet({ q: "test" });
+
+      expect(result.data.hits).toEqual([]);
+    });
+    it("should handle null response body safely", async () => {
+      fetchMock.mockResolvedValue(mockResponse(null));
+
+      const result = await client.search({
+        q: "test",
+        langs: ["en"],
+        page_size: 20,
+        page: 1,
+      });
+
+      expect(result.data).toBeNull();
+    });
     it("should perform GET search successfully", async () => {
-      const data = { results: [{ id: 1 }] };
+      const data = { hits: [{ id: 1 }] };
       const query = { q: "test" };
       fetchMock.mockResolvedValue(mockResponse(data));
 

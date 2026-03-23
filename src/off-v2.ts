@@ -121,7 +121,7 @@ export class ProductOpenerApiV2 {
       },
     });
 
-    // @ts-expect-error - OpenAPI schema may not include all possible fields
+    // @ts-expect-error - OpenAPI schema does not define attribute_groups_en on product response
     return res.data?.product?.attribute_groups_en || [];
   }
 
@@ -253,7 +253,7 @@ export class ProductOpenerApiV2 {
    */
   async uploadImage(barcode: string, imageFile: File, imagefield: string) {
     return this.client.POST("/cgi/product_image_upload.pl", {
-      // @ts-expect-error - OpenAPI schema wrong
+      // @ts-expect-error - OpenAPI schema does not support dynamic imgupload_* field keys
       body: {
         code: barcode,
         imagefield: imagefield,
@@ -335,7 +335,7 @@ export class ProductOpenerApiV2 {
     credentials?: { username?: string; password?: string },
   ): Promise<boolean> {
     const res = await this.client.POST("/cgi/product_jqm2.pl", {
-      // @ts-expect-error - OpenAPI schema requires user_id and password, but we want to omit them if undefined
+      // @ts-expect-error - OpenAPI schema requires user_id and password, but they are optional at runtime
       body: {
         code: currentCode,
         new_code: newCode,

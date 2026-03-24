@@ -7,6 +7,7 @@ import type {
   LangPackagingText,
   RawImage,
   SelectedImage,
+  Nutriments,
 } from "./types.js";
 
 export type ResponseStatus = components["schemas"]["response_status"];
@@ -112,7 +113,7 @@ export type ProductDataType = ProductDataSection & {
   emb_codes: string;
   emb_codes_tags: string[];
 
-  nutriments: any;
+  nutriments: Nutriments;
 
   no_nutrition_data?: boolean;
 

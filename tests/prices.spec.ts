@@ -112,6 +112,21 @@ describe("Prices Wrapper", () => {
       const result = await client.isAuthenticated();
       expect(result).toBe(true);
     });
+
+    it("should not send Authorization header when token is undefined", async () => {
+      let capturedHeaders: HeadersInit | undefined;
+
+      const customFetchMock = jest.fn((url, options) => {
+        capturedHeaders = options?.headers;
+        return Promise.resolve(mockResponse({}));
+      });
+
+      const clientWithoutToken = new PricesApi(customFetchMock as typeof globalThis.fetch);
+      await clientWithoutToken.getPrices({ product_code: "123" });
+
+      const headers = new Headers(capturedHeaders);
+      expect(headers.has("Authorization")).toBe(false);
+    });
   });
 
   describe("Proofs", () => {

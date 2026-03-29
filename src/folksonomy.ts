@@ -30,7 +30,7 @@ export class Folksonomy {
       fetch,
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${this.authToken}`,
+        ...(options?.authToken ? { Authorization: `Bearer ${options.authToken}` } : {}),
         "User-Agent": USER_AGENT,
       },
     });

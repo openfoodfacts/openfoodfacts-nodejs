@@ -215,5 +215,20 @@ describe("Folksonomy Wrapper", () => {
         "Auth token is required to perform this action",
       );
     });
+
+    it("should not send Authorization header when token is undefined", async () => {
+      let capturedHeaders: HeadersInit | undefined;
+
+      const customFetchMock = jest.fn((url, options) => {
+        capturedHeaders = options?.headers;
+        return Promise.resolve(mockResponse({}));
+      });
+
+      const clientWithoutToken = new Folksonomy(customFetchMock as typeof globalThis.fetch);
+      await clientWithoutToken.getKeys(); // this endpoint doesn't strictly throw validation error on client
+
+      const headers = new Headers(capturedHeaders);
+      expect(headers.has("Authorization")).toBe(false);
+    });
   });
 });

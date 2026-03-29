@@ -104,7 +104,7 @@ export class PricesApi {
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${options?.authToken}`,
+        ...(options?.authToken ? { Authorization: `Bearer ${options.authToken}` } : {}),
         "User-Agent": USER_AGENT,
       },
     });

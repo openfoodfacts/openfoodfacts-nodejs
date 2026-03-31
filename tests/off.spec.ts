@@ -742,7 +742,15 @@ describe("OpenFoodFacts", () => {
       const result = await productsApi.getCurrentUserPermissions();
 
       expect(result.data).toBeUndefined();
-      expect(result.error).toBeDefined();
+      expect(result.error).toBe("HTTP error! status: 401");
+    });
+
+    it("should throw on network error", async () => {
+      mockFetch.mockRejectedValue(new Error("Network error"));
+
+      await expect(productsApi.getCurrentUserPermissions()).rejects.toThrow(
+        "Network error",
+      );
     });
   });
 });

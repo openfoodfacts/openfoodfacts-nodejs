@@ -35,7 +35,10 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Fetch questions */
+        /**
+         * Fetch questions
+         * @description Fetch questions based on various filters.
+         */
         get: operations["getQuestions"];
         put?: never;
         post?: never;
@@ -73,7 +76,10 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get predictions */
+        /**
+         * Get predictions
+         * @description Fetch predictions based on various filters.
+         */
         get: operations["getPredictions"];
         put?: never;
         post?: never;
@@ -112,7 +118,10 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get a specific insight */
+        /**
+         * Get a specific insight
+         * @description Get detailed information about a specific insight.
+         */
         get: operations["getInsightDetails"];
         put?: never;
         post?: never;
@@ -627,7 +636,10 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Generate OCR predictions an OCR JSON */
+        /**
+         * Generate OCR-based predictions for a product.
+         * @description Generate OCR-based predictions for a product based on the OCR JSON obtained from Google Cloud Vision.
+         */
         get: operations["generateOCRPredictions"];
         put?: never;
         post?: never;
@@ -758,6 +770,136 @@ export interface components {
             barcode: number;
             /** @description country tags of the product */
             countries: string[];
+            /** @description a JSON object containing additional data about the insight. */
+            data?: {
+                /** @description The bounding box of the logo as a list of ratio coordinates. */
+                bounding_box?: number[];
+                /** @description the ID of the logo associated with the insight, if any */
+                logo_id?: number;
+            };
+            /** @description the path of the image the insight was generated from. */
+            source_image?: string;
+            /** @description whether the insight has an associated image or not */
+            with_image?: boolean;
+        };
+        /** @description a question associated to an insight. */
+        Question: {
+            /**
+             * @description Barcode of the product the question is about
+             * @example 3250390172185
+             */
+            barcode: string;
+            /**
+             * @description ID of the insight the question is about
+             * @example a5e4397a-f14b-444f-972d-504a04e1cd7a
+             */
+            insight_id: string;
+            /**
+             * @description Type of the insight the question is about (ex: "label", "category",...)
+             * @example label
+             */
+            insight_type: string;
+            /**
+             * @description The question to ask the user to validate the insight.
+             * @example Does the product have this label?
+             */
+            question: string;
+            /**
+             * @description A reference image URL to help the user answer the question. For example, for a label
+             *     insight, we show the user a reference image of the label to help them identify it on
+             *     the product packaging.
+             * @example https://static.openfoodfacts.org/images/attributes/dist/nutriscore-a.svg
+             */
+            ref_image_url?: string;
+            server_type?: components["parameters"]["server_type"];
+            /**
+             * @description The URL of the image the insight was generated from. This is provided as additional context
+             *     to help the user answer the question, but it is not necessarily the same image as the one
+             *     shown to the user in the question interface.
+             * @example https://images.openfoodfacts.org/images/products/325/039/017/2185/6.400.jpg
+             */
+            source_image_url?: string;
+            /**
+             * @description The type of the question, which determines how the user's answer will be processed.
+             *     Only `add-binary` is currently supported.
+             * @example add-binary
+             * @enum {string}
+             */
+            type?: "add-binary";
+            /**
+             * @description The value associated with the question. This is the value that will be added to the product
+             *     in Product Opener if the user answers "yes" to the question. Depending on the insight type,
+             *     the `value_tag` may also be used to update Product Opener.
+             * @example Nutriscore Grade A
+             */
+            value: string;
+            /**
+             * @description The value tag associated with the question. This is the value tag that will be added to the product
+             *     in Product Opener if the user answers "yes" to the question. Depending on the insight type,
+             *     the `value` may also be used to update Product Opener.
+             * @example en:nutriscore-grade-a
+             */
+            value_tag?: string;
+        };
+        /** @description Logo annotation details */
+        LogoDetails: {
+            /**
+             * @description The type of the logo annotation (ex: "brand", "label",...)
+             * @example label
+             */
+            annotation_type?: string;
+            /**
+             * @description The value of the logo annotation.
+             * @example en:eu-organic
+             */
+            annotation_value?: string;
+            /**
+             * @description The value tag of the logo annotation.
+             * @example en:eu-organic
+             */
+            annotation_value_tag?: string;
+            /**
+             * @description Barcode of the product the logo annotation is about.
+             * @example 6175700
+             */
+            barcode: string;
+            /** @description The bounding box of the logo as a list of ratio coordinates. */
+            bounding_box?: number[];
+            /**
+             * Format: date-time
+             * @description The datetime of completion of the annotation, in ISO format.
+             * @example 2022-12-16T11:28:25.599715
+             */
+            completed_at?: string;
+            /** @description The ID of the logo annotation. */
+            id: number;
+            /** @description Details about the image associated with the logo. */
+            image?: Record<string, unknown>;
+            /** @description The nearest neighbor logos of this logo, as returned by the logo ANN search. */
+            nearest_neighbors?: {
+                distances?: number[];
+                logo_ids?: number[];
+            };
+            /** @description The confidence score of the annotation, between 0 and 1. The larger the score is the more confident we are in the annotation. */
+            score?: number;
+            server_type?: components["parameters"]["server_type"];
+            /**
+             * @description The path of the image the logo was extracted from.
+             * @example /6175700/5.jpg
+             */
+            source_image?: string;
+            /**
+             * @description The taxonomy tag associated to the logo, if any.
+             * @example en:eu-organic
+             */
+            taxonomy_value?: string;
+            /** @description The text detected on the logo. */
+            text?: string;
+            /**
+             * @description The username of the annotator who created the logo.
+             * @example gcloud-annotators
+             */
+            username?: string;
         };
         /** @description a Robotoff Prediction */
         Prediction: {
@@ -830,12 +972,7 @@ export interface components {
              * @example neural
              */
             predictor?: string;
-            /**
-             * @description The server type (=project) to use, such as 'off' (Open Food Facts), 'obf' (Open Beauty Facts),...
-             * @example off
-             * @enum {string}
-             */
-            server_type?: "off" | "obf" | "opff" | "opf" | "off_pro";
+            server_type?: components["parameters"]["server_type"];
             /**
              * @description confidence score of the prediction, it is only provided for ML-based predictions. It may be null.
              * @example 0.95
@@ -941,7 +1078,7 @@ export interface operations {
                     "application/json": {
                         /** @enum {string} */
                         status?: "no_questions" | "found";
-                        questions?: Record<string, unknown>[];
+                        questions?: components["schemas"]["Question"][];
                     };
                 };
             };
@@ -1001,7 +1138,7 @@ export interface operations {
                     "application/json": {
                         /** @enum {string} */
                         status?: "no_questions" | "found";
-                        questions?: Record<string, unknown>[];
+                        questions?: components["schemas"]["Question"][];
                         /** @description The total number of results with the provided filters */
                         count?: number;
                     };
@@ -1425,7 +1562,7 @@ export interface operations {
                 content: {
                     "application/json": {
                         /** @description Details about requested logos */
-                        logos: Record<string, unknown>[];
+                        logos: components["schemas"]["LogoDetails"][];
                         /** @description Number of returned results */
                         count: number;
                     };
@@ -1478,7 +1615,7 @@ export interface operations {
                 content: {
                     "application/json": {
                         /** @description Found logos */
-                        logos: Record<string, unknown>[];
+                        logos: components["schemas"]["LogoDetails"][];
                         /** @description Number of returned results */
                         count: number;
                     };
@@ -1816,7 +1953,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": Record<string, unknown>;
+                    "application/json": components["schemas"]["LogoDetails"];
                 };
             };
             /** @description Logo not found */

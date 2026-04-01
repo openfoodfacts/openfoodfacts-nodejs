@@ -89,6 +89,7 @@ describe("OpenFoodFacts", () => {
       expect(result).toEqual(mockTaxoEntry);
       expect(mockFetch).toHaveBeenCalledWith(
         expect.stringContaining("tagtype=categories"),
+        expect.anything(),
       );
     });
 
@@ -97,6 +98,7 @@ describe("OpenFoodFacts", () => {
       expect(result).toEqual(mockTaxoEntry);
       expect(mockFetch).toHaveBeenCalledWith(
         expect.stringContaining("tagtype=labels"),
+        expect.anything(),
       );
     });
 
@@ -105,6 +107,7 @@ describe("OpenFoodFacts", () => {
       expect(result).toEqual(mockTaxoEntry);
       expect(mockFetch).toHaveBeenCalledWith(
         expect.stringContaining("tagtype=additives"),
+        expect.anything(),
       );
     });
 
@@ -113,6 +116,7 @@ describe("OpenFoodFacts", () => {
       expect(result).toEqual(mockTaxoEntry);
       expect(mockFetch).toHaveBeenCalledWith(
         expect.stringContaining("tagtype=allergens"),
+        expect.anything(),
       );
     });
 
@@ -121,6 +125,7 @@ describe("OpenFoodFacts", () => {
       expect(result).toEqual(mockTaxoEntry);
       expect(mockFetch).toHaveBeenCalledWith(
         expect.stringContaining("tagtype=countries"),
+        expect.anything(),
       );
     });
 
@@ -129,6 +134,7 @@ describe("OpenFoodFacts", () => {
       expect(result).toEqual(mockTaxoEntry);
       expect(mockFetch).toHaveBeenCalledWith(
         expect.stringContaining("tagtype=ingredients"),
+        expect.anything(),
       );
     });
 
@@ -137,6 +143,7 @@ describe("OpenFoodFacts", () => {
       expect(result).toEqual(mockTaxoEntry);
       expect(mockFetch).toHaveBeenCalledWith(
         expect.stringContaining("tagtype=packaging"),
+        expect.anything(),
       );
     });
 
@@ -145,6 +152,7 @@ describe("OpenFoodFacts", () => {
       expect(result).toEqual(mockTaxoEntry);
       expect(mockFetch).toHaveBeenCalledWith(
         expect.stringContaining("tagtype=states"),
+        expect.anything(),
       );
     });
 
@@ -153,6 +161,7 @@ describe("OpenFoodFacts", () => {
       expect(result).toEqual(mockTaxoEntry);
       expect(mockFetch).toHaveBeenCalledWith(
         expect.stringContaining("tagtype=stores"),
+        expect.anything(),
       );
     });
 
@@ -161,6 +170,7 @@ describe("OpenFoodFacts", () => {
       expect(result).toEqual(mockTaxoEntry);
       expect(mockFetch).toHaveBeenCalledWith(
         expect.stringContaining("tagtype=nutrients"),
+        expect.anything(),
       );
     });
   });

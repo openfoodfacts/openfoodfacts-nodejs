@@ -40,7 +40,7 @@ const client = new OpenFoodFacts(fetch);
 
 (async () => {
   // then you can use the client to access the Open Food Facts API
-  const { data, error } = await client.getProduct("5000112546415");
+  const { data, error } = await client.getProductV3("5000112546415");
   if (!data) {
     console.error("Error fetching product:", error);
     return;

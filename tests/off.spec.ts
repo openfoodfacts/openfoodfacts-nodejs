@@ -562,6 +562,25 @@ describe("OpenFoodFacts", () => {
     });
   });
 
+  describe("isTokenExpired edge cases", () => {
+    const createDummyToken = (payloadObj: any) => {
+      const payloadBase64 = Buffer.from(JSON.stringify(payloadObj)).toString('base64');
+      return `dummyHeader.${payloadBase64}.dummySignature`;
+    };
+
+    it("should treat a token with exp = 0 as expired", () => {
+      const token = createDummyToken({ exp: 0 });
+      const isExpired = (productsApi as any).isTokenExpired(token);
+      expect(isExpired).toBe(true);
+    });
+
+    it("should return false (not expired) if exp claim is missing/undefined", () => {
+      const token = createDummyToken({ userId: 123 }); 
+      const isExpired = (productsApi as any).isTokenExpired(token);
+      expect(isExpired).toBe(false); 
+    });
+  });
+
   describe("error handling and edge cases", () => {
     const testCases = [
       { description: "empty barcode", barcode: "", expected: null },

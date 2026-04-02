@@ -165,6 +165,26 @@ describe("NutriPatrol Wrapper", () => {
       expect(data).toEqual(mockData);
     });
 
+    it("should fetch tickets filtered by barcode", async () => {
+      const mockData = {
+        tickets: [{ id: 1, status: "open", barcode: "3017620422003" }],
+        max_page: 1,
+      };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
+
+      const { data, error } = await client.getTickets({
+        barcode: "3017620422003",
+        status: "open",
+      });
+
+      expect(error).toBeUndefined();
+      expect(data).toEqual(mockData);
+      // Verify the barcode was passed in the URL
+      const fetchArg = fetchMock.mock.calls[0][0];
+      const url = typeof fetchArg === "string" ? fetchArg : fetchArg.url;
+      expect(url).toContain("barcode=3017620422003");
+    });
+
     it("should handle error when fetching tickets", async () => {
       fetchMock.mockResolvedValue(mockResponse(null, false, 404));
 

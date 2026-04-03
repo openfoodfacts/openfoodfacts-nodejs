@@ -25,7 +25,7 @@ export type Label = TaxoNode & {
 
 export type Ingredient = TaxoNode & object;
 
-export type Packaging = TaxoNode & {};
+export type Packaging = TaxoNode & object;
 
 export type State = TaxoNode & {};
 

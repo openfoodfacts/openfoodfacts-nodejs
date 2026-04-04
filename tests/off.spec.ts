@@ -564,7 +564,9 @@ describe("OpenFoodFacts", () => {
 
   describe("isTokenExpired edge cases", () => {
     const createDummyToken = (payloadObj: any) => {
-      const payloadBase64 = Buffer.from(JSON.stringify(payloadObj)).toString('base64');
+      const payloadBase64 = Buffer.from(JSON.stringify(payloadObj)).toString(
+        "base64",
+      );
       return `dummyHeader.${payloadBase64}.dummySignature`;
     };
 
@@ -575,9 +577,9 @@ describe("OpenFoodFacts", () => {
     });
 
     it("should return false (not expired) if exp claim is missing/undefined", () => {
-      const token = createDummyToken({ userId: 123 }); 
+      const token = createDummyToken({ userId: 123 });
       const isExpired = (productsApi as any).isTokenExpired(token);
-      expect(isExpired).toBe(false); 
+      expect(isExpired).toBe(false);
     });
   });
 

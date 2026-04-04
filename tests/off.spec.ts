@@ -88,8 +88,8 @@ describe("OpenFoodFacts", () => {
       const result = await productsApi.getCategory("en:beverages");
       expect(result).toEqual(mockTaxoEntry);
       expect(mockFetch).toHaveBeenCalledWith(
-        expect.stringContaining("tagtype=categories"),
-        expect.anything(),
+        expect.stringContaining("tagtype=categories&tags=en:beverages"),
+        expect.objectContaining({}),
       );
     });
 
@@ -97,8 +97,8 @@ describe("OpenFoodFacts", () => {
       const result = await productsApi.getLabel("en:organic");
       expect(result).toEqual(mockTaxoEntry);
       expect(mockFetch).toHaveBeenCalledWith(
-        expect.stringContaining("tagtype=labels"),
-        expect.anything(),
+        expect.stringContaining("tagtype=labels&tags=en:organic"),
+        expect.objectContaining({}),
       );
     });
 
@@ -106,8 +106,8 @@ describe("OpenFoodFacts", () => {
       const result = await productsApi.getAdditive("en:e322");
       expect(result).toEqual(mockTaxoEntry);
       expect(mockFetch).toHaveBeenCalledWith(
-        expect.stringContaining("tagtype=additives"),
-        expect.anything(),
+        expect.stringContaining("tagtype=additives&tags=en:e322"),
+        expect.objectContaining({}),
       );
     });
 
@@ -115,8 +115,8 @@ describe("OpenFoodFacts", () => {
       const result = await productsApi.getAllergen("en:gluten");
       expect(result).toEqual(mockTaxoEntry);
       expect(mockFetch).toHaveBeenCalledWith(
-        expect.stringContaining("tagtype=allergens"),
-        expect.anything(),
+        expect.stringContaining("tagtype=allergens&tags=en:gluten"),
+        expect.objectContaining({}),
       );
     });
 
@@ -124,8 +124,8 @@ describe("OpenFoodFacts", () => {
       const result = await productsApi.getCountry("en:france");
       expect(result).toEqual(mockTaxoEntry);
       expect(mockFetch).toHaveBeenCalledWith(
-        expect.stringContaining("tagtype=countries"),
-        expect.anything(),
+        expect.stringContaining("tagtype=countries&tags=en:france"),
+        expect.objectContaining({}),
       );
     });
 
@@ -133,8 +133,8 @@ describe("OpenFoodFacts", () => {
       const result = await productsApi.getIngredient("en:sugar");
       expect(result).toEqual(mockTaxoEntry);
       expect(mockFetch).toHaveBeenCalledWith(
-        expect.stringContaining("tagtype=ingredients"),
-        expect.anything(),
+        expect.stringContaining("tagtype=ingredients&tags=en:sugar"),
+        expect.objectContaining({}),
       );
     });
 
@@ -142,8 +142,8 @@ describe("OpenFoodFacts", () => {
       const result = await productsApi.getPackaging("en:plastic");
       expect(result).toEqual(mockTaxoEntry);
       expect(mockFetch).toHaveBeenCalledWith(
-        expect.stringContaining("tagtype=packaging"),
-        expect.anything(),
+        expect.stringContaining("tagtype=packaging&tags=en:plastic"),
+        expect.objectContaining({}),
       );
     });
 
@@ -151,8 +151,8 @@ describe("OpenFoodFacts", () => {
       const result = await productsApi.getState("en:complete");
       expect(result).toEqual(mockTaxoEntry);
       expect(mockFetch).toHaveBeenCalledWith(
-        expect.stringContaining("tagtype=states"),
-        expect.anything(),
+        expect.stringContaining("tagtype=states&tags=en:complete"),
+        expect.objectContaining({}),
       );
     });
 
@@ -160,8 +160,8 @@ describe("OpenFoodFacts", () => {
       const result = await productsApi.getStore("en:carrefour");
       expect(result).toEqual(mockTaxoEntry);
       expect(mockFetch).toHaveBeenCalledWith(
-        expect.stringContaining("tagtype=stores"),
-        expect.anything(),
+        expect.stringContaining("tagtype=stores&tags=en:carrefour"),
+        expect.objectContaining({}),
       );
     });
 
@@ -169,8 +169,8 @@ describe("OpenFoodFacts", () => {
       const result = await productsApi.getNutrient("en:energy");
       expect(result).toEqual(mockTaxoEntry);
       expect(mockFetch).toHaveBeenCalledWith(
-        expect.stringContaining("tagtype=nutrients"),
-        expect.anything(),
+        expect.stringContaining("tagtype=nutrients&tags=en:energy"),
+        expect.objectContaining({}),
       );
     });
   });

@@ -320,6 +320,33 @@ export class ProductOpenerApiV2 {
     const images = product.images ?? {};
     return Object.keys(images);
   }
+
+  /**
+   * Updates the barcode of a product (moderator-only action)
+   * @param currentCode - The current barcode of the product
+   * @param newCode - The correct barcode to replace the current one
+   * @returns A promise that resolves to true if successful, false otherwise
+   * @example
+   * const success = await changeBarcode("12345", "54321");
+   */
+  async changeBarcode(
+    currentCode: string,
+    newCode: string,
+    credentials?: { username?: string; password?: string },
+  ): Promise<boolean> {
+    const res = await this.client.POST("/cgi/product_jqm2.pl", {
+      // @ts-expect-error - OpenAPI schema requires user_id and password, but we want to omit them if undefined
+      body: {
+        code: currentCode,
+        new_code: newCode,
+        ...(credentials?.username ? { user_id: credentials.username } : {}),
+        ...(credentials?.password ? { password: credentials.password } : {}),
+      },
+      bodySerializer: formData,
+    });
+
+    return res.response.ok;
+  }
 }
 
 export function getProductNameInLang(product: ProductDataType, lang: string) {

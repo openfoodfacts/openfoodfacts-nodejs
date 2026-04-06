@@ -305,17 +305,17 @@ export class OpenFoodFacts {
     return newAccessToken;
   }
 
-  private isTokenExpired(token: string) {
+  private isTokenExpired(token: string): boolean {
     const parts = token.split(".");
     if (parts.length !== 3) {
       throw new Error("Invalid JWT token format");
     }
     const payload = JSON.parse(
       Buffer.from(parts[1], "base64").toString("utf-8"),
-    ) as { exp: number };
+    ) as { exp?: number };
 
     // Check if the token is expired
-    return payload.exp && Date.now() >= payload.exp * 1000;
+    return payload.exp != null && Date.now() >= payload.exp * 1000;
   }
 
   ////////////////

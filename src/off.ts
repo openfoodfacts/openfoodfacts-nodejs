@@ -305,29 +305,109 @@ export class OpenFoodFacts {
     return newAccessToken;
   }
 
-  private isTokenExpired(token: string) {
+  private isTokenExpired(token: string): boolean {
     const parts = token.split(".");
     if (parts.length !== 3) {
       throw new Error("Invalid JWT token format");
     }
     const payload = JSON.parse(
       Buffer.from(parts[1], "base64").toString("utf-8"),
-    ) as { exp: number };
+    ) as { exp?: number };
 
     // Check if the token is expired
-    return payload.exp && Date.now() >= payload.exp * 1000;
+    return payload.exp != null && Date.now() >= payload.exp * 1000;
   }
 
   ////////////////
   // TAXONOMIES
   ////////////////
 
-  getBrand(brandName: string): Promise<Brand> {
-    return this.apiv2.getTaxoEntry("brands", brandName);
+  getBrand(brandId: string): Promise<Brand> {
+    return this.apiv2.getTaxoEntry("brands", brandId);
   }
 
-  getLanguage(languageName: string): Promise<Language> {
-    return this.apiv2.getTaxoEntry("languages", languageName);
+  getLanguage(languageId: string): Promise<Language> {
+    return this.apiv2.getTaxoEntry("languages", languageId);
+  }
+
+  /**
+   * Returns a single category taxonomy entry by id
+   * @param categoryId - The id of the category (e.g., "en:beverages")
+   */
+  getCategory(categoryId: string): Promise<Category> {
+    return this.apiv2.getTaxoEntry("categories", categoryId);
+  }
+
+  /**
+   * Returns a single label taxonomy entry by id
+   * @param labelId - The id of the label (e.g., "en:organic")
+   */
+  getLabel(labelId: string): Promise<Label> {
+    return this.apiv2.getTaxoEntry("labels", labelId);
+  }
+
+  /**
+   * Returns a single additive taxonomy entry by id
+   * @param additiveId - The id of the additive (e.g., "en:e322")
+   */
+  getAdditive(additiveId: string): Promise<Additive> {
+    return this.apiv2.getTaxoEntry("additives", additiveId);
+  }
+
+  /**
+   * Returns a single allergen taxonomy entry by id
+   * @param allergenId - The id of the allergen (e.g., "en:gluten")
+   */
+  getAllergen(allergenId: string): Promise<Allergen> {
+    return this.apiv2.getTaxoEntry("allergens", allergenId);
+  }
+
+  /**
+   * Returns a single country taxonomy entry by id
+   * @param countryId - The id of the country (e.g., "en:france")
+   */
+  getCountry(countryId: string): Promise<Country> {
+    return this.apiv2.getTaxoEntry("countries", countryId);
+  }
+
+  /**
+   * Returns a single ingredient taxonomy entry by id
+   * @param ingredientId - The id of the ingredient (e.g., "en:sugar")
+   */
+  getIngredient(ingredientId: string): Promise<Ingredient> {
+    return this.apiv2.getTaxoEntry("ingredients", ingredientId);
+  }
+
+  /**
+   * Returns a single packaging taxonomy entry by id
+   * @param packagingId - The id of the packaging (e.g., "en:plastic")
+   */
+  getPackaging(packagingId: string): Promise<TaxoNode> {
+    return this.apiv2.getTaxoEntry("packaging", packagingId);
+  }
+
+  /**
+   * Returns a single state taxonomy entry by id
+   * @param stateId - The id of the state (e.g., "en:complete")
+   */
+  getState(stateId: string): Promise<State> {
+    return this.apiv2.getTaxoEntry("states", stateId);
+  }
+
+  /**
+   * Returns a single store taxonomy entry by id
+   * @param storeId - The id of the store (e.g., "en:carrefour")
+   */
+  getStore(storeId: string): Promise<Store> {
+    return this.apiv2.getTaxoEntry("stores", storeId);
+  }
+
+  /**
+   * Returns a single nutrient taxonomy entry by id
+   * @param nutrientId - The id of the nutrient (e.g., "en:energy")
+   */
+  getNutrient(nutrientId: string): Promise<Nutrient> {
+    return this.apiv2.getTaxoEntry("nutrients", nutrientId);
   }
 
   getBrands(): Promise<Taxonomy<Brand>> {

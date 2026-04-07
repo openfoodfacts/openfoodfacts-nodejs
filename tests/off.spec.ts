@@ -71,6 +71,110 @@ describe("OpenFoodFacts", () => {
     });
   });
 
+  describe("individual taxonomy getters", () => {
+    const mockTaxoEntry = {
+      name: { en: "Test Entry" },
+      parents: [],
+      children: [],
+    };
+
+    beforeEach(() => {
+      mockFetch.mockResolvedValue(
+        TestUtils.mockResponse(mockTaxoEntry, true, 200),
+      );
+    });
+
+    it("should fetch a single category by name", async () => {
+      const result = await productsApi.getCategory("en:beverages");
+      expect(result).toEqual(mockTaxoEntry);
+      expect(mockFetch).toHaveBeenCalledWith(
+        expect.stringContaining("tagtype=categories&tags=en:beverages"),
+        expect.objectContaining({}),
+      );
+    });
+
+    it("should fetch a single label by name", async () => {
+      const result = await productsApi.getLabel("en:organic");
+      expect(result).toEqual(mockTaxoEntry);
+      expect(mockFetch).toHaveBeenCalledWith(
+        expect.stringContaining("tagtype=labels&tags=en:organic"),
+        expect.objectContaining({}),
+      );
+    });
+
+    it("should fetch a single additive by name", async () => {
+      const result = await productsApi.getAdditive("en:e322");
+      expect(result).toEqual(mockTaxoEntry);
+      expect(mockFetch).toHaveBeenCalledWith(
+        expect.stringContaining("tagtype=additives&tags=en:e322"),
+        expect.objectContaining({}),
+      );
+    });
+
+    it("should fetch a single allergen by name", async () => {
+      const result = await productsApi.getAllergen("en:gluten");
+      expect(result).toEqual(mockTaxoEntry);
+      expect(mockFetch).toHaveBeenCalledWith(
+        expect.stringContaining("tagtype=allergens&tags=en:gluten"),
+        expect.objectContaining({}),
+      );
+    });
+
+    it("should fetch a single country by name", async () => {
+      const result = await productsApi.getCountry("en:france");
+      expect(result).toEqual(mockTaxoEntry);
+      expect(mockFetch).toHaveBeenCalledWith(
+        expect.stringContaining("tagtype=countries&tags=en:france"),
+        expect.objectContaining({}),
+      );
+    });
+
+    it("should fetch a single ingredient by name", async () => {
+      const result = await productsApi.getIngredient("en:sugar");
+      expect(result).toEqual(mockTaxoEntry);
+      expect(mockFetch).toHaveBeenCalledWith(
+        expect.stringContaining("tagtype=ingredients&tags=en:sugar"),
+        expect.objectContaining({}),
+      );
+    });
+
+    it("should fetch a single packaging entry by name", async () => {
+      const result = await productsApi.getPackaging("en:plastic");
+      expect(result).toEqual(mockTaxoEntry);
+      expect(mockFetch).toHaveBeenCalledWith(
+        expect.stringContaining("tagtype=packaging&tags=en:plastic"),
+        expect.objectContaining({}),
+      );
+    });
+
+    it("should fetch a single state by name", async () => {
+      const result = await productsApi.getState("en:complete");
+      expect(result).toEqual(mockTaxoEntry);
+      expect(mockFetch).toHaveBeenCalledWith(
+        expect.stringContaining("tagtype=states&tags=en:complete"),
+        expect.objectContaining({}),
+      );
+    });
+
+    it("should fetch a single store by name", async () => {
+      const result = await productsApi.getStore("en:carrefour");
+      expect(result).toEqual(mockTaxoEntry);
+      expect(mockFetch).toHaveBeenCalledWith(
+        expect.stringContaining("tagtype=stores&tags=en:carrefour"),
+        expect.objectContaining({}),
+      );
+    });
+
+    it("should fetch a single nutrient by name", async () => {
+      const result = await productsApi.getNutrient("en:energy");
+      expect(result).toEqual(mockTaxoEntry);
+      expect(mockFetch).toHaveBeenCalledWith(
+        expect.stringContaining("tagtype=nutrients&tags=en:energy"),
+        expect.objectContaining({}),
+      );
+    });
+  });
+
   describe("getProductAttributes", () => {
     it("should return product attributes for a valid barcode", async () => {
       const mockData = {
@@ -559,6 +663,27 @@ describe("OpenFoodFacts", () => {
       expect(getProductIngredientsInLang(product, "de")).toBe(
         "Default ingredients",
       ); // fallback
+    });
+  });
+
+  describe("isTokenExpired edge cases", () => {
+    const createDummyToken = (payloadObj: any) => {
+      const payloadBase64 = Buffer.from(JSON.stringify(payloadObj)).toString(
+        "base64",
+      );
+      return `dummyHeader.${payloadBase64}.dummySignature`;
+    };
+
+    it("should treat a token with exp = 0 as expired", () => {
+      const token = createDummyToken({ exp: 0 });
+      const isExpired = (productsApi as any).isTokenExpired(token);
+      expect(isExpired).toBe(true);
+    });
+
+    it("should return false (not expired) if exp claim is missing/undefined", () => {
+      const token = createDummyToken({ userId: 123 });
+      const isExpired = (productsApi as any).isTokenExpired(token);
+      expect(isExpired).toBe(false);
     });
   });
 

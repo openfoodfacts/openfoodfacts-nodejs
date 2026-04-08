@@ -40,9 +40,10 @@ export class Robotoff {
     options: { baseUrl: string } = { baseUrl: DEFAULT_ROBOTOFF_API_URL },
   ) {
     this.fetch = fetch;
+    const baseUrl = new URL("/api/v1", options.baseUrl).toString();
     this.raw = createClient<paths>({
       fetch: this.fetch,
-      baseUrl: options.baseUrl,
+      baseUrl: baseUrl,
       headers: {
         "User-Agent": USER_AGENT,
       },

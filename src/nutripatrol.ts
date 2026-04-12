@@ -94,7 +94,7 @@ export class NutriPatrol {
    * const { data, error } = await nutripatrol.getTickets({
    *   barcode: "3017620422003",
    *   status: "open",
-   *   type_: "product",
+   *   type: "product",
    *   reason: ["inappropriate", "human"],
    *   page: 1,
    *   page_size: 20,
@@ -103,12 +103,20 @@ export class NutriPatrol {
   getTickets(query: {
     barcode?: string;
     status?: components["schemas"]["TicketStatus"];
-    type_?: components["schemas"]["IssueType"];
+    type?: components["schemas"]["IssueType"];
     reason?: components["schemas"]["ReasonType"][];
     page?: number;
     page_size?: number;
   }) {
-    return this.client.GET("/api/v1/tickets", { params: { query } });
+    const { type, ...rest } = query;
+    return this.client.GET("/api/v1/tickets", {
+      params: {
+        query: {
+          ...rest,
+          type_: type,
+        },
+      },
+    });
   }
 
   /**

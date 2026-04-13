@@ -9,6 +9,8 @@ export type Flag = components["schemas"]["Flag"];
 export type Ticket = components["schemas"]["Ticket"];
 export type TicketStatus = components["schemas"]["TicketStatus"];
 export type StatsResponse = components["schemas"]["StatsResponse"];
+export type IssueType = components["schemas"]["IssueType"];
+export type ReasonType = components["schemas"]["ReasonType"];
 
 export class NutriPatrol {
   private readonly fetch: typeof global.fetch;
@@ -90,21 +92,31 @@ export class NutriPatrol {
    * @returns A promise that resolves with the list of tickets or error.
    * @example
    * const { data, error } = await nutripatrol.getTickets({
+   *   barcode: "3017620422003",
    *   status: "open",
-   *   type: "spam",
+   *   type: "product",
    *   reason: ["inappropriate", "human"],
    *   page: 1,
    *   page_size: 20,
    * });
    */
   getTickets(query: {
-    status: "open" | "closed";
-    type?: string;
-    reason?: ("inappropriate" | "human" | "beauty" | "other")[];
+    barcode?: string;
+    status?: components["schemas"]["TicketStatus"];
+    type?: components["schemas"]["IssueType"];
+    reason?: components["schemas"]["ReasonType"][];
     page?: number;
     page_size?: number;
   }) {
-    return this.client.GET("/api/v1/tickets", { params: { query } });
+    const { type, ...rest } = query;
+    return this.client.GET("/api/v1/tickets", {
+      params: {
+        query: {
+          ...rest,
+          type_: type,
+        },
+      },
+    });
   }
 
   /**

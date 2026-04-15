@@ -1,5 +1,22 @@
 # Changelog
 
+## [2.0.0-alpha.31](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.30...v2.0.0-alpha.31) (2026-04-15)
+
+
+### Features
+
+* **nutripatrol:** add barcode filter to getTickets and fix type parameter ([#843](https://github.com/openfoodfacts/openfoodfacts-js/issues/843)) ([08c5d0d](https://github.com/openfoodfacts/openfoodfacts-js/commit/08c5d0dfbec1a34a4a143ef8c1ed12b8c72677b7))
+
+
+### Bug Fixes
+
+* add /api/v1 to Robotoff baseUrl ([#846](https://github.com/openfoodfacts/openfoodfacts-js/issues/846)) ([423c635](https://github.com/openfoodfacts/openfoodfacts-js/commit/423c6356b60dc2e8a704cfea483fd117c222af10))
+
+
+### Miscellaneous Chores
+
+* Prepare 2.0.0-alpha.31 release ([5c1a1ce](https://github.com/openfoodfacts/openfoodfacts-js/commit/5c1a1ceb6622c8cdc24f383026669dbb51e72202))
+
 ## [2.0.0-alpha.30](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.29...v2.0.0-alpha.30) (2026-04-06)
 
 

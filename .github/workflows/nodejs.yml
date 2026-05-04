@@ -74,7 +74,7 @@ jobs:
         run: yarn test --coverage
 
       - name: Write coverage report to GitHub Summary
-        uses: livewing/lcov-job-summary@v1.2.0
+        uses: livewing/lcov-job-summary@v1.3.0
         with:
           lcov: "coverage/lcov.info"
 

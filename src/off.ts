@@ -26,7 +26,7 @@ import type {
   Taxonomy,
 } from "./taxonomy/types.js";
 
-import type { RawImage, SelectedImage } from "./types.js";
+import type { FetchFn, RawImage, SelectedImage } from "./types.js";
 
 import type {
   FacetResponse,
@@ -224,9 +224,9 @@ export class OpenFoodFacts {
    * Creates a fetch wrapper with User-Agent and optional token handling
    */
   private createFetchWrapper(
-    fetch: typeof global.fetch,
+    fetch: FetchFn,
     options: OpenFoodFactsOptions,
-  ): typeof global.fetch {
+  ): FetchFn {
     // Base fetch wrapper with User-Agent
     let wrappedFetch = this.createUserAgentFetch(fetch);
 
@@ -242,9 +242,7 @@ export class OpenFoodFacts {
   /**
    * Creates a fetch wrapper that adds User-Agent header
    */
-  private createUserAgentFetch(
-    fetch: typeof globalThis.fetch,
-  ): typeof globalThis.fetch {
+  private createUserAgentFetch(fetch: FetchFn): FetchFn {
     return (
       url: string | URL | globalThis.Request,
       init?: globalThis.RequestInit,
@@ -259,9 +257,9 @@ export class OpenFoodFacts {
    * Creates a fetch wrapper that handles token refresh and authorization
    */
   private createTokenAwareFetch(
-    fetch: typeof global.fetch,
+    fetch: FetchFn,
     options: OpenFoodFactsOptions,
-  ): typeof global.fetch {
+  ): FetchFn {
     return async (
       url: string | URL | globalThis.Request | URL,
       init?: globalThis.RequestInit,

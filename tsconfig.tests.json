@@ -1,9 +1,7 @@
 {
-  "include": ["tests"],
+  "include": ["tests", "src"],
+  "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "esModuleInterop": true,
-    "resolveJsonModule": true
+    "composite": true
   }
 }

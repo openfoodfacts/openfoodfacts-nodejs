@@ -3,8 +3,10 @@
     "module": "esnext",
     "moduleResolution": "bundler",
 
-    "lib": ["ES2017"],
-    "target": "ES2017",
+    "target": "ES2020",
+    // Disable access to @types/ packages by default
+    "types": [],
+    "lib": ["ES2017", "DOM"],
 
     "strict": true,
     "esModuleInterop": true,

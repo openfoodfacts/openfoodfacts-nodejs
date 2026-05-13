@@ -1,7 +1,9 @@
 {
-  "include": ["tests", "src"],
+  "include": ["tests"],
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "composite": true
-  }
+    "composite": true,
+    "types": ["node", "jest"]
+  },
+  "references": [{ "path": "./tsconfig.esm.json" }]
 }

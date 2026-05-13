@@ -46,6 +46,7 @@
     "test:coverage": "jest --coverage"
   },
   "dependencies": {
+    "jwt-decode": "4.0.0",
     "openapi-fetch": "^0.17.0"
   },
   "devDependencies": {

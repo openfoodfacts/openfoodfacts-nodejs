@@ -3,7 +3,7 @@
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "composite": true,
-    "types": ["node", "jest"]
+    "types": ["node", "vitest/globals"]
   },
   "references": [{ "path": "./tsconfig.esm.json" }]
 }

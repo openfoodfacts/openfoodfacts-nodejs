@@ -15,7 +15,7 @@ export default tseslint.config(
   },
   {
     languageOptions: {
-      globals: { ...globals.browser, ...globals.node, ...globals.jest },
+      globals: { ...globals.browser, ...globals.node, ...globals.vitest },
     },
   },
   {
@@ -47,7 +47,7 @@ export default tseslint.config(
       "src/schemas",
       "coverage",
       "*.config.mjs",
-      "jest.config.ts",
+      "vitest.config.ts",
     ],
   },
 );

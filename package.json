@@ -42,8 +42,8 @@
     "lint:fix": "eslint --fix .",
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
-    "test": "jest",
-    "test:coverage": "jest --coverage"
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "jwt-decode": "4.0.0",
@@ -54,21 +54,19 @@
     "@commitlint/config-conventional": "^20.0.0",
     "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^9.25.0",
-    "@types/jest": "^30.0.0",
     "@types/node": "^25.0.3",
     "@typescript-eslint/eslint-plugin": "^8.30.1",
     "@typescript-eslint/parser": "^8.30.1",
+    "@vitest/coverage-v8": "^4.1.6",
     "eslint": "^10.0.2",
     "globals": "^16.0.0",
-    "jest": "^30.0.4",
     "openapi-typescript": "^7.6.1",
     "prettier": "^3.5.3",
-    "ts-jest": "^29.3.2",
-    "ts-jest-resolver": "^2.0.1",
     "ts-node": "^10.9.2",
     "typedoc": "^0.28.2",
     "typescript": "^5.8.3",
-    "typescript-eslint": "^8.30.1"
+    "typescript-eslint": "^8.30.1",
+    "vitest": "^4.1.6"
   },
   "packageManager": "yarn@4.13.0+sha512.5c20ba010c99815433e5c8453112165e673f1c7948d8d2b267f4b5e52097538658388ebc9f9580656d9b75c5cc996f990f611f99304a2197d4c56d21eea370e7"
 }

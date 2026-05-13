@@ -1,11 +1,12 @@
+import { MockedFunction } from "vitest";
 import OpenFoodFacts from "../src";
 import { BackendType } from "../src/consts";
 
 describe("OpenFoodFacts Constructor", () => {
-  let mockFetch: jest.MockedFunction<typeof fetch>;
+  let mockFetch: MockedFunction<typeof fetch>;
 
   beforeEach(() => {
-    mockFetch = jest.fn().mockResolvedValue({
+    mockFetch = vi.fn().mockResolvedValue({
       json: () => Promise.resolve({}),
     } as Response);
   });
@@ -299,7 +300,7 @@ describe("OpenFoodFacts Constructor", () => {
         }) as unknown as Promise<Response>;
       });
 
-      const onAccessTokenExpired = jest.fn().mockResolvedValue(newToken);
+      const onAccessTokenExpired = vi.fn().mockResolvedValue(newToken);
       const client = new OpenFoodFacts(mockFetch, {
         accessToken: willExpireToken,
         onAccessTokenExpired,

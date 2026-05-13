@@ -1,22 +1,23 @@
+import { Mock } from "vitest";
 import { Folksonomy, FolksonomyTag } from "../src/folksonomy";
 import { TestUtils } from "./utils/test-utils";
 
 describe("Folksonomy Wrapper", () => {
-  let fetchMock: jest.Mock;
+  let fetchMock: Mock;
   let client: Folksonomy;
 
   beforeEach(() => {
-    fetchMock = jest.fn();
+    fetchMock = vi.fn();
     global.fetch = fetchMock;
     client = new Folksonomy(fetchMock, { authToken: "test-token" });
   });
 
   afterEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   afterAll(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   const mockResponse = TestUtils.mockResponse;

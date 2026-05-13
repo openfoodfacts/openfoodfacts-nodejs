@@ -3,7 +3,7 @@
 .vscode/
 
 tests/
-jest.config.ts
+vitest.config.ts
 eslint.config.mjs
 tsconfig.build.json
 tsconfig.json

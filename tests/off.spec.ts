@@ -674,10 +674,10 @@ describe("OpenFoodFacts", () => {
       expect(isExpired).toBe(true);
     });
 
-    it("should return false (not expired) if exp claim is missing/undefined", () => {
+    it("should treat a token with no exp as expired", () => {
       const token = createDummyToken({ userId: 123 });
       const isExpired = (productsApi as any).isTokenExpired(token);
-      expect(isExpired).toBe(false);
+      expect(isExpired).toBe(true);
     });
   });
 

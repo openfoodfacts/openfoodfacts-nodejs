@@ -2,6 +2,7 @@ import createClient from "openapi-fetch";
 import type { components, paths } from "./schemas/prices.js";
 import { USER_AGENT } from "./consts.js";
 import type { UnwrapContent } from "./openapi.js";
+import type { FetchFn } from "./types.js";
 
 type GetPricesQuery = paths["/api/v1/prices"]["get"]["parameters"]["query"];
 
@@ -95,7 +96,7 @@ export class PricesApi {
   private readonly client: ReturnType<typeof createClient<paths>>;
 
   constructor(
-    fetch: typeof globalThis.fetch,
+    fetch: FetchFn,
     options: { baseUrl: string; authToken?: string } = { baseUrl: BASE_URL },
   ) {
     this.client = createClient({

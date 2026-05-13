@@ -7,6 +7,7 @@ import type {
   LangPackagingText,
   RawImage,
   SelectedImage,
+  FetchFn,
 } from "./types.js";
 
 export type ResponseStatus = components["schemas"]["response_status"];
@@ -167,17 +168,21 @@ export type ProductState<T = ProductDataType> = ProductStateBase &
   (ProductStateFound<T> | ProductStateFailure);
 
 export class ProductOpenerApiV3 {
-  private readonly fetch: typeof global.fetch;
+  private readonly fetch: FetchFn;
   private readonly baseUrl: string;
   readonly client: ReturnType<typeof createClient<paths>>;
 
-  constructor(fetch: typeof global.fetch, options: { host: string }) {
+  constructor(fetch: FetchFn, options: { host: string }) {
     this.fetch = fetch;
     this.baseUrl = options.host;
     this.client = createClient<paths>({
       fetch: this.fetch,
       baseUrl: this.baseUrl,
     });
+  }
+
+  test() {
+    return true;
   }
 
   async uploadProductImage(code: string, params: ProductImageUploadParams) {

@@ -11,10 +11,7 @@ import { ProductDataType } from "../src/off-v3";
 import { formData } from "../src/openapi";
 
 describe("OpenFoodFacts", () => {
-  let mockFetch: jest.Mock<
-    ReturnType<typeof window.fetch>,
-    [RequestInfo | URL, RequestInit?]
-  >;
+  let mockFetch: jest.Mock<Promise<Response>, Parameters<typeof global.fetch>>;
   let productsApi: OpenFoodFacts;
 
   // Common test data
@@ -42,10 +39,7 @@ describe("OpenFoodFacts", () => {
   //const mockFetchError = (error: Error) => mockFetch.mockRejectedValue(error);
 
   beforeEach(() => {
-    mockFetch = jest.fn<
-      ReturnType<typeof window.fetch>,
-      [RequestInfo | URL, RequestInit?]
-    >();
+    mockFetch = jest.fn();
     productsApi = new OpenFoodFacts(mockFetch as any, {
       host: "https://world.openfoodfacts.org",
     });

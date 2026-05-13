@@ -1,22 +1,23 @@
+import { Mock } from "vitest";
 import { NutriPatrol } from "../src";
 import { TestUtils } from "./utils/test-utils";
 
 describe("NutriPatrol Wrapper", () => {
-  let fetchMock: jest.Mock;
+  let fetchMock: Mock;
   let client: NutriPatrol;
 
   beforeEach(() => {
-    fetchMock = jest.fn();
+    fetchMock = vi.fn();
     global.fetch = fetchMock;
     client = new NutriPatrol(fetchMock);
   });
 
   afterEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   afterAll(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   const mockResponse = TestUtils.mockResponse;

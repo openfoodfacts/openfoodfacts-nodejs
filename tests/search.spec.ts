@@ -1,22 +1,23 @@
+import { Mock } from "vitest";
 import { SearchApi } from "../src/search";
 import { USER_AGENT } from "../src/consts";
 
 describe("SearchApi Wrapper", () => {
-  let fetchMock: jest.Mock;
+  let fetchMock: Mock;
   let client: SearchApi;
 
   beforeEach(() => {
-    fetchMock = jest.fn();
+    fetchMock = vi.fn();
     global.fetch = fetchMock;
     client = new SearchApi(fetchMock);
   });
 
   afterEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   afterAll(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   const mockResponse = (data: any, ok = true, status = 200) => {

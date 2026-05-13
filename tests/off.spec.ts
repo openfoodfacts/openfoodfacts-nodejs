@@ -1,3 +1,4 @@
+import { Mock } from "vitest";
 import OpenFoodFacts, {
   getProductImageUrl,
   getProductIngredientsInLang,
@@ -11,7 +12,7 @@ import { ProductDataType } from "../src/off-v3";
 import { formData } from "../src/openapi";
 
 describe("OpenFoodFacts", () => {
-  let mockFetch: jest.Mock<Promise<Response>, Parameters<typeof global.fetch>>;
+  let mockFetch: Mock<typeof global.fetch>;
   let productsApi: OpenFoodFacts;
 
   // Common test data
@@ -21,16 +22,16 @@ describe("OpenFoodFacts", () => {
 
   // Helper functions
   const mockV2Success = (data: any) =>
-    jest.spyOn(productsApi.apiv2.client, "GET").mockResolvedValue({ data });
+    vi.spyOn(productsApi.apiv2.client, "GET").mockResolvedValue({ data });
   const mockV3Success = (data: any) =>
-    jest.spyOn(productsApi.apiv3.client, "GET").mockResolvedValue({ data });
+    vi.spyOn(productsApi.apiv3.client, "GET").mockResolvedValue({ data });
 
   const mockV2Error = (error: Error) =>
-    jest.spyOn(productsApi.apiv2.client, "GET").mockRejectedValue(error);
+    vi.spyOn(productsApi.apiv2.client, "GET").mockRejectedValue(error);
 
   // Uncomment if needed
   //const mockV3Error = (error: Error) =>
-  //  jest.spyOn(productsApi.apiv3.client, "GET").mockRejectedValue(error);
+  //  vi.spyOn(productsApi.apiv3.client, "GET").mockRejectedValue(error);
 
   const mockFetchSuccess = (data: any) =>
     mockFetch.mockResolvedValue(TestUtils.mockResponse(data, true, 200));
@@ -39,14 +40,14 @@ describe("OpenFoodFacts", () => {
   //const mockFetchError = (error: Error) => mockFetch.mockRejectedValue(error);
 
   beforeEach(() => {
-    mockFetch = jest.fn();
+    mockFetch = vi.fn();
     productsApi = new OpenFoodFacts(mockFetch as any, {
       host: "https://world.openfoodfacts.org",
     });
   });
 
   afterEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   describe("constructor", () => {

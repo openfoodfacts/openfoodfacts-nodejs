@@ -1,23 +1,24 @@
+import { Mock } from "vitest";
 import { PricesApi } from "../src/prices";
 import { TestUtils } from "./utils/test-utils";
 import crypto from "node:crypto";
 
 describe("Prices Wrapper", () => {
-  let fetchMock: jest.Mock;
+  let fetchMock: Mock;
   let client: PricesApi;
 
   beforeEach(() => {
-    fetchMock = jest.fn();
+    fetchMock = vi.fn();
     global.fetch = fetchMock;
     client = new PricesApi(fetchMock);
   });
 
   afterEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   afterAll(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   const getRandomPassword = () => {

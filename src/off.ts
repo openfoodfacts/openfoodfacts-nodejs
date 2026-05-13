@@ -106,7 +106,7 @@ export type OpenFoodFactsOptions = {
 
 /** Wrapper of OFF API */
 export class OpenFoodFacts {
-  private readonly fetch: typeof global.fetch;
+  private readonly fetch: FetchFn;
   private readonly baseUrl: string;
   private readonly backendType?: BackendType;
   private readonly customUserAgent: string;
@@ -135,7 +135,7 @@ export class OpenFoodFacts {
    * @param options - Options for the OFF Object
    */
   constructor(
-    fetch: typeof global.fetch,
+    fetch: FetchFn,
     options: OpenFoodFactsOptions = { country: "world", language: "en" },
   ) {
     this.validateOptions(options);

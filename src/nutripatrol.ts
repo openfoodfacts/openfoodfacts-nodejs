@@ -3,6 +3,7 @@ import createClient from "openapi-fetch";
 import type { components, paths } from "./schemas/nutripatrol.js";
 
 import { DEFAULT_NUTRIPATROL_API_URL, USER_AGENT } from "./consts.js";
+import type { FetchFn } from "./types.js";
 
 export type FlagCreate = components["schemas"]["FlagCreate"];
 export type Flag = components["schemas"]["Flag"];
@@ -13,12 +14,12 @@ export type IssueType = components["schemas"]["IssueType"];
 export type ReasonType = components["schemas"]["ReasonType"];
 
 export class NutriPatrol {
-  private readonly fetch: typeof global.fetch;
+  private readonly fetch: FetchFn;
   private readonly baseUrl: string;
   readonly client: ReturnType<typeof createClient<paths>>;
 
   constructor(
-    fetch: typeof global.fetch,
+    fetch: FetchFn,
     options: { baseUrl: string } = {
       baseUrl: DEFAULT_NUTRIPATROL_API_URL,
     },

@@ -3,6 +3,7 @@ import createClient from "openapi-fetch";
 import type { operations, paths } from "./schemas/robotoff.js";
 import { DEFAULT_ROBOTOFF_API_URL, USER_AGENT } from "./consts.js";
 import { formBody } from "./formbody.js";
+import type { FetchFn } from "./types.js";
 
 export type RobotoffInsightQuery =
   paths["/insights"]["get"]["parameters"]["query"];
@@ -30,13 +31,13 @@ export type LogoAnnotation =
 
 export class Robotoff {
   /** The fetch function used for every request */
-  private readonly fetch: typeof global.fetch;
+  private readonly fetch: FetchFn;
 
   /** The raw openapi-fetch client is used for every request exposed by the openapi schema */
   private readonly raw: ReturnType<typeof createClient<paths>>;
 
   constructor(
-    fetch: typeof global.fetch,
+    fetch: FetchFn,
     options: { baseUrl: string } = { baseUrl: DEFAULT_ROBOTOFF_API_URL },
   ) {
     this.fetch = fetch;

@@ -292,17 +292,15 @@ describe("OpenFoodFacts Constructor", () => {
       const newToken = mockJWT({ exp: Math.floor(Date.now() / 1000) + 60 });
 
       let capturedHeaders: Headers | undefined;
-      const testFetch = jest
-        .fn()
-        .mockImplementation((url: RequestInfo | URL, options?: RequestInit) => {
-          capturedHeaders = options?.headers as Headers;
-          return Promise.resolve({
-            json: () => Promise.resolve({}),
-          });
-        });
+      mockFetch.mockImplementation((_url, options) => {
+        capturedHeaders = options?.headers as Headers;
+        return Promise.resolve({
+          json: () => Promise.resolve({}),
+        }) as unknown as Promise<Response>;
+      });
 
       const onAccessTokenExpired = jest.fn().mockResolvedValue(newToken);
-      const client = new OpenFoodFacts(testFetch, {
+      const client = new OpenFoodFacts(mockFetch, {
         accessToken: willExpireToken,
         onAccessTokenExpired,
       });

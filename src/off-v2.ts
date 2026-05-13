@@ -4,6 +4,7 @@ import type { TaxoNode } from "./taxonomy/types.js";
 import { formData } from "./openapi.js";
 import { USER_AGENT } from "./consts.js";
 import type { ProductDataType } from "./off-v3.js";
+import type { FetchFn } from "./index.js";
 
 export type SearchQuery = operations["get-search"]["parameters"]["query"];
 export type AttributeGroups = components["schemas"]["get_attribute_groups"];
@@ -27,11 +28,11 @@ export type ProductAttributeGroup = {
  * You should not use this class directly, instead use the `OpenFoodFactsApi` class.
  */
 export class ProductOpenerApiV2 {
-  private readonly fetch: typeof global.fetch;
+  private readonly fetch: FetchFn;
   private readonly baseUrl: string;
   readonly client: ReturnType<typeof createClient<paths>>;
 
-  constructor(fetch: typeof global.fetch, options: { host: string }) {
+  constructor(fetch: FetchFn, options: { host: string }) {
     this.fetch = fetch;
     this.baseUrl = options.host;
     this.client = createClient<paths>({

@@ -1,3 +1,5 @@
+import { jwtDecode, type JwtPayload } from "jwt-decode";
+
 import {
   PRODUCT_IMAGE_URL,
   BackendType,
@@ -303,17 +305,26 @@ export class OpenFoodFacts {
     return newAccessToken;
   }
 
+  /**
+   * Checks if a JWT access token is expired. Returns false only if the token is
+   * well-formed, has a valid exp claim, and is not expired. Otherwise returns
+   * true.
+   */
   private isTokenExpired(token: string): boolean {
-    const parts = token.split(".");
-    if (parts.length !== 3) {
-      throw new Error("Invalid JWT token format");
-    }
-    const payload = JSON.parse(
-      Buffer.from(parts[1], "base64").toString("utf-8"),
-    ) as { exp?: number };
+    try {
+      const decoded = jwtDecode<JwtPayload>(token);
 
-    // Check if the token is expired
-    return payload.exp != null && Date.now() >= payload.exp * 1000;
+      if (decoded.exp == null) {
+        return true; // If there's no exp claim, consider the token expired
+      }
+
+      const currentTime = Math.floor(Date.now() / 1000);
+      return currentTime >= decoded.exp;
+    } catch (error) {
+      // If token is malformed or cannot be decoded, consider it expired
+      console.warn("Failed to decode access token:", error);
+      return true;
+    }
   }
 
   ////////////////

@@ -24,7 +24,7 @@ export default defineConfig([
     languageOptions: {
       parser: tsParser,
       parserOptions: {
-        project: "./tsconfig.esm.json",
+        projectService: true,
       },
     },
   },

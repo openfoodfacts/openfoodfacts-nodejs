@@ -1,9 +1,23 @@
 {
-  "files": [],
-  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "module": "esnext",
+    "moduleResolution": "bundler",
+
+    "target": "es2017",
+    // Disable access to @types/ packages by default
+    "types": [],
+    "lib": ["es2017", "DOM"],
+
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "declaration": true,
+    "declarationMap": true
+  },
   "references": [
-    { "path": "tsconfig.esm.json" },
-    { "path": "tsconfig.cjs.json" },
-    { "path": "tsconfig.tests.json" }
+    { "path": "./tsconfig.tests.json" },
+    { "path": "./tsconfig.src.json" }
   ]
 }

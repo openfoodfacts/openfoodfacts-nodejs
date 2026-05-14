@@ -1,9 +1,9 @@
 {
   "include": ["tests"],
-  "extends": "./tsconfig.base.json",
+  "extends": "./tsconfig.json",
   "compilerOptions": {
     "composite": true,
     "types": ["node", "vitest/globals"]
   },
-  "references": [{ "path": "./tsconfig.esm.json" }]
+  "references": [{ "path": "./tsconfig.src.json" }]
 }

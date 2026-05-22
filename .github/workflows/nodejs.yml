@@ -74,12 +74,12 @@ jobs:
         run: yarn test --coverage
 
       - name: Write coverage report to GitHub Summary
-        uses: livewing/lcov-job-summary@v1.2.0
+        uses: livewing/lcov-job-summary@v1.3.0
         with:
           lcov: "coverage/lcov.info"
 
       - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@v6
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
@@ -115,7 +115,7 @@ jobs:
         run: yarn build:docs
 
       - name: Upload docs
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v5
         with:
           path: "docs"
 
@@ -139,4 +139,4 @@ jobs:
       # Deploy documentation to GitHub Pages
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5

@@ -1,3 +1,4 @@
+import { Mock } from "vitest";
 import OpenFoodFacts, {
   getProductImageUrl,
   getProductIngredientsInLang,
@@ -11,10 +12,7 @@ import { ProductDataType } from "../src/off-v3";
 import { formData } from "../src/openapi";
 
 describe("OpenFoodFacts", () => {
-  let mockFetch: jest.Mock<
-    ReturnType<typeof window.fetch>,
-    [RequestInfo | URL, RequestInit?]
-  >;
+  let mockFetch: Mock<typeof global.fetch>;
   let productsApi: OpenFoodFacts;
 
   // Common test data
@@ -24,16 +22,16 @@ describe("OpenFoodFacts", () => {
 
   // Helper functions
   const mockV2Success = (data: any) =>
-    jest.spyOn(productsApi.apiv2.client, "GET").mockResolvedValue({ data });
+    vi.spyOn(productsApi.apiv2.client, "GET").mockResolvedValue({ data });
   const mockV3Success = (data: any) =>
-    jest.spyOn(productsApi.apiv3.client, "GET").mockResolvedValue({ data });
+    vi.spyOn(productsApi.apiv3.client, "GET").mockResolvedValue({ data });
 
   const mockV2Error = (error: Error) =>
-    jest.spyOn(productsApi.apiv2.client, "GET").mockRejectedValue(error);
+    vi.spyOn(productsApi.apiv2.client, "GET").mockRejectedValue(error);
 
   // Uncomment if needed
   //const mockV3Error = (error: Error) =>
-  //  jest.spyOn(productsApi.apiv3.client, "GET").mockRejectedValue(error);
+  //  vi.spyOn(productsApi.apiv3.client, "GET").mockRejectedValue(error);
 
   const mockFetchSuccess = (data: any) =>
     mockFetch.mockResolvedValue(TestUtils.mockResponse(data, true, 200));
@@ -42,17 +40,14 @@ describe("OpenFoodFacts", () => {
   //const mockFetchError = (error: Error) => mockFetch.mockRejectedValue(error);
 
   beforeEach(() => {
-    mockFetch = jest.fn<
-      ReturnType<typeof window.fetch>,
-      [RequestInfo | URL, RequestInit?]
-    >();
+    mockFetch = vi.fn();
     productsApi = new OpenFoodFacts(mockFetch as any, {
       host: "https://world.openfoodfacts.org",
     });
   });
 
   afterEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   describe("constructor", () => {
@@ -68,6 +63,110 @@ describe("OpenFoodFacts", () => {
       });
 
       expect(customApi).toBeInstanceOf(OpenFoodFacts);
+    });
+  });
+
+  describe("individual taxonomy getters", () => {
+    const mockTaxoEntry = {
+      name: { en: "Test Entry" },
+      parents: [],
+      children: [],
+    };
+
+    beforeEach(() => {
+      mockFetch.mockResolvedValue(
+        TestUtils.mockResponse(mockTaxoEntry, true, 200),
+      );
+    });
+
+    it("should fetch a single category by name", async () => {
+      const result = await productsApi.getCategory("en:beverages");
+      expect(result).toEqual(mockTaxoEntry);
+      expect(mockFetch).toHaveBeenCalledWith(
+        expect.stringContaining("tagtype=categories&tags=en:beverages"),
+        expect.objectContaining({}),
+      );
+    });
+
+    it("should fetch a single label by name", async () => {
+      const result = await productsApi.getLabel("en:organic");
+      expect(result).toEqual(mockTaxoEntry);
+      expect(mockFetch).toHaveBeenCalledWith(
+        expect.stringContaining("tagtype=labels&tags=en:organic"),
+        expect.objectContaining({}),
+      );
+    });
+
+    it("should fetch a single additive by name", async () => {
+      const result = await productsApi.getAdditive("en:e322");
+      expect(result).toEqual(mockTaxoEntry);
+      expect(mockFetch).toHaveBeenCalledWith(
+        expect.stringContaining("tagtype=additives&tags=en:e322"),
+        expect.objectContaining({}),
+      );
+    });
+
+    it("should fetch a single allergen by name", async () => {
+      const result = await productsApi.getAllergen("en:gluten");
+      expect(result).toEqual(mockTaxoEntry);
+      expect(mockFetch).toHaveBeenCalledWith(
+        expect.stringContaining("tagtype=allergens&tags=en:gluten"),
+        expect.objectContaining({}),
+      );
+    });
+
+    it("should fetch a single country by name", async () => {
+      const result = await productsApi.getCountry("en:france");
+      expect(result).toEqual(mockTaxoEntry);
+      expect(mockFetch).toHaveBeenCalledWith(
+        expect.stringContaining("tagtype=countries&tags=en:france"),
+        expect.objectContaining({}),
+      );
+    });
+
+    it("should fetch a single ingredient by name", async () => {
+      const result = await productsApi.getIngredient("en:sugar");
+      expect(result).toEqual(mockTaxoEntry);
+      expect(mockFetch).toHaveBeenCalledWith(
+        expect.stringContaining("tagtype=ingredients&tags=en:sugar"),
+        expect.objectContaining({}),
+      );
+    });
+
+    it("should fetch a single packaging entry by name", async () => {
+      const result = await productsApi.getPackaging("en:plastic");
+      expect(result).toEqual(mockTaxoEntry);
+      expect(mockFetch).toHaveBeenCalledWith(
+        expect.stringContaining("tagtype=packaging&tags=en:plastic"),
+        expect.objectContaining({}),
+      );
+    });
+
+    it("should fetch a single state by name", async () => {
+      const result = await productsApi.getState("en:complete");
+      expect(result).toEqual(mockTaxoEntry);
+      expect(mockFetch).toHaveBeenCalledWith(
+        expect.stringContaining("tagtype=states&tags=en:complete"),
+        expect.objectContaining({}),
+      );
+    });
+
+    it("should fetch a single store by name", async () => {
+      const result = await productsApi.getStore("en:carrefour");
+      expect(result).toEqual(mockTaxoEntry);
+      expect(mockFetch).toHaveBeenCalledWith(
+        expect.stringContaining("tagtype=stores&tags=en:carrefour"),
+        expect.objectContaining({}),
+      );
+    });
+
+    it("should fetch a single nutrient by name", async () => {
+      const result = await productsApi.getNutrient("en:energy");
+      expect(result).toEqual(mockTaxoEntry);
+      expect(mockFetch).toHaveBeenCalledWith(
+        expect.stringContaining("tagtype=nutrients&tags=en:energy"),
+        expect.objectContaining({}),
+      );
     });
   });
 
@@ -562,6 +661,27 @@ describe("OpenFoodFacts", () => {
     });
   });
 
+  describe("isTokenExpired edge cases", () => {
+    const createDummyToken = (payloadObj: any) => {
+      const payloadBase64 = Buffer.from(JSON.stringify(payloadObj)).toString(
+        "base64",
+      );
+      return `dummyHeader.${payloadBase64}.dummySignature`;
+    };
+
+    it("should treat a token with exp = 0 as expired", () => {
+      const token = createDummyToken({ exp: 0 });
+      const isExpired = (productsApi as any).isTokenExpired(token);
+      expect(isExpired).toBe(true);
+    });
+
+    it("should treat a token with no exp as expired", () => {
+      const token = createDummyToken({ userId: 123 });
+      const isExpired = (productsApi as any).isTokenExpired(token);
+      expect(isExpired).toBe(true);
+    });
+  });
+
   describe("error handling and edge cases", () => {
     const testCases = [
       { description: "empty barcode", barcode: "", expected: null },
@@ -596,6 +716,66 @@ describe("OpenFoodFacts", () => {
 
       await expect(productsApi.getProductV2(testBarcode)).rejects.toThrow(
         "Request timeout",
+      );
+    });
+  });
+
+  describe("getCurrentUserPermissions", () => {
+    it("should return user permissions when authenticated", async () => {
+      const mockData = {
+        status: "success",
+        result: { id: "user_found" },
+        user: {
+          userid: "stephane",
+          name: "Stephane Gigandet",
+          moderator: 1,
+          admin: 1,
+        },
+      };
+
+      mockFetchSuccess(mockData);
+
+      const result = await productsApi.getCurrentUserPermissions();
+
+      expect(result.error).toBeUndefined();
+      expect(result.data).toEqual(mockData);
+      expect(mockFetch).toHaveBeenCalledWith(
+        new URL(
+          "/api/v3/current-user/permissions",
+          "https://world.openfoodfacts.org",
+        ),
+        expect.anything(),
+      );
+    });
+
+    it("should return error when not authenticated (401)", async () => {
+      mockFetch.mockResolvedValue(
+        TestUtils.mockResponse(
+          {
+            status: "failure",
+            errors: [
+              {
+                message: { id: "authentication_required" },
+                impact: { id: "failure" },
+              },
+            ],
+          },
+          false,
+          401,
+        ),
+      );
+
+      const result = await productsApi.getCurrentUserPermissions();
+
+      expect(result.data).toBeUndefined();
+      expect(result.error).toBe("HTTP error! status: 401");
+    });
+
+    it("should throw on network error", async () => {
+      mockFetch.mockRejectedValue(new Error("Network error"));
+
+      await expect(productsApi.getCurrentUserPermissions()).rejects.toThrow(
+        "Network error",
       );
     });
   });

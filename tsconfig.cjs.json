@@ -1,12 +1,14 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
+    "composite": true,
+
     "module": "commonjs",
     "moduleResolution": "node",
 
     "outDir": "./dist/cjs",
+    "declarationDir": "./dist/cjs/types",
 
-    "declaration": false,
     "isolatedModules": true
   }
 }

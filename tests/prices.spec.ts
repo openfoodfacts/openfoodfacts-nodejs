@@ -1,23 +1,24 @@
+import { Mock } from "vitest";
 import { PricesApi } from "../src/prices";
 import { TestUtils } from "./utils/test-utils";
 import crypto from "node:crypto";
 
 describe("Prices Wrapper", () => {
-  let fetchMock: jest.Mock;
+  let fetchMock: Mock;
   let client: PricesApi;
 
   beforeEach(() => {
-    fetchMock = jest.fn();
+    fetchMock = vi.fn();
     global.fetch = fetchMock;
     client = new PricesApi(fetchMock);
   });
 
   afterEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   afterAll(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   const getRandomPassword = () => {
@@ -165,6 +166,344 @@ describe("Prices Wrapper", () => {
 
       const result = await client.getStatus();
       expect(result).toBeUndefined();
+    });
+  });
+
+  describe("Locations", () => {
+    it("should call getLocations successfully", async () => {
+      const mockData = { success: true };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
+      const result = await client.getLocations();
+      expect(result.data ?? result).toBeDefined();
+    });
+
+    it("should call createLocation successfully", async () => {
+      const mockData = { success: true };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
+      const result = await client.createLocation({
+        type: "OSM",
+        osm_id: 1,
+        osm_type: "NODE",
+      } as any);
+      expect(result.data ?? result).toBeDefined();
+    });
+
+    it("should call getLocation successfully", async () => {
+      const mockData = { success: true };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
+      const result = await client.getLocation(1);
+      expect(result.data ?? result).toBeDefined();
+    });
+
+    it("should call compareLocations successfully", async () => {
+      const mockData = { success: true };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
+      const result = await client.compareLocations({
+        location_id_a: 1,
+        location_id_b: 2,
+      });
+      expect(result.data ?? result).toBeDefined();
+    });
+
+    it("should call getLocationByOSM successfully", async () => {
+      const mockData = { success: true };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
+      const result = await client.getLocationByOSM("NODE", 1);
+      expect(result.data ?? result).toBeDefined();
+    });
+
+    it("should call getOSMCountries successfully", async () => {
+      const mockData = { success: true };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
+      const result = await client.getOSMCountries();
+      expect(result.data ?? result).toBeDefined();
+    });
+
+    it("should call getOSMCountryCities successfully", async () => {
+      const mockData = { success: true };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
+      const result = await client.getOSMCountryCities("FR");
+      expect(result.data ?? result).toBeDefined();
+    });
+  });
+
+  describe("Products", () => {
+    it("should call getProducts successfully", async () => {
+      const mockData = { success: true };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
+      const result = await client.getProducts();
+      expect(result.data ?? result).toBeDefined();
+    });
+
+    it("should call getProduct successfully", async () => {
+      const mockData = { success: true };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
+      const result = await client.getProduct(1);
+      expect(result.data ?? result).toBeDefined();
+    });
+
+    it("should call getProductByCode successfully", async () => {
+      const mockData = { success: true };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
+      const result = await client.getProductByCode("12345");
+      expect(result.data ?? result).toBeDefined();
+    });
+
+    it("should call triggerOFFUpdate successfully", async () => {
+      const mockData = { success: true };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
+      const result = await client.triggerOFFUpdate("12345", {});
+      expect(result.data ?? result).toBeDefined();
+    });
+
+    it("should call triggerOFFUploadImage successfully", async () => {
+      const mockData = { success: true };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
+      const result = await client.triggerOFFUploadImage("12345", {
+        image_field: "front",
+      } as any);
+      expect(result.data ?? result).toBeDefined();
+    });
+  });
+
+  describe("Proofs", () => {
+    it("should call getProof successfully", async () => {
+      const mockData = { success: true };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
+      const result = await client.getProof(1);
+      expect(result.data ?? result).toBeDefined();
+    });
+
+    it("should call updateProof successfully", async () => {
+      const mockData = { success: true };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
+      const result = await client.updateProof(1, {});
+      expect(result.data ?? result).toBeDefined();
+    });
+
+    it("should call deleteProof successfully", async () => {
+      const mockData = { success: true };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
+      const result = await client.deleteProof(1);
+      expect(result.data ?? result).toBeDefined();
+    });
+
+    it("should call getProofHistory successfully", async () => {
+      const mockData = { success: true };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
+      const result = await client.getProofHistory(1);
+      expect(result.data ?? result).toBeDefined();
+    });
+
+    it("should call flagProof successfully", async () => {
+      const mockData = { success: true };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
+      const result = await client.flagProof(1, {
+        type: "OTHER",
+        comment: "Test",
+      } as any);
+      expect(result.data ?? result).toBeDefined();
+    });
+
+    it("should call processProofWithGemini successfully", async () => {
+      const mockData = { success: true };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
+      const result = await client.processProofWithGemini(undefined as never);
+      expect(result.data ?? result).toBeDefined();
+    });
+  });
+
+  describe("Users", () => {
+    it("should call getUsers successfully", async () => {
+      const mockData = { success: true };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
+      const result = await client.getUsers();
+      expect(result.data ?? result).toBeDefined();
+    });
+
+    it("should call getUser successfully", async () => {
+      const mockData = { success: true };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
+      const result = await client.getUser("user1");
+      expect(result.data ?? result).toBeDefined();
+    });
+  });
+
+  describe("Challenges", () => {
+    it("should call getChallenges successfully", async () => {
+      const mockData = { success: true };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
+      const result = await client.getChallenges();
+      expect(result.data ?? result).toBeDefined();
+    });
+
+    it("should call getChallenge successfully", async () => {
+      const mockData = { success: true };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
+      const result = await client.getChallenge(1);
+      expect(result.data ?? result).toBeDefined();
+    });
+  });
+
+  describe("Price Tags", () => {
+    it("should call getPriceTags successfully", async () => {
+      const mockData = { success: true };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
+      const result = await client.getPriceTags();
+      expect(result.data ?? result).toBeDefined();
+    });
+
+    it("should call createPriceTag successfully", async () => {
+      const mockData = { success: true };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
+      const result = await client.createPriceTag({ proof_id: 1 } as any);
+      expect(result.data ?? result).toBeDefined();
+    });
+
+    it("should call getPriceTag successfully", async () => {
+      const mockData = { success: true };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
+      const result = await client.getPriceTag(1);
+      expect(result.data ?? result).toBeDefined();
+    });
+
+    it("should call updatePriceTag successfully", async () => {
+      const mockData = { success: true };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
+      const result = await client.updatePriceTag(1, {});
+      expect(result.data ?? result).toBeDefined();
+    });
+
+    it("should call deletePriceTag successfully", async () => {
+      const mockData = { success: true };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
+      const result = await client.deletePriceTag(1);
+      expect(result.data ?? result).toBeDefined();
+    });
+  });
+
+  describe("Receipt Items", () => {
+    it("should call getReceiptItems successfully", async () => {
+      const mockData = { success: true };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
+      const result = await client.getReceiptItems();
+      expect(result.data ?? result).toBeDefined();
+    });
+
+    it("should call createReceiptItem successfully", async () => {
+      const mockData = { success: true };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
+      const result = await client.createReceiptItem({ receipt_id: 1 } as any);
+      expect(result.data ?? result).toBeDefined();
+    });
+
+    it("should call getReceiptItem successfully", async () => {
+      const mockData = { success: true };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
+      const result = await client.getReceiptItem(1);
+      expect(result.data ?? result).toBeDefined();
+    });
+
+    it("should call updateReceiptItem successfully", async () => {
+      const mockData = { success: true };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
+      const result = await client.updateReceiptItem(1, {});
+      expect(result.data ?? result).toBeDefined();
+    });
+
+    it("should call deleteReceiptItem successfully", async () => {
+      const mockData = { success: true };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
+      const result = await client.deleteReceiptItem(1);
+      expect(result.data ?? result).toBeDefined();
+    });
+  });
+
+  describe("Flags", () => {
+    it("should call getFlags successfully", async () => {
+      const mockData = { success: true };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
+      const result = await client.getFlags();
+      expect(result.data ?? result).toBeDefined();
+    });
+
+    it("should call updateFlag successfully", async () => {
+      const mockData = { success: true };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
+      const result = await client.updateFlag(1, { status: "RESOLVED" as any });
+      expect(result.data ?? result).toBeDefined();
+    });
+  });
+
+  describe("Prices Extra", () => {
+    it("should call getPrice successfully", async () => {
+      const mockData = { success: true };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
+      const result = await client.getPrice(1);
+      expect(result.data ?? result).toBeDefined();
+    });
+
+    it("should call updatePrice successfully", async () => {
+      const mockData = { success: true };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
+      const result = await client.updatePrice(1, {});
+      expect(result.data ?? result).toBeDefined();
+    });
+
+    it("should call deletePrice successfully", async () => {
+      const mockData = { success: true };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
+      const result = await client.deletePrice(1);
+      expect(result.data ?? result).toBeDefined();
+    });
+
+    it("should call getPriceHistory successfully", async () => {
+      const mockData = { success: true };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
+      const result = await client.getPriceHistory(1);
+      expect(result.data ?? result).toBeDefined();
+    });
+
+    it("should call getPricesStats successfully", async () => {
+      const mockData = { success: true };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
+      const result = await client.getPricesStats();
+      expect(result.data ?? result).toBeDefined();
+    });
+
+    it("should call flagPrice successfully", async () => {
+      const mockData = { success: true };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
+      const result = await client.flagPrice(1, {
+        type: "OTHER",
+        comment: "Test",
+      } as any);
+      expect(result.data ?? result).toBeDefined();
+    });
+  });
+
+  describe("Session", () => {
+    it("should call getSession successfully", async () => {
+      const mockData = { success: true };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
+      const result = await client.getSession();
+      expect(result.data ?? result).toBeDefined();
+    });
+
+    it("should call deleteSession successfully", async () => {
+      const mockData = { success: true };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
+      const result = await client.deleteSession();
+      expect(result.data ?? result).toBeDefined();
+    });
+  });
+
+  describe("Stats", () => {
+    it("should call getStats successfully", async () => {
+      const mockData = { success: true };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
+      const result = await client.getStats();
+      expect(result.data ?? result).toBeDefined();
     });
   });
 });

@@ -506,7 +506,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:^8.30.1"
     "@vitest/coverage-v8": "npm:^4.1.6"
     eslint: "npm:^10.0.2"
-    globals: "npm:^16.0.0"
+    globals: "npm:^17.6.0"
     jwt-decode: "npm:4.0.0"
     openapi-fetch: "npm:^0.17.0"
     openapi-typescript: "npm:^7.6.1"
@@ -1805,10 +1805,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"globals@npm:^16.0.0":
-  version: 16.5.0
-  resolution: "globals@npm:16.5.0"
-  checksum: 10/f9e8a2a13f50222c127030a619e283e7bbfe32966316bdde0715af1d15a7e40cb9c24ff52cad59671f97762ed8b515353c2f8674f560c63d9385f19ee26735a6
+"globals@npm:^17.6.0":
+  version: 17.6.0
+  resolution: "globals@npm:17.6.0"
+  checksum: 10/2bf0febf31c942edee6f4eca7e939a9c885f8ecfb767048b1c4dd2a32008d0ab136e6076665d76b44b29c2571bbbc1681371caab05fd8ee0067c7618e841b89d
   languageName: node
   linkType: hard
 

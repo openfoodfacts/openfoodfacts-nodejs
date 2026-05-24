@@ -179,6 +179,7 @@ export class ProductOpenerApiV2 {
       comment: product.comment ?? "",
       product_name: product.product_name || "",
       ingredients_text: product.ingredients_text || "",
+      no_nutrition_data: product.no_nutrition_data === true ? "on" : "",
       ...productNames,
       ...ingredientsTexts,
     });

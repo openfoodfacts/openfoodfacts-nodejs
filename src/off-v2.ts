@@ -169,8 +169,7 @@ export class ProductOpenerApiV2 {
       labels: product.labels || "",
       brands: product.brands || "",
       quantity: product.quantity || "",
-      serving_size:
-        product.no_nutrition_data === true ? "" : product.serving_size || "",
+      serving_size: product.serving_size || "",
       stores: product.stores || "",
       origins: product.origins || "",
       countries: product.countries || "",

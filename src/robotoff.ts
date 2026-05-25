@@ -29,6 +29,42 @@ export type LogoSearchParams =
 export type LogoAnnotation =
   paths["/images/logos/annotate"]["post"]["requestBody"]["content"]["application/json"]["annotations"][number];
 
+/**
+ * Represents a logo object returned by the Robotoff API
+ * Contains detailed information about a product logo
+ */
+export type LogoDetails = {
+  /** Unique identifier for the logo */
+  id: number;
+  /** Product barcode associated with the logo */
+  barcode: string;
+  /** Type/category of the logo */
+  type: string;
+  /** ISO 8601 timestamp when the logo was created */
+  created_at: string;
+  /** ISO 8601 timestamp when the logo was last updated */
+  updated_at: string;
+  /** Image identifier */
+  image_id: string;
+  /** Optional bounding box coordinates for the logo in the image */
+  bounding_box?: {
+    /** Left coordinate */
+    x_min: number;
+    /** Top coordinate */
+    y_min: number;
+    /** Right coordinate */
+    x_max: number;
+    /** Bottom coordinate */
+    y_max: number;
+  };
+  /** Optional annotation value */
+  annotation_value?: string;
+  /** Optional annotation type */
+  annotation_type?: string;
+  /** Optional taxonomy value for the logo */
+  taxonomy_value?: string;
+};
+
 export class Robotoff {
   /** The fetch function used for every request */
   private readonly fetch: FetchFn;
@@ -85,14 +121,26 @@ export class Robotoff {
     return this.raw.GET("/insights", { params: { query } });
   }
 
-  // TODO: replace any with proper type
-  // ATM not specifying the type makes tsc fail sometimes
-  async loadLogo(logoId: string): Promise<any> {
-    // @ts-expect-error TODO: still not documented
+  /**
+   * Loads detailed information for a specific logo by ID
+   *
+   * @param logoId - The ID of the logo to load
+   * @returns A promise that resolves to the logo details, or undefined if not found
+   *
+   * @example
+   * ```typescript
+   * const logo = await robotoff.loadLogo("123");
+   * if (logo) {
+   *   console.log(`Logo ${logo.id} for product ${logo.barcode}`);
+   * }
+   * ```
+   */
+  async loadLogo(logoId: string): Promise<LogoDetails | undefined> {
+    // @ts-expect-error Endpoint not yet documented in OpenAPI spec
     const result = await this.raw.GET("/images/logos/{logoId}", {
       params: { path: { logoId } },
     });
-    return result.data;
+    return result.data as LogoDetails | undefined;
   }
 
   searchLogos(params: LogoSearchParams) {

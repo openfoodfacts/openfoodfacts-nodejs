@@ -127,6 +127,46 @@ export class ProductOpenerApiV2 {
   }
 
   /**
+   * Maps nested product nutriments to flat CGI query parameters expected by the server.
+   *
+   * Maps suffixes (_100g, _serving, _unit, _modifier) to their flat CGI representations
+   * (e.g. nutriment_[nid], nutriment_[nid]_unit, nutriment_[nid]_modifier).
+   *
+   * @param nutriments - The nutriments object from the product
+   * @returns A record of flat CGI parameters ready for form submission
+   */
+  private buildNutritionParams(
+    nutriments: Record<string, unknown>,
+  ): Record<string, string> {
+    const params: Record<string, string> = {};
+
+    for (const [key, value] of Object.entries(nutriments)) {
+      if (value === undefined || value === null) continue;
+
+      const strVal = String(value);
+
+      if (key.endsWith("_100g")) {
+        const nid = key.slice(0, -"_100g".length);
+        params[`nutriment_${nid}`] = strVal;
+        // Only set nutrition_data_per if not already determined
+        params["nutrition_data_per"] ??= "100g";
+      } else if (key.endsWith("_serving")) {
+        const nid = key.slice(0, -"_serving".length);
+        params[`nutriment_${nid}`] = strVal;
+        params["nutrition_data_per"] ??= "serving";
+      } else if (key.endsWith("_unit")) {
+        const nid = key.slice(0, -"_unit".length);
+        params[`nutriment_${nid}_unit`] = strVal;
+      } else if (key.endsWith("_modifier")) {
+        const nid = key.slice(0, -"_modifier".length);
+        params[`nutriment_${nid}_modifier`] = strVal;
+      }
+    }
+
+    return params;
+  }
+
+  /**
    * Adds or edits a product using the V2 API
    * @param product - The product data to add or edit
    * @param credentials - Optional credentials for authentication
@@ -161,6 +201,15 @@ export class ProductOpenerApiV2 {
       {} as Record<string, string>,
     );
 
+    const noNutrition = product.no_nutrition_data === true;
+
+    // When no_nutrition_data is checked, the server handles clearing nutriments.
+    // When unchecked, translate the nutriments object into flat CGI parameters.
+    const nutritionParams =
+      !noNutrition && product.nutriments
+        ? this.buildNutritionParams(product.nutriments)
+        : {};
+
     const body = formData({
       code: product.code,
       user_id: credentials?.username,
@@ -179,9 +228,10 @@ export class ProductOpenerApiV2 {
       comment: product.comment ?? "",
       product_name: product.product_name || "",
       ingredients_text: product.ingredients_text || "",
-      no_nutrition_data: product.no_nutrition_data === true ? "on" : "",
+      no_nutrition_data: noNutrition ? "on" : "",
       ...productNames,
       ...ingredientsTexts,
+      ...nutritionParams,
     });
 
     const res = await this.fetch(url, {

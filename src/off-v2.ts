@@ -135,54 +135,69 @@ export class ProductOpenerApiV2 {
    * @param nutriments - The nutriments object from the product
    * @returns A record of flat CGI parameters ready for form submission
    */
+  private isPrimitiveValue(value: unknown): value is string | number | boolean {
+    if (value === undefined || value === null) {
+      return false;
+    }
+    const valType = typeof value;
+    return (
+      valType === "string" || valType === "number" || valType === "boolean"
+    );
+  }
+
+  private getNutritionDataPer(
+    nutriments: Record<string, unknown>,
+  ): "100g" | "serving" | undefined {
+    let nutritionDataPer: "100g" | "serving" | undefined;
+    for (const [key, value] of Object.entries(nutriments)) {
+      if (!this.isPrimitiveValue(value)) continue;
+
+      if (key.endsWith("_100g")) {
+        return "100g";
+      }
+      if (key.endsWith("_serving")) {
+        nutritionDataPer = "serving";
+      }
+    }
+    return nutritionDataPer;
+  }
+
+  private processNutrimentEntry(
+    key: string,
+    value: string | number | boolean,
+    nutritionDataPer: "100g" | "serving" | undefined,
+    params: Record<string, string>,
+  ): void {
+    const strVal = String(value);
+
+    if (key.endsWith("_100g") && nutritionDataPer === "100g") {
+      const nid = key.slice(0, -5);
+      params[`nutriment_${nid}`] = strVal;
+    } else if (key.endsWith("_serving") && nutritionDataPer === "serving") {
+      const nid = key.slice(0, -8);
+      params[`nutriment_${nid}`] = strVal;
+    } else if (key.endsWith("_unit")) {
+      const nid = key.slice(0, -5);
+      params[`nutriment_${nid}_unit`] = strVal;
+    } else if (key.endsWith("_modifier")) {
+      const nid = key.slice(0, -9);
+      params[`nutriment_${nid}_modifier`] = strVal;
+    }
+  }
+
   private buildNutritionParams(
     nutriments: Record<string, unknown>,
   ): Record<string, string> {
     const params: Record<string, string> = {};
 
-    let nutritionDataPer: "100g" | "serving" | undefined;
-    for (const key of Object.keys(nutriments)) {
-      if (key.endsWith("_100g")) {
-        nutritionDataPer = "100g";
-        break;
-      } else if (key.endsWith("_serving")) {
-        nutritionDataPer = "serving";
-      }
-    }
-
+    const nutritionDataPer = this.getNutritionDataPer(nutriments);
     if (nutritionDataPer) {
       params["nutrition_data_per"] = nutritionDataPer;
     }
 
     for (const [key, value] of Object.entries(nutriments)) {
-      if (value === undefined || value === null) continue;
-
-      // Skip non-primitive types (objects, arrays, functions)
-      const valType = typeof value;
-      if (
-        valType !== "string" &&
-        valType !== "number" &&
-        valType !== "boolean"
-      ) {
-        continue;
-      }
-
-      const strVal = String(value);
-
-      if (key.endsWith("_100g")) {
-        if (nutritionDataPer !== "100g") continue;
-        const nid = key.slice(0, -"_100g".length);
-        params[`nutriment_${nid}`] = strVal;
-      } else if (key.endsWith("_serving")) {
-        if (nutritionDataPer !== "serving") continue;
-        const nid = key.slice(0, -"_serving".length);
-        params[`nutriment_${nid}`] = strVal;
-      } else if (key.endsWith("_unit")) {
-        const nid = key.slice(0, -"_unit".length);
-        params[`nutriment_${nid}_unit`] = strVal;
-      } else if (key.endsWith("_modifier")) {
-        const nid = key.slice(0, -"_modifier".length);
-        params[`nutriment_${nid}_modifier`] = strVal;
+      if (this.isPrimitiveValue(value)) {
+        this.processNutrimentEntry(key, value, nutritionDataPer, params);
       }
     }
 

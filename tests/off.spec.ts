@@ -671,6 +671,28 @@ describe("OpenFoodFacts", () => {
       expect(body.get("nutrition_data_per")).toBe("serving");
       expect(body.get("nutriment_sugars")).toBe("5");
     });
+
+    it("should fallback to serving when 100g keys contain only non-serializable data", async () => {
+      mockFetch.mockResolvedValue(TestUtils.mockResponse({}, true, 200));
+
+      const productWithInvalid100g = {
+        ...baseProductData,
+        nutriments: {
+          fat_100g: { invalid: "object" },
+          sugars_serving: 5,
+        },
+      };
+
+      await productsApi.addOrEditProductV2(
+        productWithInvalid100g,
+        testCredentials,
+      );
+
+      const body = mockFetch.mock.calls[0]?.[1]?.body as FormData;
+      expect(body.get("nutrition_data_per")).toBe("serving");
+      expect(body.get("nutriment_fat")).toBeNull();
+      expect(body.get("nutriment_sugars")).toBe("5");
+    });
   });
 
   describe("getProductImageUrl", () => {

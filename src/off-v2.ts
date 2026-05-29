@@ -140,20 +140,43 @@ export class ProductOpenerApiV2 {
   ): Record<string, string> {
     const params: Record<string, string> = {};
 
+    let nutritionDataPer: "100g" | "serving" | undefined;
+    for (const key of Object.keys(nutriments)) {
+      if (key.endsWith("_100g")) {
+        nutritionDataPer = "100g";
+        break;
+      } else if (key.endsWith("_serving")) {
+        nutritionDataPer = "serving";
+      }
+    }
+
+    if (nutritionDataPer) {
+      params["nutrition_data_per"] = nutritionDataPer;
+    }
+
     for (const [key, value] of Object.entries(nutriments)) {
       if (value === undefined || value === null) continue;
+
+      // Skip non-primitive types (objects, arrays, functions)
+      const valType = typeof value;
+      if (
+        valType !== "string" &&
+        valType !== "number" &&
+        valType !== "boolean"
+      ) {
+        continue;
+      }
 
       const strVal = String(value);
 
       if (key.endsWith("_100g")) {
+        if (nutritionDataPer !== "100g") continue;
         const nid = key.slice(0, -"_100g".length);
         params[`nutriment_${nid}`] = strVal;
-        // Only set nutrition_data_per if not already determined
-        params["nutrition_data_per"] ??= "100g";
       } else if (key.endsWith("_serving")) {
+        if (nutritionDataPer !== "serving") continue;
         const nid = key.slice(0, -"_serving".length);
         params[`nutriment_${nid}`] = strVal;
-        params["nutrition_data_per"] ??= "serving";
       } else if (key.endsWith("_unit")) {
         const nid = key.slice(0, -"_unit".length);
         params[`nutriment_${nid}_unit`] = strVal;

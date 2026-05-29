@@ -22,6 +22,8 @@ export type ProductAttributeGroup = {
   attributes: ProductAttribute[];
 };
 
+export type NutritionDataPer = "100g" | "serving";
+
 /**
  * The OpenFoodFacts main API client for version 2.
  *
@@ -147,8 +149,8 @@ export class ProductOpenerApiV2 {
 
   private getNutritionDataPer(
     nutriments: Record<string, unknown>,
-  ): "100g" | "serving" | undefined {
-    let nutritionDataPer: "100g" | "serving" | undefined;
+  ): NutritionDataPer | undefined {
+    let nutritionDataPer: NutritionDataPer | undefined;
     for (const [key, value] of Object.entries(nutriments)) {
       if (!this.isPrimitiveValue(value)) continue;
 
@@ -165,7 +167,7 @@ export class ProductOpenerApiV2 {
   private processNutrimentEntry(
     key: string,
     value: string | number | boolean,
-    nutritionDataPer: "100g" | "serving" | undefined,
+    nutritionDataPer: NutritionDataPer | undefined,
     params: Record<string, string>,
   ): void {
     const strVal = String(value);

@@ -22,7 +22,7 @@ npm install git+https://github.com/openfoodfacts/openfoodfacts-js.git
 ## Usage
 
 > [!WARNING]
-> Be sure to read the [Open Food Facts API documentation](https://openfoodfacts.github.io/openfoodfacts-server/) to understand how the API should be used and what data is available **BEFORE** starting to use the SDK.
+> Be sure to read the [Open Food Facts API documentation](https://openfoodfacts.github.io/documentation/docs/Product-Opener/api/) to understand how the API should be used and what data is available **BEFORE** starting to use the SDK.
 
 Import the SDK in your project and create a client instance:
 

@@ -5,6 +5,7 @@ import { formData } from "./openapi.js";
 import { USER_AGENT } from "./consts.js";
 import type { ProductDataType } from "./off-v3.js";
 import type { FetchFn } from "./index.js";
+import { buildNutritionParams } from "./utils.js";
 
 export type SearchQuery = operations["get-search"]["parameters"]["query"];
 export type AttributeGroups = components["schemas"]["get_attribute_groups"];
@@ -129,84 +130,6 @@ export class ProductOpenerApiV2 {
   }
 
   /**
-   * Maps nested product nutriments to flat CGI query parameters expected by the server.
-   *
-   * Maps suffixes (_100g, _serving, _unit, _modifier) to their flat CGI representations
-   * (e.g. nutriment_[nid], nutriment_[nid]_unit, nutriment_[nid]_modifier).
-   *
-   * @param nutriments - The nutriments object from the product
-   * @returns A record of flat CGI parameters ready for form submission
-   */
-  private isPrimitiveValue(value: unknown): value is string | number | boolean {
-    if (value === undefined || value === null) {
-      return false;
-    }
-    const valType = typeof value;
-    return (
-      valType === "string" || valType === "number" || valType === "boolean"
-    );
-  }
-
-  private getNutritionDataPer(
-    nutriments: Record<string, unknown>,
-  ): NutritionDataPer | undefined {
-    let nutritionDataPer: NutritionDataPer | undefined;
-    for (const [key, value] of Object.entries(nutriments)) {
-      if (!this.isPrimitiveValue(value)) continue;
-
-      if (key.endsWith("_100g")) {
-        return "100g";
-      }
-      if (key.endsWith("_serving")) {
-        nutritionDataPer = "serving";
-      }
-    }
-    return nutritionDataPer;
-  }
-
-  private processNutrimentEntry(
-    key: string,
-    value: string | number | boolean,
-    nutritionDataPer: NutritionDataPer | undefined,
-    params: Record<string, string>,
-  ): void {
-    const strVal = String(value);
-
-    if (key.endsWith("_100g") && nutritionDataPer === "100g") {
-      const nid = key.slice(0, -5);
-      params[`nutriment_${nid}`] = strVal;
-    } else if (key.endsWith("_serving") && nutritionDataPer === "serving") {
-      const nid = key.slice(0, -8);
-      params[`nutriment_${nid}`] = strVal;
-    } else if (key.endsWith("_unit")) {
-      const nid = key.slice(0, -5);
-      params[`nutriment_${nid}_unit`] = strVal;
-    } else if (key.endsWith("_modifier")) {
-      const nid = key.slice(0, -9);
-      params[`nutriment_${nid}_modifier`] = strVal;
-    }
-  }
-
-  private buildNutritionParams(
-    nutriments: Record<string, unknown>,
-  ): Record<string, string> {
-    const params: Record<string, string> = {};
-
-    const nutritionDataPer = this.getNutritionDataPer(nutriments);
-    if (nutritionDataPer) {
-      params["nutrition_data_per"] = nutritionDataPer;
-    }
-
-    for (const [key, value] of Object.entries(nutriments)) {
-      if (this.isPrimitiveValue(value)) {
-        this.processNutrimentEntry(key, value, nutritionDataPer, params);
-      }
-    }
-
-    return params;
-  }
-
-  /**
    * Adds or edits a product using the V2 API
    * @param product - The product data to add or edit
    * @param credentials - Optional credentials for authentication
@@ -247,7 +170,7 @@ export class ProductOpenerApiV2 {
     // When unchecked, translate the nutriments object into flat CGI parameters.
     const nutritionParams =
       !noNutrition && product.nutriments
-        ? this.buildNutritionParams(product.nutriments)
+        ? buildNutritionParams(product.nutriments)
         : {};
 
     const body = formData({

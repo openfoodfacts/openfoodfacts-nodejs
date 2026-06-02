@@ -28,6 +28,12 @@ export type LogoSearchParams =
 export type LogoAnnotation =
   paths["/images/logos/annotate"]["post"]["requestBody"]["content"]["application/json"]["annotations"][number];
 
+export type RobotoffQuestionsQuery =
+  operations["getQuestions"]["parameters"]["query"];
+
+export type RobotoffUnansweredQuestionsQuery =
+  operations["getUnansweredQuestions"]["parameters"]["query"];
+
 export class Robotoff {
   /** The fetch function used for every request */
   private readonly fetch: typeof global.fetch;
@@ -130,6 +136,54 @@ export class Robotoff {
     });
   }
 
+  questions(
+    query?: Omit<RobotoffQuestionsQuery, 'page' | 'count'>,
+    /**
+     * The page number 
+     * @default 0
+     */
+    page = 0,
+    /**
+     * The page size
+     * @default 25
+     */
+    count = 25
+  ) {
+    return this.raw.GET("/questions", { params: { query: { ...query, page, count } } });
+  }
+
+  /**
+   * Returns the number of unanswered questions per values.
+   * Especially useful for campaigns like the eco-score one
+   */
+  getQuestionsUnanswered(query?: Omit<RobotoffUnansweredQuestionsQuery, 'page' | 'count'>,
+    /**
+     * The page number 
+     * @default 0
+     */
+    page = 0,
+    /**
+     * The page size
+     * @default 25
+     */
+    count = 25) {
+    return this.raw.GET("/questions/unanswered", { params: { query: { ...query, page, count } } });
+  }
+
+
+  updateLogo(logoId: number, body: { type: string; value?: string | null }) {
+    return this.raw.PUT("/images/logos/{logo_id}", {
+      params: { path: { logo_id: logoId } },
+      body,
+    });
+  }
+
+  getUserStatistics(username: string) {
+    return this.raw.GET("/users/statistics/{username}", {
+      params: { path: { username } },
+    });
+  }
+
   getCroppedImageUrl(
     imageUrl: string,
     /**
@@ -146,5 +200,15 @@ export class Robotoff {
       x_max: x_max.toString(),
     });
     return `${this.baseUrl}/images/crop?${params.toString()}`;
+  }
+
+  /**
+   * Get a batch of logo from their ids.
+   * @param logoIds The array of logos to fetch.
+   */
+  fetchLogos(logoIds: string[]) {
+    return this.raw.GET("/images/logos", {
+      params: { query: { logo_ids: logoIds.join(",") } },
+    });
   }
 }

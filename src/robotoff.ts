@@ -35,15 +35,18 @@ export class Robotoff {
   /** The raw openapi-fetch client is used for every request exposed by the openapi schema */
   private readonly raw: ReturnType<typeof createClient<paths>>;
 
+  /** The base URL for the API */
+  private readonly baseUrl: string;
+
   constructor(
     fetch: typeof global.fetch,
     options: { baseUrl: string } = { baseUrl: DEFAULT_ROBOTOFF_API_URL },
   ) {
     this.fetch = fetch;
-    const baseUrl = new URL("/api/v1", options.baseUrl).toString();
+    this.baseUrl = new URL("/api/v1", options.baseUrl).toString();
     this.raw = createClient<paths>({
       fetch: this.fetch,
-      baseUrl: baseUrl,
+      baseUrl: this.baseUrl,
       headers: {
         "User-Agent": USER_AGENT,
       },
@@ -125,5 +128,23 @@ export class Robotoff {
         path: { logo_id: logoId },
       },
     });
+  }
+
+  getCroppedImageUrl(
+    imageUrl: string,
+    /**
+     * The bounding box of the crop, in the format [y_min, x_min, y_max, x_max]
+     */
+    boundingBox: [number, number, number, number],
+  ) {
+    const [y_min, x_min, y_max, x_max] = boundingBox;
+    const params = new URLSearchParams({
+      image_url: imageUrl,
+      y_min: y_min.toString(),
+      x_min: x_min.toString(),
+      y_max: y_max.toString(),
+      x_max: x_max.toString(),
+    });
+    return `${this.baseUrl}/images/crop?${params.toString()}`;
   }
 }

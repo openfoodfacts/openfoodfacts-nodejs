@@ -104,6 +104,11 @@ export type ProductDataType = ProductDataSection & {
   labels_tags: string[];
   product_type: string;
 
+  allergens?: string;
+  allergens_tags?: string[];
+  traces?: string;
+  traces_tags?: string[];
+
   origins: string;
   origins_tags: string[];
 

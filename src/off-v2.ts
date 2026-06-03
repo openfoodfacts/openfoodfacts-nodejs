@@ -173,6 +173,8 @@ export class ProductOpenerApiV2 {
       stores: product.stores || "",
       origins: product.origins || "",
       countries: product.countries || "",
+      allergens: product.allergens || "",
+      traces: product.traces || "",
       emb_codes: product.emb_codes || "",
       packaging: product.packaging || "",
       manufacturing_places: product.manufacturing_places || "",

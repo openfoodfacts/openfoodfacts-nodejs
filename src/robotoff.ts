@@ -137,9 +137,9 @@ export class Robotoff {
   }
 
   questions(
-    query?: Omit<RobotoffQuestionsQuery, 'page' | 'count'>,
+    query?: Omit<RobotoffQuestionsQuery, "page" | "count">,
     /**
-     * The page number 
+     * The page number
      * @default 0
      */
     page = 0,
@@ -147,18 +147,21 @@ export class Robotoff {
      * The page size
      * @default 25
      */
-    count = 25
+    count = 25,
   ) {
-    return this.raw.GET("/questions", { params: { query: { ...query, page, count } } });
+    return this.raw.GET("/questions", {
+      params: { query: { ...query, page, count } },
+    });
   }
 
   /**
    * Returns the number of unanswered questions per values.
    * Especially useful for campaigns like the eco-score one
    */
-  getQuestionsUnanswered(query?: Omit<RobotoffUnansweredQuestionsQuery, 'page' | 'count'>,
+  getQuestionsUnanswered(
+    query?: Omit<RobotoffUnansweredQuestionsQuery, "page" | "count">,
     /**
-     * The page number 
+     * The page number
      * @default 0
      */
     page = 0,
@@ -166,10 +169,12 @@ export class Robotoff {
      * The page size
      * @default 25
      */
-    count = 25) {
-    return this.raw.GET("/questions/unanswered", { params: { query: { ...query, page, count } } });
+    count = 25,
+  ) {
+    return this.raw.GET("/questions/unanswered", {
+      params: { query: { ...query, page, count } },
+    });
   }
-
 
   updateLogo(logoId: number, body: { type: string; value?: string | null }) {
     return this.raw.PUT("/images/logos/{logo_id}", {

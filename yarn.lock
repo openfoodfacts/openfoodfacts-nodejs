@@ -583,6 +583,7 @@ __metadata:
     typedoc: "npm:^0.28.19"
     typescript: "npm:^5.8.3"
     typescript-eslint: "npm:^8.59.3"
+    unrun: "npm:^0.3.0"
     vitest: "npm:^4.1.6"
   languageName: unknown
   linkType: soft
@@ -3447,6 +3448,22 @@ __metadata:
   version: 6.25.0
   resolution: "undici@npm:6.25.0"
   checksum: 10/a475e45da3e1d1073283bb70531666f09a432eabff2b857bd7063d469a1ee1486192ff61dc0dadbb526673ce1120fee14d66a59b6b17d1e0bd3a4d5f0a52d0a6
+  languageName: node
+  linkType: hard
+
+"unrun@npm:^0.3.0":
+  version: 0.3.0
+  resolution: "unrun@npm:0.3.0"
+  dependencies:
+    rolldown: "npm:^1.0.0"
+  peerDependencies:
+    synckit: ^0.11.11
+  peerDependenciesMeta:
+    synckit:
+      optional: true
+  bin:
+    unrun: ./dist/cli.mjs
+  checksum: 10/6dc90f799787335ab8fc9fb3b604144c4dc131a9078ee50ec2de8317cef20566845f29403d92c9d801816b3d87e5ba45c36516abb96e3d249eb20f1f1f10633c
   languageName: node
   linkType: hard
 

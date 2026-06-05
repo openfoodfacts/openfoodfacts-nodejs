@@ -4,7 +4,6 @@
     "moduleResolution": "bundler",
 
     "target": "es2017",
-    // Disable access to @types/ packages by default
     "types": [],
     "lib": ["es2017", "DOM"],
 

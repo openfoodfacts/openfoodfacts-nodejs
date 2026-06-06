@@ -141,6 +141,8 @@ export type ProductDataType = ProductDataSection & {
   };
   lang: string;
   data_quality_errors_tags?: string[];
+  data_quality_warnings_tags?: string[];
+  data_quality_info_tags?: string[];
 } & Partial<Record<LangProduct | LangIngredient | LangPackagingText, string>>;
 
 export type ProductStateBase = {

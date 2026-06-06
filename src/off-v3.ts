@@ -140,6 +140,7 @@ export type ProductDataType = ProductDataSection & {
     [lang: string]: number;
   };
   lang: string;
+  data_quality_errors_tags?: string[];
 } & Partial<Record<LangProduct | LangIngredient | LangPackagingText, string>>;
 
 export type ProductStateBase = {

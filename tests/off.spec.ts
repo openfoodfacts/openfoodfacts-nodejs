@@ -500,6 +500,31 @@ describe("OpenFoodFacts", () => {
     });
   });
 
+  describe("deleteProduct", () => {
+    it("should successfully delete a product", async () => {
+      mockFetch.mockResolvedValue(TestUtils.mockResponse({}, true, 200));
+
+      const result = await productsApi.deleteProduct("123456", "test deletion");
+
+      expect(result).toBe(true);
+      expect(mockFetch).toHaveBeenCalledWith(
+        "https://world.openfoodfacts.org/cgi/product.pl",
+        expect.objectContaining({
+          method: "POST",
+          body: expect.any(FormData),
+        }),
+      );
+    });
+
+    it("should return false when deletion request fails", async () => {
+      mockFetch.mockResolvedValue(TestUtils.mockResponse({}, false, 400));
+
+      const result = await productsApi.deleteProduct("123456", "test deletion");
+
+      expect(result).toBe(false);
+    });
+  });
+
   describe("getProductImageUrl", () => {
     const mockSelectedImage = {
       front: {

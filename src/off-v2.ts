@@ -351,6 +351,29 @@ export class ProductOpenerApiV2 {
 
     return res.response.ok;
   }
+
+  /**
+   * Delete a product page (moderator-only action)
+   * @param code - product barcode
+   * @param comment - reason for deletion
+   * @returns A promise that resolves to true if successful, false otherwise
+   */
+  async deleteProduct(code: string, comment: string): Promise<boolean> {
+    const url = `${this.baseUrl}/cgi/product.pl`;
+    const body = formData({
+      type: "delete",
+      action: "process",
+      code,
+      comment,
+    });
+
+    const res = await this.fetch(url, {
+      method: "POST",
+      body,
+    });
+
+    return res.status === 200;
+  }
 }
 
 export function getProductNameInLang(product: ProductDataType, lang: string) {

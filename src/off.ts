@@ -623,6 +623,15 @@ export class OpenFoodFacts {
    */
   getProductImages = (barcode: string) => this.apiv2.getProductImages(barcode);
 
+  /**
+   * Delete a product page (moderator-only action)
+   * @param code - The barcode of the product to delete
+   * @param comment - The reason for deleting the product
+   * @returns A promise that resolves to true if successful, false otherwise
+   */
+  deleteProduct = (code: string, comment: string) =>
+    this.apiv2.deleteProduct(code, comment);
+
   async getFacet(
     facet: string,
     opts?: { page?: number; pageSize?: number; sortBy?: FacetSortOption },

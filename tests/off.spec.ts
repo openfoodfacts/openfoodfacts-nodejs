@@ -731,6 +731,40 @@ describe("OpenFoodFacts", () => {
     });
   });
 
+  describe("moveOrDeleteImages", () => {
+    it("should successfully move/delete images", async () => {
+      mockFetch.mockResolvedValue(TestUtils.mockResponse({}, true, 200));
+
+      const result = await productsApi.moveOrDeleteImages(
+        "123456",
+        "1,2",
+        "trash",
+        true,
+      );
+
+      expect(result).toBe(true);
+      expect(mockFetch).toHaveBeenCalledWith(
+        "https://world.openfoodfacts.org/cgi/product_image_move.pl",
+        expect.objectContaining({
+          method: "POST",
+          body: expect.any(FormData),
+        }),
+      );
+    });
+
+    it("should return false when the request fails", async () => {
+      mockFetch.mockResolvedValue(TestUtils.mockResponse({}, false, 400));
+
+      const result = await productsApi.moveOrDeleteImages(
+        "123456",
+        "1,2",
+        "trash",
+      );
+
+      expect(result).toBe(false);
+    });
+  });
+
   describe("getProductImageUrl", () => {
     const mockSelectedImage = {
       front: {

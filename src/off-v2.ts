@@ -390,6 +390,36 @@ export class ProductOpenerApiV2 {
 
     return res.status === 200;
   }
+
+  /**
+   * Move images from one product to another, or to trash (delete).
+   * Moderator-only action.
+   * @param code - source product barcode
+   * @param imgids - comma-separated list of image IDs (e.g., "1,2,3")
+   * @param moveTo - destination product barcode OR "trash" to delete
+   * @param copyData - whether to copy product data to destination
+   */
+  async moveOrDeleteImages(
+    code: string,
+    imgids: string,
+    moveTo: string,
+    copyData: boolean = false,
+  ): Promise<boolean> {
+    const url = `${this.baseUrl}/cgi/product_image_move.pl`;
+    const body = formData({
+      code: code,
+      imgids: imgids,
+      move_to_override: moveTo,
+      copy_data_override: copyData ? "true" : "false",
+    });
+
+    const res = await this.fetch(url, {
+      method: "POST",
+      body,
+    });
+
+    return res.status === 200;
+  }
 }
 
 export function getProductNameInLang(product: ProductDataType, lang: string) {

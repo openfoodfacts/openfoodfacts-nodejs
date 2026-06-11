@@ -632,6 +632,22 @@ export class OpenFoodFacts {
   deleteProduct = (code: string, comment: string) =>
     this.apiv2.deleteProduct(code, comment);
 
+  /**
+   * Move images from one product to another, or to trash (delete).
+   * Moderator-only action.
+   * @param code - source product barcode
+   * @param imgids - comma-separated list of image IDs (e.g., "1,2,3")
+   * @param moveTo - destination product barcode OR "trash" to delete
+   * @param copyData - whether to copy product data to destination
+   * @returns A promise that resolves to true if successful, false otherwise
+   */
+  moveOrDeleteImages = (
+    code: string,
+    imgids: string,
+    moveTo: string,
+    copyData?: boolean,
+  ) => this.apiv2.moveOrDeleteImages(code, imgids, moveTo, copyData);
+
   async getFacet(
     facet: string,
     opts?: { page?: number; pageSize?: number; sortBy?: FacetSortOption },

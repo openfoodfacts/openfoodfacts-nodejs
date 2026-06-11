@@ -1,5 +1,28 @@
 # Changelog
 
+## [2.0.0-alpha.32](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.31...v2.0.0-alpha.32) (2026-06-11)
+
+
+### Features
+
+* add allergens and traces fields ([c031772](https://github.com/openfoodfacts/openfoodfacts-js/commit/c03177261fa21ad44466462aebcd700f9baa030b))
+* Add data quality tags to V3 product type ([#885](https://github.com/openfoodfacts/openfoodfacts-js/issues/885)) ([5b216d6](https://github.com/openfoodfacts/openfoodfacts-js/commit/5b216d6252da77c30cb38f77a0d57df8ea0243d1))
+* Complete the robotoff functions to match hunger games usage ([3278cfc](https://github.com/openfoodfacts/openfoodfacts-js/commit/3278cfc6db91f60be26e81628dd6ab0fafa99447))
+* **productopener:** Support editing nutrition information ([#875](https://github.com/openfoodfacts/openfoodfacts-js/issues/875)) ([8cc741c](https://github.com/openfoodfacts/openfoodfacts-js/commit/8cc741c683f9d7b1d0e89621fc89794406dcb7af))
+
+
+### Bug Fixes
+
+* Make isTokenExpired work on browser ([12505c6](https://github.com/openfoodfacts/openfoodfacts-js/commit/12505c6f510fc65b95cfd846a962b30a44c4f951))
+* remove duplicate 'last_modified_t' from FACETS_SORT_OPTIONS ([00b8665](https://github.com/openfoodfacts/openfoodfacts-js/commit/00b86659003208654d6cd91e873f5c71361161c4))
+* Update isTokenExpired test to reflect correct behavior for tokens without exp claim ([77dcace](https://github.com/openfoodfacts/openfoodfacts-js/commit/77dcacedf22904007392918ab193acd58ed079f9))
+* **v2:** Send `no_nutrition_data` field in addOrEditProductV2 ([#867](https://github.com/openfoodfacts/openfoodfacts-js/issues/867)) ([0af44aa](https://github.com/openfoodfacts/openfoodfacts-js/commit/0af44aae5a655a3baf36fda8669a02e09711908b))
+
+
+### Miscellaneous Chores
+
+* Bump version to 2.0.0-alpha.32 ([0badae8](https://github.com/openfoodfacts/openfoodfacts-js/commit/0badae86930b6931cd09feaafae7fb033dc1ae9f))
+
 ## [2.0.0-alpha.31](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.30...v2.0.0-alpha.31) (2026-04-15)
 
 

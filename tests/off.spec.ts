@@ -523,6 +523,15 @@ describe("OpenFoodFacts", () => {
 
       expect(result).toBe(false);
     });
+
+    it("should throw an error if the deletion comment is empty or whitespace", async () => {
+      await expect(productsApi.deleteProduct("123456", "")).rejects.toThrow(
+        "A non-empty deletion comment is required.",
+      );
+      await expect(productsApi.deleteProduct("123456", "   ")).rejects.toThrow(
+        "A non-empty deletion comment is required.",
+      );
+    });
   });
 
   describe("getProductImageUrl", () => {

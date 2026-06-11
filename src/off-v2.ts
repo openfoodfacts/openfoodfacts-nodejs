@@ -359,6 +359,9 @@ export class ProductOpenerApiV2 {
    * @returns A promise that resolves to true if successful, false otherwise
    */
   async deleteProduct(code: string, comment: string): Promise<boolean> {
+    if (!comment || comment.trim().length === 0) {
+      throw new Error("A non-empty deletion comment is required.");
+    }
     const url = `${this.baseUrl}/cgi/product.pl`;
     const body = formData({
       type: "delete",

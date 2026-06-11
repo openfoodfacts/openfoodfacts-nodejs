@@ -498,6 +498,201 @@ describe("OpenFoodFacts", () => {
 
       expect(result).toBe(false);
     });
+
+    it("should include nutriment parameters when nutrition data is present", async () => {
+      mockFetch.mockResolvedValue(TestUtils.mockResponse({}, true, 200));
+
+      const productWithNutrients = {
+        ...baseProductData,
+        nutriments: {
+          fat_100g: 20,
+          sugars_100g: 5,
+          salt_100g: 1.2,
+          fat_unit: "g",
+        },
+      };
+
+      await productsApi.addOrEditProductV2(
+        productWithNutrients,
+        testCredentials,
+      );
+
+      const body = mockFetch.mock.calls[0]?.[1]?.body as FormData;
+      expect(body.get("nutriment_fat")).toBe("20");
+      expect(body.get("nutriment_sugars")).toBe("5");
+      expect(body.get("nutriment_salt")).toBe("1.2");
+      expect(body.get("nutriment_fat_unit")).toBe("g");
+      expect(body.get("nutrition_data_per")).toBe("100g");
+      expect(body.get("no_nutrition_data")).toBe("");
+    });
+
+    it("should set nutrition_data_per to serving for per-serving values", async () => {
+      mockFetch.mockResolvedValue(TestUtils.mockResponse({}, true, 200));
+
+      const productWithServing = {
+        ...baseProductData,
+        serving_size: "30g",
+        nutriments: {
+          fat_serving: 6,
+          sugars_serving: 1.5,
+        },
+      };
+
+      await productsApi.addOrEditProductV2(productWithServing, testCredentials);
+
+      const body = mockFetch.mock.calls[0]?.[1]?.body as FormData;
+      expect(body.get("nutriment_fat")).toBe("6");
+      expect(body.get("nutriment_sugars")).toBe("1.5");
+      expect(body.get("nutrition_data_per")).toBe("serving");
+    });
+
+    it("should preserve empty strings for nutriment deletion", async () => {
+      mockFetch.mockResolvedValue(TestUtils.mockResponse({}, true, 200));
+
+      const productWithDeletion = {
+        ...baseProductData,
+        nutriments: {
+          fat_100g: 20,
+          sugars_100g: "",
+        },
+      };
+
+      await productsApi.addOrEditProductV2(
+        productWithDeletion,
+        testCredentials,
+      );
+
+      const body = mockFetch.mock.calls[0]?.[1]?.body as FormData;
+      expect(body.get("nutriment_fat")).toBe("20");
+      expect(body.get("nutriment_sugars")).toBe("");
+    });
+
+    it("should skip nutriment parameters when no_nutrition_data is true", async () => {
+      mockFetch.mockResolvedValue(TestUtils.mockResponse({}, true, 200));
+
+      const productNoNutrition = {
+        ...baseProductData,
+        no_nutrition_data: true,
+        nutriments: {
+          fat_100g: 20,
+          sugars_100g: 5,
+        },
+      };
+
+      await productsApi.addOrEditProductV2(productNoNutrition, testCredentials);
+
+      const body = mockFetch.mock.calls[0]?.[1]?.body as FormData;
+      expect(body.get("no_nutrition_data")).toBe("on");
+      expect(body.get("nutriment_fat")).toBeNull();
+      expect(body.get("nutriment_sugars")).toBeNull();
+      expect(body.get("nutrition_data_per")).toBeNull();
+    });
+
+    it("should include modifier parameters", async () => {
+      mockFetch.mockResolvedValue(TestUtils.mockResponse({}, true, 200));
+
+      const productWithModifier = {
+        ...baseProductData,
+        nutriments: {
+          fat_100g: 20,
+          fat_modifier: "<",
+        },
+      };
+
+      await productsApi.addOrEditProductV2(
+        productWithModifier,
+        testCredentials,
+      );
+
+      const body = mockFetch.mock.calls[0]?.[1]?.body as FormData;
+      expect(body.get("nutriment_fat")).toBe("20");
+      expect(body.get("nutriment_fat_modifier")).toBe("<");
+    });
+
+    it("should skip non-primitive nutriment values", async () => {
+      mockFetch.mockResolvedValue(TestUtils.mockResponse({}, true, 200));
+
+      const productWithInvalidVal = {
+        ...baseProductData,
+        nutriments: {
+          fat_100g: 20,
+          sugars_100g: { nested: "object" },
+          salt_100g: [1, 2],
+        },
+      };
+
+      await productsApi.addOrEditProductV2(
+        productWithInvalidVal,
+        testCredentials,
+      );
+
+      const body = mockFetch.mock.calls[0]?.[1]?.body as FormData;
+      expect(body.get("nutriment_fat")).toBe("20");
+      expect(body.get("nutriment_sugars")).toBeNull();
+      expect(body.get("nutriment_salt")).toBeNull();
+    });
+
+    it("should handle mixed _100g and _serving inputs deterministically preferring 100g", async () => {
+      mockFetch.mockResolvedValue(TestUtils.mockResponse({}, true, 200));
+
+      const productWithMixed = {
+        ...baseProductData,
+        nutriments: {
+          fat_100g: 20,
+          sugars_serving: 5,
+        },
+      };
+
+      await productsApi.addOrEditProductV2(productWithMixed, testCredentials);
+
+      const body = mockFetch.mock.calls[0]?.[1]?.body as FormData;
+      expect(body.get("nutrition_data_per")).toBe("100g");
+      expect(body.get("nutriment_fat")).toBe("20");
+      // Sugars per serving should be ignored because nutrition_data_per is 100g
+      expect(body.get("nutriment_sugars")).toBeNull();
+    });
+
+    it("should handle mixed inputs deterministically preferring serving when no 100g keys exist", async () => {
+      mockFetch.mockResolvedValue(TestUtils.mockResponse({}, true, 200));
+
+      const productWithMixedServing = {
+        ...baseProductData,
+        nutriments: {
+          sugars_serving: 5,
+        },
+      };
+
+      await productsApi.addOrEditProductV2(
+        productWithMixedServing,
+        testCredentials,
+      );
+
+      const body = mockFetch.mock.calls[0]?.[1]?.body as FormData;
+      expect(body.get("nutrition_data_per")).toBe("serving");
+      expect(body.get("nutriment_sugars")).toBe("5");
+    });
+
+    it("should fallback to serving when 100g keys contain only non-serializable data", async () => {
+      mockFetch.mockResolvedValue(TestUtils.mockResponse({}, true, 200));
+
+      const productWithInvalid100g = {
+        ...baseProductData,
+        nutriments: {
+          fat_100g: { invalid: "object" },
+          sugars_serving: 5,
+        },
+      };
+
+      await productsApi.addOrEditProductV2(
+        productWithInvalid100g,
+        testCredentials,
+      );
+
+      const body = mockFetch.mock.calls[0]?.[1]?.body as FormData;
+      expect(body.get("nutrition_data_per")).toBe("serving");
+      expect(body.get("nutriment_fat")).toBeNull();
+      expect(body.get("nutriment_sugars")).toBe("5");
+    });
   });
 
   describe("getProductImageUrl", () => {

@@ -5,6 +5,7 @@ import { formData } from "./openapi.js";
 import { USER_AGENT } from "./consts.js";
 import type { ProductDataType } from "./off-v3.js";
 import type { FetchFn } from "./index.js";
+import { buildNutritionParams } from "./utils.js";
 
 export type SearchQuery = operations["get-search"]["parameters"]["query"];
 export type AttributeGroups = components["schemas"]["get_attribute_groups"];
@@ -21,6 +22,8 @@ export type ProductAttributeGroup = {
   warning?: string;
   attributes: ProductAttribute[];
 };
+
+export type NutritionDataPer = "100g" | "serving";
 
 /**
  * The OpenFoodFacts main API client for version 2.
@@ -161,6 +164,15 @@ export class ProductOpenerApiV2 {
       {} as Record<string, string>,
     );
 
+    const noNutrition = product.no_nutrition_data === true;
+
+    // When no_nutrition_data is checked, the server handles clearing nutriments.
+    // When unchecked, translate the nutriments object into flat CGI parameters.
+    const nutritionParams =
+      !noNutrition && product.nutriments
+        ? buildNutritionParams(product.nutriments)
+        : {};
+
     const body = formData({
       code: product.code,
       user_id: credentials?.username,
@@ -181,9 +193,10 @@ export class ProductOpenerApiV2 {
       comment: product.comment ?? "",
       product_name: product.product_name || "",
       ingredients_text: product.ingredients_text || "",
-      no_nutrition_data: product.no_nutrition_data === true ? "on" : "",
+      no_nutrition_data: noNutrition ? "on" : "",
       ...productNames,
       ...ingredientsTexts,
+      ...nutritionParams,
     });
 
     const res = await this.fetch(url, {

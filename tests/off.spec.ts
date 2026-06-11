@@ -507,13 +507,15 @@ describe("OpenFoodFacts", () => {
       const result = await productsApi.deleteProduct("123456", "test deletion");
 
       expect(result).toBe(true);
-      expect(mockFetch).toHaveBeenCalledWith(
-        "https://world.openfoodfacts.org/cgi/product.pl",
-        expect.objectContaining({
-          method: "POST",
-          body: expect.any(FormData),
-        }),
-      );
+      expect(mockFetch).toHaveBeenCalled();
+      const [url, options] = mockFetch.mock.calls[0] as [string, any];
+      expect(url).toBe("https://world.openfoodfacts.org/cgi/product.pl");
+      expect(options.method).toBe("POST");
+      const formDataBody = options.body as FormData;
+      expect(formDataBody.get("type")).toBe("delete");
+      expect(formDataBody.get("action")).toBe("process");
+      expect(formDataBody.get("code")).toBe("123456");
+      expect(formDataBody.get("comment")).toBe("test deletion");
     });
 
     it("should return false when deletion request fails", async () => {

@@ -104,6 +104,11 @@ export type ProductDataType = ProductDataSection & {
   labels_tags: string[];
   product_type: string;
 
+  allergens?: string;
+  allergens_tags?: string[];
+  traces?: string;
+  traces_tags?: string[];
+
   origins: string;
   origins_tags: string[];
 
@@ -135,6 +140,9 @@ export type ProductDataType = ProductDataSection & {
     [lang: string]: number;
   };
   lang: string;
+  data_quality_errors_tags?: string[];
+  data_quality_warnings_tags?: string[];
+  data_quality_info_tags?: string[];
 } & Partial<Record<LangProduct | LangIngredient | LangPackagingText, string>>;
 
 export type ProductStateBase = {

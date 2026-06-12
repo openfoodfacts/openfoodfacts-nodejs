@@ -731,6 +731,95 @@ describe("OpenFoodFacts", () => {
     });
   });
 
+  const verifyImageMoveRequest = (
+    expectedMoveTo: string,
+    expectedCopyData: string,
+  ) => {
+    expect(mockFetch).toHaveBeenCalled();
+    const [url, options] = mockFetch.mock.calls[0] as [string, any];
+    expect(url).toBe(
+      "https://world.openfoodfacts.org/cgi/product_image_move.pl",
+    );
+    expect(options.method).toBe("POST");
+    const formDataBody = options.body as FormData;
+    expect(formDataBody.get("code")).toBe("123456");
+    expect(formDataBody.get("imgids")).toBe("1,2");
+    expect(formDataBody.get("move_to_override")).toBe(expectedMoveTo);
+    expect(formDataBody.get("copy_data_override")).toBe(expectedCopyData);
+  };
+
+  describe("moveImages", () => {
+    it("should successfully move images", async () => {
+      mockFetch.mockResolvedValue(TestUtils.mockResponse({}, true, 200));
+
+      const result = await productsApi.moveImages(
+        "123456",
+        "1,2",
+        "654321",
+        true,
+      );
+
+      expect(result).toBe(true);
+    });
+
+    it("should successfully move images with default copyData=false", async () => {
+      mockFetch.mockResolvedValue(TestUtils.mockResponse({}, true, 200));
+
+      const result = await productsApi.moveImages("123456", "1,2", "654321");
+
+      expect(result).toBe(true);
+      verifyImageMoveRequest("654321", "false");
+    });
+
+    it("should return false when moving images request fails", async () => {
+      mockFetch.mockResolvedValue(TestUtils.mockResponse({}, false, 400));
+
+      const result = await productsApi.moveImages("123456", "1,2", "654321");
+
+      expect(result).toBe(false);
+    });
+
+    it("should throw an error if any required parameter is empty or whitespace", async () => {
+      await expect(productsApi.moveImages("", "1,2", "654321")).rejects.toThrow(
+        "A non-empty source product barcode is required.",
+      );
+      await expect(
+        productsApi.moveImages("123456", "   ", "654321"),
+      ).rejects.toThrow("A non-empty list of image IDs is required.");
+      await expect(productsApi.moveImages("123456", "1,2", "")).rejects.toThrow(
+        "A non-empty destination product barcode is required.",
+      );
+    });
+  });
+
+  describe("deleteImages", () => {
+    it("should successfully delete images (move to trash)", async () => {
+      mockFetch.mockResolvedValue(TestUtils.mockResponse({}, true, 200));
+
+      const result = await productsApi.deleteImages("123456", "1,2");
+
+      expect(result).toBe(true);
+      verifyImageMoveRequest("trash", "false");
+    });
+
+    it("should return false when deleting images request fails", async () => {
+      mockFetch.mockResolvedValue(TestUtils.mockResponse({}, false, 400));
+
+      const result = await productsApi.deleteImages("123456", "1,2");
+
+      expect(result).toBe(false);
+    });
+
+    it("should throw an error if any required parameter is empty or whitespace", async () => {
+      await expect(productsApi.deleteImages("", "1,2")).rejects.toThrow(
+        "A non-empty product barcode is required.",
+      );
+      await expect(productsApi.deleteImages("123456", "  ")).rejects.toThrow(
+        "A non-empty list of image IDs is required.",
+      );
+    });
+  });
+
   describe("getProductImageUrl", () => {
     const mockSelectedImage = {
       front: {

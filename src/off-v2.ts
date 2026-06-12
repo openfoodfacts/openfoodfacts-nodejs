@@ -392,25 +392,63 @@ export class ProductOpenerApiV2 {
   }
 
   /**
-   * Move images from one product to another, or to trash (delete).
-   * Moderator-only action.
+   * Move images from one product to another (moderator-only action)
    * @param code - source product barcode
    * @param imgids - comma-separated list of image IDs (e.g., "1,2,3")
-   * @param moveTo - destination product barcode OR "trash" to delete
+   * @param moveToBarcode - destination product barcode
    * @param copyData - whether to copy product data to destination
+   * @returns A promise that resolves to true if successful, false otherwise
    */
-  async moveOrDeleteImages(
+  async moveImages(
     code: string,
     imgids: string,
-    moveTo: string,
+    moveToBarcode: string,
     copyData: boolean = false,
   ): Promise<boolean> {
+    if (!code || code.trim().length === 0) {
+      throw new Error("A non-empty source product barcode is required.");
+    }
+    if (!imgids || imgids.trim().length === 0) {
+      throw new Error("A non-empty list of image IDs is required.");
+    }
+    if (!moveToBarcode || moveToBarcode.trim().length === 0) {
+      throw new Error("A non-empty destination product barcode is required.");
+    }
     const url = `${this.baseUrl}/cgi/product_image_move.pl`;
     const body = formData({
-      code: code,
-      imgids: imgids,
-      move_to_override: moveTo,
+      code,
+      imgids,
+      move_to_override: moveToBarcode,
       copy_data_override: copyData ? "true" : "false",
+    });
+
+    const res = await this.fetch(url, {
+      method: "POST",
+      body,
+    });
+
+    return res.status === 200;
+  }
+
+  /**
+   * Delete product images by moving them to trash (moderator-only action)
+   * @param code - product barcode
+   * @param imgids - comma-separated list of image IDs (e.g., "1,2,3")
+   * @returns A promise that resolves to true if successful, false otherwise
+   */
+  async deleteImages(code: string, imgids: string): Promise<boolean> {
+    if (!code || code.trim().length === 0) {
+      throw new Error("A non-empty product barcode is required.");
+    }
+    if (!imgids || imgids.trim().length === 0) {
+      throw new Error("A non-empty list of image IDs is required.");
+    }
+    const url = `${this.baseUrl}/cgi/product_image_move.pl`;
+    const body = formData({
+      code,
+      imgids,
+      move_to_override: "trash",
+      copy_data_override: "false",
     });
 
     const res = await this.fetch(url, {

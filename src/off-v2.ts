@@ -422,12 +422,16 @@ export class ProductOpenerApiV2 {
       copy_data_override: copyData ? "true" : "false",
     });
 
-    const res = await this.fetch(url, {
-      method: "POST",
-      body,
-    });
+    try {
+      const res = await this.fetch(url, {
+        method: "POST",
+        body,
+      });
 
-    return res.status === 200;
+      return res.status === 200;
+    } catch {
+      return false;
+    }
   }
 
   /**
@@ -451,12 +455,16 @@ export class ProductOpenerApiV2 {
       copy_data_override: "false",
     });
 
-    const res = await this.fetch(url, {
-      method: "POST",
-      body,
-    });
+    try {
+      const res = await this.fetch(url, {
+        method: "POST",
+        body,
+      });
 
-    return res.status === 200;
+      return res.status === 200;
+    } catch {
+      return false;
+    }
   }
 }
 

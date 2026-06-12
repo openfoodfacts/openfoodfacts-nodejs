@@ -1,9 +1,10 @@
 import globals from "globals";
+import { defineConfig } from "eslint/config";
 import eslint from "@eslint/js";
 import tseslint from "typescript-eslint";
 import tsParser from "@typescript-eslint/parser";
 
-export default tseslint.config(
+export default defineConfig([
   {
     plugins: {
       "@typescript-eslint": tseslint,
@@ -50,4 +51,4 @@ export default tseslint.config(
       "vitest.config.ts",
     ],
   },
-);
+]);

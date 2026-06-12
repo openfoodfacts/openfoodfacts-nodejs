@@ -759,7 +759,8 @@ describe("OpenFoodFacts", () => {
         true,
       );
 
-      expect(result).toBe(true);
+      expect("data" in result).toBe(true);
+      expect("error" in result).toBe(false);
     });
 
     it("should successfully move images with default copyData=false", async () => {
@@ -767,16 +768,17 @@ describe("OpenFoodFacts", () => {
 
       const result = await productsApi.moveImages("123456", "1,2", "654321");
 
-      expect(result).toBe(true);
+      expect("data" in result).toBe(true);
       verifyImageMoveRequest("654321", "false");
     });
 
-    it("should return false when moving images request fails", async () => {
+    it("should return error when moving images request fails", async () => {
       mockFetch.mockResolvedValue(TestUtils.mockResponse({}, false, 400));
 
       const result = await productsApi.moveImages("123456", "1,2", "654321");
 
-      expect(result).toBe(false);
+      expect("error" in result).toBe(true);
+      expect("data" in result).toBe(false);
     });
 
     it("should throw an error if any required parameter is empty or whitespace", async () => {
@@ -798,16 +800,18 @@ describe("OpenFoodFacts", () => {
 
       const result = await productsApi.deleteImages("123456", "1,2");
 
-      expect(result).toBe(true);
+      expect("data" in result).toBe(true);
+      expect("error" in result).toBe(false);
       verifyImageMoveRequest("trash", "false");
     });
 
-    it("should return false when deleting images request fails", async () => {
+    it("should return error when deleting images request fails", async () => {
       mockFetch.mockResolvedValue(TestUtils.mockResponse({}, false, 400));
 
       const result = await productsApi.deleteImages("123456", "1,2");
 
-      expect(result).toBe(false);
+      expect("error" in result).toBe(true);
+      expect("data" in result).toBe(false);
     });
 
     it("should throw an error if any required parameter is empty or whitespace", async () => {

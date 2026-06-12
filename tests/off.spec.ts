@@ -695,6 +695,42 @@ describe("OpenFoodFacts", () => {
     });
   });
 
+  describe("deleteProduct", () => {
+    it("should successfully delete a product", async () => {
+      mockFetch.mockResolvedValue(TestUtils.mockResponse({}, true, 200));
+
+      const result = await productsApi.deleteProduct("123456", "test deletion");
+
+      expect(result).toBe(true);
+      expect(mockFetch).toHaveBeenCalled();
+      const [url, options] = mockFetch.mock.calls[0] as [string, any];
+      expect(url).toBe("https://world.openfoodfacts.org/cgi/product.pl");
+      expect(options.method).toBe("POST");
+      const formDataBody = options.body as FormData;
+      expect(formDataBody.get("type")).toBe("delete");
+      expect(formDataBody.get("action")).toBe("process");
+      expect(formDataBody.get("code")).toBe("123456");
+      expect(formDataBody.get("comment")).toBe("test deletion");
+    });
+
+    it("should return false when deletion request fails", async () => {
+      mockFetch.mockResolvedValue(TestUtils.mockResponse({}, false, 400));
+
+      const result = await productsApi.deleteProduct("123456", "test deletion");
+
+      expect(result).toBe(false);
+    });
+
+    it("should throw an error if the deletion comment is empty or whitespace", async () => {
+      await expect(productsApi.deleteProduct("123456", "")).rejects.toThrow(
+        "A non-empty deletion comment is required.",
+      );
+      await expect(productsApi.deleteProduct("123456", "   ")).rejects.toThrow(
+        "A non-empty deletion comment is required.",
+      );
+    });
+  });
+
   describe("getProductImageUrl", () => {
     const mockSelectedImage = {
       front: {

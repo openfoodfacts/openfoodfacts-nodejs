@@ -769,6 +769,7 @@ describe("OpenFoodFacts", () => {
       const result = await productsApi.moveImages("123456", "1,2", "654321");
 
       expect("data" in result).toBe(true);
+      expect("error" in result).toBe(false);
       verifyImageMoveRequest("654321", "false");
     });
 
@@ -779,6 +780,15 @@ describe("OpenFoodFacts", () => {
 
       expect("error" in result).toBe(true);
       expect("data" in result).toBe(false);
+    });
+    it("should return error when fetch rejects", async () => {
+      mockFetch.mockRejectedValue(new Error("Network failure"));
+
+      const result = await productsApi.moveImages("123456", "1,2", "654321");
+
+      expect("error" in result).toBe(true);
+      expect("data" in result).toBe(false);
+      expect(result.response).toBeUndefined();
     });
 
     it("should throw an error if any required parameter is empty or whitespace", async () => {
@@ -812,6 +822,15 @@ describe("OpenFoodFacts", () => {
 
       expect("error" in result).toBe(true);
       expect("data" in result).toBe(false);
+    });
+    it("should return error when fetch rejects", async () => {
+      mockFetch.mockRejectedValue(new Error("Network failure"));
+
+      const result = await productsApi.deleteImages("123456", "1,2");
+
+      expect("error" in result).toBe(true);
+      expect("data" in result).toBe(false);
+      expect(result.response).toBeUndefined();
     });
 
     it("should throw an error if any required parameter is empty or whitespace", async () => {

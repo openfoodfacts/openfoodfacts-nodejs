@@ -5,7 +5,7 @@
 
     "target": "es2017",
     "types": [],
-    "lib": ["es2017", "DOM"],
+    "lib": ["es2017"],
 
     "strict": true,
     "esModuleInterop": true,

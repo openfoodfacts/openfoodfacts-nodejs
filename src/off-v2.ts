@@ -397,14 +397,24 @@ export class ProductOpenerApiV2 {
    * @param imgids - comma-separated list of image IDs (e.g., "1,2,3")
    * @param moveToBarcode - destination product barcode
    * @param copyData - whether to copy product data to destination
-   * @returns A promise that resolves to true if successful, false otherwise
+   * @returns A promise that resolves with `{ data }` on success or `{ error }` on failure
+   * @example
+   * const result = await moveImages("12345", "1,2,3", "54321", true);
+   * if ("error" in result) {
+   *   console.error("Failed to move images:", result.error);
+   * } else {
+   *   console.log("Images moved successfully:", result.data);
+   * }
    */
   async moveImages(
     code: string,
     imgids: string,
     moveToBarcode: string,
     copyData: boolean = false,
-  ): Promise<boolean> {
+  ): Promise<
+    | { error: Error; response?: Response }
+    | { data: unknown; response?: Response }
+  > {
     if (!code || code.trim().length === 0) {
       throw new Error("A non-empty source product barcode is required.");
     }
@@ -414,45 +424,70 @@ export class ProductOpenerApiV2 {
     if (!moveToBarcode || moveToBarcode.trim().length === 0) {
       throw new Error("A non-empty destination product barcode is required.");
     }
-    const url = `${this.baseUrl}/cgi/product_image_move.pl`;
-    const body = formData({
-      code,
+
+    return this.productImageMove(code, {
       imgids,
-      move_to_override: moveToBarcode,
-      copy_data_override: copyData ? "true" : "false",
+      moveToOverride: moveToBarcode,
+      copyDataOverride: copyData,
     });
-
-    try {
-      const res = await this.fetch(url, {
-        method: "POST",
-        body,
-      });
-
-      return res.status === 200;
-    } catch {
-      return false;
-    }
   }
 
   /**
    * Delete product images by moving them to trash (moderator-only action)
    * @param code - product barcode
    * @param imgids - comma-separated list of image IDs (e.g., "1,2,3")
-   * @returns A promise that resolves to true if successful, false otherwise
+   * @returns A promise that resolves with `{ data }` on success or `{ error }` on failure
+   * @example
+   * const result = await deleteImages("12345", "1,2,3");
+   * if ("error" in result) {
+   *   console.error("Failed to delete images:", result.error);
+   * } else {
+   *   console.log("Images deleted successfully:", result.data);
+   * }
    */
-  async deleteImages(code: string, imgids: string): Promise<boolean> {
+  async deleteImages(
+    code: string,
+    imgids: string,
+  ): Promise<
+    | { error: Error; response?: Response }
+    | { data: unknown; response?: Response }
+  > {
     if (!code || code.trim().length === 0) {
       throw new Error("A non-empty product barcode is required.");
     }
     if (!imgids || imgids.trim().length === 0) {
       throw new Error("A non-empty list of image IDs is required.");
     }
+
+    return this.productImageMove(code, {
+      imgids,
+      moveToOverride: "trash",
+      copyDataOverride: false,
+    });
+  }
+
+  /**
+   * Calls /cgi/product_image_move.pl to move or delete images, depending on the
+   * parameters.
+   */
+  private async productImageMove(
+    code: string,
+    options: {
+      imgids: string;
+      moveToOverride: string;
+      copyDataOverride: boolean;
+    },
+  ): Promise<
+    | { error: Error; response?: Response }
+    | { data: unknown; response?: Response }
+  > {
     const url = `${this.baseUrl}/cgi/product_image_move.pl`;
+
     const body = formData({
       code,
-      imgids,
-      move_to_override: "trash",
-      copy_data_override: "false",
+      imgids: options.imgids,
+      move_to_override: options.moveToOverride,
+      copy_data_override: options.copyDataOverride ? "true" : "false",
     });
 
     try {
@@ -461,9 +496,18 @@ export class ProductOpenerApiV2 {
         body,
       });
 
-      return res.status === 200;
+      if (!res.ok) {
+        return {
+          response: res,
+          error: new Error(`Failed to move images: ${res.statusText}`),
+        };
+      }
+
+      const json = await res.json();
+
+      return { data: json, response: res };
     } catch {
-      return false;
+      return { response: undefined, error: new Error("Failed to move images") };
     }
   }
 }

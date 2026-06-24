@@ -164,6 +164,17 @@ export class ProductOpenerApiV2 {
       {} as Record<string, string>,
     );
 
+    const genericNames = languageCodes.reduce(
+      (acc, lang) => {
+        const genericName = getGenericNameInLang(product, lang);
+        if (genericName != null) {
+          acc[`generic_name_${lang}`] = genericName;
+        }
+        return acc;
+      },
+      {} as Record<string, string>,
+    );
+
     const noNutrition = product.no_nutrition_data === true;
 
     // When no_nutrition_data is checked, the server handles clearing nutriments.
@@ -191,11 +202,13 @@ export class ProductOpenerApiV2 {
       packaging: product.packaging || "",
       manufacturing_places: product.manufacturing_places || "",
       comment: product.comment ?? "",
+      link: product.link || "",
       product_name: product.product_name || "",
       ingredients_text: product.ingredients_text || "",
       no_nutrition_data: noNutrition ? "on" : "",
       ...productNames,
       ...ingredientsTexts,
+      ...genericNames,
       ...nutritionParams,
     });
 
@@ -521,4 +534,8 @@ export function getProductIngredientsInLang(
   lang: string,
 ) {
   return product[`ingredients_text_${lang}`] ?? product.ingredients_text;
+}
+
+export function getGenericNameInLang(product: ProductDataType, lang: string) {
+  return product[`generic_name_${lang}`];
 }

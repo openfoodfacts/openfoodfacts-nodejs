@@ -1,6 +1,7 @@
 export type LangIngredient = `ingredients_text_${string}`;
 export type LangProduct = `product_name_${string}`;
 export type LangPackagingText = `packaging_text_${string}`;
+export type LangGenericName = `generic_name_${string}`;
 
 export type ImageSize = { h: number; w: number };
 

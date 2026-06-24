@@ -482,6 +482,28 @@ describe("OpenFoodFacts", () => {
       );
     });
 
+    it("should include link and language-specific generic name parameters", async () => {
+      mockFetch.mockResolvedValue(TestUtils.mockResponse({}, true, 200));
+
+      const productWithUrlAndGeneric = {
+        ...baseProductData,
+        link: "https://example.com/producer-pasta",
+        languages_codes: { en: 1, fr: 1 },
+        generic_name_en: "Organic Pasta",
+        generic_name_fr: "Pâtes Biologiques",
+      };
+
+      await productsApi.addOrEditProductV2(
+        productWithUrlAndGeneric,
+        testCredentials,
+      );
+
+      const body = mockFetch.mock.calls[0]?.[1]?.body as FormData;
+      expect(body.get("link")).toBe("https://example.com/producer-pasta");
+      expect(body.get("generic_name_en")).toBe("Organic Pasta");
+      expect(body.get("generic_name_fr")).toBe("Pâtes Biologiques");
+    });
+
     it("should return false when request fails", async () => {
       mockFetch.mockResolvedValue(TestUtils.mockResponse({}, false, 400));
 

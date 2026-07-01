@@ -141,7 +141,20 @@ export class ProductOpenerApiV2 {
   ): Promise<boolean> {
     const url = `${this.baseUrl}/cgi/product_jqm2.pl`;
 
-    const languageCodes = Object.keys(product.languages_codes || {});
+    const languageCodes = Array.from(
+      new Set([
+        ...Object.keys(product.languages_codes || {}),
+        ...Object.keys(product)
+          .map((key) =>
+            key.match(
+              /^(?:product_name|ingredients_text|generic_name)_([a-z]{2,3})$/,
+            ),
+          )
+          .filter((match): match is RegExpMatchArray => !!match)
+          .map((match) => match[1]),
+      ]),
+    );
+
     const productNames = languageCodes.reduce(
       (acc, lang) => {
         const productName = getProductNameInLang(product, lang);

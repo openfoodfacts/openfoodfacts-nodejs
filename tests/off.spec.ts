@@ -512,6 +512,7 @@ describe("OpenFoodFacts", () => {
         languages_codes: { en: 1 },
         product_name_fr: "",
         ingredients_text_fr: "",
+        generic_name_fr: "",
       };
 
       await productsApi.addOrEditProductV2(
@@ -523,6 +524,7 @@ describe("OpenFoodFacts", () => {
       expect(body.get("product_name_en")).toBe("Test Product");
       expect(body.get("product_name_fr")).toBe("");
       expect(body.get("ingredients_text_fr")).toBe("");
+      expect(body.get("generic_name_fr")).toBe("");
     });
 
     it("should return false when request fails", async () => {

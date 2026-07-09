@@ -190,7 +190,7 @@ describe("Folksonomy Wrapper", () => {
   describe("Auth Token Validation", () => {
     it("should throw an error if auth token is missing and calling putTag", async () => {
       const clientWithoutToken = new Folksonomy(fetchMock);
-      expect(() =>
+      await expect(() =>
         clientWithoutToken.putTag({
           k: "key",
           v: "value",
@@ -212,7 +212,7 @@ describe("Folksonomy Wrapper", () => {
         comment: "Test comment",
         owner: "",
       };
-      expect(() => clientWithoutToken.removeTag(tagData)).rejects.toThrow(
+      await expect(() => clientWithoutToken.removeTag(tagData)).rejects.toThrow(
         "Auth token is required to perform this action",
       );
     });

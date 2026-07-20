@@ -638,7 +638,7 @@ export class OpenFoodFacts {
    * @param imgids - comma-separated list of image IDs (e.g., "1,2,3")
    * @param moveToBarcode - destination product barcode
    * @param copyData - whether to copy product data to destination
-   * @returns A promise that resolves to true if successful, false otherwise
+   * @returns A promise that resolves with `{ data }` on success or `{ error }` on failure
    */
   moveImages = (
     code: string,
@@ -651,7 +651,7 @@ export class OpenFoodFacts {
    * Delete product images by moving them to trash (moderator-only action).
    * @param code - product barcode
    * @param imgids - comma-separated list of image IDs (e.g., "1,2,3")
-   * @returns A promise that resolves to true if successful, false otherwise
+   * @returns A promise that resolves with `{ data }` on success or `{ error }` on failure
    */
   deleteImages = (code: string, imgids: string) =>
     this.apiv2.deleteImages(code, imgids);

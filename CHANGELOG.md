@@ -1,5 +1,24 @@
 # Changelog
 
+## [2.0.0-alpha.33](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.32...v2.0.0-alpha.33) (2026-07-20)
+
+
+### Features
+
+* add generic name and official website URL fields to product ([1380e54](https://github.com/openfoodfacts/openfoodfacts-js/commit/1380e5403a5c2a2cbd79aa6a1a5d387030083e08))
+* **v2:** Add deleteProduct method ([#890](https://github.com/openfoodfacts/openfoodfacts-js/issues/890)) ([9ebba7c](https://github.com/openfoodfacts/openfoodfacts-js/commit/9ebba7c0bf902cbe1f9faaf394aaf33dcde83ab8))
+* **v2:** Add moveImages and deleteImages API method ([#889](https://github.com/openfoodfacts/openfoodfacts-js/issues/889)) ([136554b](https://github.com/openfoodfacts/openfoodfacts-js/commit/136554bb4a56f71df3e315dbad8cbf13d35f3fe7))
+
+
+### Bug Fixes
+
+* **deps:** resolve audit vulnerabilities in transitive dependencies ([399b730](https://github.com/openfoodfacts/openfoodfacts-js/commit/399b730f4e0b0a7e533a55fa3c834f3948d73c4a))
+
+
+### Miscellaneous Chores
+
+* Bump version to 2.0.0-alpha.33 ([6599b40](https://github.com/openfoodfacts/openfoodfacts-js/commit/6599b40fd5e3172f79f48416c5bbf4131697dc16))
+
 ## [2.0.0-alpha.32](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.31...v2.0.0-alpha.32) (2026-06-11)
 
 

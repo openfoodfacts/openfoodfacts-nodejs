@@ -19,14 +19,14 @@
   "bugs": {
     "url": "https://github.com/openfoodfacts/openfoodfacts-js/issues"
   },
-  "types": "./dist/types/index.d.ts",
-  "main": "./dist/cjs/index.js",
+  "types": "./dist/index.d.cts",
+  "main": "./dist/index.cjs",
   "exports": {
     ".": {
-      "import": "./dist/esm/index.js",
-      "require": "./dist/cjs/index.js",
-      "types": "./dist/types/index.d.ts"
-    }
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./package.json": "./package.json"
   },
   "files": [
     "dist"
@@ -34,8 +34,8 @@
   "scripts": {
     "prepack": "yarn run prebuild && yarn run build",
     "prebuild": "node scripts/prebuild.js",
-    "build:docs": "typedoc --tsconfig tsconfig.esm.json src/index.ts",
-    "build": "yarn run prebuild && tsc -b tsconfig.cjs.json tsconfig.esm.json",
+    "build:docs": "typedoc --tsconfig tsconfig.docs.json src/index.ts",
+    "build": "yarn run prebuild && tsdown",
     "commitmsg": "commitlint -quiet=0 --extends=@commitlint/config-conventional -e",
     "api": "yarn run openapi-typescript --empty-objects-unknown",
     "lint": "eslint .",
@@ -62,7 +62,8 @@
     "openapi-typescript": "^7.6.1",
     "prettier": "^3.5.3",
     "ts-node": "^10.9.2",
-    "typedoc": "^0.28.2",
+    "tsdown": "^0.22.0",
+    "typedoc": "^0.28.19",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.30.1",
     "vitest": "^4.1.9"
@@ -74,5 +75,6 @@
     "js-yaml": ">=4.1.2",
     "vite": ">=8.0.16"
   },
-  "packageManager": "yarn@4.13.0+sha512.5c20ba010c99815433e5c8453112165e673f1c7948d8d2b267f4b5e52097538658388ebc9f9580656d9b75c5cc996f990f611f99304a2197d4c56d21eea370e7"
+  "packageManager": "yarn@4.13.0+sha512.5c20ba010c99815433e5c8453112165e673f1c7948d8d2b267f4b5e52097538658388ebc9f9580656d9b75c5cc996f990f611f99304a2197d4c56d21eea370e7",
+  "module": "./dist/index.js"
 }

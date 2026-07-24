@@ -81,9 +81,9 @@ describe("Robotoff", () => {
     const res = await robotoff.loadLogo(testLogoId);
 
     expect(res).toEqual(mockData);
-     expect(fetchMock).toHaveBeenCalled();
-     const call = fetchMock.mock.calls[0];
-     const url = typeof call[0] === "string" ? call[0] : (call[0] as any).url;
-     expect(url).toContain(`/images/logos/${testLogoId}`);
-   });
+    expect(fetchMock).toHaveBeenCalled();
+    const call = fetchMock.mock.calls[0];
+    const url = typeof call[0] === "string" ? call[0] : (call[0] as any).url;
+    expect(url).toContain(`/images/logos/${testLogoId}`);
+  });
 });

@@ -1,9 +1,10 @@
 import globals from "globals";
+import { defineConfig } from "eslint/config";
 import eslint from "@eslint/js";
 import tseslint from "typescript-eslint";
 import tsParser from "@typescript-eslint/parser";
 
-export default tseslint.config(
+export default defineConfig([
   {
     plugins: {
       "@typescript-eslint": tseslint,
@@ -15,7 +16,7 @@ export default tseslint.config(
   },
   {
     languageOptions: {
-      globals: { ...globals.browser, ...globals.node, ...globals.jest },
+      globals: { ...globals.browser, ...globals.node, ...globals.vitest },
     },
   },
   {
@@ -23,7 +24,7 @@ export default tseslint.config(
     languageOptions: {
       parser: tsParser,
       parserOptions: {
-        project: "./tsconfig.esm.json",
+        projectService: true,
       },
     },
   },
@@ -47,7 +48,7 @@ export default tseslint.config(
       "src/schemas",
       "coverage",
       "*.config.mjs",
-      "jest.config.ts",
+      "vitest.config.ts",
     ],
   },
-);
+]);

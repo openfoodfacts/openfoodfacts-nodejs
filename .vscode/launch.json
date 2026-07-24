@@ -4,18 +4,13 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Jest Current File",
-      "program": "${workspaceFolder}/node_modules/.bin/jest",
-      "args": [
-        "--runTestsByPath",
-        "${relativeFile}",
-        "--config",
-        "jest.config.ts"
-      ],
+      "name": "Vitest Current File",
+      "program": "${workspaceFolder}/node_modules/.bin/vitest",
+      "args": ["run", "${relativeFile}"],
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
       "windows": {
-        "program": "${workspaceFolder}/node_modules/jest/bin/jest"
+        "program": "${workspaceFolder}/node_modules/vitest/vitest.mjs"
       }
     }
   ]

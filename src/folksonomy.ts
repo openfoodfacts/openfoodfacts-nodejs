@@ -2,6 +2,7 @@ import createClient from "openapi-fetch";
 
 import type { paths, components, operations } from "./schemas/folksonomy.js";
 import { DEFAULT_FOLKSONOMY_API_URL, USER_AGENT } from "./consts.js";
+import type { FetchFn } from "./types.js";
 
 export type FolksonomyTag = components["schemas"]["ProductTag"];
 export type FolksonomyKey = {
@@ -11,14 +12,14 @@ export type FolksonomyKey = {
 };
 
 export class Folksonomy {
-  private readonly fetch: typeof global.fetch;
+  private readonly fetch: FetchFn;
   private readonly baseUrl: string;
   private authToken?: string;
 
   readonly client: ReturnType<typeof createClient<paths>>;
 
   constructor(
-    fetch: typeof global.fetch,
+    fetch: FetchFn,
     options?: { baseUrl?: string; authToken?: string },
   ) {
     this.baseUrl = options?.baseUrl ?? DEFAULT_FOLKSONOMY_API_URL;

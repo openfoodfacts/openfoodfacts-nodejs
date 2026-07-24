@@ -3,6 +3,7 @@ import type { components } from "./schemas/server/v2.js";
 export type LangIngredient = `ingredients_text_${string}`;
 export type LangProduct = `product_name_${string}`;
 export type LangPackagingText = `packaging_text_${string}`;
+export type LangGenericName = `generic_name_${string}`;
 
 export type ImageSize = { h: number; w: number };
 
@@ -53,3 +54,10 @@ export type NutrientUnit = Nutriments[string] extends infer U
     ? Exclude<U, number | string> // This extracts the union of string literals
     : never
   : never;
+
+export type FetchFn = typeof globalThis.fetch;
+
+export type FetchResponse<D, E = unknown> = Promise<
+  | { data: D; error?: never; response: Response }
+  | { data?: never; error: E; response: Response }
+>;

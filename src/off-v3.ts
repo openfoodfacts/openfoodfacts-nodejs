@@ -5,9 +5,11 @@ import type {
   LangIngredient,
   LangProduct,
   LangPackagingText,
+  LangGenericName,
   RawImage,
   SelectedImage,
   Nutriments,
+  FetchFn,
 } from "./types.js";
 
 export type ResponseStatus = components["schemas"]["response_status"];
@@ -104,6 +106,11 @@ export type ProductDataType = ProductDataSection & {
   labels_tags: string[];
   product_type: string;
 
+  allergens?: string;
+  allergens_tags?: string[];
+  traces?: string;
+  traces_tags?: string[];
+
   origins: string;
   origins_tags: string[];
 
@@ -135,7 +142,15 @@ export type ProductDataType = ProductDataSection & {
     [lang: string]: number;
   };
   lang: string;
-} & Partial<Record<LangProduct | LangIngredient | LangPackagingText, string>>;
+  data_quality_errors_tags?: string[];
+  data_quality_warnings_tags?: string[];
+  data_quality_info_tags?: string[];
+} & Partial<
+    Record<
+      LangProduct | LangIngredient | LangPackagingText | LangGenericName,
+      string
+    >
+  >;
 
 export type ProductStateBase = {
   result: {
@@ -168,17 +183,21 @@ export type ProductState<T = ProductDataType> = ProductStateBase &
   (ProductStateFound<T> | ProductStateFailure);
 
 export class ProductOpenerApiV3 {
-  private readonly fetch: typeof global.fetch;
+  private readonly fetch: FetchFn;
   private readonly baseUrl: string;
   readonly client: ReturnType<typeof createClient<paths>>;
 
-  constructor(fetch: typeof global.fetch, options: { host: string }) {
+  constructor(fetch: FetchFn, options: { host: string }) {
     this.fetch = fetch;
     this.baseUrl = options.host;
     this.client = createClient<paths>({
       fetch: this.fetch,
       baseUrl: this.baseUrl,
     });
+  }
+
+  test() {
+    return true;
   }
 
   async uploadProductImage(code: string, params: ProductImageUploadParams) {

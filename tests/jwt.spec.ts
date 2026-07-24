@@ -11,7 +11,7 @@ function mockJWT(token: { exp: number }) {
 
 describe("JWT tokens", () => {
   beforeEach(() => {
-    global.fetch = jest.fn();
+    global.fetch = vi.fn();
   });
 
   it("should error on numeric jwt", () => {
@@ -54,7 +54,7 @@ describe("JWT tokens", () => {
     const newToken = mockJWT({ exp: Math.floor(Date.now() / 1000) + 60 });
 
     let capturedHeaders: Headers | undefined = undefined;
-    const fetch = jest
+    const fetch = vi
       .fn()
       .mockImplementation((url: string, options?: { headers?: Headers }) => {
         capturedHeaders = options?.headers;
@@ -63,7 +63,7 @@ describe("JWT tokens", () => {
         });
       });
 
-    const onAccessTokenExpired = jest.fn().mockResolvedValue(newToken);
+    const onAccessTokenExpired = vi.fn().mockResolvedValue(newToken);
     const client = new OpenFoodFacts(fetch, {
       accessToken: willExpireToken,
       onAccessTokenExpired,

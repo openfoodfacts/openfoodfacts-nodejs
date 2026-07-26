@@ -1,22 +1,23 @@
+import { Mock } from "vitest";
 import { NutriPatrol } from "../src";
 import { TestUtils } from "./utils/test-utils";
 
 describe("NutriPatrol Wrapper", () => {
-  let fetchMock: jest.Mock;
+  let fetchMock: Mock;
   let client: NutriPatrol;
 
   beforeEach(() => {
-    fetchMock = jest.fn();
+    fetchMock = vi.fn();
     global.fetch = fetchMock;
     client = new NutriPatrol(fetchMock);
   });
 
   afterEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   afterAll(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   const mockResponse = TestUtils.mockResponse;
@@ -163,6 +164,26 @@ describe("NutriPatrol Wrapper", () => {
 
       expect(error).toBeUndefined();
       expect(data).toEqual(mockData);
+    });
+
+    it("should fetch tickets filtered by barcode", async () => {
+      const mockData = {
+        tickets: [{ id: 1, status: "open", barcode: "3017620422003" }],
+        max_page: 1,
+      };
+      fetchMock.mockResolvedValue(mockResponse(mockData));
+
+      const { data, error } = await client.getTickets({
+        barcode: "3017620422003",
+        status: "open",
+      });
+
+      expect(error).toBeUndefined();
+      expect(data).toEqual(mockData);
+      // Verify the barcode was passed in the URL
+      const fetchArg = fetchMock.mock.calls[0][0];
+      const url = typeof fetchArg === "string" ? fetchArg : fetchArg.url;
+      expect(url).toContain("barcode=3017620422003");
     });
 
     it("should handle error when fetching tickets", async () => {

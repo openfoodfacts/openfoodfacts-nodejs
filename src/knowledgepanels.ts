@@ -1,14 +1,28 @@
 export type KnowledgePanels = { [key: string]: KnowledgePanel };
 
-export type KnowledgePanelTitle = {
+export type KnowledgePanelTitleBase = {
   title: string;
   subtitle?: string;
-  grade: "a" | "b" | "c" | "d" | "e" | "unknown";
   icon_url: string;
-  icon_color_from_evaluation: string;
+  icon_color_from_evaluation: boolean;
   icon_size: string;
-  type: string;
+  type?: never;
 };
+
+type KnowledgePanelTitleGrade = KnowledgePanelTitleBase & {
+  type: "grade";
+  grade: "a" | "b" | "c" | "d" | "e" | "unknown";
+};
+
+type KnowledgePanelTitlePercentage = KnowledgePanelTitleBase & {
+  type: "percentage";
+  value: number;
+};
+
+export type KnowledgePanelTitle =
+  | KnowledgePanelTitleGrade
+  | KnowledgePanelTitlePercentage
+  | KnowledgePanelTitleBase;
 
 export type KnowledgePanelSize = "small";
 
@@ -16,6 +30,8 @@ export type KnowledgePanel = {
   type: "card" | "inline";
   expanded: boolean;
   expand_for: string;
+  evaluation?: string;
+  half_width_on_mobile?: boolean;
   title_element: KnowledgePanelTitle;
   elements: KnowledgeElement[];
   topics: string[];

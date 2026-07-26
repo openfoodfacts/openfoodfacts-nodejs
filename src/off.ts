@@ -1,3 +1,5 @@
+import { jwtDecode, type JwtPayload } from "jwt-decode";
+
 import {
   PRODUCT_IMAGE_URL,
   BackendType,
@@ -21,13 +23,14 @@ import type {
   Label,
   Language,
   Nutrient,
+  Packaging,
   State,
   Store,
   TaxoNode,
   Taxonomy,
 } from "./taxonomy/types.js";
 
-import type { RawImage, SelectedImage } from "./types.js";
+import type { FetchFn, RawImage, SelectedImage } from "./types.js";
 
 import type {
   FacetResponse,
@@ -105,7 +108,7 @@ export type OpenFoodFactsOptions = {
 
 /** Wrapper of OFF API */
 export class OpenFoodFacts {
-  private readonly fetch: typeof global.fetch;
+  private readonly fetch: FetchFn;
   private readonly baseUrl: string;
   private readonly backendType?: BackendType;
   private readonly customUserAgent: string;
@@ -134,7 +137,7 @@ export class OpenFoodFacts {
    * @param options - Options for the OFF Object
    */
   constructor(
-    fetch: typeof global.fetch,
+    fetch: FetchFn,
     options: OpenFoodFactsOptions = { country: "world", language: "en" },
   ) {
     this.validateOptions(options);
@@ -225,9 +228,9 @@ export class OpenFoodFacts {
    * Creates a fetch wrapper with User-Agent and optional token handling
    */
   private createFetchWrapper(
-    fetch: typeof global.fetch,
+    fetch: FetchFn,
     options: OpenFoodFactsOptions,
-  ): typeof global.fetch {
+  ): FetchFn {
     // Base fetch wrapper with User-Agent
     let wrappedFetch = this.createUserAgentFetch(fetch);
 
@@ -243,9 +246,7 @@ export class OpenFoodFacts {
   /**
    * Creates a fetch wrapper that adds User-Agent header
    */
-  private createUserAgentFetch(
-    fetch: typeof globalThis.fetch,
-  ): typeof globalThis.fetch {
+  private createUserAgentFetch(fetch: FetchFn): FetchFn {
     return async (
       url: string | URL | globalThis.Request,
       init?: globalThis.RequestInit,
@@ -260,9 +261,9 @@ export class OpenFoodFacts {
    * Creates a fetch wrapper that handles token refresh and authorization
    */
   private createTokenAwareFetch(
-    fetch: typeof global.fetch,
+    fetch: FetchFn,
     options: OpenFoodFactsOptions,
-  ): typeof global.fetch {
+  ): FetchFn {
     return async (
       url: string | URL | globalThis.Request | URL,
       init?: globalThis.RequestInit,
@@ -308,29 +309,119 @@ export class OpenFoodFacts {
     return newAccessToken;
   }
 
-  private isTokenExpired(token: string) {
-    const parts = token.split(".");
-    if (parts.length !== 3) {
-      throw new OpenFoodFactsError("Invalid JWT token format");
-    }
-    const payload = JSON.parse(
-      Buffer.from(parts[1], "base64").toString("utf-8"),
-    ) as { exp: number };
+  /**
+   * Checks if a JWT access token is expired. Returns false only if the token is
+   * well-formed, has a valid exp claim, and is not expired. Otherwise returns
+   * true.
+   */
+  private isTokenExpired(token: string): boolean {
+    try {
+      const decoded = jwtDecode<JwtPayload>(token);
 
-    // Check if the token is expired
-    return payload.exp && Date.now() >= payload.exp * 1000;
+      if (decoded.exp == null) {
+        return true; // If there's no exp claim, consider the token expired
+      }
+
+      const currentTime = Math.floor(Date.now() / 1000);
+      return currentTime >= decoded.exp;
+    } catch (error) {
+      // If token is malformed or cannot be decoded, consider it expired
+      throw new OpenFoodFactsError(
+        `Failed to decode access token: ${error instanceof Error ? error.message : String(error)}`,
+      );
+    }
   }
 
   ////////////////
   // TAXONOMIES
   ////////////////
 
-  getBrand(brandName: string): Promise<Brand> {
-    return this.apiv2.getTaxoEntry("brands", brandName);
+  getBrand(brandId: string): Promise<Brand> {
+    return this.apiv2.getTaxoEntry("brands", brandId);
   }
 
-  getLanguage(languageName: string): Promise<Language> {
-    return this.apiv2.getTaxoEntry("languages", languageName);
+  getLanguage(languageId: string): Promise<Language> {
+    return this.apiv2.getTaxoEntry("languages", languageId);
+  }
+
+  /**
+   * Returns a single category taxonomy entry by id
+   * @param categoryId - The id of the category (e.g., "en:beverages")
+   */
+  getCategory(categoryId: string): Promise<Category> {
+    return this.apiv2.getTaxoEntry("categories", categoryId);
+  }
+
+  /**
+   * Returns a single label taxonomy entry by id
+   * @param labelId - The id of the label (e.g., "en:organic")
+   */
+  getLabel(labelId: string): Promise<Label> {
+    return this.apiv2.getTaxoEntry("labels", labelId);
+  }
+
+  /**
+   * Returns a single additive taxonomy entry by id
+   * @param additiveId - The id of the additive (e.g., "en:e322")
+   */
+  getAdditive(additiveId: string): Promise<Additive> {
+    return this.apiv2.getTaxoEntry("additives", additiveId);
+  }
+
+  /**
+   * Returns a single allergen taxonomy entry by id
+   * @param allergenId - The id of the allergen (e.g., "en:gluten")
+   */
+  getAllergen(allergenId: string): Promise<Allergen> {
+    return this.apiv2.getTaxoEntry("allergens", allergenId);
+  }
+
+  /**
+   * Returns a single country taxonomy entry by id
+   * @param countryId - The id of the country (e.g., "en:france")
+   */
+  getCountry(countryId: string): Promise<Country> {
+    return this.apiv2.getTaxoEntry("countries", countryId);
+  }
+
+  /**
+   * Returns a single ingredient taxonomy entry by id
+   * @param ingredientId - The id of the ingredient (e.g., "en:sugar")
+   */
+  getIngredient(ingredientId: string): Promise<Ingredient> {
+    return this.apiv2.getTaxoEntry("ingredients", ingredientId);
+  }
+
+  /**
+   * Returns a single packaging taxonomy entry by id
+   * @param packagingId - The id of the packaging (e.g., "en:plastic")
+   */
+  getPackaging(packagingId: string): Promise<TaxoNode> {
+    return this.apiv2.getTaxoEntry("packaging", packagingId);
+  }
+
+  /**
+   * Returns a single state taxonomy entry by id
+   * @param stateId - The id of the state (e.g., "en:complete")
+   */
+  getState(stateId: string): Promise<State> {
+    return this.apiv2.getTaxoEntry("states", stateId);
+  }
+
+  /**
+   * Returns a single store taxonomy entry by id
+   * @param storeId - The id of the store (e.g., "en:carrefour")
+   */
+  getStore(storeId: string): Promise<Store> {
+    return this.apiv2.getTaxoEntry("stores", storeId);
+  }
+
+  /**
+   * Returns a single nutrient taxonomy entry by id
+   * @param nutrientId - The id of the nutrient (e.g., "en:energy")
+   */
+  getNutrient(nutrientId: string): Promise<Nutrient> {
+    return this.apiv2.getTaxoEntry("nutrients", nutrientId);
   }
 
   getBrands(): Promise<Taxonomy<Brand>> {
@@ -365,8 +456,8 @@ export class OpenFoodFacts {
     return this.getTaxo<Ingredient>("ingredients");
   }
 
-  getPackagings(): Promise<Taxonomy<TaxoNode>> {
-    return this.getTaxo<TaxoNode>("packaging");
+  getPackagings(): Promise<Taxonomy<Packaging>> {
+    return this.getTaxo<Packaging>("packaging");
   }
 
   getStates(): Promise<Taxonomy<State>> {
@@ -536,6 +627,39 @@ export class OpenFoodFacts {
    * @returns A promise that resolves to an array of image names or null if not found
    */
   getProductImages = (barcode: string) => this.apiv2.getProductImages(barcode);
+
+  /**
+   * Delete a product page (moderator-only action)
+   * @param code - The barcode of the product to delete
+   * @param comment - The reason for deleting the product
+   * @returns A promise that resolves to true if successful, false otherwise
+   */
+  deleteProduct = (code: string, comment: string) =>
+    this.apiv2.deleteProduct(code, comment);
+
+  /**
+   * Move images from one product to another (moderator-only action).
+   * @param code - source product barcode
+   * @param imgids - comma-separated list of image IDs (e.g., "1,2,3")
+   * @param moveToBarcode - destination product barcode
+   * @param copyData - whether to copy product data to destination
+   * @returns A promise that resolves with `{ data }` on success or `{ error }` on failure
+   */
+  moveImages = (
+    code: string,
+    imgids: string,
+    moveToBarcode: string,
+    copyData?: boolean,
+  ) => this.apiv2.moveImages(code, imgids, moveToBarcode, copyData);
+
+  /**
+   * Delete product images by moving them to trash (moderator-only action).
+   * @param code - product barcode
+   * @param imgids - comma-separated list of image IDs (e.g., "1,2,3")
+   * @returns A promise that resolves with `{ data }` on success or `{ error }` on failure
+   */
+  deleteImages = (code: string, imgids: string) =>
+    this.apiv2.deleteImages(code, imgids);
 
   async getFacet(
     facet: string,

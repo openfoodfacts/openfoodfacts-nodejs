@@ -1,9 +1,9 @@
 {
   "include": ["tests"],
+  "extends": "./tsconfig.json",
   "compilerOptions": {
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "esModuleInterop": true,
-    "resolveJsonModule": true
-  }
+    "composite": true,
+    "types": ["node", "vitest/globals"]
+  },
+  "references": [{ "path": "./tsconfig.src.json" }]
 }

@@ -1,22 +1,23 @@
+import { Mock } from "vitest";
 import { Folksonomy, FolksonomyTag } from "../src/folksonomy";
 import { TestUtils } from "./utils/test-utils";
 
 describe("Folksonomy Wrapper", () => {
-  let fetchMock: jest.Mock;
+  let fetchMock: Mock;
   let client: Folksonomy;
 
   beforeEach(() => {
-    fetchMock = jest.fn();
+    fetchMock = vi.fn();
     global.fetch = fetchMock;
     client = new Folksonomy(fetchMock, { authToken: "test-token" });
   });
 
   afterEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   afterAll(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   const mockResponse = TestUtils.mockResponse;
@@ -189,7 +190,7 @@ describe("Folksonomy Wrapper", () => {
   describe("Auth Token Validation", () => {
     it("should throw an error if auth token is missing and calling putTag", async () => {
       const clientWithoutToken = new Folksonomy(fetchMock);
-      expect(() =>
+      await expect(() =>
         clientWithoutToken.putTag({
           k: "key",
           v: "value",
@@ -211,7 +212,7 @@ describe("Folksonomy Wrapper", () => {
         comment: "Test comment",
         owner: "",
       };
-      expect(() => clientWithoutToken.removeTag(tagData)).rejects.toThrow(
+      await expect(() => clientWithoutToken.removeTag(tagData)).rejects.toThrow(
         "Auth token is required to perform this action",
       );
     });

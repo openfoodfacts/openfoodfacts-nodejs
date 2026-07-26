@@ -22,7 +22,7 @@ npm install git+https://github.com/openfoodfacts/openfoodfacts-js.git
 ## Usage
 
 > [!WARNING]
-> Be sure to read the [Open Food Facts API documentation](https://openfoodfacts.github.io/openfoodfacts-server/) to understand how the API should be used and what data is available **BEFORE** starting to use the SDK.
+> Be sure to read the [Open Food Facts API documentation][off-api] to understand how the API should be used and what data is available **BEFORE** starting to use the SDK.
 
 Import the SDK in your project and create a client instance:
 
@@ -40,7 +40,7 @@ const client = new OpenFoodFacts(fetch);
 
 (async () => {
   // then you can use the client to access the Open Food Facts API
-  const { data, error } = await client.getProduct("5000112546415");
+  const { data, error } = await client.getProductV3("5000112546415");
   if (!data) {
     console.error("Error fetching product:", error);
     return;
@@ -49,7 +49,7 @@ const client = new OpenFoodFacts(fetch);
 })();
 ```
 
-- See the [Open Food Facts API documentation](https://openfoodfacts.github.io/openfoodfacts-server/) for more details on the API endpoints.
+- See the [Open Food Facts API documentation][off-api] for more details on the API endpoints.
 
 - See the [SDK auto generated documentation](https://openfoodfacts.github.io/openfoodfacts-js/) for a complete list of available methods and classes.
 
@@ -85,3 +85,5 @@ When submitting a PR, please use the [angular commit guideline](https://github.c
 
 - If you use this SDK, feel free to open a PR to add your application in the list in [REUSERS.md](https://github.com/openfoodfacts/openfoodfacts-js/blob/develop/REUSERS.md)
 - Make sure you comply with the OdBL licence, mentioning the Source of your data, and ensuring to avoid combining non free data you can't release legally as open data. Another requirement is contributing back any product you add using this SDK.
+
+[off-api]: https://openfoodfacts.github.io/documentation/docs/Product-Opener/api/

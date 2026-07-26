@@ -1,6 +1,7 @@
 import type { paths } from "./schemas/search.js";
 import createClient from "openapi-fetch";
 import { USER_AGENT } from "./consts.js";
+import type { FetchFn } from "./types.js";
 
 const SEARCH_BASE_URL = "https://search.openfoodfacts.org";
 
@@ -38,7 +39,7 @@ export class SearchApi {
   private readonly client: ReturnType<typeof createClient<paths>>;
 
   constructor(
-    fetch: typeof globalThis.fetch,
+    fetch: FetchFn,
     options: { baseUrl: string } = { baseUrl: SEARCH_BASE_URL },
   ) {
     this.client = createClient<paths>({

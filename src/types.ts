@@ -48,12 +48,9 @@ export type Nutriments = NonNullable<
 
 /**
  * Valid units for nutritional values.
+ * Alias for the OpenAPI-declared nutrient unit enum.
  */
-export type NutrientUnit = Nutriments[string] extends infer U
-  ? U extends number | string
-    ? Exclude<U, number | string> // This extracts the union of string literals
-    : never
-  : never;
+export type NutrientUnit = components["schemas"]["nutrient_unit"];
 
 export type FetchFn = typeof globalThis.fetch;
 

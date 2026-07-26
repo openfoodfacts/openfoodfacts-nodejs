@@ -1,5 +1,96 @@
 # Changelog
 
+## [2.0.0-alpha.33](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.32...v2.0.0-alpha.33) (2026-07-20)
+
+
+### Features
+
+* add generic name and official website URL fields to product ([1380e54](https://github.com/openfoodfacts/openfoodfacts-js/commit/1380e5403a5c2a2cbd79aa6a1a5d387030083e08))
+* **v2:** Add deleteProduct method ([#890](https://github.com/openfoodfacts/openfoodfacts-js/issues/890)) ([9ebba7c](https://github.com/openfoodfacts/openfoodfacts-js/commit/9ebba7c0bf902cbe1f9faaf394aaf33dcde83ab8))
+* **v2:** Add moveImages and deleteImages API method ([#889](https://github.com/openfoodfacts/openfoodfacts-js/issues/889)) ([136554b](https://github.com/openfoodfacts/openfoodfacts-js/commit/136554bb4a56f71df3e315dbad8cbf13d35f3fe7))
+
+
+### Bug Fixes
+
+* **deps:** resolve audit vulnerabilities in transitive dependencies ([399b730](https://github.com/openfoodfacts/openfoodfacts-js/commit/399b730f4e0b0a7e533a55fa3c834f3948d73c4a))
+
+
+### Miscellaneous Chores
+
+* Bump version to 2.0.0-alpha.33 ([6599b40](https://github.com/openfoodfacts/openfoodfacts-js/commit/6599b40fd5e3172f79f48416c5bbf4131697dc16))
+
+## [2.0.0-alpha.32](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.31...v2.0.0-alpha.32) (2026-06-11)
+
+
+### Features
+
+* add allergens and traces fields ([c031772](https://github.com/openfoodfacts/openfoodfacts-js/commit/c03177261fa21ad44466462aebcd700f9baa030b))
+* Add data quality tags to V3 product type ([#885](https://github.com/openfoodfacts/openfoodfacts-js/issues/885)) ([5b216d6](https://github.com/openfoodfacts/openfoodfacts-js/commit/5b216d6252da77c30cb38f77a0d57df8ea0243d1))
+* Complete the robotoff functions to match hunger games usage ([3278cfc](https://github.com/openfoodfacts/openfoodfacts-js/commit/3278cfc6db91f60be26e81628dd6ab0fafa99447))
+* **productopener:** Support editing nutrition information ([#875](https://github.com/openfoodfacts/openfoodfacts-js/issues/875)) ([8cc741c](https://github.com/openfoodfacts/openfoodfacts-js/commit/8cc741c683f9d7b1d0e89621fc89794406dcb7af))
+
+
+### Bug Fixes
+
+* Make isTokenExpired work on browser ([12505c6](https://github.com/openfoodfacts/openfoodfacts-js/commit/12505c6f510fc65b95cfd846a962b30a44c4f951))
+* remove duplicate 'last_modified_t' from FACETS_SORT_OPTIONS ([00b8665](https://github.com/openfoodfacts/openfoodfacts-js/commit/00b86659003208654d6cd91e873f5c71361161c4))
+* Update isTokenExpired test to reflect correct behavior for tokens without exp claim ([77dcace](https://github.com/openfoodfacts/openfoodfacts-js/commit/77dcacedf22904007392918ab193acd58ed079f9))
+* **v2:** Send `no_nutrition_data` field in addOrEditProductV2 ([#867](https://github.com/openfoodfacts/openfoodfacts-js/issues/867)) ([0af44aa](https://github.com/openfoodfacts/openfoodfacts-js/commit/0af44aae5a655a3baf36fda8669a02e09711908b))
+
+
+### Miscellaneous Chores
+
+* Bump version to 2.0.0-alpha.32 ([0badae8](https://github.com/openfoodfacts/openfoodfacts-js/commit/0badae86930b6931cd09feaafae7fb033dc1ae9f))
+
+## [2.0.0-alpha.31](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.30...v2.0.0-alpha.31) (2026-04-15)
+
+
+### Features
+
+* **nutripatrol:** add barcode filter to getTickets and fix type parameter ([#843](https://github.com/openfoodfacts/openfoodfacts-js/issues/843)) ([08c5d0d](https://github.com/openfoodfacts/openfoodfacts-js/commit/08c5d0dfbec1a34a4a143ef8c1ed12b8c72677b7))
+
+
+### Bug Fixes
+
+* add /api/v1 to Robotoff baseUrl ([#846](https://github.com/openfoodfacts/openfoodfacts-js/issues/846)) ([423c635](https://github.com/openfoodfacts/openfoodfacts-js/commit/423c6356b60dc2e8a704cfea483fd117c222af10))
+
+
+### Miscellaneous Chores
+
+* Prepare 2.0.0-alpha.31 release ([5c1a1ce](https://github.com/openfoodfacts/openfoodfacts-js/commit/5c1a1ceb6622c8cdc24f383026669dbb51e72202))
+
+## [2.0.0-alpha.30](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.29...v2.0.0-alpha.30) (2026-04-06)
+
+
+### Features
+
+* add `nutriscore_score` to `FACETS_SORT_OPTIONS` ([#779](https://github.com/openfoodfacts/openfoodfacts-js/issues/779)) ([bab4485](https://github.com/openfoodfacts/openfoodfacts-js/commit/bab44857e9a7bb739b77e9e676e866a76da1e78c))
+* Add and export KnowledgePanels type ([#801](https://github.com/openfoodfacts/openfoodfacts-js/issues/801)) ([fe9f77b](https://github.com/openfoodfacts/openfoodfacts-js/commit/fe9f77b624ebfb1f44c6ef323a134d35e7b21092))
+* Add changeBarcode to ProductOpenerApiV2 ([#782](https://github.com/openfoodfacts/openfoodfacts-js/issues/782)) ([2b48d52](https://github.com/openfoodfacts/openfoodfacts-js/commit/2b48d525808198dd7a5690fe81121b365a4fb5e4))
+* Add fields to KPs types ([#804](https://github.com/openfoodfacts/openfoodfacts-js/issues/804)) ([66c7f62](https://github.com/openfoodfacts/openfoodfacts-js/commit/66c7f625ee5330ea8c04632d1ac704054c6e65ae))
+* Add getAttributeGroups method to v3 ([d81ebcf](https://github.com/openfoodfacts/openfoodfacts-js/commit/d81ebcf9071e24c1ab8e4dabbe50f00d329b0fbc))
+* Add getStats method to nutripatrol ([#780](https://github.com/openfoodfacts/openfoodfacts-js/issues/780)) ([f49e749](https://github.com/openfoodfacts/openfoodfacts-js/commit/f49e749f11872a4a46c82f3444660c447703d918))
+* add support for /api/v3/current-user/permissions endpoint ([#814](https://github.com/openfoodfacts/openfoodfacts-js/issues/814)) ([6a4e5cc](https://github.com/openfoodfacts/openfoodfacts-js/commit/6a4e5ccfc62336bc22a3c84d261bbc63b77f649c))
+* add support for structured packaging data (V3) ([#785](https://github.com/openfoodfacts/openfoodfacts-js/issues/785)) ([70f93f2](https://github.com/openfoodfacts/openfoodfacts-js/commit/70f93f255362e17ba62835e11a07e8b99537b666))
+* expose NutriPatrol in main client ([bbe7022](https://github.com/openfoodfacts/openfoodfacts-js/commit/bbe7022ef08c50efaa3590f9c083cbd4a1267d14))
+* Expose open prices API endpoints ([#811](https://github.com/openfoodfacts/openfoodfacts-js/issues/811)) ([f8c2cf3](https://github.com/openfoodfacts/openfoodfacts-js/commit/f8c2cf382ceebc608605a0a60aee423969149839))
+* **off:** Add individual getter methods for all taxonomy types ([#822](https://github.com/openfoodfacts/openfoodfacts-js/issues/822)) ([a967246](https://github.com/openfoodfacts/openfoodfacts-js/commit/a967246653cacdc1cfa0297a48fc56e79ca4f93b))
+* taxonomy based on product type ([45b8d56](https://github.com/openfoodfacts/openfoodfacts-js/commit/45b8d5678d5d0ce28ce2a4685779169509940e6d))
+* Update robotoff API ([#837](https://github.com/openfoodfacts/openfoodfacts-js/issues/837)) ([8b540e9](https://github.com/openfoodfacts/openfoodfacts-js/commit/8b540e964d4753b326f0ee2337d9a3ef3892542e))
+
+
+### Bug Fixes
+
+* **auth:** Handle OIDC token having no exp field and improve typing ([#842](https://github.com/openfoodfacts/openfoodfacts-js/issues/842)) ([29074a6](https://github.com/openfoodfacts/openfoodfacts-js/commit/29074a6b4c62075570380347e7245ed5407279ce))
+* **off:** Wrong return type for getPackagings ([#844](https://github.com/openfoodfacts/openfoodfacts-js/issues/844)) ([e06a8bc](https://github.com/openfoodfacts/openfoodfacts-js/commit/e06a8bc88ee39c96a01e4970f8b1fbbb23f15811))
+* Update return type of getProductAttributes to ProductAttributeGroup[] ([6f1ba74](https://github.com/openfoodfacts/openfoodfacts-js/commit/6f1ba744899898f6ffe725e3ccab5e2baa6b7413))
+* **v3:** Mark packaging field as optional ([#786](https://github.com/openfoodfacts/openfoodfacts-js/issues/786)) ([26c3bfe](https://github.com/openfoodfacts/openfoodfacts-js/commit/26c3bfe0d076d7f5b69fab6e957f904c5508b19d))
+
+
+### Miscellaneous Chores
+
+* Trigger 2.0.0-alpha.30 release ([be50538](https://github.com/openfoodfacts/openfoodfacts-js/commit/be50538a824fa3bee3dd78e37379e62342a34da0))
+
 ## [2.0.0-alpha.29](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.28...v2.0.0-alpha.29) (2026-02-09)
 
 

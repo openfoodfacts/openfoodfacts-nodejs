@@ -257,6 +257,8 @@ export interface components {
             /**
              * Image Id
              * @description ID of the flagged image
+             * @example 1
+             * @example front_fr
              */
             image_id?: string | null;
             /** @description Flavor (project) associated with the ticket */
@@ -322,6 +324,8 @@ export interface components {
             /**
              * Image Id
              * @description ID of the flagged image
+             * @example 1
+             * @example front_fr
              */
             image_id?: string | null;
             /** @description Flavor (project) associated with the ticket */
@@ -474,6 +478,8 @@ export interface components {
             /**
              * Image Id
              * @description ID of the flagged image, if the ticket type is `image`
+             * @example 1
+             * @example front_fr
              */
             image_id?: string | null;
             /** @description Flavor (project) associated with the ticket */
@@ -640,6 +646,7 @@ export interface operations {
     get_tickets_api_v1_tickets_get: {
         parameters: {
             query?: {
+                barcode?: string | null;
                 status?: components["schemas"]["TicketStatus"] | null;
                 type_?: components["schemas"]["IssueType"] | null;
                 reason?: components["schemas"]["ReasonType"][] | null;

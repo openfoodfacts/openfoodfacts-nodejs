@@ -1,19 +1,20 @@
+import { Mock } from "vitest";
 import { LogoAnnotation, Robotoff } from "../src";
 import { TestUtils } from "./utils/test-utils";
 describe("Robotoff", () => {
-  let fetchMock: jest.Mock;
+  let fetchMock: Mock;
   let robotoff: Robotoff;
   let testLogoId = 12345;
   const mockResponse = TestUtils.mockResponse;
 
   beforeEach(() => {
-    fetchMock = jest.fn();
+    fetchMock = vi.fn();
     global.fetch = fetchMock as any;
     robotoff = new Robotoff(fetchMock);
   });
 
   afterEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
   it("searches logo crops", async () => {
     const mockData = { logos: [{ id: testLogoId }], count: 1 };

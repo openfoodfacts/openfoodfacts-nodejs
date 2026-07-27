@@ -1,5 +1,3 @@
-import type { components } from "./schemas/server/v2.js";
-
 export type LangIngredient = `ingredients_text_${string}`;
 export type LangProduct = `product_name_${string}`;
 export type LangPackagingText = `packaging_text_${string}`;
@@ -37,20 +35,6 @@ export type RawImage = {
   uploaded_t: string;
   uploader: string;
 };
-
-/**
- * Nutritional data for a product.
- * Automatically extracted from the OpenAPI schema to ensure consistency.
- */
-export type Nutriments = NonNullable<
-  components["schemas"]["Product"]["nutriments"]
->;
-
-/**
- * Valid units for nutritional values.
- * Alias for the OpenAPI-declared nutrient unit enum.
- */
-export type NutrientUnit = components["schemas"]["nutrient_unit"];
 
 export type FetchFn = typeof globalThis.fetch;
 

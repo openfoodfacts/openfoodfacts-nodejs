@@ -1,6 +1,7 @@
 import createClient from "openapi-fetch";
 import type { components, operations, paths } from "./schemas/server/v3.js";
 import type { KnowledgePanel } from "./knowledgepanels.js";
+import type { Nutriments } from "./off-v2.js";
 import type {
   LangIngredient,
   LangProduct,
@@ -8,7 +9,6 @@ import type {
   LangGenericName,
   RawImage,
   SelectedImage,
-  Nutriments,
   FetchFn,
 } from "./types.js";
 

@@ -1,3 +1,5 @@
+import { OpenFoodFactsError } from "./error.js";
+
 type FormBodyValue =
   | string
   | boolean
@@ -30,7 +32,7 @@ export function formBody(params: Record<string, FormBodyValue>) {
         formBody.append(key, JSON.stringify(value));
         break;
       default:
-        throw new Error(`Cannot formBody-fy a ${typeof value}!`);
+        throw new OpenFoodFactsError(`Cannot formBody-fy a ${typeof value}!`);
     }
   }
   return formBody.toString();

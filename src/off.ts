@@ -7,6 +7,8 @@ import {
   BACKEND_NAMES,
 } from "./consts.js";
 
+import { AuthenticationError, OpenFoodFactsError } from "./error.js";
+
 import { Robotoff } from "./robotoff.js";
 import { NutriPatrol } from "./nutripatrol.js";
 
@@ -165,7 +167,7 @@ export class OpenFoodFacts {
       (options.host && options.country) ||
       (options.type && options.country)
     ) {
-      throw new Error(
+      throw new OpenFoodFactsError(
         "You must provide either `host`, `type`, or `country`, not multiple.",
       );
     }
@@ -204,21 +206,21 @@ export class OpenFoodFacts {
    */
   private validateAccessToken(token: string): void {
     if (typeof token !== "string") {
-      throw new Error("Access token must be a string.");
+      throw new OpenFoodFactsError("Access token must be a string.");
     }
 
     if (token.length === 0) {
-      throw new Error("Access token cannot be an empty string.");
+      throw new OpenFoodFactsError("Access token cannot be an empty string.");
     }
 
     if (!/^[A-Za-z0-9-_.]+$/.test(token)) {
-      throw new Error(
+      throw new OpenFoodFactsError(
         "Access token can only contain alphanumeric characters, dashes, underscores, and periods.",
       );
     }
 
     if (this.isTokenExpired(token)) {
-      throw new Error("Access token is expired.");
+      throw new AuthenticationError("Access token is expired.");
     }
   }
 
@@ -245,13 +247,13 @@ export class OpenFoodFacts {
    * Creates a fetch wrapper that adds User-Agent header
    */
   private createUserAgentFetch(fetch: FetchFn): FetchFn {
-    return (
+    return async (
       url: string | URL | globalThis.Request,
       init?: globalThis.RequestInit,
     ) => {
       const headers = new Headers(init?.headers);
       headers.set("User-Agent", this.customUserAgent);
-      return fetch(url, { ...init, headers });
+      return await fetch(url, { ...init, headers });
     };
   }
 
@@ -269,7 +271,9 @@ export class OpenFoodFacts {
       const headers = new Headers(init?.headers);
 
       if (this.accessToken == null) {
-        throw new Error("Access token was first specified and now is null.");
+        throw new AuthenticationError(
+          "Access token was first specified and now is null.",
+        );
       }
 
       if (this.isTokenExpired(this.accessToken)) {
@@ -288,7 +292,7 @@ export class OpenFoodFacts {
     options: OpenFoodFactsOptions,
   ): Promise<string> {
     if (options.onAccessTokenExpired == null) {
-      throw new Error(
+      throw new AuthenticationError(
         "Access token expired and no handler provided to refresh it." +
           " You should provide `onAccessTokenExpired` option or wrap the fetch function to handle token expiration.",
       );
@@ -297,7 +301,7 @@ export class OpenFoodFacts {
     const newAccessToken = await options.onAccessTokenExpired();
 
     if (newAccessToken == null) {
-      throw new Error(
+      throw new AuthenticationError(
         "onAccessTokenExpired handler did not return a new access token.",
       );
     }
@@ -322,8 +326,9 @@ export class OpenFoodFacts {
       return currentTime >= decoded.exp;
     } catch (error) {
       // If token is malformed or cannot be decoded, consider it expired
-      console.warn("Failed to decode access token:", error);
-      return true;
+      throw new OpenFoodFactsError(
+        `Failed to decode access token: ${error instanceof Error ? error.message : String(error)}`,
+      );
     }
   }
 
@@ -767,9 +772,9 @@ export function getProductImageUrl(
   size: "100" | "200" | "400" | "full" = "400",
 ): string | null {
   const paddedBarcode = barcode.toString().padStart(13, "0");
-  const match = paddedBarcode.match(/^(.{3})(.{3})(.{3})(.*)$/);
+  const match = paddedBarcode.match(/^(\d{3})(\d{3})(\d{3})(\d{4})$/);
   if (!match) {
-    throw new Error(`Invalid barcode format: ${paddedBarcode}`);
+    throw new OpenFoodFactsError(`Invalid barcode format: ${paddedBarcode}`);
   }
 
   const path = `${match[1]}/${match[2]}/${match[3]}/${match[4]}`;

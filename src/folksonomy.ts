@@ -4,6 +4,8 @@ import type { paths, components, operations } from "./schemas/folksonomy.js";
 import { DEFAULT_FOLKSONOMY_API_URL, USER_AGENT } from "./consts.js";
 import type { FetchFn } from "./types.js";
 
+import { AuthenticationError } from "./error.js";
+
 export type FolksonomyTag = components["schemas"]["ProductTag"];
 export type FolksonomyKey = {
   k: string;
@@ -39,7 +41,7 @@ export class Folksonomy {
 
   private validateAuthToken(message?: string): void {
     if (!this.authToken) {
-      throw new Error(
+      throw new AuthenticationError(
         message || "Auth token is required to perform this action",
       );
     }

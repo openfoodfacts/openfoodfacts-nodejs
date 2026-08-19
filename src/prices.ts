@@ -1,8 +1,12 @@
-import createClient from "openapi-fetch";
+import openapiFetchCreateClient from "openapi-fetch";
+import { unwrapCjsDefault } from "./interop-workaround.js";
 import type { components, paths } from "./schemas/prices.js";
 import { USER_AGENT } from "./consts.js";
 import type { UnwrapContent } from "./openapi.js";
 import type { FetchFn } from "./types.js";
+
+// https://github.com/rolldown/tsdown/issues/1054
+const createClient = unwrapCjsDefault(openapiFetchCreateClient);
 
 type GetPricesQuery = paths["/api/v1/prices"]["get"]["parameters"]["query"];
 

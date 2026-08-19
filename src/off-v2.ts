@@ -1,4 +1,5 @@
-import createClient from "openapi-fetch";
+import openapiFetchCreateClient from "openapi-fetch";
+import { unwrapCjsDefault } from "./interop-workaround.js";
 import type { components, operations, paths } from "./schemas/server/v2.js";
 import type { TaxoNode } from "./taxonomy/types.js";
 import { formData } from "./openapi.js";
@@ -6,6 +7,9 @@ import { USER_AGENT } from "./consts.js";
 import type { ProductDataType } from "./off-v3.js";
 import type { FetchFn } from "./index.js";
 import { buildNutritionParams } from "./utils.js";
+
+// https://github.com/rolldown/tsdown/issues/1054
+const createClient = unwrapCjsDefault(openapiFetchCreateClient);
 
 export type SearchQuery = operations["get-search"]["parameters"]["query"];
 export type AttributeGroups = components["schemas"]["get_attribute_groups"];

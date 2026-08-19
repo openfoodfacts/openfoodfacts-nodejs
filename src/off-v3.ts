@@ -1,4 +1,5 @@
-import createClient from "openapi-fetch";
+import openapiFetchCreateClient from "openapi-fetch";
+import { unwrapCjsDefault } from "./interop-workaround.js";
 import type { components, operations, paths } from "./schemas/server/v3.js";
 import type { KnowledgePanel } from "./knowledgepanels.js";
 import type {
@@ -10,6 +11,9 @@ import type {
   SelectedImage,
   FetchFn,
 } from "./types.js";
+
+// https://github.com/rolldown/tsdown/issues/1054
+const createClient = unwrapCjsDefault(openapiFetchCreateClient);
 
 export type ResponseStatus = components["schemas"]["response_status"];
 export type Product = components["schemas"]["product_v3"];

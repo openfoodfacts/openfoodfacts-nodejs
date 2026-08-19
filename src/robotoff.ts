@@ -1,9 +1,13 @@
-import createClient from "openapi-fetch";
+import openapiFetchCreateClient from "openapi-fetch";
+import { unwrapCjsDefault } from "./interop-workaround.js";
 
 import type { operations, paths } from "./schemas/robotoff.js";
 import { DEFAULT_ROBOTOFF_API_URL, USER_AGENT } from "./consts.js";
 import { formBody } from "./formbody.js";
 import type { FetchFn } from "./types.js";
+
+// https://github.com/rolldown/tsdown/issues/1054
+const createClient = unwrapCjsDefault(openapiFetchCreateClient);
 
 export type RobotoffInsightQuery =
   paths["/insights"]["get"]["parameters"]["query"];

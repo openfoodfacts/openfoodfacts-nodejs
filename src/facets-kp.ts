@@ -1,7 +1,11 @@
-import createClient from "openapi-fetch";
+import openapiFetchCreateClient from "openapi-fetch";
+import { unwrapCjsDefault } from "./interop-workaround.js";
 import type { KnowledgePanel } from "./knowledgepanels.js";
 import type { paths } from "./schemas/facets-kp.js";
 import type { FetchFn } from "./types.js";
+
+// https://github.com/rolldown/tsdown/issues/1054
+const createClient = unwrapCjsDefault(openapiFetchCreateClient);
 
 export type FacetKnowledgePanelResponse = {
   knowledge_panels: Record<string, KnowledgePanel>;

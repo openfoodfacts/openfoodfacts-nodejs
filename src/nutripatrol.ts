@@ -1,9 +1,13 @@
-import createClient from "openapi-fetch";
+import openapiFetchCreateClient from "openapi-fetch";
+import { unwrapCjsDefault } from "./interop-workaround.js";
 
 import type { components, paths } from "./schemas/nutripatrol.js";
 
 import { DEFAULT_NUTRIPATROL_API_URL, USER_AGENT } from "./consts.js";
 import type { FetchFn } from "./types.js";
+
+// https://github.com/rolldown/tsdown/issues/1054
+const createClient = unwrapCjsDefault(openapiFetchCreateClient);
 
 export type FlagCreate = components["schemas"]["FlagCreate"];
 export type Flag = components["schemas"]["Flag"];

@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.0.0-alpha.34](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.33...v2.0.0-alpha.34) (2026-08-22)
+
+
+### Bug Fixes
+
+* Revert "chore(deps): bump brace-expansion from 5.0.6 to 5.0.9" ([263f83b](https://github.com/openfoodfacts/openfoodfacts-js/commit/263f83b9565250ec9c3911a49459a02ede5a5c7f))
+* temporary workaround for cjs users ([e0506f6](https://github.com/openfoodfacts/openfoodfacts-js/commit/e0506f6c085b877cdffabcee134464039346d46f))
+
+
+### Miscellaneous Chores
+
+* Prepare release 2.0.0-alpha.34 ([06d71ea](https://github.com/openfoodfacts/openfoodfacts-js/commit/06d71ea08fc0f9a06d4c9f1c8fb6d057e61e4017))
+
 ## [2.0.0-alpha.33](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.32...v2.0.0-alpha.33) (2026-07-20)
 
 

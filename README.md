@@ -70,7 +70,7 @@ The files are to be committed to the repository, so that the SDK can be used wit
 ### Building
 
 - Clone the repository and run `yarn install` in the directory.
-- Run `yarn build` to generate the OpenAPI bindings and build the project.
+- Run `yarn api` to generate the OpenAPI bindings, then `yarn build` to build the project.
 - Run `yarn test` to run the tests.
 
 ## Contribute

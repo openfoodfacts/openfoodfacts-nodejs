@@ -109,7 +109,11 @@ export type KnowledgePanelElement = KnowledgeElementBase & {
 };
 
 export type KnowledgePanelTableRow = {
-  values: { text: string; evaluation?: string }[];
+  values: {
+    text: string;
+    icon_url?: string;
+    evaluation?: string;
+  }[];
 };
 
 export type KnowledgeTableColumn = {

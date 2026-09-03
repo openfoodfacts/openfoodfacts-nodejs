@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.0.0-alpha.35](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.34...v2.0.0-alpha.35) (2026-09-03)
+
+
+### Bug Fixes
+
+* **deps:** resolve recursive audit vulnerabilities ([de14ff5](https://github.com/openfoodfacts/openfoodfacts-js/commit/de14ff54fe13a4e51d38f3c20a3e0a6eb0964ccb))
+* **KnowledgePanel:** add missing icon_url field in KnowledgePanelTableRow type ([#948](https://github.com/openfoodfacts/openfoodfacts-js/issues/948)) ([ac9baa0](https://github.com/openfoodfacts/openfoodfacts-js/commit/ac9baa07de2329e64f3a68e15219f4448baff76a))
+
+
+### Miscellaneous Chores
+
+* Prepare release 2.0.0-alpha.35 ([93f6992](https://github.com/openfoodfacts/openfoodfacts-js/commit/93f6992a2c127d315df08337f028344c768baa27))
+
 ## [2.0.0-alpha.34](https://github.com/openfoodfacts/openfoodfacts-js/compare/v2.0.0-alpha.33...v2.0.0-alpha.34) (2026-08-22)
 
 

@@ -2,6 +2,7 @@ import openapiFetchCreateClient from "openapi-fetch";
 import { unwrapCjsDefault } from "./interop-workaround.js";
 import type { components, operations, paths } from "./schemas/server/v3.js";
 import type { KnowledgePanel } from "./knowledgepanels.js";
+import type { Nutriments } from "./off-v2.js";
 import type {
   LangIngredient,
   LangProduct,
@@ -123,7 +124,7 @@ export type ProductDataType = ProductDataSection & {
   emb_codes: string;
   emb_codes_tags: string[];
 
-  nutriments: any;
+  nutriments: Nutriments;
 
   no_nutrition_data?: boolean;
 
